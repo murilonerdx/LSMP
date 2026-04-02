@@ -1,7 +1,6 @@
 package br.com.murilo.liberthia.item;
 
-import br.com.murilo.liberthia.registry.ModBlocks;
-import br.com.murilo.liberthia.registry.ModFluids;
+import br.com.murilo.liberthia.logic.InfectionLogic;
 import br.com.murilo.liberthia.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -14,9 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
-
 public class GeigerCounterItem extends Item {
     private int tickCounter = 0;
 
@@ -36,7 +32,8 @@ public class GeigerCounterItem extends Item {
 
         tickCounter++;
 
-        int radiationLevel = scanRadiation(player, level);
+        RadiationSnapshot radiation = scanRadiation(player, level);
+        int radiationLevel = radiation.level();
 
         if (radiationLevel > 0) {
             // Intervalo dinâmico: de 20 ticks (1s) a 2 ticks (0.1s)
@@ -65,39 +62,35 @@ public class GeigerCounterItem extends Item {
                 } else {
                     severity = "§a∿ Radiação Baixa";
                 }
-                player.displayClientMessage(Component.literal(severity + " §7[" + radiationLevel + "]"), true);
+                player.displayClientMessage(Component.literal(
+                        severity + " §7[" + radiationLevel + "] §8Partículas: §f" + radiation.particles()
+                                + " §8Densidade: §f" + String.format("%.1f%%", radiation.density() * 100.0f)
+                ), true);
             }
         }
     }
 
-    private int scanRadiation(ServerPlayer player, Level level) {
+    private RadiationSnapshot scanRadiation(ServerPlayer player, Level level) {
         BlockPos center = player.blockPosition();
-        int count = 0;
+        int particles = InfectionLogic.countDarkMatterParticles(level, center, 16, 6);
+        float density = InfectionLogic.getChunkInfectionDensity(level, center);
 
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-8, -4, -8), center.offset(8, 4, 8))) {
-            BlockState blockState = level.getBlockState(pos);
-            FluidState fluidState = level.getFluidState(pos);
-
-            if (blockState.is(ModBlocks.DARK_MATTER_BLOCK.get())
-                    || blockState.is(ModBlocks.CORRUPTED_SOIL.get())
-                    || blockState.is(ModBlocks.DARK_MATTER_ORE.get())
-                    || blockState.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())
-                    || fluidState.getType().isSame(ModFluids.DARK_MATTER.get())
-                    || fluidState.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
-                count++;
-            }
-        }
-
-        return Math.min(20, count);
+        int particleLevel = particles > 0 ? Math.min(20, Math.max(1, particles / 40)) : 0;
+        int densityLevel = Math.min(20, Math.round(density * 20.0f));
+        int combined = Math.max(particleLevel, densityLevel);
+        return new RadiationSnapshot(combined, particles, density);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            int radiation = scanRadiation(serverPlayer, level);
-            String msg = radiation == 0
+            RadiationSnapshot radiation = scanRadiation(serverPlayer, level);
+            boolean safe = radiation.particles() < 20 && radiation.density() < 0.02f;
+            String msg = safe
                     ? "§a[Geiger] Área segura — nenhuma radiação detectada."
-                    : "§e[Geiger] Nível de radiação: " + radiation + "/20";
+                    : "§e[Geiger] Nível de radiação: " + radiation.level() + "/20"
+                    + " §8| Partículas: §f" + radiation.particles()
+                    + " §8| Densidade: §f" + String.format("%.1f%%", radiation.density() * 100.0f);
             player.displayClientMessage(Component.literal(msg), false);
         }
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide);
@@ -107,4 +100,6 @@ public class GeigerCounterItem extends Item {
     public boolean isFoil(ItemStack stack) {
         return true;
     }
+
+    private record RadiationSnapshot(int level, int particles, float density) {}
 }

@@ -25,6 +25,7 @@ public class ClientModEvents {
     public static void onRegisterGuiOverlays(net.minecraftforge.client.event.RegisterGuiOverlaysEvent event) {
         event.registerAboveAll("infection_hud", InfectionHudOverlay.INSTANCE);
         event.registerAboveAll("matter_energy_hud", MatterEnergyHudOverlay.INSTANCE);
+        event.registerAboveAll("dna_mutation_hud", DnaMutationOverlay.INSTANCE);
     }
 
     @SubscribeEvent
