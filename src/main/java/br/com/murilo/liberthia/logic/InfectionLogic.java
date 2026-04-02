@@ -29,9 +29,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Map;
 
 public final class InfectionLogic {
     private static final UUID HEALTH_PENALTY_UUID = UUID.fromString("ce316bd0-ec11-44ca-98da-e77be719fe77");
@@ -58,6 +58,7 @@ public final class InfectionLogic {
         if (immuneNow && data.getInfection() > 0) {
             data.setInfection(0);
         }
+
         ExposureData exposure = scanExposureGeneric(player);
 
         if (data.getPillTimer() > 0) {
@@ -71,6 +72,7 @@ public final class InfectionLogic {
         if (!immuneNow) {
             applyExposure(player, data, exposure);
         }
+
         updateDnaProfile(player, exposure);
         applyMatterSynergy(player, data, exposure);
 
@@ -104,7 +106,14 @@ public final class InfectionLogic {
         }
 
         if ((data.getStage() >= 3 || exposure.immersedInDark()) && player.level().getGameTime() % 200L == 0L) {
-            player.level().playSound(null, player.blockPosition(), ModSounds.DARK_PULSE.get(), SoundSource.PLAYERS, 0.65F, 0.85F);
+            player.level().playSound(
+                    null,
+                    player.blockPosition(),
+                    ModSounds.DARK_PULSE.get(),
+                    SoundSource.PLAYERS,
+                    0.65F,
+                    0.85F
+            );
         }
 
         if (data.isDirty() || player.tickCount % 20 == 0) {
@@ -218,9 +227,9 @@ public final class InfectionLogic {
         }
 
         for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(16))) {
-            entity.getCapability(br.com.murilo.liberthia.registry.ModCapabilities.INFECTION).ifPresent(data -> {
-                data.setInfection(100);
-                data.setDirty(true);
+            entity.getCapability(br.com.murilo.liberthia.registry.ModCapabilities.INFECTION).ifPresent(infectionData -> {
+                infectionData.setInfection(100);
+                infectionData.setDirty(true);
             });
         }
     }
@@ -289,6 +298,7 @@ public final class InfectionLogic {
 
     private static int updateMobExposureCounter(LivingEntity entity, boolean exposedToDark) {
         UUID entityId = entity.getUUID();
+
         if (exposedToDark) {
             int updated = Math.min(FULL_MOB_INFECTION_TICKS, MOB_EXPOSURE_TICKS.getOrDefault(entityId, 0) + 1);
             MOB_EXPOSURE_TICKS.put(entityId, updated);
@@ -300,6 +310,7 @@ public final class InfectionLogic {
             MOB_EXPOSURE_TICKS.remove(entityId);
             return 0;
         }
+
         MOB_EXPOSURE_TICKS.put(entityId, cooled);
         return cooled;
     }
@@ -472,31 +483,19 @@ public final class InfectionLogic {
             } else if (blockState.is(ModBlocks.DARK_MATTER_ORE.get())
                     || blockState.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) {
                 sourceStrength = 0.5f;
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
             }
 
             if (sourceStrength > 0.0f) {
                 net.minecraft.world.phys.Vec3 blockCenter = new net.minecraft.world.phys.Vec3(
-                        pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D
+                        pos.getX() + 0.5D,
+                        pos.getY() + 0.5D,
+                        pos.getZ() + 0.5D
                 );
                 double distance = Math.sqrt(blockCenter.distanceToSqr(entityCenter));
                 float attenuation = (float) (1.0D / (1.0D + (distance * 0.75D)));
                 localPressure += sourceStrength * attenuation;
             }
 
-=======
-            }
-
-            if (sourceStrength > 0.0f) {
-                net.minecraft.world.phys.Vec3 blockCenter = new net.minecraft.world.phys.Vec3(
-                        pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D
-                );
-                double distance = Math.sqrt(blockCenter.distanceToSqr(entityCenter));
-                float attenuation = (float) (1.0D / (1.0D + (distance * 0.75D)));
-                localPressure += sourceStrength * attenuation;
-            }
-
->>>>>>> master
             if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
                 clearBlocks++;
             }
@@ -529,14 +528,10 @@ public final class InfectionLogic {
 
         FluidState feetFluid = entity.level().getFluidState(entity.blockPosition());
         FluidState headFluid = entity.level().getFluidState(entity.blockPosition().above());
-        if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get()) || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
+        if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
             rawDarkPressure += 8;
-        }
-
-        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
-            rawDarkPressure = 0;
-            immersedInDark = false;
         }
 
         if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
@@ -550,11 +545,11 @@ public final class InfectionLogic {
 
         BlockState feetBlock = entity.level().getBlockState(entity.blockPosition());
         BlockState headBlock = entity.level().getBlockState(entity.blockPosition().above());
-        if (feetBlock.is(ModBlocks.CLEAR_MATTER_BLOCK.get())
-                || headBlock.is(ModBlocks.CLEAR_MATTER_BLOCK.get())
-        ) {
+
+        if (feetBlock.is(ModBlocks.CLEAR_MATTER_BLOCK.get()) || headBlock.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
             touchingClear = true;
         }
+
         if (isYellowMatterBlock(feetBlock) || isYellowMatterBlock(headBlock)) {
             touchingYellow = true;
         }
@@ -570,6 +565,7 @@ public final class InfectionLogic {
         if (touchingClear) {
             clearProtectionRatio = Math.min(1.0F, clearProtectionRatio + 0.20F);
         }
+
         int clearRelief = Math.round(rawDarkPressure * clearProtectionRatio);
 
         return new ExposureData(
@@ -599,7 +595,8 @@ public final class InfectionLogic {
     private static boolean isImmersedInDark(LivingEntity entity) {
         FluidState feetFluid = entity.level().getFluidState(entity.blockPosition());
         FluidState headFluid = entity.level().getFluidState(entity.blockPosition().above());
-        return feetFluid.getType().isSame(ModFluids.DARK_MATTER.get()) || headFluid.getType().isSame(ModFluids.DARK_MATTER.get());
+        return feetFluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                || headFluid.getType().isSame(ModFluids.DARK_MATTER.get());
     }
 
     private static void applyExposure(ServerPlayer player, IInfectionData data, ExposureData exposure) {
@@ -620,12 +617,24 @@ public final class InfectionLogic {
 
         int severity = Math.max(0, data.getInfection() - exposure.clearRelief());
 
-        if (severity >= 5) player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, severity >= 50 ? 2 : 1, true, false, true));
-        if (severity >= 10) player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 80, severity >= 60 ? 2 : 1, true, false, true));
-        if (severity >= 15) player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, severity >= 70 ? 1 : 0, true, false, true));
-        if (severity >= 20) player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, severity >= 65 ? 1 : 0, true, false, true));
-        if (severity >= 25 && !exposure.touchingClear()) player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, true, false, true));
-        if (severity >= 35 && !exposure.touchingClear()) player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, true, false, true));
+        if (severity >= 5) {
+            player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, severity >= 50 ? 2 : 1, true, false, true));
+        }
+        if (severity >= 10) {
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 80, severity >= 60 ? 2 : 1, true, false, true));
+        }
+        if (severity >= 15) {
+            player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, severity >= 70 ? 1 : 0, true, false, true));
+        }
+        if (severity >= 20) {
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, severity >= 65 ? 1 : 0, true, false, true));
+        }
+        if (severity >= 25 && !exposure.touchingClear()) {
+            player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, true, false, true));
+        }
+        if (severity >= 35 && !exposure.touchingClear()) {
+            player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, true, false, true));
+        }
 
         if (exposure.carryingDarkMatter()) {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 80, 0, true, false, true));
@@ -647,6 +656,7 @@ public final class InfectionLogic {
             int clear = energy.getClearEnergy();
             int yellow = energy.getYellowEnergy();
             long gameTime = player.level().getGameTime();
+
             boolean darkDominant = dark >= DNA_DOMINANCE_THRESHOLD && dark > clear && dark > yellow;
             boolean darkClearBalanced = Math.abs(dark - clear) <= DNA_BALANCE_TOLERANCE && dark >= 350 && clear >= 350;
             boolean clearYellowImmune = Math.abs(clear - yellow) <= 50 && clear >= 450 && yellow >= 450 && dark <= 100;
@@ -678,7 +688,6 @@ public final class InfectionLogic {
                 }
             }
 
-            // Só fica imune com DNA 50/50 entre Clara e Amarela
             data.setImmune(clearYellowImmune);
 
             if (darkDominant) {
@@ -699,10 +708,16 @@ public final class InfectionLogic {
                 player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, 1, true, false, true));
 
                 if (gameTime % 120L == 0L) {
-                    player.level().playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.AMBIENT_CAVE.value(), SoundSource.PLAYERS, 0.6F, 0.7F);
+                    player.level().playSound(
+                            null,
+                            player.blockPosition(),
+                            net.minecraft.sounds.SoundEvents.AMBIENT_CAVE.value(),
+                            SoundSource.PLAYERS,
+                            0.6F,
+                            0.7F
+                    );
                 }
             } else if (clear > 0) {
-                // Matéria Clara desfaz mutações da Escura, mas não impede receber infecção
                 data.removeMutation("LUCID_CORRUPTION");
                 data.removeMutation("HEAVY_STEPS");
                 data.removeMutation("RADIO_EYES");
@@ -723,6 +738,7 @@ public final class InfectionLogic {
             if (exposure.immersedInDark()) {
                 darkGain += 2;
             }
+
             int clearGain = exposure.clearPressure() > 0 ? 2 : 0;
             int yellowGain = exposure.yellowPressure() > 0 ? 2 : 0;
 
@@ -730,7 +746,6 @@ public final class InfectionLogic {
             clear = Math.min(energy.getMaxEnergy(), clear + clearGain - (darkGain > 0 ? 1 : 0));
             yellow = Math.min(energy.getMaxEnergy(), yellow + yellowGain - (darkGain > 0 ? 1 : 0));
 
-            // Matéria Clara desfaz progressivamente DNA escuro
             if (clearGain > 0 && dark > 0) {
                 dark = Math.max(0, dark - 2);
             }
@@ -769,6 +784,7 @@ public final class InfectionLogic {
         for (int i = 0; i < 3; i++) {
             BlockPos surface = findNearbySurface(serverLevel, player.blockPosition(), SURFACE_SPREAD_RADIUS);
             BlockState surfaceState = serverLevel.getBlockState(surface);
+
             if (!isNaturalSurface(surfaceState)) {
                 continue;
             }
@@ -795,6 +811,7 @@ public final class InfectionLogic {
 
     private static boolean isDarkItem(ItemStack stack) {
         if (stack.isEmpty()) return false;
+
         net.minecraft.world.item.Item item = stack.getItem();
         return item == ModItems.DARK_MATTER_BUCKET.get()
                 || item == ModItems.DARK_MATTER_BLOCK_ITEM.get()
@@ -807,7 +824,9 @@ public final class InfectionLogic {
     private static int getYellowArmorPieces(ServerPlayer player) {
         int pieces = 0;
         for (ItemStack stack : player.getInventory().armor) {
-            if (isYellowMatterArmor(stack)) pieces++;
+            if (isYellowMatterArmor(stack)) {
+                pieces++;
+            }
         }
         return pieces;
     }
@@ -883,19 +902,13 @@ public final class InfectionLogic {
         if (isHydroBlocked(level, pos)) {
             return false;
         }
-
         if (!level.getBlockState(pos).isAir()) {
             return false;
         }
-
         if (!level.getFluidState(pos).isEmpty()) {
             return false;
         }
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
-        if (hasNearbyGrowthTree(level, pos, MIN_GROWTH_SPACING_BLOCKS)) {
-=======
-        if (hasAdjacentGrowth(level, pos)) {
->>>>>>> master
+        if (hasNearbyGrowthTree(level, pos, MIN_GROWTH_SPACING_BLOCKS) || hasAdjacentGrowth(level, pos)) {
             return false;
         }
 
@@ -925,7 +938,6 @@ public final class InfectionLogic {
                 || level.getBlockState(pos.west()).is(ModBlocks.INFECTION_GROWTH.get());
     }
 
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
     private static boolean trySpawnDarkMatterTree(ServerLevel level, BlockPos base) {
         if (isSpreadBlockedByProtectiveBlocks(level, base)) return false;
         if (isHydroBlocked(level, base)) return false;
@@ -947,6 +959,7 @@ public final class InfectionLogic {
 
         int height = 1 + level.random.nextInt(3);
         BlockPos top = base;
+
         for (int i = 0; i < height; i++) {
             BlockPos p = base.above(i + 1);
             if (!level.getBlockState(p).isAir() || !level.getFluidState(p).isEmpty() || hasAdjacentGrowth(level, p)) {
@@ -960,6 +973,7 @@ public final class InfectionLogic {
         if (level.getBlockState(top.above()).isAir() && level.getFluidState(top.above()).isEmpty()) {
             level.setBlockAndUpdate(top.above(), fluid);
         }
+
         return true;
     }
 
@@ -968,6 +982,7 @@ public final class InfectionLogic {
             if (isHydroBlocked(level, pos)) {
                 continue;
             }
+
             BlockState state = level.getBlockState(pos);
             if (isNaturalSurface(state)) {
                 MatterHistoryManager.recordOriginalBlock(level, pos, state);
@@ -985,8 +1000,6 @@ public final class InfectionLogic {
         return false;
     }
 
-=======
->>>>>>> master
     private static boolean tryCondenseDarkFluid(ServerLevel level, BlockPos base) {
         if (isSpreadBlockedByProtectiveBlocks(level, base)) {
             return false;
@@ -1164,6 +1177,7 @@ public final class InfectionLogic {
                 center
         );
         BlockPos spawnPos = surface.above(2);
+
         if (level.getBlockState(spawnPos).isAir() && level.getBlockState(spawnPos.above()).isAir()) {
             spawnBlackHole(level, spawnPos, particles);
         }
@@ -1171,6 +1185,7 @@ public final class InfectionLogic {
 
     public static int countDarkMatterParticles(Level level, BlockPos center, int radius, int vertical) {
         int particles = 0;
+
         for (BlockPos pos : BlockPos.betweenClosed(
                 center.offset(-radius, -vertical, -radius),
                 center.offset(radius, vertical, radius)
@@ -1178,71 +1193,25 @@ public final class InfectionLogic {
             BlockState state = level.getBlockState(pos);
             FluidState fluid = level.getFluidState(pos);
 
-            if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) particles += 14;
-            else if (state.is(ModBlocks.INFECTION_GROWTH.get())) particles += 11;
-            else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) particles += 7;
-            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
+            if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) {
+                particles += 14;
+            } else if (state.is(ModBlocks.INFECTION_GROWTH.get())) {
+                particles += 11;
+            } else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) {
+                particles += 7;
+            } else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) {
+                particles += 9;
+            }
 
-            if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+            if (fluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                    || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
                 particles += 25;
             }
         }
+
         return particles;
     }
 
-    // Compatibilidade para chamadas antigas
-    public static int countDarkMatterParticles(Level level, BlockPos center, int radius) {
-        return countDarkMatterParticles(level, center, radius, 6);
-    }
-
-    public static int countDarkMatterParticles(Level level, BlockPos center) {
-        return countDarkMatterParticles(level, center, 16, 6);
-    }
-
-    public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
-        processDarkFluidActivity(level, center);
-
-        int particles = countDarkMatterParticles(level, center, FLUID_SCAN_RADIUS, FLUID_SCAN_VERTICAL);
-        if (particles < BLACK_HOLE_PARTICLE_THRESHOLD) {
-            return;
-        }
-
-        if (hasNearbyBlackHole(level, center, 48.0D) || isSpreadBlockedByProtectiveBlocks(level, center)) {
-            return;
-        }
-
-        BlockPos surface = level.getHeightmapPos(
-                net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                center
-        );
-        BlockPos spawnPos = surface.above(2);
-        if (level.getBlockState(spawnPos).isAir() && level.getBlockState(spawnPos.above()).isAir()) {
-            spawnBlackHole(level, spawnPos, particles);
-        }
-    }
-
-    public static int countDarkMatterParticles(Level level, BlockPos center, int radius, int vertical) {
-        int particles = 0;
-        for (BlockPos pos : BlockPos.betweenClosed(
-                center.offset(-radius, -vertical, -radius),
-                center.offset(radius, vertical, radius)
-        )) {
-            BlockState state = level.getBlockState(pos);
-            FluidState fluid = level.getFluidState(pos);
-
-            if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) particles += 14;
-            else if (state.is(ModBlocks.INFECTION_GROWTH.get())) particles += 11;
-            else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) particles += 7;
-            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
-
-            if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
-                particles += 25;
-            }
-        }
-        return particles;
-    }
-
-    // Compatibilidade para chamadas antigas
     public static int countDarkMatterParticles(Level level, BlockPos center, int radius) {
         return countDarkMatterParticles(level, center, radius, 6);
     }
@@ -1265,11 +1234,9 @@ public final class InfectionLogic {
         if (isHydroBlocked(level, targetPos)) {
             return true;
         }
-
         if (hasYellowMatterProtection(level, targetPos)) {
             return true;
         }
-
         return hasClearMatterProtection(level, targetPos);
     }
 
@@ -1295,6 +1262,7 @@ public final class InfectionLogic {
         if (state.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
             return true;
         }
+
         return hasRegistryPath(state, "clear_matter")
                 || hasRegistryPath(state, "white_matter")
                 || hasRegistryPath(state, "materia_branca");
@@ -1315,11 +1283,7 @@ public final class InfectionLogic {
     }
 
     private static boolean isHydroBlocked(Level level, BlockPos pos) {
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
-        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
-=======
         for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
->>>>>>> master
             FluidState fluid = level.getFluidState(scan);
             if (isWaterOrLava(fluid)) {
                 return true;
@@ -1329,40 +1293,24 @@ public final class InfectionLogic {
     }
 
     private static boolean isWaterOrLava(FluidState fluid) {
-        return fluid.is(net.minecraft.tags.FluidTags.WATER) || fluid.is(net.minecraft.tags.FluidTags.LAVA);
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
+        return fluid.is(net.minecraft.tags.FluidTags.WATER)
+                || fluid.is(net.minecraft.tags.FluidTags.LAVA);
     }
 
     private static double findNearestDarkMatterDistance(Level level, BlockPos center, int radius) {
         double nearest = Double.MAX_VALUE;
+
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 2, radius))) {
             BlockState state = level.getBlockState(pos);
             FluidState fluid = level.getFluidState(pos);
+
             if (isInfectionBlock(state)
                     || fluid.getType().isSame(ModFluids.DARK_MATTER.get())
                     || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
                 nearest = Math.min(nearest, Math.sqrt(center.distSqr(pos)));
             }
         }
+
         return nearest == Double.MAX_VALUE ? 999.0D : nearest;
     }
-
-=======
-    }
-
-    private static double findNearestDarkMatterDistance(Level level, BlockPos center, int radius) {
-        double nearest = Double.MAX_VALUE;
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 2, radius))) {
-            BlockState state = level.getBlockState(pos);
-            FluidState fluid = level.getFluidState(pos);
-            if (isInfectionBlock(state)
-                    || fluid.getType().isSame(ModFluids.DARK_MATTER.get())
-                    || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
-                nearest = Math.min(nearest, Math.sqrt(center.distSqr(pos)));
-            }
-        }
-        return nearest == Double.MAX_VALUE ? 999.0D : nearest;
-    }
-
->>>>>>> master
 }
