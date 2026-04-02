@@ -88,6 +88,58 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
+tasks.register('checkMergeConflictMarkers') {
+    group = 'verification'
+    description = 'Fails the build if merge conflict markers are present in tracked text files.'
+
+    doLast {
+        def excludedDirs = ['.git', 'build', 'run', 'run-data', '.gradle']
+        def offenders = []
+
+        fileTree(project.projectDir) {
+            exclude excludedDirs.collect { "${it}/**" }
+        }.visit { FileVisitDetails details ->
+            if (details.isDirectory()) return
+
+            def name = details.file.name.toLowerCase(Locale.ROOT)
+            def isText = name.endsWith('.java')
+                    || name.endsWith('.json')
+                    || name.endsWith('.mcmeta')
+                    || name.endsWith('.toml')
+                    || name.endsWith('.gradle')
+                    || name.endsWith('.md')
+                    || name.endsWith('.txt')
+                    || name.endsWith('.cfg')
+                    || name.endsWith('.properties')
+                    || name.endsWith('.xml')
+                    || name.endsWith('.yml')
+                    || name.endsWith('.yaml')
+            if (!isText) return
+
+            int lineNo = 0
+            details.file.eachLine('UTF-8') { line ->
+                lineNo++
+                def trimmed = line.trim()
+                if (trimmed.startsWith('<<<<<<<')
+                        || trimmed == '======='
+                        || trimmed.startsWith('>>>>>>>')) {
+                    offenders << "${project.relativePath(details.file)}:${lineNo}: ${line.trim()}"
+                }
+            }
+        }
+
+        if (!offenders.isEmpty()) {
+            throw new GradleException(
+                    "Merge conflict markers detected:\n" + offenders.join('\n')
+            )
+        }
+    }
+}
+
+tasks.named('check').configure {
+    dependsOn(tasks.named('checkMergeConflictMarkers'))
+}
+
 jar {
     manifest {
         attributes([
