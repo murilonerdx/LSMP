@@ -40,6 +40,7 @@ public final class InfectionLogic {
     private static final int DNA_BALANCE_TOLERANCE = 75;
 
     private static final int MAX_INFECTION_GROWTH_HEIGHT = 3;
+    private static final int MIN_GROWTH_SPACING_BLOCKS = 8;
     private static final int SURFACE_SPREAD_RADIUS = 5;
     private static final int FLUID_SCAN_RADIUS = 16;
     private static final int FLUID_SCAN_VERTICAL = 6;
@@ -471,6 +472,7 @@ public final class InfectionLogic {
             } else if (blockState.is(ModBlocks.DARK_MATTER_ORE.get())
                     || blockState.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) {
                 sourceStrength = 0.5f;
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
             }
 
             if (sourceStrength > 0.0f) {
@@ -482,6 +484,19 @@ public final class InfectionLogic {
                 localPressure += sourceStrength * attenuation;
             }
 
+=======
+            }
+
+            if (sourceStrength > 0.0f) {
+                net.minecraft.world.phys.Vec3 blockCenter = new net.minecraft.world.phys.Vec3(
+                        pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D
+                );
+                double distance = Math.sqrt(blockCenter.distanceToSqr(entityCenter));
+                float attenuation = (float) (1.0D / (1.0D + (distance * 0.75D)));
+                localPressure += sourceStrength * attenuation;
+            }
+
+>>>>>>> master
             if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
                 clearBlocks++;
             }
@@ -517,6 +532,11 @@ public final class InfectionLogic {
         if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get()) || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
             rawDarkPressure += 8;
+        }
+
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
         }
 
         if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
@@ -806,7 +826,7 @@ public final class InfectionLogic {
             return;
         }
 
-        if (isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
+        if (isSpreadBlockedByProtectiveBlocks(level, groundPos) || isHydroBlocked(level, groundPos)) {
             return;
         }
 
@@ -822,7 +842,7 @@ public final class InfectionLogic {
 
         if (groundState.is(ModBlocks.CORRUPTED_SOIL.get()) || groundState.is(ModBlocks.DARK_MATTER_BLOCK.get())) {
             if (level.random.nextFloat() < growthChance) {
-                tryGrowInfectionColumn(level, groundPos.above());
+                trySpawnDarkMatterTree(level, groundPos);
             }
 
             if (level.random.nextFloat() < fluidChance) {
@@ -835,8 +855,7 @@ public final class InfectionLogic {
             BlockPos base = findGrowthBase(level, groundPos);
 
             if (level.random.nextFloat() < growthChance) {
-                BlockPos top = getGrowthTop(level, base);
-                tryGrowInfectionColumn(level, top.above());
+                trySpawnDarkMatterTree(level, base);
             }
 
             if (level.random.nextFloat() < fluidChance) {
@@ -872,7 +891,11 @@ public final class InfectionLogic {
         if (!level.getFluidState(pos).isEmpty()) {
             return false;
         }
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
+        if (hasNearbyGrowthTree(level, pos, MIN_GROWTH_SPACING_BLOCKS)) {
+=======
         if (hasAdjacentGrowth(level, pos)) {
+>>>>>>> master
             return false;
         }
 
@@ -902,6 +925,68 @@ public final class InfectionLogic {
                 || level.getBlockState(pos.west()).is(ModBlocks.INFECTION_GROWTH.get());
     }
 
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
+    private static boolean trySpawnDarkMatterTree(ServerLevel level, BlockPos base) {
+        if (isSpreadBlockedByProtectiveBlocks(level, base)) return false;
+        if (isHydroBlocked(level, base)) return false;
+        if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) return false;
+
+        BlockState baseState = level.getBlockState(base);
+        if (isNaturalSurface(baseState)) {
+            MatterHistoryManager.recordOriginalBlock(level, base, baseState);
+            level.setBlockAndUpdate(base, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
+            return false;
+        }
+
+        if (!baseState.is(ModBlocks.CORRUPTED_SOIL.get()) && !baseState.is(ModBlocks.DARK_MATTER_BLOCK.get())) {
+            return false;
+        }
+
+        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+        infectGroundAroundTree(level, base, 2);
+
+        int height = 1 + level.random.nextInt(3);
+        BlockPos top = base;
+        for (int i = 0; i < height; i++) {
+            BlockPos p = base.above(i + 1);
+            if (!level.getBlockState(p).isAir() || !level.getFluidState(p).isEmpty() || hasAdjacentGrowth(level, p)) {
+                break;
+            }
+            level.setBlockAndUpdate(p, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
+            top = p;
+        }
+
+        BlockState fluid = ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock();
+        if (level.getBlockState(top.above()).isAir() && level.getFluidState(top.above()).isEmpty()) {
+            level.setBlockAndUpdate(top.above(), fluid);
+        }
+        return true;
+    }
+
+    private static void infectGroundAroundTree(ServerLevel level, BlockPos center, int radius) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 0, radius))) {
+            if (isHydroBlocked(level, pos)) {
+                continue;
+            }
+            BlockState state = level.getBlockState(pos);
+            if (isNaturalSurface(state)) {
+                MatterHistoryManager.recordOriginalBlock(level, pos, state);
+                level.setBlockAndUpdate(pos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
+            }
+        }
+    }
+
+    private static boolean hasNearbyGrowthTree(Level level, BlockPos center, int radius) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 4, radius))) {
+            if (level.getBlockState(pos).is(ModBlocks.INFECTION_GROWTH.get())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+=======
+>>>>>>> master
     private static boolean tryCondenseDarkFluid(ServerLevel level, BlockPos base) {
         if (isSpreadBlockedByProtectiveBlocks(level, base)) {
             return false;
@@ -1114,6 +1199,58 @@ public final class InfectionLogic {
         return countDarkMatterParticles(level, center, 16, 6);
     }
 
+    public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
+        processDarkFluidActivity(level, center);
+
+        int particles = countDarkMatterParticles(level, center, FLUID_SCAN_RADIUS, FLUID_SCAN_VERTICAL);
+        if (particles < BLACK_HOLE_PARTICLE_THRESHOLD) {
+            return;
+        }
+
+        if (hasNearbyBlackHole(level, center, 48.0D) || isSpreadBlockedByProtectiveBlocks(level, center)) {
+            return;
+        }
+
+        BlockPos surface = level.getHeightmapPos(
+                net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                center
+        );
+        BlockPos spawnPos = surface.above(2);
+        if (level.getBlockState(spawnPos).isAir() && level.getBlockState(spawnPos.above()).isAir()) {
+            spawnBlackHole(level, spawnPos, particles);
+        }
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius, int vertical) {
+        int particles = 0;
+        for (BlockPos pos : BlockPos.betweenClosed(
+                center.offset(-radius, -vertical, -radius),
+                center.offset(radius, vertical, radius)
+        )) {
+            BlockState state = level.getBlockState(pos);
+            FluidState fluid = level.getFluidState(pos);
+
+            if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) particles += 14;
+            else if (state.is(ModBlocks.INFECTION_GROWTH.get())) particles += 11;
+            else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) particles += 7;
+            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
+
+            if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+                particles += 25;
+            }
+        }
+        return particles;
+    }
+
+    // Compatibilidade para chamadas antigas
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius) {
+        return countDarkMatterParticles(level, center, radius, 6);
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center) {
+        return countDarkMatterParticles(level, center, 16, 6);
+    }
+
     private static boolean hasNearbyBlackHole(ServerLevel level, BlockPos pos, double radius) {
         return !level.getEntitiesOfClass(
                 br.com.murilo.liberthia.entity.BlackHoleEntity.class,
@@ -1178,7 +1315,11 @@ public final class InfectionLogic {
     }
 
     private static boolean isHydroBlocked(Level level, BlockPos pos) {
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
+        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
+=======
         for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+>>>>>>> master
             FluidState fluid = level.getFluidState(scan);
             if (isWaterOrLava(fluid)) {
                 return true;
@@ -1189,6 +1330,7 @@ public final class InfectionLogic {
 
     private static boolean isWaterOrLava(FluidState fluid) {
         return fluid.is(net.minecraft.tags.FluidTags.WATER) || fluid.is(net.minecraft.tags.FluidTags.LAVA);
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
     }
 
     private static double findNearestDarkMatterDistance(Level level, BlockPos center, int radius) {
@@ -1205,4 +1347,22 @@ public final class InfectionLogic {
         return nearest == Double.MAX_VALUE ? 999.0D : nearest;
     }
 
+=======
+    }
+
+    private static double findNearestDarkMatterDistance(Level level, BlockPos center, int radius) {
+        double nearest = Double.MAX_VALUE;
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 2, radius))) {
+            BlockState state = level.getBlockState(pos);
+            FluidState fluid = level.getFluidState(pos);
+            if (isInfectionBlock(state)
+                    || fluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                    || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+                nearest = Math.min(nearest, Math.sqrt(center.distSqr(pos)));
+            }
+        }
+        return nearest == Double.MAX_VALUE ? 999.0D : nearest;
+    }
+
+>>>>>>> master
 }
