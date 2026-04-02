@@ -36,17 +36,21 @@ public class WorldSpawnerEvents {
         // Avalia anomalias mesmo sem players online.
         InfectionLogic.evaluateDarkMatterRegion(serverLevel, pickAnomalyCenter(serverLevel));
 
-        List<ServerPlayer> players = serverLevel.players();
-        if (players.isEmpty() || serverLevel.random.nextFloat() > 0.15F) return;
+        trySpawnNearRandomPlayer(serverLevel);
+    }
 
-        ServerPlayer player = players.get(serverLevel.random.nextInt(players.size()));
-        BlockPos center = player.blockPosition().offset(serverLevel.random.nextInt(33) - 16, 0, serverLevel.random.nextInt(33) - 16);
-        BlockPos top = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
+    private void trySpawnNearRandomPlayer(ServerLevel level) {
+        List<ServerPlayer> players = level.players();
+        if (players.isEmpty() || level.random.nextFloat() > 0.15F) return;
 
-        if (top.getY() < serverLevel.getMinBuildHeight() + 2 || top.getY() >= serverLevel.getMaxBuildHeight() - 2) return;
+        ServerPlayer player = players.get(level.random.nextInt(players.size()));
+        BlockPos center = player.blockPosition().offset(level.random.nextInt(33) - 16, 0, level.random.nextInt(33) - 16);
+        BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
 
-        placeScatteredGrowth(serverLevel, top);
-        serverLevel.playSound(null, top, ModSounds.DARK_PULSE.get(), SoundSource.BLOCKS, 0.8F, 0.75F);
+        if (top.getY() < level.getMinBuildHeight() + 2 || top.getY() >= level.getMaxBuildHeight() - 2) return;
+
+        placeScatteredGrowth(level, top);
+        level.playSound(null, top, ModSounds.DARK_PULSE.get(), SoundSource.BLOCKS, 0.8F, 0.75F);
     }
 
     private BlockPos pickAnomalyCenter(ServerLevel level) {
