@@ -428,11 +428,19 @@ public final class InfectionLogic {
             attribute.removeModifier(existing);
         }
 
-        if (data.getPermanentHealthPenalty() > 0) {
+        // Penalidade atual acompanha a infecção atual
+        int currentPenalty = Math.min(10, (data.getInfection() / 20) * 2);
+
+        // Mantém só uma "cicatriz" pequena do histórico, em vez de travar a vida inteira
+        int scarPenalty = Math.min(2, data.getPermanentHealthPenalty());
+
+        int appliedPenalty = Math.max(currentPenalty, scarPenalty);
+
+        if (appliedPenalty > 0) {
             attribute.addPermanentModifier(new AttributeModifier(
                     HEALTH_PENALTY_UUID,
                     "liberthia_infection_penalty",
-                    -data.getPermanentHealthPenalty(),
+                    -appliedPenalty,
                     AttributeModifier.Operation.ADDITION
             ));
         }
@@ -491,16 +499,13 @@ public final class InfectionLogic {
             }
         }
 
-        int forwardPressure = 0;
-        net.minecraft.world.phys.Vec3 lookVec = entity.getLookAngle();
-        net.minecraft.world.phys.Vec3 startPos = entity.getEyePosition();
-
-        for (int d = 1; d <= 20; d++) {
-            BlockPos p = BlockPos.containing(startPos.add(lookVec.scale(d)));
-            if (isInfectionBlock(entity.level().getBlockState(p))) {
-                forwardPressure += Math.max(1, (22 - d) / 4);
+            if (isYellowMatterBlock(blockState)) {
+                yellowBlocks++;
             }
-        }
+
+            if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
+                clearBlocks++;
+            }
 
         if (!entity.level().isClientSide && entity.tickCount % 20 == 0) {
             int ambient = countDarkMatterParticles(entity.level(), center, 16, 6) / 120;
@@ -514,9 +519,25 @@ public final class InfectionLogic {
 
         FluidState feetFluid = entity.level().getFluidState(entity.blockPosition());
         FluidState headFluid = entity.level().getFluidState(entity.blockPosition().above());
-        if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get()) || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
+        if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
-            rawDarkPressure += 8;
+            rawDarkPressure += 6;
+        }
+
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
+        }
+
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
+        }
+
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
         }
 
         if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
@@ -552,9 +573,11 @@ public final class InfectionLogic {
         }
         int clearRelief = Math.round(rawDarkPressure * clearProtectionRatio);
 
+        int effectiveDarkPressure = Math.max(0, rawDarkPressure - blockedExposure - clearRelief);
+
         return new ExposureData(
                 rawDarkPressure,
-                Math.max(0, rawDarkPressure - blockedExposure - clearRelief),
+                effectiveDarkPressure,
                 blockedExposure,
                 clearRelief,
                 rawClearPressure,
@@ -600,12 +623,18 @@ public final class InfectionLogic {
 
         int severity = Math.max(0, data.getInfection() - exposure.clearRelief());
 
-        if (severity >= 5) player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, severity >= 50 ? 2 : 1, true, false, true));
-        if (severity >= 10) player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 80, severity >= 60 ? 2 : 1, true, false, true));
-        if (severity >= 15) player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, severity >= 70 ? 1 : 0, true, false, true));
-        if (severity >= 20) player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, severity >= 65 ? 1 : 0, true, false, true));
-        if (severity >= 25 && !exposure.touchingClear()) player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, true, false, true));
-        if (severity >= 35 && !exposure.touchingClear()) player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, true, false, true));
+        if (severity >= 5)
+            player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, severity >= 50 ? 2 : 1, true, false, true));
+        if (severity >= 10)
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 80, severity >= 60 ? 2 : 1, true, false, true));
+        if (severity >= 15)
+            player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, severity >= 70 ? 1 : 0, true, false, true));
+        if (severity >= 20)
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, severity >= 65 ? 1 : 0, true, false, true));
+        if (severity >= 25 && !exposure.touchingClear())
+            player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, true, false, true));
+        if (severity >= 35 && !exposure.touchingClear())
+            player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, true, false, true));
 
         if (exposure.carryingDarkMatter()) {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 80, 0, true, false, true));
@@ -1060,6 +1089,59 @@ public final class InfectionLogic {
                 spawnBlackHole(level, spawnPos, localParticles);
             }
         }
+        return particles;
+    }
+
+    public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
+        processDarkFluidActivity(level, center);
+
+        int particles = countDarkMatterParticles(level, center, FLUID_SCAN_RADIUS, FLUID_SCAN_VERTICAL);
+        if (particles < BLACK_HOLE_PARTICLE_THRESHOLD) {
+            return;
+        }
+
+        if (hasNearbyBlackHole(level, center, 48.0D) || isSpreadBlockedByProtectiveBlocks(level, center)) {
+            return;
+        }
+
+        BlockPos surface = level.getHeightmapPos(
+                net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                center
+        );
+        BlockPos spawnPos = surface.above(2);
+        if (level.getBlockState(spawnPos).isAir() && level.getBlockState(spawnPos.above()).isAir()) {
+            spawnBlackHole(level, spawnPos, particles);
+        }
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius, int vertical) {
+        int particles = 0;
+        for (BlockPos pos : BlockPos.betweenClosed(
+                center.offset(-radius, -vertical, -radius),
+                center.offset(radius, vertical, radius)
+        )) {
+            BlockState state = level.getBlockState(pos);
+            FluidState fluid = level.getFluidState(pos);
+
+            if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) particles += 14;
+            else if (state.is(ModBlocks.INFECTION_GROWTH.get())) particles += 11;
+            else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) particles += 7;
+            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
+
+            if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+                particles += 25;
+            }
+        }
+        return particles;
+    }
+
+    // Compatibilidade para chamadas antigas
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius) {
+        return countDarkMatterParticles(level, center, radius, 6);
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center) {
+        return countDarkMatterParticles(level, center, 16, 6);
     }
 
     public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {

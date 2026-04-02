@@ -4,7 +4,17 @@
       "Bash(du -sh /c/Users/T-GAMER/Desktop/liberthia_mod/*)",
       "Bash(./gradlew build:*)",
       "Bash(find . -path */IForgeMenuType*)",
-      "Bash(./gradlew compileJava)"
+      "Bash(./gradlew compileJava)",
+      "Bash(python3 -c \"from PIL import Image; print\\(''Pillow available''\\)\")",
+      "Bash(python3 -c \"import struct, zlib; print\\(''Will use pure Python PNG''\\)\")",
+      "Bash(pip show:*)",
+      "Bash(grep -r \"textures\" /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/resources/assets/liberthia/models/block/*.json)",
+      "Bash(for file:*)",
+      "Bash(do cat:*)",
+      "Bash(grep -r \"textures\\\\|gui\\\\|TEXTURE\\\\|ResourceLocation\" /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/java/br/com/murilo/liberthia/client/screen/*.java)",
+      "Bash(grep -h \"TEXTURE = new ResourceLocation\" /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/java/br/com/murilo/liberthia/client/screen/*.java)",
+      "Bash(/tmp/check_missing.sh:*)",
+      "Bash(bash /tmp/check_missing.sh)"
     ]
   }
 }
