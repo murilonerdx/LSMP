@@ -806,7 +806,7 @@ public final class InfectionLogic {
             return;
         }
 
-        if (isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
+        if (isSpreadBlockedByProtectiveBlocks(level, groundPos) || isHydroBlocked(level, groundPos)) {
             return;
         }
 
@@ -940,6 +940,9 @@ public final class InfectionLogic {
 
     private static void infectGroundAroundTree(ServerLevel level, BlockPos center, int radius) {
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 0, radius))) {
+            if (isHydroBlocked(level, pos)) {
+                continue;
+            }
             BlockState state = level.getBlockState(pos);
             if (isNaturalSurface(state)) {
                 MatterHistoryManager.recordOriginalBlock(level, pos, state);
@@ -1233,7 +1236,7 @@ public final class InfectionLogic {
     }
 
     private static boolean isHydroBlocked(Level level, BlockPos pos) {
-        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
             FluidState fluid = level.getFluidState(scan);
             if (isWaterOrLava(fluid)) {
                 return true;

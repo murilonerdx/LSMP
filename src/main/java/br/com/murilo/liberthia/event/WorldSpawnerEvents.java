@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -97,6 +98,8 @@ public class WorldSpawnerEvents {
     }
 
     private void placeSingleGrowth(ServerLevel level, BlockPos base) {
+        if (isHydroBlocked(level, base)) return;
+
         BlockState previous = level.getBlockState(base);
         if (!previous.isSolidRender(level, base)) return;
         if (!level.isEmptyBlock(base.above())) return;
@@ -130,6 +133,8 @@ public class WorldSpawnerEvents {
 
     private void infectGroundAroundTree(ServerLevel level, BlockPos center, int radius) {
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 0, radius))) {
+            if (isHydroBlocked(level, pos)) continue;
+
             BlockState state = level.getBlockState(pos);
             if (state.is(net.minecraft.world.level.block.Blocks.GRASS_BLOCK)
                     || state.is(net.minecraft.world.level.block.Blocks.DIRT)
@@ -142,5 +147,15 @@ public class WorldSpawnerEvents {
                 level.setBlockAndUpdate(pos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
             }
         }
+    }
+
+    private boolean isHydroBlocked(ServerLevel level, BlockPos pos) {
+        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
+            FluidState fluid = level.getFluidState(scan);
+            if (fluid.is(net.minecraft.tags.FluidTags.WATER) || fluid.is(net.minecraft.tags.FluidTags.LAVA)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
