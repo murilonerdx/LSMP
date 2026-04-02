@@ -467,7 +467,6 @@ public final class InfectionLogic {
             if (isYellowMatterBlock(blockState)) {
                 yellowBlocks++;
             }
-        }
 
             if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
                 clearBlocks++;
@@ -570,12 +569,18 @@ public final class InfectionLogic {
 
         int severity = Math.max(0, data.getInfection() - exposure.clearRelief());
 
-        if (severity >= 5) player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, severity >= 50 ? 2 : 1, true, false, true));
-        if (severity >= 10) player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 80, severity >= 60 ? 2 : 1, true, false, true));
-        if (severity >= 15) player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, severity >= 70 ? 1 : 0, true, false, true));
-        if (severity >= 20) player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, severity >= 65 ? 1 : 0, true, false, true));
-        if (severity >= 25 && !exposure.touchingClear()) player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, true, false, true));
-        if (severity >= 35 && !exposure.touchingClear()) player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, true, false, true));
+        if (severity >= 5)
+            player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, severity >= 50 ? 2 : 1, true, false, true));
+        if (severity >= 10)
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 80, severity >= 60 ? 2 : 1, true, false, true));
+        if (severity >= 15)
+            player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, severity >= 70 ? 1 : 0, true, false, true));
+        if (severity >= 20)
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, severity >= 65 ? 1 : 0, true, false, true));
+        if (severity >= 25 && !exposure.touchingClear())
+            player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, true, false, true));
+        if (severity >= 35 && !exposure.touchingClear())
+            player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, true, false, true));
 
         if (exposure.carryingDarkMatter()) {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 80, 0, true, false, true));
@@ -1025,7 +1030,8 @@ public final class InfectionLogic {
             if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) particles += 14;
             else if (state.is(ModBlocks.INFECTION_GROWTH.get())) particles += 11;
             else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) particles += 7;
-            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
+            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get()))
+                particles += 9;
 
             if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
                 particles += 25;
