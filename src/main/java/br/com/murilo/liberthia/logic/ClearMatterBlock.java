@@ -16,6 +16,12 @@ public class ClearMatterBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        int restored = MatterHistoryManager.restoreMappedBlocks(level, pos, 16);
+        if (restored > 0 && random.nextFloat() < 0.15F) {
+            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+            return;
+        }
+
         // A matéria clara atua como um sumidouro para a matéria escura
         for (Direction direction : Direction.values()) {
             BlockPos neighborPos = pos.relative(direction);

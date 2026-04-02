@@ -20,6 +20,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import br.com.murilo.liberthia.command.PurgeInfectionCommand;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -218,10 +219,6 @@ public class InfectionEvents {
 
             // Matter Energy decay and sync
             player.getCapability(ModCapabilities.MATTER_ENERGY).ifPresent(energy -> {
-                // Decay every 200 ticks (10 seconds)
-                if (player.tickCount % 200 == 0) {
-                    energy.decay();
-                }
                 // Sync to client every 20 ticks or when dirty
                 if (energy.isDirty() || player.tickCount % 20 == 0) {
                     ModNetwork.sendToPlayer(player, new S2CMatterEnergySyncPacket(
@@ -310,6 +307,33 @@ public class InfectionEvents {
             serverPlayer.getCapability(ModCapabilities.INFECTION)
                     .ifPresent(data -> InfectionLogic.sync(serverPlayer, data));
         }
+    }
+
+    @SubscribeEvent
+    public void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
+        if (!(event.getLevel() instanceof net.minecraft.server.level.ServerLevel serverLevel)) {
+            return;
+        }
+        br.com.murilo.liberthia.logic.MatterHistoryManager.registerProtectionBlock(serverLevel, event.getPos(), event.getPlacedBlock());
+
+        if (event.getPlacedBlock().is(br.com.murilo.liberthia.registry.ModBlocks.DARK_MATTER_BLOCK.get())) {
+            for (BlockPos nearby : BlockPos.betweenClosed(event.getPos().offset(-1, -1, -1), event.getPos().offset(1, 1, 1))) {
+                net.minecraft.world.level.block.state.BlockState state = serverLevel.getBlockState(nearby);
+                if (state.is(br.com.murilo.liberthia.registry.ModBlocks.CLEAR_MATTER_BLOCK.get())
+                        || state.is(br.com.murilo.liberthia.registry.ModBlocks.YELLOW_MATTER_BLOCK.get())) {
+                    serverLevel.setBlockAndUpdate(nearby, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+                    br.com.murilo.liberthia.logic.MatterHistoryManager.unregisterProtectionBlock(serverLevel, nearby);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onBlockBroken(BlockEvent.BreakEvent event) {
+        if (!(event.getLevel() instanceof net.minecraft.server.level.ServerLevel serverLevel)) {
+            return;
+        }
+        br.com.murilo.liberthia.logic.MatterHistoryManager.unregisterProtectionBlock(serverLevel, event.getPos());
     }
 
     /**
