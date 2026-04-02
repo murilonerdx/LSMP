@@ -65,6 +65,7 @@ public class WorldSpawnerEvents {
         while (placed.size() < desired && attempts < 40) {
             attempts++;
             int distance = 16 + level.random.nextInt(17);
+            int distance = 16 + level.random.nextInt(17);
             double angle = level.random.nextDouble() * Math.PI * 2.0D;
 
             BlockPos candidate = center.offset(
@@ -135,7 +136,27 @@ public class WorldSpawnerEvents {
                 level.setBlockAndUpdate(canopyPos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
             }
         }
+        return true;
+    }
 
+    private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
+            if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
+        if (!level.getBlockState(base).isSolidRender(level, base)) {
+            return;
+        }
+        if (!level.isEmptyBlock(base.above())) {
+            return;
+        }
+
+        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
         BlockState fluidState = ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock();
         if (level.isEmptyBlock(top.above())) {
             level.setBlockAndUpdate(top.above(), fluidState);
