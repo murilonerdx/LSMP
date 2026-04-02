@@ -218,10 +218,6 @@ public class InfectionEvents {
 
             // Matter Energy decay and sync
             player.getCapability(ModCapabilities.MATTER_ENERGY).ifPresent(energy -> {
-                // Decay every 200 ticks (10 seconds)
-                if (player.tickCount % 200 == 0) {
-                    energy.decay();
-                }
                 // Sync to client every 20 ticks or when dirty
                 if (energy.isDirty() || player.tickCount % 20 == 0) {
                     ModNetwork.sendToPlayer(player, new S2CMatterEnergySyncPacket(
