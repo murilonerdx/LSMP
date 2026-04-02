@@ -51,6 +51,17 @@ public class WorldSpawnerEvents {
 
         placeScatteredGrowth(level, top);
         level.playSound(null, top, ModSounds.DARK_PULSE.get(), SoundSource.BLOCKS, 0.8F, 0.75F);
+        List<ServerPlayer> players = serverLevel.players();
+        if (players.isEmpty() || serverLevel.random.nextFloat() > 0.15F) return;
+
+        ServerPlayer player = players.get(serverLevel.random.nextInt(players.size()));
+        BlockPos center = player.blockPosition().offset(serverLevel.random.nextInt(33) - 16, 0, serverLevel.random.nextInt(33) - 16);
+        BlockPos top = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
+
+        if (top.getY() < serverLevel.getMinBuildHeight() + 2 || top.getY() >= serverLevel.getMaxBuildHeight() - 2) return;
+
+        placeScatteredGrowth(serverLevel, top);
+        serverLevel.playSound(null, top, ModSounds.DARK_PULSE.get(), SoundSource.BLOCKS, 0.8F, 0.75F);
     }
 
     private BlockPos pickAnomalyCenter(ServerLevel level) {
@@ -61,6 +72,22 @@ public class WorldSpawnerEvents {
         BlockPos spawn = level.getSharedSpawnPos();
         return spawn.offset(level.random.nextInt(1025) - 512, 0, level.random.nextInt(1025) - 512);
     }
+
+    private void placeScatteredGrowth(ServerLevel level, BlockPos center) {
+        List<BlockPos> placed = new ArrayList<>();
+        int desired = 3 + level.random.nextInt(3);
+        int attempts = 0;
+
+        while (placed.size() < desired && attempts++ < 40) {
+            int distance = 16 + level.random.nextInt(17);
+            double angle = level.random.nextDouble() * Math.PI * 2.0D;
+
+            BlockPos candidate = center.offset(
+                    (int) Math.round(Math.cos(angle) * distance),
+                    0,
+                    (int) Math.round(Math.sin(angle) * distance)
+            );
+
 
     private void placeScatteredGrowth(ServerLevel level, BlockPos center) {
         List<BlockPos> placed = new ArrayList<>();
@@ -88,6 +115,12 @@ public class WorldSpawnerEvents {
             if (placeSingleGrowth(level, base)) {
                 placed.add(base.immutable());
             }
+            if (!isFarEnough(base, placed, MIN_GROWTH_SPACING_BLOCKS)) continue;
+            if (hasNearbyDarkMatter(level, base, 10)) continue;
+            if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) continue;
+
+            placeSingleGrowth(level, base);
+            placed.add(base.immutable());
         }
     }
 
@@ -176,5 +209,14 @@ public class WorldSpawnerEvents {
             }
         }
         return false;
+        }
+        return false;
+    }
+
+    private boolean hasAdjacentGrowth(ServerLevel level, BlockPos pos) {
+        return level.getBlockState(pos.north()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.south()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.east()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.west()).is(ModBlocks.INFECTION_GROWTH.get());
     }
 }
