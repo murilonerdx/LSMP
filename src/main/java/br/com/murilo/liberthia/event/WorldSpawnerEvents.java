@@ -36,6 +36,7 @@ public class WorldSpawnerEvents {
         // Avalia anomalias mesmo sem players online.
         InfectionLogic.evaluateDarkMatterRegion(serverLevel, pickAnomalyCenter(serverLevel));
 
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
         List<ServerPlayer> players = serverLevel.players();
         if (players.isEmpty() || serverLevel.random.nextFloat() > 0.15F) return;
 
@@ -43,6 +44,25 @@ public class WorldSpawnerEvents {
         BlockPos center = player.blockPosition().offset(serverLevel.random.nextInt(33) - 16, 0, serverLevel.random.nextInt(33) - 16);
         BlockPos top = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
 
+=======
+        BlockPos anomalyCenter;
+        if (!serverLevel.players().isEmpty()) {
+            ServerPlayer pivot = serverLevel.players().get(serverLevel.random.nextInt(serverLevel.players().size()));
+            anomalyCenter = pivot.blockPosition();
+        } else {
+            BlockPos spawn = serverLevel.getSharedSpawnPos();
+            anomalyCenter = spawn.offset(serverLevel.random.nextInt(1025) - 512, 0, serverLevel.random.nextInt(1025) - 512);
+        }
+        InfectionLogic.evaluateDarkMatterRegion(serverLevel, anomalyCenter);
+
+        List<ServerPlayer> players = serverLevel.players();
+        if (players.isEmpty() || serverLevel.random.nextFloat() > 0.15F) return;
+
+        ServerPlayer player = players.get(serverLevel.random.nextInt(players.size()));
+        BlockPos center = player.blockPosition().offset(serverLevel.random.nextInt(33) - 16, 0, serverLevel.random.nextInt(33) - 16);
+        BlockPos top = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
+
+>>>>>>> master
         if (top.getY() < serverLevel.getMinBuildHeight() + 2 || top.getY() >= serverLevel.getMaxBuildHeight() - 2) return;
 
         placeScatteredGrowth(serverLevel, top);
@@ -57,6 +77,7 @@ public class WorldSpawnerEvents {
         BlockPos spawn = level.getSharedSpawnPos();
         return spawn.offset(level.random.nextInt(1025) - 512, 0, level.random.nextInt(1025) - 512);
     }
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
 
     private void placeScatteredGrowth(ServerLevel level, BlockPos center) {
         List<BlockPos> placed = new ArrayList<>();
@@ -73,13 +94,36 @@ public class WorldSpawnerEvents {
                     (int) Math.round(Math.sin(angle) * distance)
             );
 
+=======
+
+    private void placeScatteredGrowth(ServerLevel level, BlockPos center) {
+        List<BlockPos> placed = new ArrayList<>();
+        int desired = 3 + level.random.nextInt(3);
+        int attempts = 0;
+
+        while (placed.size() < desired && attempts++ < 40) {
+            int distance = 16 + level.random.nextInt(17);
+            double angle = level.random.nextDouble() * Math.PI * 2.0D;
+
+            BlockPos candidate = center.offset(
+                    (int) Math.round(Math.cos(angle) * distance),
+                    0,
+                    (int) Math.round(Math.sin(angle) * distance)
+            );
+
+>>>>>>> master
             BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, candidate);
             BlockPos base = top.below();
 
             if (top.getY() <= level.getMinBuildHeight() + 2 || top.getY() >= level.getMaxBuildHeight() - 2) continue;
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
             if (!isFarEnough(base, placed, MIN_GROWTH_SPACING_BLOCKS)) continue;
             if (hasNearbyDarkMatter(level, base, 10)) continue;
             if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) continue;
+=======
+            if (!isFarEnough(base, placed, 16.0D)) continue;
+            if (hasNearbyDarkMatter(level, base, 10)) continue;
+>>>>>>> master
 
             placeSingleGrowth(level, base);
             placed.add(base.immutable());
@@ -93,15 +137,22 @@ public class WorldSpawnerEvents {
         return true;
     }
 
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
     private boolean hasNearbyGrowthTree(ServerLevel level, BlockPos center, int radius) {
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 4, radius))) {
             if (level.getBlockState(pos).is(ModBlocks.INFECTION_GROWTH.get())) {
                 return true;
             }
+=======
+    private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
+            if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) return true;
+>>>>>>> master
         }
         return false;
     }
 
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
     private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
             if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) return true;
@@ -167,7 +218,96 @@ public class WorldSpawnerEvents {
             if (fluid.is(net.minecraft.tags.FluidTags.WATER) || fluid.is(net.minecraft.tags.FluidTags.LAVA)) {
                 return true;
             }
+=======
+    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
+        BlockState previous = level.getBlockState(base);
+        if (!previous.isSolidRender(level, base)) return;
+        if (!level.isEmptyBlock(base.above())) return;
+
+        MatterHistoryManager.recordOriginalBlock(level, base, previous);
+        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+
+        int trunkHeight = 1 + level.random.nextInt(3); // até 3 blocos verticais
+        BlockPos top = base;
+        for (int i = 0; i < trunkHeight; i++) {
+            BlockPos trunkPos = base.above(i + 1);
+            if (!level.isEmptyBlock(trunkPos)) break;
+            if (hasAdjacentGrowth(level, trunkPos)) break;
+            level.setBlockAndUpdate(trunkPos, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
+            top = trunkPos;
+        }
+        return true;
+    }
+
+    private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
+            if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) {
+                return true;
+            }
         }
         return false;
+    }
+
+    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
+        BlockState previous = level.getBlockState(base);
+        if (!level.getBlockState(base).isSolidRender(level, base)) {
+            return;
+        }
+        if (!level.isEmptyBlock(base.above())) {
+            return;
+        }
+
+        br.com.murilo.liberthia.logic.MatterHistoryManager.recordOriginalBlock(level, base, previous);
+        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+        int trunkHeight = 1 + level.random.nextInt(2);
+        BlockPos top = base;
+        for (int i = 0; i < trunkHeight; i++) {
+            BlockPos trunkPos = base.above(i + 1);
+            if (!level.isEmptyBlock(trunkPos)) {
+                break;
+            }
+            level.setBlockAndUpdate(trunkPos, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
+            top = trunkPos;
+        }
+
+        for (BlockPos canopyPos : BlockPos.betweenClosed(top.offset(-1, 0, -1), top.offset(1, 1, 1))) {
+            if (level.random.nextFloat() < 0.45F && level.isEmptyBlock(canopyPos)) {
+                level.setBlockAndUpdate(canopyPos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+            }
+        }
+        return true;
+    }
+
+    private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
+            if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
+        if (!level.getBlockState(base).isSolidRender(level, base)) {
+            return;
+        }
+        if (!level.isEmptyBlock(base.above())) {
+            return;
+        }
+
+        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+        BlockState fluidState = ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock();
+        if (level.isEmptyBlock(top.above())) {
+            level.setBlockAndUpdate(top.above(), fluidState);
+>>>>>>> master
+        }
+        return false;
+    }
+
+    private boolean hasAdjacentGrowth(ServerLevel level, BlockPos pos) {
+        return level.getBlockState(pos.north()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.south()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.east()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.west()).is(ModBlocks.INFECTION_GROWTH.get());
     }
 }
