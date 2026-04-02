@@ -36,7 +36,21 @@ public class WorldSpawnerEvents {
         // Avalia anomalias mesmo sem players online.
         InfectionLogic.evaluateDarkMatterRegion(serverLevel, pickAnomalyCenter(serverLevel));
 
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
+        trySpawnNearRandomPlayer(serverLevel);
+    }
+
+    private void trySpawnNearRandomPlayer(ServerLevel level) {
+        List<ServerPlayer> players = level.players();
+        if (players.isEmpty() || level.random.nextFloat() > 0.15F) return;
+
+        ServerPlayer player = players.get(level.random.nextInt(players.size()));
+        BlockPos center = player.blockPosition().offset(level.random.nextInt(33) - 16, 0, level.random.nextInt(33) - 16);
+        BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
+
+        if (top.getY() < level.getMinBuildHeight() + 2 || top.getY() >= level.getMaxBuildHeight() - 2) return;
+
+        placeScatteredGrowth(level, top);
+        level.playSound(null, top, ModSounds.DARK_PULSE.get(), SoundSource.BLOCKS, 0.8F, 0.75F);
         List<ServerPlayer> players = serverLevel.players();
         if (players.isEmpty() || serverLevel.random.nextFloat() > 0.15F) return;
 
@@ -44,25 +58,6 @@ public class WorldSpawnerEvents {
         BlockPos center = player.blockPosition().offset(serverLevel.random.nextInt(33) - 16, 0, serverLevel.random.nextInt(33) - 16);
         BlockPos top = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
 
-=======
-        BlockPos anomalyCenter;
-        if (!serverLevel.players().isEmpty()) {
-            ServerPlayer pivot = serverLevel.players().get(serverLevel.random.nextInt(serverLevel.players().size()));
-            anomalyCenter = pivot.blockPosition();
-        } else {
-            BlockPos spawn = serverLevel.getSharedSpawnPos();
-            anomalyCenter = spawn.offset(serverLevel.random.nextInt(1025) - 512, 0, serverLevel.random.nextInt(1025) - 512);
-        }
-        InfectionLogic.evaluateDarkMatterRegion(serverLevel, anomalyCenter);
-
-        List<ServerPlayer> players = serverLevel.players();
-        if (players.isEmpty() || serverLevel.random.nextFloat() > 0.15F) return;
-
-        ServerPlayer player = players.get(serverLevel.random.nextInt(players.size()));
-        BlockPos center = player.blockPosition().offset(serverLevel.random.nextInt(33) - 16, 0, serverLevel.random.nextInt(33) - 16);
-        BlockPos top = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
-
->>>>>>> master
         if (top.getY() < serverLevel.getMinBuildHeight() + 2 || top.getY() >= serverLevel.getMaxBuildHeight() - 2) return;
 
         placeScatteredGrowth(serverLevel, top);
@@ -77,7 +72,6 @@ public class WorldSpawnerEvents {
         BlockPos spawn = level.getSharedSpawnPos();
         return spawn.offset(level.random.nextInt(1025) - 512, 0, level.random.nextInt(1025) - 512);
     }
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
 
     private void placeScatteredGrowth(ServerLevel level, BlockPos center) {
         List<BlockPos> placed = new ArrayList<>();
@@ -94,7 +88,6 @@ public class WorldSpawnerEvents {
                     (int) Math.round(Math.sin(angle) * distance)
             );
 
-=======
 
     private void placeScatteredGrowth(ServerLevel level, BlockPos center) {
         List<BlockPos> placed = new ArrayList<>();
@@ -111,19 +104,20 @@ public class WorldSpawnerEvents {
                     (int) Math.round(Math.sin(angle) * distance)
             );
 
->>>>>>> master
             BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, candidate);
             BlockPos base = top.below();
 
             if (top.getY() <= level.getMinBuildHeight() + 2 || top.getY() >= level.getMaxBuildHeight() - 2) continue;
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
             if (!isFarEnough(base, placed, MIN_GROWTH_SPACING_BLOCKS)) continue;
             if (hasNearbyDarkMatter(level, base, 10)) continue;
             if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) continue;
-=======
-            if (!isFarEnough(base, placed, 16.0D)) continue;
+
+            if (placeSingleGrowth(level, base)) {
+                placed.add(base.immutable());
+            }
+            if (!isFarEnough(base, placed, MIN_GROWTH_SPACING_BLOCKS)) continue;
             if (hasNearbyDarkMatter(level, base, 10)) continue;
->>>>>>> master
+            if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) continue;
 
             placeSingleGrowth(level, base);
             placed.add(base.immutable());
@@ -137,22 +131,15 @@ public class WorldSpawnerEvents {
         return true;
     }
 
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
     private boolean hasNearbyGrowthTree(ServerLevel level, BlockPos center, int radius) {
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 4, radius))) {
             if (level.getBlockState(pos).is(ModBlocks.INFECTION_GROWTH.get())) {
                 return true;
             }
-=======
-    private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
-            if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) return true;
->>>>>>> master
         }
         return false;
     }
 
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
     private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
             if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) return true;
@@ -160,12 +147,13 @@ public class WorldSpawnerEvents {
         return false;
     }
 
-    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
-        if (isHydroBlocked(level, base)) return;
+    private boolean placeSingleGrowth(ServerLevel level, BlockPos base) {
+        if (isHydroBlocked(level, base)) return false;
+        if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) return false;
 
         BlockState previous = level.getBlockState(base);
-        if (!previous.isSolidRender(level, base)) return;
-        if (!level.isEmptyBlock(base.above())) return;
+        if (!previous.isSolidRender(level, base)) return false;
+        if (!level.isEmptyBlock(base.above())) return false;
 
         MatterHistoryManager.recordOriginalBlock(level, base, previous);
         level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
@@ -182,9 +170,10 @@ public class WorldSpawnerEvents {
         }
 
         BlockState fluidState = ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock();
-        if (level.isEmptyBlock(top.above())) {
+        if (level.isEmptyBlock(top.above()) && !isHydroBlocked(level, top.above())) {
             level.setBlockAndUpdate(top.above(), fluidState);
         }
+        return true;
     }
 
     private boolean hasAdjacentGrowth(ServerLevel level, BlockPos pos) {
@@ -218,88 +207,8 @@ public class WorldSpawnerEvents {
             if (fluid.is(net.minecraft.tags.FluidTags.WATER) || fluid.is(net.minecraft.tags.FluidTags.LAVA)) {
                 return true;
             }
-=======
-    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
-        BlockState previous = level.getBlockState(base);
-        if (!previous.isSolidRender(level, base)) return;
-        if (!level.isEmptyBlock(base.above())) return;
-
-        MatterHistoryManager.recordOriginalBlock(level, base, previous);
-        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
-
-        int trunkHeight = 1 + level.random.nextInt(3); // até 3 blocos verticais
-        BlockPos top = base;
-        for (int i = 0; i < trunkHeight; i++) {
-            BlockPos trunkPos = base.above(i + 1);
-            if (!level.isEmptyBlock(trunkPos)) break;
-            if (hasAdjacentGrowth(level, trunkPos)) break;
-            level.setBlockAndUpdate(trunkPos, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
-            top = trunkPos;
-        }
-        return true;
-    }
-
-    private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
-            if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) {
-                return true;
-            }
         }
         return false;
-    }
-
-    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
-        BlockState previous = level.getBlockState(base);
-        if (!level.getBlockState(base).isSolidRender(level, base)) {
-            return;
-        }
-        if (!level.isEmptyBlock(base.above())) {
-            return;
-        }
-
-        br.com.murilo.liberthia.logic.MatterHistoryManager.recordOriginalBlock(level, base, previous);
-        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
-        int trunkHeight = 1 + level.random.nextInt(2);
-        BlockPos top = base;
-        for (int i = 0; i < trunkHeight; i++) {
-            BlockPos trunkPos = base.above(i + 1);
-            if (!level.isEmptyBlock(trunkPos)) {
-                break;
-            }
-            level.setBlockAndUpdate(trunkPos, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
-            top = trunkPos;
-        }
-
-        for (BlockPos canopyPos : BlockPos.betweenClosed(top.offset(-1, 0, -1), top.offset(1, 1, 1))) {
-            if (level.random.nextFloat() < 0.45F && level.isEmptyBlock(canopyPos)) {
-                level.setBlockAndUpdate(canopyPos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
-            }
-        }
-        return true;
-    }
-
-    private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -1, -radius), center.offset(radius, 1, radius))) {
-            if (level.getBlockState(pos).is(ModBlocks.DARK_MATTER_BLOCK.get())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
-        if (!level.getBlockState(base).isSolidRender(level, base)) {
-            return;
-        }
-        if (!level.isEmptyBlock(base.above())) {
-            return;
-        }
-
-        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
-        BlockState fluidState = ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock();
-        if (level.isEmptyBlock(top.above())) {
-            level.setBlockAndUpdate(top.above(), fluidState);
->>>>>>> master
         }
         return false;
     }

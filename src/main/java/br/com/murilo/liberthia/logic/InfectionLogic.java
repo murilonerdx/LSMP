@@ -480,7 +480,6 @@ public final class InfectionLogic {
             } else if (blockState.is(ModBlocks.DARK_MATTER_ORE.get())
                     || blockState.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) {
                 sourceStrength = 0.5f;
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
             }
 
             if (sourceStrength > 0.0f) {
@@ -491,28 +490,6 @@ public final class InfectionLogic {
                 float attenuation = (float) (1.0D / (1.0D + (distance * 0.75D)));
                 localPressure += sourceStrength * attenuation;
             }
-
-=======
-            }
-
-            if (sourceStrength > 0.0f) {
-                net.minecraft.world.phys.Vec3 blockCenter = new net.minecraft.world.phys.Vec3(
-                        pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D
-                );
-                double distance = Math.sqrt(blockCenter.distanceToSqr(entityCenter));
-                float attenuation = (float) (1.0D / (1.0D + (distance * 0.75D)));
-                localPressure += sourceStrength * attenuation;
-            }
-
->>>>>>> master
-            if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
-                clearBlocks++;
-            }
-
-            if (isYellowMatterBlock(blockState)) {
-                yellowBlocks++;
-            }
-        }
 
             if (isYellowMatterBlock(blockState)) {
                 yellowBlocks++;
@@ -538,6 +515,11 @@ public final class InfectionLogic {
                 || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
             rawDarkPressure += 6;
+        }
+
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
         }
 
         if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
@@ -905,7 +887,7 @@ public final class InfectionLogic {
                 || state.is(Blocks.STONE);
     }
 
-    private static boolean tryGrowInfectionColumn(ServerLevel level, BlockPos pos) {
+    private static boolean (ServerLevel level, BlockPos pos) {
         if (isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return false;
         }
@@ -920,13 +902,8 @@ public final class InfectionLogic {
         if (!level.getFluidState(pos).isEmpty()) {
             return false;
         }
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
         if (hasNearbyGrowthTree(level, pos, MIN_GROWTH_SPACING_BLOCKS)) {
-=======
-        if (hasAdjacentGrowth(level, pos)) {
->>>>>>> master
-            return false;
-        }
+        if (hasNearbyGrowthTree(level, pos, MIN_GROWTH_SPACING_BLOCKS)) {
 
         BlockPos cursor = pos.below();
         int growthCount = 0;
@@ -954,7 +931,6 @@ public final class InfectionLogic {
                 || level.getBlockState(pos.west()).is(ModBlocks.INFECTION_GROWTH.get());
     }
 
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
     private static boolean trySpawnDarkMatterTree(ServerLevel level, BlockPos base) {
         if (isSpreadBlockedByProtectiveBlocks(level, base)) return false;
         if (isHydroBlocked(level, base)) return false;
@@ -1014,8 +990,6 @@ public final class InfectionLogic {
         return false;
     }
 
-=======
->>>>>>> master
     private static boolean tryCondenseDarkFluid(ServerLevel level, BlockPos base) {
         if (isSpreadBlockedByProtectiveBlocks(level, base)) {
             return false;
@@ -1175,6 +1149,15 @@ public final class InfectionLogic {
             }
         }
         return particles;
+    }
+
+    // Compatibilidade para chamadas antigas
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius) {
+        return countDarkMatterParticles(level, center, radius, 6);
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center) {
+        return countDarkMatterParticles(level, center, 16, 6);
     }
 
     public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
@@ -1397,11 +1380,8 @@ public final class InfectionLogic {
     }
 
     private static boolean isHydroBlocked(Level level, BlockPos pos) {
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
         for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
-=======
-        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
->>>>>>> master
+        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
             FluidState fluid = level.getFluidState(scan);
             if (isWaterOrLava(fluid)) {
                 return true;
@@ -1412,7 +1392,6 @@ public final class InfectionLogic {
 
     private static boolean isWaterOrLava(FluidState fluid) {
         return fluid.is(net.minecraft.tags.FluidTags.WATER) || fluid.is(net.minecraft.tags.FluidTags.LAVA);
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-83cdzg
     }
 
     private static double findNearestDarkMatterDistance(Level level, BlockPos center, int radius) {
@@ -1429,7 +1408,6 @@ public final class InfectionLogic {
         return nearest == Double.MAX_VALUE ? 999.0D : nearest;
     }
 
-=======
     }
 
     private static double findNearestDarkMatterDistance(Level level, BlockPos center, int radius) {
@@ -1446,5 +1424,5 @@ public final class InfectionLogic {
         return nearest == Double.MAX_VALUE ? 999.0D : nearest;
     }
 
->>>>>>> master
+
 }
