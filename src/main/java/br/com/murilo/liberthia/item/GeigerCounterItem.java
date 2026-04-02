@@ -75,11 +75,8 @@ public class GeigerCounterItem extends Item {
         int particles = InfectionLogic.countDarkMatterParticles(level, center, 16, 6);
         float density = InfectionLogic.getChunkInfectionDensity(level, center);
 
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
         int particleLevel = particles > 0 ? Math.min(20, Math.max(1, particles / 40)) : 0;
-=======
-        int particleLevel = Math.min(20, particles / 120);
->>>>>>> master
+        int particleLevel = particles > 0 ? Math.min(20, Math.max(1, particles / 40)) : 0;
         int densityLevel = Math.min(20, Math.round(density * 20.0f));
         int combined = Math.max(particleLevel, densityLevel);
         return new RadiationSnapshot(combined, particles, density);
@@ -89,12 +86,10 @@ public class GeigerCounterItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
             RadiationSnapshot radiation = scanRadiation(serverPlayer, level);
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
             boolean safe = radiation.particles() < 20 && radiation.density() < 0.02f;
             String msg = safe
-=======
-            String msg = radiation.level() == 0
->>>>>>> master
+            boolean safe = radiation.particles() < 20 && radiation.density() < 0.02f;
+            String msg = safe
                     ? "§a[Geiger] Área segura — nenhuma radiação detectada."
                     : "§e[Geiger] Nível de radiação: " + radiation.level() + "/20"
                     + " §8| Partículas: §f" + radiation.particles()

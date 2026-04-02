@@ -64,11 +64,8 @@ public class WorldSpawnerEvents {
 
         while (placed.size() < desired && attempts < 40) {
             attempts++;
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
             int distance = 16 + level.random.nextInt(17);
-=======
-            int distance = 6 + level.random.nextInt(13);
->>>>>>> master
+            int distance = 16 + level.random.nextInt(17);
             double angle = level.random.nextDouble() * Math.PI * 2.0D;
 
             BlockPos candidate = center.offset(
@@ -82,17 +79,10 @@ public class WorldSpawnerEvents {
             if (top.getY() <= level.getMinBuildHeight() + 2 || top.getY() >= level.getMaxBuildHeight() - 2) {
                 continue;
             }
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
             if (!isFarEnoughFromOthers(base, placed, 16.0D)) {
                 continue;
             }
             if (hasNearbyDarkMatter(level, base, 10)) {
-=======
-            if (!isFarEnoughFromOthers(base, placed, 6.0D)) {
-                continue;
-            }
-            if (hasNearbyDarkMatter(level, base, 4)) {
->>>>>>> master
                 continue;
             }
 
@@ -105,7 +95,6 @@ public class WorldSpawnerEvents {
         for (BlockPos existing : placed) {
             if (existing.distSqr(candidate) < (minDistance * minDistance)) {
                 return false;
-<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
             }
         }
         return true;
@@ -145,8 +134,6 @@ public class WorldSpawnerEvents {
         for (BlockPos canopyPos : BlockPos.betweenClosed(top.offset(-1, 0, -1), top.offset(1, 1, 1))) {
             if (level.random.nextFloat() < 0.45F && level.isEmptyBlock(canopyPos)) {
                 level.setBlockAndUpdate(canopyPos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
-=======
->>>>>>> master
             }
         }
         return true;
