@@ -378,11 +378,19 @@ public final class InfectionLogic {
             attribute.removeModifier(existing);
         }
 
-        if (data.getPermanentHealthPenalty() > 0) {
+        // Penalidade atual acompanha a infecção atual
+        int currentPenalty = Math.min(10, (data.getInfection() / 20) * 2);
+
+        // Mantém só uma "cicatriz" pequena do histórico, em vez de travar a vida inteira
+        int scarPenalty = Math.min(2, data.getPermanentHealthPenalty());
+
+        int appliedPenalty = Math.max(currentPenalty, scarPenalty);
+
+        if (appliedPenalty > 0) {
             attribute.addPermanentModifier(new AttributeModifier(
                     HEALTH_PENALTY_UUID,
                     "liberthia_infection_penalty",
-                    -data.getPermanentHealthPenalty(),
+                    -appliedPenalty,
                     AttributeModifier.Operation.ADDITION
             ));
         }
@@ -393,20 +401,47 @@ public final class InfectionLogic {
     }
 
     public static ExposureData scanExposureGeneric(LivingEntity entity) {
-        int darkBlocks = 0;
+        float localPressure = 0.0f;
         int clearBlocks = 0;
         boolean immersedInDark = false;
         boolean touchingClear = false;
         boolean carryingDarkMatter = entity instanceof ServerPlayer p && isCarryingDarkMatter(p);
 
         BlockPos center = entity.blockPosition();
+        net.minecraft.world.phys.Vec3 entityCenter = entity.position().add(0.0D, entity.getBbHeight() * 0.5D, 0.0D);
 
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-2, -1, -2), center.offset(2, 1, 2))) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-4, -2, -4), center.offset(4, 2, 4))) {
             BlockState blockState = entity.level().getBlockState(pos);
             FluidState fluidState = entity.level().getFluidState(pos);
 
-            if (isInfectionBlock(blockState) || fluidState.getType().isSame(ModFluids.DARK_MATTER.get())) {
-                darkBlocks += 3;
+            float sourceStrength = 0.0f;
+
+            if (fluidState.getType().isSame(ModFluids.DARK_MATTER.get())) {
+                sourceStrength = 4.0f;
+            } else if (blockState.is(ModBlocks.DARK_MATTER_BLOCK.get())) {
+                sourceStrength = 3.0f;
+            } else if (blockState.is(ModBlocks.INFECTION_GROWTH.get())) {
+                sourceStrength = 2.0f;
+            } else if (blockState.is(ModBlocks.CORRUPTED_SOIL.get())) {
+                sourceStrength = 1.0f;
+            } else if (blockState.is(ModBlocks.DARK_MATTER_ORE.get())
+                    || blockState.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) {
+                sourceStrength = 0.5f;
+            }
+
+            if (sourceStrength > 0.0f) {
+                double distSq = entityCenter.distanceToSqr(net.minecraft.world.phys.Vec3.atCenterOf(pos));
+
+                // Quanto mais perto, maior o peso.
+                // Um bloco isolado longe quase não influencia.
+                float distanceFactor = (float) (1.0D / (1.0D + distSq));
+
+                localPressure += sourceStrength * distanceFactor;
+
+                // Encostado ou quase encostado pesa mais
+                if (distSq <= 2.25D) {
+                    localPressure += sourceStrength * 0.5f;
+                }
             }
 
             if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get()) || isYellowMatterBlock(blockState)) {
@@ -414,34 +449,22 @@ public final class InfectionLogic {
             }
         }
 
-        int forwardPressure = 0;
-        net.minecraft.world.phys.Vec3 lookVec = entity.getLookAngle();
-        net.minecraft.world.phys.Vec3 startPos = entity.getEyePosition();
+        // Chunk entra como influência secundária, não principal
+        float chunkDensity = getChunkInfectionDensity(entity.level(), center);
+        int ambientChunkExposure = Math.round(chunkDensity * 3.0f); // 0 a 3, no máximo
 
-        for (int d = 1; d <= 20; d++) {
-            BlockPos p = BlockPos.containing(startPos.add(lookVec.scale(d)));
-            if (isInfectionBlock(entity.level().getBlockState(p))) {
-                forwardPressure += Math.max(1, (22 - d) / 4);
-            }
-        }
-
-        if (!entity.level().isClientSide && entity.tickCount % 20 == 0) {
-            int ambient = countDarkMatterFoci(entity.level(), center, 24) / 6;
-            AMBIENT_CACHE.put(entity.getUUID(), ambient);
-        }
-
-        int ambientChunkExposure = AMBIENT_CACHE.getOrDefault(entity.getUUID(), 0);
-        int rawDarkPressure = darkBlocks + ambientChunkExposure + forwardPressure;
+        int rawDarkPressure = Math.round(localPressure) + ambientChunkExposure;
 
         FluidState feetFluid = entity.level().getFluidState(entity.blockPosition());
         FluidState headFluid = entity.level().getFluidState(entity.blockPosition().above());
-        if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get()) || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
+        if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
-            rawDarkPressure += 8;
+            rawDarkPressure += 6;
         }
 
         if (carryingDarkMatter) {
-            rawDarkPressure += 4;
+            rawDarkPressure += 1;
         }
 
         BlockState feetBlock = entity.level().getBlockState(entity.blockPosition());
@@ -463,9 +486,11 @@ public final class InfectionLogic {
         }
         int clearRelief = Math.round(rawDarkPressure * clearProtectionRatio);
 
+        int effectiveDarkPressure = Math.max(0, rawDarkPressure - blockedExposure - clearRelief);
+
         return new ExposureData(
                 rawDarkPressure,
-                Math.max(0, rawDarkPressure - blockedExposure - clearRelief),
+                effectiveDarkPressure,
                 blockedExposure,
                 clearRelief,
                 immersedInDark,
