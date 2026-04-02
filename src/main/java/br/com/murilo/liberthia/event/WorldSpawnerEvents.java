@@ -81,8 +81,9 @@ public class WorldSpawnerEvents {
             if (hasNearbyDarkMatter(level, base, 10)) continue;
             if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) continue;
 
-            placeSingleGrowth(level, base);
-            placed.add(base.immutable());
+            if (placeSingleGrowth(level, base)) {
+                placed.add(base.immutable());
+            }
         }
     }
 
@@ -109,12 +110,13 @@ public class WorldSpawnerEvents {
         return false;
     }
 
-    private void placeSingleGrowth(ServerLevel level, BlockPos base) {
-        if (isHydroBlocked(level, base)) return;
+    private boolean placeSingleGrowth(ServerLevel level, BlockPos base) {
+        if (isHydroBlocked(level, base)) return false;
+        if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) return false;
 
         BlockState previous = level.getBlockState(base);
-        if (!previous.isSolidRender(level, base)) return;
-        if (!level.isEmptyBlock(base.above())) return;
+        if (!previous.isSolidRender(level, base)) return false;
+        if (!level.isEmptyBlock(base.above())) return false;
 
         MatterHistoryManager.recordOriginalBlock(level, base, previous);
         level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
@@ -131,9 +133,10 @@ public class WorldSpawnerEvents {
         }
 
         BlockState fluidState = ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock();
-        if (level.isEmptyBlock(top.above())) {
+        if (level.isEmptyBlock(top.above()) && !isHydroBlocked(level, top.above())) {
             level.setBlockAndUpdate(top.above(), fluidState);
         }
+        return true;
     }
 
     private boolean hasAdjacentGrowth(ServerLevel level, BlockPos pos) {
