@@ -224,6 +224,10 @@ public final class InfectionLogic {
     }
 
     private static void spawnBlackHole(Level level, BlockPos pos) {
+        spawnBlackHole(level, pos, BLACK_HOLE_PARTICLE_THRESHOLD);
+    }
+
+    private static void spawnBlackHole(Level level, BlockPos pos, int particleMass) {
         if (level.isClientSide) return;
         if (!(level instanceof ServerLevel serverLevel)) return;
         if (isSpreadBlockedByProtectiveBlocks(serverLevel, pos)) return;
@@ -232,6 +236,11 @@ public final class InfectionLogic {
                 br.com.murilo.liberthia.registry.ModEntities.BLACK_HOLE.get().create(level);
 
         if (blackHole != null) {
+            double massFactor = Math.max(1.0D, particleMass / 2000.0D);
+            blackHole.setExplosionSizeMultiplier(0.55D * Math.min(4.0D, massFactor));
+            blackHole.setPlayerDeathExplosionMultiplier(3.40D * Math.min(2.5D, massFactor));
+            blackHole.setProximityExplosionMultiplier(2.60D * Math.min(2.5D, massFactor));
+            blackHole.setTriggerPercent(Math.min(95, 45 + (particleMass / 120)));
             blackHole.moveTo(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, 0, 0);
             level.addFreshEntity(blackHole);
             level.playSound(null, pos, ModSounds.DARK_PULSE.get(), SoundSource.BLOCKS, 2.0F, 0.5F);
@@ -243,6 +252,7 @@ public final class InfectionLogic {
 
         ExposureData exposure = scanExposureGeneric(entity);
         int exposureTicks = updateMobExposureCounter(entity, exposure.effectiveDarkPressure() > 0 || exposure.immersedInDark());
+        double nearestDarkDistance = findNearestDarkMatterDistance(entity.level(), entity.blockPosition(), 8);
 
         if (exposureTicks > 0) {
             int targetInfection = Math.min(100, (exposureTicks * 100) / FULL_MOB_INFECTION_TICKS);
@@ -253,6 +263,16 @@ public final class InfectionLogic {
 
         if (exposure.effectiveDarkPressure() >= 8 && entity.tickCount % 40 == 0) {
             entity.hurt(entity.damageSources().magic(), 1.0F);
+        }
+
+        if (nearestDarkDistance <= 8.0D) {
+            int bonus = nearestDarkDistance <= 2.0D ? 3 : nearestDarkDistance <= 4.0D ? 2 : 1;
+            if (entity.tickCount % Math.max(6, 20 - (bonus * 4)) == 0) {
+                data.addInfection(bonus);
+            }
+            if (entity.tickCount % Math.max(20, 60 - (bonus * 10)) == 0) {
+                entity.hurt(entity.damageSources().magic(), 1.0F + bonus);
+            }
         }
 
         if (data.getInfection() >= 50) {
@@ -461,7 +481,7 @@ public final class InfectionLogic {
         }
 
         if (!entity.level().isClientSide && entity.tickCount % 20 == 0) {
-            int ambient = countDarkMatterFoci(entity.level(), center, 24) / 6;
+            int ambient = countDarkMatterParticles(entity.level(), center, 16, 6) / 120;
             AMBIENT_CACHE.put(entity.getUUID(), ambient);
         }
 
@@ -473,6 +493,11 @@ public final class InfectionLogic {
         if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get()) || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
             rawDarkPressure += 8;
+        }
+
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
         }
 
         if (carryingDarkMatter) {
@@ -812,6 +837,9 @@ public final class InfectionLogic {
         if (isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return false;
         }
+        if (isHydroBlocked(level, pos)) {
+            return false;
+        }
 
         if (!level.getBlockState(pos).isAir()) {
             return false;
@@ -842,6 +870,9 @@ public final class InfectionLogic {
 
     private static boolean tryCondenseDarkFluid(ServerLevel level, BlockPos base) {
         if (isSpreadBlockedByProtectiveBlocks(level, base)) {
+            return false;
+        }
+        if (isHydroBlocked(level, base)) {
             return false;
         }
 
@@ -992,7 +1023,7 @@ public final class InfectionLogic {
             if (level.getBlockState(spawnPos).isAir()
                     && level.getBlockState(spawnPos.above()).isAir()
                     && !isSpreadBlockedByProtectiveBlocks(level, spawnPos)) {
-                spawnBlackHole(level, spawnPos);
+                spawnBlackHole(level, spawnPos, localParticles);
             }
         }
     }
@@ -1027,6 +1058,9 @@ public final class InfectionLogic {
 
     private static boolean isSpreadBlockedByProtectiveBlocks(ServerLevel level, BlockPos targetPos) {
         if (MatterHistoryManager.hasProtectionInChunkRange(level, targetPos, 16)) {
+            return true;
+        }
+        if (isHydroBlocked(level, targetPos)) {
             return true;
         }
 
@@ -1076,6 +1110,34 @@ public final class InfectionLogic {
             return false;
         }
         return key.getPath().contains(expectedFragment);
+    }
+
+    private static boolean isHydroBlocked(Level level, BlockPos pos) {
+        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+            FluidState fluid = level.getFluidState(scan);
+            if (isWaterOrLava(fluid)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isWaterOrLava(FluidState fluid) {
+        return fluid.is(net.minecraft.tags.FluidTags.WATER) || fluid.is(net.minecraft.tags.FluidTags.LAVA);
+    }
+
+    private static double findNearestDarkMatterDistance(Level level, BlockPos center, int radius) {
+        double nearest = Double.MAX_VALUE;
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 2, radius))) {
+            BlockState state = level.getBlockState(pos);
+            FluidState fluid = level.getFluidState(pos);
+            if (isInfectionBlock(state)
+                    || fluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                    || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+                nearest = Math.min(nearest, Math.sqrt(center.distSqr(pos)));
+            }
+        }
+        return nearest == Double.MAX_VALUE ? 999.0D : nearest;
     }
 
     public record ExposureData(
