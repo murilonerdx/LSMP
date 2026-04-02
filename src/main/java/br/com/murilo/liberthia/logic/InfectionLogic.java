@@ -467,8 +467,8 @@ public final class InfectionLogic {
             FluidState fluidState = entity.level().getFluidState(pos);
 
             float sourceStrength = 0.0f;
-
-            if (fluidState.getType().isSame(ModFluids.DARK_MATTER.get())) {
+            if (fluidState.getType().isSame(ModFluids.DARK_MATTER.get())
+                    || fluidState.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
                 sourceStrength = 4.0f;
             } else if (blockState.is(ModBlocks.DARK_MATTER_BLOCK.get())) {
                 sourceStrength = 3.0f;
@@ -479,6 +479,15 @@ public final class InfectionLogic {
             } else if (blockState.is(ModBlocks.DARK_MATTER_ORE.get())
                     || blockState.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) {
                 sourceStrength = 0.5f;
+            }
+
+            if (sourceStrength > 0.0f) {
+                net.minecraft.world.phys.Vec3 blockCenter = new net.minecraft.world.phys.Vec3(
+                        pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D
+                );
+                double distance = Math.sqrt(blockCenter.distanceToSqr(entityCenter));
+                float attenuation = (float) (1.0D / (1.0D + (distance * 0.75D)));
+                localPressure += sourceStrength * attenuation;
             }
 
             if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
@@ -503,11 +512,10 @@ public final class InfectionLogic {
             AMBIENT_CACHE.put(entity.getUUID(), ambient);
         }
 
-        // Chunk entra como influência secundária, não principal
+        int ambientChunkExposure = AMBIENT_CACHE.getOrDefault(entity.getUUID(), 0);
         float chunkDensity = getChunkInfectionDensity(entity.level(), center);
-        int ambientChunkExposure = Math.round(chunkDensity * 3.0f); // 0 a 3, no máximo
-
-        int rawDarkPressure = Math.round(localPressure) + ambientChunkExposure;
+        int chunkInfluence = Math.round(chunkDensity * 3.0f);
+        int rawDarkPressure = Math.round(localPressure) + ambientChunkExposure + chunkInfluence + forwardPressure;
 
         FluidState feetFluid = entity.level().getFluidState(entity.blockPosition());
         FluidState headFluid = entity.level().getFluidState(entity.blockPosition().above());
@@ -515,6 +523,11 @@ public final class InfectionLogic {
                 || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
             rawDarkPressure += 6;
+        }
+
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
         }
 
         if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
@@ -888,6 +901,9 @@ public final class InfectionLogic {
         if (!level.getFluidState(pos).isEmpty()) {
             return false;
         }
+        if (hasAdjacentGrowth(level, pos)) {
+            return false;
+        }
 
         BlockPos cursor = pos.below();
         int growthCount = 0;
@@ -906,6 +922,13 @@ public final class InfectionLogic {
 
         level.setBlockAndUpdate(pos, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
         return true;
+    }
+
+    private static boolean hasAdjacentGrowth(Level level, BlockPos pos) {
+        return level.getBlockState(pos.north()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.south()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.east()).is(ModBlocks.INFECTION_GROWTH.get())
+                || level.getBlockState(pos.west()).is(ModBlocks.INFECTION_GROWTH.get());
     }
 
     private static boolean tryCondenseDarkFluid(ServerLevel level, BlockPos base) {
@@ -1067,6 +1090,58 @@ public final class InfectionLogic {
             }
         }
         return particles;
+    }
+
+    public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
+        processDarkFluidActivity(level, center);
+
+        int particles = countDarkMatterParticles(level, center, FLUID_SCAN_RADIUS, FLUID_SCAN_VERTICAL);
+        if (particles < BLACK_HOLE_PARTICLE_THRESHOLD) {
+            return;
+        }
+
+        if (hasNearbyBlackHole(level, center, 48.0D) || isSpreadBlockedByProtectiveBlocks(level, center)) {
+            return;
+        }
+
+        BlockPos surface = level.getHeightmapPos(
+                net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                center
+        );
+        BlockPos spawnPos = surface.above(2);
+        if (level.getBlockState(spawnPos).isAir() && level.getBlockState(spawnPos.above()).isAir()) {
+            spawnBlackHole(level, spawnPos, particles);
+        }
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius, int vertical) {
+        int particles = 0;
+        for (BlockPos pos : BlockPos.betweenClosed(
+                center.offset(-radius, -vertical, -radius),
+                center.offset(radius, vertical, radius)
+        )) {
+            BlockState state = level.getBlockState(pos);
+            FluidState fluid = level.getFluidState(pos);
+
+            if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) particles += 14;
+            else if (state.is(ModBlocks.INFECTION_GROWTH.get())) particles += 11;
+            else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) particles += 7;
+            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
+
+            if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+                particles += 25;
+            }
+        }
+        return particles;
+    }
+
+    // Compatibilidade para chamadas antigas
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius) {
+        return countDarkMatterParticles(level, center, radius, 6);
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center) {
+        return countDarkMatterParticles(level, center, 16, 6);
     }
 
     public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
