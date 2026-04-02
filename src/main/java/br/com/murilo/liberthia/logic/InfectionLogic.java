@@ -224,6 +224,10 @@ public final class InfectionLogic {
     }
 
     private static void spawnBlackHole(Level level, BlockPos pos) {
+        spawnBlackHole(level, pos, BLACK_HOLE_PARTICLE_THRESHOLD);
+    }
+
+    private static void spawnBlackHole(Level level, BlockPos pos, int particleMass) {
         if (level.isClientSide) return;
         if (!(level instanceof ServerLevel serverLevel)) return;
         if (isSpreadBlockedByProtectiveBlocks(serverLevel, pos)) return;
@@ -232,6 +236,11 @@ public final class InfectionLogic {
                 br.com.murilo.liberthia.registry.ModEntities.BLACK_HOLE.get().create(level);
 
         if (blackHole != null) {
+            double massFactor = Math.max(1.0D, particleMass / 2000.0D);
+            blackHole.setExplosionSizeMultiplier(0.55D * Math.min(4.0D, massFactor));
+            blackHole.setPlayerDeathExplosionMultiplier(3.40D * Math.min(2.5D, massFactor));
+            blackHole.setProximityExplosionMultiplier(2.60D * Math.min(2.5D, massFactor));
+            blackHole.setTriggerPercent(Math.min(95, 45 + (particleMass / 120)));
             blackHole.moveTo(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, 0, 0);
             level.addFreshEntity(blackHole);
             level.playSound(null, pos, ModSounds.DARK_PULSE.get(), SoundSource.BLOCKS, 2.0F, 0.5F);
@@ -243,6 +252,10 @@ public final class InfectionLogic {
 
         ExposureData exposure = scanExposureGeneric(entity);
         int exposureTicks = updateMobExposureCounter(entity, exposure.effectiveDarkPressure() > 0 || exposure.immersedInDark());
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+        double nearestDarkDistance = findNearestDarkMatterDistance(entity.level(), entity.blockPosition(), 8);
+=======
+>>>>>>> master
 
         if (exposureTicks > 0) {
             int targetInfection = Math.min(100, (exposureTicks * 100) / FULL_MOB_INFECTION_TICKS);
@@ -253,6 +266,16 @@ public final class InfectionLogic {
 
         if (exposure.effectiveDarkPressure() >= 8 && entity.tickCount % 40 == 0) {
             entity.hurt(entity.damageSources().magic(), 1.0F);
+        }
+
+        if (nearestDarkDistance <= 8.0D) {
+            int bonus = nearestDarkDistance <= 2.0D ? 3 : nearestDarkDistance <= 4.0D ? 2 : 1;
+            if (entity.tickCount % Math.max(6, 20 - (bonus * 4)) == 0) {
+                data.addInfection(bonus);
+            }
+            if (entity.tickCount % Math.max(20, 60 - (bonus * 10)) == 0) {
+                entity.hurt(entity.damageSources().magic(), 1.0F + bonus);
+            }
         }
 
         if (data.getInfection() >= 50) {
@@ -463,6 +486,14 @@ public final class InfectionLogic {
             if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
                 clearBlocks++;
             }
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+
+            if (isYellowMatterBlock(blockState)) {
+                yellowBlocks++;
+            }
+        }
+=======
+>>>>>>> master
 
             if (isYellowMatterBlock(blockState)) {
                 yellowBlocks++;
@@ -472,9 +503,15 @@ public final class InfectionLogic {
                 clearBlocks++;
             }
 
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+        if (!entity.level().isClientSide && entity.tickCount % 20 == 0) {
+            int ambient = countDarkMatterParticles(entity.level(), center, 16, 6) / 120;
+            AMBIENT_CACHE.put(entity.getUUID(), ambient);
+=======
             if (isYellowMatterBlock(blockState)) {
                 yellowBlocks++;
             }
+>>>>>>> master
         }
 
         // Chunk entra como influência secundária, não principal
@@ -489,6 +526,11 @@ public final class InfectionLogic {
                 || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
             rawDarkPressure += 6;
+        }
+
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
         }
 
         if (carryingDarkMatter) {
@@ -604,14 +646,21 @@ public final class InfectionLogic {
             long gameTime = player.level().getGameTime();
             boolean darkDominant = dark >= DNA_DOMINANCE_THRESHOLD && dark > clear && dark > yellow;
             boolean darkClearBalanced = Math.abs(dark - clear) <= DNA_BALANCE_TOLERANCE && dark >= 350 && clear >= 350;
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+            boolean clearYellowImmune = Math.abs(clear - yellow) <= 50 && clear >= 450 && yellow >= 450 && dark <= 100;
+=======
             boolean clearYellowStable = clear >= 350 && yellow >= 350 && dark < 250;
+>>>>>>> master
 
             if (dark > 0 && yellow > 0) {
                 int repulsion = Math.min(dark, Math.max(2, yellow / 40));
                 energy.setDarkEnergy(dark - repulsion);
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+=======
                 if (gameTime % 20L == 0L) {
                     data.reduceInfection(1);
                 }
+>>>>>>> master
             }
 
             if (dark > 0 && clear > 0) {
@@ -630,18 +679,28 @@ public final class InfectionLogic {
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 0, true, false, true));
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60, 0, true, false, true));
 
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+=======
                 if (exposure.effectiveDarkPressure() > 0 && gameTime % 20L == 0L) {
                     data.reduceInfection(2);
                 }
 
+>>>>>>> master
                 if (gameTime % 120L == 0L && player.getRandom().nextFloat() < 0.25F) {
                     player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 1, true, false, true));
                     player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 0, true, false, true));
                 }
             }
 
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+            // Só fica imune com DNA 50/50 entre Clara e Amarela
+            data.setImmune(clearYellowImmune);
+
+            if (darkDominant) {
+=======
             if (darkDominant) {
                 data.setImmune(true);
+>>>>>>> master
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 80, 1, true, false, true));
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 1, true, false, true));
                 player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 80, 0, true, false, true));
@@ -655,13 +714,26 @@ public final class InfectionLogic {
                     }
                 }
             } else if (darkClearBalanced) {
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+=======
                 data.setImmune(true);
+>>>>>>> master
                 player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 80, 0, true, false, true));
                 player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, 1, true, false, true));
 
                 if (gameTime % 120L == 0L) {
                     player.level().playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.AMBIENT_CAVE.value(), SoundSource.PLAYERS, 0.6F, 0.7F);
                 }
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+            } else if (clear > 0) {
+                // Matéria Clara desfaz mutações da Escura, mas não impede receber infecção
+                data.removeMutation("LUCID_CORRUPTION");
+                data.removeMutation("HEAVY_STEPS");
+                data.removeMutation("RADIO_EYES");
+                player.removeEffect(MobEffects.CONFUSION);
+                player.removeEffect(MobEffects.HUNGER);
+                player.removeEffect(MobEffects.BLINDNESS);
+=======
             } else if (clearYellowStable) {
                 data.setImmune(true);
                 player.removeEffect(MobEffects.CONFUSION);
@@ -669,6 +741,7 @@ public final class InfectionLogic {
                 player.removeEffect(MobEffects.BLINDNESS);
             } else if (data.isImmune()) {
                 data.setImmune(false);
+>>>>>>> master
             }
         });
     }
@@ -690,6 +763,14 @@ public final class InfectionLogic {
             clear = Math.min(energy.getMaxEnergy(), clear + clearGain - (darkGain > 0 ? 1 : 0));
             yellow = Math.min(energy.getMaxEnergy(), yellow + yellowGain - (darkGain > 0 ? 1 : 0));
 
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+            // Matéria Clara desfaz progressivamente DNA escuro
+            if (clearGain > 0 && dark > 0) {
+                dark = Math.max(0, dark - 2);
+            }
+
+=======
+>>>>>>> master
             dark = Math.max(0, dark);
             clear = Math.max(0, clear);
             yellow = Math.max(0, yellow);
@@ -730,8 +811,15 @@ public final class InfectionLogic {
 
             if (yellowChance > clearChance && serverLevel.random.nextFloat() < yellowChance) {
                 serverLevel.setBlockAndUpdate(surface, ModBlocks.YELLOW_MATTER_BLOCK.get().defaultBlockState());
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+                MatterHistoryManager.registerProtectionBlock(serverLevel, surface, ModBlocks.YELLOW_MATTER_BLOCK.get().defaultBlockState());
             } else if (serverLevel.random.nextFloat() < clearChance) {
                 serverLevel.setBlockAndUpdate(surface, ModBlocks.CLEAR_MATTER_BLOCK.get().defaultBlockState());
+                MatterHistoryManager.registerProtectionBlock(serverLevel, surface, ModBlocks.CLEAR_MATTER_BLOCK.get().defaultBlockState());
+=======
+            } else if (serverLevel.random.nextFloat() < clearChance) {
+                serverLevel.setBlockAndUpdate(surface, ModBlocks.CLEAR_MATTER_BLOCK.get().defaultBlockState());
+>>>>>>> master
             }
         }
     }
@@ -787,6 +875,7 @@ public final class InfectionLogic {
 
         if (isNaturalSurface(groundState)) {
             if (level.random.nextFloat() < soilChance) {
+                MatterHistoryManager.recordOriginalBlock(level, groundPos, groundState);
                 level.setBlockAndUpdate(groundPos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
             }
             return;
@@ -833,6 +922,9 @@ public final class InfectionLogic {
         if (isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return false;
         }
+        if (isHydroBlocked(level, pos)) {
+            return false;
+        }
 
         if (!level.getBlockState(pos).isAir()) {
             return false;
@@ -863,6 +955,9 @@ public final class InfectionLogic {
 
     private static boolean tryCondenseDarkFluid(ServerLevel level, BlockPos base) {
         if (isSpreadBlockedByProtectiveBlocks(level, base)) {
+            return false;
+        }
+        if (isHydroBlocked(level, base)) {
             return false;
         }
 
@@ -1013,7 +1108,7 @@ public final class InfectionLogic {
             if (level.getBlockState(spawnPos).isAir()
                     && level.getBlockState(spawnPos.above()).isAir()
                     && !isSpreadBlockedByProtectiveBlocks(level, spawnPos)) {
-                spawnBlackHole(level, spawnPos);
+                spawnBlackHole(level, spawnPos, localParticles);
             }
         }
     }
@@ -1030,8 +1125,12 @@ public final class InfectionLogic {
             if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) particles += 14;
             else if (state.is(ModBlocks.INFECTION_GROWTH.get())) particles += 11;
             else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) particles += 7;
+<<<<<<< codex/adjust-mob-exposure-time-to-dark-matter-k0flt4
+            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
+=======
             else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get()))
                 particles += 9;
+>>>>>>> master
 
             if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
                 particles += 25;
@@ -1048,6 +1147,13 @@ public final class InfectionLogic {
     }
 
     private static boolean isSpreadBlockedByProtectiveBlocks(ServerLevel level, BlockPos targetPos) {
+        if (MatterHistoryManager.hasProtectionInChunkRange(level, targetPos, 16)) {
+            return true;
+        }
+        if (isHydroBlocked(level, targetPos)) {
+            return true;
+        }
+
         if (hasYellowMatterProtection(level, targetPos)) {
             return true;
         }
@@ -1094,6 +1200,34 @@ public final class InfectionLogic {
             return false;
         }
         return key.getPath().contains(expectedFragment);
+    }
+
+    private static boolean isHydroBlocked(Level level, BlockPos pos) {
+        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+            FluidState fluid = level.getFluidState(scan);
+            if (isWaterOrLava(fluid)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isWaterOrLava(FluidState fluid) {
+        return fluid.is(net.minecraft.tags.FluidTags.WATER) || fluid.is(net.minecraft.tags.FluidTags.LAVA);
+    }
+
+    private static double findNearestDarkMatterDistance(Level level, BlockPos center, int radius) {
+        double nearest = Double.MAX_VALUE;
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 2, radius))) {
+            BlockState state = level.getBlockState(pos);
+            FluidState fluid = level.getFluidState(pos);
+            if (isInfectionBlock(state)
+                    || fluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                    || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+                nearest = Math.min(nearest, Math.sqrt(center.distSqr(pos)));
+            }
+        }
+        return nearest == Double.MAX_VALUE ? 999.0D : nearest;
     }
 
     public record ExposureData(
