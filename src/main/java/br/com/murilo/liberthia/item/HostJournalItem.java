@@ -21,25 +21,23 @@ public class HostJournalItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide) {
-            // Display lore pages as chat messages for now
-            player.displayClientMessage(Component.literal("=== The Host's Journal ===").withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.BOLD), false);
+            player.displayClientMessage(Component.literal("=== Diário do Anfitrião: Liberthia ===").withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.BOLD), false);
             player.displayClientMessage(Component.literal(""), false);
-            player.displayClientMessage(Component.literal("Day 1 - The island appeared from nowhere.").withStyle(ChatFormatting.GRAY), false);
-            player.displayClientMessage(Component.literal("Three types of matter coexist here:").withStyle(ChatFormatting.GRAY), false);
-            player.displayClientMessage(Component.literal("Dark, Clear, and Yellow.").withStyle(ChatFormatting.GRAY), false);
+            player.displayClientMessage(Component.literal("Dia 1 - Liberthia surgiu de origem desconhecida.").withStyle(ChatFormatting.GRAY), false);
+            player.displayClientMessage(Component.literal("Três matérias coexistem aqui: Escura, Clara e Amarela.").withStyle(ChatFormatting.GRAY), false);
+            player.displayClientMessage(Component.literal("É a ilha mais habitável e diversa até agora.").withStyle(ChatFormatting.GRAY), false);
             player.displayClientMessage(Component.literal(""), false);
-            player.displayClientMessage(Component.literal("Day 14 - Dark Matter is unstable.").withStyle(ChatFormatting.DARK_RED), false);
-            player.displayClientMessage(Component.literal("It distorts reality. Transforms living beings.").withStyle(ChatFormatting.DARK_RED), false);
-            player.displayClientMessage(Component.literal("The workers... they are changing.").withStyle(ChatFormatting.DARK_RED), false);
+            player.displayClientMessage(Component.literal("Dia 14 - Matéria Escura: a mais poderosa.").withStyle(ChatFormatting.DARK_RED), false);
+            player.displayClientMessage(Component.literal("Ela distorce a realidade e infecta qualquer vida.").withStyle(ChatFormatting.DARK_RED), false);
+            player.displayClientMessage(Component.literal("Em 40s de exposição contínua, um ser é totalmente tomado.").withStyle(ChatFormatting.DARK_RED), false);
             player.displayClientMessage(Component.literal(""), false);
-            player.displayClientMessage(Component.literal("Day 47 - Clear Matter balances the infection.").withStyle(ChatFormatting.AQUA), false);
-            player.displayClientMessage(Component.literal("Without it, we would all be lost.").withStyle(ChatFormatting.AQUA), false);
-            player.displayClientMessage(Component.literal("I can feel it in my veins now.").withStyle(ChatFormatting.AQUA), false);
-            player.displayClientMessage(Component.literal("Both Dark and Light. Coexisting.").withStyle(ChatFormatting.AQUA), false);
+            player.displayClientMessage(Component.literal("Dia 47 - Matéria Clara sozinha parece segura.").withStyle(ChatFormatting.AQUA), false);
+            player.displayClientMessage(Component.literal("Quando unida à Escura, surge uma consciência hostil.").withStyle(ChatFormatting.AQUA), false);
+            player.displayClientMessage(Component.literal("Não é puro caos: existe intenção e habilidade.").withStyle(ChatFormatting.AQUA), false);
             player.displayClientMessage(Component.literal(""), false);
-            player.displayClientMessage(Component.literal("Day 112 - The test subjects arrive today.").withStyle(ChatFormatting.GOLD), false);
-            player.displayClientMessage(Component.literal("They don't know what Liberthia really is.").withStyle(ChatFormatting.GOLD), false);
-            player.displayClientMessage(Component.literal("Not yet.").withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC), false);
+            player.displayClientMessage(Component.literal("Dia 112 - Matéria Amarela repele a Escura.").withStyle(ChatFormatting.GOLD), false);
+            player.displayClientMessage(Component.literal("Com a Clara, amplifica emoções, mas preserva a mente.").withStyle(ChatFormatting.GOLD), false);
+            player.displayClientMessage(Component.literal("Juntas, Clara + Amarela combatem a Escura com estratégia.").withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC), false);
         }
 
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
@@ -47,8 +45,8 @@ public class HostJournalItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.literal("A worn leather journal").withStyle(ChatFormatting.DARK_PURPLE));
-        tooltip.add(Component.literal("belonging to The Host").withStyle(ChatFormatting.DARK_PURPLE));
-        tooltip.add(Component.literal("Right-click to read").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+        tooltip.add(Component.literal("Um diário gasto de couro").withStyle(ChatFormatting.DARK_PURPLE));
+        tooltip.add(Component.literal("pertencente ao Anfitrião").withStyle(ChatFormatting.DARK_PURPLE));
+        tooltip.add(Component.literal("Clique com botão direito para ler").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
     }
 }
