@@ -40,6 +40,7 @@ public final class InfectionLogic {
     private static final int DNA_BALANCE_TOLERANCE = 75;
 
     private static final int MAX_INFECTION_GROWTH_HEIGHT = 3;
+    private static final int MIN_GROWTH_SPACING_BLOCKS = 8;
     private static final int SURFACE_SPREAD_RADIUS = 5;
     private static final int FLUID_SCAN_RADIUS = 16;
     private static final int FLUID_SCAN_VERTICAL = 6;
@@ -871,7 +872,7 @@ public final class InfectionLogic {
         if (!level.getFluidState(pos).isEmpty()) {
             return false;
         }
-        if (hasAdjacentGrowth(level, pos)) {
+        if (hasNearbyGrowthTree(level, pos, MIN_GROWTH_SPACING_BLOCKS)) {
             return false;
         }
 
@@ -904,7 +905,7 @@ public final class InfectionLogic {
     private static boolean trySpawnDarkMatterTree(ServerLevel level, BlockPos base) {
         if (isSpreadBlockedByProtectiveBlocks(level, base)) return false;
         if (isHydroBlocked(level, base)) return false;
-        if (hasNearbyGrowthTree(level, base, 4)) return false;
+        if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) return false;
 
         BlockState baseState = level.getBlockState(base);
         if (isNaturalSurface(baseState)) {

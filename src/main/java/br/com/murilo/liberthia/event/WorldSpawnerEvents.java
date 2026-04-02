@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorldSpawnerEvents {
+    private static final int MIN_GROWTH_SPACING_BLOCKS = 8;
+
     @SubscribeEvent
     public void onLevelTick(TickEvent.LevelTickEvent event) {
         if (event.phase != TickEvent.Phase.END || event.level.isClientSide()) return;
@@ -75,8 +77,9 @@ public class WorldSpawnerEvents {
             BlockPos base = top.below();
 
             if (top.getY() <= level.getMinBuildHeight() + 2 || top.getY() >= level.getMaxBuildHeight() - 2) continue;
-            if (!isFarEnough(base, placed, 16.0D)) continue;
+            if (!isFarEnough(base, placed, MIN_GROWTH_SPACING_BLOCKS)) continue;
             if (hasNearbyDarkMatter(level, base, 10)) continue;
+            if (hasNearbyGrowthTree(level, base, MIN_GROWTH_SPACING_BLOCKS)) continue;
 
             placeSingleGrowth(level, base);
             placed.add(base.immutable());
@@ -88,6 +91,15 @@ public class WorldSpawnerEvents {
             if (existing.distSqr(candidate) < (minDistance * minDistance)) return false;
         }
         return true;
+    }
+
+    private boolean hasNearbyGrowthTree(ServerLevel level, BlockPos center, int radius) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -2, -radius), center.offset(radius, 4, radius))) {
+            if (level.getBlockState(pos).is(ModBlocks.INFECTION_GROWTH.get())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean hasNearbyDarkMatter(ServerLevel level, BlockPos center, int radius) {
