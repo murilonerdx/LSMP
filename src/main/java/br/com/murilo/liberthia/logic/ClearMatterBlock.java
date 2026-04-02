@@ -22,6 +22,21 @@ public class ClearMatterBlock extends Block {
             return;
         }
 
+        for (BlockPos area : BlockPos.betweenClosed(pos.offset(-3, -1, -3), pos.offset(3, 1, 3))) {
+            BlockState areaState = level.getBlockState(area);
+            if (areaState.is(ModBlocks.CORRUPTED_SOIL.get())) {
+                level.setBlockAndUpdate(area, Blocks.DIRT.defaultBlockState());
+            } else if (areaState.is(ModBlocks.INFECTION_GROWTH.get())) {
+                level.setBlockAndUpdate(area, Blocks.AIR.defaultBlockState());
+            }
+        }
+
+        level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, new net.minecraft.world.phys.AABB(pos).inflate(6.0D))
+                .forEach(entity -> entity.getCapability(br.com.murilo.liberthia.registry.ModCapabilities.INFECTION).ifPresent(data -> {
+                    data.reduceInfection(2);
+                    data.setDirty(true);
+                }));
+
         // A matéria clara atua como um sumidouro para a matéria escura
         for (Direction direction : Direction.values()) {
             BlockPos neighborPos = pos.relative(direction);

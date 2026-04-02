@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 public class HudConfigScreen extends Screen {
     private boolean draggingInfection = false;
     private boolean draggingExposure = false;
+    private boolean draggingDna = false;
 
     public HudConfigScreen() {
         super(Component.literal("Configuração de HUD"));
@@ -23,10 +24,13 @@ public class HudConfigScreen extends Screen {
         int infY = LiberthiaConfig.CLIENT.infectionY.get();
         int expX = LiberthiaConfig.CLIENT.exposureX.get();
         int expY = LiberthiaConfig.CLIENT.exposureY.get();
+        int dnaX = LiberthiaConfig.CLIENT.dnaX.get();
+        int dnaY = LiberthiaConfig.CLIENT.dnaY.get();
 
         // Render dummy HUDs for preview (matching premium look)
         renderDummyInfection(guiGraphics, infX, infY);
         renderDummyExposure(guiGraphics, expX, expY);
+        renderDummyDna(guiGraphics, dnaX, dnaY);
 
         super.render(guiGraphics, mouseX, mouseY, partialTick);
     }
@@ -52,6 +56,16 @@ public class HudConfigScreen extends Screen {
         guiGraphics.drawString(this.font, "DEFESA: 50%", x + 4, y + 16, 0xAAAAAA, true);
     }
 
+    private void renderDummyDna(GuiGraphics guiGraphics, int x, int y) {
+        int width = 140;
+        int height = 56;
+        guiGraphics.fill(x - 4, y - 6, x + width + 6, y + height, 0xAA0A0A0A);
+        guiGraphics.drawString(this.font, "DNA Mutation", x, y - 2, 0xFFE0E0E0, false);
+        guiGraphics.drawString(this.font, "Escura: 45%", x + 4, y + 12, 0xFF7B2CBF, false);
+        guiGraphics.drawString(this.font, "Clara: 30%", x + 4, y + 24, 0xFF4CC9F0, false);
+        guiGraphics.drawString(this.font, "Amarela: 25%", x + 4, y + 36, 0xFFF4B400, false);
+    }
+
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         int infX = LiberthiaConfig.CLIENT.infectionX.get();
@@ -69,6 +83,13 @@ public class HudConfigScreen extends Screen {
             return true;
         }
 
+        int dnaX = LiberthiaConfig.CLIENT.dnaX.get();
+        int dnaY = LiberthiaConfig.CLIENT.dnaY.get();
+        if (mouseX >= dnaX - 8 && mouseX <= dnaX + 150 && mouseY >= dnaY - 8 && mouseY <= dnaY + 60) {
+            draggingDna = true;
+            return true;
+        }
+
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -76,6 +97,7 @@ public class HudConfigScreen extends Screen {
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         draggingInfection = false;
         draggingExposure = false;
+        draggingDna = false;
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
@@ -89,6 +111,11 @@ public class HudConfigScreen extends Screen {
         if (draggingExposure) {
             LiberthiaConfig.CLIENT.exposureX.set((int) mouseX);
             LiberthiaConfig.CLIENT.exposureY.set((int) mouseY);
+            return true;
+        }
+        if (draggingDna) {
+            LiberthiaConfig.CLIENT.dnaX.set((int) mouseX);
+            LiberthiaConfig.CLIENT.dnaY.set((int) mouseY);
             return true;
         }
         return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);

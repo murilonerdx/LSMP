@@ -1,5 +1,6 @@
 package br.com.murilo.liberthia.client;
 
+import br.com.murilo.liberthia.config.LiberthiaConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
@@ -18,8 +19,8 @@ public class DnaMutationOverlay implements IGuiOverlay {
             return;
         }
 
-        int x = 10;
-        int y = 95;
+        int x = LiberthiaConfig.CLIENT.dnaX.get();
+        int y = LiberthiaConfig.CLIENT.dnaY.get();
         int width = 140;
         int rowH = 14;
 

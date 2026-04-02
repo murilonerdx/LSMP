@@ -27,6 +27,8 @@ public final class LiberthiaConfig {
         public final ForgeConfigSpec.IntValue infectionY;
         public final ForgeConfigSpec.IntValue exposureX;
         public final ForgeConfigSpec.IntValue exposureY;
+        public final ForgeConfigSpec.IntValue dnaX;
+        public final ForgeConfigSpec.IntValue dnaY;
 
         private Client(ForgeConfigSpec.Builder builder) {
             builder.comment("Configuração de interface (HUD).").push("hud");
@@ -46,6 +48,14 @@ public final class LiberthiaConfig {
             exposureY = builder
                     .comment("Posição Y do alerta de exposição.")
                     .defineInRange("exposure_y", 50, 0, 4000);
+
+            dnaX = builder
+                    .comment("Posição X do painel de mutação de DNA.")
+                    .defineInRange("dna_x", 10, 0, 4000);
+
+            dnaY = builder
+                    .comment("Posição Y do painel de mutação de DNA.")
+                    .defineInRange("dna_y", 95, 0, 4000);
 
             builder.pop();
         }

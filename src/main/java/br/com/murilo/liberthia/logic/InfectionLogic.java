@@ -254,7 +254,6 @@ public final class InfectionLogic {
         ExposureData exposure = scanExposureGeneric(entity);
         int exposureTicks = updateMobExposureCounter(entity, exposure.effectiveDarkPressure() > 0 || exposure.immersedInDark());
         double nearestDarkDistance = findNearestDarkMatterDistance(entity.level(), entity.blockPosition(), 8);
-        double nearestDarkDistance = findNearestDarkMatterDistance(entity.level(), entity.blockPosition(), 8);
 
         if (exposureTicks > 0) {
             int targetInfection = Math.min(100, (exposureTicks * 100) / FULL_MOB_INFECTION_TICKS);
@@ -528,6 +527,11 @@ public final class InfectionLogic {
             immersedInDark = false;
         }
 
+        if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
+            rawDarkPressure = 0;
+            immersedInDark = false;
+        }
+
         if (carryingDarkMatter) {
             rawDarkPressure += 1;
         }
@@ -641,7 +645,6 @@ public final class InfectionLogic {
             long gameTime = player.level().getGameTime();
             boolean darkDominant = dark >= DNA_DOMINANCE_THRESHOLD && dark > clear && dark > yellow;
             boolean darkClearBalanced = Math.abs(dark - clear) <= DNA_BALANCE_TOLERANCE && dark >= 350 && clear >= 350;
-            boolean clearYellowImmune = Math.abs(clear - yellow) <= 50 && clear >= 450 && yellow >= 450 && dark <= 100;
             boolean clearYellowImmune = Math.abs(clear - yellow) <= 50 && clear >= 450 && yellow >= 450 && dark <= 100;
 
             if (dark > 0 && yellow > 0) {
@@ -1061,13 +1064,31 @@ public final class InfectionLogic {
                     && level.getBlockState(spawnPos.above()).isAir()
                     && !isSpreadBlockedByProtectiveBlocks(level, spawnPos)) {
                 spawnBlackHole(level, spawnPos, localParticles);
-            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
-
-            if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
-                particles += 25;
             }
         }
         return particles;
+    }
+
+    public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
+        processDarkFluidActivity(level, center);
+
+        int particles = countDarkMatterParticles(level, center, FLUID_SCAN_RADIUS, FLUID_SCAN_VERTICAL);
+        if (particles < BLACK_HOLE_PARTICLE_THRESHOLD) {
+            return;
+        }
+
+        if (hasNearbyBlackHole(level, center, 48.0D) || isSpreadBlockedByProtectiveBlocks(level, center)) {
+            return;
+        }
+
+        BlockPos surface = level.getHeightmapPos(
+                net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                center
+        );
+        BlockPos spawnPos = surface.above(2);
+        if (level.getBlockState(spawnPos).isAir() && level.getBlockState(spawnPos.above()).isAir()) {
+            spawnBlackHole(level, spawnPos, particles);
+        }
     }
 
     public static int countDarkMatterParticles(Level level, BlockPos center, int radius, int vertical) {
@@ -1089,6 +1110,15 @@ public final class InfectionLogic {
             }
         }
         return particles;
+    }
+
+    // Compatibilidade para chamadas antigas
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius) {
+        return countDarkMatterParticles(level, center, radius, 6);
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center) {
+        return countDarkMatterParticles(level, center, 16, 6);
     }
 
     private static boolean hasNearbyBlackHole(ServerLevel level, BlockPos pos, double radius) {
@@ -1182,19 +1212,4 @@ public final class InfectionLogic {
         return nearest == Double.MAX_VALUE ? 999.0D : nearest;
     }
 
-    public record ExposureData(
-            int rawDarkPressure,
-            int effectiveDarkPressure,
-            int blockedExposure,
-            int clearRelief,
-            int clearPressure,
-            int yellowPressure,
-            boolean immersedInDark,
-            boolean touchingClear,
-            boolean touchingYellow,
-            boolean carryingDarkMatter,
-            int armorPieces,
-            int armorProtectionPercent
-    ) {
-    }
 }
