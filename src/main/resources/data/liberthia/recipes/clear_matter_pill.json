@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "liberthia:clear_matter_block"}
+  ],
+  "result": {
+    "item": "liberthia:clear_matter_pill",
+    "count": 4
+  }
+}

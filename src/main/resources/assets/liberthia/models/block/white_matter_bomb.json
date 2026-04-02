@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "liberthia:block/white_matter_bomb"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "liberthia:dark_matter_ore"
+  ],
+  "step": "underground_ores"
+}

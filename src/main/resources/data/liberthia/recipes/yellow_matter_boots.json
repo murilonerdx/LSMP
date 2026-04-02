@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["   ", "Y Y", "Y Y"],
+  "key": {
+    "Y": {
+      "item": "liberthia:yellow_matter_ingot"
+    }
+  },
+  "result": {
+    "item": "liberthia:yellow_matter_boots"
+  }
+}

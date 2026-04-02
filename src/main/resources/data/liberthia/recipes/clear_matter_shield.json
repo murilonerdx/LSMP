@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CSC",
+    "CCC"
+  ],
+  "key": {
+    "C": {"item": "liberthia:clear_matter_block"},
+    "S": {"item": "minecraft:stick"}
+  },
+  "result": {
+    "item": "liberthia:clear_matter_shield",
+    "count": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "liberthia:block/dark_matter_forge_top",
+    "front": "liberthia:block/dark_matter_forge_front_on",
+    "side": "liberthia:block/dark_matter_forge_side"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Y ",
+    "IRI",
+    " I "
+  ],
+  "key": {
+    "Y": {"item": "liberthia:yellow_matter_ingot"},
+    "I": {"item": "minecraft:iron_ingot"},
+    "R": {"item": "minecraft:redstone"}
+  },
+  "result": {
+    "item": "liberthia:geiger_counter",
+    "count": 1
+  }
+}

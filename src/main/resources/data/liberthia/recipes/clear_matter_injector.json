@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "YGY",
+    " Y "
+  ],
+  "key": {
+    "C": {
+      "item": "liberthia:clear_matter_block"
+    },
+    "Y": {
+      "item": "liberthia:yellow_matter_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "liberthia:clear_matter_injector"
+  }
+}

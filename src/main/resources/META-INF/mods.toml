@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="liberthia"
+version="0.1.0"
+displayName="Liberthia"
+authors="Murilo Pereira, OpenAI"
+description='''Mod de sobrevivência anômala com Matéria Escura, Matéria Clara e Matéria Amarela.'''
+displayTest="MATCH_VERSION"
+
+[[dependencies.liberthia]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.liberthia]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"

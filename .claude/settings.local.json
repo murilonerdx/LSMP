@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(du -sh /c/Users/T-GAMER/Desktop/liberthia_mod/*)",
+      "Bash(./gradlew build:*)",
+      "Bash(find . -path */IForgeMenuType*)",
+      "Bash(./gradlew compileJava)"
+    ]
+  }
+}

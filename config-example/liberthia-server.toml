@@ -1,0 +1,10 @@
+[backend]
+enabled = true
+base_url = "https://seu-backend.com"
+snapshot_path = "/api/v1/infection/snapshot"
+connect_timeout_ms = 3000
+request_timeout_ms = 5000
+
+[world]
+world_spawns_enabled = true
+spawn_interval_ticks = 2400

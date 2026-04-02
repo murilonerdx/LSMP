@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "liberthia:dark_matter_block",
+    "liberthia:clear_matter_block",
+    "liberthia:yellow_matter_block",
+    "liberthia:dark_matter_ore",
+    "liberthia:deepslate_dark_matter_ore",
+    "liberthia:corrupted_soil",
+    "liberthia:purification_bench",
+    "liberthia:dark_matter_forge",
+    "liberthia:matter_infuser",
+    "liberthia:containment_chamber",
+    "liberthia:matter_transmuter"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "dark_whisper": {
+    "subtitle": "subtitle.liberthia.dark_whisper",
+    "sounds": [
+      {
+        "name": "liberthia:dark_whisper",
+        "stream": false
+      }
+    ]
+  },
+  "dark_pulse": {
+    "subtitle": "subtitle.liberthia.dark_pulse",
+    "sounds": [
+      {
+        "name": "liberthia:dark_pulse",
+        "stream": false
+      }
+    ]
+  },
+  "clear_hum": {
+    "subtitle": "subtitle.liberthia.clear_hum",
+    "sounds": [
+      {
+        "name": "liberthia:clear_hum",
+        "stream": false
+      }
+    ]
+  },
+  "geiger_tick": {
+    "subtitle": "subtitle.liberthia.geiger_tick",
+    "sounds": [
+      {
+        "name": "liberthia:geiger_tick",
+        "stream": false
+      }
+    ]
+  },
+  "infection_alert": {
+    "subtitle": "subtitle.liberthia.infection_alert",
+    "sounds": [
+      {
+        "name": "liberthia:infection_alert",
+        "stream": false
+      }
+    ]
+  },
+  "isolation_warning": {
+    "subtitle": "subtitle.liberthia.isolation_warning",
+    "sounds": [
+      {
+        "name": "liberthia:isolation_warning",
+        "stream": false
+      }
+    ]
+  }
+}
