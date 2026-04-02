@@ -44,6 +44,7 @@ public final class InfectionLogic {
     private static final int FLUID_SCAN_RADIUS = 16;
     private static final int FLUID_SCAN_VERTICAL = 6;
     private static final int BLACK_HOLE_MIN_FLUID_BLOCKS = 6;
+    private static final int BLACK_HOLE_PARTICLE_THRESHOLD = 2000;
 
     private static final Map<UUID, Integer> AMBIENT_CACHE = new ConcurrentHashMap<>();
     private static final Map<UUID, Integer> MOB_EXPOSURE_TICKS = new ConcurrentHashMap<>();
@@ -459,20 +460,14 @@ public final class InfectionLogic {
                 sourceStrength = 0.5f;
             }
 
-            if (sourceStrength > 0.0f) {
-                double distSq = entityCenter.distanceToSqr(net.minecraft.world.phys.Vec3.atCenterOf(pos));
-
-                // Quanto mais perto, maior o peso.
-                // Um bloco isolado longe quase não influencia.
-                float distanceFactor = (float) (1.0D / (1.0D + distSq));
-
-                localPressure += sourceStrength * distanceFactor;
-
-                // Encostado ou quase encostado pesa mais
-                if (distSq <= 2.25D) {
-                    localPressure += sourceStrength * 0.5f;
-                }
+            if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
+                clearBlocks++;
             }
+
+            if (isYellowMatterBlock(blockState)) {
+                yellowBlocks++;
+            }
+        }
 
             if (blockState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
                 clearBlocks++;
@@ -660,7 +655,7 @@ public final class InfectionLogic {
                 player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, 1, true, false, true));
 
                 if (gameTime % 120L == 0L) {
-                    player.level().playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.AMBIENT_CAVE, SoundSource.PLAYERS, 0.6F, 0.7F);
+                    player.level().playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.AMBIENT_CAVE.value(), SoundSource.PLAYERS, 0.6F, 0.7F);
                 }
             } else if (clearYellowStable) {
                 data.setImmune(true);
@@ -1007,18 +1002,36 @@ public final class InfectionLogic {
             return;
         }
 
-        int localFoci = countDarkMatterFoci(level, selected, 6);
-        float density = getChunkInfectionDensity(level, selected);
-
-        if (localFoci >= 18 && density >= 0.55f && level.random.nextFloat() < 0.20f) {
+        int localParticles = countDarkMatterParticles(level, selected, FLUID_SCAN_RADIUS, FLUID_SCAN_VERTICAL);
+        if (localParticles >= BLACK_HOLE_PARTICLE_THRESHOLD) {
             BlockPos spawnPos = selected.above(2 + level.random.nextInt(2));
-
             if (level.getBlockState(spawnPos).isAir()
                     && level.getBlockState(spawnPos.above()).isAir()
                     && !isSpreadBlockedByProtectiveBlocks(level, spawnPos)) {
                 spawnBlackHole(level, spawnPos);
             }
         }
+    }
+
+    public static int countDarkMatterParticles(Level level, BlockPos center, int radius, int vertical) {
+        int particles = 0;
+        for (BlockPos pos : BlockPos.betweenClosed(
+                center.offset(-radius, -vertical, -radius),
+                center.offset(radius, vertical, radius)
+        )) {
+            BlockState state = level.getBlockState(pos);
+            FluidState fluid = level.getFluidState(pos);
+
+            if (state.is(ModBlocks.DARK_MATTER_BLOCK.get())) particles += 14;
+            else if (state.is(ModBlocks.INFECTION_GROWTH.get())) particles += 11;
+            else if (state.is(ModBlocks.CORRUPTED_SOIL.get())) particles += 7;
+            else if (state.is(ModBlocks.DARK_MATTER_ORE.get()) || state.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) particles += 9;
+
+            if (fluid.getType().isSame(ModFluids.DARK_MATTER.get()) || fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+                particles += 25;
+            }
+        }
+        return particles;
     }
 
     private static boolean hasNearbyBlackHole(ServerLevel level, BlockPos pos, double radius) {
