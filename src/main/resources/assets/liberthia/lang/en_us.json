@@ -66,5 +66,15 @@
   "item.liberthia.clear_matter_boots": "Clear Matter Boots",
   "item.liberthia.host_journal": "The Host's Journal",
   "item.liberthia.worker_badge": "Worker ID Badge",
-  "item.liberthia.cleansing_grenade": "Cleansing Grenade"
+  "item.liberthia.cleansing_grenade": "Cleansing Grenade",
+
+  "tooltip.liberthia.host_journal.line1": "A worn leather journal",
+  "tooltip.liberthia.host_journal.line2": "belonging to the Host Chief",
+  "tooltip.liberthia.host_journal.line3": "Right-click to read",
+
+  "tooltip.liberthia.worker_badge.facility": "LIBERTHIA RESEARCH FACILITY",
+  "tooltip.liberthia.worker_badge.id": "Worker Identification",
+  "tooltip.liberthia.worker_badge.status": "Status: EXPOSED - QUARANTINED",
+  "tooltip.liberthia.worker_badge.clearance": "Clearance: STANDARD",
+  "tooltip.liberthia.worker_badge.note": "\"Travels between installations required\""
 }

@@ -17,10 +17,11 @@ public class WorkerBadgeItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.literal("LIBERTHIA RESEARCH FACILITY").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-        tooltip.add(Component.literal("Worker Identification").withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.literal("Status: INFECTED").withStyle(ChatFormatting.DARK_PURPLE));
-        tooltip.add(Component.literal("Clearance: STANDARD").withStyle(ChatFormatting.YELLOW));
+        tooltip.add(Component.translatable("tooltip.liberthia.worker_badge.facility").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+        tooltip.add(Component.translatable("tooltip.liberthia.worker_badge.id").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.liberthia.worker_badge.status").withStyle(ChatFormatting.DARK_PURPLE));
+        tooltip.add(Component.translatable("tooltip.liberthia.worker_badge.clearance").withStyle(ChatFormatting.YELLOW));
+        tooltip.add(Component.translatable("tooltip.liberthia.worker_badge.note").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
     }
 
     @Override

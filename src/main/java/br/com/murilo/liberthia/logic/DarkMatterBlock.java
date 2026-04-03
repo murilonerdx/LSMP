@@ -350,8 +350,13 @@ public class DarkMatterBlock extends Block {
             return;
         }
 
-        // Matéria amarela bloqueia a propagação.
-        if (neighborState.is(ModBlocks.YELLOW_MATTER_BLOCK.get())) {
+        // Matéria amarela bloqueia a propagação (hard stop).
+        if (ProtectionUtils.isYellowMatterBlock(neighborState)) {
+            return;
+        }
+
+        // Check if target position is within a protection zone (clear or yellow matter nearby)
+        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, neighborPos)) {
             return;
         }
 

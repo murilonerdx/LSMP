@@ -125,18 +125,31 @@ public class MatterInfuserBlockEntity extends BlockEntity implements MenuProvide
         ItemStack yellow = inventory.getStackInSlot(2);
         ItemStack catalyst = inventory.getStackInSlot(3);
 
-        // Dark Shard + Clear Block + Yellow Ingot + Holy Essence -> Stabilized Dark Matter x2
+        // All 3 matter blocks + Singularity Core -> Matter Core
+        // The Infuser is the ONLY machine that can safely combine all three matters.
+        // Clear Matter acts as a bridge between Dark and Yellow (which repel each other).
+        // The Singularity Core contains the infused dark energy needed to stabilize the fusion.
+        if (dark.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem())
+                && clear.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())
+                && yellow.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem())
+                && catalyst.is(ModItems.SINGULARITY_CORE.get())) {
+            return new ItemStack(ModItems.MATTER_CORE.get());
+        }
+        // Dark Shard + Clear Block + Holy Essence (no yellow) -> Purified Essence x3
+        // Dark + Clear creates a hostile consciousness, but Holy Essence purifies it
         if (dark.is(ModItems.DARK_MATTER_SHARD.get())
+                && clear.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())
+                && yellow.isEmpty()
+                && catalyst.is(ModItems.HOLY_ESSENCE.get())) {
+            return new ItemStack(ModItems.PURIFIED_ESSENCE.get(), 3);
+        }
+        // Clear Block + Yellow Ingot + Holy Essence (no dark) -> Clear Matter Pill x4
+        // Clear + Yellow amplifies emotions but preserves the mind; with Holy Essence it becomes medicine
+        if (dark.isEmpty()
                 && clear.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())
                 && yellow.is(ModItems.YELLOW_MATTER_INGOT.get())
                 && catalyst.is(ModItems.HOLY_ESSENCE.get())) {
-            return new ItemStack(ModItems.YELLOW_MATTER_INGOT.get(), 4);
-        }
-        // Dark Block + Clear Block + Yellow Block + no catalyst -> Matter Core
-        if (dark.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem())
-                && clear.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())
-                && yellow.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem())) {
-            return new ItemStack(ModItems.HOLY_ESSENCE.get(), 2);
+            return new ItemStack(ModItems.CLEAR_MATTER_PILL.get(), 4);
         }
         return ItemStack.EMPTY;
     }

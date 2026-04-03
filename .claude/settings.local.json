@@ -14,7 +14,15 @@
       "Bash(grep -r \"textures\\\\|gui\\\\|TEXTURE\\\\|ResourceLocation\" /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/java/br/com/murilo/liberthia/client/screen/*.java)",
       "Bash(grep -h \"TEXTURE = new ResourceLocation\" /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/java/br/com/murilo/liberthia/client/screen/*.java)",
       "Bash(/tmp/check_missing.sh:*)",
-      "Bash(bash /tmp/check_missing.sh)"
+      "Bash(bash /tmp/check_missing.sh)",
+      "Bash(python generate_textures.py)",
+      "Bash(grep -h \"model\" \"C:\\\\Users\\\\T-GAMER\\\\Desktop\\\\liberthia_mod\\\\src\\\\main\\\\resources\\\\assets\\\\liberthia\\\\blockstates\"/*.json)",
+      "Bash(grep -h \"liberthia:block\" \"C:\\\\Users\\\\T-GAMER\\\\Desktop\\\\liberthia_mod\\\\src\\\\main\\\\resources\\\\assets\\\\liberthia\\\\models\\\\block\"/*.json)",
+      "Bash(grep -h \"parent\" \"C:\\\\Users\\\\T-GAMER\\\\Desktop\\\\liberthia_mod\\\\src\\\\main\\\\resources\\\\assets\\\\liberthia\\\\models\\\\block\"/*.json)",
+      "Bash(find \"C:\\\\Users\\\\T-GAMER\\\\Desktop\\\\liberthia_mod\\\\src\\\\main\\\\resources\\\\assets\\\\liberthia\\\\models\\\\block\" -type f -name \"*.json\" -exec grep -h \"parent\" {})",
+      "Bash(while read:*)",
+      "Bash(do grep:*)",
+      "Bash(done)"
     ]
   }
 }

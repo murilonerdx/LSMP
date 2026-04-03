@@ -22,12 +22,19 @@ public class ClearMatterBlock extends Block {
             return;
         }
 
-        for (BlockPos area : BlockPos.betweenClosed(pos.offset(-3, -1, -3), pos.offset(3, 1, 3))) {
+        // Expanded purification aura: 9x5x9 area
+        // Gradually reduces InfectionGrowth AGE instead of instant removal
+        for (BlockPos area : BlockPos.betweenClosed(pos.offset(-4, -2, -4), pos.offset(4, 2, 4))) {
             BlockState areaState = level.getBlockState(area);
             if (areaState.is(ModBlocks.CORRUPTED_SOIL.get())) {
                 level.setBlockAndUpdate(area, Blocks.DIRT.defaultBlockState());
             } else if (areaState.is(ModBlocks.INFECTION_GROWTH.get())) {
-                level.setBlockAndUpdate(area, Blocks.AIR.defaultBlockState());
+                int age = areaState.getValue(InfectionGrowthBlock.AGE);
+                if (age > 0) {
+                    level.setBlockAndUpdate(area, areaState.setValue(InfectionGrowthBlock.AGE, age - 1));
+                } else {
+                    level.setBlockAndUpdate(area, Blocks.AIR.defaultBlockState());
+                }
             }
         }
 

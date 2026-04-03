@@ -208,16 +208,24 @@ public class DarkMatterForgeBlockEntity extends BlockEntity implements MenuProvi
 
     private ItemStack getResult(ItemStack input1, ItemStack input2) {
         // Dark Matter Shard + Iron Ingot -> Stabilized Dark Matter
+        // Dark matter distorts reality; iron stabilizes its chaotic energy
         if (input1.is(ModItems.DARK_MATTER_SHARD.get()) && input2.is(net.minecraft.world.item.Items.IRON_INGOT)) {
-            return new ItemStack(ModItems.YELLOW_MATTER_INGOT.get(), 2);
+            return new ItemStack(ModItems.STABILIZED_DARK_MATTER.get());
         }
-        // Dark Matter Block + Clear Matter Block -> Yellow Matter Block
-        if (input1.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem()) && input2.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())) {
-            return new ItemStack(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem());
+        // Dark Matter Shard + Netherite Scrap -> Void Crystal
+        // The forge concentrates dark matter's reality-warping into crystalline form
+        if (input1.is(ModItems.DARK_MATTER_SHARD.get()) && input2.is(net.minecraft.world.item.Items.NETHERITE_SCRAP)) {
+            return new ItemStack(ModItems.VOID_CRYSTAL.get());
         }
-        // Dark Matter Shard + Yellow Matter Ingot -> 2x Dark Matter Shard (amplification)
-        if (input1.is(ModItems.DARK_MATTER_SHARD.get()) && input2.is(ModItems.YELLOW_MATTER_INGOT.get())) {
-            return new ItemStack(ModItems.DARK_MATTER_SHARD.get(), 3);
+        // Stabilized Dark Matter + Void Crystal -> Singularity Core
+        // Two refined dark matter products fused into a controlled singularity
+        if (input1.is(ModItems.STABILIZED_DARK_MATTER.get()) && input2.is(ModItems.VOID_CRYSTAL.get())) {
+            return new ItemStack(ModItems.SINGULARITY_CORE.get());
+        }
+        // Dark Matter Block + Holy Essence -> Purified Essence
+        // Holy Essence purifies the dark matter's hostile energy
+        if (input1.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem()) && input2.is(ModItems.HOLY_ESSENCE.get())) {
+            return new ItemStack(ModItems.PURIFIED_ESSENCE.get(), 2);
         }
         return ItemStack.EMPTY;
     }

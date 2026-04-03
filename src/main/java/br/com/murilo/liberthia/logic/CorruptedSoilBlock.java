@@ -3,8 +3,6 @@ package br.com.murilo.liberthia.logic;
 import br.com.murilo.liberthia.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -26,7 +24,7 @@ public class CorruptedSoilBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (isSpreadBlockedByProtectiveBlocks(level, pos)) {
+        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return;
         }
 
@@ -89,7 +87,7 @@ public class CorruptedSoilBlock extends Block {
         BlockPos groundPos = findGroundAtSurface(level, targetColumn);
         BlockState groundState = level.getBlockState(groundPos);
 
-        if (groundState.isAir() || isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
+        if (groundState.isAir() || ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
             return;
         }
 
@@ -183,12 +181,12 @@ public class CorruptedSoilBlock extends Block {
 
         if (state.is(BlockTags.LOGS)
                 || state.is(BlockTags.LEAVES)
-                || hasRegistryPath(state, "grass")
-                || hasRegistryPath(state, "fern")
-                || hasRegistryPath(state, "vine")
-                || hasRegistryPath(state, "flower")
-                || hasRegistryPath(state, "plant")
-                || hasRegistryPath(state, "crop")) {
+                || ProtectionUtils.hasRegistryPath(state, "grass")
+                || ProtectionUtils.hasRegistryPath(state, "fern")
+                || ProtectionUtils.hasRegistryPath(state, "vine")
+                || ProtectionUtils.hasRegistryPath(state, "flower")
+                || ProtectionUtils.hasRegistryPath(state, "plant")
+                || ProtectionUtils.hasRegistryPath(state, "crop")) {
             if (state.getDestroySpeed(level, pos) >= 0.0F) {
                 level.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
                 return true;
@@ -239,7 +237,7 @@ public class CorruptedSoilBlock extends Block {
     }
 
     private static boolean canSproutGrowth(ServerLevel level, BlockPos growthPos) {
-        if (isSpreadBlockedByProtectiveBlocks(level, growthPos)) {
+        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, growthPos)) {
             return false;
         }
 
@@ -258,19 +256,7 @@ public class CorruptedSoilBlock extends Block {
             return false;
         }
 
-        return !hasGrowthTooClose(level, growthPos);
-    }
-
-    private static boolean hasGrowthTooClose(ServerLevel level, BlockPos pos) {
-        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-            if (scan.equals(pos)) {
-                continue;
-            }
-            if (level.getBlockState(scan).is(ModBlocks.INFECTION_GROWTH.get())) {
-                return true;
-            }
-        }
-        return false;
+        return !ProtectionUtils.hasGrowthTooClose(level, growthPos, 6);
     }
 
     private boolean isSurfaceSoilBlock(BlockState state) {
@@ -300,7 +286,7 @@ public class CorruptedSoilBlock extends Block {
             return false;
         }
 
-        if (isYellowMatterBlock(state) || isClearMatterBlock(state)) {
+        if (ProtectionUtils.isYellowMatterBlock(state) || ProtectionUtils.isClearMatterBlock(state)) {
             return false;
         }
 
@@ -335,59 +321,10 @@ public class CorruptedSoilBlock extends Block {
                 || state.is(Blocks.PACKED_MUD)
                 || state.is(Blocks.SANDSTONE)
                 || state.is(Blocks.RED_SANDSTONE)
-                || hasRegistryPath(state, "_ore")) {
+                || ProtectionUtils.hasRegistryPath(state, "_ore")) {
             return true;
         }
 
         return state.isFaceSturdy(level, pos, Direction.UP);
-    }
-
-    private static boolean isSpreadBlockedByProtectiveBlocks(ServerLevel level, BlockPos center) {
-        if (hasYellowMatterProtection(level, center)) {
-            return true;
-        }
-        return hasClearMatterProtection(level, center);
-    }
-
-    private static boolean hasYellowMatterProtection(Level level, BlockPos center) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-2, -1, -2), center.offset(2, 1, 2))) {
-            if (isYellowMatterBlock(level.getBlockState(pos))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean hasClearMatterProtection(Level level, BlockPos center) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-1, -1, -1), center.offset(1, 1, 1))) {
-            if (isClearMatterBlock(level.getBlockState(pos))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isClearMatterBlock(BlockState state) {
-        if (state.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
-            return true;
-        }
-
-        return hasRegistryPath(state, "clear_matter")
-                || hasRegistryPath(state, "white_matter")
-                || hasRegistryPath(state, "materia_branca");
-    }
-
-    private static boolean isYellowMatterBlock(BlockState state) {
-        return hasRegistryPath(state, "yellow_matter")
-                || hasRegistryPath(state, "yellowmatter")
-                || hasRegistryPath(state, "materia_amarela");
-    }
-
-    private static boolean hasRegistryPath(BlockState state, String expectedFragment) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-        if (key == null) {
-            return false;
-        }
-        return key.getPath().contains(expectedFragment);
     }
 }

@@ -73,6 +73,17 @@ public final class InfectionLogic {
             applyExposure(player, data, exposure);
         }
 
+        // Clear/white matter actively reduces infection over time
+        if (player.tickCount % 40 == 0 && data.getInfection() > 0) {
+            if (exposure.touchingClear()) {
+                data.reduceInfection(2);
+                data.setDirty(true);
+            } else if (exposure.clearPressure() > 5) {
+                data.reduceInfection(1);
+                data.setDirty(true);
+            }
+        }
+
         updateDnaProfile(player, exposure);
         applyMatterSynergy(player, data, exposure);
 
@@ -1241,45 +1252,19 @@ public final class InfectionLogic {
     }
 
     private static boolean hasYellowMatterProtection(Level level, BlockPos center) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-2, -1, -2), center.offset(2, 1, 2))) {
-            if (isYellowMatterBlock(level.getBlockState(pos))) {
-                return true;
-            }
-        }
-        return false;
+        return ProtectionUtils.hasYellowMatterProtection(level, center);
     }
 
     private static boolean hasClearMatterProtection(Level level, BlockPos center) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-1, -1, -1), center.offset(1, 1, 1))) {
-            if (isClearMatterBlock(level.getBlockState(pos))) {
-                return true;
-            }
-        }
-        return false;
+        return ProtectionUtils.hasClearMatterProtection(level, center);
     }
 
     private static boolean isClearMatterBlock(BlockState state) {
-        if (state.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
-            return true;
-        }
-
-        return hasRegistryPath(state, "clear_matter")
-                || hasRegistryPath(state, "white_matter")
-                || hasRegistryPath(state, "materia_branca");
+        return ProtectionUtils.isClearMatterBlock(state);
     }
 
     private static boolean isYellowMatterBlock(BlockState state) {
-        return hasRegistryPath(state, "yellow_matter")
-                || hasRegistryPath(state, "yellowmatter")
-                || hasRegistryPath(state, "materia_amarela");
-    }
-
-    private static boolean hasRegistryPath(BlockState state, String expectedFragment) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-        if (key == null) {
-            return false;
-        }
-        return key.getPath().contains(expectedFragment);
+        return ProtectionUtils.isYellowMatterBlock(state);
     }
 
     private static boolean isHydroBlocked(Level level, BlockPos pos) {

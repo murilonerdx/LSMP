@@ -57,13 +57,18 @@ public class HudConfigScreen extends Screen {
     }
 
     private void renderDummyDna(GuiGraphics guiGraphics, int x, int y) {
-        int width = 140;
-        int height = 56;
-        guiGraphics.fill(x - 4, y - 6, x + width + 6, y + height, 0xAA0A0A0A);
-        guiGraphics.drawString(this.font, "DNA Mutation", x, y - 2, 0xFFE0E0E0, false);
-        guiGraphics.drawString(this.font, "Escura: 45%", x + 4, y + 12, 0xFF7B2CBF, false);
-        guiGraphics.drawString(this.font, "Clara: 30%", x + 4, y + 24, 0xFF4CC9F0, false);
-        guiGraphics.drawString(this.font, "Amarela: 25%", x + 4, y + 36, 0xFFF4B400, false);
+        int width = 105;
+        int height = 38;
+        float scale = 0.75f;
+        guiGraphics.fill(x - 3, y - 4, x + width + 3, y + height, 0xAA0A0A0A);
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+        guiGraphics.drawString(this.font, "Exposure", (int)(x / scale), (int)((y - 2) / scale), 0xFFE0E0E0, false);
+        guiGraphics.drawString(this.font, "Esc 45%", (int)(x / scale), (int)((y + 10) / scale), 0xFF7B2CBF, false);
+        guiGraphics.drawString(this.font, "Cla 30%", (int)(x / scale), (int)((y + 20) / scale), 0xFF4CC9F0, false);
+        guiGraphics.drawString(this.font, "Ama 25%", (int)(x / scale), (int)((y + 30) / scale), 0xFFF4B400, false);
+        guiGraphics.pose().popPose();
     }
 
     @Override
@@ -85,7 +90,7 @@ public class HudConfigScreen extends Screen {
 
         int dnaX = LiberthiaConfig.CLIENT.dnaX.get();
         int dnaY = LiberthiaConfig.CLIENT.dnaY.get();
-        if (mouseX >= dnaX - 8 && mouseX <= dnaX + 150 && mouseY >= dnaY - 8 && mouseY <= dnaY + 60) {
+        if (mouseX >= dnaX - 5 && mouseX <= dnaX + 115 && mouseY >= dnaY - 5 && mouseY <= dnaY + 45) {
             draggingDna = true;
             return true;
         }

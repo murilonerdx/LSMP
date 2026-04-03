@@ -125,17 +125,23 @@ public class MatterTransmuterBlockEntity extends BlockEntity implements MenuProv
         if (input.isEmpty() || catalyst.isEmpty()) return ItemStack.EMPTY;
 
         // Dark Matter -> Clear Matter (catalyst: Holy Essence)
+        // Holy Essence purifies dark matter's chaotic energy into neutral Clear Matter
         if (input.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem()) && catalyst.is(ModItems.HOLY_ESSENCE.get())) {
             return new ItemStack(ModBlocks.CLEAR_MATTER_BLOCK.get());
         }
         // Clear Matter -> Yellow Matter (catalyst: Yellow Matter Ingot)
+        // Clear Matter is compatible with Yellow; the ingot acts as a seed for transmutation
         if (input.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem()) && catalyst.is(ModItems.YELLOW_MATTER_INGOT.get())) {
             return new ItemStack(ModBlocks.YELLOW_MATTER_BLOCK.get());
         }
-        // Yellow Matter -> Dark Matter (catalyst: Dark Matter Shard)
-        if (input.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem()) && catalyst.is(ModItems.DARK_MATTER_SHARD.get())) {
+        // Clear Matter -> Dark Matter (catalyst: Dark Matter Shard)
+        // Clear Matter can also be corrupted back into Dark Matter using a shard as seed
+        if (input.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem()) && catalyst.is(ModItems.DARK_MATTER_SHARD.get())) {
             return new ItemStack(ModBlocks.DARK_MATTER_BLOCK.get());
         }
+        // NOTE: Yellow Matter <-> Dark Matter conversion is IMPOSSIBLE.
+        // Per research, they completely repel each other and cannot connect in any way.
+        // Clear Matter serves as the bridge between the two extremes.
         return ItemStack.EMPTY;
     }
 

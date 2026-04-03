@@ -3,8 +3,6 @@ package br.com.murilo.liberthia.logic;
 import br.com.murilo.liberthia.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -19,7 +17,10 @@ import net.minecraftforge.common.Tags;
 public class InfectionGrowthBlock extends Block {
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 3);
 
-    private static final int MAX_VERTICAL_STACK = 3;
+    private static final int MAX_TRUNK_HEIGHT = 5;
+    private static final int MIN_TRUNK_FOR_CANOPY = 3;
+    private static final int MIN_SPACING = 6;
+    private static final int MAX_CANOPY_RADIUS = 2;
     private static final int HORIZONTAL_MIN_RADIUS = 2;
     private static final int HORIZONTAL_MAX_RADIUS = 4;
 
@@ -46,14 +47,15 @@ public class InfectionGrowthBlock extends Block {
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.tick(state, level, pos, random);
 
-        if (isSpreadBlockedByProtectiveBlocks(level, pos)) {
+        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return;
         }
 
         float density = InfectionLogic.getChunkInfectionDensity(level, pos);
         int age = state.getValue(AGE);
 
-        if (age >= 3 && density >= 0.75f && countColumnHeight(level, pos) >= 3) {
+        // At max age, high density, and sufficient tree size: convert to dark matter
+        if (age >= 3 && density >= 0.75f && countTreeBlocks(level, pos) >= 5) {
             level.setBlock(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState(), 3);
             return;
         }
@@ -63,7 +65,7 @@ public class InfectionGrowthBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (isSpreadBlockedByProtectiveBlocks(level, pos)) {
+        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return;
         }
 
@@ -80,7 +82,7 @@ public class InfectionGrowthBlock extends Block {
         }
 
         spreadHorizontally(level, pos, random, attempts, density);
-        growUpwards(level, pos, random, age, density);
+        growTree(level, pos, random, age, density);
         attemptSporeLaunch(level, pos, random, density);
 
         if (random.nextFloat() < (0.18f + (density * 0.25f))) {
@@ -113,7 +115,7 @@ public class InfectionGrowthBlock extends Block {
             BlockPos groundPos = findGroundAtSurface(level, targetColumn);
             BlockState groundState = level.getBlockState(groundPos);
 
-            if (isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
+            if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
                 continue;
             }
 
@@ -132,13 +134,17 @@ public class InfectionGrowthBlock extends Block {
             BlockPos near = findGroundAtSurface(level, pos.offset(random.nextInt(7) - 3, 0, random.nextInt(7) - 3));
             BlockState nearState = level.getBlockState(near);
 
-            if (!isSpreadBlockedByProtectiveBlocks(level, near) && isCorruptibleGround(level, near, nearState)) {
+            if (!ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, near) && isCorruptibleGround(level, near, nearState)) {
                 level.setBlockAndUpdate(near, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
             }
         }
     }
 
-    private void growUpwards(ServerLevel level, BlockPos pos, RandomSource random, int age, float density) {
+    /**
+     * Tree-shaped growth: trunk phase (age 0-2) grows vertically,
+     * canopy phase (age 2+, trunk >= 3) grows branches outward from the top.
+     */
+    private void growTree(ServerLevel level, BlockPos pos, RandomSource random, int age, float density) {
         if (age < 1) {
             return;
         }
@@ -147,25 +153,73 @@ public class InfectionGrowthBlock extends Block {
             return;
         }
 
-        int currentHeight = countColumnHeight(level, pos);
-        if (currentHeight >= MAX_VERTICAL_STACK) {
-            return;
+        int trunkHeight = countTrunkHeight(level, pos);
+
+        // Trunk phase: grow upward until MAX_TRUNK_HEIGHT
+        if (trunkHeight < MAX_TRUNK_HEIGHT) {
+            BlockPos topOfTrunk = findTrunkTop(level, pos);
+            BlockPos above = topOfTrunk.above();
+
+            if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, above)) {
+                return;
+            }
+
+            if (level.getBlockState(above).isAir() && level.getFluidState(above).isEmpty()) {
+                level.setBlockAndUpdate(above, this.defaultBlockState());
+                return;
+            }
         }
 
-        BlockPos above = pos.above();
-        if (isSpreadBlockedByProtectiveBlocks(level, above)) {
-            return;
+        // Canopy phase: grow branches from the trunk top
+        if (trunkHeight >= MIN_TRUNK_FOR_CANOPY && age >= 2) {
+            BlockPos topOfTrunk = findTrunkTop(level, pos);
+            growCanopy(level, topOfTrunk, random);
         }
+    }
 
-        if (!level.getBlockState(above).isAir()) {
-            return;
+    private void growCanopy(ServerLevel level, BlockPos trunkTop, RandomSource random) {
+        int branchAttempts = 1 + random.nextInt(2); // 1-2 branches per tick
+
+        for (int i = 0; i < branchAttempts; i++) {
+            // Random horizontal offset, at least 1 block out from trunk
+            int dx = random.nextInt(MAX_CANOPY_RADIUS * 2 + 1) - MAX_CANOPY_RADIUS;
+            int dz = random.nextInt(MAX_CANOPY_RADIUS * 2 + 1) - MAX_CANOPY_RADIUS;
+
+            // Ensure at least 1 block horizontal distance
+            if (dx == 0 && dz == 0) {
+                dx = random.nextBoolean() ? 1 : -1;
+            }
+
+            // Branches go level or slightly up
+            int dy = random.nextInt(2); // 0 or 1
+
+            BlockPos branchPos = trunkTop.offset(dx, dy, dz);
+
+            if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, branchPos)) {
+                continue;
+            }
+
+            if (!level.getBlockState(branchPos).isAir() || !level.getFluidState(branchPos).isEmpty()) {
+                continue;
+            }
+
+            level.setBlockAndUpdate(branchPos, this.defaultBlockState());
+
+            // 30% chance to extend branch 1 more block outward
+            if (random.nextFloat() < 0.30f) {
+                int extDx = dx != 0 ? Integer.signum(dx) : (random.nextBoolean() ? 1 : -1);
+                int extDz = dz != 0 ? Integer.signum(dz) : (random.nextBoolean() ? 1 : -1);
+                int extDy = random.nextInt(2);
+
+                BlockPos extendPos = branchPos.offset(extDx, extDy, extDz);
+
+                if (!ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, extendPos)
+                        && level.getBlockState(extendPos).isAir()
+                        && level.getFluidState(extendPos).isEmpty()) {
+                    level.setBlockAndUpdate(extendPos, this.defaultBlockState());
+                }
+            }
         }
-
-        if (!level.getFluidState(above).isEmpty()) {
-            return;
-        }
-
-        level.setBlockAndUpdate(above, this.defaultBlockState());
     }
 
     private void attemptSporeLaunch(ServerLevel level, BlockPos pos, RandomSource random, float density) {
@@ -182,7 +236,7 @@ public class InfectionGrowthBlock extends Block {
         BlockPos groundPos = findGroundAtSurface(level, target);
         BlockState groundState = level.getBlockState(groundPos);
 
-        if (isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
+        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
             return;
         }
 
@@ -214,7 +268,7 @@ public class InfectionGrowthBlock extends Block {
     }
 
     private boolean canPlaceNewGrowthColumn(ServerLevel level, BlockPos growthPos) {
-        if (isSpreadBlockedByProtectiveBlocks(level, growthPos)) {
+        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, growthPos)) {
             return false;
         }
 
@@ -233,37 +287,52 @@ public class InfectionGrowthBlock extends Block {
             return false;
         }
 
-        return !hasGrowthTooClose(level, growthPos);
+        return !ProtectionUtils.hasGrowthTooClose(level, growthPos, MIN_SPACING);
     }
 
-    private static boolean hasGrowthTooClose(ServerLevel level, BlockPos pos) {
-        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-            if (scan.equals(pos)) {
-                continue;
-            }
-            if (level.getBlockState(scan).is(ModBlocks.INFECTION_GROWTH.get())) {
-                return true;
-            }
+    /**
+     * Count vertical trunk height from any position in the column.
+     */
+    private int countTrunkHeight(ServerLevel level, BlockPos pos) {
+        // Find the base of the trunk
+        BlockPos base = pos;
+        while (level.getBlockState(base.below()).is(this)) {
+            base = base.below();
         }
-        return false;
+
+        // Count upward
+        int height = 0;
+        BlockPos current = base;
+        while (level.getBlockState(current).is(this)) {
+            height++;
+            current = current.above();
+        }
+
+        return height;
     }
 
-    private int countColumnHeight(ServerLevel level, BlockPos pos) {
-        int total = 1;
-
-        BlockPos up = pos.above();
-        while (level.getBlockState(up).is(this)) {
-            total++;
-            up = up.above();
+    /**
+     * Find the topmost block in the trunk column from any position.
+     */
+    private BlockPos findTrunkTop(ServerLevel level, BlockPos pos) {
+        BlockPos top = pos;
+        while (level.getBlockState(top.above()).is(this)) {
+            top = top.above();
         }
+        return top;
+    }
 
-        BlockPos down = pos.below();
-        while (level.getBlockState(down).is(this)) {
-            total++;
-            down = down.below();
+    /**
+     * Count total tree blocks (trunk + branches) in a local area.
+     */
+    private int countTreeBlocks(ServerLevel level, BlockPos pos) {
+        int count = 0;
+        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-3, -2, -3), pos.offset(3, MAX_TRUNK_HEIGHT + 2, 3))) {
+            if (level.getBlockState(scan).is(this)) {
+                count++;
+            }
         }
-
-        return total;
+        return count;
     }
 
     private static boolean isCorruptibleGround(Level level, BlockPos pos, BlockState state) {
@@ -278,7 +347,7 @@ public class InfectionGrowthBlock extends Block {
             return false;
         }
 
-        if (isYellowMatterBlock(state) || isClearMatterBlock(state)) {
+        if (ProtectionUtils.isYellowMatterBlock(state) || ProtectionUtils.isClearMatterBlock(state)) {
             return false;
         }
 
@@ -292,7 +361,7 @@ public class InfectionGrowthBlock extends Block {
                 || state.is(BlockTags.BASE_STONE_NETHER)
                 || state.is(BlockTags.TERRACOTTA)
                 || state.is(Tags.Blocks.ORES)
-                || hasRegistryPath(state, "_ore")
+                || ProtectionUtils.hasRegistryPath(state, "_ore")
                 || state.is(Blocks.GRAVEL)
                 || state.is(Blocks.CLAY)
                 || state.is(Blocks.MUD)
@@ -317,54 +386,5 @@ public class InfectionGrowthBlock extends Block {
         }
 
         return false;
-    }
-
-    private static boolean isSpreadBlockedByProtectiveBlocks(ServerLevel level, BlockPos center) {
-        if (hasYellowMatterProtection(level, center)) {
-            return true;
-        }
-        return hasClearMatterProtection(level, center);
-    }
-
-    private static boolean hasYellowMatterProtection(Level level, BlockPos center) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-2, -1, -2), center.offset(2, 1, 2))) {
-            if (isYellowMatterBlock(level.getBlockState(pos))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean hasClearMatterProtection(Level level, BlockPos center) {
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-1, -1, -1), center.offset(1, 1, 1))) {
-            if (isClearMatterBlock(level.getBlockState(pos))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isClearMatterBlock(BlockState state) {
-        if (state.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
-            return true;
-        }
-
-        return hasRegistryPath(state, "clear_matter")
-                || hasRegistryPath(state, "white_matter")
-                || hasRegistryPath(state, "materia_branca");
-    }
-
-    private static boolean isYellowMatterBlock(BlockState state) {
-        return hasRegistryPath(state, "yellow_matter")
-                || hasRegistryPath(state, "yellowmatter")
-                || hasRegistryPath(state, "materia_amarela");
-    }
-
-    private static boolean hasRegistryPath(BlockState state, String expectedFragment) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-        if (key == null) {
-            return false;
-        }
-        return key.getPath().contains(expectedFragment);
     }
 }

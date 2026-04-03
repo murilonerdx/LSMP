@@ -66,5 +66,15 @@
   "item.liberthia.clear_matter_leggings": "Cal\u00e7as de Mat\u00e9ria Clara",
   "item.liberthia.clear_matter_boots": "Botas de Mat\u00e9ria Clara",
   "item.liberthia.host_journal": "Di\u00e1rio do Anfitri\u00e3o",
-  "item.liberthia.worker_badge": "Crach\u00e1 de Trabalhador"
+  "item.liberthia.worker_badge": "Crach\u00e1 de Trabalhador",
+
+  "tooltip.liberthia.host_journal.line1": "Um di\u00e1rio de couro gasto",
+  "tooltip.liberthia.host_journal.line2": "pertencente ao Anfitri\u00e3o-Chefe",
+  "tooltip.liberthia.host_journal.line3": "Clique com bot\u00e3o direito para ler",
+
+  "tooltip.liberthia.worker_badge.facility": "INSTALA\u00c7\u00c3O DE PESQUISA LIBERTHIA",
+  "tooltip.liberthia.worker_badge.id": "Identifica\u00e7\u00e3o de Trabalhador",
+  "tooltip.liberthia.worker_badge.status": "Status: EXPOSTO - QUARENTENA",
+  "tooltip.liberthia.worker_badge.clearance": "N\u00edvel de Acesso: PADR\u00c3O",
+  "tooltip.liberthia.worker_badge.note": "\"Deslocamento entre instala\u00e7\u00f5es obrigat\u00f3rio\""
 }
