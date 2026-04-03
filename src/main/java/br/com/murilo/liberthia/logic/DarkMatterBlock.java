@@ -209,16 +209,15 @@ public class DarkMatterBlock extends Block {
         // Mede a densidade local de infecção.
         float density = InfectionLogic.getChunkInfectionDensity(level, pos);
 
-        // Quanto maior a densidade, mais tentativas de espalhar.
-        int attempts = 3 + (int) (density * 10);
+        // Reduced spread rate: max 4 attempts instead of 13
+        int attempts = 1 + (int) (density * 3);
 
-        // Tenta espalhar infecção múltiplas vezes no mesmo random tick.
         for (int i = 0; i < attempts; i++) {
             spreadInfection(level, pos, random);
         }
 
-        // Chance de lançar esporo cresce com a densidade.
-        float sporeChance = 0.03f + (density * 0.07f);
+        // Reduced spore chance
+        float sporeChance = 0.02f + (density * 0.04f);
         if (random.nextFloat() < sporeChance) {
             attemptSporeLaunch(level, pos, random);
         }
@@ -300,14 +299,21 @@ public class DarkMatterBlock extends Block {
      *   Troca bloco e sincroniza atualização.
      */
     private void spreadInfection(ServerLevel level, BlockPos pos, RandomSource random) {
-        // Escolhe uma direção qualquer.
+        // 40% chance gate — slows overall spread
+        if (random.nextFloat() >= 0.40f) {
+            return;
+        }
+
         Direction dir = Direction.getRandom(random);
-
-        // Posição vizinha naquela direção.
         BlockPos neighborPos = pos.relative(dir);
-
-        // Estado do bloco vizinho.
         BlockState neighborState = level.getBlockState(neighborPos);
+
+        // Water/fluid barrier — infection cannot cross water
+        if (!level.getFluidState(neighborPos).isEmpty()
+                && !level.getFluidState(neighborPos).getType().isSame(
+                        br.com.murilo.liberthia.registry.ModFluids.DARK_MATTER.get())) {
+            return;
+        }
 
         // Reação especial contra matéria clara.
         if (neighborState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
@@ -381,14 +387,11 @@ public class DarkMatterBlock extends Block {
             level.setBlockAndUpdate(neighborPos, ModBlocks.DARK_MATTER_FLUID_BLOCK.get().defaultBlockState());
         }
 
-        // Crescimento vertical:
-        // só cria INFECTION_GROWTH acima se:
-        // 1. a pilha ainda não estiver muito alta
-        // 2. o bloco acima for ar
-        // 3. o bloco atual/abaixo for sólido para render/suporte
+        // Growth placement with spacing check (8 blocks between growth plants)
         if (!isTooHigh(level, neighborPos.above())
                 && level.getBlockState(neighborPos.above()).isAir()
-                && level.getBlockState(neighborPos).isSolidRender(level, neighborPos)) {
+                && level.getBlockState(neighborPos).isSolidRender(level, neighborPos)
+                && !ProtectionUtils.hasGrowthTooClose(level, neighborPos.above(), 8)) {
             level.setBlockAndUpdate(
                     neighborPos.above(),
                     ModBlocks.INFECTION_GROWTH.get().defaultBlockState()

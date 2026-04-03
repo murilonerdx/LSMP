@@ -76,5 +76,28 @@
   "tooltip.liberthia.worker_badge.id": "Identifica\u00e7\u00e3o de Trabalhador",
   "tooltip.liberthia.worker_badge.status": "Status: EXPOSTO - QUARENTENA",
   "tooltip.liberthia.worker_badge.clearance": "N\u00edvel de Acesso: PADR\u00c3O",
-  "tooltip.liberthia.worker_badge.note": "\"Deslocamento entre instala\u00e7\u00f5es obrigat\u00f3rio\""
+  "tooltip.liberthia.worker_badge.note": "\"Deslocamento entre instala\u00e7\u00f5es obrigat\u00f3rio\"",
+
+  "block.liberthia.corrupted_stone": "Pedra Corrompida",
+  "block.liberthia.infection_vein": "Veia de Infec\u00e7\u00e3o",
+  "block.liberthia.spore_bloom": "Flor de Esporos",
+  "block.liberthia.corrupted_log": "Tronco Corrompido",
+  "block.liberthia.white_matter_tnt": "TNT de Mat\u00e9ria Branca",
+
+  "item.liberthia.clear_matter_sword": "Espada de Mat\u00e9ria Clara",
+  "item.liberthia.clear_matter_pickaxe": "Picareta de Mat\u00e9ria Clara",
+  "item.liberthia.clear_matter_axe": "Machado de Mat\u00e9ria Clara",
+  "item.liberthia.yellow_matter_sword": "Espada de Mat\u00e9ria Amarela",
+  "item.liberthia.yellow_matter_pickaxe": "Picareta de Mat\u00e9ria Amarela",
+  "item.liberthia.yellow_matter_axe": "Machado de Mat\u00e9ria Amarela",
+  "item.liberthia.yellow_matter_shield": "Escudo de Mat\u00e9ria Amarela",
+  "item.liberthia.containment_suit_helmet": "Capacete de Conten\u00e7\u00e3o",
+  "item.liberthia.containment_suit_chestplate": "Peitoral de Conten\u00e7\u00e3o",
+  "item.liberthia.containment_suit_leggings": "Cal\u00e7as de Conten\u00e7\u00e3o",
+  "item.liberthia.containment_suit_boots": "Botas de Conten\u00e7\u00e3o",
+  "item.liberthia.protection_ruby": "Rubi de Prote\u00e7\u00e3o",
+
+  "entity.liberthia.corrupted_zombie": "Zumbi Corrompido",
+  "entity.liberthia.spore_spitter": "Cuspidor de Esporos",
+  "entity.liberthia.white_matter_explosion": "Explos\u00e3o de Mat\u00e9ria Branca"
 }

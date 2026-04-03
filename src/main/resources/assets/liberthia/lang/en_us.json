@@ -76,5 +76,28 @@
   "tooltip.liberthia.worker_badge.id": "Worker Identification",
   "tooltip.liberthia.worker_badge.status": "Status: EXPOSED - QUARANTINED",
   "tooltip.liberthia.worker_badge.clearance": "Clearance: STANDARD",
-  "tooltip.liberthia.worker_badge.note": "\"Travels between installations required\""
+  "tooltip.liberthia.worker_badge.note": "\"Travels between installations required\"",
+
+  "block.liberthia.corrupted_stone": "Corrupted Stone",
+  "block.liberthia.infection_vein": "Infection Vein",
+  "block.liberthia.spore_bloom": "Spore Bloom",
+  "block.liberthia.corrupted_log": "Corrupted Log",
+  "block.liberthia.white_matter_tnt": "White Matter TNT",
+
+  "item.liberthia.clear_matter_sword": "Clear Matter Sword",
+  "item.liberthia.clear_matter_pickaxe": "Clear Matter Pickaxe",
+  "item.liberthia.clear_matter_axe": "Clear Matter Axe",
+  "item.liberthia.yellow_matter_sword": "Yellow Matter Sword",
+  "item.liberthia.yellow_matter_pickaxe": "Yellow Matter Pickaxe",
+  "item.liberthia.yellow_matter_axe": "Yellow Matter Axe",
+  "item.liberthia.yellow_matter_shield": "Yellow Matter Shield",
+  "item.liberthia.containment_suit_helmet": "Containment Suit Helmet",
+  "item.liberthia.containment_suit_chestplate": "Containment Suit Chestplate",
+  "item.liberthia.containment_suit_leggings": "Containment Suit Leggings",
+  "item.liberthia.containment_suit_boots": "Containment Suit Boots",
+  "item.liberthia.protection_ruby": "Matter Protection Ruby",
+
+  "entity.liberthia.corrupted_zombie": "Corrupted Zombie",
+  "entity.liberthia.spore_spitter": "Spore Spitter",
+  "entity.liberthia.white_matter_explosion": "White Matter Explosion"
 }

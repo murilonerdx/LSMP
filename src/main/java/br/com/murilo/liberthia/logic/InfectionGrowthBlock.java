@@ -19,7 +19,7 @@ public class InfectionGrowthBlock extends Block {
 
     private static final int MAX_TRUNK_HEIGHT = 5;
     private static final int MIN_TRUNK_FOR_CANOPY = 3;
-    private static final int MIN_SPACING = 6;
+    private static final int MIN_SPACING = 8;
     private static final int MAX_CANOPY_RADIUS = 2;
     private static final int HORIZONTAL_MIN_RADIUS = 2;
     private static final int HORIZONTAL_MAX_RADIUS = 4;
@@ -107,7 +107,9 @@ public class InfectionGrowthBlock extends Block {
     }
 
     private void spreadHorizontally(ServerLevel level, BlockPos pos, RandomSource random, int attempts, float density) {
-        for (int i = 0; i < attempts; i++) {
+        // Reduced spread: max attempts capped
+        int effectiveAttempts = Math.min(attempts, 2);
+        for (int i = 0; i < effectiveAttempts; i++) {
             int distance = HORIZONTAL_MIN_RADIUS + random.nextInt((HORIZONTAL_MAX_RADIUS - HORIZONTAL_MIN_RADIUS) + 1);
             Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
 
@@ -116,6 +118,11 @@ public class InfectionGrowthBlock extends Block {
             BlockState groundState = level.getBlockState(groundPos);
 
             if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
+                continue;
+            }
+
+            // Water barrier — infection cannot cross water
+            if (ProtectionUtils.isWaterBarrier(level, groundPos)) {
                 continue;
             }
 

@@ -44,6 +44,16 @@ public class DarkMatterForgeBlockEntity extends BlockEntity implements MenuProvi
                 level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             }
         }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch (slot) {
+                case 0 -> isFuel(stack); // Fuel slot
+                case 1, 2 -> isValidInput(stack); // Input slots
+                case 3 -> false; // Output slot — no player insertion
+                default -> false;
+            };
+        }
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -289,5 +299,21 @@ public class DarkMatterForgeBlockEntity extends BlockEntity implements MenuProvi
     @Override
     public CompoundTag getUpdateTag() {
         return saveWithoutMetadata();
+    }
+
+    private static boolean isFuel(ItemStack stack) {
+        return stack.is(ModItems.DARK_MATTER_SHARD.get())
+                || stack.is(ModItems.DARK_MATTER_BUCKET.get())
+                || stack.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem());
+    }
+
+    private static boolean isValidInput(ItemStack stack) {
+        return stack.is(ModItems.DARK_MATTER_SHARD.get())
+                || stack.is(net.minecraft.world.item.Items.IRON_INGOT)
+                || stack.is(net.minecraft.world.item.Items.NETHERITE_SCRAP)
+                || stack.is(ModItems.STABILIZED_DARK_MATTER.get())
+                || stack.is(ModItems.VOID_CRYSTAL.get())
+                || stack.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem())
+                || stack.is(ModItems.HOLY_ESSENCE.get());
     }
 }

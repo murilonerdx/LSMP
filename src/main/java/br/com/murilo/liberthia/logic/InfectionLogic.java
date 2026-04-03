@@ -6,6 +6,7 @@ import br.com.murilo.liberthia.network.ModNetwork;
 import br.com.murilo.liberthia.network.S2CInfectionSyncPacket;
 import br.com.murilo.liberthia.registry.ModBlocks;
 import br.com.murilo.liberthia.registry.ModEffects;
+import br.com.murilo.liberthia.registry.ModEntities;
 import br.com.murilo.liberthia.registry.ModFluids;
 import br.com.murilo.liberthia.registry.ModItems;
 import br.com.murilo.liberthia.registry.ModSounds;
@@ -112,7 +113,7 @@ public final class InfectionLogic {
             processDarkFluidActivity(player.serverLevel(), player.blockPosition());
         }
 
-        if (!immuneNow && data.getStage() >= 2 && player.level().getGameTime() % 80L == 0L) {
+        if (!immuneNow && data.getStage() >= 2 && player.level().getGameTime() % 120L == 0L) {
             player.hurt(player.damageSources().magic(), 1.0F);
         }
 
@@ -155,6 +156,50 @@ public final class InfectionLogic {
             }
         } else if (density >= 0.75f) {
             triggerDarkExplosion(serverLevel, origin);
+        }
+
+        // Density-based natural mob spawning
+        if (density >= 0.80f && serverLevel.random.nextFloat() < 0.15f) {
+            spawnDensityMob(serverLevel, origin, ModEntities.CORRUPTED_ZOMBIE.get(), 16);
+        } else if (density >= 0.60f && serverLevel.random.nextFloat() < 0.12f) {
+            spawnDensityMob(serverLevel, origin, ModEntities.SPORE_SPITTER.get(), 12);
+        }
+
+        // Natural SporeBloom placement at high density
+        if (density >= 0.60f && serverLevel.random.nextFloat() < 0.08f) {
+            BlockPos bloomPos = origin.offset(
+                    serverLevel.random.nextInt(16) - 8, 0, serverLevel.random.nextInt(16) - 8);
+            // Find surface
+            for (int dy = 4; dy >= -4; dy--) {
+                BlockPos check = bloomPos.above(dy);
+                if (serverLevel.getBlockState(check).isAir()
+                        && serverLevel.getBlockState(check.below()).is(ModBlocks.CORRUPTED_SOIL.get())) {
+                    if (!ProtectionUtils.hasGrowthTooClose(serverLevel, check, 8)) {
+                        serverLevel.setBlockAndUpdate(check, ModBlocks.SPORE_BLOOM.get().defaultBlockState());
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    private static <T extends net.minecraft.world.entity.Mob> void spawnDensityMob(
+            ServerLevel level, BlockPos origin, net.minecraft.world.entity.EntityType<T> type, int range) {
+        BlockPos spawnPos = origin.offset(
+                level.random.nextInt(range * 2) - range, 0, level.random.nextInt(range * 2) - range);
+        // Find valid surface
+        for (int dy = 5; dy >= -5; dy--) {
+            BlockPos check = spawnPos.above(dy);
+            if (level.getBlockState(check).isAir() && level.getBlockState(check.above()).isAir()
+                    && !level.getBlockState(check.below()).isAir()) {
+                T mob = type.create(level);
+                if (mob != null) {
+                    mob.moveTo(check.getX() + 0.5, check.getY(), check.getZ() + 0.5,
+                            level.random.nextFloat() * 360F, 0.0F);
+                    level.addFreshEntity(mob);
+                }
+                return;
+            }
         }
     }
 
@@ -301,6 +346,21 @@ public final class InfectionLogic {
             entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 40, 0));
             if (entity.tickCount % 20 == 0) {
                 entity.hurt(entity.damageSources().magic(), 2.0F);
+            }
+        }
+
+        // Convert fully infected mobs to CorruptedZombie
+        if (data.getInfection() >= 100 && exposureTicks >= FULL_MOB_INFECTION_TICKS
+                && entity.level() instanceof ServerLevel serverLevel
+                && !(entity instanceof br.com.murilo.liberthia.entity.CorruptedZombieEntity)
+                && !(entity instanceof net.minecraft.world.entity.player.Player)) {
+            br.com.murilo.liberthia.entity.CorruptedZombieEntity zombie =
+                    ModEntities.CORRUPTED_ZOMBIE.get().create(serverLevel);
+            if (zombie != null) {
+                zombie.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.getYRot(), entity.getXRot());
+                serverLevel.addFreshEntity(zombie);
+                entity.discard();
+                return;
             }
         }
 
@@ -613,12 +673,19 @@ public final class InfectionLogic {
     private static void applyExposure(ServerPlayer player, IInfectionData data, ExposureData exposure) {
         int delta = exposure.effectiveDarkPressure() - exposure.clearRelief();
         if (delta > 0) {
-            data.addInfection(Math.min(8, delta));
+            // Reduced infection gain rate (max 4 instead of 8)
+            data.addInfection(Math.min(4, delta));
         } else if (delta < 0) {
             data.reduceInfection(Math.min(12, -delta));
         }
 
-        if ((exposure.touchingClear() || exposure.clearRelief() >= 12) && player.level().getGameTime() % 100L == 0L) {
+        // Health penalty reduces faster near clear matter (every 60 ticks instead of 100)
+        if ((exposure.touchingClear() || exposure.clearRelief() >= 12) && player.level().getGameTime() % 60L == 0L) {
+            data.reducePermanentHealthPenalty(1);
+        }
+
+        // When infection is fully cured via clear+yellow immunity, also reduce penalty
+        if (data.isImmune() && data.getPermanentHealthPenalty() > 0 && player.level().getGameTime() % 40L == 0L) {
             data.reducePermanentHealthPenalty(1);
         }
     }
@@ -699,9 +766,13 @@ public final class InfectionLogic {
                 }
             }
 
-            data.setImmune(clearYellowImmune);
+            // Two paths to immunity: clear+yellow balance OR dark matter dominance
+            data.setImmune(clearYellowImmune || darkDominant);
 
             if (darkDominant) {
+                // Dark dominance grants immunity but depletes clear matter DNA
+                clear = Math.max(0, clear - 3);
+                energy.setClearEnergy(clear);
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 80, 1, true, false, true));
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 1, true, false, true));
                 player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 80, 0, true, false, true));

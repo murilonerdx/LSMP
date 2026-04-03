@@ -158,6 +158,63 @@ public final class ModItems {
     public static final RegistryObject<Item> CLEAR_MATTER_BOOTS = ITEMS.register("clear_matter_boots",
             () -> new ArmorItem(ClearMatterArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS, new Item.Properties()));
 
+    // --- New Infection Block Items ---
+    public static final RegistryObject<Item> CORRUPTED_STONE_ITEM = ITEMS.register("corrupted_stone",
+            () -> new BlockItem(ModBlocks.CORRUPTED_STONE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> INFECTION_VEIN_ITEM = ITEMS.register("infection_vein",
+            () -> new BlockItem(ModBlocks.INFECTION_VEIN.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SPORE_BLOOM_ITEM = ITEMS.register("spore_bloom",
+            () -> new BlockItem(ModBlocks.SPORE_BLOOM.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CORRUPTED_LOG_ITEM = ITEMS.register("corrupted_log",
+            () -> new BlockItem(ModBlocks.CORRUPTED_LOG.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WHITE_MATTER_TNT_ITEM = ITEMS.register("white_matter_tnt",
+            () -> new BlockItem(ModBlocks.WHITE_MATTER_TNT.get(), new Item.Properties()));
+
+    // --- Clear Matter Tools ---
+    public static final RegistryObject<Item> CLEAR_MATTER_SWORD = ITEMS.register("clear_matter_sword",
+            () -> new ClearMatterSwordItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> CLEAR_MATTER_PICKAXE = ITEMS.register("clear_matter_pickaxe",
+            () -> new ClearMatterPickaxeItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> CLEAR_MATTER_AXE = ITEMS.register("clear_matter_axe",
+            () -> new ClearMatterAxeItem(new Item.Properties()));
+
+    // --- Yellow Matter Tools ---
+    public static final RegistryObject<Item> YELLOW_MATTER_SWORD = ITEMS.register("yellow_matter_sword",
+            () -> new YellowMatterSwordItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> YELLOW_MATTER_PICKAXE = ITEMS.register("yellow_matter_pickaxe",
+            () -> new YellowMatterPickaxeItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> YELLOW_MATTER_AXE = ITEMS.register("yellow_matter_axe",
+            () -> new YellowMatterAxeItem(new Item.Properties()));
+
+    // --- Yellow Matter Shield ---
+    public static final RegistryObject<Item> YELLOW_MATTER_SHIELD = ITEMS.register("yellow_matter_shield",
+            () -> new YellowMatterShieldItem(new Item.Properties()));
+
+    // --- Containment Suit ---
+    public static final RegistryObject<Item> CONTAINMENT_SUIT_HELMET = ITEMS.register("containment_suit_helmet",
+            () -> new ContainmentSuitItem(ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<Item> CONTAINMENT_SUIT_CHESTPLATE = ITEMS.register("containment_suit_chestplate",
+            () -> new ContainmentSuitItem(ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<Item> CONTAINMENT_SUIT_LEGGINGS = ITEMS.register("containment_suit_leggings",
+            () -> new ContainmentSuitItem(ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<Item> CONTAINMENT_SUIT_BOOTS = ITEMS.register("containment_suit_boots",
+            () -> new ContainmentSuitItem(ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    // --- Protection Ruby ---
+    public static final RegistryObject<Item> PROTECTION_RUBY = ITEMS.register("protection_ruby",
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
     // --- Lore Items ---
     public static final RegistryObject<Item> HOST_JOURNAL = ITEMS.register("host_journal",
             () -> new HostJournalItem(new Item.Properties().stacksTo(1)));

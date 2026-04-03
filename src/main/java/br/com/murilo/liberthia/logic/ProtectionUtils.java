@@ -1,12 +1,15 @@
 package br.com.murilo.liberthia.logic;
 
 import br.com.murilo.liberthia.registry.ModBlocks;
+import br.com.murilo.liberthia.registry.ModFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 
 public final class ProtectionUtils {
 
@@ -66,6 +69,24 @@ public final class ProtectionUtils {
             return true;
         }
         return hasClearMatterProtection(level, center);
+    }
+
+    /**
+     * Check if a position is blocked by non-dark-matter fluid (water, lava, etc.).
+     * Infection cannot cross water/ocean/fluid barriers.
+     */
+    public static boolean isWaterBarrier(Level level, BlockPos pos) {
+        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+            FluidState fluid = level.getFluidState(scan);
+            if (!fluid.isEmpty()
+                    && !fluid.getType().isSame(ModFluids.DARK_MATTER.get())
+                    && !fluid.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
+                if (fluid.is(FluidTags.WATER) || fluid.is(FluidTags.LAVA)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

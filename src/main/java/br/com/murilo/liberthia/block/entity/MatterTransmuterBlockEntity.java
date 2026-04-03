@@ -40,6 +40,19 @@ public class MatterTransmuterBlockEntity extends BlockEntity implements MenuProv
                 level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             }
         }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch (slot) {
+                case 0 -> stack.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem())
+                        || stack.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem());
+                case 1 -> stack.is(ModItems.HOLY_ESSENCE.get())
+                        || stack.is(ModItems.YELLOW_MATTER_INGOT.get())
+                        || stack.is(ModItems.DARK_MATTER_SHARD.get());
+                case 2 -> false; // Output
+                default -> false;
+            };
+        }
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();

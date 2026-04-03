@@ -19,6 +19,9 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.BLACK_HOLE.get(), BlackHoleRenderer::new);
         event.registerEntityRenderer(ModEntities.DARK_MATTER_SPORE.get(), br.com.murilo.liberthia.client.renderer.DarkMatterSporeRenderer::new);
         event.registerEntityRenderer(ModEntities.CLEANSING_GRENADE.get(), br.com.murilo.liberthia.client.renderer.CleansingGrenadeRenderer::new);
+        event.registerEntityRenderer(ModEntities.CORRUPTED_ZOMBIE.get(), br.com.murilo.liberthia.client.renderer.CorruptedZombieRenderer::new);
+        event.registerEntityRenderer(ModEntities.SPORE_SPITTER.get(), br.com.murilo.liberthia.client.renderer.SporeSpitterRenderer::new);
+        event.registerEntityRenderer(ModEntities.WHITE_MATTER_EXPLOSION.get(), br.com.murilo.liberthia.client.renderer.WhiteMatterExplosionRenderer::new);
     }
 
     @SubscribeEvent
@@ -26,6 +29,7 @@ public class ClientModEvents {
         event.registerAboveAll("infection_hud", InfectionHudOverlay.INSTANCE);
         event.registerAboveAll("matter_energy_hud", MatterEnergyHudOverlay.INSTANCE);
         event.registerAboveAll("dna_mutation_hud", DnaMutationOverlay.INSTANCE);
+        event.registerAboveAll("radiation_guide_hud", RadiationGuideOverlay.INSTANCE);
     }
 
     @SubscribeEvent

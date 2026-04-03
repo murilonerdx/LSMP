@@ -36,6 +36,27 @@ public final class ModEntities {
                             .updateInterval(10)
                             .build("cleansing_grenade"));
 
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.CorruptedZombieEntity>> CORRUPTED_ZOMBIE =
+            ENTITY_TYPES.register("corrupted_zombie",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.CorruptedZombieEntity>of(br.com.murilo.liberthia.entity.CorruptedZombieEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(8)
+                            .build("corrupted_zombie"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.SporeSpitterEntity>> SPORE_SPITTER =
+            ENTITY_TYPES.register("spore_spitter",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.SporeSpitterEntity>of(br.com.murilo.liberthia.entity.SporeSpitterEntity::new, MobCategory.MONSTER)
+                            .sized(0.7F, 0.5F)
+                            .clientTrackingRange(8)
+                            .build("spore_spitter"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.WhiteMatterExplosionEntity>> WHITE_MATTER_EXPLOSION =
+            ENTITY_TYPES.register("white_matter_explosion",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.WhiteMatterExplosionEntity>of(br.com.murilo.liberthia.entity.WhiteMatterExplosionEntity::new, MobCategory.MISC)
+                            .sized(1.0F, 1.0F)
+                            .clientTrackingRange(10)
+                            .build("white_matter_explosion"));
+
     private ModEntities() {}
 
     public static void register(IEventBus eventBus) {

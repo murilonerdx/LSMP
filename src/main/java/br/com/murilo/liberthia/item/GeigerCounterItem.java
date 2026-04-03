@@ -52,19 +52,29 @@ public class GeigerCounterItem extends Item {
             }
 
             if (tickCounter % 20 == 0) {
-                String severity;
+                String icon;
+                String color;
                 if (radiationLevel >= 15) {
-                    severity = "§4§l⚠ RADIAÇÃO CRÍTICA ⚠";
+                    icon = "§4§l⚠";
+                    color = "§4";
                 } else if (radiationLevel >= 8) {
-                    severity = "§6⚠ Radiação Alta";
+                    icon = "§6⚠";
+                    color = "§6";
                 } else if (radiationLevel >= 3) {
-                    severity = "§e∿ Radiação Moderada";
+                    icon = "§e∿";
+                    color = "§e";
                 } else {
-                    severity = "§a∿ Radiação Baixa";
+                    icon = "§a∿";
+                    color = "§a";
                 }
+                // Compact format: icon Rad:8/20 | 156p | 12.5%
+                String bhWarn = radiation.particles() >= 1500 || radiation.density() >= 0.80f
+                        ? " §4§l[BH!]" : "";
                 player.displayClientMessage(Component.literal(
-                        severity + " §7[" + radiationLevel + "] §8Partículas: §f" + radiation.particles()
-                                + " §8Densidade: §f" + String.format("%.1f%%", radiation.density() * 100.0f)
+                        icon + color + " Rad:" + radiationLevel + "/20 §7| §f"
+                                + radiation.particles() + "p §7| §f"
+                                + String.format("%.1f%%", radiation.density() * 100.0f)
+                                + bhWarn
                 ), true);
             }
         }

@@ -148,6 +148,46 @@ public final class ModBlocks {
                     .lightLevel(state -> 4)
                     .sound(SoundType.GLASS)));
 
+    // --- New Infection Blocks ---
+    public static final RegistryObject<Block> CORRUPTED_STONE = BLOCKS.register("corrupted_stone",
+            () -> new br.com.murilo.liberthia.logic.CorruptedStoneBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(3.0F, 6.0F)
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()
+                    .sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> INFECTION_VEIN = BLOCKS.register("infection_vein",
+            () -> new br.com.murilo.liberthia.logic.InfectionVeinBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(1.5F)
+                    .lightLevel(state -> 3)
+                    .randomTicks()
+                    .sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> SPORE_BLOOM = BLOCKS.register("spore_bloom",
+            () -> new br.com.murilo.liberthia.logic.SporeBloomBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(0.3F)
+                    .noCollission()
+                    .randomTicks()
+                    .sound(SoundType.GRASS)));
+
+    public static final RegistryObject<Block> CORRUPTED_LOG = BLOCKS.register("corrupted_log",
+            () -> new br.com.murilo.liberthia.logic.CorruptedLogBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(2.0F)
+                    .randomTicks()
+                    .sound(SoundType.WOOD)));
+
+    // --- White Matter TNT ---
+    public static final RegistryObject<Block> WHITE_MATTER_TNT = BLOCKS.register("white_matter_tnt",
+            () -> new br.com.murilo.liberthia.logic.WhiteMatterTNTBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.ICE)
+                    .strength(0.0F)
+                    .lightLevel(state -> 8)
+                    .sound(SoundType.GRASS)));
+
     public static final RegistryObject<Block> MATTER_TRANSMUTER = BLOCKS.register("matter_transmuter",
             () -> new br.com.murilo.liberthia.block.MatterTransmuterBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.GOLD)

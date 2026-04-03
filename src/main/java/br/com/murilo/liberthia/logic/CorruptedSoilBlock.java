@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class CorruptedSoilBlock extends Block {
-    private static final int LOCAL_SPREAD_ATTEMPTS = 3;
+    private static final int LOCAL_SPREAD_ATTEMPTS = 2;
     private static final int LOCAL_SPREAD_RADIUS = 2;
     private static final int SPORE_RADIUS = 5;
     private static final int DEEP_CORRUPTION_DEPTH = 4;
@@ -45,7 +45,7 @@ public class CorruptedSoilBlock extends Block {
 
     private void spreadInfection(ServerLevel level, BlockPos pos, RandomSource random) {
         for (int i = 0; i < LOCAL_SPREAD_ATTEMPTS; i++) {
-            if (random.nextFloat() >= 0.60F) {
+            if (random.nextFloat() >= 0.35F) {
                 continue;
             }
 
@@ -88,6 +88,11 @@ public class CorruptedSoilBlock extends Block {
         BlockState groundState = level.getBlockState(groundPos);
 
         if (groundState.isAir() || ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
+            return;
+        }
+
+        // Water/fluid barrier — infection cannot cross water
+        if (ProtectionUtils.isWaterBarrier(level, groundPos)) {
             return;
         }
 
@@ -256,7 +261,7 @@ public class CorruptedSoilBlock extends Block {
             return false;
         }
 
-        return !ProtectionUtils.hasGrowthTooClose(level, growthPos, 6);
+        return !ProtectionUtils.hasGrowthTooClose(level, growthPos, 8);
     }
 
     private boolean isSurfaceSoilBlock(BlockState state) {

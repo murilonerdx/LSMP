@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": {"model": "liberthia:block/corrupted_log"},
+    "axis=z": {"model": "liberthia:block/corrupted_log", "x": 90},
+    "axis=x": {"model": "liberthia:block/corrupted_log", "x": 90, "y": 90}
+  }
+}

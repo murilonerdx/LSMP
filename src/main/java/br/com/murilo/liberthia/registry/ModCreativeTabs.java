@@ -62,6 +62,28 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.DARK_MATTER_SWORD.get());
                         output.accept(ModItems.DARK_MATTER_PICKAXE.get());
                         output.accept(ModItems.DARK_MATTER_AXE.get());
+                        // --- Clear Matter Tools ---
+                        output.accept(ModItems.CLEAR_MATTER_SWORD.get());
+                        output.accept(ModItems.CLEAR_MATTER_PICKAXE.get());
+                        output.accept(ModItems.CLEAR_MATTER_AXE.get());
+                        // --- Yellow Matter Tools ---
+                        output.accept(ModItems.YELLOW_MATTER_SWORD.get());
+                        output.accept(ModItems.YELLOW_MATTER_PICKAXE.get());
+                        output.accept(ModItems.YELLOW_MATTER_AXE.get());
+                        output.accept(ModItems.YELLOW_MATTER_SHIELD.get());
+                        // --- Containment Suit ---
+                        output.accept(ModItems.CONTAINMENT_SUIT_HELMET.get());
+                        output.accept(ModItems.CONTAINMENT_SUIT_CHESTPLATE.get());
+                        output.accept(ModItems.CONTAINMENT_SUIT_LEGGINGS.get());
+                        output.accept(ModItems.CONTAINMENT_SUIT_BOOTS.get());
+                        // --- New Infection Blocks ---
+                        output.accept(ModItems.CORRUPTED_STONE_ITEM.get());
+                        output.accept(ModItems.INFECTION_VEIN_ITEM.get());
+                        output.accept(ModItems.SPORE_BLOOM_ITEM.get());
+                        output.accept(ModItems.CORRUPTED_LOG_ITEM.get());
+                        output.accept(ModItems.WHITE_MATTER_TNT_ITEM.get());
+                        // --- Special Items ---
+                        output.accept(ModItems.PROTECTION_RUBY.get());
                         // --- New Materials ---
                         output.accept(ModItems.STABILIZED_DARK_MATTER.get());
                         output.accept(ModItems.VOID_CRYSTAL.get());
