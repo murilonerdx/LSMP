@@ -165,6 +165,11 @@ public final class InfectionLogic {
             spawnDensityMob(serverLevel, origin, ModEntities.SPORE_SPITTER.get(), 12);
         }
 
+        // Glitch block spawning at high density (max 10 per chunk)
+        if (density >= 0.50f && serverLevel.random.nextFloat() < 0.10f) {
+            spawnGlitchBlock(serverLevel, origin);
+        }
+
         // Natural SporeBloom placement at high density
         if (density >= 0.60f && serverLevel.random.nextFloat() < 0.08f) {
             BlockPos bloomPos = origin.offset(
@@ -200,6 +205,35 @@ public final class InfectionLogic {
                 }
                 return;
             }
+        }
+    }
+
+    private static void spawnGlitchBlock(ServerLevel level, BlockPos origin) {
+        // Count existing glitch blocks in chunk (max 10)
+        int glitchCount = 0;
+        int cx = origin.getX() >> 4 << 4;
+        int cz = origin.getZ() >> 4 << 4;
+        for (BlockPos p : BlockPos.betweenClosed(
+                new BlockPos(cx, origin.getY() - 16, cz),
+                new BlockPos(cx + 15, origin.getY() + 16, cz + 15))) {
+            if (level.getBlockState(p).is(ModBlocks.GLITCH_BLOCK.get())) {
+                glitchCount++;
+            }
+        }
+        if (glitchCount >= 10) return;
+
+        // Find a non-air, non-infection block to convert
+        BlockPos target = origin.offset(
+                level.random.nextInt(16) - 8, level.random.nextInt(8) - 4, level.random.nextInt(16) - 8);
+        BlockState targetState = level.getBlockState(target);
+        if (!targetState.isAir()
+                && !targetState.is(ModBlocks.DARK_MATTER_BLOCK.get())
+                && !targetState.is(ModBlocks.GLITCH_BLOCK.get())
+                && !targetState.is(ModBlocks.CORRUPTED_SOIL.get())
+                && !targetState.is(ModBlocks.INFECTION_GROWTH.get())
+                && !targetState.is(ModBlocks.WORMHOLE_BLOCK.get())
+                && targetState.getDestroySpeed(level, target) >= 0) {
+            level.setBlockAndUpdate(target, ModBlocks.GLITCH_BLOCK.get().defaultBlockState());
         }
     }
 

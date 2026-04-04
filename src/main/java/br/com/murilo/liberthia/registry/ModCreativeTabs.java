@@ -82,6 +82,14 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.SPORE_BLOOM_ITEM.get());
                         output.accept(ModItems.CORRUPTED_LOG_ITEM.get());
                         output.accept(ModItems.WHITE_MATTER_TNT_ITEM.get());
+                        output.accept(ModItems.GLITCH_BLOCK_ITEM.get());
+                        output.accept(ModItems.WORMHOLE_BLOCK_ITEM.get());
+                        // --- Buckets ---
+                        output.accept(ModItems.DARK_MATTER_BUCKET.get());
+                        output.accept(ModItems.CLEAR_MATTER_BUCKET.get());
+                        output.accept(ModItems.YELLOW_MATTER_BUCKET.get());
+                        // --- Medical ---
+                        output.accept(ModItems.WHITE_MATTER_SYRINGE.get());
                         // --- Special Items ---
                         output.accept(ModItems.PROTECTION_RUBY.get());
                         // --- New Materials ---

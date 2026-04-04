@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import net.minecraft.world.level.BlockGetter;
+
 import java.util.List;
 
 /**
@@ -39,6 +41,12 @@ public class DarkMatterBlock extends Block {
      */
     public DarkMatterBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
+        return 15; // Blocks ALL light — fully opaque darkness
     }
 
     /**

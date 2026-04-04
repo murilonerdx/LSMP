@@ -1,7 +1,6 @@
 package br.com.murilo.liberthia.item;
 
-import br.com.murilo.liberthia.capability.IInfectionData;
-import br.com.murilo.liberthia.capability.InfectionDataProvider;
+import br.com.murilo.liberthia.registry.ModCapabilities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -45,7 +44,7 @@ public class WorkerBadgeItem extends Item {
             }
 
             // Update stats from current infection data
-            player.getCapability(InfectionDataProvider.CAPABILITY).ifPresent(data -> {
+            player.getCapability(ModCapabilities.INFECTION).ifPresent(data -> {
                 int currentExposure = tag.getInt(TAG_TOTAL_EXPOSURE_TICKS);
                 tag.putInt(TAG_TOTAL_EXPOSURE_TICKS, currentExposure + 1);
                 int maxInf = Math.max(tag.getInt(TAG_MAX_INFECTION_SEEN), data.getInfection());
@@ -56,7 +55,7 @@ public class WorkerBadgeItem extends Item {
             });
 
             // Show status as chat message
-            player.getCapability(InfectionDataProvider.CAPABILITY).ifPresent(data -> {
+            player.getCapability(ModCapabilities.INFECTION).ifPresent(data -> {
                 player.sendSystemMessage(Component.literal("--- WORKER STATUS ---").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                 String owner = tag.contains(TAG_OWNER_NAME) ? tag.getString(TAG_OWNER_NAME) : "Unknown";
                 player.sendSystemMessage(Component.literal("Worker: " + owner).withStyle(ChatFormatting.GRAY));

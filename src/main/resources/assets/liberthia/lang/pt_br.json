@@ -99,5 +99,13 @@
 
   "entity.liberthia.corrupted_zombie": "Zumbi Corrompido",
   "entity.liberthia.spore_spitter": "Cuspidor de Esporos",
-  "entity.liberthia.white_matter_explosion": "Explos\u00e3o de Mat\u00e9ria Branca"
+  "entity.liberthia.white_matter_explosion": "Explos\u00e3o de Mat\u00e9ria Branca",
+
+  "block.liberthia.glitch_block": "Bloco de Glitch",
+  "block.liberthia.wormhole_block": "Buraco de Minhoca",
+  "item.liberthia.clear_matter_bucket": "Balde de Mat\u00e9ria Clara",
+  "item.liberthia.yellow_matter_bucket": "Balde de Mat\u00e9ria Amarela",
+  "item.liberthia.white_matter_syringe": "Seringa de Mat\u00e9ria Branca",
+  "tooltip.liberthia.white_matter_syringe.desc": "Inje\u00e7\u00e3o de purifica\u00e7\u00e3o de emerg\u00eancia",
+  "tooltip.liberthia.white_matter_syringe.effect": "Cura total + 5min imunidade + regen"
 }

@@ -25,7 +25,8 @@ public final class ModBlocks {
             () -> new DarkMatterBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BLACK)
                     .strength(4.0F, 8.0F)
-                    .lightLevel(state -> 4)
+                    .lightLevel(state -> 0)
+                    .emissiveRendering((s, g, p) -> true)
                     .randomTicks()
                     .sound(SoundType.AMETHYST)));
 
@@ -195,6 +196,26 @@ public final class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .lightLevel(state -> 5)
                     .sound(SoundType.METAL)));
+
+    // --- Glitch Block ---
+    public static final RegistryObject<Block> GLITCH_BLOCK = BLOCKS.register("glitch_block",
+            () -> new br.com.murilo.liberthia.logic.GlitchBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(2.0F)
+                    .lightLevel(state -> 0)
+                    .emissiveRendering((s, g, p) -> true)
+                    .randomTicks()
+                    .sound(SoundType.AMETHYST)));
+
+    // --- Wormhole Block ---
+    public static final RegistryObject<Block> WORMHOLE_BLOCK = BLOCKS.register("wormhole_block",
+            () -> new br.com.murilo.liberthia.logic.WormholeBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(5.0F, 12.0F)
+                    .noOcclusion()
+                    .lightLevel(state -> 10)
+                    .emissiveRendering((s, g, p) -> true)
+                    .sound(SoundType.AMETHYST)));
 
     private ModBlocks() {
 

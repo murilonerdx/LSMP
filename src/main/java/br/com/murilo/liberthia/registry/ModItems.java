@@ -215,6 +215,24 @@ public final class ModItems {
     public static final RegistryObject<Item> PROTECTION_RUBY = ITEMS.register("protection_ruby",
             () -> new Item(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
 
+    // --- Matter Buckets ---
+    public static final RegistryObject<Item> CLEAR_MATTER_BUCKET = ITEMS.register("clear_matter_bucket",
+            () -> new ClearMatterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final RegistryObject<Item> YELLOW_MATTER_BUCKET = ITEMS.register("yellow_matter_bucket",
+            () -> new YellowMatterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    // --- White Matter Syringe ---
+    public static final RegistryObject<Item> WHITE_MATTER_SYRINGE = ITEMS.register("white_matter_syringe",
+            () -> new WhiteMatterSyringeItem(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // --- New Block Items ---
+    public static final RegistryObject<Item> GLITCH_BLOCK_ITEM = ITEMS.register("glitch_block",
+            () -> new BlockItem(ModBlocks.GLITCH_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WORMHOLE_BLOCK_ITEM = ITEMS.register("wormhole_block",
+            () -> new BlockItem(ModBlocks.WORMHOLE_BLOCK.get(), new Item.Properties()));
+
     // --- Lore Items ---
     public static final RegistryObject<Item> HOST_JOURNAL = ITEMS.register("host_journal",
             () -> new HostJournalItem(new Item.Properties().stacksTo(1)));

@@ -24,7 +24,12 @@
       "Bash(do grep:*)",
       "Bash(done)",
       "Bash(./gradlew clean:*)",
-      "Bash(python generate_new_textures.py)"
+      "Bash(python generate_new_textures.py)",
+      "Bash(python generate_new_textures_v2.py)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(echo \"=== $f ===\")",
+      "Read(//c/Users/T-GAMER/Desktop/liberthia_mod/**)"
     ]
   }
 }
