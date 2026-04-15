@@ -1,1 +1,6 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"liberthia:block/spore_bloom"}}
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "liberthia:block/spore_bloom"
+  }
+}

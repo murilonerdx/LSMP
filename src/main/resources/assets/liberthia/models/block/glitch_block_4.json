@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "liberthia:block/glitch_block_4"
+    "all": "minecraft:block/netherrack"
   }
 }

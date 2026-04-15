@@ -29,6 +29,9 @@ public interface IInfectionData {
     void addMutation(String mutationId);
     void removeMutation(String mutationId);
 
+    int getSymbiosisTimer();
+    void setSymbiosisTimer(int ticks);
+
     boolean isDirty();
     void setDirty(boolean dirty);
 

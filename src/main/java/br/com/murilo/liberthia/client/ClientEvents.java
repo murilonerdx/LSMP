@@ -27,6 +27,7 @@ public final class ClientEvents {
         
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null && mc.player != null && !mc.isPaused()) {
+            if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
             int exposure = ClientInfectionState.getEffectiveExposure();
             if (exposure > 0) {
                 // Geiger Tick rate: 1000ms / exposure (Caps at 50ms)
@@ -45,19 +46,35 @@ public final class ClientEvents {
 
     @SubscribeEvent
     public static void onFogColor(net.minecraftforge.client.event.ViewportEvent.ComputeFogColor event) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null && mc.player != null) {
-            float density = br.com.murilo.liberthia.logic.InfectionLogic.getChunkInfectionDensity(mc.level, mc.player.blockPosition());
+            float density = ClientInfectionState.getChunkDensity();
             if (density > 0.1f) {
                 float r = event.getRed();
                 float g = event.getGreen();
                 float b = event.getBlue();
-                
+
                 // Shift towards Dark Purple (#2A0033)
                 event.setRed(net.minecraft.util.Mth.lerp(density * 0.7f, r, 0.16f));
                 event.setGreen(net.minecraft.util.Mth.lerp(density * 0.7f, g, 0.0f));
                 event.setBlue(net.minecraft.util.Mth.lerp(density * 0.7f, b, 0.2f));
             }
+        }
+    }
+
+    /**
+     * F6: Corrupted Sky — reduce fog distance in infected areas
+     */
+    @SubscribeEvent
+    public static void onRenderFog(net.minecraftforge.client.event.ViewportEvent.RenderFog event) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
+        float density = ClientInfectionState.getChunkDensity();
+        if (density > 0.2f) {
+            float factor = 1.0f - density * 0.5f;
+            event.setFarPlaneDistance(event.getFarPlaneDistance() * factor);
+            event.setNearPlaneDistance(event.getNearPlaneDistance() * factor);
+            event.setCanceled(true);
         }
     }
 }

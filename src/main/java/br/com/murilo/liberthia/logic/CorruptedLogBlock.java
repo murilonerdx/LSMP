@@ -39,6 +39,7 @@ public class CorruptedLogBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return;
         }

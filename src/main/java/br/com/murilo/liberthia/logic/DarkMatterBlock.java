@@ -22,25 +22,27 @@ import net.minecraft.world.phys.Vec3;
 
 import net.minecraft.world.level.BlockGetter;
 
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+
 import java.util.List;
 
 /**
  * Bloco principal da matéria escura.
- *
- * Essa classe herda de Block, então ela define o comportamento do bloco
- * quando ele é colocado, quando recebe tick agendado, quando recebe random tick
- * e como ele espalha a infecção ao redor.
+ * AGE 0-2: estágio visual/comportamental. Mais velho = mais agressivo.
  */
 public class DarkMatterBlock extends Block {
 
-    /**
-     * Construtor do bloco.
-     *
-     * Recebe as propriedades do bloco (resistência, som, material, randomTicks etc.)
-     * e repassa para a classe pai Block.
-     */
+    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 2);
+
     public DarkMatterBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(AGE);
     }
 
     @Override
@@ -214,34 +216,64 @@ public class DarkMatterBlock extends Block {
      */
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        // Mede a densidade local de infecção.
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         float density = InfectionLogic.getChunkInfectionDensity(level, pos);
+        int age = state.getValue(AGE);
 
-        // Reduced spread rate: max 4 attempts instead of 13
-        int attempts = 1 + (int) (density * 3);
+        // Age progression: 8% chance when density > 0.3
+        if (age < 2 && density > 0.3f && random.nextFloat() < 0.08f) {
+            level.setBlock(pos, state.setValue(AGE, age + 1), 3);
+            age = age + 1;
+        }
+
+        // Spread scales with age: more aggressive at higher stages
+        int attempts = 1 + age + (int) (density * 3);
 
         for (int i = 0; i < attempts; i++) {
             spreadInfection(level, pos, random);
         }
 
-        // Reduced spore chance
-        float sporeChance = 0.02f + (density * 0.04f);
+        // Spore chance scales with age
+        float sporeChance = 0.02f + (density * 0.04f) + (age * 0.01f);
         if (random.nextFloat() < sporeChance) {
             attemptSporeLaunch(level, pos, random);
         }
 
-        // Efeito visual atmosférico de névoa/fumaça escura.
+        // Particles scale with age
+        int particleCount = 6 + age * 4;
         if (random.nextFloat() < (0.2f + density * 0.4f)) {
             level.sendParticles(
                     net.minecraft.core.particles.ParticleTypes.SMOKE,
-                    pos.getX() + 0.5,
-                    pos.getY() + 1.1,
-                    pos.getZ() + 0.5,
-                    6,      // quantidade
-                    0.4,    // espalhamento X
-                    0.4,    // espalhamento Y
-                    0.4,    // espalhamento Z
-                    0.06    // velocidade
+                    pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5,
+                    particleCount, 0.4, 0.4, 0.4, 0.06
+            );
+        }
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
+        int age = state.getValue(AGE);
+        // F5: Spore particles — firefly-like PORTAL particles drifting upward
+        int count = 1 + age;
+        for (int i = 0; i < count; i++) {
+            if (random.nextFloat() < 0.3f + age * 0.15f) {
+                level.addParticle(
+                        net.minecraft.core.particles.ParticleTypes.PORTAL,
+                        pos.getX() + random.nextDouble(),
+                        pos.getY() + 1.0 + random.nextDouble() * 0.5,
+                        pos.getZ() + random.nextDouble(),
+                        (random.nextDouble() - 0.5) * 0.1, 0.05 + random.nextDouble() * 0.05, (random.nextDouble() - 0.5) * 0.1
+                );
+            }
+        }
+        if (age >= 1 && random.nextFloat() < 0.2f) {
+            level.addParticle(
+                    net.minecraft.core.particles.ParticleTypes.ENCHANT,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + 1.5 + random.nextDouble(),
+                    pos.getZ() + random.nextDouble(),
+                    0, 0.1, 0
             );
         }
     }
@@ -323,42 +355,11 @@ public class DarkMatterBlock extends Block {
             return;
         }
 
-        // Reação especial contra matéria clara.
+        // F8: Reação contra matéria clara — cria matéria instável ao invés de explosão direta.
         if (neighborState.is(ModBlocks.CLEAR_MATTER_BLOCK.get())) {
-            // Explode no ponto do bloco claro.
-            level.explode(
-                    null,
-                    neighborPos.getX(),
-                    neighborPos.getY(),
-                    neighborPos.getZ(),
-                    4.0F,
-                    Level.ExplosionInteraction.BLOCK
-            );
-
-            // Remove o bloco claro e também o bloco de matéria escura atual.
-            level.removeBlock(neighborPos, false);
+            // Remove ambos e coloca UnstableMatter no lugar do clear
             level.removeBlock(pos, false);
-
-            // Cria uma área de 16 blocos ao redor para infectar seres vivos.
-            AABB area = new AABB(neighborPos).inflate(4);
-            List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, area);
-
-            for (LivingEntity target : entities) {
-                target.getCapability(ModCapabilities.INFECTION).ifPresent(data -> {
-                    data.addInfection(5);
-                    data.setDirty(true);
-                });
-            }
-
-            // Dropa um item de yellow matter no local da reação.
-            ItemEntity item = new ItemEntity(
-                    level,
-                    neighborPos.getX(),
-                    neighborPos.getY(),
-                    neighborPos.getZ(),
-                    new ItemStack(ModItems.YELLOW_MATTER_BLOCK_ITEM.get())
-            );
-            level.addFreshEntity(item);
+            level.setBlockAndUpdate(neighborPos, ModBlocks.UNSTABLE_MATTER.get().defaultBlockState());
 
             // Encerra o método porque essa reação especial já consumiu a tentativa.
             return;
@@ -378,19 +379,25 @@ public class DarkMatterBlock extends Block {
         if (neighborState.is(Blocks.GRASS_BLOCK) || neighborState.is(Blocks.DIRT)) {
             level.setBlockAndUpdate(neighborPos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
         }
-        // Se for materiais "minerais/terreno", transforma em bloco de matéria escura.
+        // Se for materiais "minerais/terreno", transforma em bloco de matéria escura ou corrupted_stone.
         else if (neighborState.is(Blocks.STONE)
                 || neighborState.is(Blocks.COBBLESTONE)
                 || neighborState.is(Blocks.SAND)
                 || neighborState.is(Blocks.GRAVEL)
                 || neighborState.is(Blocks.DEEPSLATE)
                 || neighborState.is(Blocks.SNOW_BLOCK)) {
-            level.setBlockAndUpdate(neighborPos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+            // 30% chance to become corrupted_stone instead of dark matter
+            if (random.nextFloat() < 0.30f) {
+                level.setBlockAndUpdate(neighborPos, ModBlocks.CORRUPTED_STONE.get().defaultBlockState());
+            } else {
+                level.setBlockAndUpdate(neighborPos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+            }
         }
 
-        // Se for madeira, folhas ou flores, derrete/contamina para fluido.
-        if (neighborState.is(BlockTags.LOGS)
-                || neighborState.is(BlockTags.LEAVES)
+        // Se for madeira, folhas ou flores — logs become corrupted_log, rest becomes fluid.
+        if (neighborState.is(BlockTags.LOGS)) {
+            level.setBlockAndUpdate(neighborPos, ModBlocks.CORRUPTED_LOG.get().defaultBlockState());
+        } else if (neighborState.is(BlockTags.LEAVES)
                 || neighborState.is(BlockTags.FLOWERS)) {
             level.setBlockAndUpdate(neighborPos, ModBlocks.DARK_MATTER_FLUID_BLOCK.get().defaultBlockState());
         }

@@ -68,7 +68,45 @@ public final class ProtectionUtils {
         if (hasYellowMatterProtection(level, center)) {
             return true;
         }
-        return hasClearMatterProtection(level, center);
+        if (hasClearMatterProtection(level, center)) {
+            return true;
+        }
+        return hasQuarantineWardProtection(level, center);
+    }
+
+    /**
+     * F3: Quarantine Ward protection: 9x5x9 area (radius 4 XZ, 2 Y).
+     */
+    public static boolean hasQuarantineWardProtection(Level level, BlockPos center) {
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-4, -2, -4), center.offset(4, 2, 4))) {
+            if (level.getBlockState(pos).is(ModBlocks.QUARANTINE_WARD.get())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * F9: Replace infection blocks with scarred variants.
+     * CORRUPTED_SOIL → SCARRED_EARTH, DARK_MATTER/CORRUPTED_STONE → SCARRED_STONE,
+     * INFECTION_GROWTH/SPORE_BLOOM/DARK_MATTER_FLUID → AIR
+     */
+    public static void replaceInfectionWithScar(Level level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        if (state.is(ModBlocks.CORRUPTED_SOIL.get())) {
+            level.setBlockAndUpdate(pos, ModBlocks.SCARRED_EARTH.get().defaultBlockState());
+        } else if (state.is(ModBlocks.DARK_MATTER_BLOCK.get()) || state.is(ModBlocks.CORRUPTED_STONE.get())) {
+            level.setBlockAndUpdate(pos, ModBlocks.SCARRED_STONE.get().defaultBlockState());
+        } else if (state.is(ModBlocks.INFECTION_GROWTH.get()) || state.is(ModBlocks.SPORE_BLOOM.get())
+                || state.is(ModBlocks.INFECTION_VEIN.get())) {
+            level.setBlockAndUpdate(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        } else if (state.is(ModBlocks.DARK_MATTER_FLUID_BLOCK.get())) {
+            level.setBlockAndUpdate(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        } else if (state.is(ModBlocks.CORRUPTED_LOG.get())) {
+            level.setBlockAndUpdate(pos, ModBlocks.SCARRED_STONE.get().defaultBlockState());
+        } else if (state.is(ModBlocks.GLITCH_BLOCK.get())) {
+            level.setBlockAndUpdate(pos, net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        }
     }
 
     /**

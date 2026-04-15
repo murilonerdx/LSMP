@@ -1,7 +1,7 @@
 {
   "variants": {
-    "": {
-      "model": "liberthia:block/corrupted_soil"
-    }
+    "age=0": { "model": "liberthia:block/corrupted_soil" },
+    "age=1": { "model": "liberthia:block/corrupted_soil_1" },
+    "age=2": { "model": "liberthia:block/corrupted_soil_2" }
   }
 }

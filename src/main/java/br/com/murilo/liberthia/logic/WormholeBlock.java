@@ -20,6 +20,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 /**
  * Wormhole Block — a dark matter portal that teleports players between two linked wormholes.
@@ -38,6 +40,9 @@ public class WormholeBlock extends Block {
     private static final String TAG_LINK_Z = "WormholeLinkZ";
     private static final String TAG_LINK_DIM = "WormholeLinkDim";
 
+    // Thin portal shape like nether portal
+    private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 6.0, 16.0, 16.0, 10.0);
+
     public WormholeBlock(Properties properties) {
         super(properties);
     }
@@ -46,6 +51,12 @@ public class WormholeBlock extends Block {
     @SuppressWarnings("deprecation")
     public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
         return 0; // Transparent to light (portal-like)
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
     @Override

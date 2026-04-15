@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "age=0": { "model": "liberthia:block/quarantine_ward" },
+    "age=1": { "model": "liberthia:block/quarantine_ward_1" },
+    "age=2": { "model": "liberthia:block/quarantine_ward_2" },
+    "age=3": { "model": "liberthia:block/quarantine_ward_3" }
+  }
+}

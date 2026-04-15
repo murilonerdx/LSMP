@@ -29,7 +29,19 @@
       "Bash(for f:*)",
       "Bash(do)",
       "Bash(echo \"=== $f ===\")",
-      "Read(//c/Users/T-GAMER/Desktop/liberthia_mod/**)"
+      "Read(//c/Users/T-GAMER/Desktop/liberthia_mod/**)",
+      "Bash(python darken_textures.py)",
+      "Bash(ls src/main/resources/assets/liberthia/models/item/worker_*.json)",
+      "Bash(ls src/main/java/br/com/murilo/liberthia/item/Worker*.java src/main/java/br/com/murilo/liberthia/network/)",
+      "Bash(find /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/resources/assets/liberthia/textures/item -name \"*.png\" -exec basename {} \\\\;)",
+      "Bash(grep -v \"^$\")",
+      "Bash(bash /tmp/check_items.sh)",
+      "Bash(bash /tmp/check_blocks.sh)",
+      "Bash(ls -la /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/resources/assets/liberthia/models/block/glitch_block*.json)",
+      "Bash(bash /tmp/check_translations.sh)",
+      "Bash(ls -la /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/resources/assets/liberthia/textures/block/*matter*fluid*)",
+      "Bash(pip install:*)",
+      "Bash(python -c ':*)"
     ]
   }
 }

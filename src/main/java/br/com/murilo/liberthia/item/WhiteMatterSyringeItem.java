@@ -36,11 +36,12 @@ public class WhiteMatterSyringeItem extends Item {
 
         if (!level.isClientSide) {
             player.getCapability(ModCapabilities.INFECTION).ifPresent(data -> {
-                // Full cure
+                // Full cure — reset maxInfectionReached FIRST to prevent tick loop re-enforcement
+                data.setMaxInfectionReached(0);
                 data.setInfection(0);
                 data.setMutations("");
+                data.setPermanentHealthPenalty(0);
                 data.setImmune(true);
-                data.setPermanentHealthPenalty(Math.max(0, data.getPermanentHealthPenalty() - 4));
                 data.setDirty(true);
 
                 // Remove all negative effects

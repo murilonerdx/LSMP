@@ -13,13 +13,24 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
 
 import java.util.List;
 
 public class SporeBloomBlock extends Block {
 
+    private static final VoxelShape SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 10.0, 11.0);
+
     public SporeBloomBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
     @Override
@@ -29,6 +40,7 @@ public class SporeBloomBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         // Check if base block is still valid
         if (!isValidBase(level, pos)) {
             level.destroyBlock(pos, true);
@@ -70,6 +82,7 @@ public class SporeBloomBlock extends Block {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         // Constant purple particle emission
         for (int i = 0; i < 2; i++) {
             level.addParticle(

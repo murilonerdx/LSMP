@@ -59,6 +59,7 @@ public class ClearMatterInjectorItem extends Item {
 
         data.reduceInfection(30);
         data.reducePermanentHealthPenalty(2);
+        data.setMaxInfectionReached(Math.max(0, data.getMaxInfectionReached() - 40));
 
         // Cleanse ALL mutations
         data.setMutations("");

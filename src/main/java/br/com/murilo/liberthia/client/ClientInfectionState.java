@@ -13,6 +13,7 @@ public final class ClientInfectionState {
     private static int blockedExposure;
     private static int armorProtectionPercent;
     private static String mutations = "";
+    private static float chunkDensity;
 
     private ClientInfectionState() {
     }
@@ -25,6 +26,7 @@ public final class ClientInfectionState {
         blockedExposure = packet.blockedExposure();
         armorProtectionPercent = packet.armorProtectionPercent();
         mutations = packet.mutations();
+        chunkDensity = packet.chunkDensity();
     }
 
     public static int getInfection() {
@@ -61,5 +63,9 @@ public final class ClientInfectionState {
 
     public static String getMutations() {
         return mutations != null ? mutations : "";
+    }
+
+    public static float getChunkDensity() {
+        return chunkDensity;
     }
 }

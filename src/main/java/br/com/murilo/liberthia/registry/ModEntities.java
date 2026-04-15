@@ -50,12 +50,33 @@ public final class ModEntities {
                             .clientTrackingRange(8)
                             .build("spore_spitter"));
 
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.ClonePlayerEntity>> CLONE_PLAYER =
+            ENTITY_TYPES.register("clone_player",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.ClonePlayerEntity>of(br.com.murilo.liberthia.entity.ClonePlayerEntity::new, MobCategory.MISC)
+                            .sized(0.6F, 1.8F)
+                            .clientTrackingRange(16)
+                            .build("clone_player"));
+
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.WhiteMatterExplosionEntity>> WHITE_MATTER_EXPLOSION =
             ENTITY_TYPES.register("white_matter_explosion",
                     () -> EntityType.Builder.<br.com.murilo.liberthia.entity.WhiteMatterExplosionEntity>of(br.com.murilo.liberthia.entity.WhiteMatterExplosionEntity::new, MobCategory.MISC)
                             .sized(1.0F, 1.0F)
                             .clientTrackingRange(10)
                             .build("white_matter_explosion"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.DarkConsciousnessEntity>> DARK_CONSCIOUSNESS =
+            ENTITY_TYPES.register("dark_consciousness",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.DarkConsciousnessEntity>of(br.com.murilo.liberthia.entity.DarkConsciousnessEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.9F)
+                            .clientTrackingRange(16)
+                            .build("dark_consciousness"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.EyeOfHorusEntity>> EYE_OF_HORUS =
+            ENTITY_TYPES.register("eye_of_horus",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.EyeOfHorusEntity>of(br.com.murilo.liberthia.entity.EyeOfHorusEntity::new, MobCategory.MISC)
+                            .sized(1.0F, 1.0F)
+                            .clientTrackingRange(24)
+                            .build("eye_of_horus"));
 
     private ModEntities() {}
 

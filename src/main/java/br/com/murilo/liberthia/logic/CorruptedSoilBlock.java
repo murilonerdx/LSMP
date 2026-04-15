@@ -10,9 +10,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class CorruptedSoilBlock extends Block {
-    private static final int LOCAL_SPREAD_ATTEMPTS = 2;
+    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 2);
+
     private static final int LOCAL_SPREAD_RADIUS = 2;
     private static final int SPORE_RADIUS = 5;
     private static final int DEEP_CORRUPTION_DEPTH = 4;
@@ -20,40 +23,66 @@ public class CorruptedSoilBlock extends Block {
 
     public CorruptedSoilBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(AGE);
     }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return;
         }
 
-        spreadInfection(level, pos, random);
+        int age = state.getValue(AGE);
+        float density = InfectionLogic.getChunkInfectionDensity(level, pos);
+
+        // Age progression
+        if (age < 2 && density > 0.3f && random.nextFloat() < 0.08f) {
+            level.setBlock(pos, state.setValue(AGE, age + 1), 3);
+            age = age + 1;
+        }
+
+        int spreadAttempts = 2 + age;
+        for (int i = 0; i < spreadAttempts; i++) {
+            spreadInfectionOnce(level, pos, random);
+        }
         attemptSporeLaunch(level, pos, random);
         attemptGrowthSprout(level, pos, random);
 
-        if (random.nextFloat() < 0.12f) {
+        if (random.nextFloat() < 0.12f + age * 0.06f) {
             level.sendParticles(
                     net.minecraft.core.particles.ParticleTypes.SQUID_INK,
                     pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D,
-                    2,
-                    0.25D, 0.10D, 0.25D,
-                    0.01D
+                    2 + age, 0.25D, 0.10D, 0.25D, 0.01D
             );
         }
     }
 
-    private void spreadInfection(ServerLevel level, BlockPos pos, RandomSource random) {
-        for (int i = 0; i < LOCAL_SPREAD_ATTEMPTS; i++) {
-            if (random.nextFloat() >= 0.35F) {
-                continue;
-            }
-
-            int dx = random.nextInt((LOCAL_SPREAD_RADIUS * 2) + 1) - LOCAL_SPREAD_RADIUS;
-            int dz = random.nextInt((LOCAL_SPREAD_RADIUS * 2) + 1) - LOCAL_SPREAD_RADIUS;
-
-            infectSurfaceColumnDeep(level, pos.offset(dx, 0, dz), random, false);
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
+        // F5: Spore particles
+        if (random.nextFloat() < 0.25f) {
+            level.addParticle(
+                    net.minecraft.core.particles.ParticleTypes.PORTAL,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + 1.0 + random.nextDouble() * 0.3,
+                    pos.getZ() + random.nextDouble(),
+                    (random.nextDouble() - 0.5) * 0.05, 0.03, (random.nextDouble() - 0.5) * 0.05
+            );
         }
+    }
+
+    private void spreadInfectionOnce(ServerLevel level, BlockPos pos, RandomSource random) {
+        if (random.nextFloat() >= 0.35F) return;
+        int dx = random.nextInt((LOCAL_SPREAD_RADIUS * 2) + 1) - LOCAL_SPREAD_RADIUS;
+        int dz = random.nextInt((LOCAL_SPREAD_RADIUS * 2) + 1) - LOCAL_SPREAD_RADIUS;
+        infectSurfaceColumnDeep(level, pos.offset(dx, 0, dz), random, false);
     }
 
     private void attemptSporeLaunch(ServerLevel level, BlockPos pos, RandomSource random) {
@@ -155,7 +184,12 @@ public class CorruptedSoilBlock extends Block {
         }
 
         if (isDeepCorruptibleGround(level, pos, state)) {
-            level.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+            // 25% chance to become corrupted_stone for stone-like blocks
+            if (level.getRandom().nextFloat() < 0.25f && isStoneType(state)) {
+                level.setBlockAndUpdate(pos, ModBlocks.CORRUPTED_STONE.get().defaultBlockState());
+            } else {
+                level.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+            }
             return true;
         }
 
@@ -184,8 +218,12 @@ public class CorruptedSoilBlock extends Block {
             return false;
         }
 
-        if (state.is(BlockTags.LOGS)
-                || state.is(BlockTags.LEAVES)
+        if (state.is(BlockTags.LOGS)) {
+            if (state.getDestroySpeed(level, pos) >= 0.0F) {
+                level.setBlockAndUpdate(pos, ModBlocks.CORRUPTED_LOG.get().defaultBlockState());
+                return true;
+            }
+        } else if (state.is(BlockTags.LEAVES)
                 || ProtectionUtils.hasRegistryPath(state, "grass")
                 || ProtectionUtils.hasRegistryPath(state, "fern")
                 || ProtectionUtils.hasRegistryPath(state, "vine")
@@ -209,6 +247,11 @@ public class CorruptedSoilBlock extends Block {
 
         BlockPos first = groundPos.above();
         if (!canSproutGrowth(level, first)) {
+            return;
+        }
+
+        // Spacing check already in canSproutGrowth, but double-check
+        if (ProtectionUtils.hasGrowthTooClose(level, first, 8)) {
             return;
         }
 
@@ -331,5 +374,21 @@ public class CorruptedSoilBlock extends Block {
         }
 
         return state.isFaceSturdy(level, pos, Direction.UP);
+    }
+
+    private static boolean isStoneType(BlockState state) {
+        return state.is(BlockTags.BASE_STONE_OVERWORLD)
+                || state.is(BlockTags.BASE_STONE_NETHER)
+                || state.is(Blocks.STONE)
+                || state.is(Blocks.COBBLESTONE)
+                || state.is(Blocks.DEEPSLATE)
+                || state.is(Blocks.TUFF)
+                || state.is(Blocks.CALCITE)
+                || state.is(Blocks.ANDESITE)
+                || state.is(Blocks.DIORITE)
+                || state.is(Blocks.GRANITE)
+                || state.is(Blocks.BLACKSTONE)
+                || state.is(Blocks.BASALT)
+                || state.is(Blocks.SMOOTH_BASALT);
     }
 }

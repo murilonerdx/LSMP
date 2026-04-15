@@ -1,6 +1,7 @@
 package br.com.murilo.liberthia.registry;
 
 import br.com.murilo.liberthia.LiberthiaMod;
+import br.com.murilo.liberthia.entry.AdminToolItem;
 import br.com.murilo.liberthia.item.*;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
@@ -57,6 +58,11 @@ public final class ModItems {
 
     public static final RegistryObject<Item> WHITE_MATTER_ORE_ITEM = ITEMS.register("white_matter_ore",
             () -> new BlockItem(ModBlocks.WHITE_MATTER_ORE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ADMIN_TOOL = ITEMS.register(
+            "admin_tool",
+            () -> new AdminToolItem(new Item.Properties())
+    );
 
     // --- Machines & Defense ---
     public static final RegistryObject<Item> PURIFICATION_BENCH_ITEM = ITEMS.register("purification_bench",
@@ -217,10 +223,10 @@ public final class ModItems {
 
     // --- Matter Buckets ---
     public static final RegistryObject<Item> CLEAR_MATTER_BUCKET = ITEMS.register("clear_matter_bucket",
-            () -> new ClearMatterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+            () -> new BucketItem(ModFluids.CLEAR_MATTER.get(), new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
     public static final RegistryObject<Item> YELLOW_MATTER_BUCKET = ITEMS.register("yellow_matter_bucket",
-            () -> new YellowMatterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+            () -> new BucketItem(ModFluids.YELLOW_MATTER.get(), new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
     // --- White Matter Syringe ---
     public static final RegistryObject<Item> WHITE_MATTER_SYRINGE = ITEMS.register("white_matter_syringe",
@@ -239,6 +245,69 @@ public final class ModItems {
 
     public static final RegistryObject<Item> WORKER_BADGE = ITEMS.register("worker_badge",
             () -> new WorkerBadgeItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> FIELD_JOURNAL = ITEMS.register("field_journal",
+            () -> new FieldJournalItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> EYE_OF_HORUS = ITEMS.register("eye_of_horus",
+            () -> new EyeOfHorusItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> EQUILIBRIUM_FRAGMENT = ITEMS.register("equilibrium_fragment",
+            () -> new EquilibriumFragmentItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> EXPEDITION_TRACKER = ITEMS.register("expedition_tracker",
+            () -> new ExpeditionTrackerItem(new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> MATTER_AMPOULE = ITEMS.register("matter_ampoule",
+            () -> new MatterAmpouleItem(new Item.Properties().stacksTo(16)));
+
+    // --- Worker Admin Tools ---
+    public static final RegistryObject<Item> WORKER_TELEPORTER = ITEMS.register("worker_teleporter",
+            () -> new WorkerTeleporterItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> WORKER_LIGHTNING = ITEMS.register("worker_lightning",
+            () -> new WorkerLightningItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> WORKER_INVENTORY_VIEWER = ITEMS.register("worker_inventory_viewer",
+            () -> new WorkerInventoryViewerItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> WORKER_VOICE_BOX = ITEMS.register("worker_voice_box",
+            () -> new WorkerVoiceBoxItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> WORKER_CLONE = ITEMS.register("worker_clone",
+            () -> new WorkerCloneItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // --- Gravity Trap ---
+    public static final RegistryObject<Item> GRAVITY_TRAP = ITEMS.register("gravity_trap",
+            () -> new GravityTrapItem(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // --- Revelation Lens ---
+    public static final RegistryObject<Item> REVELATION_LENS = ITEMS.register("revelation_lens",
+            () -> new RevelationLensItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // --- Gravity Anchor ---
+    public static final RegistryObject<Item> GRAVITY_ANCHOR = ITEMS.register("gravity_anchor",
+            () -> new GravityAnchorItem(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // --- Freeze Staff ---
+    public static final RegistryObject<Item> FREEZE_STAFF = ITEMS.register("freeze_staff",
+            () -> new FreezeStaffItem(new Item.Properties().stacksTo(1).durability(50).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // --- New Infection Blocks (F3, F7, F8, F9) ---
+    public static final RegistryObject<Item> SCARRED_EARTH_ITEM = ITEMS.register("scarred_earth",
+            () -> new BlockItem(ModBlocks.SCARRED_EARTH.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SCARRED_STONE_ITEM = ITEMS.register("scarred_stone",
+            () -> new BlockItem(ModBlocks.SCARRED_STONE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> QUARANTINE_WARD_ITEM = ITEMS.register("quarantine_ward",
+            () -> new BlockItem(ModBlocks.QUARANTINE_WARD.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> UNSTABLE_MATTER_ITEM = ITEMS.register("unstable_matter",
+            () -> new BlockItem(ModBlocks.UNSTABLE_MATTER.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> INFECTION_HEART_ITEM = ITEMS.register("infection_heart",
+            () -> new BlockItem(ModBlocks.INFECTION_HEART.get(), new Item.Properties()));
 
     private ModItems() {
     }

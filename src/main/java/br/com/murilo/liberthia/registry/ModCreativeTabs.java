@@ -28,6 +28,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.PURIFICATION_BENCH_ITEM.get());
                         output.accept(ModItems.WHITE_MATTER_BOMB_ITEM.get());
                         output.accept(ModItems.PURITY_BEACON_ITEM.get());
+
                         // --- Workbenches ---
                         output.accept(ModItems.DARK_MATTER_FORGE_ITEM.get());
                         output.accept(ModItems.MATTER_INFUSER_ITEM.get());
@@ -102,6 +103,24 @@ public final class ModCreativeTabs {
                         // --- Lore ---
                         output.accept(ModItems.HOST_JOURNAL.get());
                         output.accept(ModItems.WORKER_BADGE.get());
+                        output.accept(ModItems.FIELD_JOURNAL.get());
+                        output.accept(ModItems.EYE_OF_HORUS.get());
+                        output.accept(ModItems.EQUILIBRIUM_FRAGMENT.get());
+                        output.accept(ModItems.EXPEDITION_TRACKER.get());
+                        output.accept(ModItems.MATTER_AMPOULE.get());
+                        // --- New Infection Blocks ---
+                        output.accept(ModItems.SCARRED_EARTH_ITEM.get());
+                        output.accept(ModItems.SCARRED_STONE_ITEM.get());
+                        output.accept(ModItems.QUARANTINE_WARD_ITEM.get());
+                        output.accept(ModItems.UNSTABLE_MATTER_ITEM.get());
+                        output.accept(ModItems.INFECTION_HEART_ITEM.get());
+                        // --- Worker Admin Tools ---
+                        output.accept(ModItems.WORKER_TELEPORTER.get());
+                        output.accept(ModItems.WORKER_LIGHTNING.get());
+                        output.accept(ModItems.WORKER_INVENTORY_VIEWER.get());
+                        output.accept(ModItems.WORKER_VOICE_BOX.get());
+                        output.accept(ModItems.WORKER_CLONE.get());
+                        output.accept(ModItems.ADMIN_TOOL.get());
                     })
                     .build());
 

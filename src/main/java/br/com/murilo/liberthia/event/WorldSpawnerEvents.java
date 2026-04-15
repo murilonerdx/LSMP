@@ -29,6 +29,7 @@ public class WorldSpawnerEvents {
         if (!(event.level instanceof ServerLevel serverLevel)) return;
         if (!serverLevel.dimension().equals(Level.OVERWORLD)) return;
         if (!LiberthiaConfig.SERVER.worldSpawnsEnabled.get()) return;
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
 
         int interval = LiberthiaConfig.SERVER.spawnIntervalTicks.get();
         if (interval <= 0 || serverLevel.getGameTime() % interval != 0L) return;

@@ -38,9 +38,6 @@ public class WorkerBadgeItem extends Item {
             if (!tag.contains(TAG_OWNER_UUID)) {
                 tag.putUUID(TAG_OWNER_UUID, player.getUUID());
                 tag.putString(TAG_OWNER_NAME, player.getName().getString());
-                player.displayClientMessage(
-                        Component.literal("Badge bound to: " + player.getName().getString())
-                                .withStyle(ChatFormatting.GREEN), true);
             }
 
             // Update stats from current infection data
@@ -54,21 +51,7 @@ public class WorkerBadgeItem extends Item {
                 tag.putInt(TAG_MUTATIONS_DISCOVERED, mutCount);
             });
 
-            // Show status as chat message
-            player.getCapability(ModCapabilities.INFECTION).ifPresent(data -> {
-                player.sendSystemMessage(Component.literal("--- WORKER STATUS ---").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-                String owner = tag.contains(TAG_OWNER_NAME) ? tag.getString(TAG_OWNER_NAME) : "Unknown";
-                player.sendSystemMessage(Component.literal("Worker: " + owner).withStyle(ChatFormatting.GRAY));
-                player.sendSystemMessage(Component.literal("Infection: " + data.getInfection() + "%").withStyle(ChatFormatting.DARK_PURPLE));
-                player.sendSystemMessage(Component.literal("Stage: " + data.getStage()).withStyle(ChatFormatting.YELLOW));
-                String muts = data.getMutations();
-                int mutCount = (muts == null || muts.isEmpty()) ? 0 : muts.split(",").length;
-                player.sendSystemMessage(Component.literal("Mutations: " + mutCount).withStyle(ChatFormatting.AQUA));
-                player.sendSystemMessage(Component.literal("Max Infection Seen: " + tag.getInt(TAG_MAX_INFECTION_SEEN) + "%").withStyle(ChatFormatting.DARK_RED));
-                boolean immune = data.isImmune();
-                player.sendSystemMessage(Component.literal("Immune: " + (immune ? "YES" : "NO"))
-                        .withStyle(immune ? ChatFormatting.GREEN : ChatFormatting.RED));
-            });
+            // stats silently updated in tag — tooltip shows info
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);

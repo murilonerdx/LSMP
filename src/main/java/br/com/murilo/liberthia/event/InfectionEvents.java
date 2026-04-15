@@ -21,6 +21,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimension
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import br.com.murilo.liberthia.command.PurgeInfectionCommand;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -209,6 +210,7 @@ public class InfectionEvents {
     public void onEntityTick(LivingEvent.LivingTickEvent event) {
         // Não executa no client
         if (event.getEntity().level().isClientSide) return;
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
 
         LivingEntity entity = event.getEntity();
 
@@ -306,6 +308,14 @@ public class InfectionEvents {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             serverPlayer.getCapability(ModCapabilities.INFECTION)
                     .ifPresent(data -> InfectionLogic.sync(serverPlayer, data));
+
+            // Load persistent infection toggle and sync to this client
+            br.com.murilo.liberthia.data.InfectionToggleData toggleData =
+                    br.com.murilo.liberthia.data.InfectionToggleData.get(serverPlayer.serverLevel());
+            boolean enabled = toggleData.isInfectionEnabled();
+            br.com.murilo.liberthia.config.DevMode.ACTIVE = !enabled;
+            ModNetwork.sendToPlayer(serverPlayer,
+                    new br.com.murilo.liberthia.network.S2CInfectionTogglePacket(enabled));
         }
     }
 
@@ -370,6 +380,18 @@ public class InfectionEvents {
     @SubscribeEvent
     public void onCommandsRegister(RegisterCommandsEvent event) {
         PurgeInfectionCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.InfectionToggleCommand.register(event.getDispatcher());
+    }
+
+    /**
+     * Carrega o estado persistente do toggle de infecção quando o servidor inicia.
+     * Isso garante que DevMode.ACTIVE reflita o estado salvo no mundo.
+     */
+    @SubscribeEvent
+    public void onServerStarted(ServerStartedEvent event) {
+        br.com.murilo.liberthia.data.InfectionToggleData toggleData =
+                br.com.murilo.liberthia.data.InfectionToggleData.get(event.getServer().overworld());
+        br.com.murilo.liberthia.config.DevMode.ACTIVE = !toggleData.isInfectionEnabled();
     }
 
     /**
@@ -390,7 +412,58 @@ public class InfectionEvents {
             serverPlayer.getCapability(ModCapabilities.INFECTION).ifPresent(data -> {
                 InfectionLogic.applyDerivedEffects(serverPlayer, data);
                 InfectionLogic.sync(serverPlayer, data);
+
+                // Lore: Horus Island is accessed via the Nether — survivors reported lasting trauma.
+                // Entering the Nether with infection >= 50 triggers HORUS_TRAUMA mutation.
+                if (event.getTo() == net.minecraft.world.level.Level.NETHER && data.getInfection() >= 50) {
+                    if (!data.hasMutation("HORUS_TRAUMA")) {
+                        data.addMutation("HORUS_TRAUMA");
+                        serverPlayer.displayClientMessage(
+                                net.minecraft.network.chat.Component.translatable("chat.liberthia.horus_trauma")
+                                        .withStyle(net.minecraft.ChatFormatting.DARK_RED, net.minecraft.ChatFormatting.BOLD),
+                                false);
+                    }
+                    // Immediate debuffs — flashbacks of the Eye's presence
+                    serverPlayer.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                            net.minecraft.world.effect.MobEffects.DARKNESS, 200, 0, true, false, true));
+                    serverPlayer.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                            net.minecraft.world.effect.MobEffects.CONFUSION, 200, 0, true, false, true));
+                    serverPlayer.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                            net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 100, 1, true, false, true));
+                }
             });
+        }
+    }
+
+    /**
+     * Atualiza dados de contaminação por chunk a cada 100 ticks.
+     * Percorre chunks carregados perto de players e registra densidade no SavedData.
+     */
+    @SubscribeEvent
+    public void onLevelTick(net.minecraftforge.event.TickEvent.LevelTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
+        if (!(event.level instanceof net.minecraft.server.level.ServerLevel serverLevel)) return;
+
+        // Gravity trap tick — every tick for smooth pulling
+        br.com.murilo.liberthia.item.GravityTrapItem.tickTraps(serverLevel);
+        br.com.murilo.liberthia.item.GravityAnchorItem.tickGrounded(serverLevel);
+        br.com.murilo.liberthia.item.FreezeStaffItem.tickFrozen(serverLevel);
+
+        if (serverLevel.getServer().getTickCount() % 100 != 0) return;
+
+        br.com.murilo.liberthia.data.ChunkInfectionData chunkData =
+                br.com.murilo.liberthia.data.ChunkInfectionData.get(serverLevel);
+
+        for (net.minecraft.server.level.ServerPlayer player : serverLevel.players()) {
+            net.minecraft.world.level.ChunkPos cp = new net.minecraft.world.level.ChunkPos(player.blockPosition());
+            for (int dx = -2; dx <= 2; dx++) {
+                for (int dz = -2; dz <= 2; dz++) {
+                    net.minecraft.world.level.ChunkPos target = new net.minecraft.world.level.ChunkPos(cp.x + dx, cp.z + dz);
+                    if (!serverLevel.hasChunk(target.x, target.z)) continue;
+                    float density = InfectionLogic.getChunkInfectionDensityDirect(serverLevel, target);
+                    chunkData.setContamination(target, (int) (density * 100));
+                }
+            }
         }
     }
 }

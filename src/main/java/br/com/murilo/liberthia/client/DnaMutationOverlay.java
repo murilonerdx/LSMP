@@ -28,6 +28,7 @@ public class DnaMutationOverlay implements IGuiOverlay {
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         String mutationsRaw = ClientInfectionState.getMutations();
         if (mutationsRaw == null || mutationsRaw.isEmpty()) {
             return;

@@ -81,6 +81,26 @@ public final class ModBlocks {
                             .replaceable()
                             .noLootTable()));
 
+    public static final RegistryObject<LiquidBlock> CLEAR_MATTER_FLUID_BLOCK = BLOCKS.register("clear_matter_fluid",
+            () -> new LiquidBlock(ModFluids.CLEAR_MATTER,
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.ICE)
+                            .noCollission()
+                            .strength(100.0F)
+                            .lightLevel(state -> 6)
+                            .replaceable()
+                            .noLootTable()));
+
+    public static final RegistryObject<LiquidBlock> YELLOW_MATTER_FLUID_BLOCK = BLOCKS.register("yellow_matter_fluid",
+            () -> new LiquidBlock(ModFluids.YELLOW_MATTER,
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.GOLD)
+                            .noCollission()
+                            .strength(100.0F)
+                            .lightLevel(state -> 8)
+                            .replaceable()
+                            .noLootTable()));
+
     public static final RegistryObject<Block> INFECTION_GROWTH = BLOCKS.register("infection_growth",
             () -> new InfectionGrowthBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_PURPLE)
@@ -216,6 +236,48 @@ public final class ModBlocks {
                     .lightLevel(state -> 10)
                     .emissiveRendering((s, g, p) -> true)
                     .sound(SoundType.AMETHYST)));
+
+    // --- Scarred Terrain (F9) ---
+    public static final RegistryObject<Block> SCARRED_EARTH = BLOCKS.register("scarred_earth",
+            () -> new br.com.murilo.liberthia.logic.ScarredEarthBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .strength(0.6F)
+                    .sound(SoundType.GRAVEL)));
+
+    public static final RegistryObject<Block> SCARRED_STONE = BLOCKS.register("scarred_stone",
+            () -> new br.com.murilo.liberthia.logic.ScarredStoneBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .strength(3.0F, 6.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)));
+
+    // --- Quarantine Ward (F3) ---
+    public static final RegistryObject<Block> QUARANTINE_WARD = BLOCKS.register("quarantine_ward",
+            () -> new br.com.murilo.liberthia.logic.QuarantineWardBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.ICE)
+                    .strength(5.0F, 10.0F)
+                    .lightLevel(state -> 7)
+                    .randomTicks()
+                    .sound(SoundType.METAL)));
+
+    // --- Unstable Matter (F8) ---
+    public static final RegistryObject<Block> UNSTABLE_MATTER = BLOCKS.register("unstable_matter",
+            () -> new br.com.murilo.liberthia.logic.UnstableMatterBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .strength(0.5F)
+                    .lightLevel(state -> 5 + state.getValue(br.com.murilo.liberthia.logic.UnstableMatterBlock.AGE))
+                    .emissiveRendering((s, g, p) -> true)
+                    .noOcclusion()
+                    .sound(SoundType.GLASS)));
+
+    // --- Infection Heart (F7) ---
+    public static final RegistryObject<Block> INFECTION_HEART = BLOCKS.register("infection_heart",
+            () -> new br.com.murilo.liberthia.logic.InfectionHeartBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(10.0F, 20.0F)
+                    .lightLevel(state -> 12)
+                    .emissiveRendering((s, g, p) -> true)
+                    .sound(SoundType.SCULK_CATALYST)));
 
     private ModBlocks() {
 

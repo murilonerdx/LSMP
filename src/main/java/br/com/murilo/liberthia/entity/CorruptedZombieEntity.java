@@ -38,7 +38,7 @@ public class CorruptedZombieEntity extends Zombie {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes()
+        return Zombie.createAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.27)
                 .add(Attributes.ATTACK_DAMAGE, 5.0)

@@ -16,6 +16,7 @@ public final class InfectionHudOverlay implements IGuiOverlay {
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.options.hideGui || minecraft.player == null) return;
 

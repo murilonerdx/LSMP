@@ -14,6 +14,7 @@ public class InfectionData implements IInfectionData {
     private int pillEffectTimer;
     private boolean immune;
     private String mutationsCount = "";
+    private int symbiosisTimer;
     private boolean dirty = true;
 
     @Override
@@ -165,6 +166,16 @@ public class InfectionData implements IInfectionData {
     }
 
     @Override
+    public int getSymbiosisTimer() {
+        return symbiosisTimer;
+    }
+
+    @Override
+    public void setSymbiosisTimer(int ticks) {
+        this.symbiosisTimer = Math.max(0, ticks);
+    }
+
+    @Override
     public boolean isDirty() {
         return dirty;
     }
@@ -183,6 +194,7 @@ public class InfectionData implements IInfectionData {
         tag.putInt("pillEffectTimer", pillEffectTimer);
         tag.putBoolean("immune", immune);
         tag.putString("mutations", mutationsCount);
+        tag.putInt("symbiosisTimer", symbiosisTimer);
         return tag;
     }
 
@@ -194,6 +206,7 @@ public class InfectionData implements IInfectionData {
         pillEffectTimer = Math.max(0, tag.getInt("pillEffectTimer"));
         immune = tag.getBoolean("immune");
         mutationsCount = tag.getString("mutations");
+        symbiosisTimer = Math.max(0, tag.getInt("symbiosisTimer"));
         dirty = true;
     }
 }

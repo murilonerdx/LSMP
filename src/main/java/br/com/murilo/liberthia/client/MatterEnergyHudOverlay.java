@@ -14,6 +14,7 @@ public class MatterEnergyHudOverlay implements IGuiOverlay {
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         int dark = ClientMatterEnergyState.getDarkEnergy();
         int clear = ClientMatterEnergyState.getClearEnergy();
         int yellow = ClientMatterEnergyState.getYellowEnergy();

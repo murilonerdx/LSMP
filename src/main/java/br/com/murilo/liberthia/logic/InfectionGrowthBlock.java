@@ -65,6 +65,7 @@ public class InfectionGrowthBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return;
         }
@@ -171,7 +172,8 @@ public class InfectionGrowthBlock extends Block {
                 return;
             }
 
-            if (level.getBlockState(above).isAir() && level.getFluidState(above).isEmpty()) {
+            if (level.getBlockState(above).isAir() && level.getFluidState(above).isEmpty()
+                    && !ProtectionUtils.hasGrowthTooClose(level, above, MIN_SPACING)) {
                 level.setBlockAndUpdate(above, this.defaultBlockState());
                 return;
             }
@@ -393,5 +395,29 @@ public class InfectionGrowthBlock extends Block {
         }
 
         return false;
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
+        // F5: Spore particles — upward drifting fireflies
+        if (random.nextFloat() < 0.4f) {
+            level.addParticle(
+                    net.minecraft.core.particles.ParticleTypes.PORTAL,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + 0.5 + random.nextDouble(),
+                    pos.getZ() + random.nextDouble(),
+                    (random.nextDouble() - 0.5) * 0.08, 0.06, (random.nextDouble() - 0.5) * 0.08
+            );
+        }
+        if (random.nextFloat() < 0.25f) {
+            level.addParticle(
+                    net.minecraft.core.particles.ParticleTypes.ENCHANT,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + 1.0 + random.nextDouble() * 1.5,
+                    pos.getZ() + random.nextDouble(),
+                    0, 0.08, 0
+            );
+        }
     }
 }

@@ -55,6 +55,10 @@ public final class InfectionLogic {
     }
 
     public static void tick(ServerPlayer player, IInfectionData data) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) {
+            if (data.getInfection() > 0) data.setInfection(0);
+            return;
+        }
         boolean immuneNow = data.isImmune();
         if (immuneNow && data.getInfection() > 0) {
             data.setInfection(0);
@@ -96,9 +100,16 @@ public final class InfectionLogic {
             );
         }
 
-        int derivedPenalty = Math.min(10, (data.getMaxInfectionReached() / 20) * 2);
-        if (derivedPenalty > data.getPermanentHealthPenalty()) {
-            data.setPermanentHealthPenalty(derivedPenalty);
+        // When immune or infection is 0, gradually reset maxInfectionReached
+        if (immuneNow || data.getInfection() == 0) {
+            if (data.getMaxInfectionReached() > 0 && player.tickCount % 4 == 0) {
+                data.setMaxInfectionReached(Math.max(0, data.getMaxInfectionReached() - 1));
+            }
+        } else {
+            int derivedPenalty = Math.min(10, (data.getMaxInfectionReached() / 20) * 2);
+            if (derivedPenalty > data.getPermanentHealthPenalty()) {
+                data.setPermanentHealthPenalty(derivedPenalty);
+            }
         }
 
         applyDerivedEffects(player, data);
@@ -127,6 +138,9 @@ public final class InfectionLogic {
                     0.85F
             );
         }
+
+        // F11: Symbiosis — tracks prolonged exposure at 50-75% infection
+        tickSymbiosis(player, data);
 
         if (data.isDirty() || player.tickCount % 20 == 0) {
             sync(player, data, exposure);
@@ -168,6 +182,64 @@ public final class InfectionLogic {
         // Glitch block spawning at high density (max 10 per chunk)
         if (density >= 0.50f && serverLevel.random.nextFloat() < 0.10f) {
             spawnGlitchBlock(serverLevel, origin);
+        }
+
+        // Seed infection veins underground at moderate+ density
+        if (density >= 0.40f && serverLevel.random.nextFloat() < 0.12f) {
+            BlockPos veinPos = origin.offset(
+                    serverLevel.random.nextInt(16) - 8, -(2 + serverLevel.random.nextInt(8)), serverLevel.random.nextInt(16) - 8);
+            BlockState veinTarget = serverLevel.getBlockState(veinPos);
+            if (veinTarget.is(Blocks.STONE) || veinTarget.is(Blocks.DEEPSLATE)
+                    || veinTarget.is(Blocks.ANDESITE) || veinTarget.is(Blocks.DIORITE)
+                    || veinTarget.is(Blocks.GRANITE) || veinTarget.is(Blocks.TUFF)) {
+                serverLevel.setBlockAndUpdate(veinPos, ModBlocks.INFECTION_VEIN.get().defaultBlockState());
+            }
+        }
+
+        // F7: Infection Heart spawning at very high density
+        if (density >= 0.85f && serverLevel.random.nextFloat() < 0.05f) {
+            BlockPos heartPos = origin.offset(
+                    serverLevel.random.nextInt(16) - 8, 0, serverLevel.random.nextInt(16) - 8);
+            // Find surface
+            for (int dy = 4; dy >= -4; dy--) {
+                BlockPos check = heartPos.above(dy);
+                if (serverLevel.getBlockState(check).isAir()
+                        && !serverLevel.getBlockState(check.below()).isAir()) {
+                    // Cap: no existing heart within 48 blocks
+                    boolean tooClose = false;
+                    for (BlockPos scan : BlockPos.betweenClosed(check.offset(-48, -10, -48), check.offset(48, 10, 48))) {
+                        if (serverLevel.getBlockState(scan).is(ModBlocks.INFECTION_HEART.get())) {
+                            tooClose = true;
+                            break;
+                        }
+                    }
+                    if (!tooClose) {
+                        serverLevel.setBlockAndUpdate(check, ModBlocks.INFECTION_HEART.get().defaultBlockState());
+                    }
+                    break;
+                }
+            }
+        }
+
+        // Lore: Eye of Horus — ambient watching entity appears at very high infection
+        // Represents the "presence" that Horus explorers reported
+        if (density >= 0.70f && serverLevel.random.nextFloat() < 0.03f) {
+            // Check no existing Eye nearby
+            boolean eyeNearby = !serverLevel.getEntitiesOfClass(
+                    br.com.murilo.liberthia.entity.EyeOfHorusEntity.class,
+                    new AABB(origin).inflate(48.0)).isEmpty();
+            if (!eyeNearby) {
+                br.com.murilo.liberthia.entity.EyeOfHorusEntity eye =
+                        ModEntities.EYE_OF_HORUS.get().create(serverLevel);
+                if (eye != null) {
+                    double ex = origin.getX() + serverLevel.random.nextInt(20) - 10;
+                    double ez = origin.getZ() + serverLevel.random.nextInt(20) - 10;
+                    double ey = origin.getY() + 6 + serverLevel.random.nextInt(8);
+                    eye.moveTo(ex, ey, ez, 0, 0);
+                    eye.setMaxLifetime(400 + serverLevel.random.nextInt(400)); // 20-40 seconds
+                    serverLevel.addFreshEntity(eye);
+                }
+            }
         }
 
         // Natural SporeBloom placement at high density
@@ -258,8 +330,24 @@ public final class InfectionLogic {
         return count;
     }
 
+    /**
+     * Retorna densidade de infecção do chunk. No server, lê do SavedData se disponível.
+     * No client, faz scan direto.
+     */
     public static float getChunkInfectionDensity(Level level, BlockPos pos) {
-        net.minecraft.world.level.chunk.LevelChunk chunk = level.getChunkAt(pos);
+        if (level instanceof ServerLevel serverLevel) {
+            br.com.murilo.liberthia.data.ChunkInfectionData data =
+                    br.com.murilo.liberthia.data.ChunkInfectionData.get(serverLevel);
+            float cached = data.getDensity(new net.minecraft.world.level.ChunkPos(pos));
+            if (cached > 0) return cached;
+        }
+        return getChunkInfectionDensityDirect(level, new net.minecraft.world.level.ChunkPos(pos));
+    }
+
+    /**
+     * Scan direto de blocos no chunk — usado para atualizar o SavedData e no client.
+     */
+    public static float getChunkInfectionDensityDirect(Level level, net.minecraft.world.level.ChunkPos chunkPos) {
         int count = 0;
         int samples = 0;
 
@@ -267,7 +355,7 @@ public final class InfectionLogic {
             for (int z = 0; z < 16; z += 2) {
                 BlockPos p = level.getHeightmapPos(
                         net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING,
-                        new BlockPos(chunk.getPos().getMinBlockX() + x, 0, chunk.getPos().getMinBlockZ() + z)
+                        new BlockPos(chunkPos.getMinBlockX() + x, 0, chunkPos.getMinBlockZ() + z)
                 );
 
                 BlockState s = level.getBlockState(p.below());
@@ -349,6 +437,7 @@ public final class InfectionLogic {
     }
 
     public static void tickLiving(LivingEntity entity, IInfectionData data) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         if (data.isImmune() || entity.level().isClientSide) return;
 
         ExposureData exposure = scanExposureGeneric(entity);
@@ -452,6 +541,43 @@ public final class InfectionLogic {
         }
     }
 
+    /**
+     * F11: Symbiosis — prolonged 50-75% infection grants benefits with growing debuffs.
+     */
+    private static void tickSymbiosis(ServerPlayer player, IInfectionData data) {
+        int infection = data.getInfection();
+        int timer = data.getSymbiosisTimer();
+
+        if (infection >= 50 && infection <= 75) {
+            data.setSymbiosisTimer(timer + 1);
+        } else {
+            data.setSymbiosisTimer(Math.max(0, timer - 2));
+        }
+
+        timer = data.getSymbiosisTimer();
+
+        // Activate symbiosis mutation at 5 minutes
+        if (timer >= 6000 && !data.hasMutation("SYMBIOSIS")) {
+            data.addMutation("SYMBIOSIS");
+        } else if (timer < 6000 && data.hasMutation("SYMBIOSIS")) {
+            data.removeMutation("SYMBIOSIS");
+        }
+
+        if (data.hasMutation("SYMBIOSIS")) {
+            // Benefits: Night Vision + Speed I
+            player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 220, 0, true, false, true));
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 0, true, false, true));
+
+            // Growing debuffs based on timer
+            if (timer > 12000 && player.tickCount % 20 == 0 && player.level().random.nextFloat() < 0.05f) {
+                player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, true, false, true));
+            }
+            if (timer > 24000 && player.tickCount % 200 == 0) {
+                player.hurt(player.damageSources().wither(), 1.0f);
+            }
+        }
+    }
+
     private static void applyMutationEffects(ServerPlayer player, IInfectionData data) {
         if (data.getInfection() < 50) return;
 
@@ -481,6 +607,35 @@ public final class InfectionLogic {
         }
         if (data.hasMutation("STATIC_DISCHARGE") && player.isInWaterOrRain()) {
             player.hurt(player.damageSources().magic(), 1.0f);
+        }
+        // Lore: Horus survivors carry lasting psychological trauma
+        // Periodic Darkness flashes + Nausea in the Nether, occasional damage from "flashbacks"
+        if (data.hasMutation("HORUS_TRAUMA")) {
+            if (player.level().dimension() == net.minecraft.world.level.Level.NETHER) {
+                // In the Nether — trauma is intense
+                if (player.tickCount % 100 == 0) {
+                    player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 60, 0, true, false, true));
+                }
+                if (player.tickCount % 300 == 0) {
+                    player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 80, 0, true, false, true));
+                    player.displayClientMessage(
+                            net.minecraft.network.chat.Component.translatable("chat.liberthia.horus_flashback")
+                                    .withStyle(net.minecraft.ChatFormatting.DARK_RED, net.minecraft.ChatFormatting.ITALIC),
+                            false);
+                }
+                if (player.tickCount % 400 == 0) {
+                    player.hurt(player.damageSources().magic(), 2.0f);
+                }
+            } else {
+                // Outside Nether — mild PTSD flashes
+                if (player.tickCount % 600 == 0 && player.level().random.nextFloat() < 0.3f) {
+                    player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 40, 0, true, false, true));
+                }
+            }
+        }
+        // Lore: Yellow+Clear attraction makes it harder to move away
+        if (data.hasMutation("YELLOW_ATTRACTION")) {
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 0, true, false, true));
         }
     }
 
@@ -525,6 +680,7 @@ public final class InfectionLogic {
     }
 
     private static void sync(ServerPlayer player, IInfectionData data, ExposureData exposure) {
+        float density = getChunkInfectionDensity(player.serverLevel(), player.blockPosition());
         ModNetwork.sendToPlayer(player, new S2CInfectionSyncPacket(
                 data.getInfection(),
                 data.getPermanentHealthPenalty(),
@@ -532,11 +688,13 @@ public final class InfectionLogic {
                 exposure.rawDarkPressure(),
                 exposure.blockedExposure(),
                 exposure.armorProtectionPercent(),
-                data.getMutations()
+                data.getMutations(),
+                density
         ));
     }
 
     public static void applyDerivedEffects(ServerPlayer player, IInfectionData data) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         AttributeInstance attribute = player.getAttribute(Attributes.MAX_HEALTH);
         if (attribute == null) return;
 
@@ -797,6 +955,30 @@ public final class InfectionLogic {
                 if (gameTime % 120L == 0L && player.getRandom().nextFloat() < 0.25F) {
                     player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 1, true, false, true));
                     player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 0, true, false, true));
+                }
+
+                // Lore: Yellow+Clear amplifies emotions, makes players want to stay
+                // "Attraction Effect" — the more Yellow+Clear, the harder to leave
+                int attraction = Math.min(yellow, clear);
+                if (attraction >= 300) {
+                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 0, true, false, true));
+                    if (gameTime % 200L == 0L) {
+                        String[] attractionKeys = {
+                                "chat.liberthia.attraction1",
+                                "chat.liberthia.attraction2",
+                                "chat.liberthia.attraction3"
+                        };
+                        String key = attractionKeys[(int) (gameTime / 200L) % attractionKeys.length];
+                        player.displayClientMessage(
+                                net.minecraft.network.chat.Component.translatable(key)
+                                        .withStyle(net.minecraft.ChatFormatting.GOLD, net.minecraft.ChatFormatting.ITALIC),
+                                false);
+                    }
+                }
+                if (attraction >= 600) {
+                    // Strong attraction — even harder to leave
+                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 1, true, false, true));
+                    data.addMutation("YELLOW_ATTRACTION");
                 }
             }
 
@@ -1277,6 +1459,7 @@ public final class InfectionLogic {
     }
 
     public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         processDarkFluidActivity(level, center);
 
         int particles = countDarkMatterParticles(level, center, FLUID_SCAN_RADIUS, FLUID_SCAN_VERTICAL);

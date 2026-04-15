@@ -6,12 +6,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.AABB;
 
 public class InfectionVeinBlock extends Block {
 
@@ -34,11 +38,20 @@ public class InfectionVeinBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return;
         }
 
         int age = state.getValue(AGE);
+
+        // F2: Count connected veins for network boost
+        int connectedVeins = 0;
+        for (Direction dir : Direction.values()) {
+            if (level.getBlockState(pos.relative(dir)).is(this)) {
+                connectedVeins++;
+            }
+        }
 
         // Grow age
         if (age < 3 && random.nextFloat() < 0.15f) {
@@ -46,8 +59,9 @@ public class InfectionVeinBlock extends Block {
             age = age + 1;
         }
 
-        // Spread along stone surfaces underground (below Y=50)
-        if (pos.getY() < 50 && random.nextFloat() < 0.20f) {
+        // Spread scales with connected veins
+        float spreadChance = 0.20f * (1.0f + connectedVeins * 0.25f);
+        if (pos.getY() < 50 && random.nextFloat() < spreadChance) {
             spreadUnderground(level, pos, random);
         }
 
@@ -57,23 +71,28 @@ public class InfectionVeinBlock extends Block {
             return;
         }
 
-        // Emit pulsating particles
-        if (random.nextFloat() < 0.15f) {
+        // F2: 4+ connected veins = apply Slowness to nearby entities
+        if (connectedVeins >= 4 && random.nextFloat() < 0.15f) {
+            AABB area = new AABB(pos).inflate(4);
+            for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area)) {
+                entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 0, false, false, true));
+            }
+        }
+
+        // Particles scale with connected veins
+        int particleCount = 2 + connectedVeins / 2;
+        if (random.nextFloat() < 0.15f + connectedVeins * 0.05f) {
             level.sendParticles(
                     ParticleTypes.SQUID_INK,
                     pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                    2,
-                    0.2D, 0.2D, 0.2D,
-                    0.01D
+                    particleCount, 0.2D, 0.2D, 0.2D, 0.01D
             );
         }
         if (random.nextFloat() < 0.10f) {
             level.sendParticles(
                     ParticleTypes.SMOKE,
                     pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                    1,
-                    0.15D, 0.15D, 0.15D,
-                    0.005D
+                    1, 0.15D, 0.15D, 0.15D, 0.005D
             );
         }
     }
@@ -118,6 +137,7 @@ public class InfectionVeinBlock extends Block {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         if (random.nextFloat() < 0.3f) {
             level.addParticle(
                     ParticleTypes.SQUID_INK,
