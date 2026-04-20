@@ -225,6 +225,9 @@ public final class ModItems {
     public static final RegistryObject<Item> CLEAR_MATTER_BUCKET = ITEMS.register("clear_matter_bucket",
             () -> new BucketItem(ModFluids.CLEAR_MATTER.get(), new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
+    public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",
+            () -> new BucketItem(ModFluids.BLOOD.get(), new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
     public static final RegistryObject<Item> YELLOW_MATTER_BUCKET = ITEMS.register("yellow_matter_bucket",
             () -> new BucketItem(ModFluids.YELLOW_MATTER.get(), new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
@@ -246,8 +249,8 @@ public final class ModItems {
     public static final RegistryObject<Item> WORKER_BADGE = ITEMS.register("worker_badge",
             () -> new WorkerBadgeItem(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> FIELD_JOURNAL = ITEMS.register("field_journal",
-            () -> new FieldJournalItem(new Item.Properties().stacksTo(1)));
+//    public static final RegistryObject<Item> FIELD_JOURNAL = ITEMS.register("field_journal",
+//            () -> new FieldJournalItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> EYE_OF_HORUS = ITEMS.register("eye_of_horus",
             () -> new EyeOfHorusItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC)));
@@ -293,6 +296,33 @@ public final class ModItems {
     public static final RegistryObject<Item> FREEZE_STAFF = ITEMS.register("freeze_staff",
             () -> new FreezeStaffItem(new Item.Properties().stacksTo(1).durability(50).rarity(net.minecraft.world.item.Rarity.EPIC)));
 
+    // --- Interrogation Sticks ---
+    public static final RegistryObject<Item> MARKING_STICK = ITEMS.register("marking_stick",
+            () -> new MarkingStickItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> EXECUTION_STICK = ITEMS.register("execution_stick",
+            () -> new ExecutionStickItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // --- Summon Staff ---
+    public static final RegistryObject<Item> SUMMON_STAFF = ITEMS.register("summon_staff",
+            () -> new SummonStaffItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // --- Order Weapons ---
+    public static final RegistryObject<Item> HOLY_BLADE = ITEMS.register("holy_blade",
+            () -> new HolyBladeItem(net.minecraft.world.item.Tiers.NETHERITE, 8, -2.2F,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)
+                            .fireResistant()));
+
+    public static final RegistryObject<Item> HOLY_HAMMER = ITEMS.register("holy_hammer",
+            () -> new HolyHammerItem(net.minecraft.world.item.Tiers.NETHERITE, 9, -3.0F,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)
+                            .fireResistant()));
+
+    // --- Blood Fountain ---
+    public static final RegistryObject<Item> BLOOD_FOUNTAIN_ITEM = ITEMS.register("blood_fountain",
+            () -> new BlockItem(ModBlocks.BLOOD_FOUNTAIN.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
     // --- New Infection Blocks (F3, F7, F8, F9) ---
     public static final RegistryObject<Item> SCARRED_EARTH_ITEM = ITEMS.register("scarred_earth",
             () -> new BlockItem(ModBlocks.SCARRED_EARTH.get(), new Item.Properties()));
@@ -308,6 +338,208 @@ public final class ModItems {
 
     public static final RegistryObject<Item> INFECTION_HEART_ITEM = ITEMS.register("infection_heart",
             () -> new BlockItem(ModBlocks.INFECTION_HEART.get(), new Item.Properties()));
+
+    // --- Blood Ritual / Proliferation ---
+    public static final RegistryObject<Item> CHALK = ITEMS.register("chalk",
+            () -> new ChalkItem(new Item.Properties().stacksTo(1).durability(32)));
+
+    public static final RegistryObject<Item> BLOOD_CURE_PILL = ITEMS.register("blood_cure_pill",
+            () -> new BloodCurePillItem(new Item.Properties().stacksTo(16)
+                    .rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> CHALK_SYMBOL_ITEM = ITEMS.register("chalk_symbol",
+            () -> new BlockItem(ModBlocks.CHALK_SYMBOL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLOOD_ALTAR_ITEM = ITEMS.register("blood_altar",
+            () -> new BlockItem(ModBlocks.BLOOD_ALTAR.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> LIVING_FLESH_ITEM = ITEMS.register("living_flesh",
+            () -> new BlockItem(ModBlocks.LIVING_FLESH.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> FLESH_MOTHER_ITEM = ITEMS.register("flesh_mother",
+            () -> new BlockItem(ModBlocks.FLESH_MOTHER.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> ATTACKING_FLESH_ITEM = ITEMS.register("attacking_flesh",
+            () -> new BlockItem(ModBlocks.ATTACKING_FLESH.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> BLOOD_INFECTION_BLOCK_ITEM = ITEMS.register("blood_infection_block",
+            () -> new BlockItem(ModBlocks.BLOOD_INFECTION_BLOCK.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> BLOOD_INFESTATION_BLOCK_ITEM = ITEMS.register("blood_infestation_block",
+            () -> new BlockItem(ModBlocks.BLOOD_INFESTATION_BLOCK.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> BLOOD_VOLCANO_ITEM = ITEMS.register("blood_volcano",
+            () -> new BlockItem(ModBlocks.BLOOD_VOLCANO.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+
+    public static final RegistryObject<Item> BLOOD_SPIKE_ITEM = ITEMS.register("blood_spike",
+            () -> new BlockItem(ModBlocks.BLOOD_SPIKE.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // --- Blood terrain variants as BlockItems ---
+    public static final RegistryObject<Item> BLOOD_DIRT_ITEM = ITEMS.register("blood_dirt",
+            () -> new BlockItem(ModBlocks.BLOOD_DIRT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_SAND_ITEM = ITEMS.register("blood_sand",
+            () -> new BlockItem(ModBlocks.BLOOD_SAND.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_STONE_ITEM = ITEMS.register("blood_stone",
+            () -> new BlockItem(ModBlocks.BLOOD_STONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_COAL_ORE_ITEM = ITEMS.register("blood_coal_ore",
+            () -> new BlockItem(ModBlocks.BLOOD_COAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_IRON_ORE_ITEM = ITEMS.register("blood_iron_ore",
+            () -> new BlockItem(ModBlocks.BLOOD_IRON_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_GOLD_ORE_ITEM = ITEMS.register("blood_gold_ore",
+            () -> new BlockItem(ModBlocks.BLOOD_GOLD_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_DIAMOND_ORE_ITEM = ITEMS.register("blood_diamond_ore",
+            () -> new BlockItem(ModBlocks.BLOOD_DIAMOND_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_REDSTONE_ORE_ITEM = ITEMS.register("blood_redstone_ore",
+            () -> new BlockItem(ModBlocks.BLOOD_REDSTONE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_LAPIS_ORE_ITEM = ITEMS.register("blood_lapis_ore",
+            () -> new BlockItem(ModBlocks.BLOOD_LAPIS_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_EMERALD_ORE_ITEM = ITEMS.register("blood_emerald_ore",
+            () -> new BlockItem(ModBlocks.BLOOD_EMERALD_ORE.get(), new Item.Properties()));
+
+    // --- Blood Armor (strong tanky) ---
+    public static final RegistryObject<Item> BLOOD_HELMET = ITEMS.register("blood_helmet",
+            () -> new BloodArmorItem(ArmorItem.Type.HELMET,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> BLOOD_CHESTPLATE = ITEMS.register("blood_chestplate",
+            () -> new BloodArmorItem(ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> BLOOD_LEGGINGS = ITEMS.register("blood_leggings",
+            () -> new BloodArmorItem(ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> BLOOD_BOOTS = ITEMS.register("blood_boots",
+            () -> new BloodArmorItem(ArmorItem.Type.BOOTS,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+
+    // --- Order Armor ---
+    public static final RegistryObject<Item> ORDER_HELMET = ITEMS.register("order_helmet",
+            () -> new OrderArmorItem(ArmorItem.Type.HELMET,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> ORDER_CHESTPLATE = ITEMS.register("order_chestplate",
+            () -> new OrderArmorItem(ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> ORDER_LEGGINGS = ITEMS.register("order_leggings",
+            () -> new OrderArmorItem(ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> ORDER_BOOTS = ITEMS.register("order_boots",
+            () -> new OrderArmorItem(ArmorItem.Type.BOOTS,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // --- Order / Blood Spell Items ---
+    public static final RegistryObject<Item> HOLY_SMITE_STAFF = ITEMS.register("holy_smite_staff",
+            () -> new HolySmiteStaffItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> SANCTIFY_ORB = ITEMS.register("sanctify_orb",
+            () -> new SanctifyOrbItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLOOD_SCYTHE = ITEMS.register("blood_scythe",
+            () -> new BloodScytheItem(net.minecraft.world.item.Tiers.NETHERITE, 9, -2.4F,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+
+    // --- A Mãe (Fase 2) ---
+    public static final RegistryObject<Item> HEART_OF_FLESH_BLOCK_ITEM = ITEMS.register("heart_of_flesh_block",
+            () -> new BlockItem(ModBlocks.HEART_OF_FLESH.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> HEART_OF_FLESH_ITEM = ITEMS.register("heart_of_flesh",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> HEART_OF_THE_MOTHER = ITEMS.register("heart_of_the_mother",
+            () -> new Item(new Item.Properties().stacksTo(1)
+                    .rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> SANGUINE_CORE = ITEMS.register("sanguine_core",
+            () -> new Item(new Item.Properties().stacksTo(1)
+                    .rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> SANGUINE_ESSENCE = ITEMS.register("sanguine_essence",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> FLESH_MOTHER_BOSS_EGG =
+            ITEMS.register("flesh_mother_boss_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.FLESH_MOTHER_BOSS, 0x3a0000, 0xc41818,
+                            new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // --- Ordem × Sangue (Fase 5) ---
+    public static final RegistryObject<Item> ORDER_SHRINE_ITEM = ITEMS.register("order_shrine",
+            () -> new BlockItem(ModBlocks.ORDER_SHRINE.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> DESECRATED_HOLY_RELIC = ITEMS.register("desecrated_holy_relic",
+            () -> new br.com.murilo.liberthia.item.DesecratedHolyRelicItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORDER_PALADIN_EGG = ITEMS.register("order_paladin_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.ORDER_PALADIN, 0xffffff, 0xdbb75b, new Item.Properties()));
+
+    // --- Armas & Magia (Fase 4) ---
+    public static final RegistryObject<Item> HEMOMANCER_STAFF = ITEMS.register("hemomancer_staff",
+            () -> new br.com.murilo.liberthia.item.HemomancerStaffItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> BLOOD_BOW = ITEMS.register("blood_bow",
+            () -> new br.com.murilo.liberthia.item.BloodBowItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> BLOOD_RITUAL_DAGGER = ITEMS.register("blood_ritual_dagger",
+            () -> new br.com.murilo.liberthia.item.BloodRitualDaggerItem(
+                    net.minecraft.world.item.Tiers.IRON, 5, -2.0F,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> BLOOD_PACT_AMULET = ITEMS.register("blood_pact_amulet",
+            () -> new br.com.murilo.liberthia.item.BloodPactAmuletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+
+    // --- Alquimia de Sangue (Fase 3) ---
+    public static final RegistryObject<Item> BLOOD_CAULDRON_ITEM = ITEMS.register("blood_cauldron",
+            () -> new BlockItem(ModBlocks.BLOOD_CAULDRON.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> BLOOD_VIAL = ITEMS.register("blood_vial",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> BLOOD_VIAL_FILLED = ITEMS.register("blood_vial_filled",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> CONGEALED_BLOOD = ITEMS.register("congealed_blood",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FLESH_THREAD = ITEMS.register("flesh_thread",
+            () -> new Item(new Item.Properties()));
+
+    // --- Culto do Sangue (Fase 1) ---
+    public static final RegistryObject<Item> BLOODY_RAG = ITEMS.register("bloody_rag",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RUSTED_DAGGER = ITEMS.register("rusted_dagger",
+            () -> new br.com.murilo.liberthia.item.RustedDaggerItem(new Item.Properties()));
+    public static final RegistryObject<Item> PRIEST_SIGIL = ITEMS.register("priest_sigil",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> TOME_OF_THE_MOTHER = ITEMS.register("tome_of_the_mother",
+            () -> new br.com.murilo.liberthia.item.lore.TomeOfTheMotherItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> TOME_OF_THE_PILGRIM = ITEMS.register("tome_of_the_pilgrim",
+            () -> new br.com.murilo.liberthia.item.lore.TomeOfThePilgrimItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> BLOOD_CULTIST_EGG =
+            ITEMS.register("blood_cultist_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.BLOOD_CULTIST, 0x5a0d0d, 0x2b0000, new Item.Properties()));
+
+    public static final RegistryObject<Item> BLOOD_PRIEST_EGG =
+            ITEMS.register("blood_priest_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.BLOOD_PRIEST, 0x3a0000, 0x7a1212, new Item.Properties()));
+
+    public static final RegistryObject<Item> WOUNDED_PILGRIM_EGG =
+            ITEMS.register("wounded_pilgrim_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.WOUNDED_PILGRIM, 0x6b5a4a, 0x9a3a3a, new Item.Properties()));
+
+    // --- Spawn eggs for new worms ---
+    public static final RegistryObject<Item> FLESH_CRAWLER_EGG =
+            ITEMS.register("flesh_crawler_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.FLESH_CRAWLER, 0x5a0000, 0x8b2b2b, new Item.Properties()));
+
+    public static final RegistryObject<Item> GORE_WORM_EGG =
+            ITEMS.register("gore_worm_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.GORE_WORM, 0x3a0000, 0xc43a3a, new Item.Properties()));
 
     private ModItems() {
     }

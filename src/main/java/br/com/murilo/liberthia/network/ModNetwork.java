@@ -8,6 +8,8 @@ import br.com.murilo.liberthia.entry.FieldJournalSaveC2SPacket;
 import br.com.murilo.liberthia.entry.TrackerC2SPacket;
 import br.com.murilo.liberthia.entry.TrackerDataS2CPacket;
 import br.com.murilo.liberthia.entry.WorkerVoicePlayC2SPacket;
+import br.com.murilo.liberthia.network.packet.OpenTeleportExecutorScreenS2CPacket;
+import br.com.murilo.liberthia.network.packet.TeleportExecutorActionC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkRegistry;
@@ -117,6 +119,23 @@ public final class ModNetwork {
                 S2CInfectionTogglePacket::encode,
                 S2CInfectionTogglePacket::decode,
                 S2CInfectionTogglePacket::handle
+        );
+
+        // --- Teleport tools packets ---
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenTeleportExecutorScreenS2CPacket.class,
+                OpenTeleportExecutorScreenS2CPacket::encode,
+                OpenTeleportExecutorScreenS2CPacket::decode,
+                OpenTeleportExecutorScreenS2CPacket::handle
+        );
+
+        CHANNEL.registerMessage(
+                packetId++,
+                TeleportExecutorActionC2SPacket.class,
+                TeleportExecutorActionC2SPacket::encode,
+                TeleportExecutorActionC2SPacket::decode,
+                TeleportExecutorActionC2SPacket::handle
         );
     }
 

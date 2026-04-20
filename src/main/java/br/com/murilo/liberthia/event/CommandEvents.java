@@ -10,5 +10,6 @@ public class CommandEvents {
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         ModCommands.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.CultCampCommand.register(event.getDispatcher());
     }
 }

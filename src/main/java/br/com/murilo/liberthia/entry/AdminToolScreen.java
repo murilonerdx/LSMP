@@ -95,13 +95,22 @@ public class AdminToolScreen extends Screen {
         this.addRenderableWidget(itemCountBox);
 
         this.addRenderableWidget(Button.builder(Component.literal("Dar"), b -> giveItem())
-                .bounds(left + 204, top + 204, 40, 18).build());
-        this.addRenderableWidget(Button.builder(Component.literal("Remover"), b -> removeItem())
-                .bounds(left + 246, top + 204, 56, 18).build());
-        this.addRenderableWidget(Button.builder(Component.literal("Ver Inv"), b -> requestInventory())
-                .bounds(left + 304, top + 204, 50, 18).build());
+                .bounds(left + 204, top + 204, 30, 18).build());
+        this.addRenderableWidget(Button.builder(Component.literal("Rem"), b -> removeItem())
+                .bounds(left + 236, top + 204, 30, 18).build());
+        // "Bloco": places block/fluid at target (count=radius, 0=single, >=1=cube)
+        this.addRenderableWidget(Button.builder(Component.literal("Bloco"), b -> placeBlock())
+                .bounds(left + 268, top + 204, 34, 18).build());
+        this.addRenderableWidget(Button.builder(Component.literal("Inv"), b -> requestInventory())
+                .bounds(left + 304, top + 204, 28, 18).build());
         this.addRenderableWidget(Button.builder(Component.literal("Pos"), b -> sendPosition())
-                .bounds(left + 356, top + 204, 36, 18).build());
+                .bounds(left + 334, top + 204, 26, 18).build());
+        // Water shortcut
+        this.addRenderableWidget(Button.builder(Component.literal("Wt"), b -> { itemIdBox.setValue("minecraft:water"); placeBlock(); })
+                .bounds(left + 362, top + 204, 14, 18).build());
+        // Dark matter fluid shortcut
+        this.addRenderableWidget(Button.builder(Component.literal("Dk"), b -> { itemIdBox.setValue("liberthia:dark_matter"); placeBlock(); })
+                .bounds(left + 378, top + 204, 14, 18).build());
 
         // Section C row 2 — monsters
         entityIdBox = new EditBox(this.font, left + 6, top + 224, 168, 14, Component.literal("Entity ID"));
@@ -374,6 +383,16 @@ public class AdminToolScreen extends Screen {
         int count = parseInt(entityCountBox.getValue(), 1, 1, 32);
         ModNetwork.CHANNEL.sendToServer(
                 AdminActionC2SPacket.summonMonster(target.uuid(), entityIdBox.getValue().trim(), count)
+        );
+    }
+
+    private void placeBlock() {
+        AdminPlayerEntry target = selectedPlayer();
+        if (target == null) return;
+        // Use itemCountBox as radius: 0 = single block at feet, 1..8 = cube around
+        int radius = parseInt(itemCountBox.getValue(), 0, 0, 8);
+        ModNetwork.CHANNEL.sendToServer(
+                AdminActionC2SPacket.placeBlock(target.uuid(), itemIdBox.getValue().trim(), radius)
         );
     }
 

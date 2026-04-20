@@ -102,6 +102,44 @@ public final class ModFluids {
     public static final RegistryObject<FlowingFluid> FLOWING_YELLOW_MATTER = FLUIDS.register("flowing_yellow_matter",
             () -> new ForgeFlowingFluid.Flowing(yellowMatterProperties()));
 
+    // ---------------- BLOOD ----------------
+    private static final ResourceLocation BLOOD_STILL =
+            ResourceLocation.fromNamespaceAndPath("liberthia", "block/blood_still");
+    private static final ResourceLocation BLOOD_FLOW =
+            ResourceLocation.fromNamespaceAndPath("liberthia", "block/blood_flow");
+
+    public static final RegistryObject<FluidType> BLOOD_TYPE = FLUID_TYPES.register("blood_type", () ->
+            new FluidType(FluidType.Properties.create()
+                    .density(1500)
+                    .viscosity(2500)
+                    .lightLevel(2)
+                    .canSwim(true)
+                    .canDrown(true)
+                    .supportsBoating(false)
+                    .canHydrate(false)) {
+                @Override
+                public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+                    consumer.accept(new IClientFluidTypeExtensions() {
+                        @Override public ResourceLocation getStillTexture() { return BLOOD_STILL; }
+                        @Override public ResourceLocation getFlowingTexture() { return BLOOD_FLOW; }
+                        @Override public ResourceLocation getOverlayTexture() { return BLOOD_STILL; }
+                        @Override public ResourceLocation getRenderOverlayTexture(Minecraft mc) { return UNDERWATER; }
+                        @Override public int getTintColor() { return 0xFFFFFFFF; }
+                        @Override
+                        public Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
+                                                       int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
+                            return new Vector3f(0.55F, 0.05F, 0.05F);
+                        }
+                    });
+                }
+            });
+
+    public static final RegistryObject<FlowingFluid> BLOOD = FLUIDS.register("blood",
+            () -> new ForgeFlowingFluid.Source(bloodProperties()));
+
+    public static final RegistryObject<FlowingFluid> FLOWING_BLOOD = FLUIDS.register("flowing_blood",
+            () -> new ForgeFlowingFluid.Flowing(bloodProperties()));
+
     private ModFluids() {
     }
 
@@ -147,6 +185,16 @@ public final class ModFluids {
                 .levelDecreasePerBlock(1)
                 .slopeFindDistance(4)
                 .tickRate(5)
+                .explosionResistance(100.0F);
+    }
+
+    private static ForgeFlowingFluid.Properties bloodProperties() {
+        return new ForgeFlowingFluid.Properties(BLOOD_TYPE, BLOOD, FLOWING_BLOOD)
+                .bucket(ModItems.BLOOD_BUCKET)
+                .block(ModBlocks.BLOOD_FLUID_BLOCK)
+                .levelDecreasePerBlock(2)
+                .slopeFindDistance(3)
+                .tickRate(10)
                 .explosionResistance(100.0F);
     }
 

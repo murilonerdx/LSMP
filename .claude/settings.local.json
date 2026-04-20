@@ -41,7 +41,27 @@
       "Bash(bash /tmp/check_translations.sh)",
       "Bash(ls -la /c/Users/T-GAMER/Desktop/liberthia_mod/src/main/resources/assets/liberthia/textures/block/*matter*fluid*)",
       "Bash(pip install:*)",
-      "Bash(python -c ':*)"
+      "Bash(python -c ':*)",
+      "Bash(ls /c/Users/T-GAMER/Desktop/liberthia_mod/*.py)",
+      "Bash(python generate_improved_textures.py)",
+      "Bash(py -3 generate_order_blood_textures.py)",
+      "Bash(python generate_blood_ritual_textures.py)",
+      "Bash(python gen_worm_textures.py)",
+      "Bash(python gen_blood_textures_v2.py)",
+      "Bash(python -c \"from PIL import Image; print\\(Image.__version__\\)\")",
+      "Bash(python gen_textures_v3.py)",
+      "Bash(set PYTHONIOENCODING=utf-8)",
+      "Bash(python -c \"import sys; sys.stdout.reconfigure\\(encoding='utf-8'\\); exec\\(open\\('gen_textures_v3.py'\\).read\\(\\)\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(./gradlew compileJava -x test)",
+      "Bash(./gradlew compileJava -q)",
+      "Bash(python gen_blood_variants.py)",
+      "Bash(python gen_cult_textures.py)",
+      "Bash(python gen_mother_textures.py)",
+      "Bash(python gen_alchemy_textures.py)",
+      "Bash(./gradlew compileJava --rerun-tasks)",
+      "Bash(python gen_weapons_textures.py)",
+      "Bash(python gen_order_textures.py)"
     ]
   }
 }

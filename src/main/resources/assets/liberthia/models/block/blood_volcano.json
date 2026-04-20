@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "liberthia:block/blood_volcano_top",
+    "bottom": "liberthia:block/blood_volcano_bottom",
+    "side": "liberthia:block/blood_volcano_side"
+  }
+}

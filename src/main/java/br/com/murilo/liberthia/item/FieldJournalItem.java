@@ -1,6 +1,5 @@
 package br.com.murilo.liberthia.item;
 
-import br.com.murilo.liberthia.entry.FieldJournalScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -40,7 +39,7 @@ public class FieldJournalItem extends Item {
             if (player.isShiftKeyDown()) {
                 // Edit mode — only ops can edit but GUI check is server-side via packet
                 DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
-                        net.minecraft.client.Minecraft.getInstance().setScreen(new FieldJournalScreen(hand)));
+                        br.com.murilo.liberthia.item.client.ClientScreenHelper.openFieldJournal(hand));
             } else {
                 // Read mode — show current page
                 displayCurrentPage(player, stack);

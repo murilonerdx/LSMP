@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  C",
+    " S ",
+    "E  "
+  ],
+  "key": {
+    "C": {"item": "liberthia:sanguine_core"},
+    "S": {"item": "minecraft:blaze_rod"},
+    "E": {"item": "liberthia:sanguine_essence"}
+  },
+  "result": {"item": "liberthia:hemomancer_staff", "count": 1}
+}

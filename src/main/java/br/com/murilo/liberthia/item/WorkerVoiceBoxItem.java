@@ -1,7 +1,6 @@
 package br.com.murilo.liberthia.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -26,7 +25,7 @@ public class WorkerVoiceBoxItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (level.isClientSide) {
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
-                    Minecraft.getInstance().setScreen(new br.com.murilo.liberthia.entry.WorkerVoiceScreen()));
+                    br.com.murilo.liberthia.item.client.ClientScreenHelper.openWorkerVoice());
         }
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
     }

@@ -49,12 +49,13 @@ public class InfectionToggleCommand {
             ModNetwork.sendToPlayer(player, packet);
         }
 
+        // broadcastToAdmins=false: silent to everyone except the executor.
         if (enabled) {
             source.sendSuccess(() -> Component.literal(
-                    "§a[Liberthia] §fInfecção §aLIGADA§f — blocos de infecção agora proliferam."), true);
+                    "§a[Liberthia] §fInfecção §aLIGADA§f — blocos de infecção agora proliferam."), false);
         } else {
             source.sendSuccess(() -> Component.literal(
-                    "§c[Liberthia] §fInfecção §cDESLIGADA§f — blocos podem ser colocados mas não proliferam."), true);
+                    "§c[Liberthia] §fInfecção §cDESLIGADA§f — blocos podem ser colocados mas não proliferam."), false);
         }
 
         return 1;

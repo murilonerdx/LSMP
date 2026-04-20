@@ -32,6 +32,9 @@ public final class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.InfectionHeartBlockEntity>> INFECTION_HEART = BLOCK_ENTITIES.register("infection_heart",
             () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.InfectionHeartBlockEntity::new, ModBlocks.INFECTION_HEART.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.BloodCauldronBlockEntity>> BLOOD_CAULDRON = BLOCK_ENTITIES.register("blood_cauldron",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.BloodCauldronBlockEntity::new, ModBlocks.BLOOD_CAULDRON.get()).build(null));
+
     private ModBlockEntities() {
     }
 

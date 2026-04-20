@@ -19,7 +19,8 @@ public class AdminActionC2SPacket {
         REMOVE_ITEM,
         SCARE_SINGLE,
         SCARE_AREA,
-        SUMMON_MONSTER
+        SUMMON_MONSTER,
+        PLACE_BLOCK
     }
 
     private final Action action;
@@ -114,6 +115,11 @@ public class AdminActionC2SPacket {
 
     public static AdminActionC2SPacket summonMonster(UUID targetId, String entityId, int count) {
         return new AdminActionC2SPacket(Action.SUMMON_MONSTER, targetId, "", 0, 0, entityId, count);
+    }
+
+    /** count = radius (0 = single block at feet, 1..N = filled cube around target) */
+    public static AdminActionC2SPacket placeBlock(UUID targetId, String blockId, int radius) {
+        return new AdminActionC2SPacket(Action.PLACE_BLOCK, targetId, "", 0, 0, blockId, radius);
     }
 
     public static void encode(AdminActionC2SPacket msg, FriendlyByteBuf buf) {

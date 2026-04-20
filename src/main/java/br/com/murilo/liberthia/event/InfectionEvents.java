@@ -107,6 +107,16 @@ public class InfectionEvents {
                     newEnergy.setStabilized(oldEnergy.isStabilized());
                 }));
 
+        // Copy Blood Infection drain NBT from original → new (death preserves infection).
+        double drain = event.getOriginal().getPersistentData()
+                .getDouble(br.com.murilo.liberthia.effect.BloodInfectionEffect.NBT_DRAIN);
+        if (drain > 0) {
+            event.getEntity().getPersistentData()
+                    .putDouble(br.com.murilo.liberthia.effect.BloodInfectionEffect.NBT_DRAIN, drain);
+            // Reapply the MAX_HEALTH modifier on the new entity
+            br.com.murilo.liberthia.effect.BloodInfectionApplier.restore(event.getEntity());
+        }
+
         // Invalida novamente as capabilities do original após a cópia
         event.getOriginal().invalidateCaps();
     }
@@ -271,27 +281,23 @@ public class InfectionEvents {
         }
 
         player.getCapability(ModCapabilities.INFECTION).ifPresent(data -> {
-            boolean carrying = InfectionLogic.isCarryingDarkMatter(player);
-            boolean hasHeavySteps = data.hasMutation("HEAVY_STEPS");
+            // Só reduz pulo se realmente houver infecção ativa.
+            // HEAVY_STEPS sozinho não penaliza (caso contrário, mesmo após pílula, o pulo ficaria ruim para sempre).
             int infection = data.getInfection();
+            if (infection < 20) return;
+            if (data.isImmune()) return;
 
-            if (infection >= 20 || carrying || hasHeavySteps) {
-                // Se estiver carregando dark matter ou tiver mutação de passos pesados,
-                // o pulo é bem mais afetado.
-                // Caso contrário, a redução depende do nível de infecção.
-                double factor = (carrying || hasHeavySteps)
-                        ? 0.35D
-                        : Math.max(0.55D, 1.0D - (infection / 140.0D));
+            boolean carrying = InfectionLogic.isCarryingDarkMatter(player);
+            double factor = carrying
+                    ? 0.45D
+                    : Math.max(0.60D, 1.0D - (infection / 160.0D));
 
-                player.setDeltaMovement(
-                        player.getDeltaMovement().x,
-                        player.getDeltaMovement().y * factor,
-                        player.getDeltaMovement().z
-                );
-
-                // Marca que o movimento foi alterado para sincronização/atualização
-                player.hurtMarked = true;
-            }
+            player.setDeltaMovement(
+                    player.getDeltaMovement().x,
+                    player.getDeltaMovement().y * factor,
+                    player.getDeltaMovement().z
+            );
+            player.hurtMarked = true;
         });
     }
 
@@ -308,6 +314,9 @@ public class InfectionEvents {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             serverPlayer.getCapability(ModCapabilities.INFECTION)
                     .ifPresent(data -> InfectionLogic.sync(serverPlayer, data));
+
+            // Reapply Blood Infection HP-drain modifier from SavedData persistence.
+            br.com.murilo.liberthia.effect.BloodInfectionApplier.restore(serverPlayer);
 
             // Load persistent infection toggle and sync to this client
             br.com.murilo.liberthia.data.InfectionToggleData toggleData =
@@ -381,6 +390,8 @@ public class InfectionEvents {
     public void onCommandsRegister(RegisterCommandsEvent event) {
         PurgeInfectionCommand.register(event.getDispatcher());
         br.com.murilo.liberthia.command.InfectionToggleCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.ExecutionStickCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.SummonStaffCommand.register(event.getDispatcher());
     }
 
     /**

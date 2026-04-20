@@ -28,6 +28,41 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.CLONE_PLAYER.get(), br.com.murilo.liberthia.client.renderer.ClonePlayerRenderer::new);
         event.registerEntityRenderer(ModEntities.DARK_CONSCIOUSNESS.get(), br.com.murilo.liberthia.client.renderer.DarkConsciousnessRenderer::new);
         event.registerEntityRenderer(ModEntities.EYE_OF_HORUS.get(), br.com.murilo.liberthia.client.renderer.EyeOfHorusRenderer::new);
+        // Reuse vanilla Silverfish renderer as fast, stable base for BloodWorm
+        event.registerEntityRenderer(ModEntities.BLOOD_WORM.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.BloodWormRenderer(ctx, "blood_worm"));
+        event.registerEntityRenderer(ModEntities.FLESH_CRAWLER.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.BloodWormRenderer(ctx, "flesh_crawler"));
+        event.registerEntityRenderer(ModEntities.GORE_WORM.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.BloodWormRenderer(ctx, "gore_worm"));
+        // Blood Orb is particle-only; render as invisible using a no-op renderer
+        event.registerEntityRenderer(ModEntities.BLOOD_CULTIST.get(),
+                br.com.murilo.liberthia.client.renderer.BloodCultistRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLOOD_PRIEST.get(),
+                br.com.murilo.liberthia.client.renderer.BloodPriestRenderer::new);
+        event.registerEntityRenderer(ModEntities.WOUNDED_PILGRIM.get(),
+                br.com.murilo.liberthia.client.renderer.WoundedPilgrimRenderer::new);
+        event.registerEntityRenderer(ModEntities.HEMO_BOLT.get(),
+                br.com.murilo.liberthia.client.renderer.HemoBoltRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLEEDING_ARROW.get(),
+                net.minecraft.client.renderer.entity.TippableArrowRenderer::new);
+        event.registerEntityRenderer(ModEntities.ORDER_PALADIN.get(),
+                br.com.murilo.liberthia.client.renderer.OrderPaladinRenderer::new);
+        event.registerEntityRenderer(ModEntities.FLESH_MOTHER_BOSS.get(),
+                br.com.murilo.liberthia.client.renderer.FleshMotherBossRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLOOD_ORB.get(),
+                ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.entity.BloodOrbEntity>(ctx) {
+                    @Override public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.entity.BloodOrbEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/misc/white.png");
+                    }
+                    @Override public boolean shouldRender(br.com.murilo.liberthia.entity.BloodOrbEntity e, net.minecraft.client.renderer.culling.Frustum f, double x, double y, double z) { return false; }
+                });
+    }
+
+    @SubscribeEvent
+    public static void onRegisterLayers(net.minecraftforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(br.com.murilo.liberthia.client.model.BloodWormModel.LAYER,
+                br.com.murilo.liberthia.client.model.BloodWormModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -56,6 +91,8 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.WORMHOLE_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.CLEAR_MATTER_FLUID_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.YELLOW_MATTER_FLUID_BLOCK.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_FLUID_BLOCK.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHALK_SYMBOL.get(), RenderType.cutout());
         });
     }
 }

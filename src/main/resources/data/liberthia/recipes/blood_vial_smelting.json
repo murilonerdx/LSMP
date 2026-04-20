@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {"item": "liberthia:blood_vial_filled"},
+  "result": "liberthia:congealed_blood",
+  "experience": 0.2,
+  "cookingtime": 200
+}

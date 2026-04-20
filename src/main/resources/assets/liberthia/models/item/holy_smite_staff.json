@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {"layer0": "liberthia:item/holy_smite_staff"}
+}

@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "liberthia:block/blood_spike",
+    "tex": "liberthia:block/blood_spike"
+  },
+  "elements": [
+    {
+      "from": [1, 0, 1],
+      "to": [4, 5, 4],
+      "faces": {
+        "down":  {"uv": [0, 12, 3, 15], "texture": "#tex", "cullface": "down"},
+        "up":    {"uv": [0, 0, 3, 3], "texture": "#tex"},
+        "north": {"uv": [0, 0, 3, 5], "texture": "#tex"},
+        "south": {"uv": [0, 0, 3, 5], "texture": "#tex"},
+        "west":  {"uv": [0, 0, 3, 5], "texture": "#tex"},
+        "east":  {"uv": [0, 0, 3, 5], "texture": "#tex"}
+      }
+    },
+    {
+      "from": [8, 0, 3], "to": [12, 6, 7],
+      "faces": {
+        "down":  {"uv": [0, 10, 4, 14], "texture": "#tex", "cullface": "down"},
+        "up":    {"uv": [0, 0, 4, 4], "texture": "#tex"},
+        "north": {"uv": [0, 0, 4, 6], "texture": "#tex"},
+        "south": {"uv": [0, 0, 4, 6], "texture": "#tex"},
+        "west":  {"uv": [0, 0, 4, 6], "texture": "#tex"},
+        "east":  {"uv": [0, 0, 4, 6], "texture": "#tex"}
+      }
+    },
+    {
+      "from": [4, 0, 9], "to": [8, 4, 13],
+      "faces": {
+        "down":  {"uv": [0, 12, 4, 16], "texture": "#tex", "cullface": "down"},
+        "up":    {"uv": [0, 0, 4, 4], "texture": "#tex"},
+        "north": {"uv": [0, 0, 4, 4], "texture": "#tex"},
+        "south": {"uv": [0, 0, 4, 4], "texture": "#tex"},
+        "west":  {"uv": [0, 0, 4, 4], "texture": "#tex"},
+        "east":  {"uv": [0, 0, 4, 4], "texture": "#tex"}
+      }
+    },
+    {
+      "from": [11, 0, 10], "to": [14, 3, 13],
+      "faces": {
+        "down":  {"uv": [0, 13, 3, 16], "texture": "#tex", "cullface": "down"},
+        "up":    {"uv": [0, 0, 3, 3], "texture": "#tex"},
+        "north": {"uv": [0, 0, 3, 3], "texture": "#tex"},
+        "south": {"uv": [0, 0, 3, 3], "texture": "#tex"},
+        "west":  {"uv": [0, 0, 3, 3], "texture": "#tex"},
+        "east":  {"uv": [0, 0, 3, 3], "texture": "#tex"}
+      }
+    }
+  ]
+}

@@ -36,9 +36,6 @@ public class InfectionHeartBlockEntity extends BlockEntity {
             serverLevel.sendParticles(ParticleTypes.SCULK_CHARGE_POP,
                     pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                     12, 1.0, 1.0, 1.0, 0.05);
-            serverLevel.sendParticles(ParticleTypes.HEART,
-                    pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
-                    2, 0.3, 0.2, 0.3, 0.01);
         }
 
         // Spawn CorruptedZombie every 200 ticks if player within 32 blocks

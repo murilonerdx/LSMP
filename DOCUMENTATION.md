@@ -29,6 +29,7 @@
 20. [Comandos](#20-comandos)
 21. [Receitas](#21-receitas)
 22. [Registro Completo de Arquivos](#22-registro-completo-de-arquivos)
+23. [Sistema de Sangue e Carne (Blood System)](#23-sistema-de-sangue-e-carne-blood-system)
 
 ---
 
@@ -937,3 +938,211 @@ data/minecraft/tags/blocks/ (2 arquivos)
 ---
 
 > **Nota:** Esta documentacao cobre o estado completo do mod ate a versao v1 (branch `v1`). O mod compila com sucesso com apenas warnings de deprecacao do `ResourceLocation`.
+
+---
+
+## 23. Sistema de Sangue e Carne (Blood System)
+
+O **Blood System** é um segundo vetor de corrupção paralelo à Matéria Escura. Enquanto a matéria escura corrompe via radiação/DNA, o sangue corrompe via **infecção orgânica**: altar invoca carne viva que drena HP máximo, worms emergem do solo infectado, e partículas de sangue vermelho impregnam o terreno. Tudo gira em torno do **Blood Altar**.
+
+### 23.1 Princípio de Design
+
+- **Dependência do altar**: todo bloco de carne/sangue só se propaga se houver um `BloodAltarBlock` não contido em raio de 20–24 blocos. Quebrar o altar **para** a infecção imediatamente (blocos existentes permanecem, mas não proliferam).
+- **Anti-flutuação**: antes de converter um bloco alvo, verifica-se `level.getBlockState(target.below()).isFaceSturdy(level, target.below(), Direction.UP)`. Chega de carne no ar.
+- **Contenção por Chalk**: 4+ `CHALK_SYMBOL` em raio 4 param o spread (mesma mecânica do FleshMother, reutilizada via `BloodAltarBlock.countChalkSymbols`).
+- **Partículas vermelhas reais**: `BloodParticles.BLOOD/BLOOD_BRIGHT/BLOOD_DARK` (DustParticleOptions RGB). Nenhum `DAMAGE_INDICATOR` (aquele ícone de coração rachado) é usado no tema de sangue — foi substituído em todos os 14 arquivos.
+
+### 23.2 Blocos do Sistema
+
+Localização: `src/main/java/br/com/murilo/liberthia/logic/`
+
+| Bloco | Arquivo | Função |
+|---|---|---|
+| `BLOOD_ALTAR` | `BloodAltarBlock.java` | Coração do sistema. Scheduled-tick a cada 8–16 ticks (escalonado via `level.scheduleTick(pos, this, 5)` no `onPlace`). Spreada infecção, converte terreno em carne/sangue/infection, spawna worms, emite partículas. Contido por 4+ chalks. |
+| `FLESH_MOTHER` | `FleshMotherBlock.java` | Nó de proliferação secundário. Converte blocos adjacentes em `LIVING_FLESH` (80%) ou `ATTACKING_FLESH` (20%). Requer altar ativo + anti-float. |
+| `LIVING_FLESH` | `LivingFleshBlock.java` | Carne passiva. Dano AoE leve (0.5HP) em entidades próximas. Spawna worms (`BLOOD_WORM`/`GORE_WORM`/`FLESH_CRAWLER`) com chance 1/14, cap 6 em raio 14. |
+| `ATTACKING_FLESH` | `AttackingFleshBlock.java` | Carne agressiva. `scheduleTick` a cada 20–30 ticks. Cospe arco parabólico de 14 partículas de sangue + `CRIMSON_SPORE` em direção à vítima mais próxima (raio 4). Dano 2.5HP + `BLOOD_INFECTION` por 200 ticks. Som: `SLIME_ATTACK` + `SLIME_SQUISH`. |
+| `BLOOD_INFECTION_BLOCK` | `BloodInfectionBlock.java` | Terreno infectado. Spreada para grass/dirt/stone/sand/cobble/podzol/mycelium com anti-float + altar-check. Infeta entidades em raio 2.5 com `BLOOD_INFECTION` II. `stepOn` aplica 400 ticks do efeito. |
+| `BLOOD_INFESTATION_BLOCK` | `BloodInfestationBlock.java` | Bloco com worms. Spawna 1 worm acima a cada randomTick se jogador em raio 16 (cap 4 em raio 8). `destroy` libera 2–4 worms irritados. |
+| `BLOOD_SPIKE` | `BloodSpikeBlock.java` | Espetos de osso/sangue. Hitbox `Block.box(0,0,0, 16,4,16)`. `entityInside` aplica 1.5 de dano mágico + `BLOOD_INFECTION` 100 ticks. `animateTick` emite 4–6 partículas constantes subindo. |
+| `BLOOD_VOLCANO` | `BloodVolcanoBlock.java` | Erupção orgânica — emite sangue para cima periodicamente. |
+| `BLOOD_FOUNTAIN` | `BloodFountainBlock.java` | Fonte decorativa que pulsa sangue. |
+| `BLOOD_FLUID_BLOCK` | `ModBlocks` | Bloco de fluido (`liquid_block`) associado ao fluido `BLOOD` registrado em `ModFluids`. |
+| `CHALK_SYMBOL` | `ChalkSymbolBlock.java` | Decal transparente (thin_block + cutout RenderType). Textura RGBA com alpha=0 no fundo. 4+ em raio 4 contém o altar. |
+
+### 23.3 Fluido de Sangue (`BLOOD`)
+
+`src/main/java/br/com/murilo/liberthia/registry/ModFluids.java`
+
+- **FluidType**: `BLOOD_TYPE` — density 1500, viscosity 2500, lightLevel 2, `canSwim=true`, `canDrown=true`, `supportsBoating=false`, `canHydrate=false`.
+- **Texturas**: `liberthia:block/blood_still` e `liberthia:block/blood_flow` (animadas, 8 frames, frametime 4 ticks via `.mcmeta`).
+- **Fog subaquático**: `(0.55, 0.05, 0.05)` vermelho profundo.
+- **Fluids**: `BLOOD` (source) + `FLOWING_BLOOD` + `BLOOD_BUCKET` (via `ModItems.BLOOD_BUCKET`).
+- **Properties**: `levelDecreasePerBlock=2`, `slopeFindDistance=3`, `tickRate=10`, `explosionResistance=100`.
+
+### 23.4 Partículas Centralizadas
+
+`src/main/java/br/com/murilo/liberthia/logic/BloodParticles.java`
+
+```java
+public static final DustParticleOptions BLOOD        = new DustParticleOptions(new Vector3f(0.55F, 0.02F, 0.02F), 1.2F);
+public static final DustParticleOptions BLOOD_BRIGHT = new DustParticleOptions(new Vector3f(0.80F, 0.05F, 0.05F), 1.0F);
+public static final DustParticleOptions BLOOD_DARK   = new DustParticleOptions(new Vector3f(0.28F, 0.01F, 0.01F), 1.3F);
+```
+
+Usado por: todos os 9 blocos de sangue em `logic/`, as 3 entidades worm (`BloodWormEntity`, `GoreWormEntity`, `FleshCrawlerEntity`), `BloodOrbEntity` e `BloodScytheItem`. Substituiu todos os `ParticleTypes.DAMAGE_INDICATOR` que criavam o visual de "corações do chão".
+
+### 23.5 Efeito `BLOOD_INFECTION`
+
+**Arquivos:**
+- `effect/BloodInfectionEffect.java` — MobEffect HARMFUL, cor `0x8B0000`.
+- `effect/BloodInfectionApplier.java` — aplica/remove/restaura o `AttributeModifier` de `MAX_HEALTH`.
+- `effect/BloodInfectionData.java` — `SavedData` persistido no `ServerLevel`, mapa `UUID → drain`.
+- `event/InfectionEvents.java` — handlers `PlayerLoggedIn`, `PlayerEvent.Clone`.
+- `registry/ModEffects.java` — registro como `blood_infection`.
+- `textures/mob_effect/blood_infection.png` — ícone 18×18 (gota escura com veias).
+
+**Mecânica de drenagem:**
+1. `BloodInfectionEffect.applyEffectTick` roda todo tick (via `isDurationEffectTick = true`).
+2. A cada 120 ticks (6s), incrementa `NBT_DRAIN` em `0.5 + 0.5 * amplifier` HP (máx 18).
+3. A cada 40 ticks, aplica `0.5 + 0.5 * amplifier` de dano mágico.
+4. `BloodInfectionApplier.apply(entity, drain)` adiciona `AttributeModifier` fixo (UUID `e5a2c3f1-7b4d-4a9e-8f1c-2a3b4c5d6e7f`, operação ADDITION, valor `-drain`) em `Attributes.MAX_HEALTH`.
+5. Para players: `BloodInfectionData.setDrain(uuid, drain)` persiste no level SavedData → sobrevive restart/dimensão/morte.
+6. No `PlayerLoggedIn` e no `PlayerEvent.Clone` (respawn), `BloodInfectionApplier.restore(player)` re-aplica o modifier lendo da SavedData + copia NBT.
+
+### 23.6 Pílula de Cura (`BloodCurePillItem`)
+
+`src/main/java/br/com/murilo/liberthia/item/BloodCurePillItem.java`
+
+- `UseAnim.DRINK`, `getUseDuration = 24` (1.2s), `stacksTo(16)`, `isFoil = true`.
+- `use()` chama `player.startUsingItem(hand)` e retorna `InteractionResultHolder.success(...)`.
+- `finishUsingItem` faz, na ordem:
+  1. `user.removeEffect(BLOOD_INFECTION)`.
+  2. `BloodInfectionApplier.clear(user)` — remove modifier, zera NBT, limpa `SavedData`.
+  3. **Remove TODOS os efeitos `MobEffectCategory.HARMFUL`** (não só BLOOD_INFECTION).
+  4. Safety-net: remove manualmente o modifier pelo UUID fixo caso `clear` tenha falhado.
+  5. `user.setHealth(user.getMaxHealth())` — restaura todos os corações.
+  6. Aplica `REGENERATION II` (10s) + `ABSORPTION` (15s).
+  7. Partículas `HEART` + `EFFECT` + som `BEACON_ACTIVATE`.
+  8. `displayClientMessage("§aInfecção curada! Corações restaurados.")`.
+
+### 23.7 Entidades (Worms)
+
+`src/main/java/br/com/murilo/liberthia/entity/`
+
+- **`BloodWormEntity`** — worm básico, estende `Silverfish` (AI vanilla).
+- **`FleshCrawlerEntity`** — aplica `BLOOD_INFECTION` no ataque.
+- **`GoreWormEntity`** — aplica `MobEffects.POISON` + `BLOOD_INFECTION`, mais tanky.
+- **`BloodOrbEntity`** — projétil lançado pelo altar/scythe, cria trail de `BloodParticles.BLOOD` e aplica infecção no impacto.
+
+**Renderização**: `BloodWormModel`/`BloodWormRenderer` (`client/`). Segmentos articulados. Layer registrada em `ClientModEvents.RegisterLayerDefinitions`. Não renderiza como silverfish vanilla.
+
+**Spawn sources**:
+- `BloodAltarBlock.trySpawnWormAtBlood` — escaneia 13×13 ao redor do altar, cap 6 worms em raio 14.
+- `LivingFleshBlock.randomTick` — 1/14 de chance, requer altar+player, cap 6.
+- `BloodInfestationBlock.randomTick` — player em raio 16, cap 4.
+
+### 23.8 Aba Criativa
+
+Todos os blocos/itens de sangue aparecem em `ModCreativeTabs` (aba Liberthia): `BLOOD_ALTAR`, `FLESH_MOTHER`, `LIVING_FLESH`, `ATTACKING_FLESH`, `BLOOD_INFECTION_BLOCK`, `BLOOD_INFESTATION_BLOCK`, `BLOOD_SPIKE`, `BLOOD_VOLCANO`, `BLOOD_FOUNTAIN`, `CHALK_SYMBOL`, `BLOOD_BUCKET`, `BLOOD_CURE_PILL`, `BLOOD_SCYTHE`, armaduras Blood.
+
+### 23.9 Armaduras Blood/Order
+
+Texturas em `textures/models/armor/`:
+- `blood_layer_1.png` / `blood_layer_2.png` (paleta: base `#6B0A0A`, veia `#3C0505`, highlight `#C22020`)
+- `order_layer_1.png` / `order_layer_2.png` (paleta: base `#D4AF37`, veia `#9E7314`, highlight `#FFF8DC`)
+
+**Layout UV 64×32 (vanilla diamond)** — regiões pintadas por `gen_textures_v3.py::armor_layer()`:
+
+| Região | Coordenadas | Layer 1 | Layer 2 |
+|---|---|---|---|
+| Head faces | (0,0)–(32,16) | ✓ | — |
+| Hat (inflated) | (32,0)–(64,16) | ✓ | — |
+| Body | (16,16)–(40,32) | ✓ | ✓ |
+| Arm | (40,16)–(56,32) | ✓ | — |
+| Leg | (0,16)–(16,32) | ✓ | ✓ |
+
+Áreas fora dessas regiões ficam com alpha=0 (transparente) — crítico para evitar que o Minecraft estique "pixels" virando cubos gigantes no modelo do player. Acabamento: rim highlight nas bordas + vein streaks procedurais + base fBm.
+
+### 23.10 Geração Procedural de Texturas
+
+`gen_textures_v3.py` gera o pacote completo de texturas de sangue:
+
+**Blocos** (16×16): `living_flesh`, `attacking_flesh`, `flesh_mother`, `blood_infection_block`, `blood_infestation_block`, `blood_altar_top/side/bottom`, `blood_volcano_top/side/bottom`, `blood_spike`.
+**Chalk**: `chalk_symbol.png` (RGBA transparente real).
+**Fluido**: `blood_still.png` (16×128, 8 frames), `blood_flow.png` (32×256, 8 frames) + `.mcmeta`.
+**Armaduras**: 4 PNGs 64×32 com layout vanilla correto.
+
+Algoritmos: fBm 4 oitavas, Voronoi para células, Bezier para veias, droplets aleatórios com gradiente e highlight.
+
+Execução: `python gen_textures_v3.py`.
+
+### 23.11 Fluxo de Jogo (Blood Progression)
+
+1. Player encontra `BLOOD_ALTAR` (world gen ou crafted).
+2. Ao colocar no chão, altar começa a scheduled-tick a cada 8–16 ticks.
+3. Blocos adjacentes (com chão sólido) viram `BLOOD_INFECTION_BLOCK`/`LIVING_FLESH`/`ATTACKING_FLESH`/`BLOOD_SPIKE` aleatoriamente. Água vira `BLOOD_FLUID`.
+4. Worms começam a emergir da superfície infectada (cap 6 em raio 14).
+5. Player pisa em carne/spike → efeito `BLOOD_INFECTION` aplicado → HP máximo começa a drenar (0.5–1.5 HP a cada 6s).
+6. Drain persiste após morte/relog (SavedData + Clone copy).
+7. Player pode:
+   - **Conter**: desenhar 4+ `CHALK_SYMBOL` em raio 4 do altar → spread para.
+   - **Destruir**: quebrar o altar → blocos existentes permanecem mas não proliferam (dependência via `BloodAltarBlock.hasActiveAltarNearby`).
+   - **Curar**: `BLOOD_CURE_PILL` → HP máximo restaurado + todos os debuffs removidos + Regen/Absorption.
+
+### 23.12 Arquivos do Sistema de Sangue
+
+**Java (src/main/java/br/com/murilo/liberthia/):**
+```
+logic/
+  BloodAltarBlock.java          (altar + spread master + hasActiveAltarNearby)
+  BloodInfectionBlock.java      (terreno infectado, altar-dep + anti-float)
+  BloodInfestationBlock.java    (spawn de worms)
+  BloodSpikeBlock.java          (espetos)
+  BloodFountainBlock.java       (fonte)
+  BloodVolcanoBlock.java        (vulcão)
+  LivingFleshBlock.java         (carne passiva + worm spawn)
+  FleshMotherBlock.java         (proliferação)
+  AttackingFleshBlock.java      (cospe sangue em arco)
+  ChalkSymbolBlock.java         (contenção)
+  BloodParticles.java           (presets DustParticleOptions)
+effect/
+  BloodInfectionEffect.java
+  BloodInfectionApplier.java
+  BloodInfectionData.java       (SavedData)
+event/
+  InfectionEvents.java          (login + clone handlers)
+entity/
+  BloodWormEntity.java
+  FleshCrawlerEntity.java
+  GoreWormEntity.java
+  BloodOrbEntity.java
+item/
+  BloodCurePillItem.java
+  BloodScytheItem.java
+client/
+  BloodWormModel.java
+  BloodWormRenderer.java
+```
+
+**Resources (src/main/resources/assets/liberthia/):**
+```
+blockstates/          blood_altar, blood_infection_block, blood_infestation_block,
+                      blood_spike, blood_volcano, blood_fountain, living_flesh,
+                      attacking_flesh, flesh_mother, chalk_symbol, blood_fluid
+models/block/         (mesmos nomes + flat model para fluid, thin_block para chalk)
+models/item/          (idem + pill + scythe)
+textures/block/       blood_still.png+mcmeta, blood_flow.png+mcmeta, blood_altar_*,
+                      living_flesh, attacking_flesh, flesh_mother, blood_infection_block,
+                      blood_infestation_block, blood_spike, blood_volcano_*, chalk_symbol
+textures/mob_effect/  blood_infection.png      (ícone do HUD)
+textures/models/armor/blood_layer_1.png, blood_layer_2.png
+data/liberthia/loot_tables/blocks/  blood_spike.json + demais blocos
+lang/                 pt_br.json, en_us.json  (entradas block.liberthia.blood_*, effect.liberthia.blood_infection)
+```
+
+**Script:** `gen_textures_v3.py` na raiz do projeto.
+
+---
+
+> **Nota:** Esta documentacao cobre o estado completo do mod ate a versao v1 (branch `v1`). O mod compila com sucesso com apenas warnings de deprecacao do `ResourceLocation`. O **Sistema de Sangue** (seção 23) é o vetor de corrupção orgânica paralelo à Matéria Escura, com sua própria cadeia de infecção, persistência de dano via `SavedData`, e cura única via `BLOOD_CURE_PILL`.

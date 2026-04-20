@@ -1,7 +1,6 @@
 package br.com.murilo.liberthia.item;
 
 import br.com.murilo.liberthia.entry.TrackerC2SPacket;
-import br.com.murilo.liberthia.entry.TrackerScreen;
 import br.com.murilo.liberthia.logic.TrackerManager;
 import br.com.murilo.liberthia.network.ModNetwork;
 import net.minecraft.ChatFormatting;
@@ -66,7 +65,7 @@ public class ExpeditionTrackerItem extends Item {
                 UUID targetId = tag.getUUID(TAG_TARGET_UUID);
                 String name = tag.getString(TAG_TARGET_NAME);
                 DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
-                        net.minecraft.client.Minecraft.getInstance().setScreen(new TrackerScreen(targetId, name)));
+                        br.com.murilo.liberthia.item.client.ClientScreenHelper.openTracker(targetId, name));
                 ModNetwork.CHANNEL.sendToServer(new TrackerC2SPacket(targetId));
             }
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);

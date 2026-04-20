@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GQG",
+    "GGG"
+  ],
+  "key": {
+    "G": {"item": "minecraft:gold_ingot"},
+    "Q": {"item": "minecraft:quartz_block"}
+  },
+  "result": {"item": "liberthia:order_shrine", "count": 1}
+}

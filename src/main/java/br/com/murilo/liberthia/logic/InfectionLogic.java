@@ -54,11 +54,29 @@ public final class InfectionLogic {
     private InfectionLogic() {
     }
 
-    public static void tick(ServerPlayer player, IInfectionData data) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) {
-            if (data.getInfection() > 0) data.setInfection(0);
-            return;
+    /** Infection origin range: only blocks within this radius of an InfectionHeart can be infected. */
+    public static final double INFECTION_ORIGIN_RANGE = 20.0;
+
+    /** Returns true if target is within range of an InfectionHeart (the origin). */
+    public static boolean isInInfectionRange(ServerLevel level, BlockPos pos) {
+        int r = (int) Math.ceil(INFECTION_ORIGIN_RANGE);
+        BlockPos.MutableBlockPos m = new BlockPos.MutableBlockPos();
+        for (int dx = -r; dx <= r; dx += 4) {
+            for (int dy = -r; dy <= r; dy += 4) {
+                for (int dz = -r; dz <= r; dz += 4) {
+                    m.set(pos.getX() + dx, pos.getY() + dy, pos.getZ() + dz);
+                    if (!level.isLoaded(m)) continue;
+                    if (level.getBlockState(m).is(ModBlocks.INFECTION_HEART.get())) {
+                        if (pos.distSqr(m) <= INFECTION_ORIGIN_RANGE * INFECTION_ORIGIN_RANGE) return true;
+                    }
+                }
+            }
         }
+        return false;
+    }
+
+    public static void tick(ServerPlayer player, IInfectionData data) {
+        boolean disabled = br.com.murilo.liberthia.config.DevMode.ACTIVE;
         boolean immuneNow = data.isImmune();
         if (immuneNow && data.getInfection() > 0) {
             data.setInfection(0);
@@ -117,8 +135,12 @@ public final class InfectionLogic {
         applyCustomEffects(player, data);
         applyMutationEffects(player, data);
         applyIsolation(player, data);
-        spreadCorruption(player, data);
-        spreadNeutralMatters(player, exposure);
+        // Block spread is disabled when DevMode.ACTIVE (infection OFF),
+        // but players still receive infection/mutation/damage effects.
+        if (!disabled) {
+            spreadCorruption(player, data);
+            spreadNeutralMatters(player, exposure);
+        }
 
         if (player.tickCount % 40 == 0) {
             processDarkFluidActivity(player.serverLevel(), player.blockPosition());
@@ -126,6 +148,15 @@ public final class InfectionLogic {
 
         if (!immuneNow && data.getStage() >= 2 && player.level().getGameTime() % 120L == 0L) {
             player.hurt(player.damageSources().magic(), 1.0F);
+        }
+
+        // Direct proximity damage — fires even when infection is disabled.
+        // Closer/stronger dark matter = more damage. Immune players are safe.
+        if (!immuneNow && exposure.effectiveDarkPressure() > 0 && player.level().getGameTime() % 40L == 0L) {
+            float dmg = 0.5F + Math.min(2.5F, exposure.effectiveDarkPressure() * 0.15F);
+            if (exposure.immersedInDark()) dmg += 1.0F;
+            if (exposure.carryingDarkMatter()) dmg += 0.5F;
+            player.hurt(player.damageSources().magic(), dmg);
         }
 
         if ((data.getStage() >= 3 || exposure.immersedInDark()) && player.level().getGameTime() % 200L == 0L) {
@@ -514,6 +545,11 @@ public final class InfectionLogic {
             return;
         }
 
+        // Only spread corruption near infection origin (InfectionHeart)
+        if (!isInInfectionRange(serverLevel, entity.blockPosition())) {
+            return;
+        }
+
         float chance = Math.min(0.12f, 0.03f * data.getStage());
         if (serverLevel.random.nextFloat() >= chance) {
             return;
@@ -694,7 +730,6 @@ public final class InfectionLogic {
     }
 
     public static void applyDerivedEffects(ServerPlayer player, IInfectionData data) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         AttributeInstance attribute = player.getAttribute(Attributes.MAX_HEALTH);
         if (attribute == null) return;
 

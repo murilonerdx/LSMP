@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " FT",
+    "P T",
+    " FT"
+  ],
+  "key": {
+    "F": {"item": "liberthia:flesh_thread"},
+    "T": {"item": "minecraft:string"},
+    "P": {"item": "liberthia:priest_sigil"}
+  },
+  "result": {"item": "liberthia:blood_bow", "count": 1}
+}

@@ -1,171 +1,139 @@
-"""Generate 16x16 pixel textures for new Liberthia blocks and items."""
 from PIL import Image, ImageDraw
-import random, os
+import os, random, math
 
-BLOCK_DIR = "src/main/resources/assets/liberthia/textures/block"
-ITEM_DIR = "src/main/resources/assets/liberthia/textures/item"
-os.makedirs(BLOCK_DIR, exist_ok=True)
-os.makedirs(ITEM_DIR, exist_ok=True)
-
-def noise_fill(img, base_rgb, var=20):
-    """Fill image with noisy pixels around a base color."""
-    px = img.load()
-    for y in range(16):
-        for x in range(16):
-            r = max(0, min(255, base_rgb[0] + random.randint(-var, var)))
-            g = max(0, min(255, base_rgb[1] + random.randint(-var, var)))
-            b = max(0, min(255, base_rgb[2] + random.randint(-var, var)))
-            px[x, y] = (r, g, b, 255)
+BASE = r"C:\Users\T-GAMER\Desktop\liberthia_mod\src\main\resources\assets\liberthia\textures"
+os.makedirs(f"{BASE}/item", exist_ok=True)
+os.makedirs(f"{BASE}/mob_effect", exist_ok=True)
 
 def save(img, path):
-    img.save(path)
-    print(f"  Created: {path}")
+    full = f"{BASE}/{path}"
+    os.makedirs(os.path.dirname(full), exist_ok=True)
+    img.save(full)
+    print("saved", path)
 
-# --- BLOCK TEXTURES ---
-
-# Corrupted Stone - dark purple stone
-img = Image.new("RGBA", (16, 16))
-noise_fill(img, (60, 30, 80), 15)
-# Add stone-like cracks
+# Gravity Trap
+img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
 d = ImageDraw.Draw(img)
-d.line([(3,5),(7,6),(10,4)], fill=(40,15,55,255))
-d.line([(2,11),(6,12),(9,10)], fill=(40,15,55,255))
-save(img, f"{BLOCK_DIR}/corrupted_stone.png")
+d.ellipse([3, 3, 12, 12], fill=(10, 0, 20, 255))
+for r in range(6, 2, -1):
+    a = 100 + r*20
+    d.ellipse([8-r, 8-r, 8+r, 8+r], outline=(120 + r*10, 30, 180, a))
+d.ellipse([7, 7, 9, 9], fill=(200, 100, 255, 255))
+for _ in range(10):
+    x = random.randint(1, 14); y = random.randint(1, 14)
+    if abs(x-8) + abs(y-8) > 6:
+        d.point((x, y), fill=(180, 80, 220, 200))
+save(img, "item/gravity_trap.png")
 
-# Infection Vein - dark veins on stone
-img = Image.new("RGBA", (16, 16))
-noise_fill(img, (80, 80, 85), 10)  # Stone background
+# Revelation Lens
+img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
 d = ImageDraw.Draw(img)
-# Purple veins
+d.ellipse([2, 4, 13, 11], fill=(200, 240, 255, 255), outline=(80, 160, 200, 255))
+d.ellipse([5, 5, 10, 10], fill=(0, 180, 220, 255))
+d.ellipse([6, 6, 9, 9], fill=(0, 30, 60, 255))
+d.point((7, 6), fill=(255, 255, 255, 255))
+for a in [0, 45, 90, 135]:
+    rad = math.radians(a)
+    x = int(8 + math.cos(rad) * 7); y = int(7 + math.sin(rad) * 4)
+    if 0 <= x < 16 and 0 <= y < 16:
+        d.point((x, y), fill=(180, 240, 255, 200))
+save(img, "item/revelation_lens.png")
+
+# Gravity Anchor
+img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+d = ImageDraw.Draw(img)
+d.rectangle([7, 2, 9, 12], fill=(60, 60, 70, 255))
+d.rectangle([3, 10, 13, 12], fill=(50, 50, 60, 255))
+d.rectangle([3, 12, 4, 14], fill=(60, 60, 70, 255))
+d.rectangle([12, 12, 13, 14], fill=(60, 60, 70, 255))
+d.ellipse([6, 0, 10, 4], outline=(80, 80, 90, 255), width=1)
 for _ in range(5):
-    x1, y1 = random.randint(0,15), random.randint(0,15)
-    x2, y2 = x1+random.randint(-4,4), y1+random.randint(-4,4)
-    d.line([(x1,y1),(x2,y2)], fill=(120,30,180,255), width=1)
-# Glow spots
-for _ in range(3):
-    x, y = random.randint(2,13), random.randint(2,13)
-    d.point((x,y), fill=(180,60,255,255))
-save(img, f"{BLOCK_DIR}/infection_vein.png")
+    x = random.randint(1, 14); y = random.randint(1, 14)
+    d.point((x, y), fill=(200, 50, 50, 120))
+save(img, "item/gravity_anchor.png")
 
-# Spore Bloom - dark flower
-img = Image.new("RGBA", (16, 16), (0,0,0,0))
+# Freeze Staff
+img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
 d = ImageDraw.Draw(img)
-# Stem
-d.line([(8,15),(8,8)], fill=(40,60,30,255), width=1)
-# Petals (dark purple)
-for dx, dy in [(-2,-1),(2,-1),(0,-3),(-1,-2),(1,-2)]:
-    d.ellipse([7+dx-1, 7+dy-1, 7+dx+1, 7+dy+1], fill=(130,30,170,255))
-# Center
-d.point((8,7), fill=(200,50,255,255))
-d.point((7,8), fill=(200,50,255,255))
-save(img, f"{BLOCK_DIR}/spore_bloom.png")
+for y in range(5, 16):
+    d.point((y-5+5, y), fill=(100, 70, 40, 255))
+    d.point((y-5+6, y), fill=(80, 55, 30, 255))
+d.polygon([(3, 5), (8, 0), (13, 5), (10, 8), (6, 8)], fill=(200, 240, 255, 255), outline=(100, 180, 220, 255))
+d.polygon([(6, 4), (8, 2), (10, 4), (9, 6), (7, 6)], fill=(255, 255, 255, 255))
+for pt in [(3, 2), (14, 3), (2, 6), (13, 7)]:
+    d.point(pt, fill=(220, 240, 255, 255))
+save(img, "item/freeze_staff.png")
 
-# Corrupted Log - side
-img = Image.new("RGBA", (16, 16))
-noise_fill(img, (55, 35, 65), 12)
+# Marking Stick
+img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
 d = ImageDraw.Draw(img)
-# Bark lines
-for y in [2,5,8,11,14]:
-    d.line([(0,y),(15,y)], fill=(35,20,45,255))
-# Purple streaks
-for _ in range(4):
-    x = random.randint(2,13)
-    d.line([(x,0),(x+1,15)], fill=(100,30,140,200))
-save(img, f"{BLOCK_DIR}/corrupted_log.png")
+for i in range(10):
+    d.point((i+3, 13-i), fill=(180, 140, 60, 255))
+    d.point((i+4, 13-i), fill=(140, 100, 40, 255))
+d.ellipse([1, 10, 5, 14], fill=(220, 30, 30, 255), outline=(100, 0, 0, 255))
+d.point((2, 11), fill=(255, 200, 200, 255))
+d.rectangle([11, 1, 14, 4], fill=(255, 220, 60, 255), outline=(180, 140, 0, 255))
+save(img, "item/marking_stick.png")
 
-# Corrupted Log - top
-img = Image.new("RGBA", (16, 16))
-noise_fill(img, (50, 30, 60), 10)
+# Execution Stick
+img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
 d = ImageDraw.Draw(img)
-# Ring pattern
-d.ellipse([3,3,12,12], outline=(80,40,100,255))
-d.ellipse([5,5,10,10], outline=(70,35,90,255))
-d.point((8,8), fill=(120,50,160,255))
-save(img, f"{BLOCK_DIR}/corrupted_log_top.png")
+for i in range(10):
+    d.point((i+3, 13-i), fill=(80, 50, 100, 255))
+    d.point((i+4, 13-i), fill=(50, 30, 70, 255))
+d.ellipse([10, 0, 15, 5], fill=(140, 50, 200, 255), outline=(60, 20, 100, 255))
+d.point((11, 1), fill=(220, 180, 255, 255))
+d.ellipse([1, 10, 5, 14], fill=(180, 30, 220, 255))
+save(img, "item/execution_stick.png")
 
-# White Matter TNT
-img = Image.new("RGBA", (16, 16))
-noise_fill(img, (230, 240, 255), 10)
+# Summon Staff
+img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
 d = ImageDraw.Draw(img)
-# TNT-like bands
-d.rectangle([0,0,15,3], fill=(200,220,255,255))
-d.rectangle([0,12,15,15], fill=(200,220,255,255))
-# Center marking
-d.text((4,5), "WM", fill=(150,180,255,255))
-save(img, f"{BLOCK_DIR}/white_matter_tnt.png")
+for i in range(10):
+    d.point((i+3, 13-i), fill=(60, 40, 30, 255))
+    d.point((i+4, 13-i), fill=(40, 25, 20, 255))
+d.polygon([(10, 5), (13, 0), (15, 5), (13, 7)], fill=(80, 220, 100, 255), outline=(30, 120, 50, 255))
+d.point((12, 2), fill=(180, 255, 200, 255))
+d.point((5, 10), fill=(150, 255, 170, 255))
+d.point((2, 13), fill=(150, 255, 170, 255))
+save(img, "item/summon_staff.png")
 
-# --- ITEM TEXTURES ---
+# Improved syringe
+img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+d = ImageDraw.Draw(img)
+d.rectangle([12, 8, 15, 9], fill=(200, 200, 210, 255))
+d.rectangle([3, 7, 12, 10], fill=(230, 240, 250, 180), outline=(150, 180, 200, 255))
+d.rectangle([4, 7, 10, 10], fill=(180, 100, 220, 230))
+d.rectangle([4, 7, 10, 7], fill=(220, 150, 240, 255))
+d.rectangle([1, 6, 3, 11], fill=(120, 120, 130, 255), outline=(60, 60, 70, 255))
+d.rectangle([0, 7, 1, 10], fill=(150, 150, 160, 255))
+d.point((5, 8), fill=(255, 220, 255, 255))
+d.point((8, 8), fill=(255, 220, 255, 200))
+save(img, "item/white_matter_syringe.png")
 
-def make_sword(name, blade_rgb, guard_rgb):
-    img = Image.new("RGBA", (16,16), (0,0,0,0))
+def effect_icon(color_main, color_accent, pattern):
+    img = Image.new("RGBA", (18, 18), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    # Blade diagonal
-    for i in range(8):
-        d.point((3+i, 12-i), fill=(*blade_rgb, 255))
-        d.point((4+i, 12-i), fill=(*[min(255,c+30) for c in blade_rgb], 255))
-    # Guard
-    d.line([(4,11),(6,9)], fill=(*guard_rgb, 255), width=1)
-    # Handle
-    d.line([(1,15),(3,13)], fill=(100,70,40,255), width=1)
-    save(img, f"{ITEM_DIR}/{name}.png")
+    d.ellipse([1, 1, 16, 16], fill=color_main)
+    d.ellipse([2, 2, 15, 15], outline=color_accent, width=1)
+    if pattern == "dark":
+        d.ellipse([6, 6, 11, 11], fill=(20, 0, 30, 255))
+        for pt in [(4, 9), (13, 9), (9, 4), (9, 13)]:
+            d.point(pt, fill=color_accent)
+    elif pattern == "radiation":
+        for a in [0, 120, 240]:
+            rad = math.radians(a)
+            x = int(9 + math.cos(rad) * 4); y = int(9 + math.sin(rad) * 4)
+            d.ellipse([x-2, y-2, x+2, y+2], fill=color_accent)
+        d.ellipse([7, 7, 10, 10], fill=(255, 255, 100, 255))
+    elif pattern == "shield":
+        d.rectangle([8, 4, 9, 13], fill=(255, 255, 255, 255))
+        d.rectangle([5, 8, 12, 9], fill=(255, 255, 255, 255))
+        d.ellipse([7, 7, 10, 10], fill=color_accent)
+    return img
 
-def make_pickaxe(name, head_rgb):
-    img = Image.new("RGBA", (16,16), (0,0,0,0))
-    d = ImageDraw.Draw(img)
-    # Handle
-    d.line([(2,14),(8,8)], fill=(100,70,40,255), width=1)
-    # Head
-    d.line([(5,5),(11,5)], fill=(*head_rgb, 255), width=2)
-    d.line([(6,4),(10,4)], fill=(*[min(255,c+20) for c in head_rgb], 255))
-    save(img, f"{ITEM_DIR}/{name}.png")
+save(effect_icon((60, 20, 80, 255), (180, 80, 220, 255), "dark"), "mob_effect/dark_infection.png")
+save(effect_icon((80, 90, 30, 255), (230, 240, 80, 255), "radiation"), "mob_effect/radiation_sickness.png")
+save(effect_icon((40, 120, 180, 255), (180, 230, 255, 255), "shield"), "mob_effect/clear_shield.png")
 
-def make_axe(name, head_rgb):
-    img = Image.new("RGBA", (16,16), (0,0,0,0))
-    d = ImageDraw.Draw(img)
-    # Handle
-    d.line([(2,14),(9,7)], fill=(100,70,40,255), width=1)
-    # Head
-    d.polygon([(8,4),(12,6),(11,9),(8,7)], fill=(*head_rgb, 255))
-    save(img, f"{ITEM_DIR}/{name}.png")
-
-# Clear Matter tools (cyan)
-make_sword("clear_matter_sword", (76,201,240), (100,220,250))
-make_pickaxe("clear_matter_pickaxe", (76,201,240))
-make_axe("clear_matter_axe", (76,201,240))
-
-# Yellow Matter tools (gold)
-make_sword("yellow_matter_sword", (244,180,0), (255,200,50))
-make_pickaxe("yellow_matter_pickaxe", (244,180,0))
-make_axe("yellow_matter_axe", (244,180,0))
-
-# Yellow Matter Shield
-img = Image.new("RGBA", (16,16), (0,0,0,0))
-d = ImageDraw.Draw(img)
-d.polygon([(8,1),(2,4),(2,11),(8,14),(14,11),(14,4)], fill=(244,180,0,255), outline=(200,150,0,255))
-d.polygon([(8,3),(4,5),(4,10),(8,12),(12,10),(12,5)], fill=(255,210,50,255))
-save(img, f"{ITEM_DIR}/yellow_matter_shield.png")
-
-# Containment Suit pieces
-for piece, color in [("helmet",(180,200,180)), ("chestplate",(160,190,170)), ("leggings",(150,180,160)), ("boots",(140,170,150))]:
-    img = Image.new("RGBA", (16,16), (0,0,0,0))
-    noise_fill(img, color, 8)
-    d = ImageDraw.Draw(img)
-    # Yellow accents
-    d.line([(3,3),(12,3)], fill=(244,180,0,255))
-    d.line([(3,12),(12,12)], fill=(244,180,0,255))
-    # Visor for helmet
-    if piece == "helmet":
-        d.rectangle([5,5,10,8], fill=(76,201,240,180))
-    save(img, f"{ITEM_DIR}/containment_suit_{piece}.png")
-
-# Protection Ruby
-img = Image.new("RGBA", (16,16), (0,0,0,0))
-d = ImageDraw.Draw(img)
-# Diamond/ruby shape
-d.polygon([(8,2),(3,7),(8,13),(13,7)], fill=(220,180,255,255), outline=(180,120,220,255))
-# Inner glow
-d.polygon([(8,4),(5,7),(8,11),(11,7)], fill=(240,220,255,255))
-d.point((8,7), fill=(255,255,255,255))
-save(img, f"{ITEM_DIR}/protection_ruby.png")
-
-print("\nAll textures generated!")
+print("Done!")

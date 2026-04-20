@@ -40,6 +40,56 @@ public final class AdminActions {
             case SCARE_SINGLE -> scareSingle(admin, getTarget(admin, packet));
             case SCARE_AREA -> scareArea(admin, getTarget(admin, packet));
             case SUMMON_MONSTER -> summonMonster(admin, getTarget(admin, packet), packet.getItemId(), packet.getItemCount());
+            case PLACE_BLOCK -> placeBlock(admin, getTarget(admin, packet), packet.getItemId(), packet.getItemCount());
+        }
+    }
+
+    /**
+     * Places any block/fluid around the target player.
+     * - id can be a block id ("minecraft:water", "liberthia:dark_matter_block") OR a fluid id ("minecraft:water", "liberthia:dark_matter").
+     * - radius 0 = single block at feet, 1..8 = filled cube around the target.
+     */
+    private static void placeBlock(ServerPlayer admin, ServerPlayer target, String blockIdText, int radius) {
+        if (target == null) return;
+        ResourceLocation id = ResourceLocation.tryParse(blockIdText);
+        if (id == null) return;
+
+        net.minecraft.world.level.block.state.BlockState state = null;
+
+        // Try as block first
+        net.minecraft.world.level.block.Block block = ForgeRegistries.BLOCKS.getValue(id);
+        if (block != null && block != net.minecraft.world.level.block.Blocks.AIR) {
+            state = block.defaultBlockState();
+        }
+
+        // Fall back to fluid (store as fluid source block)
+        if (state == null) {
+            net.minecraft.world.level.material.Fluid fluid = ForgeRegistries.FLUIDS.getValue(id);
+            if (fluid != null && fluid != net.minecraft.world.level.material.Fluids.EMPTY) {
+                state = fluid.defaultFluidState().createLegacyBlock();
+            }
+        }
+
+        if (state == null) return;
+
+        ServerLevel level = target.serverLevel();
+        int r = Mth.clamp(radius, 0, 8);
+        net.minecraft.core.BlockPos origin = target.blockPosition();
+
+        if (r == 0) {
+            level.setBlockAndUpdate(origin, state);
+            return;
+        }
+
+        for (int dx = -r; dx <= r; dx++) {
+            for (int dy = -r; dy <= r; dy++) {
+                for (int dz = -r; dz <= r; dz++) {
+                    net.minecraft.core.BlockPos p = origin.offset(dx, dy, dz);
+                    // skip the target's own body blocks so we don't suffocate instantly
+                    if (dx == 0 && dz == 0 && (dy == 0 || dy == 1)) continue;
+                    level.setBlockAndUpdate(p, state);
+                }
+            }
         }
     }
 

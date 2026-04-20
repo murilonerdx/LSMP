@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CGC",
+    "GHG",
+    "CGC"
+  ],
+  "key": {
+    "C": {"item": "liberthia:congealed_blood"},
+    "G": {"item": "minecraft:gold_ingot"},
+    "H": {"item": "liberthia:heart_of_the_mother"}
+  },
+  "result": {"item": "liberthia:blood_pact_amulet", "count": 1}
+}

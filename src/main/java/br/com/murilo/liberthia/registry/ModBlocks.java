@@ -91,6 +91,16 @@ public final class ModBlocks {
                             .replaceable()
                             .noLootTable()));
 
+    public static final RegistryObject<LiquidBlock> BLOOD_FLUID_BLOCK = BLOCKS.register("blood_fluid",
+            () -> new LiquidBlock(ModFluids.BLOOD,
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_RED)
+                            .noCollission()
+                            .strength(100.0F)
+                            .lightLevel(state -> 3)
+                            .replaceable()
+                            .noLootTable()));
+
     public static final RegistryObject<LiquidBlock> YELLOW_MATTER_FLUID_BLOCK = BLOCKS.register("yellow_matter_fluid",
             () -> new LiquidBlock(ModFluids.YELLOW_MATTER,
                     BlockBehaviour.Properties.of()
@@ -137,6 +147,11 @@ public final class ModBlocks {
                     .strength(5.0F)
                     .lightLevel(state -> 15)
                     .sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> BLOOD_FOUNTAIN = BLOCKS.register("blood_fountain",
+            () -> new br.com.murilo.liberthia.logic.BloodFountainBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .sound(SoundType.SLIME_BLOCK)));
 
     // --- Workbenches ---
     public static final RegistryObject<Block> DARK_MATTER_FORGE = BLOCKS.register("dark_matter_forge",
@@ -278,6 +293,183 @@ public final class ModBlocks {
                     .lightLevel(state -> 12)
                     .emissiveRendering((s, g, p) -> true)
                     .sound(SoundType.SCULK_CATALYST)));
+
+    // --- Blood Ritual / Proliferation ---
+    public static final RegistryObject<Block> CHALK_SYMBOL = BLOCKS.register("chalk_symbol",
+            () -> new br.com.murilo.liberthia.logic.ChalkSymbolBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.SNOW)
+                    .strength(0.1F)
+                    .noCollission()
+                    .noOcclusion()
+                    .instabreak()
+                    .sound(SoundType.SAND)));
+
+    public static final RegistryObject<Block> BLOOD_ALTAR = BLOCKS.register("blood_altar",
+            () -> new br.com.murilo.liberthia.logic.BloodAltarBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(6.0F, 20.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(state -> 7)
+                    .randomTicks()
+                    .sound(SoundType.SCULK_CATALYST)));
+
+    public static final RegistryObject<Block> LIVING_FLESH = BLOCKS.register("living_flesh",
+            () -> new br.com.murilo.liberthia.logic.LivingFleshBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(1.2F)
+                    .randomTicks()
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> ORDER_SHRINE = BLOCKS.register("order_shrine",
+            () -> new br.com.murilo.liberthia.logic.OrderShrineBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.QUARTZ)
+                    .strength(3.0F, 9.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(state -> 10)
+                    .sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> BLOOD_CAULDRON = BLOCKS.register("blood_cauldron",
+            () -> new br.com.murilo.liberthia.logic.BloodCauldronBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL)
+                    .strength(3.5F, 6.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(state -> 4)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> HEART_OF_FLESH = BLOCKS.register("heart_of_flesh",
+            () -> new br.com.murilo.liberthia.logic.HeartOfFleshBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(2.0F, 6.0F)
+                    .lightLevel(state -> 7)
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> FLESH_MOTHER = BLOCKS.register("flesh_mother",
+            () -> new br.com.murilo.liberthia.logic.FleshMotherBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(4.0F, 10.0F)
+                    .lightLevel(state -> 5)
+                    .randomTicks()
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> BLOOD_INFECTION_BLOCK = BLOCKS.register("blood_infection_block",
+            () -> new br.com.murilo.liberthia.logic.BloodInfectionBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(1.0F)
+                    .lightLevel(state -> 4)
+                    .randomTicks()
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> BLOOD_INFESTATION_BLOCK = BLOCKS.register("blood_infestation_block",
+            () -> new br.com.murilo.liberthia.logic.BloodInfestationBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(1.5F)
+                    .randomTicks()
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> BLOOD_VOLCANO = BLOCKS.register("blood_volcano",
+            () -> new br.com.murilo.liberthia.logic.BloodVolcanoBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(8.0F, 30.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(state -> 14)
+                    .emissiveRendering((s, g, p) -> true)
+                    .randomTicks()
+                    .sound(SoundType.NETHERRACK)));
+
+    public static final RegistryObject<Block> ATTACKING_FLESH = BLOCKS.register("attacking_flesh",
+            () -> new br.com.murilo.liberthia.logic.AttackingFleshBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(2.0F)
+                    .lightLevel(state -> 3)
+                    .randomTicks()
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> BLOOD_SPIKE = BLOCKS.register("blood_spike",
+            () -> new br.com.murilo.liberthia.logic.BloodSpikeBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(1.0F)
+                    .lightLevel(state -> 4)
+                    .noOcclusion()
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    // --- Blood terrain variants (infected dirt/sand/stone) ---
+    public static final RegistryObject<Block> BLOOD_DIRT = BLOCKS.register("blood_dirt",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0.5F)
+                    .sound(SoundType.GRAVEL)));
+
+    public static final RegistryObject<Block> BLOOD_SAND = BLOCKS.register("blood_sand",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0.5F)
+                    .sound(SoundType.SAND)));
+
+    public static final RegistryObject<Block> BLOOD_STONE = BLOCKS.register("blood_stone",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(1.8F, 6.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)));
+
+    // --- Blood ores ---
+    public static final RegistryObject<Block> BLOOD_COAL_ORE = BLOCKS.register("blood_coal_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(3.0F, 3.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE),
+                    UniformInt.of(0, 2)));
+
+    public static final RegistryObject<Block> BLOOD_IRON_ORE = BLOCKS.register("blood_iron_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(3.0F, 3.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE),
+                    UniformInt.of(0, 0)));
+
+    public static final RegistryObject<Block> BLOOD_GOLD_ORE = BLOCKS.register("blood_gold_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(3.0F, 3.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE),
+                    UniformInt.of(0, 0)));
+
+    public static final RegistryObject<Block> BLOOD_DIAMOND_ORE = BLOCKS.register("blood_diamond_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(3.0F, 3.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE),
+                    UniformInt.of(3, 7)));
+
+    public static final RegistryObject<Block> BLOOD_REDSTONE_ORE = BLOCKS.register("blood_redstone_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(3.0F, 3.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(s -> 6)
+                    .sound(SoundType.STONE),
+                    UniformInt.of(1, 5)));
+
+    public static final RegistryObject<Block> BLOOD_LAPIS_ORE = BLOCKS.register("blood_lapis_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(3.0F, 3.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE),
+                    UniformInt.of(2, 5)));
+
+    public static final RegistryObject<Block> BLOOD_EMERALD_ORE = BLOCKS.register("blood_emerald_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(3.0F, 3.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE),
+                    UniformInt.of(3, 7)));
 
     private ModBlocks() {
 

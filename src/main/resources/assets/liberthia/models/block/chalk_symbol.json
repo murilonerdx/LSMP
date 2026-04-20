@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:block/thin_block",
+  "textures": {
+    "particle": "liberthia:block/chalk_symbol",
+    "texture": "liberthia:block/chalk_symbol"
+  },
+  "elements": [
+    {
+      "from": [0, 0.0, 0],
+      "to": [16, 0.05, 16],
+      "faces": {
+        "up":   {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#texture"}
+      }
+    }
+  ],
+  "ambientocclusion": false
+}

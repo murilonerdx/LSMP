@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "liberthia:rusted_dagger"},
+    {"item": "minecraft:iron_ingot"},
+    {"item": "liberthia:congealed_blood"}
+  ],
+  "result": {"item": "liberthia:blood_ritual_dagger", "count": 1}
+}

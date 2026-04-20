@@ -103,7 +103,7 @@ public final class ModCreativeTabs {
                         // --- Lore ---
                         output.accept(ModItems.HOST_JOURNAL.get());
                         output.accept(ModItems.WORKER_BADGE.get());
-                        output.accept(ModItems.FIELD_JOURNAL.get());
+//                        output.accept(ModItems.FIELD_JOURNAL.get());
                         output.accept(ModItems.EYE_OF_HORUS.get());
                         output.accept(ModItems.EQUILIBRIUM_FRAGMENT.get());
                         output.accept(ModItems.EXPEDITION_TRACKER.get());
@@ -121,6 +121,90 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.WORKER_VOICE_BOX.get());
                         output.accept(ModItems.WORKER_CLONE.get());
                         output.accept(ModItems.ADMIN_TOOL.get());
+                        // --- Control & Prison Items ---
+                        output.accept(ModItems.GRAVITY_TRAP.get());
+                        output.accept(ModItems.REVELATION_LENS.get());
+                        output.accept(ModItems.GRAVITY_ANCHOR.get());
+                        output.accept(ModItems.FREEZE_STAFF.get());
+                        output.accept(ModItems.MARKING_STICK.get());
+                        output.accept(ModItems.EXECUTION_STICK.get());
+                        output.accept(ModItems.SUMMON_STAFF.get());
+                        // --- Order Weapons ---
+                        output.accept(ModItems.HOLY_BLADE.get());
+                        output.accept(ModItems.HOLY_HAMMER.get());
+                        // --- Blood Fountain ---
+                        output.accept(ModItems.BLOOD_FOUNTAIN_ITEM.get());
+                        // --- Blood Ritual / Proliferation ---
+                        output.accept(ModItems.CHALK.get());
+                        output.accept(ModItems.CHALK_SYMBOL_ITEM.get());
+                        output.accept(ModItems.BLOOD_CURE_PILL.get());
+                        output.accept(ModItems.BLOOD_ALTAR_ITEM.get());
+                        output.accept(ModItems.LIVING_FLESH_ITEM.get());
+                        output.accept(ModItems.FLESH_MOTHER_ITEM.get());
+                        output.accept(ModItems.ATTACKING_FLESH_ITEM.get());
+                        output.accept(ModItems.BLOOD_INFECTION_BLOCK_ITEM.get());
+                        output.accept(ModItems.BLOOD_INFESTATION_BLOCK_ITEM.get());
+                        output.accept(ModItems.BLOOD_VOLCANO_ITEM.get());
+                        output.accept(ModItems.BLOOD_SPIKE_ITEM.get());
+                        output.accept(ModItems.BLOOD_BUCKET.get());
+                        // --- Blood terrain variants ---
+                        output.accept(ModItems.BLOOD_DIRT_ITEM.get());
+                        output.accept(ModItems.BLOOD_SAND_ITEM.get());
+                        output.accept(ModItems.BLOOD_STONE_ITEM.get());
+                        output.accept(ModItems.BLOOD_COAL_ORE_ITEM.get());
+                        output.accept(ModItems.BLOOD_IRON_ORE_ITEM.get());
+                        output.accept(ModItems.BLOOD_GOLD_ORE_ITEM.get());
+                        output.accept(ModItems.BLOOD_DIAMOND_ORE_ITEM.get());
+                        output.accept(ModItems.BLOOD_REDSTONE_ORE_ITEM.get());
+                        output.accept(ModItems.BLOOD_LAPIS_ORE_ITEM.get());
+                        output.accept(ModItems.BLOOD_EMERALD_ORE_ITEM.get());
+                        // --- Blood Armor ---
+                        output.accept(ModItems.BLOOD_HELMET.get());
+                        output.accept(ModItems.BLOOD_CHESTPLATE.get());
+                        output.accept(ModItems.BLOOD_LEGGINGS.get());
+                        output.accept(ModItems.BLOOD_BOOTS.get());
+                        // --- Order Armor / Spells ---
+                        output.accept(ModItems.ORDER_HELMET.get());
+                        output.accept(ModItems.ORDER_CHESTPLATE.get());
+                        output.accept(ModItems.ORDER_LEGGINGS.get());
+                        output.accept(ModItems.ORDER_BOOTS.get());
+                        output.accept(ModItems.HOLY_SMITE_STAFF.get());
+                        output.accept(ModItems.SANCTIFY_ORB.get());
+                        output.accept(ModItems.BLOOD_SCYTHE.get());
+                        // --- A Mãe (Fase 2) ---
+                        output.accept(ModItems.HEART_OF_FLESH_BLOCK_ITEM.get());
+                        output.accept(ModItems.HEART_OF_FLESH_ITEM.get());
+                        output.accept(ModItems.HEART_OF_THE_MOTHER.get());
+                        output.accept(ModItems.SANGUINE_CORE.get());
+                        output.accept(ModItems.SANGUINE_ESSENCE.get());
+                        output.accept(ModItems.FLESH_MOTHER_BOSS_EGG.get());
+                        // --- Ordem × Sangue (Fase 5) ---
+                        output.accept(ModItems.ORDER_SHRINE_ITEM.get());
+                        output.accept(ModItems.DESECRATED_HOLY_RELIC.get());
+                        output.accept(ModItems.ORDER_PALADIN_EGG.get());
+                        // --- Armas & Magia (Fase 4) ---
+                        output.accept(ModItems.HEMOMANCER_STAFF.get());
+                        output.accept(ModItems.BLOOD_BOW.get());
+                        output.accept(ModItems.BLOOD_RITUAL_DAGGER.get());
+                        output.accept(ModItems.BLOOD_PACT_AMULET.get());
+                        // --- Alquimia (Fase 3) ---
+                        output.accept(ModItems.BLOOD_CAULDRON_ITEM.get());
+                        output.accept(ModItems.BLOOD_VIAL.get());
+                        output.accept(ModItems.BLOOD_VIAL_FILLED.get());
+                        output.accept(ModItems.CONGEALED_BLOOD.get());
+                        output.accept(ModItems.FLESH_THREAD.get());
+                        // --- Culto do Sangue (Fase 1) ---
+                        output.accept(ModItems.BLOODY_RAG.get());
+                        output.accept(ModItems.RUSTED_DAGGER.get());
+                        output.accept(ModItems.PRIEST_SIGIL.get());
+                        output.accept(ModItems.TOME_OF_THE_MOTHER.get());
+                        output.accept(ModItems.TOME_OF_THE_PILGRIM.get());
+                        // --- Spawn Eggs ---
+                        output.accept(ModItems.FLESH_CRAWLER_EGG.get());
+                        output.accept(ModItems.GORE_WORM_EGG.get());
+                        output.accept(ModItems.BLOOD_CULTIST_EGG.get());
+                        output.accept(ModItems.BLOOD_PRIEST_EGG.get());
+                        output.accept(ModItems.WOUNDED_PILGRIM_EGG.get());
                     })
                     .build());
 

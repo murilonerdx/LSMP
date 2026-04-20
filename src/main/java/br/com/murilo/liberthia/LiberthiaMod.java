@@ -30,6 +30,7 @@ public class LiberthiaMod {
         ModEntities.register(modBus);
         ModCapabilities.register(modBus);
         ModEffects.register(modBus);
+        ModPotions.register(modBus);
         ModBlockEntities.register(modBus);
         ModMenuTypes.register(modBus);
         ModCreativeTabs.register(modBus);

@@ -78,6 +78,95 @@ public final class ModEntities {
                             .clientTrackingRange(24)
                             .build("eye_of_horus"));
 
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.BloodWormEntity>> BLOOD_WORM =
+            ENTITY_TYPES.register("blood_worm",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.BloodWormEntity>of(br.com.murilo.liberthia.entity.BloodWormEntity::new, MobCategory.MONSTER)
+                            .sized(0.5F, 0.3F)
+                            .clientTrackingRange(8)
+                            .build("blood_worm"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.BloodOrbEntity>> BLOOD_ORB =
+            ENTITY_TYPES.register("blood_orb",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.BloodOrbEntity>of(br.com.murilo.liberthia.entity.BloodOrbEntity::new, MobCategory.MISC)
+                            .sized(0.6F, 0.6F)
+                            .clientTrackingRange(16)
+                            .updateInterval(3)
+                            .build("blood_orb"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.FleshCrawlerEntity>> FLESH_CRAWLER =
+            ENTITY_TYPES.register("flesh_crawler",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.FleshCrawlerEntity>of(br.com.murilo.liberthia.entity.FleshCrawlerEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 0.35F)
+                            .clientTrackingRange(8)
+                            .build("flesh_crawler"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.GoreWormEntity>> GORE_WORM =
+            ENTITY_TYPES.register("gore_worm",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.GoreWormEntity>of(br.com.murilo.liberthia.entity.GoreWormEntity::new, MobCategory.MONSTER)
+                            .sized(0.9F, 0.5F)
+                            .clientTrackingRange(10)
+                            .build("gore_worm"));
+
+    // --- Culto do Sangue (Fase 1) ---
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.BloodCultistEntity>> BLOOD_CULTIST =
+            ENTITY_TYPES.register("blood_cultist",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.BloodCultistEntity>of(
+                                    br.com.murilo.liberthia.entity.BloodCultistEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(10)
+                            .build("blood_cultist"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.BloodPriestEntity>> BLOOD_PRIEST =
+            ENTITY_TYPES.register("blood_priest",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.BloodPriestEntity>of(
+                                    br.com.murilo.liberthia.entity.BloodPriestEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.0F)
+                            .clientTrackingRange(12)
+                            .build("blood_priest"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.WoundedPilgrimEntity>> WOUNDED_PILGRIM =
+            ENTITY_TYPES.register("wounded_pilgrim",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.WoundedPilgrimEntity>of(
+                                    br.com.murilo.liberthia.entity.WoundedPilgrimEntity::new, MobCategory.CREATURE)
+                            .sized(0.6F, 1.8F)
+                            .clientTrackingRange(10)
+                            .build("wounded_pilgrim"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.FleshMotherBossEntity>> FLESH_MOTHER_BOSS =
+            ENTITY_TYPES.register("flesh_mother_boss",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.FleshMotherBossEntity>of(
+                                    br.com.murilo.liberthia.entity.FleshMotherBossEntity::new, MobCategory.MONSTER)
+                            .sized(2.4F, 3.2F)
+                            .clientTrackingRange(16)
+                            .fireImmune()
+                            .build("flesh_mother_boss"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.BleedingArrowEntity>> BLEEDING_ARROW =
+            ENTITY_TYPES.register("bleeding_arrow",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.BleedingArrowEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.BleedingArrowEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(8)
+                            .updateInterval(20)
+                            .build("bleeding_arrow"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.OrderPaladinEntity>> ORDER_PALADIN =
+            ENTITY_TYPES.register("order_paladin",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.OrderPaladinEntity>of(
+                                    br.com.murilo.liberthia.entity.OrderPaladinEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.0F)
+                            .clientTrackingRange(12)
+                            .build("order_paladin"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.HemoBoltEntity>> HEMO_BOLT =
+            ENTITY_TYPES.register("hemo_bolt",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.HemoBoltEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.HemoBoltEntity::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F)
+                            .clientTrackingRange(8)
+                            .updateInterval(4)
+                            .build("hemo_bolt"));
+
     private ModEntities() {}
 
     public static void register(IEventBus eventBus) {
