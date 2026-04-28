@@ -22,6 +22,7 @@ public class AdminToolScreen extends Screen {
     private static final int PANEL_H = 244;
 
     private final List<AdminPlayerEntry> players = new ArrayList<>();
+    private final List<MobEffect> allEffects = new ArrayList<>();
     private final List<MobEffect> effects = new ArrayList<>();
 
     private int selectedPlayerIndex = -1;
@@ -29,7 +30,9 @@ public class AdminToolScreen extends Screen {
     private int playerScroll = 0;
     private int effectScroll = 0;
     private int refreshTicker = 0;
+    private String effectFilter = "";
 
+    private EditBox effectSearchBox;
     private EditBox durationBox;
     private EditBox amplifierBox;
     private EditBox itemIdBox;
@@ -44,15 +47,17 @@ public class AdminToolScreen extends Screen {
 
     @Override
     protected void init() {
-        this.effects.clear();
-        this.effects.addAll(
-                ForgeRegistries.MOB_EFFECTS.getValues().stream()
-                        .sorted(Comparator.comparing(effect -> {
-                            ResourceLocation key = ForgeRegistries.MOB_EFFECTS.getKey(effect);
-                            return key == null ? "" : key.toString();
-                        }))
-                        .toList()
-        );
+        if (allEffects.isEmpty()) {
+            allEffects.addAll(
+                    ForgeRegistries.MOB_EFFECTS.getValues().stream()
+                            .sorted(Comparator.comparing(effect -> {
+                                ResourceLocation key = ForgeRegistries.MOB_EFFECTS.getKey(effect);
+                                return key == null ? "" : key.toString();
+                            }))
+                            .toList()
+            );
+        }
+        rebuildEffects();
 
         if (!players.isEmpty() && selectedPlayerIndex < 0) {
             selectedPlayerIndex = 0;
@@ -60,6 +65,19 @@ public class AdminToolScreen extends Screen {
 
         int left = (this.width - PANEL_W) / 2;
         int top = (this.height - PANEL_H) / 2;
+
+        // Effect search box — sits in the effects header row.
+        effectSearchBox = new EditBox(this.font, left + 220, top + 133, 170, 10,
+                Component.literal("Buscar efeito..."));
+        effectSearchBox.setMaxLength(48);
+        effectSearchBox.setValue(effectFilter);
+        effectSearchBox.setResponder(txt -> {
+            effectFilter = txt == null ? "" : txt;
+            effectScroll = 0;
+            selectedEffectIndex = effects.isEmpty() ? -1 : 0;
+            rebuildEffects();
+        });
+        this.addRenderableWidget(effectSearchBox);
 
         // Section B controls (effects)
         durationBox = new EditBox(this.font, left + 24, top + 184, 30, 14, Component.literal("Sec"));
@@ -139,9 +157,29 @@ public class AdminToolScreen extends Screen {
         requestPlayers();
     }
 
+    private void rebuildEffects() {
+        effects.clear();
+        String needle = effectFilter == null ? "" : effectFilter.toLowerCase(java.util.Locale.ROOT).trim();
+        if (needle.isEmpty()) {
+            effects.addAll(allEffects);
+        } else {
+            for (MobEffect e : allEffects) {
+                if (effectName(e).toLowerCase(java.util.Locale.ROOT).contains(needle)) {
+                    effects.add(e);
+                }
+            }
+        }
+        if (selectedEffectIndex >= effects.size()) {
+            selectedEffectIndex = effects.isEmpty() ? -1 : 0;
+        }
+        int max = Math.max(0, effects.size() - 3);
+        if (effectScroll > max) effectScroll = max;
+    }
+
     @Override
     public void tick() {
         super.tick();
+        if (effectSearchBox != null) effectSearchBox.tick();
         durationBox.tick();
         amplifierBox.tick();
         itemIdBox.tick();
@@ -241,7 +279,8 @@ public class AdminToolScreen extends Screen {
         }
 
         // ===== Section B: Effects (y 132..200) =====
-        guiGraphics.fill(left + 6, top + 132, left + 394, top + 144, 0xFF553388);
+        // Header strip stops before the search box (which sits at x+220).
+        guiGraphics.fill(left + 6, top + 132, left + 218, top + 144, 0xFF553388);
         guiGraphics.drawString(this.font, "POÇÕES / EFEITOS", left + 10, top + 134, 0xFFAAFF, false);
         guiGraphics.fill(left + 6, top + 144, left + 394, top + 180, 0x66000000);
 

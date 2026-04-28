@@ -8,8 +8,14 @@ import br.com.murilo.liberthia.entry.FieldJournalSaveC2SPacket;
 import br.com.murilo.liberthia.entry.TrackerC2SPacket;
 import br.com.murilo.liberthia.entry.TrackerDataS2CPacket;
 import br.com.murilo.liberthia.entry.WorkerVoicePlayC2SPacket;
+import br.com.murilo.liberthia.network.packet.OpenCommandTabletScreenS2CPacket;
+import br.com.murilo.liberthia.network.packet.OpenScriptTabletScreenS2CPacket;
 import br.com.murilo.liberthia.network.packet.OpenTeleportExecutorScreenS2CPacket;
+import br.com.murilo.liberthia.network.packet.OpenWorkerTeleporterScreenS2CPacket;
+import br.com.murilo.liberthia.network.packet.SaveCommandTabletC2SPacket;
+import br.com.murilo.liberthia.network.packet.SaveScriptTabletC2SPacket;
 import br.com.murilo.liberthia.network.packet.TeleportExecutorActionC2SPacket;
+import br.com.murilo.liberthia.network.packet.WorkerTeleporterTargetC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkRegistry;
@@ -136,6 +142,57 @@ public final class ModNetwork {
                 TeleportExecutorActionC2SPacket::encode,
                 TeleportExecutorActionC2SPacket::decode,
                 TeleportExecutorActionC2SPacket::handle
+        );
+
+        // --- Worker Teleporter (pedra de teletransporte) ---
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenWorkerTeleporterScreenS2CPacket.class,
+                OpenWorkerTeleporterScreenS2CPacket::encode,
+                OpenWorkerTeleporterScreenS2CPacket::decode,
+                OpenWorkerTeleporterScreenS2CPacket::handle
+        );
+
+        CHANNEL.registerMessage(
+                packetId++,
+                WorkerTeleporterTargetC2SPacket.class,
+                WorkerTeleporterTargetC2SPacket::encode,
+                WorkerTeleporterTargetC2SPacket::decode,
+                WorkerTeleporterTargetC2SPacket::handle
+        );
+
+        // --- Command Tablet (programmable item) ---
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenCommandTabletScreenS2CPacket.class,
+                OpenCommandTabletScreenS2CPacket::encode,
+                OpenCommandTabletScreenS2CPacket::decode,
+                OpenCommandTabletScreenS2CPacket::handle
+        );
+
+        CHANNEL.registerMessage(
+                packetId++,
+                SaveCommandTabletC2SPacket.class,
+                SaveCommandTabletC2SPacket::encode,
+                SaveCommandTabletC2SPacket::decode,
+                SaveCommandTabletC2SPacket::handle
+        );
+
+        // --- Script Tablet (LiberScript) ---
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenScriptTabletScreenS2CPacket.class,
+                OpenScriptTabletScreenS2CPacket::encode,
+                OpenScriptTabletScreenS2CPacket::decode,
+                OpenScriptTabletScreenS2CPacket::handle
+        );
+
+        CHANNEL.registerMessage(
+                packetId++,
+                SaveScriptTabletC2SPacket.class,
+                SaveScriptTabletC2SPacket::encode,
+                SaveScriptTabletC2SPacket::decode,
+                SaveScriptTabletC2SPacket::handle
         );
     }
 

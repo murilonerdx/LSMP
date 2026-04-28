@@ -205,6 +205,92 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.BLOOD_CULTIST_EGG.get());
                         output.accept(ModItems.BLOOD_PRIEST_EGG.get());
                         output.accept(ModItems.WOUNDED_PILGRIM_EGG.get());
+                        output.accept(ModItems.BLOOD_MAGE_EGG.get());
+                        output.accept(ModItems.BLOOD_HOUND_EGG.get());
+                        // --- Seringa (T5b) ---
+                        output.accept(ModItems.BLOOD_SYRINGE.get());
+                        // --- T6: EvilCraft ports ---
+                        output.accept(ModItems.BLOOD_TELEPORT_PEARL.get());
+                        output.accept(ModItems.TAINTED_APPLE.get());
+                        output.accept(ModItems.PURGING_PENDANT.get());
+                        // --- T7: attacking blocks ---
+                        output.accept(ModItems.WITHERING_EYE_ITEM.get());
+                        output.accept(ModItems.VENOM_GEYSER_ITEM.get());
+                        output.accept(ModItems.LIGHTNING_COIL_ITEM.get());
+                        // --- T8: vanilla-effect throwables ---
+                        output.accept(ModItems.VEILING_ORB.get());
+                        output.accept(ModItems.MIND_SPLINTER_DART.get());
+                        // --- T9: extra attacking blocks ---
+                        output.accept(ModItems.THORN_BRIAR_ITEM.get());
+                        output.accept(ModItems.LIGHTNING_NODE_ITEM.get());
+                        output.accept(ModItems.SCREAMING_SOUL_ITEM.get());
+                        output.accept(ModItems.MAGNETIC_PYLON_ITEM.get());
+                        // --- T9: throwables + utility ---
+                        output.accept(ModItems.LIGHTNING_GRENADE.get());
+                        output.accept(ModItems.BURNING_GEM.get());
+                        output.accept(ModItems.FROST_FLASK.get());
+                        output.accept(ModItems.EYE_OF_DECAY.get());
+                        output.accept(ModItems.WITHERED_TOTEM.get());
+                        // --- Op tools ---
+                        output.accept(ModItems.GROWTH_ROD.get());
+                        output.accept(ModItems.SHRINK_ROD.get());
+                        output.accept(ModItems.COMMAND_TABLET.get());
+                        output.accept(ModItems.COMMAND_PYLON_ITEM.get());
+                        output.accept(ModItems.SCRIPT_TABLET.get());
+                        // --- Sanguine Ward (anti Blood Infection) ---
+                        output.accept(ModItems.SANGUINE_WARD_HELMET.get());
+                        output.accept(ModItems.SANGUINE_WARD_CHESTPLATE.get());
+                        output.accept(ModItems.SANGUINE_WARD_LEGGINGS.get());
+                        output.accept(ModItems.SANGUINE_WARD_BOOTS.get());
+                        output.accept(ModItems.SANGUINE_WARD_SWORD.get());
+                        output.accept(ModItems.SANGUINE_WARD_PICKAXE.get());
+                        output.accept(ModItems.BLOOD_WARD_CHARM.get());
+                        output.accept(ModItems.TAINTED_ESSENCE.get());
+                        output.accept(ModItems.CLEANSING_SALT.get());
+                        output.accept(ModItems.PURIFYING_FLASK.get());
+                        // --- Ritual blocks ---
+                        output.accept(ModItems.BLOOD_SACRIFICIAL_BOWL_ITEM.get());
+                        output.accept(ModItems.GOLDEN_BLOOD_BOWL_ITEM.get());
+                        output.accept(ModItems.CRYSTALLIZED_BLOOD_SOUL.get());
+                        // --- Blood staves + attacking blood blocks ---
+                        output.accept(ModItems.THORN_STAFF.get());
+                        output.accept(ModItems.LIGHTNING_STAFF.get());
+                        output.accept(ModItems.SOUL_SCREAM_SWORD.get());
+                        output.accept(ModItems.MAGNETIC_WAND.get());
+                        output.accept(ModItems.HEMORRHAGE_SPIKE_ITEM.get());
+                        output.accept(ModItems.SANGUINE_SNARE_ITEM.get());
+                        output.accept(ModItems.VEIL_OF_MADNESS_ITEM.get());
+                        output.accept(ModItems.PHANTOM_PORTAL_ITEM.get());
+                        // --- Occultism ports ---
+                        output.accept(ModItems.BLOOD_CHALK.get());
+                        output.accept(ModItems.BLOOD_TORCH_ITEM.get());
+                        // --- Sanguine Wood set ---
+                        output.accept(ModItems.SANGUINE_LOG_ITEM.get());
+                        output.accept(ModItems.SANGUINE_WOOD_ITEM.get());
+                        output.accept(ModItems.STRIPPED_SANGUINE_LOG_ITEM.get());
+                        output.accept(ModItems.STRIPPED_SANGUINE_WOOD_ITEM.get());
+                        output.accept(ModItems.SANGUINE_PLANKS_ITEM.get());
+                        output.accept(ModItems.SANGUINE_LEAVES_ITEM.get());
+                        output.accept(ModItems.SANGUINE_SAPLING_ITEM.get());
+                        output.accept(ModItems.SANGUINE_STAIRS_ITEM.get());
+                        output.accept(ModItems.SANGUINE_SLAB_ITEM.get());
+                        output.accept(ModItems.SANGUINE_FENCE_ITEM.get());
+                        output.accept(ModItems.SANGUINE_FENCE_GATE_ITEM.get());
+                        output.accept(ModItems.SANGUINE_BUTTON_ITEM.get());
+                        output.accept(ModItems.SANGUINE_PRESSURE_PLATE_ITEM.get());
+                        output.accept(ModItems.SANGUINE_DOOR_ITEM.get());
+                        output.accept(ModItems.SANGUINE_TRAPDOOR_ITEM.get());
+                        // --- Possessed spawn eggs ---
+                        output.accept(ModItems.POSSESSED_ZOMBIE_EGG.get());
+                        output.accept(ModItems.POSSESSED_SKELETON_EGG.get());
+                        // --- Boss artifacts ---
+                        output.accept(ModItems.CURSED_IDOL.get());
+                        output.accept(ModItems.VEILED_LANTERN.get());
+                        output.accept(ModItems.PULSING_HEART.get());
+                        // --- New monster spawn eggs ---
+                        output.accept(ModItems.BLOOD_WARDEN_EGG.get());
+                        output.accept(ModItems.WEAVING_SHADE_EGG.get());
+                        output.accept(ModItems.DISARMER_EGG.get());
                     })
                     .build());
 

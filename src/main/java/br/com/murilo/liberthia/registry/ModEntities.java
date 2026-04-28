@@ -167,6 +167,118 @@ public final class ModEntities {
                             .updateInterval(4)
                             .build("hemo_bolt"));
 
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.BloodMageEntity>> BLOOD_MAGE =
+            ENTITY_TYPES.register("blood_mage",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.BloodMageEntity>of(
+                                    br.com.murilo.liberthia.entity.BloodMageEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.0F)
+                            .clientTrackingRange(12)
+                            .build("blood_mage"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.BloodPearlEntity>> BLOOD_PEARL =
+            ENTITY_TYPES.register("blood_pearl",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.BloodPearlEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.BloodPearlEntity::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(8)
+                            .updateInterval(10)
+                            .build("blood_pearl"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.VeilingOrbEntity>> VEILING_ORB =
+            ENTITY_TYPES.register("veiling_orb",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.VeilingOrbEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.VeilingOrbEntity::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F)
+                            .clientTrackingRange(8)
+                            .updateInterval(10)
+                            .build("veiling_orb"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.MindSplinterDartEntity>> MIND_SPLINTER_DART =
+            ENTITY_TYPES.register("mind_splinter_dart",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.MindSplinterDartEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.MindSplinterDartEntity::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(8)
+                            .updateInterval(10)
+                            .build("mind_splinter_dart"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.BloodHoundEntity>> BLOOD_HOUND =
+            ENTITY_TYPES.register("blood_hound",
+                    () -> EntityType.Builder.of(
+                                    br.com.murilo.liberthia.entity.BloodHoundEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 0.85F)
+                            .clientTrackingRange(10)
+                            .build("blood_hound"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.LightningGrenadeEntity>> LIGHTNING_GRENADE =
+            ENTITY_TYPES.register("lightning_grenade",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.LightningGrenadeEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.LightningGrenadeEntity::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F).clientTrackingRange(8).updateInterval(10)
+                            .build("lightning_grenade"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.BurningGemEntity>> BURNING_GEM =
+            ENTITY_TYPES.register("burning_gem",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.BurningGemEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.BurningGemEntity::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F).clientTrackingRange(8).updateInterval(10)
+                            .build("burning_gem"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.FrostFlaskEntity>> FROST_FLASK =
+            ENTITY_TYPES.register("frost_flask",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.FrostFlaskEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.FrostFlaskEntity::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F).clientTrackingRange(8).updateInterval(10)
+                            .build("frost_flask"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.PurifyingFlaskEntity>> PURIFYING_FLASK =
+            ENTITY_TYPES.register("purifying_flask",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.PurifyingFlaskEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.PurifyingFlaskEntity::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F).clientTrackingRange(8).updateInterval(10)
+                            .build("purifying_flask"));
+
+    // --- Possessed mobs (Occultism-style) ---
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.PossessedZombieEntity>> POSSESSED_ZOMBIE =
+            ENTITY_TYPES.register("possessed_zombie",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.PossessedZombieEntity>of(
+                                    br.com.murilo.liberthia.entity.PossessedZombieEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F).clientTrackingRange(8)
+                            .build("possessed_zombie"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.PossessedSkeletonEntity>> POSSESSED_SKELETON =
+            ENTITY_TYPES.register("possessed_skeleton",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.PossessedSkeletonEntity>of(
+                                    br.com.murilo.liberthia.entity.PossessedSkeletonEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.99F).clientTrackingRange(8)
+                            .build("possessed_skeleton"));
+
+    // --- New blood-themed monsters ---
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.BloodWardenBossEntity>> BLOOD_WARDEN =
+            ENTITY_TYPES.register("blood_warden",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.BloodWardenBossEntity>of(
+                                    br.com.murilo.liberthia.entity.BloodWardenBossEntity::new, MobCategory.MONSTER)
+                            .sized(0.9F, 2.9F)
+                            .clientTrackingRange(16)
+                            .fireImmune()
+                            .build("blood_warden"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.WeavingShadeEntity>> WEAVING_SHADE =
+            ENTITY_TYPES.register("weaving_shade",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.WeavingShadeEntity>of(
+                                    br.com.murilo.liberthia.entity.WeavingShadeEntity::new, MobCategory.MONSTER)
+                            .sized(0.4F, 0.8F)
+                            .clientTrackingRange(8)
+                            .build("weaving_shade"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.DisarmerEntity>> DISARMER =
+            ENTITY_TYPES.register("disarmer",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.DisarmerEntity>of(
+                                    br.com.murilo.liberthia.entity.DisarmerEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(8)
+                            .build("disarmer"));
+
     private ModEntities() {}
 
     public static void register(IEventBus eventBus) {

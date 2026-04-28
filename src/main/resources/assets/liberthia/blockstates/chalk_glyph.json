@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "sign=0":  {"model":"liberthia:block/chalk_glyph_0"},
+    "sign=1":  {"model":"liberthia:block/chalk_glyph_1"},
+    "sign=2":  {"model":"liberthia:block/chalk_glyph_2"},
+    "sign=3":  {"model":"liberthia:block/chalk_glyph_3"},
+    "sign=4":  {"model":"liberthia:block/chalk_glyph_0", "y":90},
+    "sign=5":  {"model":"liberthia:block/chalk_glyph_1", "y":90},
+    "sign=6":  {"model":"liberthia:block/chalk_glyph_2", "y":90},
+    "sign=7":  {"model":"liberthia:block/chalk_glyph_3", "y":90},
+    "sign=8":  {"model":"liberthia:block/chalk_glyph_0", "y":180},
+    "sign=9":  {"model":"liberthia:block/chalk_glyph_1", "y":180},
+    "sign=10": {"model":"liberthia:block/chalk_glyph_2", "y":180},
+    "sign=11": {"model":"liberthia:block/chalk_glyph_3", "y":180},
+    "sign=12": {"model":"liberthia:block/chalk_glyph_0", "y":270},
+    "sign=13": {"model":"liberthia:block/chalk_glyph_1", "y":270}
+  }
+}

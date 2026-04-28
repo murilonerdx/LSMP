@@ -61,7 +61,18 @@
       "Bash(python gen_alchemy_textures.py)",
       "Bash(./gradlew compileJava --rerun-tasks)",
       "Bash(python gen_weapons_textures.py)",
-      "Bash(python gen_order_textures.py)"
+      "Bash(python gen_order_textures.py)",
+      "Bash(python scripts/apply_armor_display.py)",
+      "Bash(python scripts/gen_t5b_textures.py)",
+      "Bash(python scripts/gen_t6_t7_t8_textures.py)",
+      "Bash(python scripts/gen_t9_textures.py)",
+      "Bash(python -c \"import json; json.load\\(open\\(r'C:\\\\Users\\\\T-GAMER\\\\Desktop\\\\liberthia_mod\\\\src\\\\main\\\\resources\\\\assets\\\\liberthia\\\\lang\\\\pt_br.json', encoding='utf-8'\\)\\); json.load\\(open\\(r'C:\\\\Users\\\\T-GAMER\\\\Desktop\\\\liberthia_mod\\\\src\\\\main\\\\resources\\\\assets\\\\liberthia\\\\lang\\\\en_us.json', encoding='utf-8'\\)\\); print\\('JSON OK'\\)\")",
+      "Bash(python \"C:\\\\Users\\\\T-GAMER\\\\Desktop\\\\liberthia_mod\\\\scripts\\\\gen_t10_textures.py\")",
+      "Bash(printf '{\"variants\":{\"\":{\"model\":\"liberthia:block/blood_sacrificial_bowl\"}}}\\\\n')",
+      "Bash(printf '{\"variants\":{\"\":{\"model\":\"liberthia:block/golden_blood_bowl\"}}}\\\\n')",
+      "Bash(printf '{\"parent\":\"minecraft:block/cube_all\",\"textures\":{\"all\":\"liberthia:block/blood_sacrificial_bowl\"}}\\\\n')",
+      "Bash(printf '{\"parent\":\"minecraft:block/cube_all\",\"textures\":{\"all\":\"liberthia:block/golden_blood_bowl\"}}\\\\n')",
+      "Bash(printf '{\"parent\":\"liberthia:block/blood_sacrificial_bowl\"}\\\\n')"
     ]
   }
 }

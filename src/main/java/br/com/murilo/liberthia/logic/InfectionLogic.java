@@ -1,6 +1,5 @@
 package br.com.murilo.liberthia.logic;
 
-import br.com.murilo.liberthia.backend.BackendClient;
 import br.com.murilo.liberthia.capability.IInfectionData;
 import br.com.murilo.liberthia.network.ModNetwork;
 import br.com.murilo.liberthia.network.S2CInfectionSyncPacket;
@@ -12,8 +11,6 @@ import br.com.murilo.liberthia.registry.ModItems;
 import br.com.murilo.liberthia.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -43,13 +40,18 @@ public final class InfectionLogic {
     private static final int MAX_INFECTION_GROWTH_HEIGHT = 3;
     private static final int MIN_GROWTH_SPACING_BLOCKS = 8;
     private static final int SURFACE_SPREAD_RADIUS = 5;
-    private static final int FLUID_SCAN_RADIUS = 16;
-    private static final int FLUID_SCAN_VERTICAL = 6;
+    // Reduced from 16/6 → 8/4. Old 33×13×33 = 14157 lookups; new 17×9×17 = 2601 (5.4× cheaper).
+    private static final int FLUID_SCAN_RADIUS = 8;
+    private static final int FLUID_SCAN_VERTICAL = 4;
     private static final int BLACK_HOLE_MIN_FLUID_BLOCKS = 6;
     private static final int BLACK_HOLE_PARTICLE_THRESHOLD = 2000;
 
     private static final Map<UUID, Integer> AMBIENT_CACHE = new ConcurrentHashMap<>();
     private static final Map<UUID, Integer> MOB_EXPOSURE_TICKS = new ConcurrentHashMap<>();
+    /** Per-entity cached ExposureData, reused for up to {@link #EXPOSURE_CACHE_TTL} ticks. */
+    private static final Map<UUID, long[]> EXPOSURE_CACHE_META = new ConcurrentHashMap<>();
+    private static final Map<UUID, ExposureData> EXPOSURE_CACHE = new ConcurrentHashMap<>();
+    private static final int EXPOSURE_CACHE_TTL = 5;
 
     private InfectionLogic() {
     }
@@ -142,7 +144,9 @@ public final class InfectionLogic {
             spreadNeutralMatters(player, exposure);
         }
 
-        if (player.tickCount % 40 == 0) {
+        // Throttled: 14000-block scan was running every 40t per player. Now every 200t
+        // (the env-instability check at line 178 also runs it, so we don't lose much).
+        if (player.tickCount % 200 == 20) {
             processDarkFluidActivity(player.serverLevel(), player.blockPosition());
         }
 
@@ -179,7 +183,7 @@ public final class InfectionLogic {
         }
 
         if (player.tickCount % 200 == 0) {
-            BackendClient.sendSnapshot(player, data);
+//            BackendClient.sendSnapshot(player, data);
             checkEnvironmentalInstability(player);
         }
     }
@@ -524,13 +528,15 @@ public final class InfectionLogic {
     private static int updateMobExposureCounter(LivingEntity entity, boolean exposedToDark) {
         UUID entityId = entity.getUUID();
 
+        // tickLiving now runs once every 10 ticks, so each invocation accounts
+        // for ~10 actual ticks of exposure / cooldown.
         if (exposedToDark) {
-            int updated = Math.min(FULL_MOB_INFECTION_TICKS, MOB_EXPOSURE_TICKS.getOrDefault(entityId, 0) + 1);
+            int updated = Math.min(FULL_MOB_INFECTION_TICKS, MOB_EXPOSURE_TICKS.getOrDefault(entityId, 0) + 10);
             MOB_EXPOSURE_TICKS.put(entityId, updated);
             return updated;
         }
 
-        int cooled = Math.max(0, MOB_EXPOSURE_TICKS.getOrDefault(entityId, 0) - 2);
+        int cooled = Math.max(0, MOB_EXPOSURE_TICKS.getOrDefault(entityId, 0) - 20);
         if (cooled <= 0) {
             MOB_EXPOSURE_TICKS.remove(entityId);
             return 0;
@@ -753,6 +759,22 @@ public final class InfectionLogic {
     }
 
     public static ExposureData scanExposureGeneric(LivingEntity entity) {
+        // Per-entity cache: scan is heavy (~196 block lookups + 20-block raycast +
+        // chunk density). Reuse the result for a few ticks.
+        UUID id = entity.getUUID();
+        long[] meta = EXPOSURE_CACHE_META.get(id);
+        long now = entity.tickCount;
+        if (meta != null && (now - meta[0]) < EXPOSURE_CACHE_TTL) {
+            ExposureData cached = EXPOSURE_CACHE.get(id);
+            if (cached != null) return cached;
+        }
+        ExposureData fresh = scanExposureGenericInternal(entity);
+        EXPOSURE_CACHE.put(id, fresh);
+        EXPOSURE_CACHE_META.put(id, new long[]{now});
+        return fresh;
+    }
+
+    private static ExposureData scanExposureGenericInternal(LivingEntity entity) {
         float localPressure = 0.0f;
         int clearBlocks = 0;
         int yellowBlocks = 0;
@@ -764,23 +786,25 @@ public final class InfectionLogic {
         BlockPos center = entity.blockPosition();
         net.minecraft.world.phys.Vec3 entityCenter = entity.position().add(0.0D, entity.getBbHeight() * 0.5D, 0.0D);
 
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-4, -2, -4), center.offset(4, 2, 4))) {
+        // Rebalanced: tighter scan radius + weaker per-source strengths so isolated
+        // blocks don't ramp radiation hard. Direct immersion still scales fast.
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-3, -2, -3), center.offset(3, 1, 3))) {
             BlockState blockState = entity.level().getBlockState(pos);
             FluidState fluidState = entity.level().getFluidState(pos);
 
             float sourceStrength = 0.0f;
             if (fluidState.getType().isSame(ModFluids.DARK_MATTER.get())
                     || fluidState.getType().isSame(ModFluids.FLOWING_DARK_MATTER.get())) {
-                sourceStrength = 4.0f;
-            } else if (blockState.is(ModBlocks.DARK_MATTER_BLOCK.get())) {
-                sourceStrength = 3.0f;
-            } else if (blockState.is(ModBlocks.INFECTION_GROWTH.get())) {
                 sourceStrength = 2.0f;
-            } else if (blockState.is(ModBlocks.CORRUPTED_SOIL.get())) {
+            } else if (blockState.is(ModBlocks.DARK_MATTER_BLOCK.get())) {
+                sourceStrength = 1.5f;
+            } else if (blockState.is(ModBlocks.INFECTION_GROWTH.get())) {
                 sourceStrength = 1.0f;
+            } else if (blockState.is(ModBlocks.CORRUPTED_SOIL.get())) {
+                sourceStrength = 0.5f;
             } else if (blockState.is(ModBlocks.DARK_MATTER_ORE.get())
                     || blockState.is(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get())) {
-                sourceStrength = 0.5f;
+                sourceStrength = 0.25f;
             }
 
             if (sourceStrength > 0.0f) {
@@ -790,7 +814,8 @@ public final class InfectionLogic {
                         pos.getZ() + 0.5D
                 );
                 double distance = Math.sqrt(blockCenter.distanceToSqr(entityCenter));
-                float attenuation = (float) (1.0D / (1.0D + (distance * 0.75D)));
+                // Stronger distance falloff (1.1 vs 0.75) so far blocks contribute almost nothing.
+                float attenuation = (float) (1.0D / (1.0D + (distance * 1.1D)));
                 localPressure += sourceStrength * attenuation;
             }
 
@@ -815,7 +840,9 @@ public final class InfectionLogic {
         }
 
         if (!entity.level().isClientSide && entity.tickCount % 20 == 0) {
-            int ambient = countDarkMatterParticles(entity.level(), center, 16, 6) / 120;
+            // Smaller ambient sphere (12 vs 16) and higher divisor (180 vs 120) to tame
+            // background radiation ticks when just a few blocks are around.
+            int ambient = countDarkMatterParticles(entity.level(), center, 12, 4) / 180;
             AMBIENT_CACHE.put(entity.getUUID(), ambient);
         }
 
@@ -829,7 +856,7 @@ public final class InfectionLogic {
         if (feetFluid.getType().isSame(ModFluids.DARK_MATTER.get())
                 || headFluid.getType().isSame(ModFluids.DARK_MATTER.get())) {
             immersedInDark = true;
-            rawDarkPressure += 8;
+            rawDarkPressure += 4;
         }
 
         if (isWaterOrLava(feetFluid) || isWaterOrLava(headFluid)) {
@@ -837,7 +864,9 @@ public final class InfectionLogic {
             immersedInDark = false;
         }
 
-        if (carryingDarkMatter) {
+        // Carrying dark matter adds a tiny trickle but doesn't snowball by itself.
+        // Only adds on even ticks so effective rate is +0.5/tick.
+        if (carryingDarkMatter && entity.tickCount % 2 == 0) {
             rawDarkPressure += 1;
         }
 
@@ -900,8 +929,8 @@ public final class InfectionLogic {
     private static void applyExposure(ServerPlayer player, IInfectionData data, ExposureData exposure) {
         int delta = exposure.effectiveDarkPressure() - exposure.clearRelief();
         if (delta > 0) {
-            // Reduced infection gain rate (max 4 instead of 8)
-            data.addInfection(Math.min(4, delta));
+            // Gentler cap (max 2/tick) so short exposures don't spike the bar.
+            data.addInfection(Math.min(2, delta));
         } else if (delta < 0) {
             data.reduceInfection(Math.min(12, -delta));
         }

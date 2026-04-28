@@ -240,7 +240,11 @@ public class InfectionEvents {
                 }
             });
         } else {
-            // Lógica para qualquer outro ser vivo
+            // Lógica para qualquer outro ser vivo — throttled para 1/10 ticks por mob.
+            // O contador de exposição interno escala em proporção (10x por chamada).
+            // Spread de offset por UUID evita que todos os mobs rodem no mesmo tick.
+            int phase = (int) (entity.getUUID().getLeastSignificantBits() & 0xF);
+            if ((entity.tickCount + phase) % 10 != 0) return;
             entity.getCapability(ModCapabilities.INFECTION)
                     .ifPresent(data -> InfectionLogic.tickLiving(entity, data));
         }

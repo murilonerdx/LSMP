@@ -62,38 +62,11 @@ public final class LiberthiaConfig {
     }
 
     public static final class Server {
-        public final ForgeConfigSpec.BooleanValue backendEnabled;
-        public final ForgeConfigSpec.ConfigValue<String> backendBaseUrl;
-        public final ForgeConfigSpec.ConfigValue<String> snapshotPath;
-        public final ForgeConfigSpec.IntValue connectTimeoutMs;
-        public final ForgeConfigSpec.IntValue requestTimeoutMs;
         public final ForgeConfigSpec.BooleanValue worldSpawnsEnabled;
         public final ForgeConfigSpec.IntValue spawnIntervalTicks;
 
         private Server(ForgeConfigSpec.Builder builder) {
-            builder.comment("Configuração principal do backend e dos surtos de Matéria Escura.").push("backend");
-
-            backendEnabled = builder
-                    .comment("Liga o envio assíncrono de snapshots de infecção para um backend externo.")
-                    .define("enabled", false);
-
-            backendBaseUrl = builder
-                    .comment("URL base do backend. Exemplo: https://meu-dominio.com")
-                    .define("base_url", "");
-
-            snapshotPath = builder
-                    .comment("Caminho do endpoint para snapshots de infecção.")
-                    .define("snapshot_path", "/api/v1/infection/snapshot");
-
-            connectTimeoutMs = builder
-                    .comment("Timeout de conexão HTTP em milissegundos.")
-                    .defineInRange("connect_timeout_ms", 3000, 100, 30000);
-
-            requestTimeoutMs = builder
-                    .comment("Timeout total da requisição HTTP em milissegundos.")
-                    .defineInRange("request_timeout_ms", 5000, 100, 60000);
-
-            builder.pop().push("world");
+            builder.comment("Configuração dos surtos de Matéria Escura no mundo.").push("world");
 
             worldSpawnsEnabled = builder
                     .comment("Permite surtos periódicos de Matéria Escura no Overworld.")

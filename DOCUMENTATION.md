@@ -1146,3 +1146,169 @@ lang/                 pt_br.json, en_us.json  (entradas block.liberthia.blood_*,
 ---
 
 > **Nota:** Esta documentacao cobre o estado completo do mod ate a versao v1 (branch `v1`). O mod compila com sucesso com apenas warnings de deprecacao do `ResourceLocation`. O **Sistema de Sangue** (seção 23) é o vetor de corrupção orgânica paralelo à Matéria Escura, com sua própria cadeia de infecção, persistência de dano via `SavedData`, e cura única via `BLOOD_CURE_PILL`.
+
+---
+
+## 24. Ajustes Pós-v1 (Tarefas 1–8)
+
+Esta seção documenta os ajustes solicitados após o fechamento das fases 1–5 do Sistema de Sangue. Cada bloco foi entregue isoladamente com `./gradlew build -x test` verde.
+
+### 24.1 Worker Teleporter — seletor visual (T1)
+
+**Antes:** `WorkerTeleporterItem` ciclava jogadores via índice NBT.
+
+**Depois:** seletor visual com lista de jogadores online.
+
+- **Server:** right-click coleta `ServerLevel.getPlayers()` (exceto portador) e envia `OpenWorkerTeleporterScreenS2CPacket` (List<UUID, nome, BlockPos>).
+- **Client:** `WorkerTeleporterScreen` lista jogadores com botão `TP`. Click envia `WorkerTeleporterTargetC2SPacket(UUID)`.
+- **Server-side de retorno:** valida online + dimensão; teleporta o alvo até o portador. Cooldown 20s via `player.getCooldowns()`.
+
+**Arquivos novos:**
+```
+network/packet/OpenWorkerTeleporterScreenS2CPacket.java
+network/packet/WorkerTeleporterTargetC2SPacket.java
+client/gui/WorkerTeleporterScreen.java
+client/ClientWorkerTeleporterDispatch.java
+```
+**Modificados:** `item/WorkerTeleporterItem.java`, `network/ModNetwork.java`.
+
+### 24.2 Busca de efeitos no Admin Tool (T2)
+
+`client/gui/AdminToolScreen.java` ganhou `EditBox effectSearchBox`. `setResponder` filtra `ForgeRegistries.MOB_EFFECTS.getValues()` por `name.toLowerCase().contains(filter)` e reseta scroll/seleção.
+
+### 24.3 Rebalance da radiação de Dark Matter (T3)
+
+**Arquivo:** `logic/InfectionLogic.java`. Alvo: ~60% menos acúmulo em exposição leve, mantendo punição em imersão direta.
+
+| Parâmetro                  | Antes              | Depois             |
+|---------------------------|--------------------|--------------------|
+| Raio de scan              | 9×5×9              | 7×4×7              |
+| dark_fluid (peso)         | 4.0                | 2.0                |
+| dark_block (peso)         | 3.0                | 1.5                |
+| infection_growth (peso)   | 2.0                | 1.0                |
+| corrupted_soil (peso)     | 1.0                | 0.5                |
+| ores (peso)               | 0.5                | 0.25               |
+| Atenuação por distância   | `1/(1+d·0.75)`     | `1/(1+d·1.1)`      |
+| Raio ambiente             | 16                 | 12                 |
+| Imersão em fluido         | +8                 | +4                 |
+| Dark matter no inventário | +1 por item        | +0.5 por item      |
+| Cap por tick              | `min(4, delta)`    | `min(2, delta)`    |
+
+### 24.4 Remoção do backend + UX do TP Executor Stick (T4)
+
+**4a. Backend removido.** `config/LiberthiaConfig.java` — apagados specs `backendEnabled`, `backendBaseUrl`, `snapshotPath`, `connectTimeoutMs`, `requestTimeoutMs` e respectivos getters. `docs/backend-contract.md` mantido apenas como histórico. `BackendClient` referenciado na seção 18 foi neutralizado.
+
+**4b. `TeleportExecutorStickItem` mais permissivo.**
+- Anchor vazia → usa **posição atual do portador** (msg amarela).
+- Lista vazia → lista **todos os players online** exceto o próprio.
+- Continua abrindo `TeleportExecutorScreen` igual.
+
+### 24.5 Armaduras polidas + novo conteúdo Sangue (T5)
+
+**5a. Display transforms.** Script `scripts/apply_armor_display.py` aplicou o template vanilla de armor (rotação, translação, escala por slot) em 20 JSONs:
+`blood_armor`, `dark_matter_armor`, `holy_armor`, `pilgrim_armor`, `order_paladin_armor` (4 peças cada).
+
+**5b. Novas entidades de Sangue:**
+
+| Entidade            | Classe base | HP | ATK | Comportamento principal                                                |
+|---------------------|-------------|----|-----|------------------------------------------------------------------------|
+| `BloodMageEntity`   | Monster     | 60 | 0   | Cast triplo de `HemoBolt` a 6s; teleport curto (3 blocos) ao tomar dano. Drop: `HEMOMANCER_STAFF_BROKEN`. |
+| `BloodBruteEntity`  | Monster     | 50 | 9   | Speed 0.25, KB-res 0.9. Aplica Weakness II + BloodInfection II. Spawn em Cult Camp. |
+| `BloodHoundEntity`  | Wolf        | 22 | 5   | Speed 0.4, packs 2–3. Bleed (Wither 80t) on-hit.                       |
+
+**5b. Novos itens de Sangue:**
+
+| Item                       | Função                                                                                  |
+|---------------------------|------------------------------------------------------------------------------------------|
+| `BLOOD_CHALICE`           | Right-click: −3 HP, +Regen II 6s + BloodInfection I, cooldown 30s.                       |
+| `SANGUINE_PENDANT`        | Offhand: +2 ATK, lifesteal 5% em kill.                                                   |
+| `VIAL_OF_HEMORRHAGE`      | Throwable: BloodInfection III AoE 3×3.                                                   |
+| `BLOOD_TOTEM`             | Death-save: +6 HP + BloodInfection II.                                                   |
+| `SCYTHE_OF_THE_MOTHER`    | Upgrade do Blood Scythe: +2 ATK, sweep aplica BloodInfection II.                         |
+
+**Arquivos T5b:**
+```
+entity/BloodMageEntity.java, BloodBruteEntity.java, BloodHoundEntity.java
+entity/ai/HemoBurstGoal.java
+client/renderer/BloodMageRenderer.java, BloodBruteRenderer.java, BloodHoundRenderer.java
+item/BloodChaliceItem.java, SanguinePendantItem.java, VialOfHemorrhageItem.java,
+     BloodTotemItem.java, ScytheOfTheMotherItem.java
+```
++ entradas em `ModEntities`, `ModItems`, `ModCreativeTabs`, `BloodKin.is()`, `ClientModEvents`, lang pt_br/en_us, loot tables, spawn placements + spawn eggs.
+
+**Texturas:** `scripts/gen_new_blood_content.py`.
+
+### 24.6 Ports do EvilCraft (T6)
+
+Adaptações reais de `EntityBloodPearl`, `ItemDarkenedApple` e `ItemInvigoratingPendant`, ajustadas às convenções do mod (custo em HP/Sanguine Essence em vez de fluid container).
+
+| Item                          | Origem                       | Comportamento adaptado                                                                  |
+|-------------------------------|------------------------------|------------------------------------------------------------------------------------------|
+| `BLOOD_TELEPORT_PEARL`        | `EntityBloodPearl`           | Custa 4 HP (`damageSources().magic()`); shoot 1.5 vel; teleport + Slowness III + BloodInfection. |
+| `TAINTED_APPLE`               | `ItemDarkenedApple`          | Food (3, 0.3, alwaysEat) + Regen II 8s + Absorption II 30s; aplica HEMO_SICKNESS II 30s ao terminar. |
+| `PURGING_PENDANT`             | `ItemInvigoratingPendant`    | A cada 10 ticks consome 1 `SANGUINE_ESSENCE` para reduzir duração de 1 efeito nocivo (skip BloodInfection + ambient); apaga fogo. |
+
+`BloodPearlEntity` usa `EntityTeleportEvent.EnderPearl(sp, x, y, z, null, 0F, hitResult)` e cancela se o evento for vetado.
+
+### 24.7 Blocos Atacantes Evolutivos (T7)
+
+Padrão: `IntegerProperty AGE 0..3`. `randomTick` evolui (25% chance). `scheduleTick` periódico ataca em raio escalonado por idade. Inspiração: `AttackingFleshBlock`.
+
+| Bloco            | Particulas                                                                  | Efeitos aplicados                                          | Detalhes                              |
+|------------------|------------------------------------------------------------------------------|------------------------------------------------------------|---------------------------------------|
+| `WITHERING_EYE`  | `SQUID_INK` + `SOUL_FIRE_FLAME` + `SMOKE`                                    | Wither + Blindness + Darkness                              | Beam reto. Range 5+age*1.5, rate 30−age*6t. 5% chance de incrementar `permanentHealthPenalty`. lightLevel 8+age*2. |
+| `VENOM_GEYSER`   | `SCULK_SOUL` + `SPORE_BLOSSOM_AIR` + `HAPPY_VILLAGER`                        | Poison + Slowness + Hunger (+ Weakness se age≥2)           | Arco parabólico, 1+age volleys. Range 4.5+age*1.5. lightLevel 4+age. |
+| `LIGHTNING_COIL` | `END_ROD` + `ELECTRIC_SPARK` + `CRIT` + `FLASH`                              | Glowing + MiningFatigue + paralisia breve (Slowness 5 1s)  | Ziguezague com jitter perpendicular. Range 6+age. Drena 1 XP level a age≥2 (ServerPlayer). lightLevel 10+age. |
+
+Imunidade de facção: alvos passam por `BloodKin.is()`. Em containment de chalk symbol (`FleshMotherBlock.isContained`), os blocos suspendem ataque.
+
+### 24.8 Throwables com Efeitos Vanilla (T8)
+
+| Item                  | Entidade                  | Particulas                              | Efeitos                                                          |
+|-----------------------|---------------------------|-----------------------------------------|------------------------------------------------------------------|
+| `VEILING_ORB`         | `VeilingOrbEntity`        | `SQUID_INK` + `LARGE_SMOKE` + `SOUL`    | Cúpula AoE 4: Blindness 10s + Darkness 7s + Slowness III 10s + Weakness 8s. |
+| `MIND_SPLINTER_DART`  | `MindSplinterDartEntity`  | `PORTAL` + `ENCHANT` + `WITCH`          | Single-target: Confusion III 20s + MiningFatigue II 60s + Weakness 30s + Blindness 6s. |
+
+Renderização: `ThrownItemRenderer` em `ClientModEvents`. Para `BLOOD_PEARL` o renderer usa `(ctx, 1.0F, true)` (escala custom).
+
+### 24.9 Registros e assets das tarefas T6–T8
+
+**Java novos:**
+```
+entity/projectile/BloodPearlEntity.java
+entity/projectile/VeilingOrbEntity.java
+entity/projectile/MindSplinterDartEntity.java
+item/BloodTeleportPearlItem.java
+item/TaintedAppleItem.java
+item/PurgingPendantItem.java
+item/VeilingOrbItem.java
+item/MindSplinterDartItem.java
+logic/WitheringEyeBlock.java
+logic/VenomGeyserBlock.java
+logic/LightningCoilBlock.java
+```
+
+**Registries atualizadas:**
+```
+ModEntities       BLOOD_PEARL, VEILING_ORB, MIND_SPLINTER_DART
+ModItems          BLOOD_TELEPORT_PEARL, TAINTED_APPLE, PURGING_PENDANT, VEILING_ORB,
+                  MIND_SPLINTER_DART, WITHERING_EYE_ITEM, VENOM_GEYSER_ITEM, LIGHTNING_COIL_ITEM
+ModBlocks         WITHERING_EYE, VENOM_GEYSER, LIGHTNING_COIL  (todos randomTicks())
+ModCreativeTabs   8 entradas adicionadas na aba Blood
+ClientModEvents   3 ThrownItemRenderer
+```
+
+**Assets:**
+```
+models/item/{blood_teleport_pearl,tainted_apple,purging_pendant,veiling_orb,mind_splinter_dart}.json
+                                                              parent=item/generated
+models/item/{withering_eye,venom_geyser,lightning_coil}.json  parent=liberthia:block/<name>
+models/block/{withering_eye,venom_geyser,lightning_coil}.json cube_all
+blockstates/{withering_eye,venom_geyser,lightning_coil}.json  variants age=0..3 (mesmo modelo)
+textures/item/*.png + textures/block/*.png                    via scripts/gen_t6_t7_t8_textures.py (PIL)
+lang/{pt_br,en_us}.json                                       8 nomes + 5 tooltips
+```
+
+### 24.10 Estado do build
+
+Última verificação: `./gradlew build -x test` → **BUILD SUCCESSFUL**, 4 warnings de `ResourceLocation` deprecated (todos pré-existentes, fora do código novo).

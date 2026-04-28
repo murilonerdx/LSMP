@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "liberthia:block/stripped_sanguine_log"
+    },
+    "axis=x": {
+      "model": "liberthia:block/stripped_sanguine_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "liberthia:block/stripped_sanguine_log_horizontal",
+      "x": 90
+    }
+  }
+}

@@ -1,6 +1,5 @@
 package br.com.murilo.liberthia.item;
 
-import br.com.murilo.liberthia.backend.BackendClient;
 import br.com.murilo.liberthia.logic.InfectionLogic;
 import br.com.murilo.liberthia.registry.ModCapabilities;
 import br.com.murilo.liberthia.registry.ModEffects;
@@ -82,7 +81,6 @@ public class ClearMatterInjectorItem extends Item {
         if (target instanceof ServerPlayer serverTarget) {
             InfectionLogic.applyDerivedEffects(serverTarget, data);
             InfectionLogic.sync(serverTarget, data);
-            BackendClient.sendSnapshot(serverTarget, data);
         }
 
         source.level().playSound(null, target.blockPosition(), ModSounds.CLEAR_HUM.get(), SoundSource.PLAYERS, 0.9F, 1.25F);

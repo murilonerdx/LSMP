@@ -1,6 +1,5 @@
 package br.com.murilo.liberthia.event;
 
-import br.com.murilo.liberthia.backend.BackendClient;
 import br.com.murilo.liberthia.config.LiberthiaConfig;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,7 +13,6 @@ public final class ModConfigEvents {
     @SubscribeEvent
     public static void onConfigReload(ModConfigEvent event) {
         if (event.getConfig().getSpec() == LiberthiaConfig.SERVER_SPEC) {
-            BackendClient.reloadFromConfig();
         }
     }
 }

@@ -385,6 +385,66 @@ public final class ModBlocks {
                     .randomTicks()
                     .sound(SoundType.SLIME_BLOCK)));
 
+    // --- T7: attacking blocks with evolving AGE ---
+    public static final RegistryObject<Block> WITHERING_EYE = BLOCKS.register("withering_eye",
+            () -> new br.com.murilo.liberthia.logic.WitheringEyeBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(3.0F)
+                    .lightLevel(state -> 8 + state.getValue(br.com.murilo.liberthia.logic.WitheringEyeBlock.AGE) * 2)
+                    .emissiveRendering((s, g, p) -> true)
+                    .randomTicks()
+                    .sound(SoundType.NETHERRACK)));
+
+    public static final RegistryObject<Block> VENOM_GEYSER = BLOCKS.register("venom_geyser",
+            () -> new br.com.murilo.liberthia.logic.VenomGeyserBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GREEN)
+                    .strength(2.5F)
+                    .lightLevel(state -> 4 + state.getValue(br.com.murilo.liberthia.logic.VenomGeyserBlock.AGE))
+                    .randomTicks()
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> LIGHTNING_COIL = BLOCKS.register("lightning_coil",
+            () -> new br.com.murilo.liberthia.logic.LightningCoilBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE)
+                    .strength(3.0F)
+                    .lightLevel(state -> 10 + state.getValue(br.com.murilo.liberthia.logic.LightningCoilBlock.AGE))
+                    .emissiveRendering((s, g, p) -> true)
+                    .randomTicks()
+                    .sound(SoundType.METAL)));
+
+    // --- T9: more attacking blocks ---
+    public static final RegistryObject<Block> THORN_BRIAR = BLOCKS.register("thorn_briar",
+            () -> new br.com.murilo.liberthia.logic.ThornBriarBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BROWN)
+                    .strength(0.4F)
+                    .noOcclusion()
+                    .sound(SoundType.SWEET_BERRY_BUSH)));
+
+    public static final RegistryObject<Block> LIGHTNING_NODE = BLOCKS.register("lightning_node",
+            () -> new br.com.murilo.liberthia.logic.LightningNodeBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_YELLOW)
+                    .strength(3.5F)
+                    .lightLevel(state -> 8 + state.getValue(br.com.murilo.liberthia.logic.LightningNodeBlock.AGE) * 2)
+                    .emissiveRendering((s, g, p) -> true)
+                    .randomTicks()
+                    .sound(SoundType.METAL)));
+
+    public static final RegistryObject<Block> SCREAMING_SOUL = BLOCKS.register("screaming_soul",
+            () -> new br.com.murilo.liberthia.logic.ScreamingSoulBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(2.0F)
+                    .lightLevel(state -> 6)
+                    .randomTicks()
+                    .sound(SoundType.SOUL_SOIL)));
+
+    public static final RegistryObject<Block> MAGNETIC_PYLON = BLOCKS.register("magnetic_pylon",
+            () -> new br.com.murilo.liberthia.logic.MagneticPylonBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(4.0F)
+                    .lightLevel(state -> 7)
+                    .randomTicks()
+                    .sound(SoundType.METAL)));
+
     public static final RegistryObject<Block> BLOOD_SPIKE = BLOCKS.register("blood_spike",
             () -> new br.com.murilo.liberthia.logic.BloodSpikeBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_RED)
@@ -471,11 +531,155 @@ public final class ModBlocks {
                     .sound(SoundType.STONE),
                     UniformInt.of(3, 7)));
 
+    // --- Occultism-port: Chalk Glyph + Blood Fire/Torch ---
+    public static final RegistryObject<Block> CHALK_GLYPH = BLOCKS.register("chalk_glyph",
+            () -> new br.com.murilo.liberthia.logic.ChalkGlyphBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0F).noCollission().noOcclusion()
+                    .instabreak()
+                    .sound(SoundType.WOOL)));
+
+    public static final RegistryObject<Block> BLOOD_FIRE = BLOCKS.register("blood_fire",
+            () -> new br.com.murilo.liberthia.logic.BloodFireBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0F).noCollission().noOcclusion()
+                    .instabreak()
+                    .lightLevel(s -> 12)
+                    .sound(SoundType.WOOL)));
+
+    public static final RegistryObject<Block> BLOOD_TORCH = BLOCKS.register("blood_torch",
+            () -> new br.com.murilo.liberthia.logic.BloodTorchBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .lightLevel(s -> 14)
+                    .sound(SoundType.WOOD)));
+
+    // --- Blood-themed attacking blocks ---
+    public static final RegistryObject<Block> HEMORRHAGE_SPIKE = BLOCKS.register("hemorrhage_spike",
+            () -> new br.com.murilo.liberthia.logic.HemorrhageSpikeBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0.5F).noOcclusion()
+                    .sound(SoundType.GRAVEL)));
+
+    public static final RegistryObject<Block> SANGUINE_SNARE = BLOCKS.register("sanguine_snare",
+            () -> new br.com.murilo.liberthia.logic.SanguineSnareBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0.4F).noOcclusion()
+                    .sound(SoundType.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> VEIL_OF_MADNESS = BLOCKS.register("veil_of_madness",
+            () -> new br.com.murilo.liberthia.logic.VeilOfMadnessBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(2.5F)
+                    .lightLevel(s -> 6)
+                    .randomTicks()
+                    .sound(SoundType.SOUL_SOIL)));
+
+    public static final RegistryObject<Block> PHANTOM_PORTAL = BLOCKS.register("phantom_portal",
+            () -> new br.com.murilo.liberthia.logic.PhantomPortalBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(1.0F).noOcclusion()
+                    .lightLevel(s -> 8)
+                    .sound(SoundType.AMETHYST)));
+
+    // --- Ritual bowls (Occultism-inspired) ---
+    public static final RegistryObject<Block> BLOOD_SACRIFICIAL_BOWL = BLOCKS.register("blood_sacrificial_bowl",
+            () -> new br.com.murilo.liberthia.logic.BloodSacrificialBowlBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.STONE)
+                    .strength(2.0F, 6.0F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> GOLDEN_BLOOD_BOWL = BLOCKS.register("golden_blood_bowl",
+            () -> new br.com.murilo.liberthia.logic.GoldenBloodBowlBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.GOLD)
+                    .strength(3.0F, 8.0F)
+                    .sound(SoundType.METAL)
+                    .lightLevel(s -> 6)
+                    .noOcclusion()));
+
+    // --- Command Pylon (programmable command block) ---
+    public static final RegistryObject<Block> COMMAND_PYLON = BLOCKS.register("command_pylon",
+            () -> new br.com.murilo.liberthia.logic.CommandPylonBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(-1.0F, 3600000.0F)
+                    .lightLevel(s -> 9)
+                    .sound(SoundType.METAL)
+                    .noLootTable()));
+
+    // ==================================================================
+    // Sanguine Wood — Occultism-otherworld-style alternate wood family.
+    // ==================================================================
+    private static BlockBehaviour.Properties woodProps() {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_RED)
+                .strength(2.0F, 3.0F)
+                .sound(SoundType.WOOD);
+    }
+
+    public static final RegistryObject<Block> SANGUINE_LOG = BLOCKS.register("sanguine_log",
+            () -> new net.minecraft.world.level.block.RotatedPillarBlock(woodProps()));
+    public static final RegistryObject<Block> SANGUINE_WOOD = BLOCKS.register("sanguine_wood",
+            () -> new net.minecraft.world.level.block.RotatedPillarBlock(woodProps()));
+    public static final RegistryObject<Block> STRIPPED_SANGUINE_LOG = BLOCKS.register("stripped_sanguine_log",
+            () -> new net.minecraft.world.level.block.RotatedPillarBlock(woodProps()));
+    public static final RegistryObject<Block> STRIPPED_SANGUINE_WOOD = BLOCKS.register("stripped_sanguine_wood",
+            () -> new net.minecraft.world.level.block.RotatedPillarBlock(woodProps()));
+    public static final RegistryObject<Block> SANGUINE_PLANKS = BLOCKS.register("sanguine_planks",
+            () -> new Block(woodProps()));
+    public static final RegistryObject<Block> SANGUINE_LEAVES = BLOCKS.register("sanguine_leaves",
+            () -> new net.minecraft.world.level.block.LeavesBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0.2F)
+                    .randomTicks()
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .isValidSpawn((s,g,p,e) -> false)
+                    .isSuffocating((s,g,p) -> false)
+                    .isViewBlocking((s,g,p) -> false)));
+    public static final RegistryObject<Block> SANGUINE_SAPLING = BLOCKS.register("sanguine_sapling",
+            () -> new br.com.murilo.liberthia.logic.SanguineSaplingBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0F).noCollission()
+                    .randomTicks()
+                    .sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> SANGUINE_STAIRS = BLOCKS.register("sanguine_stairs",
+            () -> new net.minecraft.world.level.block.StairBlock(
+                    () -> SANGUINE_PLANKS.get().defaultBlockState(), woodProps()));
+    public static final RegistryObject<Block> SANGUINE_SLAB = BLOCKS.register("sanguine_slab",
+            () -> new net.minecraft.world.level.block.SlabBlock(woodProps()));
+    public static final RegistryObject<Block> SANGUINE_FENCE = BLOCKS.register("sanguine_fence",
+            () -> new net.minecraft.world.level.block.FenceBlock(woodProps()));
+    public static final RegistryObject<Block> SANGUINE_FENCE_GATE = BLOCKS.register("sanguine_fence_gate",
+            () -> new net.minecraft.world.level.block.FenceGateBlock(woodProps(), ModWoodTypes.SANGUINE));
+    public static final RegistryObject<Block> SANGUINE_BUTTON = BLOCKS.register("sanguine_button",
+            () -> new net.minecraft.world.level.block.ButtonBlock(
+                    BlockBehaviour.Properties.of().noCollission().strength(0.5F).sound(SoundType.WOOD),
+                    ModWoodTypes.SANGUINE_SET, 30, true));
+    public static final RegistryObject<Block> SANGUINE_PRESSURE_PLATE = BLOCKS.register("sanguine_pressure_plate",
+            () -> new net.minecraft.world.level.block.PressurePlateBlock(
+                    net.minecraft.world.level.block.PressurePlateBlock.Sensitivity.EVERYTHING,
+                    BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).noCollission()
+                            .strength(0.5F).sound(SoundType.WOOD),
+                    ModWoodTypes.SANGUINE_SET));
+    public static final RegistryObject<Block> SANGUINE_DOOR = BLOCKS.register("sanguine_door",
+            () -> new net.minecraft.world.level.block.DoorBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).strength(3.0F)
+                            .sound(SoundType.WOOD).noOcclusion(),
+                    ModWoodTypes.SANGUINE_SET));
+    public static final RegistryObject<Block> SANGUINE_TRAPDOOR = BLOCKS.register("sanguine_trapdoor",
+            () -> new net.minecraft.world.level.block.TrapDoorBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).strength(3.0F)
+                            .sound(SoundType.WOOD).noOcclusion()
+                            .isValidSpawn((s,g,p,e) -> false),
+                    ModWoodTypes.SANGUINE_SET));
+
     private ModBlocks() {
 
     }
 
     public static void register(IEventBus eventBus) {
+        ModWoodTypes.bootstrap();
         BLOCKS.register(eventBus);
     }
 }

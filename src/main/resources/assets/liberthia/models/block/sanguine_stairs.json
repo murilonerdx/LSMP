@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "liberthia:block/sanguine_planks",
+    "top": "liberthia:block/sanguine_planks",
+    "side": "liberthia:block/sanguine_planks"
+  }
+}

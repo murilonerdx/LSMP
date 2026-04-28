@@ -31,6 +31,26 @@ public final class ModEffects {
             MOB_EFFECTS.register("sanguine_vitality",
                     br.com.murilo.liberthia.effect.SanguineVitalityEffect::new);
 
+    public static final RegistryObject<MobEffect> BLOOD_FRENZY =
+            MOB_EFFECTS.register("blood_frenzy",
+                    br.com.murilo.liberthia.effect.BloodFrenzyEffect::new);
+
+    public static final RegistryObject<MobEffect> HEMO_SICKNESS =
+            MOB_EFFECTS.register("hemo_sickness",
+                    br.com.murilo.liberthia.effect.HemoSicknessEffect::new);
+
+    public static final RegistryObject<MobEffect> INFECTED_SIGHT =
+            MOB_EFFECTS.register("infected_sight",
+                    br.com.murilo.liberthia.effect.InfectedSightEffect::new);
+
+    public static final RegistryObject<MobEffect> BLOOD_STEP =
+            MOB_EFFECTS.register("blood_step",
+                    br.com.murilo.liberthia.effect.BloodStepEffect::new);
+
+    public static final RegistryObject<MobEffect> FEATHER_FALL =
+            MOB_EFFECTS.register("feather_fall",
+                    br.com.murilo.liberthia.effect.FeatherFallEffect::new);
+
     private ModEffects() {
     }
 

@@ -30,6 +30,13 @@ public class ModEntityEvents {
         event.put(ModEntities.WOUNDED_PILGRIM.get(), br.com.murilo.liberthia.entity.WoundedPilgrimEntity.createAttributes().build());
         event.put(ModEntities.FLESH_MOTHER_BOSS.get(), br.com.murilo.liberthia.entity.FleshMotherBossEntity.createAttributes().build());
         event.put(ModEntities.ORDER_PALADIN.get(), br.com.murilo.liberthia.entity.OrderPaladinEntity.createAttributes().build());
+        event.put(ModEntities.BLOOD_MAGE.get(), br.com.murilo.liberthia.entity.BloodMageEntity.createAttributes().build());
+        event.put(ModEntities.BLOOD_HOUND.get(), br.com.murilo.liberthia.entity.BloodHoundEntity.createAttributes().build());
+        event.put(ModEntities.POSSESSED_ZOMBIE.get(), br.com.murilo.liberthia.entity.PossessedZombieEntity.createAttributes().build());
+        event.put(ModEntities.POSSESSED_SKELETON.get(), br.com.murilo.liberthia.entity.PossessedSkeletonEntity.createAttributes().build());
+        event.put(ModEntities.BLOOD_WARDEN.get(), br.com.murilo.liberthia.entity.BloodWardenBossEntity.createAttributes().build());
+        event.put(ModEntities.WEAVING_SHADE.get(), br.com.murilo.liberthia.entity.WeavingShadeEntity.createAttributes().build());
+        event.put(ModEntities.DISARMER.get(), br.com.murilo.liberthia.entity.DisarmerEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -41,6 +48,12 @@ public class ModEntityEvents {
                 SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(ModEntities.WOUNDED_PILGRIM.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Mob::checkMobSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.BLOOD_MAGE.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.BLOOD_HOUND.get(),
                 SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Mob::checkMobSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
     }

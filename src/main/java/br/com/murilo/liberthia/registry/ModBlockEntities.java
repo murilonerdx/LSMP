@@ -35,6 +35,15 @@ public final class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.BloodCauldronBlockEntity>> BLOOD_CAULDRON = BLOCK_ENTITIES.register("blood_cauldron",
             () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.BloodCauldronBlockEntity::new, ModBlocks.BLOOD_CAULDRON.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.CommandPylonBlockEntity>> COMMAND_PYLON = BLOCK_ENTITIES.register("command_pylon",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.CommandPylonBlockEntity::new, ModBlocks.COMMAND_PYLON.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.BloodSacrificialBowlBlockEntity>> BLOOD_SACRIFICIAL_BOWL = BLOCK_ENTITIES.register("blood_sacrificial_bowl",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.BloodSacrificialBowlBlockEntity::new, ModBlocks.BLOOD_SACRIFICIAL_BOWL.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.GoldenBloodBowlBlockEntity>> GOLDEN_BLOOD_BOWL = BLOCK_ENTITIES.register("golden_blood_bowl",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.GoldenBloodBowlBlockEntity::new, ModBlocks.GOLDEN_BLOOD_BOWL.get()).build(null));
+
     private ModBlockEntities() {
     }
 

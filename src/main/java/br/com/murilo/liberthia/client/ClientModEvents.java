@@ -48,6 +48,86 @@ public class ClientModEvents {
                 net.minecraft.client.renderer.entity.TippableArrowRenderer::new);
         event.registerEntityRenderer(ModEntities.ORDER_PALADIN.get(),
                 br.com.murilo.liberthia.client.renderer.OrderPaladinRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLOOD_PEARL.get(),
+                ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(ModEntities.VEILING_ORB.get(),
+                net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.MIND_SPLINTER_DART.get(),
+                net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.LIGHTNING_GRENADE.get(),
+                net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.BURNING_GEM.get(),
+                net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.FROST_FLASK.get(),
+                net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.PURIFYING_FLASK.get(),
+                net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.POSSESSED_ZOMBIE.get(),
+                net.minecraft.client.renderer.entity.ZombieRenderer::new);
+        event.registerEntityRenderer(ModEntities.POSSESSED_SKELETON.get(),
+                net.minecraft.client.renderer.entity.SkeletonRenderer::new);
+
+        // --- Blood Warden boss: ZOMBIE layer (has 'hat') + Husk texture, scaled 1.6× ---
+        event.registerEntityRenderer(ModEntities.BLOOD_WARDEN.get(), ctx -> {
+            net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.entity.BloodWardenBossEntity> body =
+                    new net.minecraft.client.model.HumanoidModel<>(
+                            ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.ZOMBIE));
+            return new net.minecraft.client.renderer.entity.MobRenderer<
+                    br.com.murilo.liberthia.entity.BloodWardenBossEntity,
+                    net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.entity.BloodWardenBossEntity>>(ctx, body, 1.0F) {
+                @Override
+                public net.minecraft.resources.ResourceLocation getTextureLocation(
+                        br.com.murilo.liberthia.entity.BloodWardenBossEntity e) {
+                    return net.minecraft.resources.ResourceLocation.tryBuild("minecraft", "textures/entity/zombie/husk.png");
+                }
+                @Override
+                protected void scale(br.com.murilo.liberthia.entity.BloodWardenBossEntity entity,
+                                     com.mojang.blaze3d.vertex.PoseStack pose, float partialTick) {
+                    pose.scale(1.6F, 1.6F, 1.6F);
+                }
+            };
+        });
+
+        // --- Weaving Shade: ZOMBIE layer + Drowned texture, scaled 0.6× ---
+        event.registerEntityRenderer(ModEntities.WEAVING_SHADE.get(), ctx -> {
+            net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.entity.WeavingShadeEntity> body =
+                    new net.minecraft.client.model.HumanoidModel<>(
+                            ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.ZOMBIE));
+            return new net.minecraft.client.renderer.entity.MobRenderer<
+                    br.com.murilo.liberthia.entity.WeavingShadeEntity,
+                    net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.entity.WeavingShadeEntity>>(ctx, body, 0.3F) {
+                @Override
+                public net.minecraft.resources.ResourceLocation getTextureLocation(
+                        br.com.murilo.liberthia.entity.WeavingShadeEntity e) {
+                    return net.minecraft.resources.ResourceLocation.tryBuild("minecraft", "textures/entity/zombie/drowned.png");
+                }
+                @Override
+                protected void scale(br.com.murilo.liberthia.entity.WeavingShadeEntity entity,
+                                     com.mojang.blaze3d.vertex.PoseStack pose, float partialTick) {
+                    pose.scale(0.6F, 0.6F, 0.6F);
+                }
+            };
+        });
+
+        // --- Disarmer: ZOMBIE layer + zombie texture ---
+        event.registerEntityRenderer(ModEntities.DISARMER.get(), ctx -> {
+            net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.entity.DisarmerEntity> body =
+                    new net.minecraft.client.model.HumanoidModel<>(
+                            ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.ZOMBIE));
+            return new net.minecraft.client.renderer.entity.MobRenderer<
+                    br.com.murilo.liberthia.entity.DisarmerEntity,
+                    net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.entity.DisarmerEntity>>(ctx, body, 0.5F) {
+                @Override
+                public net.minecraft.resources.ResourceLocation getTextureLocation(
+                        br.com.murilo.liberthia.entity.DisarmerEntity e) {
+                    return net.minecraft.resources.ResourceLocation.tryBuild("minecraft", "textures/entity/zombie/zombie.png");
+                }
+            };
+        });
+        event.registerEntityRenderer(ModEntities.BLOOD_MAGE.get(),
+                br.com.murilo.liberthia.client.renderer.BloodMageRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLOOD_HOUND.get(),
+                br.com.murilo.liberthia.client.renderer.BloodHoundRenderer::new);
         event.registerEntityRenderer(ModEntities.FLESH_MOTHER_BOSS.get(),
                 br.com.murilo.liberthia.client.renderer.FleshMotherBossRenderer::new);
         event.registerEntityRenderer(ModEntities.BLOOD_ORB.get(),
@@ -93,6 +173,7 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.YELLOW_MATTER_FLUID_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_FLUID_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHALK_SYMBOL.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.THORN_BRIAR.get(), RenderType.cutout());
         });
     }
 }

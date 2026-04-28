@@ -5,6 +5,7 @@ import br.com.murilo.liberthia.entity.BloodOrbEntity;
 import br.com.murilo.liberthia.entity.BloodPriestEntity;
 import br.com.murilo.liberthia.entity.BloodWormEntity;
 import br.com.murilo.liberthia.entity.FleshCrawlerEntity;
+import br.com.murilo.liberthia.entity.FleshMotherBossEntity;
 import br.com.murilo.liberthia.entity.GoreWormEntity;
 import br.com.murilo.liberthia.entity.WoundedPilgrimEntity;
 import net.minecraft.world.entity.Entity;
@@ -26,6 +27,12 @@ public final class BloodKin {
                 || e instanceof BloodOrbEntity
                 || e instanceof BloodCultistEntity
                 || e instanceof BloodPriestEntity
-                || e instanceof WoundedPilgrimEntity;
+                || e instanceof WoundedPilgrimEntity
+                || e instanceof FleshMotherBossEntity
+                || e instanceof br.com.murilo.liberthia.entity.BloodMageEntity
+                || e instanceof br.com.murilo.liberthia.entity.BloodHoundEntity
+                || e instanceof br.com.murilo.liberthia.entity.BloodWardenBossEntity
+                || e instanceof br.com.murilo.liberthia.entity.WeavingShadeEntity
+                || e instanceof br.com.murilo.liberthia.entity.DisarmerEntity;
     }
 }

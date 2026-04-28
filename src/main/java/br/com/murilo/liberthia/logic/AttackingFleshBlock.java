@@ -60,32 +60,24 @@ public class AttackingFleshBlock extends Block {
             // Blood-stream trail from block → victim (arc with slight gravity droop)
             Vec3 target = new Vec3(le.getX(), le.getY() + le.getBbHeight() * 0.5, le.getZ());
             Vec3 delta = target.subtract(origin);
-            int steps = 14;
+            int steps = 8; // was 14
             for (int s = 1; s <= steps; s++) {
                 double t = s / (double) steps;
-                // Parabolic arc: rise then fall
                 double arc = -0.35 * (t - 0.5) * (t - 0.5) + 0.09;
                 double x = origin.x + delta.x * t;
                 double y = origin.y + delta.y * t + arc;
                 double z = origin.z + delta.z * t;
                 level.sendParticles(BloodParticles.BLOOD, x, y, z,
-                        2, 0.05, 0.05, 0.05, 0.0);
-                if (s % 3 == 0) {
-                    level.sendParticles(ParticleTypes.CRIMSON_SPORE, x, y, z,
-                            1, 0.03, 0.03, 0.03, 0.0);
-                }
+                        1, 0.05, 0.05, 0.05, 0.0);
             }
             // Muzzle burst at the block
             level.sendParticles(BloodParticles.BLOOD,
                     origin.x, origin.y, origin.z,
-                    8, 0.2, 0.1, 0.2, 0.15);
+                    4, 0.2, 0.1, 0.2, 0.15);
             // Impact splatter on the victim
             level.sendParticles(BloodParticles.BLOOD,
                     le.getX(), le.getY() + 0.5, le.getZ(),
-                    16, 0.3, 0.5, 0.3, 0.2);
-            level.sendParticles(ParticleTypes.CRIMSON_SPORE,
-                    le.getX(), le.getY() + 0.5, le.getZ(),
-                    6, 0.3, 0.5, 0.3, 0.05);
+                    8, 0.3, 0.5, 0.3, 0.2);
             // Damage + infection
             le.hurt(le.damageSources().magic(), 2.5F);
             le.addEffect(new MobEffectInstance(ModEffects.BLOOD_INFECTION.get(), 200, 0, false, true, true));

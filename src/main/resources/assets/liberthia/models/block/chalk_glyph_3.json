@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:block/thin_block",
+  "textures": {
+    "particle": "liberthia:block/chalk_glyph_3",
+    "texture":  "liberthia:block/chalk_glyph_3"
+  },
+  "elements": [
+    {
+      "from": [1.5, 0, 1.5],
+      "to":   [14.5, 0.04, 14.5],
+      "faces": {
+        "down": {"uv":[1.5,1.5,14.5,14.5], "texture":"#texture", "tintindex":0},
+        "up":   {"uv":[1.5,1.5,14.5,14.5], "texture":"#texture", "tintindex":0}
+      }
+    }
+  ]
+}

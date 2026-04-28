@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "side": "liberthia:block/stripped_sanguine_log",
+    "end": "liberthia:block/stripped_sanguine_log_top"
+  }
+}
