@@ -340,6 +340,13 @@ public final class ModItems {
                             .fireResistant()
             ));
 
+    public static final RegistryObject<Item> DARK_BLOOD_TEST_ITEM =
+            ITEMS.register("dark_blood_test_item", () -> new DarkBloodTestItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .rarity(Rarity.RARE)
+            ));
+
     // --- Blood Fountain ---
     public static final RegistryObject<Item> BLOOD_FOUNTAIN_ITEM = ITEMS.register("blood_fountain",
             () -> new BlockItem(ModBlocks.BLOOD_FOUNTAIN.get(),

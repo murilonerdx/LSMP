@@ -44,6 +44,8 @@ public class LiberthiaMod {
         KirikoBookNetworking.register();
         MinecraftForge.EVENT_BUS.register(new InfectionEvents());
         MinecraftForge.EVENT_BUS.register(new WorldSpawnerEvents());
+
+        ModParticles.PARTICLE_TYPES.register(modBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
