@@ -181,7 +181,7 @@
   "chat.liberthia.frozen": "Você está congelado! Não pode se mover nem agir!",
   "chat.liberthia.freeze_used": "Congelou %s no lugar!",
   "chat.liberthia.thawed": "O gelo se estilhaça... você pode se mover novamente.",
-
+  "item.liberthia.red_kiriko_book": "Livro Vermelho de Kiriko",
   "item.liberthia.teleport_marker_stick": "Bastão Marcador de Teleporte",
   "item.liberthia.teleport_executor_stick": "Bastão Executor de Teleporte",
   "subtitle.liberthia.dark_matter_sword": "Som da espada escura",

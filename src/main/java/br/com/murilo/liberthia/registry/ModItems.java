@@ -332,6 +332,14 @@ public final class ModItems {
                     new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)
                             .fireResistant()));
 
+    public static final RegistryObject<Item> RED_KIRIKO_BOOK = ITEMS.register("book_red_kiriko",
+            () -> new BookRedKirikoItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .rarity(Rarity.EPIC)
+                            .fireResistant()
+            ));
+
     // --- Blood Fountain ---
     public static final RegistryObject<Item> BLOOD_FOUNTAIN_ITEM = ITEMS.register("blood_fountain",
             () -> new BlockItem(ModBlocks.BLOOD_FOUNTAIN.get(),

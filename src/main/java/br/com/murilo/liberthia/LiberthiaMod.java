@@ -4,6 +4,7 @@ import br.com.murilo.liberthia.config.LiberthiaConfig;
 import br.com.murilo.liberthia.event.InfectionEvents;
 import br.com.murilo.liberthia.event.ModConfigEvents;
 import br.com.murilo.liberthia.event.WorldSpawnerEvents;
+import br.com.murilo.liberthia.network.KirikoBookNetworking;
 import br.com.murilo.liberthia.network.ModNetwork;
 import br.com.murilo.liberthia.registry.*;
 import com.mojang.logging.LogUtils;
@@ -40,7 +41,7 @@ public class LiberthiaMod {
 
         context.registerConfig(ModConfig.Type.SERVER, LiberthiaConfig.SERVER_SPEC, "liberthia-server.toml");
         context.registerConfig(ModConfig.Type.CLIENT, LiberthiaConfig.CLIENT_SPEC, "liberthia-client.toml");
-        
+        KirikoBookNetworking.register();
         MinecraftForge.EVENT_BUS.register(new InfectionEvents());
         MinecraftForge.EVENT_BUS.register(new WorldSpawnerEvents());
     }

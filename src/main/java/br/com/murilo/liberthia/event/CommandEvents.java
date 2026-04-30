@@ -1,5 +1,6 @@
 package br.com.murilo.liberthia.event;
 
+import br.com.murilo.liberthia.command.BookRedKirikoCommand;
 import br.com.murilo.liberthia.command.ModCommands;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,5 +12,6 @@ public class CommandEvents {
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         ModCommands.register(event.getDispatcher());
         br.com.murilo.liberthia.command.CultCampCommand.register(event.getDispatcher());
+        BookRedKirikoCommand.register(event.getDispatcher());
     }
 }
