@@ -184,7 +184,14 @@
 
   "item.liberthia.teleport_marker_stick": "Bastão Marcador de Teleporte",
   "item.liberthia.teleport_executor_stick": "Bastão Executor de Teleporte",
-
+  "subtitle.liberthia.dark_matter_sword": "Som da espada escura",
+  "item.liberthia.yellow_matter_sword": "Espada de Matéria Amarela",
+  "tooltip.liberthia.yellow_matter_sword.title": "Espada de Matéria Amarela",
+  "tooltip.liberthia.yellow_matter_sword.description": "Canaliza emoções instáveis em forma de raio.",
+  "tooltip.liberthia.yellow_matter_sword.right_click": "Segurar botão direito: Rajada de Matéria Amarela",
+  "tooltip.liberthia.yellow_matter_sword.damage_scaling": "O dano aumenta em +10 por segundo canalizado.",
+  "tooltip.liberthia.yellow_matter_sword.interrupt": "Tomar dano durante a canalização rompe o fluxo.",
+  "tooltip.liberthia.yellow_matter_sword.instability": "Uso excessivo gera Descontrole Emocional.",
   "item.liberthia.marking_stick": "Bastão Marcador",
   "item.liberthia.marking_stick.desc1": "Shift+clicar bloco = definir pos TP",
   "item.liberthia.marking_stick.desc2": "Clicar jogador = marca-lo",

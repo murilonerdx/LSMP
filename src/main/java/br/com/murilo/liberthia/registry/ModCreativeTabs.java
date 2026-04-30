@@ -20,7 +20,9 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.DARK_MATTER_BLOCK_ITEM.get());
                         output.accept(ModItems.CORRUPTED_SOIL_ITEM.get());
                         output.accept(ModItems.CLEAR_MATTER_BLOCK_ITEM.get());
+                        output.accept(ModItems.CLEAR_MATTER_BLOCK_ITEM.get());
                         output.accept(ModItems.YELLOW_MATTER_BLOCK_ITEM.get());
+                        output.accept(ModItems.SWORD_BRUM.get());
                         output.accept(ModItems.DARK_MATTER_ORE_ITEM.get());
                         output.accept(ModItems.DEEPSLATE_DARK_MATTER_ORE_ITEM.get());
                         output.accept(ModItems.WHITE_MATTER_ORE_ITEM.get());

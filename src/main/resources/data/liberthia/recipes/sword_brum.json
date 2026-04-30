@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "IRI",
+    " B "
+  ],
+  "key": {
+    "Y": {"item": "minecraft:stick"},
+    "I": {"item": "minecraft:netherite_ingot"},
+    "R": {"item": "minecraft:sanguine_core"}
+  },
+  "result": {
+    "item": "liberthia:sword_brum",
+    "count": 1
+  }
+}

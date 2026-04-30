@@ -6,7 +6,7 @@ license="MIT"
 modId="liberthia"
 version="0.1.0"
 displayName="Liberthia"
-authors="Murilo Pereira, OpenAI"
+authors="Murilo Pereira"
 description='''Mod de sobrevivência anômala com Matéria Escura, Matéria Clara e Matéria Amarela.'''
 displayTest="MATCH_VERSION"
 

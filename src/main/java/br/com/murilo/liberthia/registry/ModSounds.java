@@ -17,6 +17,9 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> GEIGER_TICK = register("geiger_tick");
     public static final RegistryObject<SoundEvent> INFECTION_ALERT = register("infection_alert");
     public static final RegistryObject<SoundEvent> ISOLATION_WARNING = register("isolation_warning");
+    public static final RegistryObject<SoundEvent> FLESH_MOTHER_GRUM = register("flesh_mother_grum");
+    public static final RegistryObject<SoundEvent> DARK_MATTER_SWORD = register("dark_matter_sword");
+
 
     private ModSounds() {
     }

@@ -130,6 +130,12 @@ public class ClientModEvents {
                 br.com.murilo.liberthia.client.renderer.BloodHoundRenderer::new);
         event.registerEntityRenderer(ModEntities.FLESH_MOTHER_BOSS.get(),
                 br.com.murilo.liberthia.client.renderer.FleshMotherBossRenderer::new);
+        event.registerEntityRenderer(ModEntities.WEAVING_SHADE.get(),
+                br.com.murilo.liberthia.client.renderer.WeavingShadeRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLOOD_WARDEN.get(),
+                br.com.murilo.liberthia.client.renderer.BloodWardenRenderer::new);
+        event.registerEntityRenderer(ModEntities.DISARMER.get(),
+                br.com.murilo.liberthia.client.renderer.DisarmerRenderer::new);
         event.registerEntityRenderer(ModEntities.BLOOD_ORB.get(),
                 ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.entity.BloodOrbEntity>(ctx) {
                     @Override public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.entity.BloodOrbEntity e) {

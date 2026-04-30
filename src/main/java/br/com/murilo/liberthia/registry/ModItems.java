@@ -3,11 +3,7 @@ package br.com.murilo.liberthia.registry;
 import br.com.murilo.liberthia.LiberthiaMod;
 import br.com.murilo.liberthia.entry.AdminToolItem;
 import br.com.murilo.liberthia.item.*;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +17,18 @@ public final class ModItems {
 
     public static final RegistryObject<Item> CLEAR_MATTER_BLOCK_ITEM = ITEMS.register("clear_matter_block",
             () -> new BlockItem(ModBlocks.CLEAR_MATTER_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SWORD_BRUM =
+            ITEMS.register("sword_brum", () ->
+                    new SwordBrumItem(
+                            Tiers.NETHERITE,
+                            16,
+                            -2.4F,
+                            new Item.Properties()
+                                    .rarity(Rarity.EPIC)
+                                    .fireResistant()
+                    )
+            );
 
     public static final RegistryObject<Item> YELLOW_MATTER_BLOCK_ITEM = ITEMS.register("yellow_matter_block",
             () -> new BlockItem(ModBlocks.YELLOW_MATTER_BLOCK.get(), new Item.Properties()));
@@ -143,7 +151,13 @@ public final class ModItems {
 
     // --- Dark Matter Tools ---
     public static final RegistryObject<Item> DARK_MATTER_SWORD = ITEMS.register("dark_matter_sword",
-            () -> new DarkMatterSwordItem(new Item.Properties()));
+            () -> new DarkMatterSwordItem(
+                    new Item.Properties()
+                            .durability(2500)
+                            .rarity(Rarity.EPIC)
+                            .fireResistant()
+            )
+    );
 
     public static final RegistryObject<Item> DARK_MATTER_PICKAXE = ITEMS.register("dark_matter_pickaxe",
             () -> new DarkMatterPickaxeItem(new Item.Properties()));

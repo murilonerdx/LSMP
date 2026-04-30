@@ -35,6 +35,15 @@
       }
     ]
   },
+  "dark_matter_sword": {
+    "subtitle": "subtitle.liberthia.dark_matter_sword",
+    "sounds": [
+      {
+        "name": "liberthia:dark_matter_song",
+        "stream": false
+      }
+    ]
+  },
   "infection_alert": {
     "subtitle": "subtitle.liberthia.infection_alert",
     "sounds": [

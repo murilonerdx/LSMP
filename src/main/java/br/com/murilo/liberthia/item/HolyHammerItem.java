@@ -38,7 +38,7 @@ public class HolyHammerItem extends SwordItem {
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean ok = super.hurtEnemy(stack, target, attacker);
         if (attacker.level() instanceof ServerLevel sl) {
-            // Heavy knockback
+            // Heavy knockbacka
             Vec3 dir = target.position().subtract(attacker.position()).normalize();
             target.push(dir.x * 1.5, 0.55, dir.z * 1.5);
             target.hurtMarked = true;
