@@ -53,10 +53,8 @@ public class BurningGemEntity extends ThrowableItemProjectile {
         }
 
         for (LivingEntity le : sl.getEntitiesOfClass(LivingEntity.class, new AABB(impact).inflate(3.5))) {
-            if (BloodKin.is(le)) continue;
-            if (le == getOwner()) continue;
             le.setSecondsOnFire(10);
-            le.hurt(le.damageSources().inFire(), 4.0F);
+            le.hurt(le.damageSources().inFire(), 6.0F);
         }
 
         sl.sendParticles(ParticleTypes.LARGE_SMOKE, getX(), getY() + 0.4, getZ(), 18, 0.6, 0.4, 0.6, 0.05);

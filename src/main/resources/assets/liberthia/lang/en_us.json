@@ -16,6 +16,11 @@
   "item.liberthia.yellow_matter_chestplate": "Yellow Matter Chestplate",
   "item.liberthia.yellow_matter_leggings": "Yellow Matter Leggings",
   "item.liberthia.yellow_matter_boots": "Yellow Matter Boots",
+  "item.liberthia.spiritual_connection": "Spiritual Connection",
+  "item.liberthia.spiritual_link": "Spiritual Link",
+  "container.liberthia.spiritual_trade": "Spiritual Trades",
+  "item.liberthia.image_frame_book_builder": "Image Frame Book Builder",
+  "item.liberthia.image_frame_book": "Image Frame Book"
   "item.liberthia.dark_matter_shard": "Dark Matter Shard",
   "item.liberthia.geiger_counter": "Geiger Counter",
   "item.liberthia.clear_matter_pill": "Clear Matter Pill",

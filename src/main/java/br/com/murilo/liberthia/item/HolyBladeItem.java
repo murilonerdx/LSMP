@@ -1,21 +1,22 @@
 package br.com.murilo.liberthia.item;
 
+import br.com.murilo.liberthia.effect.ParticleEffectConfig;
+import br.com.murilo.liberthia.effect.ParticleEffectEngine;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
@@ -66,6 +67,52 @@ public class HolyBladeItem extends SwordItem {
         return ok;
     }
 
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+
+
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+        }
+        ParticleEffectConfig config = ParticleEffectConfig.builder()
+                .size(0.18F, 0.55F)
+                .alpha(0.95F)
+                .lifetime(60)
+                .count(24)
+                .gravity(-0.01F)
+                .friction(0.90F)
+                .spin(0.04F)
+                .physics(false)
+                .emissive(true)
+                .speed(0.045D)
+                .upwardSpeed(0.015D)
+                .spread(0.45D)
+                .range(5.0D)
+                .build();
+
+        ParticleEffectEngine.meteorShowerTimed(
+                serverLevel,
+                player,
+                config,
+                80,    // duração
+                8,     // quantidade de meteoros
+                7.0D,   // distância mínima do player
+                18.0D,  // raio de busca/alvo
+                40.0D,  // altura
+                2.4F,   // explosão
+                2,      // fogo no chão
+                80
+        );
+
+        if(!player.getAbilities().instabuild){
+            stack.hurtAndBreak(20, player, (p) -> p.broadcastBreakEvent(hand));
+        }
+        stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+        player.getCooldowns().addCooldown(this, 60);
+
+        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+    }
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
         if (level.isClientSide) return;

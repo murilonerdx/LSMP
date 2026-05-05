@@ -4,6 +4,7 @@ import br.com.murilo.liberthia.LiberthiaMod;
 import br.com.murilo.liberthia.menu.*;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.network.IContainerFactory;
@@ -13,6 +14,16 @@ import net.minecraftforge.registries.RegistryObject;
 
 public final class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, LiberthiaMod.MODID);
+
+    public static final RegistryObject<MenuType<SpiritualTradeMenu>> SPIRITUAL_TRADE =
+            MENUS.register("spiritual_trade", () ->
+                    IForgeMenuType.create((windowId, inventory, data) ->
+                            new SpiritualTradeMenu(windowId, inventory, ItemStack.EMPTY)));
+
+    public static final RegistryObject<MenuType<SpiritualTradeConfigMenu>> SPIRITUAL_TRADE_CONFIG =
+            MENUS.register("spiritual_trade_config", () ->
+                    IForgeMenuType.create((windowId, inventory, data) ->
+                            new SpiritualTradeConfigMenu(windowId, inventory, ItemStack.EMPTY)));
 
     public static final RegistryObject<MenuType<PurificationBenchMenu>> PURIFICATION_BENCH = registerMenuType(
             "purification_bench", PurificationBenchMenu::new);

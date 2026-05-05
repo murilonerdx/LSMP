@@ -1,5 +1,6 @@
 {
-	"format_version": "1.20.1",
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "liberthia:item/sword_brum",
 		"particle": "liberthia:item/sword_brum"
@@ -478,19 +479,19 @@
 			"translation": [-0.5, 3, 4.5]
 		},
 		"firstperson_righthand": {
-			"rotation": [6, 75.05, 44.82],
-			"translation": [0.75, -0.25, 0]
+			"rotation": [6, 75.05, 40],
+			"translation": [2.5, 2.75, 0.75]
 		},
 		"firstperson_lefthand": {
-			"rotation": [-159.5, -79, -180]
+			"rotation": [-159.5, -79, 163],
+			"translation": [0, 3.5, 1.25]
 		},
 		"ground": {
 			"translation": [0, 4.25, 0],
 			"scale": [1, 1.17383, 1]
 		},
 		"gui": {
-			"translation": [-1.5, 0, 0],
-			"scale": [0.875, 1, 1]
+			"translation": [-1.5, 0, 0]
 		},
 		"fixed": {
 			"translation": [-2.25, 0, 0]

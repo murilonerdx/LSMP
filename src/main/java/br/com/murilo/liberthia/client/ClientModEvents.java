@@ -67,6 +67,8 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.POSSESSED_SKELETON.get(),
                 net.minecraft.client.renderer.entity.SkeletonRenderer::new);
 
+
+
         // --- Blood Warden boss: ZOMBIE layer (has 'hat') + Husk texture, scaled 1.6× ---
         event.registerEntityRenderer(ModEntities.BLOOD_WARDEN.get(), ctx -> {
             net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.entity.BloodWardenBossEntity> body =
@@ -170,6 +172,10 @@ public class ClientModEvents {
             MenuScreens.register(ModMenuTypes.RESEARCH_TABLE.get(), ResearchTableScreen::new);
             MenuScreens.register(ModMenuTypes.CONTAINMENT_CHAMBER.get(), ContainmentChamberScreen::new);
             MenuScreens.register(ModMenuTypes.MATTER_TRANSMUTER.get(), MatterTransmuterScreen::new);
+
+            event.enqueueWork(() ->
+                    MenuScreens.register(ModMenuTypes.SPIRITUAL_TRADE.get(), SpiritualTradeScreen::new)
+            );
 
             // RenderType registration for transparent/cutout blocks
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPORE_BLOOM.get(), RenderType.cutout());

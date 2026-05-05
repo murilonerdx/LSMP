@@ -12,6 +12,26 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, LiberthiaMod.MODID);
 
+    public static final RegistryObject<Item> IMAGE_FRAME_BOOK_BUILDER =
+            ITEMS.register("image_frame_book_builder",
+                    () -> new ImageFrameBookBuilderItem(new Item.Properties()
+                            .stacksTo(1)
+                            .rarity(Rarity.RARE)));
+
+    public static final RegistryObject<Item> IMAGE_FRAME_BOOK =
+            ITEMS.register("image_frame_book",
+                    () -> new ImageFrameBookItem(new Item.Properties()
+                            .stacksTo(1)
+                            .rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<Item> SPIRITUAL_CONNECTION =
+            ITEMS.register("spiritual_connection", () ->
+                    new SpiritualConnectionItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> SPIRITUAL_LINK =
+            ITEMS.register("spiritual_link", () ->
+                    new SpiritualLinkItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> DARK_MATTER_BLOCK_ITEM = ITEMS.register("dark_matter_block",
             () -> new BlockItem(ModBlocks.DARK_MATTER_BLOCK.get(), new Item.Properties()));
 
@@ -828,6 +848,7 @@ public final class ModItems {
     public static final RegistryObject<Item> POSSESSED_ZOMBIE_EGG = ITEMS.register("possessed_zombie_spawn_egg",
             () -> new net.minecraftforge.common.ForgeSpawnEggItem(
                     ModEntities.POSSESSED_ZOMBIE, 0x2a0606, 0x4a1a0a, new Item.Properties()));
+
     public static final RegistryObject<Item> POSSESSED_SKELETON_EGG = ITEMS.register("possessed_skeleton_spawn_egg",
             () -> new net.minecraftforge.common.ForgeSpawnEggItem(
                     ModEntities.POSSESSED_SKELETON, 0x4a0a0a, 0x8a3a3a, new Item.Properties()));

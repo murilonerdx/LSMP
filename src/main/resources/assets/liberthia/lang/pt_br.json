@@ -16,6 +16,9 @@
   "item.liberthia.yellow_matter_boots": "Botas de Mat\u00e9ria Amarela",
   "item.liberthia.dark_matter_shard": "Fragmento de Mat\u00e9ria Escura",
   "item.liberthia.geiger_counter": "Contador Geiger",
+  "item.liberthia.spiritual_connection": "Conexão Espiritual",
+  "item.liberthia.spiritual_link": "Vínculo Espiritual",
+  "container.liberthia.spiritual_trade": "Trocas Espirituais",
   "item.liberthia.clear_matter_pill": "P\u00edlula de Mat\u00e9ria Clara",
   "item.liberthia.clear_matter_shield": "Escudo de Mat\u00e9ria Clara",
   "effect.liberthia.dark_infection": "Infec\u00e7\u00e3o por Mat\u00e9ria Escura",
@@ -272,6 +275,8 @@
   "item.liberthia.blood_diamond_ore": "Minério de Diamante de Sangue",
   "item.liberthia.blood_redstone_ore": "Minério de Redstone de Sangue",
   "item.liberthia.blood_lapis_ore": "Minério de Lápis de Sangue",
+  "item.liberthia.image_frame_book_builder": "Criador de Livro com Imagens",
+  "item.liberthia.image_frame_book": "Livro de Imagens"
   "item.liberthia.blood_emerald_ore": "Minério de Esmeralda de Sangue",
   "item.liberthia.bloody_rag": "Trapo Ensanguentado",
   "item.liberthia.rusted_dagger": "Adaga Enferrujada",

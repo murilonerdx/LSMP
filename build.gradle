@@ -60,6 +60,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    implementation 'org.sejda.imageio:webp-imageio:0.1.6'
 }
 
 def replaceProperties = [

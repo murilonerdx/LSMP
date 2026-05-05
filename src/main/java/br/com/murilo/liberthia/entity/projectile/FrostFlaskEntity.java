@@ -56,8 +56,6 @@ public class FrostFlaskEntity extends ThrowableItemProjectile {
         }
 
         for (LivingEntity le : sl.getEntitiesOfClass(LivingEntity.class, new AABB(impact).inflate(4.0))) {
-            if (BloodKin.is(le)) continue;
-            if (le == getOwner()) continue;
             le.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 4));
             le.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 200, 2));
             le.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 0));

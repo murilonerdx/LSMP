@@ -8,6 +8,7 @@ import br.com.murilo.liberthia.entry.FieldJournalSaveC2SPacket;
 import br.com.murilo.liberthia.entry.TrackerC2SPacket;
 import br.com.murilo.liberthia.entry.TrackerDataS2CPacket;
 import br.com.murilo.liberthia.entry.WorkerVoicePlayC2SPacket;
+import br.com.murilo.liberthia.network.packet.ClientboundSpiritualSyncPacket;
 import br.com.murilo.liberthia.network.packet.OpenCommandTabletScreenS2CPacket;
 import br.com.murilo.liberthia.network.packet.OpenScriptTabletScreenS2CPacket;
 import br.com.murilo.liberthia.network.packet.OpenTeleportExecutorScreenS2CPacket;
@@ -16,11 +17,14 @@ import br.com.murilo.liberthia.network.packet.SaveCommandTabletC2SPacket;
 import br.com.murilo.liberthia.network.packet.SaveScriptTabletC2SPacket;
 import br.com.murilo.liberthia.network.packet.TeleportExecutorActionC2SPacket;
 import br.com.murilo.liberthia.network.packet.WorkerTeleporterTargetC2SPacket;
+import br.com.murilo.liberthia.packet.CreateImageBookPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
+
 
 public final class ModNetwork {
     private static final String PROTOCOL_VERSION = "1";
@@ -58,6 +62,14 @@ public final class ModNetwork {
                 S2CMatterEnergySyncPacket::encode,
                 S2CMatterEnergySyncPacket::decode,
                 S2CMatterEnergySyncPacket::handle
+        );
+
+        CHANNEL.registerMessage(
+                packetId++,
+                CreateImageBookPacket.class,
+                CreateImageBookPacket::encode,
+                CreateImageBookPacket::decode,
+                CreateImageBookPacket::handle
         );
 
         // --- admin GUI packets ---
@@ -194,9 +206,24 @@ public final class ModNetwork {
                 SaveScriptTabletC2SPacket::decode,
                 SaveScriptTabletC2SPacket::handle
         );
+
+        // --- Spiritual connection sync ---
+        CHANNEL.registerMessage(
+                packetId++,
+                ClientboundSpiritualSyncPacket.class,
+                ClientboundSpiritualSyncPacket::encode,
+                ClientboundSpiritualSyncPacket::decode,
+                ClientboundSpiritualSyncPacket::handle
+        );
     }
 
     public static void sendToPlayer(ServerPlayer player, Object packet) {
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
+    }
+
+    public static void sendToAll(MinecraftServer server, Object packet) {
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            sendToPlayer(player, packet);
+        }
     }
 }
