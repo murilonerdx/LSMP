@@ -1,5 +1,6 @@
 {
 	"format_version": "1.20.1",
+	"gui_light": "front",
 	"textures": {
 		"0": "liberthia:item/dark_matter_sword",
 		"particle": "liberthia:item/dark_matter_sword"

@@ -567,6 +567,7 @@
 			}
 		}
 	],
+	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [0, 83, 62],
@@ -588,7 +589,7 @@
 			"translation": [0, 4.5, 0]
 		},
 		"gui": {
-			"translation": [-2.75, 0, 0],
+			"translation": [-2.25, 0, 0],
 			"scale": [0.9, 0.9, 0.9]
 		},
 		"fixed": {

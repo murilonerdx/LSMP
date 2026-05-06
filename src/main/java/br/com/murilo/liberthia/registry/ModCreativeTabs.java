@@ -293,6 +293,12 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.BLOOD_WARDEN_EGG.get());
                         output.accept(ModItems.WEAVING_SHADE_EGG.get());
                         output.accept(ModItems.DISARMER_EGG.get());
+
+                        output.accept(ModItems.BONE_SEAL.get());
+                        output.accept(ModItems.GOLD_SEAL.get());
+
+                        output.accept(ModItems.IMAGE_FRAME_BOOK.get());
+                        output.accept(ModItems.IMAGE_FRAME_BOOK_BUILDER.get());
                     })
                     .build());
 

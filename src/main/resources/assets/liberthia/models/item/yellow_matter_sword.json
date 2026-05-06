@@ -1,6 +1,6 @@
 {
 	"format_version": "1.9.0",
-	"credit": "Made with Blockbench",
+	"gui_light": "front",
 	"textures": {
 		"0": "liberthia:item/yellow_matter_sword",
 		"particle": "liberthia:item/yellow_matter_sword"

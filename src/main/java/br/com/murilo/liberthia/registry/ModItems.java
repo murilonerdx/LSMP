@@ -12,6 +12,52 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, LiberthiaMod.MODID);
 
+    public static final RegistryObject<Item> MAGIC_BOOK =
+            ITEMS.register("magic_book",
+                    () -> new MagicBookItem(new Item.Properties()
+                            .stacksTo(1)
+                            .rarity(Rarity.RARE)));
+
+    public static final RegistryObject<Item> BONE_SEAL =
+            ITEMS.register("bone_seal",
+                    () -> new SealingSealItem(
+                            SealTier.BONE,
+                            new Item.Properties()
+                                    .stacksTo(1)
+                                    .durability(SealTier.BONE.durability())
+                                    .rarity(Rarity.UNCOMMON)
+                    ));
+
+    public static final RegistryObject<Item> GOLD_SEAL =
+            ITEMS.register("gold_seal",
+                    () -> new SealingSealItem(
+                            SealTier.GOLD,
+                            new Item.Properties()
+                                    .stacksTo(1)
+                                    .durability(SealTier.GOLD.durability())
+                                    .rarity(Rarity.RARE)
+                    ));
+
+    public static final RegistryObject<Item> DIAMOND_SEAL =
+            ITEMS.register("diamond_seal",
+                    () -> new SealingSealItem(
+                            SealTier.DIAMOND,
+                            new Item.Properties()
+                                    .stacksTo(1)
+                                    .durability(SealTier.DIAMOND.durability())
+                                    .rarity(Rarity.EPIC)
+                    ));
+
+    public static final RegistryObject<Item> NETHERITE_SEAL =
+            ITEMS.register("netherite_seal",
+                    () -> new SealingSealItem(
+                            SealTier.NETHERITE,
+                            new Item.Properties()
+                                    .stacksTo(1)
+                                    .durability(SealTier.NETHERITE.durability())
+                                    .rarity(Rarity.EPIC)
+                    ));
+
     public static final RegistryObject<Item> IMAGE_FRAME_BOOK_BUILDER =
             ITEMS.register("image_frame_book_builder",
                     () -> new ImageFrameBookBuilderItem(new Item.Properties()

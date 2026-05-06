@@ -1,12 +1,15 @@
 package br.com.murilo.liberthia.registry;
 
 import br.com.murilo.liberthia.LiberthiaMod;
+import br.com.murilo.liberthia.block.RitualPedestalBlock;
 import br.com.murilo.liberthia.logic.ClearMatterBlock;
 import br.com.murilo.liberthia.logic.CorruptedSoilBlock;
 import br.com.murilo.liberthia.logic.DarkMatterBlock;
 import br.com.murilo.liberthia.logic.DarkMatterFluidBlock;
 import br.com.murilo.liberthia.logic.InfectionGrowthBlock;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -37,6 +40,42 @@ public final class ModBlocks {
                     .lightLevel(state -> 11)
                     .randomTicks()
                     .sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> RITUAL_PEDESTAL =
+            registerBlock("ritual_pedestal",
+                    () -> new RitualPedestalBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_PURPLE)
+                            .strength(4.0F, 8.0F)
+                            .sound(SoundType.DEEPSLATE)
+                            .noOcclusion()));
+
+    public static final RegistryObject<Block> BONE_RUNE =
+            registerBlock("bone_rune",
+                    () -> new Block(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                            .strength(2.0F)
+                            .sound(SoundType.BONE_BLOCK)));
+
+    public static final RegistryObject<Block> GOLD_RUNE =
+            registerBlock("gold_rune",
+                    () -> new Block(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.GOLD)
+                            .strength(2.0F)
+                            .sound(SoundType.METAL)));
+
+    public static final RegistryObject<Block> DIAMOND_RUNE =
+            registerBlock("diamond_rune",
+                    () -> new Block(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.DIAMOND)
+                            .strength(2.0F)
+                            .sound(SoundType.METAL)));
+
+    public static final RegistryObject<Block> NETHERITE_RUNE =
+            registerBlock("netherite_rune",
+                    () -> new Block(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_BLACK)
+                            .strength(3.0F, 10.0F)
+                            .sound(SoundType.NETHERITE_BLOCK)));
 
     public static final RegistryObject<Block> YELLOW_MATTER_BLOCK = BLOCKS.register("yellow_matter_block",
             () -> new Block(BlockBehaviour.Properties.of()
@@ -231,6 +270,14 @@ public final class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .lightLevel(state -> 5)
                     .sound(SoundType.METAL)));
+
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, java.util.function.Supplier<T> supplier) {
+        RegistryObject<T> block = BLOCKS.register(name, supplier);
+
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+
+        return block;
+    }
 
     // --- Glitch Block ---
     public static final RegistryObject<Block> GLITCH_BLOCK = BLOCKS.register("glitch_block",

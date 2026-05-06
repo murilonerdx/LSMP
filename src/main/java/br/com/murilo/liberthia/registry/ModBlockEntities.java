@@ -2,6 +2,7 @@ package br.com.murilo.liberthia.registry;
 
 import br.com.murilo.liberthia.LiberthiaMod;
 import br.com.murilo.liberthia.block.entity.*;
+import br.com.murilo.liberthia.blockentity.RitualPedestalBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,6 +14,13 @@ public final class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<PurificationBenchBlockEntity>> PURIFICATION_BENCH = BLOCK_ENTITIES.register("purification_bench",
             () -> BlockEntityType.Builder.of(PurificationBenchBlockEntity::new, ModBlocks.PURIFICATION_BENCH.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<RitualPedestalBlockEntity>> RITUAL_PEDESTAL =
+            BLOCK_ENTITIES.register("ritual_pedestal",
+                    () -> BlockEntityType.Builder.of(
+                            RitualPedestalBlockEntity::new,
+                            ModBlocks.RITUAL_PEDESTAL.get()
+                    ).build(null));
 
     public static final RegistryObject<BlockEntityType<DarkMatterForgeBlockEntity>> DARK_MATTER_FORGE = BLOCK_ENTITIES.register("dark_matter_forge",
             () -> BlockEntityType.Builder.of(DarkMatterForgeBlockEntity::new, ModBlocks.DARK_MATTER_FORGE.get()).build(null));

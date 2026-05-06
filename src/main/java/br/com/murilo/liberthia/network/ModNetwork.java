@@ -8,15 +8,7 @@ import br.com.murilo.liberthia.entry.FieldJournalSaveC2SPacket;
 import br.com.murilo.liberthia.entry.TrackerC2SPacket;
 import br.com.murilo.liberthia.entry.TrackerDataS2CPacket;
 import br.com.murilo.liberthia.entry.WorkerVoicePlayC2SPacket;
-import br.com.murilo.liberthia.network.packet.ClientboundSpiritualSyncPacket;
-import br.com.murilo.liberthia.network.packet.OpenCommandTabletScreenS2CPacket;
-import br.com.murilo.liberthia.network.packet.OpenScriptTabletScreenS2CPacket;
-import br.com.murilo.liberthia.network.packet.OpenTeleportExecutorScreenS2CPacket;
-import br.com.murilo.liberthia.network.packet.OpenWorkerTeleporterScreenS2CPacket;
-import br.com.murilo.liberthia.network.packet.SaveCommandTabletC2SPacket;
-import br.com.murilo.liberthia.network.packet.SaveScriptTabletC2SPacket;
-import br.com.murilo.liberthia.network.packet.TeleportExecutorActionC2SPacket;
-import br.com.murilo.liberthia.network.packet.WorkerTeleporterTargetC2SPacket;
+import br.com.murilo.liberthia.network.packet.*;
 import br.com.murilo.liberthia.packet.CreateImageBookPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -71,6 +63,23 @@ public final class ModNetwork {
                 CreateImageBookPacket::decode,
                 CreateImageBookPacket::handle
         );
+
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenCapturedScreenPacket.class,
+                OpenCapturedScreenPacket::encode,
+                OpenCapturedScreenPacket::decode,
+                OpenCapturedScreenPacket::handle
+        );
+
+        CHANNEL.registerMessage(
+                packetId++,
+                TryEscapeSealPacket.class,
+                TryEscapeSealPacket::encode,
+                TryEscapeSealPacket::decode,
+                TryEscapeSealPacket::handle
+        );
+
 
         // --- admin GUI packets ---
         CHANNEL.registerMessage(

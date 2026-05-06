@@ -1,6 +1,7 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
+	"gui_light": "front",
 	"textures": {
 		"0": "liberthia:item/image_frame_book",
 		"particle": "liberthia:item/image_frame_book"
@@ -61,13 +62,13 @@
 		},
 		"firstperson_righthand": {
 			"rotation": [-34.75, 0, 0],
-			"translation": [0, 3.5, 0],
-			"scale": [0.49258, 0.49258, 0.49258]
+			"translation": [0, 1.75, 0],
+			"scale": [0.27, 0.27, 0.27]
 		},
 		"firstperson_lefthand": {
 			"rotation": [-36.25, 0, 0],
-			"translation": [0, 3.5, 0],
-			"scale": [0.49258, 0.49258, 0.49258]
+			"translation": [0, 1.75, 0],
+			"scale": [0.27, 0.27, 0.27]
 		},
 		"ground": {
 			"translation": [0, 4.25, 0],

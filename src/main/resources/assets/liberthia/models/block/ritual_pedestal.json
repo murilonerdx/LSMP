@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "liberthia:block/ritual_pedestal",
+    "up": "liberthia:block/ritual_pedestal_top",
+    "north": "liberthia:block/ritual_pedestal",
+    "south": "liberthia:block/ritual_pedestal",
+    "west": "liberthia:block/ritual_pedestal",
+    "east": "liberthia:block/ritual_pedestal",
+    "particle": "liberthia:block/ritual_pedestal"
+  }
+}

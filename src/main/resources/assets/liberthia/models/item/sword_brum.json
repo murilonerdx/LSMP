@@ -1,6 +1,7 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
+	"gui_light": "front",
 	"textures": {
 		"0": "liberthia:item/sword_brum",
 		"particle": "liberthia:item/sword_brum"
@@ -469,6 +470,7 @@
 			}
 		}
 	],
+	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [44.35, 86.23, 6.9],
@@ -491,7 +493,8 @@
 			"scale": [1, 1.17383, 1]
 		},
 		"gui": {
-			"translation": [-1.5, 0, 0]
+			"translation": [-1.5, 0, 0],
+			"scale": [0.9, 0.9, 0.9]
 		},
 		"fixed": {
 			"translation": [-2.25, 0, 0]
