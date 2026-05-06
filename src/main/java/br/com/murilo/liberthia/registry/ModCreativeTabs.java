@@ -296,6 +296,8 @@ public final class ModCreativeTabs {
 
                         output.accept(ModItems.BONE_SEAL.get());
                         output.accept(ModItems.GOLD_SEAL.get());
+                        output.accept(ModItems.DIAMOND_SEAL.get());
+                        output.accept(ModItems.NETHERITE_SEAL.get());
 
                         output.accept(ModItems.IMAGE_FRAME_BOOK.get());
                         output.accept(ModItems.IMAGE_FRAME_BOOK_BUILDER.get());
