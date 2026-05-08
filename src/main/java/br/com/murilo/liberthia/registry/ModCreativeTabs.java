@@ -37,6 +37,46 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.RESEARCH_TABLE_ITEM.get());
                         output.accept(ModItems.CONTAINMENT_CHAMBER_ITEM.get());
                         output.accept(ModItems.MATTER_TRANSMUTER_ITEM.get());
+                        output.accept(ModItems.DARK_MATTER_ALCHEMIZER_ITEM.get());
+                        output.accept(ModItems.DARK_MATTER_GENERATOR_ITEM.get());
+                        output.accept(ModItems.ENERGY_CABLE_ITEM.get());
+                        output.accept(ModItems.ITEM_PIPE_ITEM.get());
+                        output.accept(ModItems.ITEM_EXTRACTOR_ITEM.get());
+                        output.accept(ModItems.ITEM_INSERTER_ITEM.get());
+                        output.accept(ModItems.DIMENSIONAL_CHEST_ITEM.get());
+                        output.accept(ModItems.MATTER_REFINER_ITEM.get());
+                        output.accept(ModItems.SPEED_UPGRADE.get());
+                        output.accept(ModItems.EFFICIENCY_UPGRADE.get());
+                        output.accept(ModItems.CAPACITY_UPGRADE.get());
+                        // --- Cadeia de Refinação (Turn 1-3) ---
+                        output.accept(ModItems.DARK_MATTER_CHEST_ITEM.get());
+                        output.accept(ModItems.FRAGMENTED_GENERATOR_ITEM.get());
+                        output.accept(ModItems.LASER_EMITTER_ITEM.get());
+                        output.accept(ModItems.CRYSTALLIZER_ITEM.get());
+                        output.accept(ModItems.AUTO_FARMER_ITEM.get());
+                        output.accept(ModItems.DIMENSIONAL_EXTRACTOR_ITEM.get());
+                        output.accept(ModItems.INACTIVE_DARK_MATTER.get());
+                        output.accept(ModItems.ACTIVE_DARK_MATTER.get());
+                        output.accept(ModItems.DARK_MATTER_CATALYST.get());
+                        output.accept(ModItems.DIMENSIONAL_COMPASS.get());
+                        output.accept(ModItems.ENERGY_METER.get());
+                        output.accept(ModItems.CONTAINMENT_GLOVE.get());
+                        // --- Lab/Lore ---
+                        output.accept(ModItems.MATTER_ANALYZER_ITEM.get());
+                        output.accept(ModItems.LIBERTHIA_MANUAL.get());
+                        // --- Baterias ---
+                        output.accept(ModItems.BATTERY_BASIC_ITEM.get());
+                        output.accept(ModItems.BATTERY_ADVANCED_ITEM.get());
+                        output.accept(ModItems.BATTERY_QUANTUM_ITEM.get());
+                        output.accept(ModItems.LIBERTHIA_WRENCH.get());
+                        output.accept(ModItems.PYLON_REMOTE.get());
+                        output.accept(ModItems.DARK_MATTER_CELL.get());
+                        output.accept(ModItems.WIRELESS_CHARGER_ITEM.get());
+                        output.accept(ModItems.SAMPLE_VIAL.get());
+                        output.accept(ModItems.RESEARCHER_CODEX.get());
+                        output.accept(ModItems.HORUS_EYE_SHARD.get());
+                        output.accept(ModItems.EQUILIBRIUM_CRYSTAL.get());
+                        output.accept(ModItems.PLAYER_LOCK.get());
                         // --- Materiais ---
                         output.accept(ModItems.DARK_MATTER_BUCKET.get());
                         output.accept(ModItems.DARK_MATTER_SHARD.get());
@@ -301,6 +341,7 @@ public final class ModCreativeTabs {
 
                         output.accept(ModItems.IMAGE_FRAME_BOOK.get());
                         output.accept(ModItems.IMAGE_FRAME_BOOK_BUILDER.get());
+                        output.accept(ModItems.RED_KIRIKO_BOOK.get());
                     })
                     .build());
 

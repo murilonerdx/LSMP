@@ -1182,10 +1182,13 @@ public class BlackHoleEntity extends Entity {
     }
 
     private BlockPos findGroundInColumn(ServerLevel serverLevel, BlockPos columnBase) {
-        BlockPos surface = serverLevel.getHeightmapPos(
+        // CHUNK-SAFE
+        BlockPos surface = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                serverLevel,
                 Heightmap.Types.MOTION_BLOCKING,
                 new BlockPos(columnBase.getX(), 0, columnBase.getZ())
         );
+        if (surface == null) return null;
 
         MutableBlockPos mutable = new MutableBlockPos(surface.getX(), surface.getY(), surface.getZ());
 
@@ -1323,10 +1326,13 @@ public class BlackHoleEntity extends Entity {
                 double bowl = normalized * normalized;
                 int rimCut = 4 + Mth.floor(normalized * 7.0D);
 
-                BlockPos surface = serverLevel.getHeightmapPos(
+                // CHUNK-SAFE: pula chunks não-carregadas pra evitar chunk-gen parcial
+                BlockPos surface = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                        serverLevel,
                         Heightmap.Types.MOTION_BLOCKING,
                         new BlockPos(x, 0, z)
                 );
+                if (surface == null) continue;
 
                 int topY = Math.min(maxY, surface.getY() + rimCut);
 

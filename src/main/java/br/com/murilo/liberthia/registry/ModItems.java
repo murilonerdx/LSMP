@@ -79,7 +79,8 @@ public final class ModItems {
                     new SpiritualLinkItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> DARK_MATTER_BLOCK_ITEM = ITEMS.register("dark_matter_block",
-            () -> new BlockItem(ModBlocks.DARK_MATTER_BLOCK.get(), new Item.Properties()));
+            () -> new br.com.murilo.liberthia.item.PurityAwareBlockItem(
+                    ModBlocks.DARK_MATTER_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> CLEAR_MATTER_BLOCK_ITEM = ITEMS.register("clear_matter_block",
             () -> new BlockItem(ModBlocks.CLEAR_MATTER_BLOCK.get(), new Item.Properties()));
@@ -195,6 +196,148 @@ public final class ModItems {
 
     public static final RegistryObject<Item> MATTER_TRANSMUTER_ITEM = ITEMS.register("matter_transmuter",
             () -> new BlockItem(ModBlocks.MATTER_TRANSMUTER.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> DARK_MATTER_ALCHEMIZER_ITEM = ITEMS.register("dark_matter_alchemizer",
+            () -> new BlockItem(ModBlocks.DARK_MATTER_ALCHEMIZER.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> PLAYER_LOCK = ITEMS.register("player_lock",
+            () -> new br.com.murilo.liberthia.item.PlayerLockItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> DARK_MATTER_GENERATOR_ITEM = ITEMS.register("dark_matter_generator",
+            () -> new BlockItem(ModBlocks.DARK_MATTER_GENERATOR.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> ENERGY_CABLE_ITEM = ITEMS.register("energy_cable",
+            () -> new BlockItem(ModBlocks.ENERGY_CABLE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ITEM_PIPE_ITEM = ITEMS.register("item_pipe",
+            () -> new BlockItem(ModBlocks.ITEM_PIPE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ITEM_EXTRACTOR_ITEM = ITEMS.register("item_extractor",
+            () -> new BlockItem(ModBlocks.ITEM_EXTRACTOR.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ITEM_INSERTER_ITEM = ITEMS.register("item_inserter",
+            () -> new BlockItem(ModBlocks.ITEM_INSERTER.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> DIMENSIONAL_CHEST_ITEM = ITEMS.register("dimensional_chest",
+            () -> new BlockItem(ModBlocks.DIMENSIONAL_CHEST.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> MATTER_REFINER_ITEM = ITEMS.register("matter_refiner",
+            () -> new BlockItem(ModBlocks.MATTER_REFINER.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // --- Upgrades de gerador ---
+    public static final RegistryObject<Item> SPEED_UPGRADE = ITEMS.register("speed_upgrade",
+            () -> new Item(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> EFFICIENCY_UPGRADE = ITEMS.register("efficiency_upgrade",
+            () -> new Item(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> CAPACITY_UPGRADE = ITEMS.register("capacity_upgrade",
+            () -> new Item(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // --- Cadeia de Matéria Escura ---
+    public static final RegistryObject<Item> INACTIVE_DARK_MATTER = ITEMS.register("inactive_dark_matter",
+            () -> new br.com.murilo.liberthia.item.PurityAwareItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> ACTIVE_DARK_MATTER = ITEMS.register("active_dark_matter",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> DARK_MATTER_CATALYST = ITEMS.register("dark_matter_catalyst",
+            () -> new Item(new Item.Properties().stacksTo(16).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> DIMENSIONAL_COMPASS = ITEMS.register("dimensional_compass",
+            () -> new br.com.murilo.liberthia.item.DimensionalCompassItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> ENERGY_METER = ITEMS.register("energy_meter",
+            () -> new br.com.murilo.liberthia.item.EnergyMeterItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // --- Block items para cadeia de refinação ---
+    public static final RegistryObject<Item> DARK_MATTER_CHEST_ITEM = ITEMS.register("dark_matter_chest",
+            () -> new BlockItem(ModBlocks.DARK_MATTER_CHEST.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> FRAGMENTED_GENERATOR_ITEM = ITEMS.register("fragmented_generator",
+            () -> new BlockItem(ModBlocks.FRAGMENTED_GENERATOR.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> LASER_EMITTER_ITEM = ITEMS.register("laser_emitter",
+            () -> new BlockItem(ModBlocks.LASER_EMITTER.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> CRYSTALLIZER_ITEM = ITEMS.register("crystallizer",
+            () -> new BlockItem(ModBlocks.CRYSTALLIZER.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> AUTO_FARMER_ITEM = ITEMS.register("auto_farmer",
+            () -> new BlockItem(ModBlocks.AUTO_FARMER.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> DIMENSIONAL_EXTRACTOR_ITEM = ITEMS.register("dimensional_extractor",
+            () -> new BlockItem(ModBlocks.DIMENSIONAL_EXTRACTOR.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> CONTAINMENT_GLOVE = ITEMS.register("containment_glove",
+            () -> new Item(new Item.Properties().stacksTo(1)
+                    .rarity(net.minecraft.world.item.Rarity.UNCOMMON)
+                    .durability(500)));
+
+    // --- Lore items ---
+    public static final RegistryObject<Item> RESEARCHER_CODEX = ITEMS.register("researcher_codex",
+            () -> new br.com.murilo.liberthia.item.ResearcherCodexItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> HORUS_EYE_SHARD = ITEMS.register("horus_eye_shard",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> EQUILIBRIUM_CRYSTAL = ITEMS.register("equilibrium_crystal",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> SAMPLE_VIAL = ITEMS.register("sample_vial",
+            () -> new br.com.murilo.liberthia.item.SampleVialItem(
+                    new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> MATTER_ANALYZER_ITEM = ITEMS.register("matter_analyzer",
+            () -> new BlockItem(ModBlocks.MATTER_ANALYZER.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> LIBERTHIA_MANUAL = ITEMS.register("liberthia_manual",
+            () -> new br.com.murilo.liberthia.item.LiberthiaManualItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> BATTERY_BASIC_ITEM = ITEMS.register("dm_battery_basic",
+            () -> new BlockItem(ModBlocks.BATTERY_BASIC.get(), new Item.Properties()
+                    .rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> BATTERY_ADVANCED_ITEM = ITEMS.register("dm_battery_advanced",
+            () -> new BlockItem(ModBlocks.BATTERY_ADVANCED.get(), new Item.Properties()
+                    .rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> BATTERY_QUANTUM_ITEM = ITEMS.register("dm_battery_quantum",
+            () -> new BlockItem(ModBlocks.BATTERY_QUANTUM.get(), new Item.Properties()
+                    .rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    public static final RegistryObject<Item> LIBERTHIA_WRENCH = ITEMS.register("liberthia_wrench",
+            () -> new br.com.murilo.liberthia.item.WrenchItem(
+                    new Item.Properties().stacksTo(1).durability(250)
+                            .rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> PYLON_REMOTE = ITEMS.register("pylon_remote",
+            () -> new br.com.murilo.liberthia.item.PylonRemoteItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> DARK_MATTER_CELL = ITEMS.register("dark_matter_cell",
+            () -> new br.com.murilo.liberthia.item.DarkMatterCellItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    public static final RegistryObject<Item> WIRELESS_CHARGER_ITEM = ITEMS.register("wireless_charger",
+            () -> new BlockItem(ModBlocks.WIRELESS_CHARGER.get(), new Item.Properties()
+                    .rarity(net.minecraft.world.item.Rarity.RARE)));
 
     // --- New Materials ---
     public static final RegistryObject<Item> STABILIZED_DARK_MATTER = ITEMS.register("stabilized_dark_matter",

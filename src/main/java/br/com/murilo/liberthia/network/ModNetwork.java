@@ -224,6 +224,31 @@ public final class ModNetwork {
                 ClientboundSpiritualSyncPacket::decode,
                 ClientboundSpiritualSyncPacket::handle
         );
+
+        // --- Matter Profile sync ---
+        CHANNEL.registerMessage(
+                packetId++,
+                MatterProfileSyncS2CPacket.class,
+                MatterProfileSyncS2CPacket::encode,
+                MatterProfileSyncS2CPacket::decode,
+                MatterProfileSyncS2CPacket::handle
+        );
+
+        // --- Dimensional Chest channel ---
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenDimensionalChannelScreenS2CPacket.class,
+                OpenDimensionalChannelScreenS2CPacket::encode,
+                OpenDimensionalChannelScreenS2CPacket::decode,
+                OpenDimensionalChannelScreenS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                SetDimensionalChannelC2SPacket.class,
+                SetDimensionalChannelC2SPacket::encode,
+                SetDimensionalChannelC2SPacket::decode,
+                SetDimensionalChannelC2SPacket::handle
+        );
     }
 
     public static void sendToPlayer(ServerPlayer player, Object packet) {

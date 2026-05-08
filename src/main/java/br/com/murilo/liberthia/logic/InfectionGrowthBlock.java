@@ -116,6 +116,7 @@ public class InfectionGrowthBlock extends Block {
 
             BlockPos targetColumn = pos.relative(direction, distance);
             BlockPos groundPos = findGroundAtSurface(level, targetColumn);
+            if (groundPos == null) continue;  // chunk não carregada — pula
             BlockState groundState = level.getBlockState(groundPos);
 
             if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
@@ -140,10 +141,11 @@ public class InfectionGrowthBlock extends Block {
 
         if (density >= 0.70f && random.nextFloat() < 0.20f) {
             BlockPos near = findGroundAtSurface(level, pos.offset(random.nextInt(7) - 3, 0, random.nextInt(7) - 3));
-            BlockState nearState = level.getBlockState(near);
-
-            if (!ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, near) && isCorruptibleGround(level, near, nearState)) {
-                level.setBlockAndUpdate(near, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
+            if (near != null) {
+                BlockState nearState = level.getBlockState(near);
+                if (!ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, near) && isCorruptibleGround(level, near, nearState)) {
+                    level.setBlockAndUpdate(near, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
+                }
             }
         }
     }
@@ -243,6 +245,7 @@ public class InfectionGrowthBlock extends Block {
 
         BlockPos target = pos.offset(rx, 0, rz);
         BlockPos groundPos = findGroundAtSurface(level, target);
+        if (groundPos == null) return;  // chunk não carregada
         BlockState groundState = level.getBlockState(groundPos);
 
         if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
@@ -261,10 +264,15 @@ public class InfectionGrowthBlock extends Block {
     }
 
     private static BlockPos findGroundAtSurface(ServerLevel level, BlockPos target) {
-        BlockPos surface = level.getHeightmapPos(
+        // CHUNK-SAFE: getHeightmapPos em chunk não-carregada força chunk-gen
+        // parcial e CORTA chunks. Se não carregada, retorna null pro caller
+        // ignorar a operação.
+        BlockPos surface = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                level,
                 net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 target
         );
+        if (surface == null) return null;
 
         BlockPos ground = surface.below();
         BlockState groundState = level.getBlockState(ground);

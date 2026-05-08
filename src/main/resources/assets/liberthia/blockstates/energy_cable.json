@@ -1,0 +1,11 @@
+{
+  "multipart": [
+    { "apply": { "model": "liberthia:block/energy_cable_core" } },
+    { "when": { "north": "true" }, "apply": { "model": "liberthia:block/energy_cable_arm" } },
+    { "when": { "south": "true" }, "apply": { "model": "liberthia:block/energy_cable_arm", "y": 180 } },
+    { "when": { "west":  "true" }, "apply": { "model": "liberthia:block/energy_cable_arm", "y": 270 } },
+    { "when": { "east":  "true" }, "apply": { "model": "liberthia:block/energy_cable_arm", "y": 90  } },
+    { "when": { "up":    "true" }, "apply": { "model": "liberthia:block/energy_cable_arm", "x": 270 } },
+    { "when": { "down":  "true" }, "apply": { "model": "liberthia:block/energy_cable_arm", "x": 90  } }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "liberthia:block/fragmented_generator"
+    }
+  }
+}

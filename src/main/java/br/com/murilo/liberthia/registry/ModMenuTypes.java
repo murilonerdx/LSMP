@@ -43,6 +43,39 @@ public final class ModMenuTypes {
     public static final RegistryObject<MenuType<MatterTransmuterMenu>> MATTER_TRANSMUTER = registerMenuType(
             "matter_transmuter", MatterTransmuterMenu::new);
 
+    public static final RegistryObject<MenuType<DarkMatterAlchemizerMenu>> DARK_MATTER_ALCHEMIZER = registerMenuType(
+            "dark_matter_alchemizer", DarkMatterAlchemizerMenu::new);
+
+    public static final RegistryObject<MenuType<DarkMatterGeneratorMenu>> DARK_MATTER_GENERATOR = registerMenuType(
+            "dark_matter_generator", DarkMatterGeneratorMenu::new);
+
+    public static final RegistryObject<MenuType<DarkMatterChestMenu>> DARK_MATTER_CHEST = registerMenuType(
+            "dark_matter_chest", DarkMatterChestMenu::new);
+
+    public static final RegistryObject<MenuType<FragmentedGeneratorMenu>> FRAGMENTED_GENERATOR = registerMenuType(
+            "fragmented_generator", FragmentedGeneratorMenu::new);
+
+    public static final RegistryObject<MenuType<CrystallizerMenu>> CRYSTALLIZER = registerMenuType(
+            "crystallizer", CrystallizerMenu::new);
+
+    public static final RegistryObject<MenuType<AutoFarmerMenu>> AUTO_FARMER = registerMenuType(
+            "auto_farmer", AutoFarmerMenu::new);
+
+    public static final RegistryObject<MenuType<MatterAnalyzerMenu>> MATTER_ANALYZER = registerMenuType(
+            "matter_analyzer", MatterAnalyzerMenu::new);
+
+    public static final RegistryObject<MenuType<DimensionalExtractorMenu>> DIMENSIONAL_EXTRACTOR = registerMenuType(
+            "dimensional_extractor", DimensionalExtractorMenu::new);
+
+    public static final RegistryObject<MenuType<DarkMatterBatteryMenu>> DARK_MATTER_BATTERY = registerMenuType(
+            "dark_matter_battery", DarkMatterBatteryMenu::new);
+
+    public static final RegistryObject<MenuType<DimensionalChestMenu>> DIMENSIONAL_CHEST = registerMenuType(
+            "dimensional_chest", DimensionalChestMenu::new);
+
+    public static final RegistryObject<MenuType<MatterRefinerMenu>> MATTER_REFINER = registerMenuType(
+            "matter_refiner", MatterRefinerMenu::new);
+
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

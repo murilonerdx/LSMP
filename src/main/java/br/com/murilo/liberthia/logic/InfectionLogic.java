@@ -388,10 +388,14 @@ public final class InfectionLogic {
 
         for (int x = 0; x < 16; x += 2) {
             for (int z = 0; z < 16; z += 2) {
-                BlockPos p = level.getHeightmapPos(
+                BlockPos sample = new BlockPos(chunkPos.getMinBlockX() + x, 0, chunkPos.getMinBlockZ() + z);
+                // CHUNK-SAFE: ignora chunks não carregadas
+                BlockPos p = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                        level,
                         net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING,
-                        new BlockPos(chunkPos.getMinBlockX() + x, 0, chunkPos.getMinBlockZ() + z)
+                        sample
                 );
+                if (p == null) continue;
 
                 BlockState s = level.getBlockState(p.below());
                 FluidState f = level.getFluidState(p);
@@ -426,10 +430,13 @@ public final class InfectionLogic {
                         chunk.getPos().getMinBlockZ() + z
                 );
 
-                BlockPos surface = serverLevel.getHeightmapPos(
+                // CHUNK-SAFE
+                BlockPos surface = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                        serverLevel,
                         net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                         sample
                 );
+                if (surface == null) continue;
 
                 BlockPos ground = surface.below();
 
@@ -573,6 +580,7 @@ public final class InfectionLogic {
         int attempts = 1 + Math.min(2, data.getStage() / 2);
         for (int i = 0; i < attempts; i++) {
             BlockPos nearbyGround = findNearbySurface(serverLevel, entity.blockPosition(), 2);
+            if (nearbyGround == null) continue;  // chunk não carregada
             advanceInfectionStage(
                     serverLevel,
                     nearbyGround,
@@ -1145,6 +1153,7 @@ public final class InfectionLogic {
 
         for (int i = 0; i < 3; i++) {
             BlockPos surface = findNearbySurface(serverLevel, player.blockPosition(), SURFACE_SPREAD_RADIUS);
+            if (surface == null) continue;  // chunk não carregada
             BlockState surfaceState = serverLevel.getBlockState(surface);
 
             if (!isNaturalSurface(surfaceState)) {
@@ -1450,10 +1459,14 @@ public final class InfectionLogic {
         int dz = level.random.nextInt((radius * 2) + 1) - radius;
 
         BlockPos sample = origin.offset(dx, 0, dz);
-        BlockPos surface = level.getHeightmapPos(
+        // CHUNK-SAFE: se chunk não carregada, retorna a própria origin
+        // (caller faz no-op em chunk segura).
+        BlockPos surface = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                level,
                 net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 sample
         );
+        if (surface == null) return null;
 
         return surface.below();
     }
@@ -1535,10 +1548,13 @@ public final class InfectionLogic {
             return;
         }
 
-        BlockPos surface = level.getHeightmapPos(
+        // CHUNK-SAFE
+        BlockPos surface = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                level,
                 net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 center
         );
+        if (surface == null) return;
         BlockPos spawnPos = surface.above(2);
 
         if (level.getBlockState(spawnPos).isAir() && level.getBlockState(spawnPos.above()).isAir()) {

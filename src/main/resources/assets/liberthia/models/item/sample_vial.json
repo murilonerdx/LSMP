@@ -1,0 +1,10 @@
+{
+  "parent": "item/generated",
+  "textures": { "layer0": "liberthia:item/sample_vial" },
+  "overrides": [
+    {
+      "predicate": { "liberthia:filled": 1.0 },
+      "model": "liberthia:item/sample_vial_filled"
+    }
+  ]
+}

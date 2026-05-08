@@ -114,8 +114,11 @@ public class WorkerLightningItem extends Item {
             double ox = (level.random.nextDouble() - 0.5) * 16.0;
             double oz = (level.random.nextDouble() - 0.5) * 16.0;
             BlockPos bp = BlockPos.containing(center.x + ox, center.y, center.z + oz);
-            bp = level.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, bp);
-            strike(level, Vec3.atBottomCenterOf(bp), false);
+            // CHUNK-SAFE: ignora alvos em chunks não-carregadas
+            BlockPos safe = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                    level, net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, bp);
+            if (safe == null) continue;
+            strike(level, Vec3.atBottomCenterOf(safe), false);
         }
     }
 

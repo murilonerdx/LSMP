@@ -114,6 +114,7 @@ public class CorruptedSoilBlock extends Block {
 
     private void infectSurfaceColumnDeep(ServerLevel level, BlockPos targetColumn, RandomSource random, boolean aggressive) {
         BlockPos groundPos = findGroundAtSurface(level, targetColumn);
+        if (groundPos == null) return;  // chunk não carregada — pula
         BlockState groundState = level.getBlockState(groundPos);
 
         if (groundState.isAir() || ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, groundPos)) {
@@ -269,10 +270,14 @@ public class CorruptedSoilBlock extends Block {
     }
 
     private static BlockPos findGroundAtSurface(ServerLevel level, BlockPos target) {
-        BlockPos surface = level.getHeightmapPos(
+        // CHUNK-SAFE: ver ChunkSafe javadoc — getHeightmapPos em chunk não-carregada
+        // força chunk-gen parcial e corrompe chunks. Retorna null se não carregada.
+        BlockPos surface = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                level,
                 net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 target
         );
+        if (surface == null) return null;
 
         BlockPos ground = surface.below();
         BlockState groundState = level.getBlockState(ground);

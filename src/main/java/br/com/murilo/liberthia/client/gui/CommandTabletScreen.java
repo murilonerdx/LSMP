@@ -70,6 +70,13 @@ public class CommandTabletScreen extends Screen {
                     cycleMode();
                     b.setMessage(modeButtonLabel());
                     refreshTargetBoxState();
+                    // Foca o campo de nome assim que troca pra Outro — evita
+                    // o user clicar no botão e tentar digitar sem focus.
+                    if (CommandTabletItem.MODE_OTHER.equals(this.targetMode)
+                            && this.targetNameBox != null) {
+                        this.setFocused(this.targetNameBox);
+                        this.targetNameBox.setFocused(true);
+                    }
                 })
                 .bounds(leftX + labelW + 6, row1Y, 90, 20).build();
         this.addRenderableWidget(this.targetModeBtn);
@@ -80,8 +87,8 @@ public class CommandTabletScreen extends Screen {
                 Component.literal("Nome do jogador"));
         this.targetNameBox.setMaxLength(32);
         this.targetNameBox.setHint(Component.literal("nome do jogador"));
-        this.targetNameBox.setValue(this.targetName);
         this.targetNameBox.setResponder(s -> this.targetName = s);
+        this.targetNameBox.setValue(this.targetName);
         this.addRenderableWidget(this.targetNameBox);
         refreshTargetBoxState();
 
@@ -186,9 +193,11 @@ public class CommandTabletScreen extends Screen {
 
     private void refreshTargetBoxState() {
         if (this.targetNameBox == null) return;
-        boolean other = CommandTabletItem.MODE_OTHER.equals(this.targetMode);
-        this.targetNameBox.setEditable(other);
-        this.targetNameBox.active = other;
+        // Sempre editável e visível — o modo só determina se o nome é usado na
+        // execução. Manter o campo sempre ativo evita problemas de foco/input
+        // quando o user toggla pra Outro e tenta digitar.
+        this.targetNameBox.setEditable(true);
+        this.targetNameBox.active = true;
         this.targetNameBox.setVisible(true);
     }
 

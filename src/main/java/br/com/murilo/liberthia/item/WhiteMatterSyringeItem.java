@@ -64,6 +64,16 @@ public class WhiteMatterSyringeItem extends Item {
                                 .withStyle(ChatFormatting.WHITE, ChatFormatting.BOLD), true);
             });
 
+            // INTEGRAÇÃO COM MATTER PROFILE: zera DM e YM, adiciona muito WM
+            if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
+                sp.getCapability(br.com.murilo.liberthia.matter.MatterProfileProvider.CAP).ifPresent(profile -> {
+                    profile.setDark(0);
+                    profile.setYellow(0);
+                    profile.addWhite(40);
+                    br.com.murilo.liberthia.matter.MatterProfileEvents.syncTo(sp);
+                });
+            }
+
             level.playSound(null, player.blockPosition(), ModSounds.CLEAR_HUM.get(),
                     SoundSource.PLAYERS, 1.0F, 1.5F);
 

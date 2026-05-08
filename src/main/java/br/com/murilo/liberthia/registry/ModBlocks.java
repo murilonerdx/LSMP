@@ -271,6 +271,120 @@ public final class ModBlocks {
                     .lightLevel(state -> 5)
                     .sound(SoundType.METAL)));
 
+    public static final RegistryObject<Block> DARK_MATTER_ALCHEMIZER = BLOCKS.register("dark_matter_alchemizer",
+            () -> new br.com.murilo.liberthia.block.DarkMatterAlchemizerBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(5.0F, 1200.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(state -> 7)
+                    .sound(SoundType.METAL)));
+
+    public static final RegistryObject<Block> DARK_MATTER_GENERATOR = BLOCKS.register("dark_matter_generator",
+            () -> new br.com.murilo.liberthia.block.DarkMatterGeneratorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(4.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(state -> 6)
+                    .sound(SoundType.METAL)));
+
+    public static final RegistryObject<Block> ENERGY_CABLE = BLOCKS.register("energy_cable",
+            () -> new br.com.murilo.liberthia.block.EnergyCableBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(0.6F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> ITEM_PIPE = BLOCKS.register("item_pipe",
+            () -> new br.com.murilo.liberthia.block.ItemPipeBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                    .strength(0.6F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> ITEM_EXTRACTOR = BLOCKS.register("item_extractor",
+            () -> new br.com.murilo.liberthia.block.ItemExtractorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .strength(0.6F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> ITEM_INSERTER = BLOCKS.register("item_inserter",
+            () -> new br.com.murilo.liberthia.block.ItemInserterBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GREEN)
+                    .strength(0.6F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> DIMENSIONAL_CHEST = BLOCKS.register("dimensional_chest",
+            () -> new br.com.murilo.liberthia.block.DimensionalChestBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLUE)
+                    .strength(3.0F, 8.0F)
+                    .sound(SoundType.METAL)
+                    .lightLevel(s -> 7)));
+
+    public static final RegistryObject<Block> MATTER_REFINER = BLOCKS.register("matter_refiner",
+            () -> new br.com.murilo.liberthia.block.MatterRefinerBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(5.0F, 8.0F)
+                    .sound(SoundType.METAL)
+                    .lightLevel(s -> 6)));
+
+    // --- Cadeia de Refinação ---
+    public static final RegistryObject<Block> DARK_MATTER_CHEST = BLOCKS.register("dark_matter_chest",
+            () -> new br.com.murilo.liberthia.block.DarkMatterChestBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(3.0F).sound(SoundType.WOOD)));
+
+    public static final RegistryObject<Block> FRAGMENTED_GENERATOR = BLOCKS.register("fragmented_generator",
+            () -> new br.com.murilo.liberthia.block.FragmentedGeneratorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(4.0F).sound(SoundType.METAL).lightLevel(s -> 5)));
+
+    public static final RegistryObject<Block> LASER_EMITTER = BLOCKS.register("laser_emitter",
+            () -> new br.com.murilo.liberthia.block.LaserEmitterBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED).strength(5.0F).sound(SoundType.METAL).lightLevel(s -> 8)));
+
+    public static final RegistryObject<Block> CRYSTALLIZER = BLOCKS.register("crystallizer",
+            () -> new br.com.murilo.liberthia.block.CrystallizerBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(6.0F).sound(SoundType.METAL)
+                    .lightLevel(s -> 10).noOcclusion()));
+
+    public static final RegistryObject<Block> AUTO_FARMER = BLOCKS.register("auto_farmer",
+            () -> new br.com.murilo.liberthia.block.AutoFarmerBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GRAY).strength(4.0F).sound(SoundType.METAL).lightLevel(s -> 4)));
+
+    public static final RegistryObject<Block> DIMENSIONAL_EXTRACTOR = BLOCKS.register("dimensional_extractor",
+            () -> new br.com.murilo.liberthia.block.DimensionalExtractorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(4.0F).sound(SoundType.METAL).lightLevel(s -> 6)));
+
+    public static final RegistryObject<Block> MATTER_ANALYZER = BLOCKS.register("matter_analyzer",
+            () -> new br.com.murilo.liberthia.block.MatterAnalyzerBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(3.5F).sound(SoundType.METAL).lightLevel(s -> 6)));
+
+    public static final RegistryObject<Block> WIRELESS_CHARGER = BLOCKS.register("wireless_charger",
+            () -> new br.com.murilo.liberthia.block.WirelessChargerBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(3.5F).sound(SoundType.METAL).lightLevel(s -> 8)));
+
+    // --- Baterias de Matéria Escura ---
+    public static final RegistryObject<Block> BATTERY_BASIC = BLOCKS.register("dm_battery_basic",
+            () -> new br.com.murilo.liberthia.block.DarkMatterBatteryBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE)
+                            .strength(4.0F).sound(SoundType.METAL).lightLevel(s -> 4),
+                    br.com.murilo.liberthia.block.entity.BasicBatteryBlockEntity::new,
+                    () -> ModBlockEntities.BATTERY_BASIC.get()));
+
+    public static final RegistryObject<Block> BATTERY_ADVANCED = BLOCKS.register("dm_battery_advanced",
+            () -> new br.com.murilo.liberthia.block.DarkMatterBatteryBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE)
+                            .strength(5.0F).sound(SoundType.METAL).lightLevel(s -> 7),
+                    br.com.murilo.liberthia.block.entity.AdvancedBatteryBlockEntity::new,
+                    () -> ModBlockEntities.BATTERY_ADVANCED.get()));
+
+    public static final RegistryObject<Block> BATTERY_QUANTUM = BLOCKS.register("dm_battery_quantum",
+            () -> new br.com.murilo.liberthia.block.DarkMatterBatteryBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK)
+                            .strength(6.0F).sound(SoundType.METAL).lightLevel(s -> 12),
+                    br.com.murilo.liberthia.block.entity.QuantumBatteryBlockEntity::new,
+                    () -> ModBlockEntities.BATTERY_QUANTUM.get()));
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, java.util.function.Supplier<T> supplier) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);
 

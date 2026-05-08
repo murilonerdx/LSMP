@@ -81,6 +81,12 @@ public class ClearMatterInjectorItem extends Item {
         if (target instanceof ServerPlayer serverTarget) {
             InfectionLogic.applyDerivedEffects(serverTarget, data);
             InfectionLogic.sync(serverTarget, data);
+            // INTEGRAÇÃO COM MATTER PROFILE: reduz DM em 35, +20 WM
+            serverTarget.getCapability(br.com.murilo.liberthia.matter.MatterProfileProvider.CAP).ifPresent(profile -> {
+                profile.addDark(-35);
+                profile.addWhite(20);
+                br.com.murilo.liberthia.matter.MatterProfileEvents.syncTo(serverTarget);
+            });
         }
 
         source.level().playSound(null, target.blockPosition(), ModSounds.CLEAR_HUM.get(), SoundSource.PLAYERS, 0.9F, 1.25F);

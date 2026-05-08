@@ -1,6 +1,7 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
+	"gui_light": "front",
 	"textures": {
 		"0": "liberthia:item/holy_blade",
 		"particle": "liberthia:item/holy_blade"

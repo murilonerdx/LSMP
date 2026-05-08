@@ -42,7 +42,10 @@ public class WorldSpawnerEvents {
 
         ServerPlayer player = players.get(serverLevel.random.nextInt(players.size()));
         BlockPos center = player.blockPosition().offset(serverLevel.random.nextInt(33) - 16, 0, serverLevel.random.nextInt(33) - 16);
-        BlockPos top = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
+        // CHUNK-SAFE
+        BlockPos top = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                serverLevel, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center);
+        if (top == null) return;
 
         BlockPos anomalyCenter;
 
@@ -88,7 +91,10 @@ public class WorldSpawnerEvents {
             );
 
 
-            BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, candidate);
+            // CHUNK-SAFE: pula candidatos em chunks não-carregadas
+            BlockPos top = br.com.murilo.liberthia.util.ChunkSafe.safeHeightmap(
+                    level, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, candidate);
+            if (top == null) continue;
             BlockPos base = top.below();
 
             if (top.getY() <= level.getMinBuildHeight() + 2 || top.getY() >= level.getMaxBuildHeight() - 2)

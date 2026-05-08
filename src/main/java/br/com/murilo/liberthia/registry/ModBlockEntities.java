@@ -37,6 +37,64 @@ public final class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<MatterTransmuterBlockEntity>> MATTER_TRANSMUTER = BLOCK_ENTITIES.register("matter_transmuter",
             () -> BlockEntityType.Builder.of(MatterTransmuterBlockEntity::new, ModBlocks.MATTER_TRANSMUTER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.DarkMatterAlchemizerBlockEntity>> DARK_MATTER_ALCHEMIZER = BLOCK_ENTITIES.register("dark_matter_alchemizer",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.DarkMatterAlchemizerBlockEntity::new, ModBlocks.DARK_MATTER_ALCHEMIZER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.DarkMatterGeneratorBlockEntity>> DARK_MATTER_GENERATOR = BLOCK_ENTITIES.register("dark_matter_generator",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.DarkMatterGeneratorBlockEntity::new, ModBlocks.DARK_MATTER_GENERATOR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.EnergyCableBlockEntity>> ENERGY_CABLE = BLOCK_ENTITIES.register("energy_cable",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.EnergyCableBlockEntity::new, ModBlocks.ENERGY_CABLE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.ItemPipeBlockEntity>> ITEM_PIPE = BLOCK_ENTITIES.register("item_pipe",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.ItemPipeBlockEntity::new,
+                    ModBlocks.ITEM_PIPE.get(),
+                    ModBlocks.ITEM_EXTRACTOR.get(),
+                    ModBlocks.ITEM_INSERTER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<DimensionalChestBlockEntity>> DIMENSIONAL_CHEST =
+            BLOCK_ENTITIES.register("dimensional_chest",
+                    () -> BlockEntityType.Builder.of(DimensionalChestBlockEntity::new,
+                            ModBlocks.DIMENSIONAL_CHEST.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<MatterRefinerBlockEntity>> MATTER_REFINER =
+            BLOCK_ENTITIES.register("matter_refiner",
+                    () -> BlockEntityType.Builder.of(MatterRefinerBlockEntity::new,
+                            ModBlocks.MATTER_REFINER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.DarkMatterChestBlockEntity>> DARK_MATTER_CHEST = BLOCK_ENTITIES.register("dark_matter_chest",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.DarkMatterChestBlockEntity::new, ModBlocks.DARK_MATTER_CHEST.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.FragmentedGeneratorBlockEntity>> FRAGMENTED_GENERATOR = BLOCK_ENTITIES.register("fragmented_generator",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.FragmentedGeneratorBlockEntity::new, ModBlocks.FRAGMENTED_GENERATOR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.LaserEmitterBlockEntity>> LASER_EMITTER = BLOCK_ENTITIES.register("laser_emitter",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.LaserEmitterBlockEntity::new, ModBlocks.LASER_EMITTER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.CrystallizerBlockEntity>> CRYSTALLIZER = BLOCK_ENTITIES.register("crystallizer",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.CrystallizerBlockEntity::new, ModBlocks.CRYSTALLIZER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.AutoFarmerBlockEntity>> AUTO_FARMER = BLOCK_ENTITIES.register("auto_farmer",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.AutoFarmerBlockEntity::new, ModBlocks.AUTO_FARMER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.DimensionalExtractorBlockEntity>> DIMENSIONAL_EXTRACTOR = BLOCK_ENTITIES.register("dimensional_extractor",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.DimensionalExtractorBlockEntity::new, ModBlocks.DIMENSIONAL_EXTRACTOR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.MatterAnalyzerBlockEntity>> MATTER_ANALYZER = BLOCK_ENTITIES.register("matter_analyzer",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.MatterAnalyzerBlockEntity::new, ModBlocks.MATTER_ANALYZER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.WirelessChargerBlockEntity>> WIRELESS_CHARGER = BLOCK_ENTITIES.register("wireless_charger",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.WirelessChargerBlockEntity::new, ModBlocks.WIRELESS_CHARGER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.BasicBatteryBlockEntity>> BATTERY_BASIC = BLOCK_ENTITIES.register("dm_battery_basic",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.BasicBatteryBlockEntity::new, ModBlocks.BATTERY_BASIC.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.AdvancedBatteryBlockEntity>> BATTERY_ADVANCED = BLOCK_ENTITIES.register("dm_battery_advanced",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.AdvancedBatteryBlockEntity::new, ModBlocks.BATTERY_ADVANCED.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.QuantumBatteryBlockEntity>> BATTERY_QUANTUM = BLOCK_ENTITIES.register("dm_battery_quantum",
+            () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.QuantumBatteryBlockEntity::new, ModBlocks.BATTERY_QUANTUM.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.InfectionHeartBlockEntity>> INFECTION_HEART = BLOCK_ENTITIES.register("infection_heart",
             () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.InfectionHeartBlockEntity::new, ModBlocks.INFECTION_HEART.get()).build(null));
 

@@ -52,6 +52,13 @@ public class ClearMatterPillItem extends Item {
                 player.getCooldowns().addCooldown(this, 100);
                 InfectionLogic.sync(serverPlayer, data);
             });
+
+            // INTEGRAÇÃO COM MATTER PROFILE: pílula reduz DM e adiciona WM
+            serverPlayer.getCapability(br.com.murilo.liberthia.matter.MatterProfileProvider.CAP).ifPresent(profile -> {
+                profile.addDark(-25);   // reduz DM em 25
+                profile.addWhite(15);   // adiciona WM em 15
+                br.com.murilo.liberthia.matter.MatterProfileEvents.syncTo(serverPlayer);
+            });
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);

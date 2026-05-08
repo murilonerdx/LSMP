@@ -67,20 +67,32 @@ public class TeleportExecutorActionC2SPacket {
                         teleportPlayers(sender, List.of(msg.targetUuid));
                     }
                 }
-                case TELEPORT_ALL -> teleportPlayers(sender, TeleportToolData.getMarkedPlayers(sender));
+                case TELEPORT_ALL -> {
+                    // Fallback: if no marked players, use every online player except sender —
+                    // matches the menu's open-time fallback in TeleportExecutorStickItem.
+                    List<UUID> markedUuids = TeleportToolData.getMarkedPlayers(sender);
+                    if (markedUuids.isEmpty()) {
+                        markedUuids = new java.util.ArrayList<>();
+                        for (ServerPlayer other : sender.server.getPlayerList().getPlayers()) {
+                            if (other == sender) continue;
+                            markedUuids.add(other.getUUID());
+                        }
+                    }
+                    teleportPlayers(sender, markedUuids);
+                }
             }
         });
         ctx.get().setPacketHandled(true);
     }
 
     private static void teleportPlayers(ServerPlayer sender, List<UUID> targetUuids) {
-        Optional<TeleportAnchor> anchorOptional = TeleportToolData.getAnchor(sender);
-        if (anchorOptional.isEmpty()) {
-            sender.displayClientMessage(Component.literal("Nenhum local de teleporte foi marcado.").withStyle(ChatFormatting.RED), true);
-            return;
-        }
-
-        TeleportAnchor anchor = anchorOptional.get();
+        // Fallback: if no anchor was marked, use sender's current position —
+        // mirrors the open-menu fallback in TeleportExecutorStickItem so the
+        // tool works out of the box without first marking a destination.
+        TeleportAnchor anchor = TeleportToolData.getAnchor(sender)
+                .orElseGet(() -> new TeleportAnchor(
+                        sender.level().dimension(),
+                        sender.getX(), sender.getY(), sender.getZ()));
         ServerLevel targetLevel = sender.server.getLevel(anchor.dimension());
         if (targetLevel == null) {
             sender.displayClientMessage(Component.literal("A dimensão do teleporte não existe mais.").withStyle(ChatFormatting.RED), true);

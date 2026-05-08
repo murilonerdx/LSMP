@@ -8,6 +8,7 @@ import br.com.murilo.liberthia.registry.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -66,6 +67,11 @@ public class ClientModEvents {
                 net.minecraft.client.renderer.entity.ZombieRenderer::new);
         event.registerEntityRenderer(ModEntities.POSSESSED_SKELETON.get(),
                 net.minecraft.client.renderer.entity.SkeletonRenderer::new);
+
+        // BlockEntity renderers
+        event.registerBlockEntityRenderer(
+                br.com.murilo.liberthia.registry.ModBlockEntities.LASER_EMITTER.get(),
+                br.com.murilo.liberthia.client.renderer.LaserBeamRenderer::new);
 
 
 
@@ -154,12 +160,27 @@ public class ClientModEvents {
     }
 
     @SubscribeEvent
+    public static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
+        // Pipe Extrator → laranja (0xFF8C00) tinted onde tem tintindex
+        event.register((s, l, p, idx) -> 0xFF8C00, ModBlocks.ITEM_EXTRACTOR.get());
+        // Pipe Inseridor → verde (0x4CD950) tinted
+        event.register((s, l, p, idx) -> 0x4CD950, ModBlocks.ITEM_INSERTER.get());
+    }
+
+    @SubscribeEvent
+    public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
+        event.register((s, idx) -> 0xFF8C00, ModBlocks.ITEM_EXTRACTOR.get().asItem());
+        event.register((s, idx) -> 0x4CD950, ModBlocks.ITEM_INSERTER.get().asItem());
+    }
+
+    @SubscribeEvent
     public static void onRegisterGuiOverlays(net.minecraftforge.client.event.RegisterGuiOverlaysEvent event) {
         event.registerAboveAll("infection_hud", InfectionHudOverlay.INSTANCE);
         event.registerAboveAll("matter_energy_hud", MatterEnergyHudOverlay.INSTANCE);
         event.registerAboveAll("dna_mutation_hud", DnaMutationOverlay.INSTANCE);
         event.registerAboveAll("radiation_guide_hud", RadiationGuideOverlay.INSTANCE);
         event.registerAboveAll("infection_distortion", InfectionDistortionOverlay.INSTANCE);
+        event.registerAboveAll("matter_profile_hud", br.com.murilo.liberthia.client.hud.MatterProfileHud.INSTANCE);
     }
 
     @SubscribeEvent
@@ -172,6 +193,39 @@ public class ClientModEvents {
             MenuScreens.register(ModMenuTypes.RESEARCH_TABLE.get(), ResearchTableScreen::new);
             MenuScreens.register(ModMenuTypes.CONTAINMENT_CHAMBER.get(), ContainmentChamberScreen::new);
             MenuScreens.register(ModMenuTypes.MATTER_TRANSMUTER.get(), MatterTransmuterScreen::new);
+            MenuScreens.register(ModMenuTypes.DARK_MATTER_ALCHEMIZER.get(), DarkMatterAlchemizerScreen::new);
+            MenuScreens.register(ModMenuTypes.DARK_MATTER_GENERATOR.get(),
+                    br.com.murilo.liberthia.client.screen.DarkMatterGeneratorScreen::new);
+            MenuScreens.register(ModMenuTypes.DARK_MATTER_CHEST.get(),
+                    br.com.murilo.liberthia.client.screen.DarkMatterChestScreen::new);
+            MenuScreens.register(ModMenuTypes.FRAGMENTED_GENERATOR.get(),
+                    br.com.murilo.liberthia.client.screen.FragmentedGeneratorScreen::new);
+            MenuScreens.register(ModMenuTypes.CRYSTALLIZER.get(),
+                    br.com.murilo.liberthia.client.screen.CrystallizerScreen::new);
+            MenuScreens.register(ModMenuTypes.AUTO_FARMER.get(),
+                    br.com.murilo.liberthia.client.screen.AutoFarmerScreen::new);
+            MenuScreens.register(ModMenuTypes.MATTER_ANALYZER.get(),
+                    br.com.murilo.liberthia.client.screen.MatterAnalyzerScreen::new);
+            MenuScreens.register(ModMenuTypes.DIMENSIONAL_EXTRACTOR.get(),
+                    br.com.murilo.liberthia.client.screen.DimensionalExtractorScreen::new);
+            MenuScreens.register(ModMenuTypes.DARK_MATTER_BATTERY.get(),
+                    br.com.murilo.liberthia.client.screen.DarkMatterBatteryScreen::new);
+            MenuScreens.register(ModMenuTypes.DIMENSIONAL_CHEST.get(),
+                    br.com.murilo.liberthia.client.screen.DimensionalChestScreen::new);
+            MenuScreens.register(ModMenuTypes.MATTER_REFINER.get(),
+                    br.com.murilo.liberthia.client.screen.MatterRefinerScreen::new);
+
+            // Sample Vial: model override "filled" baseado no NBT
+            net.minecraft.client.renderer.item.ItemProperties.register(
+                    br.com.murilo.liberthia.registry.ModItems.SAMPLE_VIAL.get(),
+                    new net.minecraft.resources.ResourceLocation(
+                            br.com.murilo.liberthia.LiberthiaMod.MODID, "filled"),
+                    (stack, level, entity, seed) ->
+                            stack.hasTag() && stack.getTag().contains("src") ? 1f : 0f);
+
+            // Cutout render so connection arms transparency works
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.ENERGY_CABLE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.ITEM_PIPE.get(), RenderType.cutout());
 
             event.enqueueWork(() ->
                     MenuScreens.register(ModMenuTypes.SPIRITUAL_TRADE.get(), SpiritualTradeScreen::new)
