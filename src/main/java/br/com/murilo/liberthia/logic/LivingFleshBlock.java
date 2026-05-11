@@ -56,38 +56,9 @@ public class LivingFleshBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        // Pulse damage AOE
-        AABB box = new AABB(pos).inflate(2.0);
-        for (LivingEntity le : level.getEntitiesOfClass(LivingEntity.class, box)) {
-            if (le instanceof Player p && p.isCreative()) continue;
-            if (BloodKin.is(le)) continue;
-            le.hurt(le.damageSources().magic(), 0.5F);
-        }
-        // Occasionally spawn worms from the flesh (only if altar nearby + player around)
-        if (rand.nextInt(14) != 0) return;
-        if (!BloodAltarBlock.hasActiveAltarNearby(level, pos, 24)) return;
-        boolean playerNear = !level.getEntitiesOfClass(Player.class, new AABB(pos).inflate(20.0),
-                p -> !p.isCreative() && !p.isSpectator()).isEmpty();
-        if (!playerNear) return;
-        int cap = 6;
-        int nearby = level.getEntitiesOfClass(Silverfish.class, new AABB(pos).inflate(14.0)).size();
-        if (nearby >= cap) return;
-        BlockPos above = pos.above();
-        if (!level.getBlockState(above).isAir()) return;
-        EntityType<?> type = rand.nextInt(3) == 0 ? ModEntities.GORE_WORM.get()
-                : (rand.nextInt(2) == 0 ? ModEntities.BLOOD_WORM.get() : ModEntities.FLESH_CRAWLER.get());
-        var worm = type.create(level);
-        if (worm != null) {
-            worm.moveTo(above.getX() + 0.5, above.getY(), above.getZ() + 0.5, rand.nextFloat() * 360F, 0F);
-            level.addFreshEntity(worm);
-            level.sendParticles(BloodParticles.BLOOD,
-                    above.getX() + 0.5, above.getY() + 0.2, above.getZ() + 0.5,
-                    10, 0.3, 0.1, 0.3, 0.08);
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 }

@@ -74,15 +74,12 @@ public class BloodFireBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState s) { return true; }
+    public boolean isRandomlyTicking(BlockState s) { return false; /* DISABLED */ }
 
     @Override
     public void randomTick(BlockState state, net.minecraft.server.level.ServerLevel level,
                            BlockPos pos, RandomSource rand) {
-        // Self-extinguish only if support gone.
-        if (!canSurvive(state, level, pos)) {
-            level.removeBlock(pos, false);
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     @Override

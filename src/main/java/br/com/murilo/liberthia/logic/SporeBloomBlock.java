@@ -34,28 +34,11 @@ public class SporeBloomBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        // Check if base block is still valid
-        if (!isValidBase(level, pos)) {
-            level.destroyBlock(pos, true);
-            return;
-        }
-
-        // If player within 8 blocks, launch a spore at them
-        AABB searchArea = new AABB(pos).inflate(8.0D);
-        List<Player> nearbyPlayers = level.getEntitiesOfClass(Player.class, searchArea,
-                player -> !player.isSpectator() && !player.isCreative());
-
-        if (!nearbyPlayers.isEmpty()) {
-            Player target = nearbyPlayers.get(random.nextInt(nearbyPlayers.size()));
-            launchSpore(level, pos, target);
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private void launchSpore(ServerLevel level, BlockPos pos, Player target) {

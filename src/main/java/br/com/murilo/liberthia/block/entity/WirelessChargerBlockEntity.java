@@ -36,21 +36,93 @@ import org.jetbrains.annotations.Nullable;
  * outros mods, etc. Tudo que registre {@code IEnergyStorage} no item-stack.
  */
 public class WirelessChargerBlockEntity extends BlockEntity
-        implements br.com.murilo.liberthia.persistence.Persistable {
+        implements net.minecraft.world.MenuProvider, br.com.murilo.liberthia.persistence.Persistable {
 
     public static final int CAPACITY = 1_000_000;
     public static final int MAX_TRANSFER = 50_000;
-    public static final int RANGE = 6;
+    public static final int BASE_RANGE = 6;
+    public static final int NETHER_STAR_RANGE = 100;
     public static final int PER_TICK_PER_PLAYER = 200;
+
+    public static final int SLOT_UPGRADE = 0; // bloco de NetherStar OU dark_matter_block 5★
+    private final net.minecraftforge.items.ItemStackHandler upgradeInv =
+            new net.minecraftforge.items.ItemStackHandler(1) {
+                @Override protected void onContentsChanged(int slot) { setChanged();
+                    if (level != null && !level.isClientSide())
+                        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+                }
+                @Override public int getSlotLimit(int s) { return 1; }
+                @Override public boolean isItemValid(int slot, net.minecraft.world.item.ItemStack stack) {
+                    if (stack.is(net.minecraft.world.item.Items.NETHER_STAR)) return true;
+                    if (stack.is(br.com.murilo.liberthia.registry.ModBlocks.DARK_MATTER_BLOCK.get().asItem())
+                            && br.com.murilo.liberthia.util.Purity.getPurity(stack) >= br.com.murilo.liberthia.util.Purity.MAX) return true;
+                    return false;
+                }
+            };
+    private LazyOptional<net.minecraftforge.items.IItemHandler> lazyUpgrade = LazyOptional.empty();
+
+    public net.minecraftforge.items.IItemHandler getUpgradeInventory() { return upgradeInv; }
+
+    /** Tipo de upgrade ativo. */
+    public enum UpgradeKind { NONE, NETHER_STAR, MAX_PURITY_DARK_MATTER }
+    public UpgradeKind currentUpgrade() {
+        net.minecraft.world.item.ItemStack u = upgradeInv.getStackInSlot(SLOT_UPGRADE);
+        if (u.is(br.com.murilo.liberthia.registry.ModBlocks.DARK_MATTER_BLOCK.get().asItem())
+                && br.com.murilo.liberthia.util.Purity.getPurity(u) >= br.com.murilo.liberthia.util.Purity.MAX)
+            return UpgradeKind.MAX_PURITY_DARK_MATTER;
+        if (u.is(net.minecraft.world.item.Items.NETHER_STAR))
+            return UpgradeKind.NETHER_STAR;
+        return UpgradeKind.NONE;
+    }
+    public int currentRange() {
+        return switch (currentUpgrade()) {
+            case NETHER_STAR -> NETHER_STAR_RANGE;
+            case MAX_PURITY_DARK_MATTER -> Integer.MAX_VALUE; // cross-dim, raio infinito
+            default -> BASE_RANGE;
+        };
+    }
+    public boolean isCrossDimensional() {
+        return currentUpgrade() == UpgradeKind.MAX_PURITY_DARK_MATTER;
+    }
 
     private final br.com.murilo.liberthia.energy.TrackedEnergyStorage energy =
             new br.com.murilo.liberthia.energy.TrackedEnergyStorage(this, CAPACITY, MAX_TRANSFER, MAX_TRANSFER);
-    private LazyOptional<IEnergyStorage> lazy = LazyOptional.empty();
+    private final LazyOptional<IEnergyStorage> lazy;
     /** Quantos jogadores carregando agora — pra animação. */
     private int activeChargingPlayers = 0;
 
+    public final net.minecraft.world.inventory.ContainerData data = new net.minecraft.world.inventory.ContainerData() {
+        @Override public int get(int i) {
+            int v = switch (i) {
+                case 0, 1 -> energy.getEnergyStored();
+                case 2, 3 -> energy.getMaxEnergyStored();
+                case 4 -> activeChargingPlayers;
+                case 5 -> currentRange() == Integer.MAX_VALUE ? 9999 : currentRange();
+                case 6 -> currentUpgrade().ordinal();
+                default -> 0;
+            };
+            return switch (i) {
+                case 0, 2 -> (v >> 16) & 0xFFFF;
+                case 1, 3 -> v & 0xFFFF;
+                default -> v;
+            };
+        }
+        @Override public void set(int i, int v) {}
+        @Override public int getCount() { return 7; }
+    };
+
     public WirelessChargerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WIRELESS_CHARGER.get(), pos, state);
+        this.lazy = LazyOptional.of(() -> this.energy);
+    }
+
+    @Override public net.minecraft.network.chat.@NotNull Component getDisplayName() {
+        return net.minecraft.network.chat.Component.translatable("container.liberthia.wireless_charger");
+    }
+    @Override public @Nullable net.minecraft.world.inventory.AbstractContainerMenu createMenu(int id,
+            net.minecraft.world.entity.player.@NotNull Inventory inv,
+            net.minecraft.world.entity.player.@NotNull Player p) {
+        return new br.com.murilo.liberthia.menu.WirelessChargerMenu(id, inv, this, this.data);
     }
 
     public int getEnergyStored() { return energy.getEnergyStored(); }
@@ -59,11 +131,13 @@ public class WirelessChargerBlockEntity extends BlockEntity
 
     @Override public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.ENERGY) return lazy.cast();
+        if (cap == ForgeCapabilities.ITEM_HANDLER) return lazyUpgrade.cast();
         return super.getCapability(cap, side);
     }
     @Override public void onLoad() {
         super.onLoad();
-        lazy = LazyOptional.of(() -> energy);
+        // lazy já está inicializada no construtor
+        lazyUpgrade = LazyOptional.of(() -> upgradeInv);
         br.com.murilo.liberthia.persistence.Persistable.LIVE.add(this);
         if (level instanceof net.minecraft.server.level.ServerLevel sl && isStateEmpty()) {
             CompoundTag snap = br.com.murilo.liberthia.persistence.LiberthiaPersistence
@@ -94,15 +168,23 @@ public class WirelessChargerBlockEntity extends BlockEntity
                     .snapshot(sl, pos, be.saveWithFullMetadata());
         }
 
-        AABB box = new AABB(pos).inflate(RANGE);
+        int range = be.currentRange();
         int charging = 0;
         int totalDrained = 0;
-        for (Player player : level.getEntitiesOfClass(Player.class, box)) {
-            if (player.isSpectator() || player.isCreative()) continue;
-            int drained = chargePlayerInventory(be, player);
-            if (drained > 0) {
-                charging++;
-                totalDrained += drained;
+
+        if (be.isCrossDimensional()) {
+            // Carregamento cross-dimensional: itera TODOS os jogadores do server.
+            for (ServerPlayer player : level.getServer().getPlayerList().getPlayers()) {
+                if (player.isSpectator() || player.isCreative()) continue;
+                int drained = chargePlayerInventory(be, player);
+                if (drained > 0) { charging++; totalDrained += drained; }
+            }
+        } else {
+            AABB box = new AABB(pos).inflate(range);
+            for (Player player : level.getEntitiesOfClass(Player.class, box)) {
+                if (player.isSpectator() || player.isCreative()) continue;
+                int drained = chargePlayerInventory(be, player);
+                if (drained > 0) { charging++; totalDrained += drained; }
             }
         }
         if (totalDrained > 0) be.setChanged();
@@ -157,11 +239,13 @@ public class WirelessChargerBlockEntity extends BlockEntity
 
     @Override protected void saveAdditional(CompoundTag tag) {
         tag.put("energy", energy.serializeNBT());
+        tag.put("upgrade", upgradeInv.serializeNBT());
         super.saveAdditional(tag);
     }
     @Override public void load(CompoundTag tag) {
         super.load(tag);
         if (tag.contains("energy")) energy.deserializeNBT(tag.get("energy"));
+        if (tag.contains("upgrade")) upgradeInv.deserializeNBT(tag.getCompound("upgrade"));
     }
     @Nullable @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {

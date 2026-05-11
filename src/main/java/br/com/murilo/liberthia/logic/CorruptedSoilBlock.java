@@ -33,34 +33,7 @@ public class CorruptedSoilBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
-            return;
-        }
-
-        int age = state.getValue(AGE);
-        float density = InfectionLogic.getChunkInfectionDensity(level, pos);
-
-        // Age progression
-        if (age < 2 && density > 0.3f && random.nextFloat() < 0.08f) {
-            level.setBlock(pos, state.setValue(AGE, age + 1), 3);
-            age = age + 1;
-        }
-
-        int spreadAttempts = 2 + age;
-        for (int i = 0; i < spreadAttempts; i++) {
-            spreadInfectionOnce(level, pos, random);
-        }
-        attemptSporeLaunch(level, pos, random);
-        attemptGrowthSprout(level, pos, random);
-
-        if (random.nextFloat() < 0.12f + age * 0.06f) {
-            level.sendParticles(
-                    net.minecraft.core.particles.ParticleTypes.SQUID_INK,
-                    pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D,
-                    2 + age, 0.25D, 0.10D, 0.25D, 0.01D
-            );
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     @Override

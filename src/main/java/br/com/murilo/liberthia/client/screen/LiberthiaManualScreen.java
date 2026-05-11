@@ -21,11 +21,12 @@ import java.util.List;
  */
 public class LiberthiaManualScreen extends Screen {
 
-    private static final int W = 340;
-    private static final int H = 220;
+    private static final int W = 420;
+    private static final int H = 240;
 
-    private static final int SIDEBAR_W = 110;
-    private static final int CHAPTER_BTN_H = 16;
+    private static final int SIDEBAR_W = 180;     // 2 colunas de capítulos
+    private static final int CHAPTER_BTN_H = 14;
+    private static final int CHAPTER_BTN_W = 84;  // (SIDEBAR_W - 12) / 2
 
     private static final int FRAME_OUTER = 0xFF0E0212;
     private static final int FRAME_INNER = 0xFF1B0830;
@@ -48,19 +49,24 @@ public class LiberthiaManualScreen extends Screen {
         x0 = (this.width - W) / 2;
         y0 = (this.height - H) / 2;
 
-        // Botões de capítulo na sidebar
-        for (int i = 0; i < ManualContent.CHAPTERS.size(); i++) {
+        // Botões de capítulo em 2 COLUNAS pra caber muitos capítulos
+        int total = ManualContent.CHAPTERS.size();
+        int availH = H - 28 - 26; // espaço pra botões
+        int rowsPerCol = Math.max(1, availH / (CHAPTER_BTN_H + 2));
+        for (int i = 0; i < total; i++) {
             final int idx = i;
             var ch = ManualContent.CHAPTERS.get(i);
-            int by = y0 + 28 + i * (CHAPTER_BTN_H + 2);
+            int col = i / rowsPerCol;
+            int row = i % rowsPerCol;
+            int bx = x0 + 6 + col * (CHAPTER_BTN_W + 2);
+            int by = y0 + 28 + row * (CHAPTER_BTN_H + 2);
             String label = stripFormatting(ch.title());
-            // Trunca pra caber
-            if (label.length() > 16) label = label.substring(0, 15) + "…";
+            if (label.length() > 14) label = label.substring(0, 13) + "…";
             String finalLabel = label;
             this.addRenderableWidget(Button.builder(
                             Component.literal(finalLabel),
                             btn -> { chapterIdx = idx; pageIdx = 0; })
-                    .bounds(x0 + 6, by, SIDEBAR_W - 12, CHAPTER_BTN_H)
+                    .bounds(bx, by, CHAPTER_BTN_W, CHAPTER_BTN_H)
                     .build());
         }
 
@@ -145,10 +151,15 @@ public class LiberthiaManualScreen extends Screen {
         g.drawString(this.font, Component.literal(pageInfo),
                 cx + 8, y0 + H - 18, 0xFFAAAAAA, false);
 
-        // Capítulo destacado na sidebar (fundo discreto)
+        // Capítulo destacado na sidebar (multi-coluna)
         if (chapterIdx >= 0 && chapterIdx < ManualContent.CHAPTERS.size()) {
-            int by = y0 + 28 + chapterIdx * (CHAPTER_BTN_H + 2);
-            g.fill(x0 + 6, by - 1, x0 + 7, by + CHAPTER_BTN_H + 1, 0xFFD080FF);
+            int availH = H - 28 - 26;
+            int rowsPerCol = Math.max(1, availH / (CHAPTER_BTN_H + 2));
+            int col = chapterIdx / rowsPerCol;
+            int row = chapterIdx % rowsPerCol;
+            int bx = x0 + 6 + col * (CHAPTER_BTN_W + 2);
+            int by = y0 + 28 + row * (CHAPTER_BTN_H + 2);
+            g.fill(bx - 2, by - 1, bx, by + CHAPTER_BTN_H + 1, 0xFFD080FF);
         }
 
         super.render(g, mouseX, mouseY, partialTick);

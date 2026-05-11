@@ -21,9 +21,7 @@ public class FleshMotherBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     public static boolean isContained(Level level, BlockPos pos) {
         return BloodAltarBlock.countChalkSymbols(level, pos) >= 4;
@@ -31,45 +29,7 @@ public class FleshMotherBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        // ----- Boss summon ritual (Fase 2) -----
-        // 4 HeartOfFlesh blocks at (±3,0,0) and (0,0,±3), at night → spawn boss.
-        if (checkSummonRitual(level, pos)) {
-            performSummon(level, pos);
-            return;
-        }
-        if (isContained(level, pos)) {
-            // Contained: just emit idle particles, no spread
-            level.sendParticles(ParticleTypes.ASH,
-                    pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5,
-                    4, 0.4, 0.2, 0.4, 0.01);
-            return;
-        }
-        // Altar dependency: stop proliferating if the altar is gone
-        if (!BloodAltarBlock.hasActiveAltarNearby(level, pos, 20)) return;
-        // Proliferate: try to convert 1-3 adjacent blocks (anti-float)
-        int attempts = 5;
-        for (int i = 0; i < attempts; i++) {
-            int ox = rand.nextInt(5) - 2;
-            int oy = rand.nextInt(3) - 1; // -1..+1
-            int oz = rand.nextInt(5) - 2;
-            BlockPos target = pos.offset(ox, oy, oz);
-            BlockState ts = level.getBlockState(target);
-            if (ts.isAir() || ts.is(Blocks.WATER) || ts.is(ModBlocks.FLESH_MOTHER.get())
-                    || ts.is(ModBlocks.LIVING_FLESH.get()) || ts.is(ModBlocks.ATTACKING_FLESH.get())
-                    || ts.is(ModBlocks.CHALK_SYMBOL.get()))
-                continue;
-            // Anti-float: need solid support below
-            BlockPos belowTarget = target.below();
-            if (!level.getBlockState(belowTarget).isFaceSturdy(level, belowTarget, Direction.UP))
-                continue;
-            // 20% chance to create attacking flesh, else living flesh
-            Block fleshType = rand.nextInt(5) == 0 ? ModBlocks.ATTACKING_FLESH.get() : ModBlocks.LIVING_FLESH.get();
-            level.setBlockAndUpdate(target, fleshType.defaultBlockState());
-            level.sendParticles(BloodParticles.BLOOD,
-                    target.getX() + 0.5, target.getY() + 0.5, target.getZ() + 0.5,
-                    8, 0.3, 0.3, 0.3, 0.05);
-            break;
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private static boolean checkSummonRitual(ServerLevel level, BlockPos pos) {

@@ -1,6 +1,45 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:block/block",
   "textures": {
-    "layer0": "liberthia:item/inactive_dark_matter"
+    "0": "minecraft:block/amethyst_block",
+    "1": "minecraft:block/obsidian",
+    "particle": "minecraft:block/amethyst_block"
+  },
+  "elements": [
+    {
+      "from": [3, 3, 3],
+      "to": [13, 13, 13],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [3, 3, 13, 13], "texture": "#1"},
+        "east":  {"uv": [3, 3, 13, 13], "texture": "#1"},
+        "south": {"uv": [3, 3, 13, 13], "texture": "#1"},
+        "west":  {"uv": [3, 3, 13, 13], "texture": "#1"},
+        "up":    {"uv": [3, 3, 13, 13], "texture": "#1"},
+        "down":  {"uv": [3, 3, 13, 13], "texture": "#1"}
+      }
+    },
+    {
+      "from": [4, 4, 4],
+      "to": [12, 12, 12],
+      "rotation": {"angle": 22.5, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [4, 4, 12, 12], "texture": "#0"},
+        "east":  {"uv": [4, 4, 12, 12], "texture": "#0"},
+        "south": {"uv": [4, 4, 12, 12], "texture": "#0"},
+        "west":  {"uv": [4, 4, 12, 12], "texture": "#0"},
+        "up":    {"uv": [4, 4, 12, 12], "texture": "#0"},
+        "down":  {"uv": [4, 4, 12, 12], "texture": "#0"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {"rotation": [0, 60, 0], "translation": [0, 1, 0], "scale": [0.5, 0.5, 0.5]},
+    "thirdperson_lefthand":  {"rotation": [0, 60, 0], "translation": [0, 1, 0], "scale": [0.5, 0.5, 0.5]},
+    "firstperson_righthand": {"rotation": [0, 45, 0], "translation": [0, 0, 0], "scale": [0.7, 0.7, 0.7]},
+    "firstperson_lefthand":  {"rotation": [0, 45, 0], "translation": [0, 0, 0], "scale": [0.7, 0.7, 0.7]},
+    "ground":                {"rotation": [0, 0, 0], "translation": [0, 2, 0], "scale": [0.5, 0.5, 0.5]},
+    "gui":                   {"rotation": [30, 225, 0], "translation": [0, 0, 0], "scale": [0.9, 0.9, 0.9]},
+    "fixed":                 {"rotation": [0, 0, 0], "translation": [0, 0, 0], "scale": [0.8, 0.8, 0.8]}
   }
 }

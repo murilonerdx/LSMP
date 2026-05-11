@@ -227,7 +227,7 @@ public final class InfectionLogic {
             if (veinTarget.is(Blocks.STONE) || veinTarget.is(Blocks.DEEPSLATE)
                     || veinTarget.is(Blocks.ANDESITE) || veinTarget.is(Blocks.DIORITE)
                     || veinTarget.is(Blocks.GRANITE) || veinTarget.is(Blocks.TUFF)) {
-                serverLevel.setBlockAndUpdate(veinPos, ModBlocks.INFECTION_VEIN.get().defaultBlockState());
+                if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(veinPos)) serverLevel.setBlockAndUpdate(veinPos, ModBlocks.INFECTION_VEIN.get().defaultBlockState());
             }
         }
 
@@ -249,7 +249,7 @@ public final class InfectionLogic {
                         }
                     }
                     if (!tooClose) {
-                        serverLevel.setBlockAndUpdate(check, ModBlocks.INFECTION_HEART.get().defaultBlockState());
+                        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(check)) serverLevel.setBlockAndUpdate(check, ModBlocks.INFECTION_HEART.get().defaultBlockState());
                     }
                     break;
                 }
@@ -287,7 +287,7 @@ public final class InfectionLogic {
                 if (serverLevel.getBlockState(check).isAir()
                         && serverLevel.getBlockState(check.below()).is(ModBlocks.CORRUPTED_SOIL.get())) {
                     if (!ProtectionUtils.hasGrowthTooClose(serverLevel, check, 8)) {
-                        serverLevel.setBlockAndUpdate(check, ModBlocks.SPORE_BLOOM.get().defaultBlockState());
+                        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(check)) serverLevel.setBlockAndUpdate(check, ModBlocks.SPORE_BLOOM.get().defaultBlockState());
                     }
                     break;
                 }
@@ -340,7 +340,7 @@ public final class InfectionLogic {
                 && !targetState.is(ModBlocks.INFECTION_GROWTH.get())
                 && !targetState.is(ModBlocks.WORMHOLE_BLOCK.get())
                 && targetState.getDestroySpeed(level, target) >= 0) {
-            level.setBlockAndUpdate(target, ModBlocks.GLITCH_BLOCK.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(target)) level.setBlockAndUpdate(target, ModBlocks.GLITCH_BLOCK.get().defaultBlockState());
         }
     }
 
@@ -1161,10 +1161,10 @@ public final class InfectionLogic {
             }
 
             if (yellowChance > clearChance && serverLevel.random.nextFloat() < yellowChance) {
-                serverLevel.setBlockAndUpdate(surface, ModBlocks.YELLOW_MATTER_BLOCK.get().defaultBlockState());
+                if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(surface)) serverLevel.setBlockAndUpdate(surface, ModBlocks.YELLOW_MATTER_BLOCK.get().defaultBlockState());
                 MatterHistoryManager.registerProtectionBlock(serverLevel, surface, ModBlocks.YELLOW_MATTER_BLOCK.get().defaultBlockState());
             } else if (serverLevel.random.nextFloat() < clearChance) {
-                serverLevel.setBlockAndUpdate(surface, ModBlocks.CLEAR_MATTER_BLOCK.get().defaultBlockState());
+                if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(surface)) serverLevel.setBlockAndUpdate(surface, ModBlocks.CLEAR_MATTER_BLOCK.get().defaultBlockState());
                 MatterHistoryManager.registerProtectionBlock(serverLevel, surface, ModBlocks.CLEAR_MATTER_BLOCK.get().defaultBlockState());
             }
         }
@@ -1225,7 +1225,7 @@ public final class InfectionLogic {
         if (isNaturalSurface(groundState)) {
             if (level.random.nextFloat() < soilChance) {
                 MatterHistoryManager.recordOriginalBlock(level, groundPos, groundState);
-                level.setBlockAndUpdate(groundPos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
+                if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(groundPos)) level.setBlockAndUpdate(groundPos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
             }
             return;
         }
@@ -1298,7 +1298,7 @@ public final class InfectionLogic {
             return false;
         }
 
-        level.setBlockAndUpdate(pos, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
+        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(pos)) level.setBlockAndUpdate(pos, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
         return true;
     }
 
@@ -1317,7 +1317,7 @@ public final class InfectionLogic {
         BlockState baseState = level.getBlockState(base);
         if (isNaturalSurface(baseState)) {
             MatterHistoryManager.recordOriginalBlock(level, base, baseState);
-            level.setBlockAndUpdate(base, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(base)) level.setBlockAndUpdate(base, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
             return false;
         }
 
@@ -1325,7 +1325,7 @@ public final class InfectionLogic {
             return false;
         }
 
-        level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(base)) level.setBlockAndUpdate(base, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
         infectGroundAroundTree(level, base, 2);
 
         int height = 1 + level.random.nextInt(3);
@@ -1336,13 +1336,13 @@ public final class InfectionLogic {
             if (!level.getBlockState(p).isAir() || !level.getFluidState(p).isEmpty() || hasAdjacentGrowth(level, p)) {
                 break;
             }
-            level.setBlockAndUpdate(p, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(p)) level.setBlockAndUpdate(p, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
             top = p;
         }
 
         BlockState fluid = ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock();
         if (level.getBlockState(top.above()).isAir() && level.getFluidState(top.above()).isEmpty()) {
-            level.setBlockAndUpdate(top.above(), fluid);
+            if (level.hasChunkAt(top.above())) level.setBlockAndUpdate(top.above(), fluid);
         }
 
         return true;
@@ -1357,7 +1357,7 @@ public final class InfectionLogic {
             BlockState state = level.getBlockState(pos);
             if (isNaturalSurface(state)) {
                 MatterHistoryManager.recordOriginalBlock(level, pos, state);
-                level.setBlockAndUpdate(pos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
+                if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(pos)) level.setBlockAndUpdate(pos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
             }
         }
     }
@@ -1407,7 +1407,7 @@ public final class InfectionLogic {
             return false;
         }
 
-        level.setBlockAndUpdate(fluidPos, ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock());
+        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(fluidPos)) level.setBlockAndUpdate(fluidPos, ModFluids.DARK_MATTER.get().defaultFluidState().createLegacyBlock());
         return true;
     }
 
@@ -1536,6 +1536,9 @@ public final class InfectionLogic {
     }
 
     public static void evaluateDarkMatterRegion(ServerLevel level, BlockPos center) {
+        // DESATIVADO permanentemente — spawn de black hole e spread DM removidos.
+        if (true) return;
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
         if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
         processDarkFluidActivity(level, center);
 
@@ -1569,6 +1572,9 @@ public final class InfectionLogic {
                 center.offset(-radius, -vertical, -radius),
                 center.offset(radius, vertical, radius)
         )) {
+            // CHUNK-SAFE: pula posições em chunks não carregadas pra evitar
+            // forçar geração parcial e causar "chunks recortadas"
+            if (!level.hasChunkAt(pos)) continue;
             BlockState state = level.getBlockState(pos);
             FluidState fluid = level.getFluidState(pos);
 

@@ -25,7 +25,7 @@ public class BloodVolcanoBlock extends Block {
     public BloodVolcanoBlock(Properties p) { super(p); }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) { return true; }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rng) {
@@ -58,44 +58,7 @@ public class BloodVolcanoBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rng) {
-        // Spread blood infection/flesh in wide radius
-        for (int i = 0; i < 5; i++) {
-            int dx = rng.nextInt(11) - 5;
-            int dy = rng.nextInt(3) - 1;
-            int dz = rng.nextInt(11) - 5;
-            BlockPos p = pos.offset(dx, dy, dz);
-            BlockState cur = level.getBlockState(p);
-            if (cur.isAir() || cur.canBeReplaced()) {
-                Block choice;
-                float r = rng.nextFloat();
-                if (r < 0.4F) choice = ModBlocks.BLOOD_INFECTION_BLOCK.get();
-                else if (r < 0.7F) choice = ModBlocks.BLOOD_INFESTATION_BLOCK.get();
-                else if (r < 0.9F) choice = ModBlocks.LIVING_FLESH.get();
-                else choice = ModBlocks.ATTACKING_FLESH.get();
-                level.setBlockAndUpdate(p, choice.defaultBlockState());
-            }
-        }
-
-        // Spawn worms frequently
-        for (int tries = 0; tries < 3; tries++) {
-            int dx = rng.nextInt(5) - 2;
-            int dz = rng.nextInt(5) - 2;
-            BlockPos sp = pos.offset(dx, 1, dz);
-            if (level.getBlockState(sp).isAir()) {
-                var type = rng.nextInt(3) == 0 ? ModEntities.GORE_WORM : ModEntities.FLESH_CRAWLER;
-                var worm = type.get().create(level);
-                if (worm != null) {
-                    worm.moveTo(sp.getX() + 0.5, sp.getY(), sp.getZ() + 0.5, rng.nextFloat() * 360F, 0F);
-                    level.addFreshEntity(worm);
-                    break;
-                }
-            }
-        }
-
-        // Massive eruption
-        if (rng.nextFloat() < 0.15F) {
-            erupt(level, pos, rng);
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private void erupt(ServerLevel level, BlockPos pos, RandomSource rng) {

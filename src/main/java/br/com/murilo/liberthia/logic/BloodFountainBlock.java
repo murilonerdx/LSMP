@@ -40,38 +40,7 @@ public class BloodFountainBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rng) {
-        // Spread blood (Living Flesh — NOT water) around the fountain
-        for (int i = 0; i < 3; i++) {
-            int dx = rng.nextInt(5) - 2;
-            int dy = rng.nextInt(2) - 1;
-            int dz = rng.nextInt(5) - 2;
-            BlockPos p = pos.offset(dx, dy, dz);
-            BlockState cur = level.getBlockState(p);
-            if (cur.isAir() || cur.canBeReplaced() || cur.is(Blocks.WATER) || cur.is(Blocks.LAVA)) {
-                float roll = rng.nextFloat();
-                Block choice;
-                if (roll < 0.45F) choice = ModBlocks.BLOOD_FLUID_BLOCK.get(); // red liquid
-                else if (roll < 0.7F) choice = ModBlocks.LIVING_FLESH.get();
-                else if (roll < 0.9F) choice = ModBlocks.ATTACKING_FLESH.get();
-                else choice = ModBlocks.BLOOD_INFECTION_BLOCK.get();
-                level.setBlockAndUpdate(p, choice.defaultBlockState());
-            }
-        }
-
-        // Spawn worms (20% chance per random tick)
-        if (rng.nextFloat() < 0.20F) {
-            trySpawnWorm(level, pos, rng);
-        }
-
-        // Eruption every few ticks
-        if (rng.nextFloat() < 0.08F) {
-            erupt(level, pos, rng);
-        }
-
-        // Ambient pulse particles
-        level.sendParticles(BloodParticles.BLOOD,
-                pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5,
-                8, 0.4, 0.3, 0.4, 0.05);
+        /* DISABLED — kill switch permanente */
     }
 
     private void trySpawnWorm(ServerLevel level, BlockPos pos, RandomSource rng) {

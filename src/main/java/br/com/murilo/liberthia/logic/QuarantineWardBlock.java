@@ -61,38 +61,7 @@ public class QuarantineWardBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-
-        int age = state.getValue(AGE);
-
-        // Count infection blocks in 5x3x5 area
-        int infectionCount = 0;
-        for (BlockPos scan : BlockPos.betweenClosed(pos.offset(-2, -1, -2), pos.offset(2, 1, 2))) {
-            BlockState s = level.getBlockState(scan);
-            if (isInfectionBlock(s)) {
-                infectionCount++;
-            }
-        }
-
-        // Corrode when surrounded by infection
-        if (infectionCount > 4 && age < 3 && random.nextFloat() < 0.15f) {
-            level.setBlock(pos, state.setValue(AGE, age + 1), 3);
-        }
-
-        // At max corrosion: 10% chance to break
-        if (age >= 3 && random.nextFloat() < 0.10f) {
-            level.destroyBlock(pos, true);
-            return;
-        }
-
-        // Protective particle effect
-        if (random.nextFloat() < 0.3f) {
-            level.sendParticles(
-                    ParticleTypes.END_ROD,
-                    pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5,
-                    3 - age, 0.5, 0.3, 0.5, 0.02
-            );
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     @Override

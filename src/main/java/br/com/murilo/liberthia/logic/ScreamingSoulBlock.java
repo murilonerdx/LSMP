@@ -28,7 +28,7 @@ public class ScreamingSoulBlock extends Block {
     public ScreamingSoulBlock(Properties props) { super(props); }
 
     @Override
-    public boolean isRandomlyTicking(BlockState s) { return true; }
+    public boolean isRandomlyTicking(BlockState s) { return false; /* DISABLED */ }
 
     @Override
     public void onPlace(BlockState s, Level l, BlockPos p, BlockState old, boolean moved) {

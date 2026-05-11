@@ -27,9 +27,7 @@ public class MagneticPylonBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState s) {
-        return true;
-    }
+    public boolean isRandomlyTicking(BlockState s) { return false; /* DISABLED */ }
 
     @Override
     public void onPlace(BlockState s, Level l, BlockPos p, BlockState old, boolean moved) {

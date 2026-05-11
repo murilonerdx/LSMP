@@ -214,6 +214,8 @@ public class ClientModEvents {
                     br.com.murilo.liberthia.client.screen.DimensionalChestScreen::new);
             MenuScreens.register(ModMenuTypes.MATTER_REFINER.get(),
                     br.com.murilo.liberthia.client.screen.MatterRefinerScreen::new);
+            MenuScreens.register(ModMenuTypes.WIRELESS_CHARGER.get(),
+                    br.com.murilo.liberthia.client.screen.WirelessChargerScreen::new);
 
             // Sample Vial: model override "filled" baseado no NBT
             net.minecraft.client.renderer.item.ItemProperties.register(

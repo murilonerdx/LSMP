@@ -51,6 +51,7 @@ public class GlitchBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
         // Rapid phase cycling via scheduled ticks (much faster than randomTick)
         int nextPhase = (state.getValue(PHASE) + 1 + random.nextInt(4)) % 8;
         level.setBlock(pos, state.setValue(PHASE, nextPhase), 2);
@@ -61,18 +62,7 @@ public class GlitchBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        // Check if area is still heavily infested; if not, revert to stone
-        float density = InfectionLogic.getChunkInfectionDensity(level, pos);
-        if (density < 0.30f) {
-            level.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
-            return;
-        }
-
-        // Visual glitch particles
-        level.sendParticles(ParticleTypes.ENCHANT,
-                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                5, 0.4, 0.4, 0.4, 0.15);
+        /* DISABLED — kill switch permanente */
     }
 
     @Override

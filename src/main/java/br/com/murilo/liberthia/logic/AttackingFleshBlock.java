@@ -26,9 +26,7 @@ public class AttackingFleshBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean moved) {
@@ -47,7 +45,7 @@ public class AttackingFleshBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        attackNearby(level, pos, rand);
+        /* DISABLED — kill switch permanente */
     }
 
     private void attackNearby(ServerLevel level, BlockPos pos, RandomSource rand) {

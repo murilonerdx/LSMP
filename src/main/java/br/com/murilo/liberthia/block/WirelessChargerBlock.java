@@ -25,13 +25,10 @@ public class WirelessChargerBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState s, Level level, BlockPos pos, Player player, InteractionHand h, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;
-        if (level.getBlockEntity(pos) instanceof WirelessChargerBlockEntity be) {
-            int e = be.getEnergyStored(), max = be.getMaxEnergyStored();
-            int pct = max == 0 ? 0 : (int) (e * 100L / max);
-            player.displayClientMessage(
-                    Component.literal(String.format("⚡ Wireless Charger: %,d / %,d FE (%d%%) | %d carregando",
-                                    e, max, pct, be.getActiveChargingPlayers()))
-                            .withStyle(ChatFormatting.LIGHT_PURPLE), false);
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof net.minecraft.world.MenuProvider mp
+                && player instanceof net.minecraft.server.level.ServerPlayer sp) {
+            net.minecraftforge.network.NetworkHooks.openScreen(sp, mp, pos);
         }
         return InteractionResult.CONSUME;
     }

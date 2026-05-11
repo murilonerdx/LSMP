@@ -46,6 +46,7 @@ public class UnstableMatterBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
         int age = state.getValue(AGE);
         if (age >= 7) {
             detonate(level, pos);

@@ -22,40 +22,11 @@ import net.minecraft.world.phys.AABB;
 public class BloodInfestationBlock extends Block {
     public BloodInfestationBlock(Properties p) { super(p); }
 
-    @Override public boolean isRandomlyTicking(BlockState s) { return true; }
+    @Override public boolean isRandomlyTicking(BlockState s) { return false; /* DISABLED */ }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rng) {
-        if (FleshMotherBlock.isContained(level, pos)) return;
-        if (!BloodAltarBlock.hasActiveAltarNearby(level, pos, 24)) return;
-        // Only spawn if a player is within 16 blocks
-        boolean playerNear = !level.getEntitiesOfClass(Player.class, new AABB(pos).inflate(16.0),
-                p -> !p.isCreative() && !p.isSpectator()).isEmpty();
-        if (!playerNear) return;
-        // Cap worms nearby to avoid runaway swarms
-        int cap = 4;
-        int count = level.getEntitiesOfClass(net.minecraft.world.entity.monster.Silverfish.class,
-                new AABB(pos).inflate(8.0)).size();
-        if (count >= cap) return;
-        // Spawn 1 worm above
-        for (int tries = 0; tries < 4; tries++) {
-            int dx = rng.nextInt(3) - 1;
-            int dz = rng.nextInt(3) - 1;
-            BlockPos sp = pos.offset(dx, 1, dz);
-            if (level.getBlockState(sp).isAir()) {
-                EntityType<?> type = rng.nextInt(3) == 0 ? ModEntities.GORE_WORM.get() : ModEntities.FLESH_CRAWLER.get();
-                var worm = type.create(level);
-                if (worm != null) {
-                    worm.moveTo(sp.getX() + 0.5, sp.getY(), sp.getZ() + 0.5, rng.nextFloat() * 360F, 0F);
-                    level.addFreshEntity(worm);
-                    level.sendParticles(BloodParticles.BLOOD,
-                            sp.getX() + 0.5, sp.getY() + 0.2, sp.getZ() + 0.5,
-                            10, 0.3, 0.1, 0.3, 0.08);
-                    level.playSound(null, pos, SoundEvents.SILVERFISH_STEP, SoundSource.BLOCKS, 0.5F, 0.7F);
-                    break;
-                }
-            }
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     @Override

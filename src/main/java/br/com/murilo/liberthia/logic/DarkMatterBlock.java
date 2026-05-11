@@ -106,6 +106,7 @@ public class DarkMatterBlock extends Block {
      */
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
         super.tick(state, level, pos, random);
 
         // Troca esse bloco pelo bloco de fluido de matéria escura.
@@ -216,38 +217,7 @@ public class DarkMatterBlock extends Block {
      */
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        float density = InfectionLogic.getChunkInfectionDensity(level, pos);
-        int age = state.getValue(AGE);
-
-        // Age progression: 8% chance when density > 0.3
-        if (age < 2 && density > 0.3f && random.nextFloat() < 0.08f) {
-            level.setBlock(pos, state.setValue(AGE, age + 1), 3);
-            age = age + 1;
-        }
-
-        // Spread scales with age: more aggressive at higher stages
-        int attempts = 1 + age + (int) (density * 3);
-
-        for (int i = 0; i < attempts; i++) {
-            spreadInfection(level, pos, random);
-        }
-
-        // Spore chance scales with age
-        float sporeChance = 0.02f + (density * 0.04f) + (age * 0.01f);
-        if (random.nextFloat() < sporeChance) {
-            attemptSporeLaunch(level, pos, random);
-        }
-
-        // Particles scale with age
-        int particleCount = 6 + age * 4;
-        if (random.nextFloat() < (0.2f + density * 0.4f)) {
-            level.sendParticles(
-                    net.minecraft.core.particles.ParticleTypes.SMOKE,
-                    pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5,
-                    particleCount, 0.4, 0.4, 0.4, 0.06
-            );
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     @Override

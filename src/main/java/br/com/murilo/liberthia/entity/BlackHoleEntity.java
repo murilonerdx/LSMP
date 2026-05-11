@@ -193,6 +193,14 @@ public class BlackHoleEntity extends Entity {
     public void tick() {
         super.tick();
 
+        // DESATIVADO permanentemente — black hole faz despawn imediato pra
+        // remover instâncias existentes do mundo. Mantém entity registrada
+        // pra evitar erros de NBT/save em mundos antigos.
+        if (!level().isClientSide) {
+            this.discard();
+            return;
+        }
+
         if (level().isClientSide) {
             updateDimensionsIfNeeded();
             spawnParticles();
@@ -817,7 +825,7 @@ public class BlackHoleEntity extends Entity {
 
             FallingBlockEntity fallingBlock = FallingBlockEntity.fall(level(), target, state);
             fallingBlock.setNoGravity(true);
-            level().setBlockAndUpdate(target, Blocks.AIR.defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level().hasChunkAt(target)) level().setBlockAndUpdate(target, Blocks.AIR.defaultBlockState());
 
             absorbedThisCycle++;
             addContamination(8);
@@ -917,14 +925,14 @@ public class BlackHoleEntity extends Entity {
         }
 
         if (!serverLevel.getFluidState(pos).isEmpty()) {
-            serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(pos)) serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
             addContamination(4);
             return true;
         }
 
         if (state.isAir()) {
             if (aggressive) {
-                serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+                if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(pos)) serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
                 addContamination(2);
                 return true;
             }
@@ -932,13 +940,13 @@ public class BlackHoleEntity extends Entity {
         }
 
         if (surfaceLayer && isSurfaceSoilLike(state)) {
-            serverLevel.setBlockAndUpdate(pos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(pos)) serverLevel.setBlockAndUpdate(pos, ModBlocks.CORRUPTED_SOIL.get().defaultBlockState());
             addContamination(3);
             return true;
         }
 
         if (isDeepCorruptibleBlock(serverLevel, pos, state)) {
-            serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(pos)) serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
             addContamination(4);
             return true;
         }
@@ -960,7 +968,7 @@ public class BlackHoleEntity extends Entity {
         }
 
         if (!serverLevel.getFluidState(pos).isEmpty()) {
-            serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(pos)) serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
             addContamination(3);
             return true;
         }
@@ -979,7 +987,7 @@ public class BlackHoleEntity extends Entity {
                 || hasRegistryPath(state, "crop")
                 || aggressive) {
             if (canConsume(state, pos)) {
-                serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
+                if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(pos)) serverLevel.setBlockAndUpdate(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState());
                 addContamination(3);
                 return true;
             }
@@ -1003,14 +1011,14 @@ public class BlackHoleEntity extends Entity {
             return;
         }
 
-        serverLevel.setBlockAndUpdate(first, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
+        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(first)) serverLevel.setBlockAndUpdate(first, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
         addContamination(1);
 
         BlockPos second = first.above();
         if (serverLevel.getBlockState(second).isAir()
                 && serverLevel.getFluidState(second).isEmpty()
                 && serverLevel.random.nextFloat() < 0.35F) {
-            serverLevel.setBlockAndUpdate(second, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(second)) serverLevel.setBlockAndUpdate(second, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
             addContamination(1);
         }
 
@@ -1018,7 +1026,7 @@ public class BlackHoleEntity extends Entity {
         if (serverLevel.getBlockState(third).isAir()
                 && serverLevel.getFluidState(third).isEmpty()
                 && serverLevel.random.nextFloat() < 0.18F) {
-            serverLevel.setBlockAndUpdate(third, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(third)) serverLevel.setBlockAndUpdate(third, ModBlocks.INFECTION_GROWTH.get().defaultBlockState());
             addContamination(1);
         }
     }
@@ -1353,7 +1361,7 @@ public class BlackHoleEntity extends Entity {
                     BlockState state = serverLevel.getBlockState(mutable);
 
                     if (canConsume(state, mutable)) {
-                        serverLevel.setBlock(mutable, Blocks.AIR.defaultBlockState(), 3);
+                        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(mutable)) serverLevel.setBlock(mutable, Blocks.AIR.defaultBlockState(), 3);
                     }
                 }
 
@@ -1365,13 +1373,13 @@ public class BlackHoleEntity extends Entity {
                         BlockState state = serverLevel.getBlockState(mutable);
 
                         if (canConsume(state, mutable)) {
-                            serverLevel.setBlock(mutable, Blocks.AIR.defaultBlockState(), 3);
+                            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(mutable)) serverLevel.setBlock(mutable, Blocks.AIR.defaultBlockState(), 3);
                         }
                     }
 
                     mutable.set(x, shaftBottom, z);
                     if (serverLevel.getBlockState(mutable).isAir()) {
-                        serverLevel.setBlock(mutable, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState(), 3);
+                        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && serverLevel.hasChunkAt(mutable)) serverLevel.setBlock(mutable, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState(), 3);
                     }
                 }
             }

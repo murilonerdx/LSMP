@@ -1565,7 +1565,7 @@ public final class ParticleEffectEngine {
             BlockState fire = Blocks.FIRE.defaultBlockState();
 
             if (fire.canSurvive(level, firePos)) {
-                level.setBlockAndUpdate(firePos, fire);
+                if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) level.setBlockAndUpdate(firePos, fire);
             }
         }
     }
@@ -1656,7 +1656,8 @@ public final class ParticleEffectEngine {
                 continue;
             }
 
-            level.destroyBlock(pos, false, breaker);
+            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE)
+                level.destroyBlock(pos, false, breaker);
         }
     }
 }

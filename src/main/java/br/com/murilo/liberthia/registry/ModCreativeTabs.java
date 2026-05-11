@@ -1,15 +1,28 @@
 package br.com.murilo.liberthia.registry;
 
 import br.com.murilo.liberthia.LiberthiaMod;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public final class ModCreativeTabs {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, LiberthiaMod.MODID);
+    // DeferredRegister.create(ResourceLocation, String) é o overload que NÃO
+    // depende de SRG remap do MC vanilla. A própria Forge resolve o SRG do
+    // ResourceKey internamente, no JAR dela — o bytecode do nosso mod só
+    // contém uma chamada pra um método público da Forge.
+    //
+    // Histórico das tentativas anteriores (todas com SRG mismatch entre
+    // Forge 47.4.18 compile e 47.4.0 runtime):
+    //   1. ResourceKey.createRegistryKey(...) → NoSuchMethodError
+    //   2. Registries.CREATIVE_MODE_TAB       → NoSuchFieldError
+    //   3. ForgeRegistries.Keys.CREATIVE_MODE_TABS → nem existe
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
+            DeferredRegister.create(
+                    new ResourceLocation("minecraft", "creative_mode_tab"),
+                    LiberthiaMod.MODID);
 
     public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main",
             () -> CreativeModeTab.builder()

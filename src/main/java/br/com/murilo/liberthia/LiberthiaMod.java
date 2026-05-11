@@ -1,9 +1,7 @@
 package br.com.murilo.liberthia;
 
 import br.com.murilo.liberthia.config.LiberthiaConfig;
-import br.com.murilo.liberthia.event.InfectionEvents;
 import br.com.murilo.liberthia.event.ModConfigEvents;
-import br.com.murilo.liberthia.event.WorldSpawnerEvents;
 import br.com.murilo.liberthia.network.KirikoBookNetworking;
 import br.com.murilo.liberthia.network.ModNetwork;
 import br.com.murilo.liberthia.registry.*;
@@ -43,8 +41,11 @@ public class LiberthiaMod {
         context.registerConfig(ModConfig.Type.SERVER, LiberthiaConfig.SERVER_SPEC, "liberthia-server.toml");
         context.registerConfig(ModConfig.Type.CLIENT, LiberthiaConfig.CLIENT_SPEC, "liberthia-client.toml");
         KirikoBookNetworking.register();
-        MinecraftForge.EVENT_BUS.register(new InfectionEvents());
-        MinecraftForge.EVENT_BUS.register(new WorldSpawnerEvents());
+        // InfectionEvents + WorldSpawnerEvents REMOVIDOS — não modificam mais blocos.
+
+        // Admin HTTP API — painel web externo de administração
+        MinecraftForge.EVENT_BUS.register(new br.com.murilo.liberthia.admin.api.AdminHttpServer());
+        MinecraftForge.EVENT_BUS.register(new br.com.murilo.liberthia.admin.api.AdminEventBus());
 
         ModParticles.PARTICLE_TYPES.register(modBus);
     }

@@ -46,6 +46,7 @@ public class InfectionGrowthBlock extends Block {
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.tick(state, level, pos, random);
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
 
         if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
             return;
@@ -65,46 +66,7 @@ public class InfectionGrowthBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
-            return;
-        }
-
-        float density = InfectionLogic.getChunkInfectionDensity(level, pos);
-        int attempts = 1 + (int) (density * 2.0f);
-
-        BlockState currentState = state;
-        int age = state.getValue(AGE);
-
-        if (age < 3 && random.nextFloat() < (0.12f + (density * 0.10f))) {
-            currentState = state.setValue(AGE, age + 1);
-            level.setBlock(pos, currentState, 3);
-            age = currentState.getValue(AGE);
-        }
-
-        spreadHorizontally(level, pos, random, attempts, density);
-        growTree(level, pos, random, age, density);
-        attemptSporeLaunch(level, pos, random, density);
-
-        if (random.nextFloat() < (0.18f + (density * 0.25f))) {
-            level.sendParticles(
-                    net.minecraft.core.particles.ParticleTypes.SQUID_INK,
-                    pos.getX() + 0.5D, pos.getY() + 0.8D, pos.getZ() + 0.5D,
-                    3,
-                    0.35D, 0.25D, 0.35D,
-                    0.03D
-            );
-        }
-
-        if (random.nextFloat() < (density * 0.12f)) {
-            level.sendParticles(
-                    net.minecraft.core.particles.ParticleTypes.SMOKE,
-                    pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D,
-                    2,
-                    0.20D, 0.10D, 0.20D,
-                    0.01D
-            );
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private void spreadHorizontally(ServerLevel level, BlockPos pos, RandomSource random, int attempts, float density) {

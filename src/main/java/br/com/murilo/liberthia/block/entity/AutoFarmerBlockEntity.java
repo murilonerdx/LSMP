@@ -136,7 +136,7 @@ public class AutoFarmerBlockEntity extends BlockEntity implements MenuProvider {
         // Como a lava já está lá, basta marcar para repor depois? Vamos repor já.
         // Para simular "consumo + reposição", definimos a lava de volta (que já é lava — no-op).
         // O importante é simular a perda/reposição: setar pra ar e devolta.
-        level.setBlock(below, net.minecraft.world.level.block.Blocks.LAVA.defaultBlockState(), 2);
+        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) level.setBlock(below, net.minecraft.world.level.block.Blocks.LAVA.defaultBlockState(), 2);
         // Output
         be.inventory.insertItem(SLOT_OUTPUT,
                 new ItemStack(ModBlocks.DARK_MATTER_BLOCK.get().asItem()), false);

@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BloodAltarBlock extends Block {
     public BloodAltarBlock(Properties props) { super(props); }
 
-    @Override public boolean isRandomlyTicking(BlockState s) { return true; }
+    @Override public boolean isRandomlyTicking(BlockState s) { return false; /* DISABLED */ }
 
     public static int countChalkSymbols(Level level, BlockPos center) {
         int count = 0;
@@ -92,6 +92,7 @@ public class BloodAltarBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rng) {
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
         // Fast scheduled tick drives aggressive spread independent of randomTickSpeed.
         if (br.com.murilo.liberthia.config.DevMode.ACTIVE) {
             level.scheduleTick(pos, this, 40);
@@ -181,29 +182,7 @@ public class BloodAltarBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rng) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        if (isContained(level, pos)) return;
-
-        // Aggressive spread
-        for (int i = 0; i < 12; i++) {
-            spreadInfection(level, pos, rng);
-        }
-
-        // Spawn Blood Orb (cooldown via entity presence)
-        java.util.List<BloodOrbEntity> existing = level.getEntitiesOfClass(BloodOrbEntity.class,
-                new net.minecraft.world.phys.AABB(pos).inflate(10.0));
-        if (existing.isEmpty() && rng.nextFloat() < 0.25F) {
-            BloodOrbEntity orb = ModEntities.BLOOD_ORB.get().create(level);
-            if (orb != null) {
-                orb.moveTo(pos.getX() + 0.5, pos.getY() + 2.5, pos.getZ() + 0.5, 0, 0);
-                level.addFreshEntity(orb);
-                level.playSound(null, pos, SoundEvents.WITHER_SPAWN, SoundSource.BLOCKS, 0.6F, 1.4F);
-                level.sendParticles(ParticleTypes.FLASH, pos.getX() + 0.5, pos.getY() + 2.0,
-                        pos.getZ() + 0.5, 1, 0, 0, 0, 0);
-                level.sendParticles(BloodParticles.BLOOD, pos.getX() + 0.5,
-                        pos.getY() + 2.0, pos.getZ() + 0.5, 60, 0.8, 0.8, 0.8, 0.2);
-            }
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     /**

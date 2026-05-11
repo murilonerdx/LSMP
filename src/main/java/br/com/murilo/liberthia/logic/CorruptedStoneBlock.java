@@ -17,32 +17,11 @@ public class CorruptedStoneBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
-            return;
-        }
-
-        // 15% chance to spread to adjacent stone variants
-        if (random.nextFloat() < 0.15f) {
-            spreadToAdjacentStone(level, pos, random);
-        }
-
-        // 5% chance to emit SQUID_INK particles
-        if (random.nextFloat() < 0.05f) {
-            level.sendParticles(
-                    ParticleTypes.SQUID_INK,
-                    pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                    2,
-                    0.3D, 0.3D, 0.3D,
-                    0.02D
-            );
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private void spreadToAdjacentStone(ServerLevel level, BlockPos pos, RandomSource random) {

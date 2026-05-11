@@ -56,7 +56,7 @@ public class DarkMatterBatteryBlockEntity extends BlockEntity
 
     public final Tier tier;
     public final br.com.murilo.liberthia.energy.TrackedEnergyStorage energy;
-    private LazyOptional<IEnergyStorage> lazy = LazyOptional.empty();
+    private LazyOptional<IEnergyStorage> lazy;
 
     /** ContainerData pra GUI: 0/1=energy hi/lo, 2/3=max hi/lo, 4=tier ordinal. */
     public final ContainerData data = new ContainerData() {
@@ -89,6 +89,10 @@ public class DarkMatterBatteryBlockEntity extends BlockEntity
         this.tier = tier;
         this.energy = new br.com.murilo.liberthia.energy.TrackedEnergyStorage(
                 this, tier.capacity, tier.transfer, tier.transfer);
+        // Inicializa lazy AGORA — não em onLoad. Garante que cabos vizinhos que
+        // querem checar a capability ENERGY durante updateShape (logo após
+        // colocar o bloco) já encontrem um LazyOptional válido.
+        this.lazy = LazyOptional.of(() -> this.energy);
     }
 
     @Override public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -97,7 +101,7 @@ public class DarkMatterBatteryBlockEntity extends BlockEntity
     }
     @Override public void onLoad() {
         super.onLoad();
-        lazy = LazyOptional.of(() -> energy);
+        // lazy já está inicializada no construtor — não recriar aqui
         br.com.murilo.liberthia.persistence.Persistable.LIVE.add(this);
         // Backup-restore se NBT vanilla veio vazio
         if (level instanceof net.minecraft.server.level.ServerLevel sl && isStateEmpty()) {

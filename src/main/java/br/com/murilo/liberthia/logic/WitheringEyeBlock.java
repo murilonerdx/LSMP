@@ -47,7 +47,7 @@ public class WitheringEyeBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) { return true; }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState old, boolean moved) {
@@ -57,6 +57,7 @@ public class WitheringEyeBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
         int age = state.getValue(AGE);
         attack(level, pos, age);
         int rate = 18 - age * 6;
@@ -68,11 +69,7 @@ public class WitheringEyeBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        int age = state.getValue(AGE);
-
-        if (age < 3 && rand.nextFloat() < 0.25F) {
-            level.setBlock(pos, state.setValue(AGE, age + 1), 3);
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     /**

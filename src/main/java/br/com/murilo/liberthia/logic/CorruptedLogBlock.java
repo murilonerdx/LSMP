@@ -33,26 +33,11 @@ public class CorruptedLogBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
-            return;
-        }
-
-        // 8% chance to spread infection to adjacent logs
-        if (random.nextFloat() < 0.08f) {
-            spreadToAdjacentLogs(level, pos, random);
-        }
-
-        // 4% chance to spread corrupted_soil to ground below
-        if (random.nextFloat() < 0.04f) {
-            spreadCorruptedSoilBelow(level, pos);
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private void spreadToAdjacentLogs(ServerLevel level, BlockPos pos, RandomSource random) {

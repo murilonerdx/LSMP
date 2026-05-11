@@ -44,10 +44,10 @@ public class BurningGemEntity extends ThrowableItemProjectile {
             for (int dz = -1; dz <= 1; dz++) {
                 BlockPos p = impact.offset(dx, 0, dz);
                 if (sl.getBlockState(p).isAir() && sl.getBlockState(p.below()).isFaceSturdy(sl, p.below(), net.minecraft.core.Direction.UP)) {
-                    sl.setBlockAndUpdate(p, BaseFireBlock.getState(sl, p));
+                    if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) sl.setBlockAndUpdate(p, BaseFireBlock.getState(sl, p));
                 } else if (sl.getBlockState(p.above()).isAir()
                         && sl.getBlockState(p).isFaceSturdy(sl, p, net.minecraft.core.Direction.UP)) {
-                    sl.setBlockAndUpdate(p.above(), Blocks.FIRE.defaultBlockState());
+                    if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) sl.setBlockAndUpdate(p.above(), Blocks.FIRE.defaultBlockState());
                 }
             }
         }

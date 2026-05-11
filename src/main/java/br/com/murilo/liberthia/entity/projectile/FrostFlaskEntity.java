@@ -49,7 +49,7 @@ public class FrostFlaskEntity extends ThrowableItemProjectile {
                 for (int dy = -1; dy <= 0; dy++) {
                     BlockPos p = impact.offset(dx, dy, dz);
                     if (sl.getFluidState(p).getType().isSame(Fluids.WATER)) {
-                        sl.setBlockAndUpdate(p, Blocks.FROSTED_ICE.defaultBlockState());
+                        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) sl.setBlockAndUpdate(p, Blocks.FROSTED_ICE.defaultBlockState());
                     }
                 }
             }

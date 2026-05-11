@@ -36,7 +36,7 @@ public class VenomGeyserBlock extends Block {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> b) { b.add(AGE); }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) { return true; }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState old, boolean moved) {
@@ -46,6 +46,7 @@ public class VenomGeyserBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
         int age = state.getValue(AGE);
         attack(level, pos, age);
         int rate = 25 - age * 5;
@@ -54,13 +55,7 @@ public class VenomGeyserBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        int age = state.getValue(AGE);
-        if (age < 3 && rand.nextFloat() < 0.18F) {
-            level.setBlock(pos, state.setValue(AGE, age + 1), 3);
-            level.sendParticles(ParticleTypes.SCULK_SOUL,
-                    pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
-                    20, 0.4, 0.4, 0.4, 0.05);
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private void attack(ServerLevel level, BlockPos pos, int age) {

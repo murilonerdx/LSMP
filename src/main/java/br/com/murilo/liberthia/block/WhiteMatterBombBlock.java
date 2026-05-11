@@ -57,7 +57,7 @@ public class WhiteMatterBombBlock extends Block {
     }
 
     private void prime(Level level, BlockPos pos, BlockState state) {
-        level.setBlock(pos, state.setValue(PRIMED, true), 3);
+        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) level.setBlock(pos, state.setValue(PRIMED, true), 3);
         level.playSound(null, pos, SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
         level.scheduleTick(pos, this, 80); // 4 seconds
     }
@@ -99,12 +99,12 @@ public class WhiteMatterBombBlock extends Block {
 
                 if (isDark) {
                     // ATOMIC SWEEP: Deep cleanse block and fluid state (Flag 3 | 16 ensures propagation)
-                    level.setBlock(p, Blocks.AIR.defaultBlockState(), 19); 
+                    if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) level.setBlock(p, Blocks.AIR.defaultBlockState(), 19); 
                     
                     if (level.random.nextFloat() < 0.15f && level.getBlockState(p.below()).isSolidRender(level, p.below())) {
                         Block flower = level.random.nextBoolean() ? Blocks.DANDELION : Blocks.POPPY;
-                        level.setBlockAndUpdate(p, flower.defaultBlockState());
-                        level.setBlockAndUpdate(p.below(), Blocks.GRASS_BLOCK.defaultBlockState());
+                        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) level.setBlockAndUpdate(p, flower.defaultBlockState());
+                        if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) level.setBlockAndUpdate(p.below(), Blocks.GRASS_BLOCK.defaultBlockState());
                     }
                 }
             }

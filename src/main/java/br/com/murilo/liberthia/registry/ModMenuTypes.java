@@ -76,6 +76,9 @@ public final class ModMenuTypes {
     public static final RegistryObject<MenuType<MatterRefinerMenu>> MATTER_REFINER = registerMenuType(
             "matter_refiner", MatterRefinerMenu::new);
 
+    public static final RegistryObject<MenuType<WirelessChargerMenu>> WIRELESS_CHARGER = registerMenuType(
+            "wireless_charger", WirelessChargerMenu::new);
+
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

@@ -49,4 +49,33 @@ public final class ChunkSafe {
                 && level.hasChunkAt(center.offset(-radius, 0, radius))
                 && level.hasChunkAt(center.offset(radius, 0, radius));
     }
+
+    /**
+     * setBlock SEGURO — só executa se a chunk estiver carregada.
+     * Retorna {@code true} se aplicou.
+     *
+     * <p>Use SEMPRE em código de tick events (LevelTick, ServerTick, RandomTick)
+     * pra evitar forçar geração parcial de chunks vizinhas.
+     */
+    public static boolean safeSetBlock(Level level, BlockPos pos,
+                                        net.minecraft.world.level.block.state.BlockState state, int flags) {
+        if (!level.hasChunkAt(pos)) return false;
+        return level.setBlock(pos, state, flags);
+    }
+
+    /** Versão sem flags — equivale a {@code level.setBlockAndUpdate} mas chunk-safe. */
+    public static boolean safeSetBlockAndUpdate(Level level, BlockPos pos,
+                                                 net.minecraft.world.level.block.state.BlockState state) {
+        return safeSetBlock(level, pos, state, 3);
+    }
+
+    /**
+     * getBlockState SEGURO — retorna {@code null} se a chunk não está carregada.
+     * Use em loops que iteram sobre áreas grandes em tick events.
+     */
+    public static @Nullable net.minecraft.world.level.block.state.BlockState safeGetBlockState(
+            Level level, BlockPos pos) {
+        if (!level.hasChunkAt(pos)) return null;
+        return level.getBlockState(pos);
+    }
 }

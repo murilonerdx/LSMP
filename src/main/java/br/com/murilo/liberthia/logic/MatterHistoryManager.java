@@ -65,7 +65,10 @@ public final class MatterHistoryManager {
                 continue;
             }
 
-            level.setBlockAndUpdate(pos, block.defaultBlockState());
+            if (level.hasChunkAt(pos)
+                    && !br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) {
+                level.setBlockAndUpdate(pos, block.defaultBlockState());
+            }
             replacements.remove(posKey(pos));
             changed = true;
             restored++;

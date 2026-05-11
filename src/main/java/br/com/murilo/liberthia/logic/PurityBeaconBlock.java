@@ -23,6 +23,7 @@ public class PurityBeaconBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
         super.tick(state, level, pos, random);
 
         purifySurroundings(level, pos, random);

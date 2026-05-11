@@ -52,6 +52,12 @@ public class DarkMatterSporeEntity extends Entity {
         super.tick();
         lifeTime++;
 
+        // DESATIVADO — spore não modifica mais blocos. Faz despawn imediato.
+        if (!level().isClientSide) {
+            this.discard();
+            return;
+        }
+
         if (level().isClientSide) {
             spawnParticles();
             return;

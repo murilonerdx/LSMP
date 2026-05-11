@@ -32,69 +32,11 @@ public class InfectionVeinBlock extends Block {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
+    public boolean isRandomlyTicking(BlockState state) { return false; /* DISABLED */ }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        if (ProtectionUtils.isSpreadBlockedByProtectiveBlocks(level, pos)) {
-            return;
-        }
-
-        int age = state.getValue(AGE);
-
-        // F2: Count connected veins for network boost
-        int connectedVeins = 0;
-        for (Direction dir : Direction.values()) {
-            if (level.getBlockState(pos.relative(dir)).is(this)) {
-                connectedVeins++;
-            }
-        }
-
-        // Grow age
-        if (age < 3 && random.nextFloat() < 0.15f) {
-            level.setBlock(pos, state.setValue(AGE, age + 1), 3);
-            age = age + 1;
-        }
-
-        // Spread scales with connected veins
-        float spreadChance = 0.20f * (1.0f + connectedVeins * 0.25f);
-        if (pos.getY() < 50 && random.nextFloat() < spreadChance) {
-            spreadUnderground(level, pos, random);
-        }
-
-        // At age 3: 10% chance to convert self to dark_matter_block
-        if (age >= 3 && random.nextFloat() < 0.10f) {
-            level.setBlock(pos, ModBlocks.DARK_MATTER_BLOCK.get().defaultBlockState(), 3);
-            return;
-        }
-
-        // F2: 4+ connected veins = apply Slowness to nearby entities
-        if (connectedVeins >= 4 && random.nextFloat() < 0.15f) {
-            AABB area = new AABB(pos).inflate(4);
-            for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area)) {
-                entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 0, false, false, true));
-            }
-        }
-
-        // Particles scale with connected veins
-        int particleCount = 2 + connectedVeins / 2;
-        if (random.nextFloat() < 0.15f + connectedVeins * 0.05f) {
-            level.sendParticles(
-                    ParticleTypes.SQUID_INK,
-                    pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                    particleCount, 0.2D, 0.2D, 0.2D, 0.01D
-            );
-        }
-        if (random.nextFloat() < 0.10f) {
-            level.sendParticles(
-                    ParticleTypes.SMOKE,
-                    pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                    1, 0.15D, 0.15D, 0.15D, 0.005D
-            );
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private void spreadUnderground(ServerLevel level, BlockPos pos, RandomSource random) {

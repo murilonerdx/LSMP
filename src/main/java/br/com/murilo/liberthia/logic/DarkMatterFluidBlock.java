@@ -21,19 +21,7 @@ public class DarkMatterFluidBlock extends LiquidBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        // Fluid infection spread - mimicking solid dark matter behavior
-        float density = InfectionLogic.getChunkInfectionDensity(level, pos);
-        int attempts = 2 + (int)(density * 8);
-
-        for (int i = 0; i < attempts; i++) {
-            spreadInfection(level, pos, random);
-        }
-
-        // Fluids also launch spores but at slightly lower frequency
-        if (random.nextFloat() < (0.15f + density * 0.2f)) {
-            attemptSporeLaunch(level, pos, random);
-        }
+        /* DISABLED — kill switch permanente */
     }
 
     private void spreadInfection(ServerLevel level, BlockPos pos, RandomSource random) {
