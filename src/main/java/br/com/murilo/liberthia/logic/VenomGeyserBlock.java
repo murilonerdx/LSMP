@@ -46,7 +46,10 @@ public class VenomGeyserBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
+        // NOTE: NÃO checa WorldChangesDisabled aqui. Esse kill switch existe pra
+        // desligar SPREAD/MODIFICAÇÃO DE MUNDO (infection growth, black hole,
+        // world spawner) — atacar entidades não modifica mundo, é comportamento
+        // normal de bloco hostil. Remover o gate aqui restaura o ataque.
         int age = state.getValue(AGE);
         attack(level, pos, age);
         int rate = 25 - age * 5;

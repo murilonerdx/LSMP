@@ -40,6 +40,26 @@ public class RevelationLensItem extends Item {
         if (level.isClientSide) return InteractionResultHolder.success(stack);
 
         ServerLevel sl = (ServerLevel) level;
+
+        // Shift+right-click → tira o glowing de QUEM tá glowing (limpa efeito anterior)
+        if (player.isShiftKeyDown()) {
+            AABB area = player.getBoundingBox().inflate(RANGE);
+            List<Entity> glowing = level.getEntities(player, area, e -> e instanceof LivingEntity le && le.hasGlowingTag());
+            int cleared = 0;
+            for (Entity e : glowing) {
+                ((LivingEntity) e).setGlowingTag(false);
+                cleared++;
+            }
+            if (cleared > 0) {
+                player.sendSystemMessage(Component.translatable("chat.liberthia.lens_cleared", cleared).withStyle(ChatFormatting.GRAY));
+                sl.playSound(null, player.blockPosition(), SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.PLAYERS, 1.0F, 0.8F);
+            } else {
+                player.sendSystemMessage(Component.translatable("chat.liberthia.lens_nothing_to_clear").withStyle(ChatFormatting.DARK_GRAY));
+            }
+            player.getCooldowns().addCooldown(this, 20);
+            return InteractionResultHolder.success(stack);
+        }
+
         AABB area = player.getBoundingBox().inflate(RANGE);
         List<Entity> entities = level.getEntities(player, area, e -> e instanceof LivingEntity le && le.isInvisible());
 
@@ -112,6 +132,7 @@ public class RevelationLensItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("item.liberthia.revelation_lens.desc1").withStyle(ChatFormatting.AQUA));
         tooltip.add(Component.translatable("item.liberthia.revelation_lens.desc2").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+        tooltip.add(Component.translatable("item.liberthia.revelation_lens.desc3").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
     }
 
     @Override

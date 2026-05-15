@@ -46,7 +46,7 @@ public class LightningNodeBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
+        // NÃO checa WorldChangesDisabled — atacar não é modificação de mundo.
         int age = state.getValue(AGE);
         attack(level, pos, age);
         // Rate: 200 → 80 ticks (1/4× faster at age 3)

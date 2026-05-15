@@ -47,7 +47,7 @@ public class LightningCoilBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
+        // NÃO checa WorldChangesDisabled — atacar não é modificação de mundo.
         int age = state.getValue(AGE);
         attack(level, pos, age, rand);
         int rate = 20 - age * 4;

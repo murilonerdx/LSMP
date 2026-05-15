@@ -12,7 +12,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -31,6 +33,41 @@ public class ExecutionStickItem extends Item {
 
     public ExecutionStickItem(Properties properties) {
         super(properties);
+    }
+
+    /**
+     * Right-click direto num player com o execution stick = teleporta esse player
+     * pra posição salva no Marking Stick. Atalho que evita o menu de chat.
+     */
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player user, LivingEntity target, InteractionHand hand) {
+        if (user.level().isClientSide) return InteractionResult.SUCCESS;
+        if (!(target instanceof ServerPlayer victim)) return InteractionResult.PASS;
+        if (!(user instanceof ServerPlayer caller)) return InteractionResult.PASS;
+
+        ItemStack mark = null;
+        for (int i = 0; i < user.getInventory().getContainerSize(); i++) {
+            ItemStack s = user.getInventory().getItem(i);
+            if (s.getItem() == ModItems.MARKING_STICK.get()) { mark = s; break; }
+        }
+        if (mark == null) {
+            caller.sendSystemMessage(Component.translatable("chat.liberthia.exec_no_stick").withStyle(ChatFormatting.RED));
+            return InteractionResult.SUCCESS;
+        }
+        if (!MarkingStickItem.hasPos(mark)) {
+            caller.sendSystemMessage(Component.translatable("chat.liberthia.exec_no_pos").withStyle(ChatFormatting.RED));
+            return InteractionResult.SUCCESS;
+        }
+        int[] pos = MarkingStickItem.getPos(mark);
+        victim.teleportTo(victim.serverLevel(), pos[0] + 0.5, pos[1], pos[2] + 0.5, victim.getYRot(), victim.getXRot());
+        victim.sendSystemMessage(Component.translatable("chat.liberthia.exec_tped").withStyle(ChatFormatting.AQUA));
+        caller.sendSystemMessage(Component.translatable("chat.liberthia.exec_sent",
+                victim.getDisplayName()).withStyle(ChatFormatting.GOLD));
+        if (user.level() instanceof ServerLevel sl) {
+            sl.sendParticles(ParticleTypes.REVERSE_PORTAL, pos[0] + 0.5, pos[1] + 1, pos[2] + 0.5, 30, 0.3, 1, 0.3, 0.1);
+            sl.playSound(null, victim.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
+        return InteractionResult.SUCCESS;
     }
 
     @Override

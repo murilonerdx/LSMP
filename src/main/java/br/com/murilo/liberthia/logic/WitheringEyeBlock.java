@@ -57,13 +57,12 @@ public class WitheringEyeBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        if (br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE) return;
+        // NOTE: NÃO checa WorldChangesDisabled. Esse kill switch existe pra
+        // desligar spread/modificação de mundo — atacar entidades não modifica
+        // mundo. Remover o gate aqui restaura o ataque.
         int age = state.getValue(AGE);
         attack(level, pos, age);
         int rate = 18 - age * 6;
-
-        logger.info("AGE: {} || rand {}", age, rand.toString());
-
         level.scheduleTick(pos, this, rate + rand.nextInt(6));
     }
 

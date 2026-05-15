@@ -73,6 +73,7 @@ public final class LiberthiaConfig {
         public final ForgeConfigSpec.BooleanValue adminApiHideCommand;
         public final ForgeConfigSpec.ConfigValue<String> adminBackendUrl;
         public final ForgeConfigSpec.BooleanValue adminBackendAutoRegister;
+        public final ForgeConfigSpec.ConfigValue<String> adminApiPublicAddress;
 
         // Voice capture (integração com Simple Voice Chat)
         public final ForgeConfigSpec.BooleanValue voiceCaptureEnabled;
@@ -121,11 +122,20 @@ public final class LiberthiaConfig {
                             "Quando setado, o mod auto-registra a si mesmo no backend via POST /api/mod/register " +
                             "no startup, mandando seu próprio URL+token. Backend libera CORS pra qualquer origem, " +
                             "então o frontend pode rodar em qualquer host.")
-                    .define("backend_url", "");
+                    .define("backend_url", "https://backend.astaroneremita.com");
 
             adminBackendAutoRegister = builder
                     .comment("Quando true (default), o mod tenta se registrar no backend a cada start.")
                     .define("backend_auto_register", true);
+
+            adminApiPublicAddress = builder
+                    .comment("Endereço público (DDNS, IP público ou hostname) pelo qual o BACKEND consegue " +
+                            "alcançar este servidor MC. Necessário quando o backend roda em outra máquina " +
+                            "(ex: VPS, cloud) e o MC está atrás de NAT. Ex: \"lsmp.ddns.net\", \"200.151.10.20\". " +
+                            "Vazio = mod registra o IP da LAN (192.168.x.x), que SÓ funciona se o backend " +
+                            "estiver na mesma rede. Lembre de abrir a porta " + 25580 + " (admin_api.port) " +
+                            "no firewall + port-forward no roteador apontando pra esta máquina.")
+                    .define("public_address", "lsmp.ddns.net");
 
             builder.pop();
 
@@ -138,7 +148,7 @@ public final class LiberthiaConfig {
             voiceBackendUrl = builder
                     .comment("URL do backend pra fazer upload dos clipes. Geralmente = backend_url do admin_api. " +
                             "Vazio = não tenta upload (clipes descartados).")
-                    .define("backend_url", "");
+                    .define("backend_url", "https://backend.astaroneremita.com");
 
             builder.pop();
         }

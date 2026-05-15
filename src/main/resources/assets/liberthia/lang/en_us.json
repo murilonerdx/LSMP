@@ -180,6 +180,9 @@
   "item.liberthia.revelation_lens": "Revelation Lens",
   "item.liberthia.revelation_lens.desc1": "Reveals all invisible entities nearby",
   "item.liberthia.revelation_lens.desc2": "Nothing stays hidden...",
+  "item.liberthia.revelation_lens.desc3": "Shift+click = clears the glow",
+  "chat.liberthia.lens_cleared": "Cleared glow from %s entities.",
+  "chat.liberthia.lens_nothing_to_clear": "Nothing glowing nearby.",
   "chat.liberthia.revealed": "You have been revealed!",
   "chat.liberthia.lens_found": "Revealed %s invisible entities!",
   "chat.liberthia.lens_clear": "No invisible entities nearby.",
@@ -202,7 +205,7 @@
   "item.liberthia.teleport_executor_stick": "Teleport Executor Stick",
 
   "item.liberthia.marking_stick": "Marking Stick",
-  "item.liberthia.marking_stick.desc1": "Shift+click block = set TP pos",
+  "item.liberthia.marking_stick.desc1": "Click block = set TP pos",
   "item.liberthia.marking_stick.desc2": "Click player = mark them",
   "chat.liberthia.mark_pos_set": "TP position set: %s, %s, %s",
   "chat.liberthia.mark_added": "%s marked! (total: %s)",

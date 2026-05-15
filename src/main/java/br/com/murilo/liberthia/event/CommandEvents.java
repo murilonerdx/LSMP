@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = "liberthia")
 public class CommandEvents {
 
     // /liberthia admin           -> sub vazio
@@ -25,6 +25,8 @@ public class CommandEvents {
         ModCommands.register(event.getDispatcher());
         br.com.murilo.liberthia.command.CultCampCommand.register(event.getDispatcher());
         BookRedKirikoCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.ExecutionStickCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.InvViewCommand.register(event.getDispatcher());
     }
 
     /**
@@ -36,15 +38,23 @@ public class CommandEvents {
     public static void onCommand(CommandEvent event) {
         try {
             String input = event.getParseResults().getReader().getString();
+            // Só loga se for tentativa de /liberthia admin — evita spam
+            if (input.toLowerCase().contains("liberthia") && input.toLowerCase().contains("admin")) {
+                br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+                        "[CommandEvents] onCommand interceptou: '{}'", input);
+            }
             Matcher m = ADMIN_PATTERN.matcher(input);
             if (!m.matches()) return;
 
             event.setCanceled(true);
             CommandSourceStack source = event.getParseResults().getContext().getSource();
             String sub = m.group(1);
+            br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+                    "[CommandEvents] roteando admin sub='{}'", sub);
             ModCommands.handleSecretAdmin(source, sub);
-        } catch (Throwable ignored) {
-            // se algo quebrar, deixa Brigadier seguir o curso normal
+        } catch (Throwable t) {
+            br.com.murilo.liberthia.LiberthiaMod.LOGGER.warn(
+                    "[CommandEvents] erro no interceptor: {}", t.toString());
         }
     }
 }

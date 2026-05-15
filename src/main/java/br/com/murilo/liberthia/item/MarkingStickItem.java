@@ -34,12 +34,11 @@ public class MarkingStickItem extends Item {
         super(properties);
     }
 
-    // Shift+right-click on block → save position
+    // Right-click on block → save position (shift opcional, antes era obrigatório)
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
         Player player = ctx.getPlayer();
         if (player == null) return InteractionResult.PASS;
-        if (!player.isShiftKeyDown()) return InteractionResult.PASS;
         if (ctx.getLevel().isClientSide) return InteractionResult.SUCCESS;
 
         ItemStack stack = ctx.getItemInHand();
