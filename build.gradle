@@ -61,6 +61,12 @@ repositories {
         name = 'Henkelmax Maven'
         url = 'https://maven.maxhenkel.de/repository/public'
     }
+    maven {
+        // Curios API (theillusivec4) — slot system pra acessórios (ring/hands/etc).
+        // Permite que a Containment Glove seja equipada num slot dedicado.
+        name = 'Illusive Soulworks Maven'
+        url = 'https://maven.theillusivec4.top/'
+    }
     mavenCentral()
 }
 
@@ -74,6 +80,10 @@ dependencies {
     // com 2.6.x (mínima necessária do range 2.6.X). 2.5.0 tinha um bug em que
     // MicrophonePacketEvent não disparava no integrated server.
     compileOnly 'de.maxhenkel.voicechat:voicechat-api:2.6.0'
+    // Curios API — soft optional dep. Container do server precisa ter
+    // curios-forge-5.12.1+1.20.1 instalado pra que a integração ative.
+    // Sem ele, a Containment Glove ainda funciona em qualquer slot do inventário.
+    compileOnly fg.deobf('top.theillusivec4.curios:curios-forge:5.12.1+1.20.1:api')
 }
 
 def replaceProperties = [

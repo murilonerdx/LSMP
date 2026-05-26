@@ -156,7 +156,7 @@ public class BloodWardenBossEntity extends Monster {
             // Self-haste + slowness II to all nearby players.
             for (Player p : sl.getEntitiesOfClass(Player.class,
                     new AABB(blockPosition()).inflate(20.0))) {
-                if (p.isCreative() || p.isSpectator()) continue;
+                if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(p)) continue;
                 p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 1));
                 p.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 0));
             }
@@ -167,7 +167,20 @@ public class BloodWardenBossEntity extends Monster {
             heal(1.0F);
         }
 
-        Player nearest = level().getNearestPlayer(this, 64.0);
+        // v0.1.22 r18: filter isProtected — pula players com Sigil/Crown/
+        // creative/spectator. Warden mira em players SEM proteção (segue
+        // atacando outros normal). User: "monstros ignoram só ELE [quem
+        // tem proteção], outros players segue normal".
+        Player nearest = null;
+        {
+            double bestDistSq = 64.0 * 64.0;
+            for (Player candidate : level().getEntitiesOfClass(Player.class,
+                    new net.minecraft.world.phys.AABB(blockPosition()).inflate(64.0))) {
+                if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(candidate)) continue;
+                double d = distanceToSqr(candidate);
+                if (d < bestDistSq) { bestDistSq = d; nearest = candidate; }
+            }
+        }
         if (nearest != null) setTarget(nearest);
 
         int phaseMul = phase3 ? 2 : (phase2 ? 1 : 1); // not used as multiplier; we manually shorten cd in p3
@@ -259,6 +272,32 @@ public class BloodWardenBossEntity extends Monster {
             p.push(dir.x * 1.6, 0.5, dir.z * 1.6);
             p.hurtMarked = true;
             p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 2));
+
+            // v0.1.22: rajada destrói 50% da durabilidade restante de cada peça
+            // de armor do player. User pediu: "rajada super sonica diminua a
+            // armadura em 50%". Não quebra a armor (clamp 1 dano mínimo) — só
+            // chega perto da quebra. Player tem que reparar/trocar depois.
+            damageArmor(p);
+        }
+    }
+
+    /**
+     * v0.1.22: corrompe 50% da durabilidade RESTANTE de cada peça de armor
+     * (helmet, chest, legs, boots) ao receber o sonic boom. Não quebra
+     * imediatamente — deixa pelo menos 1 dur pra a peça continuar usável até
+     * o player reparar.
+     */
+    private void damageArmor(Player p) {
+        for (net.minecraft.world.entity.EquipmentSlot slot : new net.minecraft.world.entity.EquipmentSlot[]{
+                net.minecraft.world.entity.EquipmentSlot.HEAD,
+                net.minecraft.world.entity.EquipmentSlot.CHEST,
+                net.minecraft.world.entity.EquipmentSlot.LEGS,
+                net.minecraft.world.entity.EquipmentSlot.FEET}) {
+            net.minecraft.world.item.ItemStack stack = p.getItemBySlot(slot);
+            if (stack.isEmpty() || !stack.isDamageableItem()) continue;
+            int remaining = stack.getMaxDamage() - stack.getDamageValue();
+            int penalty = Math.max(1, remaining / 2); // 50% da dur restante, mínimo 1
+            stack.hurtAndBreak(penalty, p, pl -> pl.broadcastBreakEvent(slot));
         }
     }
 

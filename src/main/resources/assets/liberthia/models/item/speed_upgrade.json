@@ -1,1 +1,7 @@
-{ "parent": "item/generated", "textures": { "layer0": "liberthia:item/speed_upgrade" } }
+{
+  "_comment": "Speed Upgrade — textura propria 16x16 (relampago vermelho em placa metalica).",
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "liberthia:item/speed_upgrade"
+  }
+}

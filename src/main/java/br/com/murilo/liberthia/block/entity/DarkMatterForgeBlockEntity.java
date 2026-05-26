@@ -232,9 +232,9 @@ public class DarkMatterForgeBlockEntity extends BlockEntity implements MenuProvi
         if (input1.is(ModItems.STABILIZED_DARK_MATTER.get()) && input2.is(ModItems.VOID_CRYSTAL.get())) {
             return new ItemStack(ModItems.SINGULARITY_CORE.get());
         }
-        // Dark Matter Block + Holy Essence -> Purified Essence
-        // Holy Essence purifies the dark matter's hostile energy
-        if (input1.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem()) && input2.is(ModItems.HOLY_ESSENCE.get())) {
+        // Dark Matter Block + Purified Essence -> 2x Purified Essence
+        // Loop de purificação: pequena escala já purificada amplifica em massa
+        if (input1.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem()) && input2.is(ModItems.PURIFIED_ESSENCE.get())) {
             return new ItemStack(ModItems.PURIFIED_ESSENCE.get(), 2);
         }
         return ItemStack.EMPTY;
@@ -314,6 +314,6 @@ public class DarkMatterForgeBlockEntity extends BlockEntity implements MenuProvi
                 || stack.is(ModItems.STABILIZED_DARK_MATTER.get())
                 || stack.is(ModItems.VOID_CRYSTAL.get())
                 || stack.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem())
-                || stack.is(ModItems.HOLY_ESSENCE.get());
+                || stack.is(ModItems.PURIFIED_ESSENCE.get());
     }
 }

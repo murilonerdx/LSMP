@@ -1,1 +1,7 @@
-{ "parent": "item/generated", "textures": { "layer0": "liberthia:item/efficiency_upgrade" } }
+{
+  "_comment": "Efficiency Upgrade — textura propria 16x16 (engrenagem ciano em placa metalica).",
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "liberthia:item/efficiency_upgrade"
+  }
+}

@@ -21,6 +21,8 @@ public class ModEntityEvents {
         event.put(ModEntities.CORRUPTED_ZOMBIE.get(), CorruptedZombieEntity.createAttributes().build());
         event.put(ModEntities.SPORE_SPITTER.get(), SporeSpitterEntity.createAttributes().build());
         event.put(ModEntities.CLONE_PLAYER.get(), br.com.murilo.liberthia.entity.ClonePlayerEntity.createAttributes().build());
+        // r24: SoulBody usa as mesmas attributes do ClonePlayer (extends)
+        event.put(ModEntities.SOUL_BODY.get(), br.com.murilo.liberthia.entity.ClonePlayerEntity.createAttributes().build());
         event.put(ModEntities.DARK_CONSCIOUSNESS.get(), br.com.murilo.liberthia.entity.DarkConsciousnessEntity.createAttributes().build());
         event.put(ModEntities.BLOOD_WORM.get(), br.com.murilo.liberthia.entity.BloodWormEntity.createAttributes().build());
         event.put(ModEntities.FLESH_CRAWLER.get(), br.com.murilo.liberthia.entity.FleshCrawlerEntity.createAttributes().build());
@@ -37,10 +39,50 @@ public class ModEntityEvents {
         event.put(ModEntities.BLOOD_WARDEN.get(), br.com.murilo.liberthia.entity.BloodWardenBossEntity.createAttributes().build());
         event.put(ModEntities.WEAVING_SHADE.get(), br.com.murilo.liberthia.entity.WeavingShadeEntity.createAttributes().build());
         event.put(ModEntities.DISARMER.get(), br.com.murilo.liberthia.entity.DisarmerEntity.createAttributes().build());
+        // r33: Loom dimension entities
+        event.put(ModEntities.LOOM_WATCHER.get(),
+                br.com.murilo.liberthia.loom.entity.WatcherStalkerEntity.createAttributes().build());
+        event.put(ModEntities.LOOM_PERIPHERAL.get(),
+                br.com.murilo.liberthia.loom.entity.PeripheralObserverEntity.createAttributes().build());
+        event.put(ModEntities.LOOM_SCREAMER.get(),
+                br.com.murilo.liberthia.loom.entity.ScreamerTeleporterEntity.createAttributes().build());
+        event.put(ModEntities.LOOM_WORM.get(),
+                br.com.murilo.liberthia.loom.entity.DimensionalWormEntity.createAttributes().build());
+        // r48: Reflection Entity
+        event.put(ModEntities.REFLECTION_ENTITY.get(),
+                br.com.murilo.liberthia.cosmic.observatory.ReflectionEntity.createAttributes().build());
+        // r74: Bookwyrm Familiar
+        event.put(ModEntities.BOOKWYRM.get(),
+                br.com.murilo.liberthia.observation.entity.BookwyrmEntity.createAttributes().build());
+        // r81: Horror Framework entities
+        event.put(ModEntities.EMPTY_MAN.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.EmptyManEntity.createAttributes().build());
+        event.put(ModEntities.OBSERVER.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity.createAttributes().build());
+        event.put(ModEntities.ABSENCE.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.AbsenceEntity.createAttributes().build());
+        event.put(ModEntities.REMEMBERED.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.RememberedEntity.createAttributes().build());
     }
 
     @SubscribeEvent
     public static void onSpawnPlacements(SpawnPlacementRegisterEvent event) {
+        // r34: LOOM entities — spawn em ON_GROUND com rules sem light-level (Loom é dark)
+        event.register(ModEntities.LOOM_WATCHER.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty()
+                        != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.LOOM_PERIPHERAL.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty()
+                        != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.LOOM_SCREAMER.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty()
+                        != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
         event.register(ModEntities.BLOOD_CULTIST.get(),
                 SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
@@ -56,5 +98,42 @@ public class ModEntityEvents {
         event.register(ModEntities.BLOOD_HOUND.get(),
                 SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Mob::checkMobSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+
+        // ════════════════════════════════════════════════════════════════════
+        // r68: SPIRIT WORLD entities — placements pra biome spawner funcionar
+        // Sem isso, o mob aparece em ModEntities mas a biome NUNCA spawna eles.
+        // ════════════════════════════════════════════════════════════════════
+        event.register(ModEntities.WEAVING_SHADE.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                // Spirit world não tem luz solar normal — sem checagem de light level
+                (type, level, spawnType, pos, rand) -> level.getDifficulty()
+                        != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.DARK_CONSCIOUSNESS.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty()
+                        != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.DISARMER.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+
+        // r81: Horror Framework entities — spawn placements (mostly summon-only)
+        event.register(ModEntities.EMPTY_MAN.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty() != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.OBSERVER.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty() != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.ABSENCE.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty() != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.REMEMBERED.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty() != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
     }
 }

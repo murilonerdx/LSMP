@@ -53,17 +53,11 @@ public class ItemExtractorBlock extends ItemPipeBlock {
                 break;
             }
         }
+        // v0.1.31: removidas as mensagens auto-config (chat). User reclamou:
+        // "tire isso essa mensagem ele já vai estar configurado não precisa".
+        // Auto-config silencioso — placer não precisa ler nada.
         if (extractFace != null) {
             pipe.setMode(extractFace, ItemPipeBlockEntity.Mode.EXTRACT);
-            if (placer instanceof Player p) {
-                p.displayClientMessage(Component.literal(
-                        "→ Extrator pulando do inventário em " + extractFace.getName().toUpperCase())
-                        .withStyle(ChatFormatting.GOLD), false);
-            }
-        } else if (placer instanceof Player p) {
-            p.displayClientMessage(Component.literal(
-                    "⚠ Extrator colocado sem inventário vizinho — coloque encostado num baú/máquina")
-                    .withStyle(ChatFormatting.YELLOW), false);
         }
     }
 
@@ -76,6 +70,15 @@ public class ItemExtractorBlock extends ItemPipeBlock {
 
         Direction face = hit.getDirection();
         ItemStack held = player.getItemInHand(hand);
+
+        // v0.1.40: user decidiu que filter é EXCLUSIVO do Item Pipe normal.
+        // Em extractor/inserter, mostra mensagem e bloqueia (não abre GUI).
+        if (held.getItem() instanceof br.com.murilo.liberthia.item.PipeFilterNotItem
+                || held.getItem() instanceof br.com.murilo.liberthia.item.PipeFilterItem) {
+            player.displayClientMessage(Component.literal(
+                    "§e⚠ Filtro é compatível apenas com Item Pipe (não Extractor/Inserter)"), true);
+            return InteractionResult.CONSUME;
+        }
 
         // SHIFT + mão vazia → muda a face de extração pra essa.
         if (player.isShiftKeyDown() && held.isEmpty()) {

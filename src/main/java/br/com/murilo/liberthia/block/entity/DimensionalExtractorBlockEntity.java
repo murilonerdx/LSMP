@@ -165,6 +165,26 @@ public class DimensionalExtractorBlockEntity extends BlockEntity implements Menu
                     sl.sendParticles(ParticleTypes.SOUL_FIRE_FLAME,
                             pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5,
                             20, 0.3, 0.3, 0.3, 0.05);
+
+                    // Cada balde produzido consome 1 ponto da capacidade do rift
+                    // mais próximo. Quando chega a 0, RiftSavedData remove o rift
+                    // automaticamente, e o compass vai apontar pro próximo.
+                    var rifts = br.com.murilo.liberthia.world.RiftSavedData.get(sl);
+                    BlockPos nearestRift = rifts.findNearest(pos);
+                    if (nearestRift != null) {
+                        int remaining = rifts.consumeCapacity(nearestRift);
+                        if (remaining == 0) {
+                            // Rift se esgotou — efeito visual + reescaneio forçado
+                            sl.sendParticles(ParticleTypes.LARGE_SMOKE,
+                                    nearestRift.getX() + 0.5,
+                                    nearestRift.getY() + 1.0,
+                                    nearestRift.getZ() + 0.5,
+                                    40, 1, 1, 1, 0.05);
+                            // Força reescaneio no próximo tick (procura novo rift)
+                            be.nearbyCount = 0;
+                            be.riftDistance = 0;
+                        }
+                    }
                 }
             }
             be.setChanged();

@@ -104,9 +104,8 @@ public final class ProtectionUtils {
             level.setBlockAndUpdate(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
         } else if (state.is(ModBlocks.CORRUPTED_LOG.get())) {
             level.setBlockAndUpdate(pos, ModBlocks.SCARRED_STONE.get().defaultBlockState());
-        } else if (state.is(ModBlocks.GLITCH_BLOCK.get())) {
-            level.setBlockAndUpdate(pos, net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
         }
+        // REMOVIDO v0.1.13: GLITCH_BLOCK
     }
 
     /**

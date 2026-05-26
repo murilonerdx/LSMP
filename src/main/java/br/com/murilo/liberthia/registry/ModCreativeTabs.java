@@ -41,7 +41,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.WHITE_MATTER_ORE_ITEM.get());
                         output.accept(ModItems.INFECTION_GROWTH_ITEM.get());
                         output.accept(ModItems.PURIFICATION_BENCH_ITEM.get());
-                        output.accept(ModItems.WHITE_MATTER_BOMB_ITEM.get());
+                        // REMOVIDO v0.1.13: WHITE_MATTER_BOMB_ITEM
                         output.accept(ModItems.PURITY_BEACON_ITEM.get());
 
                         // --- Workbenches ---
@@ -81,7 +81,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.BATTERY_BASIC_ITEM.get());
                         output.accept(ModItems.BATTERY_ADVANCED_ITEM.get());
                         output.accept(ModItems.BATTERY_QUANTUM_ITEM.get());
-                        output.accept(ModItems.LIBERTHIA_WRENCH.get());
+                        // REMOVIDO v0.1.13: LIBERTHIA_WRENCH
                         output.accept(ModItems.PYLON_REMOTE.get());
                         output.accept(ModItems.DARK_MATTER_CELL.get());
                         output.accept(ModItems.WIRELESS_CHARGER_ITEM.get());
@@ -94,16 +94,23 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.DARK_MATTER_BUCKET.get());
                         output.accept(ModItems.DARK_MATTER_SHARD.get());
                         output.accept(ModItems.YELLOW_MATTER_INGOT.get());
-                        output.accept(ModItems.HOLY_ESSENCE.get());
+                        // v0.1.52: ingots de DM e CM (matching o YM)
+                        output.accept(ModItems.DARK_MATTER_INGOT.get());
+                        output.accept(ModItems.CLEAR_MATTER_INGOT.get());
+                        // v0.1.22: Selo de Passagem — protege contra mobs/blocos hostis de sangue
+                        output.accept(ModItems.PASSAGE_SIGIL.get());
+                        // v0.1.22: Coroa do Boss — item OP toggleável (HP 1800, aura, gaze, reflect)
+                        output.accept(ModItems.BOSS_CROWN.get());
                         // --- Ferramentas ---
-                        output.accept(ModItems.CLEANSING_GRENADE.get());
+                        // REMOVIDO v0.1.13: CLEANSING_GRENADE
                         output.accept(ModItems.GEIGER_COUNTER.get());
                         output.accept(ModItems.CLEAR_MATTER_INJECTOR.get());
                         output.accept(ModItems.CLEAR_MATTER_PILL.get());
-                        output.accept(ModItems.CLEAR_MATTER_SHIELD.get());
-                        output.accept(ModItems.WHITE_LIGHT_WAND.get());
-                        output.accept(ModItems.WHITE_MATTER_FINDER.get());
-                        output.accept(ModItems.SAFE_SIPHON.get());
+                        // v0.1.49: pílulas dedicadas por matter (purgam só o tipo)
+                        output.accept(ModItems.DARK_MATTER_PILL.get());
+                        output.accept(ModItems.YELLOW_MATTER_PILL.get());
+                        output.accept(ModItems.MATTER_CURE.get());
+                        output.accept(ModItems.DAILY_PILL.get());
                         // --- Armadura Yellow ---
                         output.accept(ModItems.YELLOW_MATTER_HELMET.get());
                         output.accept(ModItems.YELLOW_MATTER_CHESTPLATE.get());
@@ -138,8 +145,28 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.SPORE_BLOOM_ITEM.get());
                         output.accept(ModItems.CORRUPTED_LOG_ITEM.get());
                         output.accept(ModItems.WHITE_MATTER_TNT_ITEM.get());
-                        output.accept(ModItems.GLITCH_BLOCK_ITEM.get());
+                        // REMOVIDO v0.1.13: GLITCH_BLOCK_ITEM
                         output.accept(ModItems.WORMHOLE_BLOCK_ITEM.get());
+
+                        // --- Infected Variant Blocks (v0.1.13) ---
+                        output.accept(ModItems.DM_INFECTED_DIRT_ITEM.get());
+                        output.accept(ModItems.DM_INFECTED_SAND_ITEM.get());
+                        output.accept(ModItems.DM_INFECTED_STONE_ITEM.get());
+                        output.accept(ModItems.DM_INFECTED_GRASS_ITEM.get());
+                        output.accept(ModItems.WM_BLEACHED_DIRT_ITEM.get());
+                        output.accept(ModItems.WM_BLEACHED_SAND_ITEM.get());
+                        output.accept(ModItems.WM_BLEACHED_STONE_ITEM.get());
+                        output.accept(ModItems.WM_BLEACHED_GRASS_ITEM.get());
+                        output.accept(ModItems.YM_UNSTABLE_DIRT_ITEM.get());
+                        output.accept(ModItems.YM_UNSTABLE_SAND_ITEM.get());
+                        output.accept(ModItems.YM_UNSTABLE_STONE_ITEM.get());
+                        output.accept(ModItems.YM_UNSTABLE_GRASS_ITEM.get());
+
+                        // --- Pendant cosmético (v0.1.13) ---
+                        output.accept(ModItems.WHITE_MATTER_PENDANT.get());
+                        // --- Refined Containment Artifacts (v0.1.30) ---
+                        output.accept(ModItems.REFINED_CONTAINMENT_PENDANT.get());
+                        output.accept(ModItems.REFINED_CONTAINMENT_GLOVE.get());
                         // --- Buckets ---
                         output.accept(ModItems.DARK_MATTER_BUCKET.get());
                         output.accept(ModItems.CLEAR_MATTER_BUCKET.get());
@@ -335,6 +362,18 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.SANGUINE_PRESSURE_PLATE_ITEM.get());
                         output.accept(ModItems.SANGUINE_DOOR_ITEM.get());
                         output.accept(ModItems.SANGUINE_TRAPDOOR_ITEM.get());
+                        // --- Blood Tree set ---
+                        output.accept(ModItems.BLOOD_LOG_ITEM.get());
+                        output.accept(ModItems.STRIPPED_BLOOD_LOG_ITEM.get());
+                        output.accept(ModItems.BLOOD_PLANKS_ITEM.get());
+                        output.accept(ModItems.BLOOD_LEAVES_ITEM.get());
+                        output.accept(ModItems.BLOOD_SAPLING_ITEM.get());
+                        output.accept(ModItems.BLOOD_STAIRS_ITEM.get());
+                        output.accept(ModItems.BLOOD_SLAB_ITEM.get());
+                        output.accept(ModItems.BLOOD_FENCE_ITEM.get());
+                        output.accept(ModItems.BLOOD_FENCE_GATE_ITEM.get());
+                        output.accept(ModItems.BLOOD_DOOR_ITEM.get());
+                        output.accept(ModItems.BLOOD_TRAPDOOR_ITEM.get());
                         // --- Possessed spawn eggs ---
                         output.accept(ModItems.POSSESSED_ZOMBIE_EGG.get());
                         output.accept(ModItems.POSSESSED_SKELETON_EGG.get());
@@ -346,6 +385,29 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.BLOOD_WARDEN_EGG.get());
                         output.accept(ModItems.WEAVING_SHADE_EGG.get());
                         output.accept(ModItems.DISARMER_EGG.get());
+                        // Pipe utilities
+                        output.accept(ModItems.PIPE_FILTER.get());
+                        output.accept(ModItems.PIPE_FILTER_NOT.get());
+                        // Decoração — pelúcia
+                        output.accept(ModBlocks.HOST_PLUSH.get());
+                        // Matter Extraction Network — extractor central + tanks + 3 pipes
+                        output.accept(ModBlocks.MATTER_EXTRACTOR.get());
+                        output.accept(ModBlocks.MATTER_TANK.get());
+                        output.accept(ModBlocks.MATTER_PIPE_DARK.get());
+                        output.accept(ModBlocks.MATTER_PIPE_CLEAR.get());
+                        output.accept(ModBlocks.MATTER_PIPE_YELLOW.get());
+
+                        // Matter Purifier + ingots purificados + dark matter armor
+                        output.accept(ModBlocks.MATTER_PURIFIER.get());
+                        // v0.1.44: Matter Pill Brewer — alquimia de pílulas
+                        output.accept(ModBlocks.MATTER_PILL_BREWER.get());
+                        output.accept(ModItems.PURIFIED_DARK_MATTER_INGOT.get());
+                        output.accept(ModItems.PURIFIED_CLEAR_MATTER_INGOT.get());
+                        output.accept(ModItems.PURIFIED_YELLOW_MATTER_INGOT.get());
+                        output.accept(ModItems.DARK_MATTER_HELMET.get());
+                        output.accept(ModItems.DARK_MATTER_CHESTPLATE.get());
+                        output.accept(ModItems.DARK_MATTER_LEGGINGS.get());
+                        output.accept(ModItems.DARK_MATTER_BOOTS.get());
 
                         output.accept(ModItems.BONE_SEAL.get());
                         output.accept(ModItems.GOLD_SEAL.get());
@@ -355,6 +417,361 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.IMAGE_FRAME_BOOK.get());
                         output.accept(ModItems.IMAGE_FRAME_BOOK_BUILDER.get());
                         output.accept(ModItems.RED_KIRIKO_BOOK.get());
+
+                        // --- v1: Matter Pendants ---
+                        output.accept(ModItems.DARK_MATTER_PENDANT.get());
+                        output.accept(ModItems.CLEAR_MATTER_PENDANT.get());
+                        output.accept(ModItems.YELLOW_MATTER_PENDANT.get());
+                        // --- v1: Astaron Relics ---
+                        output.accept(ModItems.RELIQUIA_PROTECAO_ASTARON.get());
+                        output.accept(ModItems.ASTARON_ACCESS_KEY.get());
+                        output.accept(ModItems.PES_QUEIMANTES_ASTARON.get());
+                        output.accept(ModItems.FLAME_KEY.get());
+                        // --- v1: Mercurial Boots ---
+                        output.accept(ModItems.BOTAS_MERCURIAIS.get());
+                        // --- v1: Vision Swap Lens ---
+                        output.accept(ModItems.VISION_SWAP_LENS.get());
+                        // --- v1: Possession Amulet (raro/admin) ---
+                        output.accept(ModItems.POSSESSION_AMULET.get());
+                        // --- v0.1.22 r22: Mind Ward (antídoto ao Amulet) ---
+                        output.accept(ModItems.MIND_WARD.get());
+                        // --- v0.1.22 r23: COSMIC HORROR (5 itens de loucura) ---
+                        output.accept(ModItems.MADNESS_AURA.get());
+                        output.accept(ModItems.MADDENING_GAZE.get());
+                        output.accept(ModItems.MASS_POSSESSION_CROWN.get());
+                        output.accept(ModItems.MIRROR_OF_INSANITY.get());
+                        output.accept(ModItems.SOUL_CLONER.get());
+                        // --- v0.1.22 r24: SPIRIT WORLD ---
+                        output.accept(ModItems.SOUL_SEVER.get());
+                        output.accept(ModItems.SPIRIT_ALTAR_ITEM.get());
+                        output.accept(ModItems.SPIRIT_STONE_ITEM.get());
+                        // --- v0.1.22 r27: DIMENSIONAL ANTENNA ---
+                        output.accept(ModItems.DIMENSIONAL_ANTENNA_ITEM.get());
+                        // --- v0.1.22 r28: QUANTUM TERMINAL ---
+                        output.accept(ModItems.QUANTUM_TERMINAL_ITEM.get());
+                        // --- v0.1.35: Pulso (sonic boom artifact) ---
+                        output.accept(ModItems.PULSO.get());
+                        // --- v0.1.22 r29: SPIRIT WORLD BLOCKS (12) ---
+                        output.accept(ModItems.SPIRIT_GRASS_BLOCK_ITEM.get());
+                        output.accept(ModItems.SPIRIT_DIRT_ITEM.get());
+                        output.accept(ModItems.ETHEREAL_STONE_ITEM.get());
+                        output.accept(ModItems.ETHEREAL_STONE_BRICKS_ITEM.get());
+                        output.accept(ModItems.SOUL_BRICK_ITEM.get());
+                        output.accept(ModItems.HALO_MARBLE_ITEM.get());
+                        output.accept(ModItems.HALO_MARBLE_BRICKS_ITEM.get());
+                        output.accept(ModItems.DREAM_GLASS_ITEM.get());
+                        output.accept(ModItems.WHISPERWOOD_LOG_ITEM.get());
+                        output.accept(ModItems.WHISPERWOOD_PLANKS_ITEM.get());
+                        output.accept(ModItems.WHISPERWOOD_LEAVES_ITEM.get());
+                        output.accept(ModItems.ASTRAL_LANTERN_ITEM.get());
+                        output.accept(ModItems.CRYSTAL_SPIRIT_ORE_ITEM.get());
+                        output.accept(ModItems.SANCTUM_WARD_ITEM.get());
+                        output.accept(ModItems.HOLY_CENSER_ITEM.get());
+                        // --- v0.1.22 r29: COSMIC HORROR ITEMS (8) ---
+                        output.accept(ModItems.WHISPERING_VEIL.get());
+                        output.accept(ModItems.EYES_OF_ABYSS.get());
+                        output.accept(ModItems.CURSED_CRADLE.get());
+                        output.accept(ModItems.PENDULUM_OF_DREAD.get());
+                        output.accept(ModItems.LANTERN_OF_FALSE_MEMORY.get());
+                        output.accept(ModItems.TONGUE_OF_OLD_ONES.get());
+                        output.accept(ModItems.HOURGLASS_OF_REGRESSION.get());
+                        output.accept(ModItems.VOID_SEER_ORB.get());
+                        // --- v0.1.22 r29: ANGEL / SPIRIT MAGIC (12) ---
+                        output.accept(ModItems.HALO_OF_LIGHT.get());
+                        output.accept(ModItems.WINGS_OF_ASCENSION.get());
+                        output.accept(ModItems.ANGEL_TEAR_AMULET.get());
+                        output.accept(ModItems.SPIRIT_ANCHOR.get());
+                        output.accept(ModItems.CHOIR_BELL.get());
+                        output.accept(ModItems.DIVINE_SMITE_ROD.get());
+                        output.accept(ModItems.SOUL_MIRROR.get());
+                        output.accept(ModItems.SPIRIT_COMPASS.get());
+                        output.accept(ModItems.HOLY_WATER_BUCKET.get());
+                        output.accept(ModItems.ANGEL_WING_FEATHER.get());
+                        output.accept(ModItems.SERAPH_BLADE.get());
+                        output.accept(ModItems.PRAYER_BOOK.get());
+                        // --- v0.1.22 r32: OCCULT RITUAL SYSTEM ---
+                        // Chalks
+                        output.accept(ModItems.CHALK_WHITE.get());
+                        output.accept(ModItems.CHALK_GOLDEN.get());
+                        output.accept(ModItems.CHALK_PURPLE.get());
+                        output.accept(ModItems.CHALK_RED.get());
+                        output.accept(ModItems.CHALK_BLACK.get());
+                        // Candles
+                        output.accept(ModItems.CANDLE_WHITE_OCCULT_ITEM.get());
+                        output.accept(ModItems.CANDLE_GOLDEN_OCCULT_ITEM.get());
+                        output.accept(ModItems.CANDLE_PURPLE_OCCULT_ITEM.get());
+                        output.accept(ModItems.CANDLE_RED_OCCULT_ITEM.get());
+                        output.accept(ModItems.CANDLE_BLACK_OCCULT_ITEM.get());
+                        // Tools
+                        output.accept(ModItems.LIGHTER.get());
+                        output.accept(ModItems.RITUAL_DAGGER.get());
+                        output.accept(ModItems.RITUAL_CHALICE.get());
+                        // Blocks
+                        output.accept(ModItems.RITUAL_CIRCLE_ITEM.get());
+                        output.accept(ModItems.SPIRIT_MINER_ITEM.get());
+                        // Sigils (10)
+                        output.accept(ModItems.SIGIL_FOLIOT.get());
+                        output.accept(ModItems.SIGIL_DJINNI.get());
+                        output.accept(ModItems.SIGIL_AFRIT.get());
+                        output.accept(ModItems.SIGIL_BAEL.get());
+                        output.accept(ModItems.SIGIL_LUCIFER.get());
+                        output.accept(ModItems.SIGIL_SANDALPHON.get());
+                        output.accept(ModItems.SIGIL_METATRON.get());
+                        output.accept(ModItems.SIGIL_NECRO.get());
+                        output.accept(ModItems.SIGIL_BANISHING.get());
+                        output.accept(ModItems.SIGIL_DIMENSIONAL.get());
+                        // Bound crystals
+                        output.accept(ModItems.BOUND_FOLIOT_CRYSTAL.get());
+                        output.accept(ModItems.BOUND_DJINNI_CRYSTAL.get());
+                        output.accept(ModItems.BOUND_AFRIT_CRYSTAL.get());
+                        // --- v0.1.22 r33: LOOM DIMENSION ---
+                        output.accept(ModItems.DARK_MATTER_LASER.get());
+                        output.accept(ModItems.LOOM_WATCHER_EGG.get());
+                        output.accept(ModItems.LOOM_PERIPHERAL_EGG.get());
+                        output.accept(ModItems.LOOM_SCREAMER_EGG.get());
+                        output.accept(ModItems.SKY_TEAR_HORN.get());
+                        // r35: COSMIC HORROR SYSTEM trigger
+                        output.accept(ModItems.FORBIDDEN_TOME.get());
+                        // r36: Grimório de feitiços aprendidos
+                        output.accept(ModItems.GRIMOIRE.get());
+                        // r40: Creative Grimoire — todos feitiços + mana infinita
+                        output.accept(ModItems.CREATIVE_GRIMOIRE.get());
+                        // r42: Spell Crafting Table portátil
+                        output.accept(ModItems.SPELL_CRAFTING_TABLE.get());
+                        // r45: Cosmic Horror Expansion items
+                        output.accept(ModItems.CURSED_EFFIGY.get());
+                        output.accept(ModItems.WATCHER_MARK.get());
+                        output.accept(ModItems.PHANTOM_CALLER.get());
+                        output.accept(ModItems.VULTO_LENS.get());
+                        output.accept(ModItems.INSANITY_CROWN.get());
+                        output.accept(ModItems.TENDRIL_SIGIL.get());
+                        output.accept(ModItems.VOICE_CURSE_AMULET.get());
+                        output.accept(ModItems.SILENT_WITNESS_CLOAK.get());
+                        // r46: Eldritch Artifacts (10 items cosmic horror profundo)
+                        output.accept(ModItems.WATCHING_EYE.get());
+                        output.accept(ModItems.BLACK_SIGNAL_RADIO.get());
+                        output.accept(ModItems.HOLLOW_MASK.get());
+                        output.accept(ModItems.FLESH_LANTERN.get());
+                        output.accept(ModItems.FALSE_TOTEM.get());
+                        output.accept(ModItems.INFECTION_NEEDLE.get());
+                        output.accept(ModItems.BOOK_IMPOSSIBLE.get());
+                        output.accept(ModItems.MIMIC_HEART.get());
+                        output.accept(ModItems.RED_TAPE.get());
+                        output.accept(ModItems.NULL_BELL.get());
+                        // r47: Living Server Artifacts (4 originais)
+                        output.accept(ModItems.GEOMETRY_KEY.get());
+                        output.accept(ModItems.LOW_SIGNAL.get());
+                        output.accept(ModItems.PALE_THREAD.get());
+                        output.accept(ModItems.MIRROR_FRUIT.get());
+                        // r48: Reflection Seed (admin artifact)
+                        output.accept(ModItems.REFLECTION_SEED.get());
+                        // r50: Caretaker Console (GUI tool)
+                        output.accept(ModItems.CARETAKER_CONSOLE.get());
+                        // r51: 10 Admin Cosmic Artifacts
+                        output.accept(ModItems.BLACK_VEIL.get());
+                        output.accept(ModItems.TENDRIL_CROWN.get());
+                        output.accept(ModItems.FALSE_SUN.get());
+                        output.accept(ModItems.MIRROR_PULSE.get());
+                        output.accept(ModItems.SILENT_BELL.get());
+                        output.accept(ModItems.OPEN_EYE.get());
+                        output.accept(ModItems.THREAD_OF_DISTANCE.get());
+                        output.accept(ModItems.FLESH_SIGNAL.get());
+                        output.accept(ModItems.DEEP_WATER.get());
+                        output.accept(ModItems.AUDIENCE_MARK.get());
+                        // r54: items que foram esquecidos do tab
+                        output.accept(ModItems.MAGIC_BOOK.get());
+                        output.accept(ModItems.RIFTITE_ORE_ITEM.get());
+                        output.accept(ModItems.RIFTITE_SHARD.get());
+                        output.accept(ModItems.UMBRAL_ORE_ITEM.get());
+                        output.accept(ModItems.UMBRAL_SHARD.get());
+                        output.accept(ModItems.VOIDITE_ORE_ITEM.get());
+                        output.accept(ModItems.VOIDITE_SHARD.get());
+                        output.accept(ModItems.LOOM_STONE_ITEM.get());
+                        output.accept(ModItems.SPIRITUAL_LINK.get());
+                        output.accept(ModItems.SPIRITUAL_CONNECTION.get());
+                        // r55: PALE WATCH ARTIFACTS
+                        output.accept(ModItems.CLONE_ARMY.get());
+                        output.accept(ModItems.STAREDOWN_PENDANT.get());
+                        output.accept(ModItems.PALE_BLINK_PENDANT.get());
+                        output.accept(ModItems.PARALYZE_PENDANT.get());
+                        output.accept(ModItems.SPIRIT_GUIDE.get());
+                        output.accept(ModItems.PALE_IRON_INGOT.get());
+                        output.accept(ModItems.SOULSTEEL_INGOT.get());
+                        output.accept(ModItems.RIFT_CRYSTAL.get());
+
+                        // r56: 15 cryptic cosmic artifacts
+                        output.accept(ModItems.PULLED_STRING.get());
+                        output.accept(ModItems.QUIET_MARK.get());
+                        output.accept(ModItems.LONELY_ECHO.get());
+                        output.accept(ModItems.FOLDED_DISTANCE.get());
+                        output.accept(ModItems.THROAT_SALT.get());
+                        output.accept(ModItems.SOFT_WOUND.get());
+                        output.accept(ModItems.LOOKING_GLASS.get());
+                        output.accept(ModItems.HALF_STEP.get());
+                        output.accept(ModItems.BENT_IRON.get());
+                        output.accept(ModItems.PALE_COIN.get());
+                        output.accept(ModItems.WET_BELL.get());
+                        output.accept(ModItems.MARROW_WHISTLE.get());
+                        output.accept(ModItems.LISTENING_GLASS.get());
+                        output.accept(ModItems.SUNKEN_RING.get());
+                        output.accept(ModItems.HAND_ON_GLASS.get());
+
+                        // r56: EXODUS BOOK
+                        output.accept(ModItems.EXODUS_BOOK.get());
+
+                        // r61: OBSERVATION CASTING ITEMS
+                        output.accept(ModItems.SPELLSWORD.get());
+                        output.accept(ModItems.SOURCE_GEM.get());
+
+                        // r62: Observation Tome + Source Jar
+                        output.accept(ModItems.OBSERVATION_TOME.get());
+                        output.accept(ModItems.SOURCE_JAR_ITEM.get());
+
+                        // r64: Grimório de Observação
+                        output.accept(ModItems.GRIMOIRE_OF_OBSERVATION.get());
+
+                        // r68: Spell Parchment + 23 Glyph items
+                        output.accept(ModItems.SPELL_PARCHMENT.get());
+                        // r69: Scribes Table block (mesa de craft)
+                        output.accept(ModItems.SCRIBES_TABLE_ITEM.get());
+                        // Methods (azuis)
+                        output.accept(ModItems.GLYPH_DIRECT_GAZE.get());
+                        output.accept(ModItems.GLYPH_WATCH_PERIPHERAL.get());
+                        output.accept(ModItems.GLYPH_WATCH_MEMORY.get());
+                        output.accept(ModItems.GLYPH_WATCH_SILENCE.get());
+                        output.accept(ModItems.GLYPH_WATCH_REFLECTION.get());
+                        output.accept(ModItems.GLYPH_METHOD_TOUCH.get());
+                        output.accept(ModItems.GLYPH_METHOD_SELF.get());
+                        // Manifestations (roxas)
+                        output.accept(ModItems.GLYPH_TENDRIL.get());
+                        output.accept(ModItems.GLYPH_MANIFEST_SILENCE.get());
+                        output.accept(ModItems.GLYPH_MANIFEST_MIRROR.get());
+                        output.accept(ModItems.GLYPH_MANIFEST_WHISPER.get());
+                        output.accept(ModItems.GLYPH_MANIFEST_DECAY.get());
+                        output.accept(ModItems.GLYPH_MANIFEST_GLIMPSE.get());
+                        output.accept(ModItems.GLYPH_EFFECT_IGNITE.get());
+                        output.accept(ModItems.GLYPH_EFFECT_HARM.get());
+                        output.accept(ModItems.GLYPH_EFFECT_HEAL.get());
+                        output.accept(ModItems.GLYPH_EFFECT_FREEZE.get());
+                        output.accept(ModItems.GLYPH_EFFECT_LAUNCH.get());
+                        output.accept(ModItems.GLYPH_EFFECT_SLOWFALL.get());
+                        // Distortions (amarelos)
+                        output.accept(ModItems.GLYPH_AMPLIFY.get());
+                        output.accept(ModItems.GLYPH_LINGER.get());
+                        output.accept(ModItems.GLYPH_ECHO.get());
+                        output.accept(ModItems.GLYPH_SECRET.get());
+                        // r70: 12 novos glyphs portados AN
+                        output.accept(ModItems.GLYPH_METHOD_LASER.get());
+                        output.accept(ModItems.GLYPH_METHOD_BURST.get());
+                        output.accept(ModItems.GLYPH_METHOD_ORBIT.get());
+                        output.accept(ModItems.GLYPH_METHOD_WALL.get());
+                        output.accept(ModItems.GLYPH_METHOD_CHAIN.get());
+                        output.accept(ModItems.GLYPH_EFFECT_LIGHTNING.get());
+                        output.accept(ModItems.GLYPH_EFFECT_GRAVITY.get());
+                        output.accept(ModItems.GLYPH_EFFECT_BLIND.get());
+                        output.accept(ModItems.GLYPH_EFFECT_LEVITATE.get());
+                        output.accept(ModItems.GLYPH_EFFECT_KNOCKBACK.get());
+                        output.accept(ModItems.GLYPH_EFFECT_EXPLOSION.get());
+                        output.accept(ModItems.GLYPH_EFFECT_FANGS.get());
+
+                        // r71: 25 elemental glyphs (5 per class)
+                        // FIRE
+                        output.accept(ModItems.GLYPH_FIREBALL.get());
+                        output.accept(ModItems.GLYPH_INFERNO.get());
+                        output.accept(ModItems.GLYPH_CLEANSING_FLAME.get());
+                        output.accept(ModItems.GLYPH_SOLAR_PULSE.get());
+                        output.accept(ModItems.GLYPH_BURNING_AURA.get());
+                        // WATER
+                        output.accept(ModItems.GLYPH_BUBBLE_SHIELD.get());
+                        output.accept(ModItems.GLYPH_TIDAL_WAVE.get());
+                        output.accept(ModItems.GLYPH_FROST_LANCE.get());
+                        output.accept(ModItems.GLYPH_MIST_VEIL.get());
+                        output.accept(ModItems.GLYPH_HEALING_RAIN.get());
+                        // EARTH
+                        output.accept(ModItems.GLYPH_STONE_SPIKES.get());
+                        output.accept(ModItems.GLYPH_QUAKE_STEP.get());
+                        output.accept(ModItems.GLYPH_VEIN_SIGHT.get());
+                        output.accept(ModItems.GLYPH_EARTHEN_WALL.get());
+                        output.accept(ModItems.GLYPH_ROOTS.get());
+                        // AIR
+                        output.accept(ModItems.GLYPH_GUST.get());
+                        output.accept(ModItems.GLYPH_TORNADO.get());
+                        output.accept(ModItems.GLYPH_SKY_STEP.get());
+                        output.accept(ModItems.GLYPH_VELOCITY.get());
+                        output.accept(ModItems.GLYPH_WIND_CUTTER.get());
+                        // COSMIC
+                        output.accept(ModItems.GLYPH_VOID_PULL.get());
+                        output.accept(ModItems.GLYPH_DREAD_STARE.get());
+                        output.accept(ModItems.GLYPH_MIND_SPIKE.get());
+                        output.accept(ModItems.GLYPH_REALITY_TEAR.get());
+                        output.accept(ModItems.GLYPH_SINGULARITY.get());
+                        // r71: Source upgrade items
+                        output.accept(ModItems.SOURCE_CRYSTAL.get());
+                        output.accept(ModItems.SOURCE_CATALYST.get());
+                        output.accept(ModItems.SOURCE_LENS.get());
+                        output.accept(ModItems.SOUL_FRAGMENT.get());
+
+                        // r72: 10 utility glyphs + 3 augments
+                        output.accept(ModItems.GLYPH_PLACE_BLOCK.get());
+                        output.accept(ModItems.GLYPH_BREAK_BLOCK.get());
+                        output.accept(ModItems.GLYPH_CONJURE_WATER.get());
+                        output.accept(ModItems.GLYPH_LIGHT.get());
+                        output.accept(ModItems.GLYPH_SNARE.get());
+                        output.accept(ModItems.GLYPH_HEX.get());
+                        output.accept(ModItems.GLYPH_PICKUP.get());
+                        output.accept(ModItems.GLYPH_PIERCE.get());
+                        output.accept(ModItems.GLYPH_SPLIT.get());
+                        output.accept(ModItems.GLYPH_AOE.get());
+
+                        // r72: Chalk + Rune block
+                        output.accept(ModItems.OBSERVATION_CHALK.get());
+                        output.accept(ModItems.RUNE_BLOCK_ITEM.get());
+                        // r73: Imbuement Table block
+                        output.accept(ModItems.IMBUEMENT_TABLE_ITEM.get());
+                        // r77: Spell Binding Pedestal
+                        output.accept(ModItems.SPELL_BINDING_PEDESTAL_ITEM.get());
+
+                        // r74: 3 Grimoire tiers
+                        output.accept(ModItems.GRIMOIRE_APPRENTICE.get());
+                        output.accept(ModItems.GRIMOIRE_MASTER.get());
+                        output.accept(ModItems.GRIMOIRE_ARCHMAGE.get());
+                        // r74: Spirit World ores + Mana berries + relay
+                        output.accept(ModItems.SOURCESTONE_ORE_ITEM.get());
+                        output.accept(ModItems.SPIRIT_GEM_ORE_ITEM.get());
+                        output.accept(ModItems.MANA_BERRY_BUSH_ITEM.get());
+                        output.accept(ModItems.MANA_BERRY.get());
+                        output.accept(ModItems.SOURCE_RELAY_ITEM.get());
+                        // r74: Bookwyrm familiar spawn egg
+                        output.accept(ModItems.BOOKWYRM_SPAWN_EGG.get());
+
+                        // r72: 8 Prebuilt Spell Tomes
+                        output.accept(ModItems.TOME_PYROMANCER.get());
+                        output.accept(ModItems.TOME_FROSTBINDER.get());
+                        output.accept(ModItems.TOME_SKYWALKER.get());
+                        output.accept(ModItems.TOME_WEBWEAVER.get());
+                        output.accept(ModItems.TOME_DEATH_BEAM.get());
+                        output.accept(ModItems.TOME_HEALING_LIGHT.get());
+                        output.accept(ModItems.TOME_DASH.get());
+                        output.accept(ModItems.TOME_SINGULARITY.get());
+
+                        // r57: 3 LIMINAL DIMENSION ENTRY KEYS
+                        output.accept(ModItems.DROWNED_COMPASS.get());
+                        output.accept(ModItems.FOLDED_ADDRESS.get());
+                        output.accept(ModItems.BARK_TOKEN.get());
+
+                        // r56: 12 new dimensional ore items
+                        output.accept(ModItems.SOULITE_SHARD.get());
+                        output.accept(ModItems.PALE_CRYSTAL_SHARD.get());
+                        output.accept(ModItems.VEINSTONE_FRAGMENT.get());
+                        output.accept(ModItems.HOLLOW_SILVER_NUGGET.get());
+                        output.accept(ModItems.MOURNING_EMBER.get());
+                        output.accept(ModItems.GHOST_QUARTZ_SHARD.get());
+                        output.accept(ModItems.NULL_IRON_SHARD.get());
+                        output.accept(ModItems.ABYSSIUM_DUST.get());
+                        output.accept(ModItems.BLACK_STAR_CORE.get());
+                        output.accept(ModItems.DISTORTION_CRYSTAL.get());
+                        output.accept(ModItems.VOID_GOLD_NUGGET.get());
+                        output.accept(ModItems.EYE_STONE_SHARD.get());
                     })
                     .build());
 

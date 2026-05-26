@@ -68,9 +68,9 @@ public class VenomGeyserBlock extends Block {
         Vec3 origin = new Vec3(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
         int volleys = 1 + age;
 
-        for (LivingEntity le : level.getEntitiesOfClass(LivingEntity.class, box)) {
-            if (le instanceof Player p && p.isCreative()) continue;
-            if (BloodKin.is(le)) continue;
+        // v0.1.22 r18: pula Sigil/Crown/creative. Ataca outros players normais.
+        for (Player le : level.getEntitiesOfClass(Player.class, box)) {
+            if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(le)) continue;
 
             Vec3 target = new Vec3(le.getX(), le.getY() + le.getBbHeight() * 0.5, le.getZ());
             Vec3 delta = target.subtract(origin);

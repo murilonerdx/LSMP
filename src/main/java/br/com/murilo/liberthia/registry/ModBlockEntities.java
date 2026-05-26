@@ -62,6 +62,18 @@ public final class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(MatterRefinerBlockEntity::new,
                             ModBlocks.MATTER_REFINER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.MatterPurifierBlockEntity>> MATTER_PURIFIER =
+            BLOCK_ENTITIES.register("matter_purifier",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.MatterPurifierBlockEntity::new,
+                            ModBlocks.MATTER_PURIFIER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.MatterPillBrewerBlockEntity>> MATTER_PILL_BREWER =
+            BLOCK_ENTITIES.register("matter_pill_brewer",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.MatterPillBrewerBlockEntity::new,
+                            ModBlocks.MATTER_PILL_BREWER.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.DarkMatterChestBlockEntity>> DARK_MATTER_CHEST = BLOCK_ENTITIES.register("dark_matter_chest",
             () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.DarkMatterChestBlockEntity::new, ModBlocks.DARK_MATTER_CHEST.get()).build(null));
 
@@ -109,6 +121,110 @@ public final class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.GoldenBloodBowlBlockEntity>> GOLDEN_BLOOD_BOWL = BLOCK_ENTITIES.register("golden_blood_bowl",
             () -> BlockEntityType.Builder.of(br.com.murilo.liberthia.block.entity.GoldenBloodBowlBlockEntity::new, ModBlocks.GOLDEN_BLOOD_BOWL.get()).build(null));
+
+    // --- Matter Extraction Network ---
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.MatterExtractorBlockEntity>> MATTER_EXTRACTOR =
+            BLOCK_ENTITIES.register("matter_extractor",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.MatterExtractorBlockEntity::new,
+                            ModBlocks.MATTER_EXTRACTOR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.MatterTankBlockEntity>> MATTER_TANK =
+            BLOCK_ENTITIES.register("matter_tank",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.MatterTankBlockEntity::new,
+                            ModBlocks.MATTER_TANK.get()).build(null));
+
+    /**
+     * 1 BlockEntityType compartilhado entre as 3 variantes de pipe (dark/clear/yellow).
+     * Pode usar o mesmo BE porque ele lê o tipo do bloco via BlockState (allowedFluid
+     * vem do MatterPipeBlock no momento do new). Igual ao pattern do ItemPipe que
+     * compartilha BE com 3 blocos.
+     */
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.MatterPipeBlockEntity>> MATTER_PIPE =
+            BLOCK_ENTITIES.register("matter_pipe",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.MatterPipeBlockEntity::new,
+                            ModBlocks.MATTER_PIPE_DARK.get(),
+                            ModBlocks.MATTER_PIPE_CLEAR.get(),
+                            ModBlocks.MATTER_PIPE_YELLOW.get()).build(null));
+
+    // v0.1.22 r24: Spirit Altar — ritual block (5s animation → Spirit World)
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.SpiritAltarBlockEntity>> SPIRIT_ALTAR =
+            BLOCK_ENTITIES.register("spirit_altar",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.SpiritAltarBlockEntity::new,
+                            ModBlocks.SPIRIT_ALTAR.get()).build(null));
+
+    // v0.1.22 r27: Dimensional Antenna — cross-dim chat broadcast
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.DimensionalAntennaBlockEntity>> DIMENSIONAL_ANTENNA =
+            BLOCK_ENTITIES.register("dimensional_antenna",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.DimensionalAntennaBlockEntity::new,
+                            ModBlocks.DIMENSIONAL_ANTENNA.get()).build(null));
+
+    // v0.1.22 r28: Quantum Terminal — receptor de mensagens cross-dim
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.QuantumTerminalBlockEntity>> QUANTUM_TERMINAL =
+            BLOCK_ENTITIES.register("quantum_terminal",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.QuantumTerminalBlockEntity::new,
+                            ModBlocks.QUANTUM_TERMINAL.get()).build(null));
+
+    // v0.1.22 r32: Ritual Circle — coração do sistema occult
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.occult.RitualCircleBlockEntity>> RITUAL_CIRCLE =
+            BLOCK_ENTITIES.register("ritual_circle",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.occult.RitualCircleBlockEntity::new,
+                            ModBlocks.RITUAL_CIRCLE.get()).build(null));
+
+    // v0.1.22 r32: Spirit Miner — automação alimentada por Foliot
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.occult.SpiritMinerBlockEntity>> SPIRIT_MINER =
+            BLOCK_ENTITIES.register("spirit_miner",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.occult.SpiritMinerBlockEntity::new,
+                            ModBlocks.SPIRIT_MINER.get()).build(null));
+
+    // r62: Source Jar — block storage de Source mana
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.observation.source.SourceJarTile>> SOURCE_JAR =
+            BLOCK_ENTITIES.register("source_jar",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.observation.source.SourceJarTile::new,
+                            ModBlocks.SOURCE_JAR.get()).build(null));
+
+    // r69: Scribes Table — tile com inventário pra crafting de spell parchments
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.block.entity.ScribesTableBlockEntity>> SCRIBES_TABLE =
+            BLOCK_ENTITIES.register("scribes_table",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.block.entity.ScribesTableBlockEntity::new,
+                            ModBlocks.SCRIBES_TABLE.get()).build(null));
+
+    // r72: Rune Block tile — armazena spell recipe
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.observation.block.RuneBlockEntity>> RUNE_BLOCK =
+            BLOCK_ENTITIES.register("rune_block",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.observation.block.RuneBlockEntity::new,
+                            ModBlocks.RUNE_BLOCK.get()).build(null));
+
+    // r73: Imbuement Table tile — inventário 4 slots pra encantar espadas
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.observation.block.ImbuementBlockEntity>> IMBUEMENT_TABLE =
+            BLOCK_ENTITIES.register("imbuement_table",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.observation.block.ImbuementBlockEntity::new,
+                            ModBlocks.IMBUEMENT_TABLE.get()).build(null));
+
+    // r74: Source Relay tile — tick a cada 2s transferindo source
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.observation.block.SourceRelayBlock.SourceRelayTile>> SOURCE_RELAY =
+            BLOCK_ENTITIES.register("source_relay",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.observation.block.SourceRelayBlock.SourceRelayTile::new,
+                            ModBlocks.SOURCE_RELAY.get()).build(null));
+
+    // r77: Spell Binding Pedestal tile — 3-slot inventário Book + Parchment → Output
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.observation.block.SpellBindingPedestalBlockEntity>> SPELL_BINDING_PEDESTAL =
+            BLOCK_ENTITIES.register("spell_binding_pedestal",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.observation.block.SpellBindingPedestalBlockEntity::new,
+                            ModBlocks.SPELL_BINDING_PEDESTAL.get()).build(null));
 
     private ModBlockEntities() {
     }

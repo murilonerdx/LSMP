@@ -1,8 +1,10 @@
 package br.com.murilo.liberthia.block;
 
 import br.com.murilo.liberthia.block.entity.CrystallizerBlockEntity;
+import br.com.murilo.liberthia.logic.DarkMatterAura;
 import br.com.murilo.liberthia.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -49,6 +51,13 @@ public class CrystallizerBlock extends BaseEntityBlock {
             if (be instanceof CrystallizerBlockEntity c) c.drops();
             super.onRemove(s, level, pos, ns, moved);
         }
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        // Crystallizer é fonte forte — aura densa (visual cosmético; ignora DevMode)
+        DarkMatterAura.emit(level, pos, random, 2.0f);
+        DarkMatterAura.emit(level, pos, random, 2.0f);
     }
 
     @Nullable @Override public BlockEntity newBlockEntity(BlockPos pos, BlockState s) {

@@ -43,11 +43,18 @@ public class MatterTransmuterBlockEntity extends BlockEntity implements MenuProv
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            // v0.1.52: aceita ingots como input e catalyst
             return switch (slot) {
                 case 0 -> stack.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem())
-                        || stack.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem());
-                case 1 -> stack.is(ModItems.HOLY_ESSENCE.get())
+                        || stack.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())
+                        || stack.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem())
+                        || stack.is(ModItems.DARK_MATTER_INGOT.get())
+                        || stack.is(ModItems.CLEAR_MATTER_INGOT.get())
+                        || stack.is(ModItems.YELLOW_MATTER_INGOT.get());
+                case 1 -> stack.is(ModItems.PURIFIED_ESSENCE.get())
                         || stack.is(ModItems.YELLOW_MATTER_INGOT.get())
+                        || stack.is(ModItems.CLEAR_MATTER_INGOT.get())
+                        || stack.is(ModItems.DARK_MATTER_INGOT.get())
                         || stack.is(ModItems.DARK_MATTER_SHARD.get());
                 case 2 -> false; // Output
                 default -> false;
@@ -132,25 +139,60 @@ public class MatterTransmuterBlockEntity extends BlockEntity implements MenuProv
         return !result.isEmpty() && canInsertIntoOutput(result);
     }
 
+    /** v0.1.52: helpers que aceitam INGOT ou BLOCK como entrada do mesmo tipo. */
+    private static boolean isDarkInput(ItemStack s) {
+        return s.is(ModItems.DARK_MATTER_INGOT.get())
+                || s.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem());
+    }
+    private static boolean isClearInput(ItemStack s) {
+        return s.is(ModItems.CLEAR_MATTER_INGOT.get())
+                || s.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem());
+    }
+    private static boolean isYellowInput(ItemStack s) {
+        return s.is(ModItems.YELLOW_MATTER_INGOT.get())
+                || s.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem());
+    }
+    /** Retorna o output do tipo correspondente — INGOT se input foi ingot, BLOCK se foi block. */
+    private static ItemStack outputOf(MatterType type, boolean asIngot) {
+        return switch (type) {
+            case DARK -> asIngot ? new ItemStack(ModItems.DARK_MATTER_INGOT.get())
+                    : new ItemStack(ModBlocks.DARK_MATTER_BLOCK.get());
+            case CLEAR -> asIngot ? new ItemStack(ModItems.CLEAR_MATTER_INGOT.get())
+                    : new ItemStack(ModBlocks.CLEAR_MATTER_BLOCK.get());
+            case YELLOW -> asIngot ? new ItemStack(ModItems.YELLOW_MATTER_INGOT.get())
+                    : new ItemStack(ModBlocks.YELLOW_MATTER_BLOCK.get());
+        };
+    }
+    private enum MatterType { DARK, CLEAR, YELLOW }
+
     private ItemStack getResult() {
         ItemStack input = inventory.getStackInSlot(0);
         ItemStack catalyst = inventory.getStackInSlot(1);
         if (input.isEmpty() || catalyst.isEmpty()) return ItemStack.EMPTY;
 
-        // Dark Matter -> Clear Matter (catalyst: Holy Essence)
-        // Holy Essence purifies dark matter's chaotic energy into neutral Clear Matter
-        if (input.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem()) && catalyst.is(ModItems.HOLY_ESSENCE.get())) {
-            return new ItemStack(ModBlocks.CLEAR_MATTER_BLOCK.get());
+        // v0.1.52: aceita INGOT ou BLOCK. Output mantém a forma do input —
+        // ingot → ingot, block → block. Catalyst expandido pra aceitar ingots tb.
+        boolean isIngot = input.is(ModItems.DARK_MATTER_INGOT.get())
+                || input.is(ModItems.CLEAR_MATTER_INGOT.get())
+                || input.is(ModItems.YELLOW_MATTER_INGOT.get());
+
+        // Dark → Clear (catalyst: Purified Essence)
+        if (isDarkInput(input) && catalyst.is(ModItems.PURIFIED_ESSENCE.get())) {
+            return outputOf(MatterType.CLEAR, isIngot);
         }
-        // Clear Matter -> Yellow Matter (catalyst: Yellow Matter Ingot)
-        // Clear Matter is compatible with Yellow; the ingot acts as a seed for transmutation
-        if (input.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem()) && catalyst.is(ModItems.YELLOW_MATTER_INGOT.get())) {
-            return new ItemStack(ModBlocks.YELLOW_MATTER_BLOCK.get());
+        // Clear → Yellow (catalyst: Yellow Matter Ingot)
+        if (isClearInput(input) && catalyst.is(ModItems.YELLOW_MATTER_INGOT.get())) {
+            return outputOf(MatterType.YELLOW, isIngot);
         }
-        // Clear Matter -> Dark Matter (catalyst: Dark Matter Shard)
-        // Clear Matter can also be corrupted back into Dark Matter using a shard as seed
-        if (input.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem()) && catalyst.is(ModItems.DARK_MATTER_SHARD.get())) {
-            return new ItemStack(ModBlocks.DARK_MATTER_BLOCK.get());
+        // Clear → Dark (catalyst: Dark Matter Shard ou Dark Matter Ingot)
+        if (isClearInput(input)
+                && (catalyst.is(ModItems.DARK_MATTER_SHARD.get())
+                    || catalyst.is(ModItems.DARK_MATTER_INGOT.get()))) {
+            return outputOf(MatterType.DARK, isIngot);
+        }
+        // Yellow → Clear (novo v0.1.52: catalyst CLEAR_MATTER_INGOT, fecha o ciclo)
+        if (isYellowInput(input) && catalyst.is(ModItems.CLEAR_MATTER_INGOT.get())) {
+            return outputOf(MatterType.CLEAR, isIngot);
         }
         // NOTE: Yellow Matter <-> Dark Matter conversion is IMPOSSIBLE.
         // Per research, they completely repel each other and cannot connect in any way.

@@ -17,6 +17,26 @@ public final class KeyBindings {
             KEY_CATEGORY_LIBERTHIA
     );
 
+    /** r42: Spell Wheel — abre o radial menu de custom spells (default X). */
+    public static final String KEY_SPELL_WHEEL = "key.liberthia.spell_wheel";
+    public static final KeyMapping SPELL_WHEEL_KEY = new KeyMapping(
+            KEY_SPELL_WHEEL,
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_X,
+            KEY_CATEGORY_LIBERTHIA
+    );
+
+    /** r42: Quick-cast — casta o feitiço selecionado sem abrir wheel (default V). */
+    public static final String KEY_QUICK_CAST = "key.liberthia.quick_cast";
+    public static final KeyMapping QUICK_CAST_KEY = new KeyMapping(
+            KEY_QUICK_CAST,
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_V,
+            KEY_CATEGORY_LIBERTHIA
+    );
+
     private KeyBindings() {
     }
 }

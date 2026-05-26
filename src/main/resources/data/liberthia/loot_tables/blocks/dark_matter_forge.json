@@ -11,8 +11,12 @@
         }
       ],
       "conditions": [
+        { "condition": "minecraft:survives_explosion" },
         {
-          "condition": "minecraft:survives_explosion"
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": ["minecraft:diamond_pickaxe", "minecraft:netherite_pickaxe"]
+          }
         }
       ]
     }

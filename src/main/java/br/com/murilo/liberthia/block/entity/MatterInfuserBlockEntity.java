@@ -43,11 +43,17 @@ public class MatterInfuserBlockEntity extends BlockEntity implements MenuProvide
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            // v0.1.52: aceita INGOTS no lugar de blocks (user pediu pra ficar
+            // mais acessível — 9× mais barato). Mantém compat com blocks também.
             return switch (slot) {
-                case 0 -> stack.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem()) || stack.is(ModItems.DARK_MATTER_SHARD.get());
-                case 1 -> stack.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem());
-                case 2 -> stack.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem()) || stack.is(ModItems.YELLOW_MATTER_INGOT.get());
-                case 3 -> stack.is(ModItems.SINGULARITY_CORE.get()) || stack.is(ModItems.HOLY_ESSENCE.get());
+                case 0 -> stack.is(ModItems.DARK_MATTER_INGOT.get())
+                        || stack.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem())
+                        || stack.is(ModItems.DARK_MATTER_SHARD.get());
+                case 1 -> stack.is(ModItems.CLEAR_MATTER_INGOT.get())
+                        || stack.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem());
+                case 2 -> stack.is(ModItems.YELLOW_MATTER_INGOT.get())
+                        || stack.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem());
+                case 3 -> stack.is(ModItems.SINGULARITY_CORE.get()) || stack.is(ModItems.PURIFIED_ESSENCE.get());
                 case 4 -> false; // Output
                 default -> false;
             };
@@ -131,36 +137,47 @@ public class MatterInfuserBlockEntity extends BlockEntity implements MenuProvide
         return !result.isEmpty() && canInsertIntoOutput(result);
     }
 
+    /** v0.1.52: helpers — true se o slot contém matter do tipo (ingot, shard ou block). */
+    private static boolean isDark(ItemStack s) {
+        return s.is(ModItems.DARK_MATTER_INGOT.get())
+                || s.is(ModItems.DARK_MATTER_SHARD.get())
+                || s.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem());
+    }
+    private static boolean isClear(ItemStack s) {
+        return s.is(ModItems.CLEAR_MATTER_INGOT.get())
+                || s.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem());
+    }
+    private static boolean isYellow(ItemStack s) {
+        return s.is(ModItems.YELLOW_MATTER_INGOT.get())
+                || s.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem());
+    }
+
     private ItemStack getResult() {
         ItemStack dark = inventory.getStackInSlot(0);
         ItemStack clear = inventory.getStackInSlot(1);
         ItemStack yellow = inventory.getStackInSlot(2);
         ItemStack catalyst = inventory.getStackInSlot(3);
 
-        // All 3 matter blocks + Singularity Core -> Matter Core
-        // The Infuser is the ONLY machine that can safely combine all three matters.
-        // Clear Matter acts as a bridge between Dark and Yellow (which repel each other).
-        // The Singularity Core contains the infused dark energy needed to stabilize the fusion.
-        if (dark.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem())
-                && clear.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())
-                && yellow.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem())
+        // v0.1.52: aceita ingots em qualquer slot. Receita principal:
+        //   All 3 matter ingots/blocks + Singularity Core -> Matter Core
+        // O Infuser é a ÚNICA máquina que combina os 3 tipos de matter com segurança.
+        // Clear age como ponte entre Dark e Yellow (que se repelem). O Singularity
+        // Core estabiliza a fusão. User pediu: "melhore pra usar ingots" → 9× mais
+        // acessível que blocos cheios.
+        if (isDark(dark) && isClear(clear) && isYellow(yellow)
                 && catalyst.is(ModItems.SINGULARITY_CORE.get())) {
             return new ItemStack(ModItems.MATTER_CORE.get());
         }
-        // Dark Shard + Clear Block + Holy Essence (no yellow) -> Purified Essence x3
-        // Dark + Clear creates a hostile consciousness, but Holy Essence purifies it
-        if (dark.is(ModItems.DARK_MATTER_SHARD.get())
-                && clear.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())
-                && yellow.isEmpty()
-                && catalyst.is(ModItems.HOLY_ESSENCE.get())) {
+        // Dark Shard/Ingot + Clear + Purified Essence (sem yellow) -> 3× Purified Essence
+        // Dark + Clear cria uma consciência hostil, mas a Essência Purificada estabiliza
+        if (isDark(dark) && isClear(clear) && yellow.isEmpty()
+                && catalyst.is(ModItems.PURIFIED_ESSENCE.get())) {
             return new ItemStack(ModItems.PURIFIED_ESSENCE.get(), 3);
         }
-        // Clear Block + Yellow Ingot + Holy Essence (no dark) -> Clear Matter Pill x4
-        // Clear + Yellow amplifies emotions but preserves the mind; with Holy Essence it becomes medicine
-        if (dark.isEmpty()
-                && clear.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem())
-                && yellow.is(ModItems.YELLOW_MATTER_INGOT.get())
-                && catalyst.is(ModItems.HOLY_ESSENCE.get())) {
+        // Clear + Yellow + Purified Essence (sem dark) -> 4× Clear Matter Pill
+        // Clear + Yellow amplifica emoções mas preserva a mente; com Essência vira remédio
+        if (dark.isEmpty() && isClear(clear) && isYellow(yellow)
+                && catalyst.is(ModItems.PURIFIED_ESSENCE.get())) {
             return new ItemStack(ModItems.CLEAR_MATTER_PILL.get(), 4);
         }
         return ItemStack.EMPTY;

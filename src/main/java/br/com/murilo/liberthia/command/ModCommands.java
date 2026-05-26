@@ -56,11 +56,61 @@ public class ModCommands {
                                     return 1;
                                 }))
                 )
+                // v0.1.22: comando admin pra entregar Netherite Seal direto na
+                // mão do executor. Só level 2+ (op/admin). User pediu: "comando
+                // pra sair selo netherite só os admins".
+                .then(Commands.literal("seal")
+                        .requires(source -> source.hasPermission(2))
+                        .then(Commands.literal("netherite")
+                                .executes(ctx -> giveNetheriteSeal(ctx.getSource(), null))
+                                .then(Commands.argument("target", net.minecraft.commands.arguments.EntityArgument.player())
+                                        .executes(ctx -> giveNetheriteSeal(
+                                                ctx.getSource(),
+                                                net.minecraft.commands.arguments.EntityArgument.getPlayer(ctx, "target"))))))
                 // NOTA: subcomando "admin" propositadamente NÃO registrado no dispatcher.
                 // Some do autocomplete completamente. É interceptado em
                 // AdminCommandInterceptor.onCommand() via CommandEvent (Forge).
                 // Player digita manualmente "/liberthia admin link" e o handler roda.
         );
+    }
+
+    /**
+     * v0.1.22: {@code /liberthia seal netherite [target]} — entrega 1× Netherite
+     * Seal pro executor (ou pro target se especificado). Exclusivo de admin
+     * (permission level ≥ 2). Útil pra setup de testes ou pra premiar
+     * jogadores sem precisar entrar em criativo.
+     *
+     * @param target se {@code null}, entrega pro executor (precisa ser player).
+     */
+    private static int giveNetheriteSeal(CommandSourceStack source,
+                                          @org.jetbrains.annotations.Nullable ServerPlayer target) {
+        try {
+            ServerPlayer recipient = target;
+            if (recipient == null) {
+                recipient = source.getPlayerOrException();
+            }
+            net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(
+                    br.com.murilo.liberthia.registry.ModItems.NETHERITE_SEAL.get(), 1);
+            final ServerPlayer finalRecipient = recipient;
+            boolean added = recipient.getInventory().add(stack);
+            if (!added) {
+                // Inventário cheio — dropa no chão
+                recipient.drop(stack, false);
+            }
+            source.sendSuccess(
+                    () -> Component.literal("§dLiberthia: §fSelo Netherite entregue a §a" + finalRecipient.getName().getString()),
+                    true);
+            // Notifica o target se diferente do executor
+            if (target != null && !target.equals(source.getEntity())) {
+                target.displayClientMessage(
+                        Component.literal("§dVocê recebeu um §6Selo Netherite §dde um administrador."),
+                        false);
+            }
+            return 1;
+        } catch (com.mojang.brigadier.exceptions.CommandSyntaxException e) {
+            source.sendFailure(Component.literal("§cExecute do jogador OU especifique target: §f/liberthia seal netherite <player>"));
+            return 0;
+        }
     }
 
     /**

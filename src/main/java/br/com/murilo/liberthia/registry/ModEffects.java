@@ -4,6 +4,7 @@ import br.com.murilo.liberthia.LiberthiaMod;
 import br.com.murilo.liberthia.effect.BloodInfectionEffect;
 import br.com.murilo.liberthia.effect.ClearShieldEffect;
 import br.com.murilo.liberthia.effect.DarkInfectionEffect;
+import br.com.murilo.liberthia.effect.MatterResistanceEffect;
 import br.com.murilo.liberthia.effect.RadiationSicknessEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -50,6 +51,36 @@ public final class ModEffects {
     public static final RegistryObject<MobEffect> FEATHER_FALL =
             MOB_EFFECTS.register("feather_fall",
                     br.com.murilo.liberthia.effect.FeatherFallEffect::new);
+
+    // v0.1.51: resistências a matter — efeitos marker aplicados pelas pílulas
+    // (30 min cada). Bloqueiam ganho de matter no perfil + atenuam efeitos
+    // negativos da exposição enquanto ativos. NÃO removem matter acumulada.
+    public static final RegistryObject<MobEffect> DARK_MATTER_RESISTANCE =
+            MOB_EFFECTS.register("dark_matter_resistance",
+                    () -> new MatterResistanceEffect(0xAA60FF)); // violeta
+
+    public static final RegistryObject<MobEffect> CLEAR_MATTER_RESISTANCE =
+            MOB_EFFECTS.register("clear_matter_resistance",
+                    () -> new MatterResistanceEffect(0xB0E8FF)); // branco perolado
+
+    public static final RegistryObject<MobEffect> YELLOW_MATTER_RESISTANCE =
+            MOB_EFFECTS.register("yellow_matter_resistance",
+                    () -> new MatterResistanceEffect(0xFFD23F)); // dourado
+
+    // ════════════════════════════════════════════════════════════════════════
+    // v0.1.22 r33: LOOM DIMENSION EFFECTS — obsession, madness, dim infection
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<MobEffect> OBSESSION =
+            MOB_EFFECTS.register("obsession",
+                    br.com.murilo.liberthia.loom.effect.LoomEffects.ObsessionEffect::new);
+
+    public static final RegistryObject<MobEffect> MADNESS =
+            MOB_EFFECTS.register("madness",
+                    br.com.murilo.liberthia.loom.effect.LoomEffects.MadnessEffect::new);
+
+    public static final RegistryObject<MobEffect> DIMENSIONAL_INFECTION =
+            MOB_EFFECTS.register("dimensional_infection",
+                    br.com.murilo.liberthia.loom.effect.LoomEffects.DimensionalInfectionEffect::new);
 
     private ModEffects() {
     }

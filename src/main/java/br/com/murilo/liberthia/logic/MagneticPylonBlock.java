@@ -46,10 +46,9 @@ public class MagneticPylonBlock extends Block {
         Vec3 center = new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
         AABB box = new AABB(pos).inflate(8.0);
 
-        // Pull living entities (skip kin + creative)
-        for (LivingEntity le : level.getEntitiesOfClass(LivingEntity.class, box)) {
-            if (le instanceof Player p && p.isCreative()) continue;
-            if (BloodKin.is(le)) continue;
+        // v0.1.22 r18: pula Sigil/Crown/creative. Atrai outros players normais.
+        for (Player le : level.getEntitiesOfClass(Player.class, box)) {
+            if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(le)) continue;
             Vec3 toCenter = center.subtract(le.position());
             double dist = toCenter.length();
             if (dist < 0.001) continue;

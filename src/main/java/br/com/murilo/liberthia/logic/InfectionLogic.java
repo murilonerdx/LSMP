@@ -164,9 +164,12 @@ public final class InfectionLogic {
         }
 
         if ((data.getStage() >= 3 || exposure.immersedInDark()) && player.level().getGameTime() % 200L == 0L) {
-            player.level().playSound(
-                    null,
-                    player.blockPosition(),
+            // Som de pulso da Dark Matter — SÓ o player infectado escuta.
+            // Antes era level.playSound(null, ...) que broadcastava pra todos
+            // próximos, expondo até quem nunca tocou em DM. Narrativamente
+            // estranho: "por que esse cara aqui ouve o coração da matter?"
+            // playNotifySound envia o packet de som SÓ pra esse player.
+            player.playNotifySound(
                     ModSounds.DARK_PULSE.get(),
                     SoundSource.PLAYERS,
                     0.65F,
@@ -315,33 +318,13 @@ public final class InfectionLogic {
         }
     }
 
+    /**
+     * REMOVIDO v0.1.13: GLITCH_BLOCK foi removido do mod. Esse método é mantido
+     * como no-op pra não quebrar chamadas externas — caso o focus engine ainda
+     * tente invocar spawnGlitchBlock, simplesmente não faz nada.
+     */
     private static void spawnGlitchBlock(ServerLevel level, BlockPos origin) {
-        // Count existing glitch blocks in chunk (max 10)
-        int glitchCount = 0;
-        int cx = origin.getX() >> 4 << 4;
-        int cz = origin.getZ() >> 4 << 4;
-        for (BlockPos p : BlockPos.betweenClosed(
-                new BlockPos(cx, origin.getY() - 16, cz),
-                new BlockPos(cx + 15, origin.getY() + 16, cz + 15))) {
-            if (level.getBlockState(p).is(ModBlocks.GLITCH_BLOCK.get())) {
-                glitchCount++;
-            }
-        }
-        if (glitchCount >= 10) return;
-
-        // Find a non-air, non-infection block to convert
-        BlockPos target = origin.offset(
-                level.random.nextInt(16) - 8, level.random.nextInt(8) - 4, level.random.nextInt(16) - 8);
-        BlockState targetState = level.getBlockState(target);
-        if (!targetState.isAir()
-                && !targetState.is(ModBlocks.DARK_MATTER_BLOCK.get())
-                && !targetState.is(ModBlocks.GLITCH_BLOCK.get())
-                && !targetState.is(ModBlocks.CORRUPTED_SOIL.get())
-                && !targetState.is(ModBlocks.INFECTION_GROWTH.get())
-                && !targetState.is(ModBlocks.WORMHOLE_BLOCK.get())
-                && targetState.getDestroySpeed(level, target) >= 0) {
-            if (!br.com.murilo.liberthia.config.WorldChangesDisabled.ACTIVE && level.hasChunkAt(target)) level.setBlockAndUpdate(target, ModBlocks.GLITCH_BLOCK.get().defaultBlockState());
-        }
+        // no-op
     }
 
     private static int countDarkMatterFoci(Level level, BlockPos center, int radius) {

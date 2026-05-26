@@ -54,6 +54,20 @@ public class ItemPipeBlockEntity extends BlockEntity {
     public enum Speed { SLOW, FAST, STACK }
 
     /**
+     * Modo do filtro por face — define se o filtro é positivo (== whitelist:
+     * passa SÓ os listados) ou negativo (!= blacklist: passa TUDO MENOS os
+     * listados).
+     *
+     * <p>Default é WHITELIST (manter compat com setups antigos onde adicionar
+     * filtro implicava "deixar passar só isso"). Quando blank (sem items), os
+     * 2 modos têm comportamento idêntico — passa tudo.
+     *
+     * <p><b>BLACKLIST use case</b>: "puxo cobblestone do baú menos diamond pickaxes
+     * que tão lá dentro" → adiciona diamond_pickaxe no filtro + seta modo BLACKLIST.
+     */
+    public enum FilterMode { WHITELIST, BLACKLIST }
+
+    /**
      * Tipo de transporte do pipe (whole-pipe).
      * <ul>
      *   <li>UNIVERSAL: todos os items (default)</li>
@@ -69,7 +83,25 @@ public class ItemPipeBlockEntity extends BlockEntity {
     public static final int FILTER_SIZE = 5;
 
     private final Mode[] sideMode = new Mode[6];
-    private final ItemStack[][] filter = new ItemStack[6][FILTER_SIZE];
+    /**
+     * v0.1.31: UM filtro por PIPE inteiro (não mais por-face).
+     *
+     * <p>Decisão tomada após reclamação do user: "filter blacklist com pedra
+     * deixava pedra passar". Causa raiz era que o filter era POR FACE e o
+     * user editava a face errada (clicava em SOUTH, mas o EXTRACT era NORTH
+     * → o filter de SOUTH nunca era consultado pelo tick).
+     *
+     * <p>Agora: filter unificado, aplica em TODAS as faces extract/insert/
+     * default do mesmo pipe. UX prometida pelo user: "se tem filter, ou
+     * passa os itens listados ou não passa". Funciona idêntico em ItemPipe,
+     * ItemExtractor e ItemInserter.
+     *
+     * <p>Migration: load() lê NBT antigo (filter[6][5]) e usa filter[0] como
+     * o filtro unificado pra preservar configurações de saves antigos.
+     */
+    private final ItemStack[] filter = new ItemStack[FILTER_SIZE];
+    /** WHITELIST (==) ou BLACKLIST (!=) — único pro pipe. */
+    private FilterMode filterMode = FilterMode.WHITELIST;
     private Speed speed = Speed.SLOW;
     private PipeType pipeType = PipeType.UNIVERSAL;
 
@@ -77,8 +109,8 @@ public class ItemPipeBlockEntity extends BlockEntity {
         super(ModBlockEntities.ITEM_PIPE.get(), pos, state);
         for (int i = 0; i < 6; i++) {
             sideMode[i] = Mode.DEFAULT;
-            for (int j = 0; j < FILTER_SIZE; j++) filter[i][j] = ItemStack.EMPTY;
         }
+        for (int j = 0; j < FILTER_SIZE; j++) filter[j] = ItemStack.EMPTY;
     }
 
     // ---------------------------------------------------------------- public API used by the block
@@ -153,47 +185,73 @@ public class ItemPipeBlockEntity extends BlockEntity {
         };
     }
 
-    /** Returns the list of filter slots for the given side (length {@link #FILTER_SIZE}). */
-    public ItemStack[] getFilter(Direction d) { return filter[d.get3DDataValue()]; }
+    /**
+     * v0.1.31: filtro unificado por pipe inteiro. Os métodos antigos com
+     * {@code Direction} foram preservados pra back-compat — ignoram a direção
+     * e delegam pra versão sem-direção.
+     */
+    public ItemStack[] getFilter() { return filter; }
+    public ItemStack[] getFilter(Direction d) { return filter; } // legacy
 
-    /** Adds an item to the first empty filter slot. Returns true if added. */
-    public boolean addFilter(Direction d, ItemStack stack) {
-        ItemStack[] f = filter[d.get3DDataValue()];
+    /** Adiciona um item ao primeiro slot vazio do filter. */
+    public boolean addFilter(ItemStack stack) {
         for (int i = 0; i < FILTER_SIZE; i++) {
-            if (f[i].isEmpty()) {
+            if (filter[i].isEmpty()) {
                 ItemStack copy = stack.copy();
                 copy.setCount(1);
-                f[i] = copy;
+                filter[i] = copy;
                 markUpdated();
                 return true;
             }
         }
         return false;
     }
+    public boolean addFilter(Direction d, ItemStack stack) { return addFilter(stack); } // legacy
 
-    public void clearFilter(Direction d) {
-        ItemStack[] f = filter[d.get3DDataValue()];
-        for (int i = 0; i < FILTER_SIZE; i++) f[i] = ItemStack.EMPTY;
+    public void clearFilter() {
+        for (int i = 0; i < FILTER_SIZE; i++) filter[i] = ItemStack.EMPTY;
         markUpdated();
     }
+    public void clearFilter(Direction d) { clearFilter(); } // legacy
+
+    public FilterMode getFilterMode() { return filterMode; }
+    public FilterMode getFilterMode(Direction d) { return filterMode; } // legacy
+
+    /** Cicla WHITELIST → BLACKLIST → WHITELIST. */
+    public FilterMode cycleFilterMode() {
+        filterMode = (filterMode == FilterMode.WHITELIST)
+                ? FilterMode.BLACKLIST : FilterMode.WHITELIST;
+        markUpdated();
+        return filterMode;
+    }
+    public FilterMode cycleFilterMode(Direction d) { return cycleFilterMode(); } // legacy
 
     /**
-     * True se a face não tem filtro (passa-tudo) OU o stack matcha por TIPO de item.
+     * True se o stack pode passar pelo pipe. Comportamento:
+     * <ul>
+     *   <li>filtro vazio: passa-tudo (ambos modos)</li>
+     *   <li>WHITELIST (==): passa SE o stack matcha algum item do filtro</li>
+     *   <li>BLACKLIST (!=): passa SE o stack NÃO matcha NENHUM item do filtro</li>
+     * </ul>
      *
-     * <p>Match relaxado: compara apenas {@code Item}, ignora NBT/dano. Assim
-     * uma diamante no filtro matcha qualquer diamante (com ou sem nome custom),
-     * uma espada no filtro matcha qualquer espada (independente de durabilidade).
+     * <p>Match relaxado: compara apenas {@code Item}, ignora NBT/dano.
      */
-    private boolean filterAllows(Direction d, ItemStack stack) {
-        ItemStack[] f = filter[d.get3DDataValue()];
+    private boolean filterAllows(ItemStack stack) {
         boolean anyConfigured = false;
-        for (ItemStack fs : f) {
+        boolean matched = false;
+        for (ItemStack fs : filter) {
             if (!fs.isEmpty()) {
                 anyConfigured = true;
-                if (fs.getItem() == stack.getItem()) return true;
+                if (fs.getItem() == stack.getItem()) {
+                    matched = true;
+                    break;
+                }
             }
         }
-        return !anyConfigured;
+        if (!anyConfigured) return true;
+        return filterMode == FilterMode.WHITELIST
+                ? matched      // == : passa só os listados
+                : !matched;    // != : passa tudo MENOS os listados
     }
 
     private void markUpdated() {
@@ -225,19 +283,31 @@ public class ItemPipeBlockEntity extends BlockEntity {
             List<Destination> destinations = collectDestinations(level, pos);
             if (destinations.isEmpty()) continue;
 
-            int budget = be.itemsPerOperation();
+            // BUDGET POR SLOT — antes era global, e gastava tudo no primeiro
+            // slot ocupado. Reclamação histórica: "baú com stone + cobblestone
+            // só transfere stone até esvaziar, depois cobblestone". Agora cada
+            // slot tem seu próprio budget, então TODOS os tipos de item se
+            // movem em paralelo no mesmo tick.
+            //
+            // Trade-off: throughput total aumenta linearmente com nº de slots
+            // ocupados (8 tipos diferentes = 8x mais items/tick que antes).
+            // Isso é o comportamento que pipes de outros mods (AE2, Pipez,
+            // Modular Pipes) já fazem — usuário esperava isso.
+            int budgetPerSlot = be.itemsPerOperation();
             int totalMoved = 0;
-            for (int slot = 0; slot < source.getSlots() && budget > 0; slot++) {
-                ItemStack peek = source.extractItem(slot, budget, true);
+            for (int slot = 0; slot < source.getSlots(); slot++) {
+                int slotBudget = budgetPerSlot;
+                ItemStack peek = source.extractItem(slot, slotBudget, true);
                 if (peek.isEmpty()) continue;
                 if (!be.pipeTypeAllows(peek)) continue;
-                if (!be.filterAllows(extractDir, peek)) continue;
+                // v0.1.31: filter UNIFICADO do pipe (não mais por-face).
+                // Pipe de origem decide se PODE SAIR.
+                if (!be.filterAllows(peek)) continue;
 
-                // Tenta inserir em cada destino na ordem (nearest-first via BFS)
                 for (Destination dest : destinations) {
-                    if (peek.isEmpty() || budget <= 0) break;
-                    // Filtro do pipe-de-saída na face de saída
-                    if (!dest.outputPipe.filterAllows(dest.outputFace, peek)) continue;
+                    if (peek.isEmpty() || slotBudget <= 0) break;
+                    // Pipe de destino decide se PODE ENTRAR.
+                    if (!dest.outputPipe.filterAllows(peek)) continue;
 
                     ItemStack toInsert = peek.copy();
                     ItemStack remainder = ItemHandlerHelper.insertItem(dest.handler, toInsert, false);
@@ -249,13 +319,12 @@ public class ItemPipeBlockEntity extends BlockEntity {
                     int taken = actuallyTaken.getCount();
                     if (taken < inserted) {
                         // Race-rare: source diminuiu entre simulate e commit.
-                        // Devolve a diferença pro destino se possível, ou aceita
-                        // a perda. Forge não tem rollback fácil aqui.
+                        // Forge não tem rollback fácil aqui — aceita a perda.
                     }
-                    budget -= taken;
+                    slotBudget -= taken;
                     totalMoved += taken;
-                    if (budget <= 0) break;
-                    peek = source.extractItem(slot, budget, true);
+                    if (slotBudget <= 0) break;
+                    peek = source.extractItem(slot, slotBudget, true);
                     if (peek.isEmpty()) break;
                 }
             }
@@ -329,19 +398,19 @@ public class ItemPipeBlockEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         for (int i = 0; i < 6; i++) tag.putString("mode" + i, sideMode[i].name());
+        // v0.1.31: filtro UNIFICADO. Save key "filterMode" (sem sufixo de face).
+        tag.putString("filterMode", filterMode.name());
         tag.putString("speed", speed.name());
         tag.putString("pipeType", pipeType.name());
 
-        for (int s = 0; s < 6; s++) {
-            ListTag list = new ListTag();
-            for (int j = 0; j < FILTER_SIZE; j++) {
-                ItemStack stk = filter[s][j];
-                CompoundTag entry = new CompoundTag();
-                if (!stk.isEmpty()) stk.save(entry);
-                list.add(entry);
-            }
-            tag.put("filter" + s, list);
+        ListTag list = new ListTag();
+        for (int j = 0; j < FILTER_SIZE; j++) {
+            ItemStack stk = filter[j];
+            CompoundTag entry = new CompoundTag();
+            if (!stk.isEmpty()) stk.save(entry);
+            list.add(entry);
         }
+        tag.put("filter", list);
         super.saveAdditional(tag);
     }
 
@@ -357,16 +426,46 @@ public class ItemPipeBlockEntity extends BlockEntity {
         try { speed = Speed.valueOf(tag.contains("speed") ? tag.getString("speed") : "SLOW"); }
         catch (Exception e) { speed = Speed.SLOW; }
 
-        for (int sIdx = 0; sIdx < 6; sIdx++) {
-            ListTag list = tag.getList("filter" + sIdx, 10);
+        // v0.1.31: MIGRATION pra filtro unificado.
+        // Save antigo tinha filterMode[6] (keys "filterMode0".."filterMode5") +
+        // filter[6][5] (keys "filter0".."filter5"). Save novo tem só "filterMode"
+        // (string) + "filter" (list de 5 itens).
+        if (tag.contains("filterMode")) {
+            // Novo format
+            try { filterMode = FilterMode.valueOf(tag.getString("filterMode")); }
+            catch (Exception e) { filterMode = FilterMode.WHITELIST; }
+        } else if (tag.contains("filterMode0")) {
+            // Migration: usa filterMode0 do save velho
+            try { filterMode = FilterMode.valueOf(tag.getString("filterMode0")); }
+            catch (Exception e) { filterMode = FilterMode.WHITELIST; }
+        } else {
+            filterMode = FilterMode.WHITELIST;
+        }
+
+        if (tag.contains("filter", 9)) { // 9 = TAG_LIST
+            // Novo format
+            ListTag list = tag.getList("filter", 10);
             for (int j = 0; j < FILTER_SIZE; j++) {
                 if (j < list.size()) {
                     CompoundTag entry = list.getCompound(j);
-                    filter[sIdx][j] = entry.isEmpty() ? ItemStack.EMPTY : ItemStack.of(entry);
+                    filter[j] = entry.isEmpty() ? ItemStack.EMPTY : ItemStack.of(entry);
                 } else {
-                    filter[sIdx][j] = ItemStack.EMPTY;
+                    filter[j] = ItemStack.EMPTY;
                 }
             }
+        } else if (tag.contains("filter0")) {
+            // Migration: usa filter0 do save velho (filtro da face NORTH)
+            ListTag list = tag.getList("filter0", 10);
+            for (int j = 0; j < FILTER_SIZE; j++) {
+                if (j < list.size()) {
+                    CompoundTag entry = list.getCompound(j);
+                    filter[j] = entry.isEmpty() ? ItemStack.EMPTY : ItemStack.of(entry);
+                } else {
+                    filter[j] = ItemStack.EMPTY;
+                }
+            }
+        } else {
+            for (int j = 0; j < FILTER_SIZE; j++) filter[j] = ItemStack.EMPTY;
         }
     }
 

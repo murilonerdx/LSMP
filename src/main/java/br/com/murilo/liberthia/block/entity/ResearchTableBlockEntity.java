@@ -1,5 +1,6 @@
 package br.com.murilo.liberthia.block.entity;
 
+import br.com.murilo.liberthia.item.lore.ResearchBookFactory;
 import br.com.murilo.liberthia.menu.ResearchTableMenu;
 import br.com.murilo.liberthia.registry.ModBlockEntities;
 import br.com.murilo.liberthia.registry.ModBlocks;
@@ -125,8 +126,33 @@ public class ResearchTableBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private boolean hasRecipe() {
-        ItemStack result = getResult();
-        return !result.isEmpty() && canInsertIntoOutput(result);
+        ItemStack material = inventory.getStackInSlot(0);
+        ItemStack paper = inventory.getStackInSlot(1);
+        if (material.isEmpty() || paper.isEmpty()) return false;
+
+        // Determina o tipo de output sem ALOCAR o ItemStack final — antes
+        // gerávamos um livro completo a cada tick só pra checar slot livre,
+        // o que criava uma NBT aleatória diferente toda vez (desperdício de
+        // CPU + GC pressure). Agora a checagem é só sobre os inputs e o
+        // estado do output, e só gera o livro real em completeProcess().
+        ItemStack output = inventory.getStackInSlot(2);
+
+        // Recipe 1: Dark Matter Shard + Paper → Research Notes (written_book)
+        // Recipe 2: Purified Essence + Book → Lore Pages (written_book)
+        boolean isBookRecipe = (material.is(ModItems.DARK_MATTER_SHARD.get()) && paper.is(Items.PAPER))
+                || (material.is(ModItems.PURIFIED_ESSENCE.get()) && paper.is(Items.BOOK));
+        if (isBookRecipe) {
+            // Livros precisam de slot vazio (NBT muda a cada craft).
+            return output.isEmpty();
+        }
+
+        // Recipe 3: Clear Matter Block + Paper → Clear Matter Pill x4 (stackável)
+        if (material.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem()) && paper.is(Items.PAPER)) {
+            if (output.isEmpty()) return true;
+            return output.is(ModItems.CLEAR_MATTER_PILL.get())
+                    && output.getCount() + 4 <= output.getMaxStackSize();
+        }
+        return false;
     }
 
     private ItemStack getResult() {
@@ -134,26 +160,23 @@ public class ResearchTableBlockEntity extends BlockEntity implements MenuProvide
         ItemStack paper = inventory.getStackInSlot(1);
         if (paper.isEmpty()) return ItemStack.EMPTY;
 
-        // Dark Matter Shard + Paper -> Written Book (research notes)
+        // Dark Matter Shard + Paper -> Research Notes (written_book com NBT válido).
+        // Antes retornava `new ItemStack(Items.WRITTEN_BOOK)` SEM NBT — o client
+        // mostrava "Invalid book tag" ao abrir, porque written_book exige
+        // title/author/pages obrigatoriamente. ResearchBookFactory sorteia uma
+        // de várias variantes pré-escritas (mais imersão pra quem pesquisa muito).
         if (material.is(ModItems.DARK_MATTER_SHARD.get()) && paper.is(Items.PAPER)) {
-            return new ItemStack(Items.WRITTEN_BOOK);
+            return ResearchBookFactory.createResearchNotes();
         }
-        // Holy Essence + Book -> Written Book (lore pages)
-        if (material.is(ModItems.HOLY_ESSENCE.get()) && paper.is(Items.BOOK)) {
-            return new ItemStack(Items.WRITTEN_BOOK);
+        // Purified Essence + Book -> Lore Pages (mesma correção do bug acima).
+        if (material.is(ModItems.PURIFIED_ESSENCE.get()) && paper.is(Items.BOOK)) {
+            return ResearchBookFactory.createLorePages();
         }
         // Clear Matter + Paper -> Clear Matter Pill
         if (material.is(ModBlocks.CLEAR_MATTER_BLOCK.get().asItem()) && paper.is(Items.PAPER)) {
             return new ItemStack(ModItems.CLEAR_MATTER_PILL.get(), 4);
         }
         return ItemStack.EMPTY;
-    }
-
-    private boolean canInsertIntoOutput(ItemStack result) {
-        ItemStack output = inventory.getStackInSlot(2);
-        if (output.isEmpty()) return true;
-        if (!ItemStack.isSameItemSameTags(output, result)) return false;
-        return output.getCount() + result.getCount() <= output.getMaxStackSize();
     }
 
     private void completeProcess() {

@@ -61,6 +61,54 @@ public class LiberthiaMod {
         // Sem registro manual, o @Mod.EventBusSubscriber às vezes não cola.
         MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.event.CommandEvents.class);
 
+        // r54: Spirit World chat block — bloqueia /tell, /msg, /w, /say, /me e chat
+        // normal pra players em spirit world. Player precisa achar saída física.
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.dimension.SpiritWorldChatBlocker.class);
+
+        // r55: Spirit World — preserva inventário em caso de death
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.dimension.SpiritWorldDeathHandler.class);
+
+        // r55: Shadow Stalker spawning tick — entidade que se aproxima quando você olha
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.stalker.ShadowStalkerManager.class);
+
+        // r55: Player Silhouette spawner — silhuetas que aparecem e somem
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.silhouette.PlayerSilhouetteManager.class);
+
+        // r55: Hallucination expansion — vultos, footsteps, particles em low sanity
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.hallucination.LowSanityHallucinationDriver.class);
+
+        // r55: Red-eye mob stare — player com baixa sanidade vê mobs encarando red
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.staredown.RedEyeStareManager.class);
+
+        // r55: Chunk Copy Illusion — mineração random teleporta pra spirit world
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.illusion.ChunkIllusionManager.class);
+
+        // r55: Floating Trees — árvores flutuantes random perto do player
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.floating.FloatingTreesDriver.class);
+
+        // r55: Pale Watch Events — drivers passivos dos pendants
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.palewatch.PaleWatchEvents.class);
+
+        // r56: 15 cosmic artifacts passive handlers
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.artifacts.CosmicArtifactsR56Events.class);
+
+        // r56: Wood Dimension Event — temporário "lugar de madeira" pra player paranóico
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.wooddim.WoodDimensionEvent.class);
+
+        // r57: LIMINAL DIMENSIONS — 3 dimensões psychological horror
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.dimension.LiminalEffectsManager.class);
+
+        // r58: Clone Army AI — clones reais que atacam aggressores do master
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.cosmic.palewatch.CloneArmyAI.class);
+
+        // r58: Procedural Strangeness Engine — gera rooms liminais on-the-fly
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.dimension.proc.ProceduralStrangeness.class);
+
+        // r61: Observation Source tick handler — regen mana cosmic ao observar
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.observation.source.SourceTickHandler.class);
+        // r61: Force-init observation parts singleton (registry warmup)
+        br.com.murilo.liberthia.observation.ObservationParts.init();
+
         // Hooks de comunidade — Backrooms tracking, Chat quotes, Memorial auto.
         // Alimenta /api/backrooms, /api/quotes, /api/memorials no backend.
         MinecraftForge.EVENT_BUS.register(new br.com.murilo.liberthia.admin.api.hooks.CommunityHooks());
@@ -68,10 +116,23 @@ public class LiberthiaMod {
         // Photo watcher — escaneia world/exposures/ e uploada PNGs novos pra galeria.
         MinecraftForge.EVENT_BUS.register(new br.com.murilo.liberthia.admin.api.hooks.ExposurePhotoWatcher());
 
+        // Sistema Nervoso (telemetria + análise comportamental).
+        // EventCollector subscreve eventos Forge e alimenta TelemetryManager.
+        // O Manager é iniciado/parado automaticamente via ServerStartedEvent /
+        // ServerStoppingEvent (cobertos pelo próprio EventCollector).
+        MinecraftForge.EVENT_BUS.register(new br.com.murilo.liberthia.telemetry.events.EventCollector());
+
+        // Matter economy: drops em mineração (DarkMatterShard com chance baseada em profundidade)
+        // + conversão TNT (DarkMatterShard → YellowMatterIngot via explosão).
+        // Permite progression sem depender só de minérios raros.
+        MinecraftForge.EVENT_BUS.register(new br.com.murilo.liberthia.event.MatterDropEvents());
+
         ModParticles.PARTICLE_TYPES.register(modBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(ModNetwork::register);
+        // r81: inicializa o Horror Framework (registra os 18 sistemas)
+        event.enqueueWork(br.com.murilo.liberthia.cosmic.framework.HorrorFramework::init);
     }
 }

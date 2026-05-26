@@ -44,6 +44,12 @@ public final class MatterContentRegistry {
             put(ModBlocks.DARK_MATTER_ORE.get().asItem(), 20, 0, 0);
             put(ModBlocks.DEEPSLATE_DARK_MATTER_ORE.get().asItem(), 25, 0, 0);
 
+            // Blocos de infecção (direto)
+            put(ModBlocks.CORRUPTED_SOIL.get().asItem(), 35, 0, 0);
+            put(ModBlocks.SCARRED_EARTH.get().asItem(), 45, 0, 0);
+            put(ModBlocks.SCARRED_STONE.get().asItem(), 55, 0, 0);
+            put(ModBlocks.CRYSTALLIZER.get().asItem(), 70, 0, 0);
+
             // Matéria branca / clara
             putIfExists("white_matter_ore", 0, 18, 0);
             putIfExists("clear_matter_block", 0, 80, 0);
@@ -56,8 +62,9 @@ public final class MatterContentRegistry {
             putIfExists("horus_eye_shard", 90, 0, 0);
             putIfExists("equilibrium_crystal", 0, 50, 50);
 
-            // Outros
-            put(ModItems.HOLY_ESSENCE.get(), 0, 30, 0);
+            // Outros — HOLY_ESSENCE removida em favor de PURIFIED_ESSENCE
+            // (essence purificada cobre o mesmo nicho de "matéria branca consagrada")
+            putIfExists("purified_essence", 0, 30, 0);
 
             // Matter swords — segurar na mão impregna o jogador com a matéria correspondente
             put(ModItems.DARK_MATTER_SWORD.get(),   40, 0, 0);

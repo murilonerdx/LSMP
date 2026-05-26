@@ -99,15 +99,8 @@ public class EnergyCableBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
                                  InteractionHand hand, BlockHitResult hit) {
-        // Cabos só respondem ao Liberthia Wrench. Mão vazia / outros itens não fazem nada.
-        if (player.getItemInHand(hand).is(br.com.murilo.liberthia.registry.ModItems.LIBERTHIA_WRENCH.get())) {
-            return InteractionResult.PASS; // deixa o WrenchItem.useOn lidar
-        }
-        if (!level.isClientSide) {
-            player.displayClientMessage(
-                    Component.literal("Use a Chave Inglesa pra reconfigurar")
-                            .withStyle(ChatFormatting.GRAY), true);
-        }
+        // v0.1.13: LIBERTHIA_WRENCH foi removido. Cabos agora não têm interação manual;
+        // conectam automaticamente baseado em vizinhos (já feito por updateShape).
         return InteractionResult.PASS;
     }
 

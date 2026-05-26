@@ -79,6 +79,42 @@ public final class ModMenuTypes {
     public static final RegistryObject<MenuType<WirelessChargerMenu>> WIRELESS_CHARGER = registerMenuType(
             "wireless_charger", WirelessChargerMenu::new);
 
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.PipeFilterMenu>> PIPE_FILTER =
+            registerMenuType("pipe_filter", br.com.murilo.liberthia.menu.PipeFilterMenu::new);
+
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.MatterPurifierMenu>> MATTER_PURIFIER =
+            registerMenuType("matter_purifier", br.com.murilo.liberthia.menu.MatterPurifierMenu::new);
+
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.MatterPillBrewerMenu>> MATTER_PILL_BREWER =
+            registerMenuType("matter_pill_brewer", br.com.murilo.liberthia.menu.MatterPillBrewerMenu::new);
+
+    // --- Matter Extraction Network ---
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.MatterTankMenu>> MATTER_TANK =
+            registerMenuType("matter_tank", br.com.murilo.liberthia.menu.MatterTankMenu::new);
+
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.MatterExtractorMenu>> MATTER_EXTRACTOR =
+            registerMenuType("matter_extractor", br.com.murilo.liberthia.menu.MatterExtractorMenu::new);
+
+    // v0.1.22 r27: Dimensional Antenna
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.DimensionalAntennaMenu>> DIMENSIONAL_ANTENNA =
+            registerMenuType("dimensional_antenna", br.com.murilo.liberthia.menu.DimensionalAntennaMenu::new);
+
+    // v0.1.22 r28: Quantum Terminal
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.QuantumTerminalMenu>> QUANTUM_TERMINAL =
+            registerMenuType("quantum_terminal", br.com.murilo.liberthia.menu.QuantumTerminalMenu::new);
+
+    // v0.1.22 r69: Scribes Table — mesa de craft de spell parchments
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.ScribesTableMenu>> SCRIBES_TABLE =
+            registerMenuType("scribes_table", br.com.murilo.liberthia.menu.ScribesTableMenu::new);
+
+    // r73: Imbuement Table — encantar espadas com feitiços
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.ImbuementMenu>> IMBUEMENT_TABLE =
+            registerMenuType("imbuement_table", br.com.murilo.liberthia.menu.ImbuementMenu::new);
+
+    // r77: Spell Binding Pedestal — combine Book + Parchment
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.SpellBindingPedestalMenu>> SPELL_BINDING_PEDESTAL =
+            registerMenuType("spell_binding_pedestal", br.com.murilo.liberthia.menu.SpellBindingPedestalMenu::new);
+
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

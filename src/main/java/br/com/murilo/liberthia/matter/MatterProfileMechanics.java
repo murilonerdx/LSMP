@@ -122,16 +122,31 @@ public final class MatterProfileMechanics {
         }
     }
 
-    /** Pequenos eventos aleatórios pro perfil YELLOW. */
+    /**
+     * Pequenos eventos aleatórios pro perfil YELLOW.
+     *
+     * <p>r37 FIX BUG #32: sons agora são ENVIADOS APENAS pro próprio player
+     * via {@code sp.connection.send} (ClientboundSoundPacket direto). Antes
+     * usava {@code level.playSound(null, ...)} que broadcast posicional —
+     * outros players próximos ouviam o "interior mental" do infectado.
+     */
     private static void randomEmotionalEvent(ServerPlayer sp) {
         int kind = sp.level().random.nextInt(4);
         switch (kind) {
-            case 0 -> sp.level().playSound(null, sp.blockPosition(),
-                    SoundEvents.VILLAGER_AMBIENT, SoundSource.PLAYERS, 0.8f, 1.6f);
-            case 1 -> sp.level().playSound(null, sp.blockPosition(),
-                    SoundEvents.GHAST_AMBIENT, SoundSource.PLAYERS, 0.6f, 1.2f);
+            case 0 -> sendPrivateSound(sp, SoundEvents.VILLAGER_AMBIENT, 0.8f, 1.6f);
+            case 1 -> sendPrivateSound(sp, SoundEvents.GHAST_AMBIENT, 0.6f, 1.2f);
             case 2 -> sp.addEffect(new MobEffectInstance(MobEffects.JUMP, 80, 1, true, false));
             case 3 -> sp.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0, true, false));
         }
+    }
+
+    /** Envia som APENAS pro player especificado (não broadcast posicional). */
+    private static void sendPrivateSound(ServerPlayer sp, net.minecraft.sounds.SoundEvent se,
+                                          float vol, float pitch) {
+        sp.connection.send(new net.minecraft.network.protocol.game.ClientboundSoundPacket(
+                net.minecraft.core.Holder.direct(se),
+                SoundSource.PLAYERS,
+                sp.getX(), sp.getY(), sp.getZ(),
+                vol, pitch, sp.level().random.nextLong()));
     }
 }

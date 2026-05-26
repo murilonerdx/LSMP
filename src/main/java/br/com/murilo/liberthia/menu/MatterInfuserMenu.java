@@ -36,16 +36,14 @@ public class MatterInfuserMenu extends AbstractContainerMenu {
         addPlayerHotbar(playerInventory);
 
         IItemHandler handler = this.blockEntity.getItemHandler();
-        // Dark matter input
-        this.addSlot(new SlotItemHandler(handler, 0, 30, 17));
-        // Clear matter input
-        this.addSlot(new SlotItemHandler(handler, 1, 52, 17));
-        // Yellow matter input
-        this.addSlot(new SlotItemHandler(handler, 2, 74, 17));
-        // Catalyst
-        this.addSlot(new SlotItemHandler(handler, 3, 52, 53));
-        // Output
-        this.addSlot(new SlotItemHandler(handler, 4, 124, 35) {
+        // v0.1.52: layout em triângulo — 3 matter ingots empilhados à esquerda
+        // convergem pro catalyst central, depois arrow → output à direita.
+        // Visualmente conta a história "3 matters fundem com catalyst → resultado".
+        this.addSlot(new SlotItemHandler(handler, 0, 24, 17)); // Dark (top)
+        this.addSlot(new SlotItemHandler(handler, 1, 24, 35)); // Clear (mid)
+        this.addSlot(new SlotItemHandler(handler, 2, 24, 53)); // Yellow (bot)
+        this.addSlot(new SlotItemHandler(handler, 3, 62, 35)); // Catalyst (center)
+        this.addSlot(new SlotItemHandler(handler, 4, 122, 35) { // Output (right)
             @Override
             public boolean mayPlace(ItemStack stack) { return false; }
         });

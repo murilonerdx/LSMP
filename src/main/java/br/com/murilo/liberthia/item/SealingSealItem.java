@@ -144,6 +144,14 @@ public class SealingSealItem extends Item {
         if (hasCapturedSomething(stack)) {
             return InteractionResult.FAIL;
         }
+        // v0.1.22: alvo com Boss Crown ATIVA é imune a qualquer selo
+        if (isBossCrownProtected(target)) {
+            player.displayClientMessage(
+                    Component.literal("Essa entidade é muito forte para esse selo...")
+                            .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC),
+                    false);
+            return InteractionResult.FAIL;
+        }
 
         CaptureCategory category = getCaptureCategory(target);
 
@@ -172,6 +180,16 @@ public class SealingSealItem extends Item {
             );
             return InteractionResult.FAIL;
         }
+        // v0.1.22: alvo com Boss Crown ATIVA é imune. User pediu: "selo
+        // netherite não funciona no player com item de boss — aparece no selo:
+        // essa entidade é muito forte para esse selo".
+        if (isBossCrownProtected(target)) {
+            player.displayClientMessage(
+                    Component.literal("Essa entidade é muito forte para esse selo...")
+                            .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC),
+                    false);
+            return InteractionResult.FAIL;
+        }
 
         CaptureCategory category = getCaptureCategory(target);
 
@@ -189,6 +207,23 @@ public class SealingSealItem extends Item {
         }
 
         return captureEntity(stack, player, target, category);
+    }
+
+    /**
+     * v0.1.22: true se o target é um Player carregando a Boss Crown ATIVA
+     * (ver {@link br.com.murilo.liberthia.item.BossCrownItem#isActive}). Esses
+     * players são totalmente imunes a captura por selo, qualquer tier.
+     */
+    private static boolean isBossCrownProtected(LivingEntity target) {
+        if (!(target instanceof Player p)) return false;
+        var crown = br.com.murilo.liberthia.registry.ModItems.BOSS_CROWN.get();
+        for (int i = 0; i < p.getInventory().getContainerSize(); i++) {
+            ItemStack s = p.getInventory().getItem(i);
+            if (s.is(crown) && br.com.murilo.liberthia.item.BossCrownItem.isActive(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private InteractionResult captureEntity(

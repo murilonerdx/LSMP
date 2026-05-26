@@ -83,11 +83,12 @@ public class WitheringEyeBlock extends Block {
         AABB box = new AABB(pos).inflate(range);
         Vec3 origin = new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
 
+        // v0.1.22 r18: pula Sigil/Crown/creative na target selection.
+        // Bloco mira players SEM proteção; outros seguem normais.
         LivingEntity target = null;
         double bestDist = Double.MAX_VALUE;
-        for (LivingEntity le : level.getEntitiesOfClass(LivingEntity.class, box)) {
-            if (le instanceof Player p && p.isCreative()) continue;
-            if (BloodKin.is(le)) continue;
+        for (Player le : level.getEntitiesOfClass(Player.class, box)) {
+            if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(le)) continue;
             double d = le.distanceToSqr(origin);
             if (d < bestDist) { bestDist = d; target = le; }
         }

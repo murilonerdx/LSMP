@@ -20,6 +20,41 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> FLESH_MOTHER_GRUM = register("flesh_mother_grum");
     public static final RegistryObject<SoundEvent> DARK_MATTER_SWORD = register("dark_matter_sword");
 
+    // ════════════════════════════════════════════════════════════════════════
+    // r34: SONS NOVOS — todos os .ogg que o user criou no ElevenLabs
+    // ════════════════════════════════════════════════════════════════════════
+    // Loom dimension
+    public static final RegistryObject<SoundEvent> LOOM_AMBIENT = register("ambient");
+    public static final RegistryObject<SoundEvent> WATCHER_STEP = register("watcher_step");
+    public static final RegistryObject<SoundEvent> WATCHER_BREATH = register("watcher_breath");
+    public static final RegistryObject<SoundEvent> PERIPHERAL_WHISPER = register("peripheral_whisper");
+    public static final RegistryObject<SoundEvent> PERIPHERAL_BLIND = register("peripheral_blind");
+    public static final RegistryObject<SoundEvent> SCREAMER_TELEPORT = register("screamer_teleport");
+    public static final RegistryObject<SoundEvent> SCREAMER_SCREAM = register("screamer_scream");
+    public static final RegistryObject<SoundEvent> WORM_BITE = register("worm_bite");
+    public static final RegistryObject<SoundEvent> PORTAL_AMBIENT = register("portal_ambient");
+    // Cosmic horror set
+    public static final RegistryObject<SoundEvent> COSMIC_WHISPER_1 = register("cosmic.whisper_1");
+    public static final RegistryObject<SoundEvent> COSMIC_WHISPER_2 = register("cosmic.whisper_2");
+    public static final RegistryObject<SoundEvent> COSMIC_WHISPER_3 = register("cosmic.whisper_3");
+    public static final RegistryObject<SoundEvent> COSMIC_AZATHOTH_EYE = register("cosmic.azathoth_eye");
+    public static final RegistryObject<SoundEvent> COSMIC_GLITCH = register("cosmic.glitch");
+    public static final RegistryObject<SoundEvent> COSMIC_DIMENSIONAL_TEAR = register("cosmic.dimensional_tear");
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r52: Cosmic Sound Framework — 10 horror sounds com variants
+    // (cada um pode ter múltiplos .ogg files — sounds.json escolhe random)
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<SoundEvent> COSMIC_DISTANT_WHISPERS = register("cosmic.distant_whispers");
+    public static final RegistryObject<SoundEvent> COSMIC_EYE_PULSE = register("cosmic.eye_pulse");
+    public static final RegistryObject<SoundEvent> COSMIC_FALSE_FOOTSTEPS = register("cosmic.false_footsteps");
+    public static final RegistryObject<SoundEvent> COSMIC_VOID_BREATHING = register("cosmic.void_breathing");
+    public static final RegistryObject<SoundEvent> COSMIC_RADIO_BROADCAST = register("cosmic.radio_broadcast");
+    public static final RegistryObject<SoundEvent> COSMIC_SKY_HUM = register("cosmic.sky_hum");
+    public static final RegistryObject<SoundEvent> COSMIC_TENDRIL_MOVEMENT = register("cosmic.tendril_movement");
+    public static final RegistryObject<SoundEvent> COSMIC_REALITY_DISTORTION = register("cosmic.reality_distortion");
+    public static final RegistryObject<SoundEvent> COSMIC_DISTANT_SCREAM = register("cosmic.distant_scream");
+    public static final RegistryObject<SoundEvent> COSMIC_AUDIENCE_PRESENCE = register("cosmic.audience_presence");
 
     private ModSounds() {
     }

@@ -50,17 +50,9 @@ public class ItemInserterBlock extends ItemPipeBlock {
                 break;
             }
         }
+        // v0.1.31: removida mensagem auto-config. Silencioso.
         if (insertFace != null) {
             pipe.setMode(insertFace, ItemPipeBlockEntity.Mode.INSERT);
-            if (placer instanceof Player p) {
-                p.displayClientMessage(Component.literal(
-                        "→ Inseridor empurrando pra " + insertFace.getName().toUpperCase())
-                        .withStyle(ChatFormatting.GREEN), false);
-            }
-        } else if (placer instanceof Player p) {
-            p.displayClientMessage(Component.literal(
-                    "⚠ Inseridor colocado sem inventário vizinho — coloque encostado num baú/máquina")
-                    .withStyle(ChatFormatting.YELLOW), false);
         }
     }
 
@@ -73,6 +65,14 @@ public class ItemInserterBlock extends ItemPipeBlock {
 
         Direction face = hit.getDirection();
         ItemStack held = player.getItemInHand(hand);
+
+        // v0.1.40: filter é EXCLUSIVO do Item Pipe — bloqueia no inserter.
+        if (held.getItem() instanceof br.com.murilo.liberthia.item.PipeFilterNotItem
+                || held.getItem() instanceof br.com.murilo.liberthia.item.PipeFilterItem) {
+            player.displayClientMessage(Component.literal(
+                    "§e⚠ Filtro é compatível apenas com Item Pipe (não Extractor/Inserter)"), true);
+            return InteractionResult.CONSUME;
+        }
 
         if (player.isShiftKeyDown() && held.isEmpty()) {
             BlockEntity nbe = level.getBlockEntity(pos.relative(face));

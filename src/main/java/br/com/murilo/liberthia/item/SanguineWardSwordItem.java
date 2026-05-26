@@ -25,6 +25,31 @@ public class SanguineWardSwordItem extends SwordItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        // v0.1.22 r9: bonus damage massivo contra dono de Boss Crown ATIVA.
+        // User pediu que a espada de sangue continue funcionando contra o
+        // boss. Boss Crown tem 3600 HP — sem buff a espada (4 ATK) demora
+        // 900 hits pra matar. Com +12 HP de bonus + 3x multiplier vs Boss
+        // Crown, vira ferramenta viável.
+        if (target instanceof net.minecraft.world.entity.player.Player p) {
+            boolean targetHasBossCrown = false;
+            for (int i = 0; i < p.getInventory().getContainerSize(); i++) {
+                ItemStack s = p.getInventory().getItem(i);
+                if (s.is(br.com.murilo.liberthia.registry.ModItems.BOSS_CROWN.get())
+                        && br.com.murilo.liberthia.item.BossCrownItem.isActive(s)) {
+                    targetHasBossCrown = true;
+                    break;
+                }
+            }
+            if (targetHasBossCrown) {
+                // Dano bonus DIRETO bypass armor/effects. Soma 40 HP por hit.
+                target.hurt(attacker.damageSources().magic(), 40.0F);
+                if (target.level() instanceof net.minecraft.server.level.ServerLevel sl) {
+                    sl.sendParticles(net.minecraft.core.particles.ParticleTypes.DAMAGE_INDICATOR,
+                            target.getX(), target.getY() + 1.0, target.getZ(),
+                            15, 0.3, 0.5, 0.3, 0.2);
+                }
+            }
+        }
         boolean hit = super.hurtEnemy(stack, target, attacker);
         if (hit && !attacker.level().isClientSide && ModEffects.BLOOD_INFECTION.get() != null) {
             var inst = attacker.getEffect(ModEffects.BLOOD_INFECTION.get());

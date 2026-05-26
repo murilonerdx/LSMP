@@ -1,1 +1,7 @@
-{ "parent": "item/generated", "textures": { "layer0": "liberthia:item/capacity_upgrade" } }
+{
+  "_comment": "Capacity Upgrade — textura propria 16x16 (bau amber com cadeado dourado).",
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "liberthia:item/capacity_upgrade"
+  }
+}

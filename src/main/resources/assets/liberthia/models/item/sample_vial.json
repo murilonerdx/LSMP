@@ -3,8 +3,16 @@
   "textures": { "layer0": "liberthia:item/sample_vial" },
   "overrides": [
     {
-      "predicate": { "liberthia:filled": 1.0 },
-      "model": "liberthia:item/sample_vial_filled"
+      "predicate": { "liberthia:matter_type": 0.1 },
+      "model": "liberthia:item/sample_vial_filled_dark"
+    },
+    {
+      "predicate": { "liberthia:matter_type": 0.4 },
+      "model": "liberthia:item/sample_vial_filled_white"
+    },
+    {
+      "predicate": { "liberthia:matter_type": 0.7 },
+      "model": "liberthia:item/sample_vial_filled_yellow"
     }
   ]
 }

@@ -160,9 +160,10 @@ public class ContainmentChamberBlockEntity extends BlockEntity implements MenuPr
         if (input1.is(ModBlocks.DARK_MATTER_BLOCK.get().asItem()) && input2.is(ModItems.DARK_MATTER_SHARD.get())) {
             return new ItemStack(ModItems.DARK_MATTER_SHARD.get(), 4);
         }
-        // Yellow Matter Block + Holy Essence -> Singularity Core (placeholder as Holy Essence x3)
-        if (input1.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem()) && input2.is(ModItems.HOLY_ESSENCE.get())) {
-            return new ItemStack(ModItems.HOLY_ESSENCE.get(), 3);
+        // Yellow Matter Block + Purified Essence -> Singularity Core
+        // Contém a energia amarela em uma essência estabilizada
+        if (input1.is(ModBlocks.YELLOW_MATTER_BLOCK.get().asItem()) && input2.is(ModItems.PURIFIED_ESSENCE.get())) {
+            return new ItemStack(ModItems.SINGULARITY_CORE.get(), 1);
         }
         return ItemStack.EMPTY;
     }

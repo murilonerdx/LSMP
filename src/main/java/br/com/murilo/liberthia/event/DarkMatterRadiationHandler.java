@@ -14,6 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Bloco de matéria escura é radioativo. Quando jogador tem o bloco no
@@ -27,6 +29,8 @@ import net.minecraftforge.fml.common.Mod;
  */
 @Mod.EventBusSubscriber(modid = LiberthiaMod.MODID)
 public final class DarkMatterRadiationHandler {
+
+    private static final Logger LOG = LoggerFactory.getLogger("Liberthia/DarkMatterRadiation");
 
     public static final int DAMAGE_PERIOD = 60;        // 3s
     public static final int WARNING_PERIOD = 200;      // 10s
@@ -51,25 +55,50 @@ public final class DarkMatterRadiationHandler {
 
         if (dmCount <= 0 && handBonus == 0f) return;
 
-        // Acumula matéria escura no perfil do jogador (mesmo com luva — só
-        // o DANO é suprimido pela luva, não a impregnação dimensional).
-        final int finalDmCount = dmCount;
-        player.getCapability(br.com.murilo.liberthia.matter.MatterProfileProvider.CAP).ifPresent(profile -> {
-            profile.addDark(0.5f + finalDmCount * 0.1f + handBonus);
-            br.com.murilo.liberthia.matter.MatterProfileEvents.syncTo(player);
-        });
+        // v0.1.30: Refined Containment artifacts SUPRIMEM totalmente o dano
+        // E o ganho de DM via radiação. Cheked PRIMEIRO porque tem prioridade
+        // sobre a glove crua. Drena durab proporcional à exposição.
+        if (br.com.murilo.liberthia.compat.CuriosCompat.isRefinedPendantActive(player)) {
+            br.com.murilo.liberthia.compat.CuriosCompat.damageRefinedPendant(player, 1);
+            return;
+        }
+        if (br.com.murilo.liberthia.compat.CuriosCompat.isRefinedGloveActive(player)
+                && handBonus > 0) {
+            // Glove refinada cobre o caso "segurando bloco de DM na mão" (handBonus)
+            br.com.murilo.liberthia.compat.CuriosCompat.damageRefinedGlove(player, 1);
+            return;
+        }
 
-        if (dmCount <= 0) return;  // se só tinha em mão, sai aqui (sem dano padrão)
-
-        // Tem luva? Suprime dano e consome durabilidade.
+        // Tem luva crua? Suprime TODO o efeito (dano + impregnação dimensional)
+        // e consome durabilidade. Comportamento anterior preservado pra quem
+        // não tem os refined artifacts.
         ItemStack glove = findGlove(player);
         if (!glove.isEmpty()) {
-            // 1 dano de durabilidade por tick de exposição (consome devagar)
+            // Consome durabilidade enquanto absorve a radiação (lento)
             if (player.level().random.nextInt(2) == 0) {
                 glove.hurtAndBreak(1, player, p -> {
                     p.broadcastBreakEvent(net.minecraft.world.entity.EquipmentSlot.MAINHAND);
                 });
             }
+            return;
+        }
+
+        // Sem luva — acumula matéria escura no perfil do jogador.
+        // v0.1.51: skip se player tomou Dark Matter Pill (resistente).
+        final int finalDmCount = dmCount;
+        if (!br.com.murilo.liberthia.matter.MatterResistance.blocked(
+                player, br.com.murilo.liberthia.matter.MatterResistance.Type.DARK)) {
+            player.getCapability(br.com.murilo.liberthia.matter.MatterProfileProvider.CAP).ifPresent(profile -> {
+                profile.addDark(0.5f + finalDmCount * 0.1f + handBonus);
+                br.com.murilo.liberthia.matter.MatterProfileEvents.syncTo(player);
+            });
+        }
+
+        if (dmCount <= 0) return;  // se só tinha em mão, sai aqui (sem dano padrão)
+
+        // v0.1.51: pílula também bloqueia o dano de radiação
+        if (br.com.murilo.liberthia.matter.MatterResistance.blocked(
+                player, br.com.murilo.liberthia.matter.MatterResistance.Type.DARK)) {
             return;
         }
 
@@ -87,19 +116,45 @@ public final class DarkMatterRadiationHandler {
         }
     }
 
-    /** Conta cubos de matéria escura no inventário (incluindo offhand). */
+    /**
+     * Conta cubos de matéria escura no inventário (incluindo offhand) MAIS
+     * items com tag NBT {@code MatterInfected} (produzidos pelo Dark Matter
+     * Alchemizer). Cada item infectado conta como +1 source — empilha com
+     * outros blocos DM pro dano por radiação escalonar igual.
+     */
     private static int countDarkMatter(Player player) {
-        int count = 0;
+        int dmBlocks = 0;
+        int infected = 0;
         var dmItem = ModBlocks.DARK_MATTER_BLOCK.get().asItem();
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack s = player.getInventory().getItem(i);
-            if (s.is(dmItem)) count += s.getCount();
+            if (s.is(dmItem)) dmBlocks += s.getCount();
+            // Items infectados (tag MatterInfected) também irradiam — cada um
+            // conta como 1 source. Não usa getCount() porque rare loot é stack
+            // size 1 sempre e é mais coerente: 1 item = 1 fonte.
+            else if (s.getTag() != null && s.getTag().getBoolean("MatterInfected")) {
+                infected += 1;
+            }
         }
-        return count;
+        int total = dmBlocks + infected;
+        if (total > 0) {
+            LOG.info("countDarkMatter: dm blocks={}, infected items={}, total={}",
+                    dmBlocks, infected, total);
+        }
+        return total;
     }
 
-    /** Procura uma Containment Glove em qualquer slot do inventário. */
+    /**
+     * Procura uma Containment Glove em qualquer slot do inventário OU equipada
+     * num slot Curios (hands, bracelet, ring, charm — se o mod Curios estiver
+     * instalado). Curios é checada primeiro pois é o "slot oficial" da glove.
+     */
     private static ItemStack findGlove(Player player) {
+        // 1) Curios slot (se mod presente)
+        ItemStack curioGlove = br.com.murilo.liberthia.compat.CuriosCompat.findEquippedGlove(player);
+        if (!curioGlove.isEmpty()) return curioGlove;
+
+        // 2) Inventário comum (fallback se Curios não está instalado)
         var gloveItem = ModItems.CONTAINMENT_GLOVE.get();
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack s = player.getInventory().getItem(i);

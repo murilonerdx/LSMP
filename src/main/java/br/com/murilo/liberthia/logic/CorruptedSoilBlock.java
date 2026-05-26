@@ -38,9 +38,9 @@ public class CorruptedSoilBlock extends Block {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (br.com.murilo.liberthia.config.DevMode.ACTIVE) return;
-        // F5: Spore particles
-        if (random.nextFloat() < 0.25f) {
+        // F5: Spore particles em cima do bloco — só rodam fora do DevMode pra não
+        // poluir tela na bancada
+        if (!br.com.murilo.liberthia.config.DevMode.ACTIVE && random.nextFloat() < 0.25f) {
             level.addParticle(
                     net.minecraft.core.particles.ParticleTypes.PORTAL,
                     pos.getX() + random.nextDouble(),
@@ -49,6 +49,9 @@ public class CorruptedSoilBlock extends Block {
                     (random.nextDouble() - 0.5) * 0.05, 0.03, (random.nextDouble() - 0.5) * 0.05
             );
         }
+        // Aura de matéria escura — sempre ativa (cosmético, ajuda a localizar
+        // fontes pro analisador)
+        DarkMatterAura.emit(level, pos, random, 1.0f);
     }
 
     private void spreadInfectionOnce(ServerLevel level, BlockPos pos, RandomSource random) {

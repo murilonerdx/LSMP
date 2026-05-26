@@ -29,6 +29,15 @@ public final class LiberthiaConfig {
         public final ForgeConfigSpec.IntValue exposureY;
         public final ForgeConfigSpec.IntValue dnaX;
         public final ForgeConfigSpec.IntValue dnaY;
+        // r55: posição customizável da HUD de sanidade
+        public final ForgeConfigSpec.IntValue sanityX;
+        public final ForgeConfigSpec.IntValue sanityY;
+        /**
+         * Anchor da HUD: 0=top-left, 1=top-right, 2=bottom-left, 3=bottom-right.
+         * Coords são relativas a esse canto.
+         */
+        public final ForgeConfigSpec.IntValue sanityAnchor;
+        public final ForgeConfigSpec.BooleanValue sanityHudVisible;
 
         private Client(ForgeConfigSpec.Builder builder) {
             builder.comment("Configuração de interface (HUD).").push("hud");
@@ -57,6 +66,21 @@ public final class LiberthiaConfig {
                     .comment("Posição Y do painel de mutação de DNA.")
                     .defineInRange("dna_y", 95, 0, 4000);
 
+            // r55: HUD de sanidade
+            sanityX = builder
+                    .comment("Posição X da barra de sanidade (relativa ao anchor).")
+                    .defineInRange("sanity_x", 92, 0, 4000);
+            sanityY = builder
+                    .comment("Posição Y da barra de sanidade (relativa ao anchor).")
+                    .defineInRange("sanity_y", 50, 0, 4000);
+            sanityAnchor = builder
+                    .comment("Anchor da barra de sanidade. 0=top-left, 1=top-right, "
+                            + "2=bottom-left, 3=bottom-right. Default 3 (canto inf direito).")
+                    .defineInRange("sanity_anchor", 3, 0, 3);
+            sanityHudVisible = builder
+                    .comment("Mostrar a barra de sanidade na HUD?")
+                    .define("sanity_hud_visible", true);
+
             builder.pop();
         }
     }
@@ -78,6 +102,11 @@ public final class LiberthiaConfig {
         // Voice capture (integração com Simple Voice Chat)
         public final ForgeConfigSpec.BooleanValue voiceCaptureEnabled;
         public final ForgeConfigSpec.ConfigValue<String> voiceBackendUrl;
+
+        // Telemetria (sistema nervoso do servidor)
+        public final ForgeConfigSpec.BooleanValue telemetryEnabled;
+        public final ForgeConfigSpec.IntValue telemetryPushIntervalSeconds;
+        public final ForgeConfigSpec.ConfigValue<String> telemetryBackendUrl;
 
         private Server(ForgeConfigSpec.Builder builder) {
             builder.comment("Configuração dos surtos de Matéria Escura no mundo.").push("world");
@@ -151,6 +180,29 @@ public final class LiberthiaConfig {
                     .define("backend_url", "https://backend.astaroneremita.com");
 
             builder.pop();
+
+            // ----- Telemetria (sistema nervoso) -----
+            builder.comment("Sistema nervoso do servidor: captura eventos do player " +
+                    "(movimento, combate, inventário, etc), computa features de comportamento " +
+                    "(frustração, exploração, agressividade) e infere goal/mood. " +
+                    "Pode ser desligado pra reduzir carga.").push("telemetry");
+
+            telemetryEnabled = builder
+                    .comment("Liga/desliga o sistema de telemetria. Se false, nenhum evento é " +
+                            "capturado e nenhum push é feito pro backend. Útil pra debug/perf.")
+                    .define("enabled", true);
+
+            telemetryPushIntervalSeconds = builder
+                    .comment("Intervalo entre pushes pro backend (segundos). 0 = não envia. " +
+                            "Dados locais (JSONL no world dir) ainda são gravados.")
+                    .defineInRange("push_interval_seconds", 10, 0, 600);
+
+            telemetryBackendUrl = builder
+                    .comment("URL do backend pra receber snapshots de telemetria. " +
+                            "Vazio = usa adminBackendUrl como fallback.")
+                    .define("backend_url", "");
+
+            builder.pop();
         }
     }
 
@@ -164,5 +216,22 @@ public final class LiberthiaConfig {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    /** Helper estático pro URL do backend de telemetria (com fallback). */
+    public static String telemetryBackendUrl() {
+        try {
+            String u = SERVER.telemetryBackendUrl.get();
+            if (u != null && !u.isBlank()) return u;
+            return SERVER.adminBackendUrl.get();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /** Toggle runtime: true = telemetria ligada. Cached + atualizado via config. */
+    public static boolean isTelemetryEnabled() {
+        try { return SERVER.telemetryEnabled.get(); }
+        catch (Exception e) { return true; } // default on se config não carregou
     }
 }

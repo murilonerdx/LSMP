@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/template_torch",
   "textures": {
-    "cross": "liberthia:block/blood_torch"
+    "torch": "liberthia:block/blood_torch"
   }
 }

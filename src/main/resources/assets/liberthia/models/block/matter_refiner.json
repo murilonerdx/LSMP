@@ -1,6 +1,10 @@
 {
-  "parent": "block/cube_all",
+  "_comment": "Matter Refiner — usa cube_bottom_top: blast_furnace_top (refinamento industrial), polished_blackstone_bricks nas laterais, deepslate_tiles embaixo (peso/durabilidade).",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "minecraft:block/purpur_block"
+    "top":      "minecraft:block/blast_furnace_top",
+    "side":     "minecraft:block/polished_blackstone_bricks",
+    "bottom":   "minecraft:block/deepslate_tiles",
+    "particle": "minecraft:block/blast_furnace_top"
   }
 }

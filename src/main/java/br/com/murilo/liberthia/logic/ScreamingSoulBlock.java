@@ -46,9 +46,9 @@ public class ScreamingSoulBlock extends Block {
         Vec3 center = new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
         AABB box = new AABB(pos).inflate(GAZE_RANGE);
         boolean any = false;
-        for (LivingEntity le : level.getEntitiesOfClass(LivingEntity.class, box)) {
-            if (le instanceof Player p && p.isCreative()) continue;
-            if (BloodKin.is(le)) continue;
+        // v0.1.22 r18: pula Sigil/Crown/creative. Mira outros players normais.
+        for (Player le : level.getEntitiesOfClass(Player.class, box)) {
+            if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(le)) continue;
             Vec3 toBlock = center.subtract(le.getEyePosition()).normalize();
             Vec3 look = le.getLookAngle().normalize();
             double dot = look.dot(toBlock);

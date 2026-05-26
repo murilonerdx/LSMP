@@ -234,6 +234,16 @@ public final class ModNetwork {
                 MatterProfileSyncS2CPacket::handle
         );
 
+        // v1: cliente pode pedir re-sync imediato do profile (usado pela
+        // MatterAnalyzerScreen pra evitar tab Perfil em branco).
+        CHANNEL.registerMessage(
+                packetId++,
+                RequestMatterProfileSyncC2SPacket.class,
+                RequestMatterProfileSyncC2SPacket::encode,
+                RequestMatterProfileSyncC2SPacket::decode,
+                RequestMatterProfileSyncC2SPacket::handle
+        );
+
         // --- Dimensional Chest channel ---
         CHANNEL.registerMessage(
                 packetId++,
@@ -248,6 +258,293 @@ public final class ModNetwork {
                 SetDimensionalChannelC2SPacket::encode,
                 SetDimensionalChannelC2SPacket::decode,
                 SetDimensionalChannelC2SPacket::handle
+        );
+
+        // v0.1.27: teleport da Clear Matter armor via shift+right-click no AR
+        // (RightClickEmpty é client-only, então cliente manda esse packet).
+        CHANNEL.registerMessage(
+                packetId++,
+                ClearMatterTeleportC2SPacket.class,
+                ClearMatterTeleportC2SPacket::encode,
+                ClearMatterTeleportC2SPacket::decode,
+                ClearMatterTeleportC2SPacket::handle
+        );
+
+        // --- v1: Vision Swap (White Matter ≥ 50 random pick) ---
+        CHANNEL.registerMessage(
+                packetId++,
+                StartVisionSwapS2CPacket.class,
+                StartVisionSwapS2CPacket::encode,
+                StartVisionSwapS2CPacket::decode,
+                StartVisionSwapS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                EndVisionSwapS2CPacket.class,
+                EndVisionSwapS2CPacket::encode,
+                EndVisionSwapS2CPacket::decode,
+                EndVisionSwapS2CPacket::handle
+        );
+
+        // --- v1: Possession (mind-control via amulet) ---
+        CHANNEL.registerMessage(
+                packetId++,
+                StartPossessionS2CPacket.class,
+                StartPossessionS2CPacket::encode,
+                StartPossessionS2CPacket::decode,
+                StartPossessionS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                EndPossessionS2CPacket.class,
+                EndPossessionS2CPacket::encode,
+                EndPossessionS2CPacket::decode,
+                EndPossessionS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                LockedInputS2CPacket.class,
+                LockedInputS2CPacket::encode,
+                LockedInputS2CPacket::decode,
+                LockedInputS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                PossessionMoveC2SPacket.class,
+                PossessionMoveC2SPacket::encode,
+                PossessionMoveC2SPacket::decode,
+                PossessionMoveC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                PossessionAttackC2SPacket.class,
+                PossessionAttackC2SPacket::encode,
+                PossessionAttackC2SPacket::decode,
+                PossessionAttackC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                EndPossessionC2SPacket.class,
+                EndPossessionC2SPacket::encode,
+                EndPossessionC2SPacket::decode,
+                EndPossessionC2SPacket::handle
+        );
+
+        // v0.1.49: Possession actions — quebrar bloco e usar item enquanto possui
+        CHANNEL.registerMessage(
+                packetId++,
+                PossessionBreakBlockC2SPacket.class,
+                PossessionBreakBlockC2SPacket::encode,
+                PossessionBreakBlockC2SPacket::decode,
+                PossessionBreakBlockC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                PossessionUseItemC2SPacket.class,
+                PossessionUseItemC2SPacket::encode,
+                PossessionUseItemC2SPacket::decode,
+                PossessionUseItemC2SPacket::handle
+        );
+
+        // v0.1.22: Boss Crown — rename de bossbar custom
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenBossCrownNameScreenS2CPacket.class,
+                OpenBossCrownNameScreenS2CPacket::encode,
+                OpenBossCrownNameScreenS2CPacket::decode,
+                OpenBossCrownNameScreenS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                SetBossCrownNameC2SPacket.class,
+                SetBossCrownNameC2SPacket::encode,
+                SetBossCrownNameC2SPacket::decode,
+                SetBossCrownNameC2SPacket::handle
+        );
+        // v0.1.22 r23: Cosmic Horror — 3 packets de alucinação/overlay
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.MadnessHallucinationS2CPacket.class,
+                br.com.murilo.liberthia.network.packet.MadnessHallucinationS2CPacket::encode,
+                br.com.murilo.liberthia.network.packet.MadnessHallucinationS2CPacket::decode,
+                br.com.murilo.liberthia.network.packet.MadnessHallucinationS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.MaddenedTargetS2CPacket.class,
+                br.com.murilo.liberthia.network.packet.MaddenedTargetS2CPacket::encode,
+                br.com.murilo.liberthia.network.packet.MaddenedTargetS2CPacket::decode,
+                br.com.murilo.liberthia.network.packet.MaddenedTargetS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.MirrorInsanityS2CPacket.class,
+                br.com.murilo.liberthia.network.packet.MirrorInsanityS2CPacket::encode,
+                br.com.murilo.liberthia.network.packet.MirrorInsanityS2CPacket::decode,
+                br.com.murilo.liberthia.network.packet.MirrorInsanityS2CPacket::handle
+        );
+        // v0.1.22 r24: Spirit World sanity sync
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.SanitySyncS2CPacket.class,
+                br.com.murilo.liberthia.network.packet.SanitySyncS2CPacket::encode,
+                br.com.murilo.liberthia.network.packet.SanitySyncS2CPacket::decode,
+                br.com.murilo.liberthia.network.packet.SanitySyncS2CPacket::handle
+        );
+        // v0.1.22 r27: Dimensional Antenna — set frequency
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.SetAntennaFrequencyC2SPacket.class,
+                br.com.murilo.liberthia.network.packet.SetAntennaFrequencyC2SPacket::encode,
+                br.com.murilo.liberthia.network.packet.SetAntennaFrequencyC2SPacket::decode,
+                br.com.murilo.liberthia.network.packet.SetAntennaFrequencyC2SPacket::handle
+        );
+
+        // v0.1.22 r28: Quantum Terminal — action (set freq / send msg)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.TerminalActionC2SPacket.class,
+                br.com.murilo.liberthia.network.packet.TerminalActionC2SPacket::encode,
+                br.com.murilo.liberthia.network.packet.TerminalActionC2SPacket::decode,
+                br.com.murilo.liberthia.network.packet.TerminalActionC2SPacket::handle
+        );
+
+        // v0.1.22 r30: Possession Ability (mob-specific habilidades)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.PossessionAbilityC2SPacket.class,
+                br.com.murilo.liberthia.network.packet.PossessionAbilityC2SPacket::encode,
+                br.com.murilo.liberthia.network.packet.PossessionAbilityC2SPacket::decode,
+                br.com.murilo.liberthia.network.packet.PossessionAbilityC2SPacket::handle
+        );
+
+        // v0.1.22 r30: Crown of Mass Possession — selecionar player + voice
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.CrownVoiceTargetC2SPacket.class,
+                br.com.murilo.liberthia.network.packet.CrownVoiceTargetC2SPacket::encode,
+                br.com.murilo.liberthia.network.packet.CrownVoiceTargetC2SPacket::decode,
+                br.com.murilo.liberthia.network.packet.CrownVoiceTargetC2SPacket::handle
+        );
+
+        // r35: Cosmic Horror sync (server → client phase + intensity)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.cosmic.CosmicSyncS2CPacket.class,
+                br.com.murilo.liberthia.cosmic.CosmicSyncS2CPacket::encode,
+                br.com.murilo.liberthia.cosmic.CosmicSyncS2CPacket::decode,
+                br.com.murilo.liberthia.cosmic.CosmicSyncS2CPacket::handle
+        );
+
+        // r38: Cosmic Horror — força rotação da câmera (mouse girando sozinho)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.cosmic.CosmicForceRotationS2CPacket.class,
+                br.com.murilo.liberthia.cosmic.CosmicForceRotationS2CPacket::encode,
+                br.com.murilo.liberthia.cosmic.CosmicForceRotationS2CPacket::decode,
+                br.com.murilo.liberthia.cosmic.CosmicForceRotationS2CPacket::handle
+        );
+
+        // r40: Hallucination — server injeta hallucination client-only
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.cosmic.hallucination.HallucinationS2CPacket.class,
+                br.com.murilo.liberthia.cosmic.hallucination.HallucinationS2CPacket::encode,
+                br.com.murilo.liberthia.cosmic.hallucination.HallucinationS2CPacket::decode,
+                br.com.murilo.liberthia.cosmic.hallucination.HallucinationS2CPacket::handle
+        );
+
+        // r50: Caretaker Console packets — start/stop fake msg session
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.cosmic.observatory.console.StartCaretakerSessionC2SPacket.class,
+                br.com.murilo.liberthia.cosmic.observatory.console.StartCaretakerSessionC2SPacket::encode,
+                br.com.murilo.liberthia.cosmic.observatory.console.StartCaretakerSessionC2SPacket::decode,
+                br.com.murilo.liberthia.cosmic.observatory.console.StartCaretakerSessionC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.cosmic.observatory.console.StopCaretakerSessionC2SPacket.class,
+                br.com.murilo.liberthia.cosmic.observatory.console.StopCaretakerSessionC2SPacket::encode,
+                br.com.murilo.liberthia.cosmic.observatory.console.StopCaretakerSessionC2SPacket::decode,
+                br.com.murilo.liberthia.cosmic.observatory.console.StopCaretakerSessionC2SPacket::handle
+        );
+
+        // r42: Custom Spells — craft / cast / select / delete / sync
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.custom.CraftSpellC2SPacket.class,
+                br.com.murilo.liberthia.magic.custom.CraftSpellC2SPacket::encode,
+                br.com.murilo.liberthia.magic.custom.CraftSpellC2SPacket::decode,
+                br.com.murilo.liberthia.magic.custom.CraftSpellC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.custom.CastCustomSpellC2SPacket.class,
+                br.com.murilo.liberthia.magic.custom.CastCustomSpellC2SPacket::encode,
+                br.com.murilo.liberthia.magic.custom.CastCustomSpellC2SPacket::decode,
+                br.com.murilo.liberthia.magic.custom.CastCustomSpellC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.custom.SelectSpellC2SPacket.class,
+                br.com.murilo.liberthia.magic.custom.SelectSpellC2SPacket::encode,
+                br.com.murilo.liberthia.magic.custom.SelectSpellC2SPacket::decode,
+                br.com.murilo.liberthia.magic.custom.SelectSpellC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.custom.DeleteSpellC2SPacket.class,
+                br.com.murilo.liberthia.magic.custom.DeleteSpellC2SPacket::encode,
+                br.com.murilo.liberthia.magic.custom.DeleteSpellC2SPacket::decode,
+                br.com.murilo.liberthia.magic.custom.DeleteSpellC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.custom.SyncCustomSpellsS2CPacket.class,
+                br.com.murilo.liberthia.magic.custom.SyncCustomSpellsS2CPacket::encode,
+                br.com.murilo.liberthia.magic.custom.SyncCustomSpellsS2CPacket::decode,
+                br.com.murilo.liberthia.magic.custom.SyncCustomSpellsS2CPacket::handle
+        );
+
+        // r54: Open Spell Wheel — Grimoire shift+rclick chama isso server-side
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenSpellWheelS2CPacket.class,
+                OpenSpellWheelS2CPacket::encode,
+                OpenSpellWheelS2CPacket::decode,
+                OpenSpellWheelS2CPacket::handle
+        );
+
+        // r65: Observation Casting — Composition GUI + Save + Animation packets
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.observation.network.OpenCompositionScreenS2CPacket.class,
+                br.com.murilo.liberthia.observation.network.OpenCompositionScreenS2CPacket::encode,
+                br.com.murilo.liberthia.observation.network.OpenCompositionScreenS2CPacket::decode,
+                br.com.murilo.liberthia.observation.network.OpenCompositionScreenS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.observation.network.SaveCompositionC2SPacket.class,
+                br.com.murilo.liberthia.observation.network.SaveCompositionC2SPacket::encode,
+                br.com.murilo.liberthia.observation.network.SaveCompositionC2SPacket::decode,
+                br.com.murilo.liberthia.observation.network.SaveCompositionC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.observation.network.CastAnimationS2CPacket.class,
+                br.com.murilo.liberthia.observation.network.CastAnimationS2CPacket::encode,
+                br.com.murilo.liberthia.observation.network.CastAnimationS2CPacket::decode,
+                br.com.murilo.liberthia.observation.network.CastAnimationS2CPacket::handle
+        );
+        // r71: HUD position S2C
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.observation.network.HudPositionS2CPacket.class,
+                br.com.murilo.liberthia.observation.network.HudPositionS2CPacket::encode,
+                br.com.murilo.liberthia.observation.network.HudPositionS2CPacket::decode,
+                br.com.murilo.liberthia.observation.network.HudPositionS2CPacket::handle
         );
     }
 

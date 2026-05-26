@@ -212,6 +212,15 @@ public class ItemPipeBlock extends BaseEntityBlock {
         Direction face = hit.getDirection();
         ItemStack held = player.getItemInHand(hand);
 
+        // v0.1.25: PipeFilter[Not]Item tratam tudo via Item#useOn (que roda
+        // ANTES do Block#use). Aqui retornamos PASS pra não disputar — sem
+        // isso, a branch de cycleSpeed (shift+item) abaixo rodaria depois
+        // do useOn já ter aberto a GUI, sobrescrevendo o comando.
+        if (held.getItem() instanceof br.com.murilo.liberthia.item.PipeFilterNotItem
+                || held.getItem() instanceof br.com.murilo.liberthia.item.PipeFilterItem) {
+            return InteractionResult.PASS;
+        }
+
         // Sneak + held item → cycle pipe speed (whole-pipe setting).
         if (player.isShiftKeyDown() && !held.isEmpty()) {
             ItemPipeBlockEntity.Speed s = pipe.cycleSpeed();
@@ -220,12 +229,33 @@ public class ItemPipeBlock extends BaseEntityBlock {
             return InteractionResult.CONSUME;
         }
 
-        // Sneak + empty hand → MOSTRA STATUS de todas as 6 faces no chat.
-        // Útil pra debugar setups que parecem não funcionar.
+        // Sneak + empty hand →
+        //   • Se a face clicada TEM items no filtro: toggle WHITELIST ↔ BLACKLIST
+        //   • Se a face NÃO tem filtro: mostra STATUS de todas as 6 faces
+        // Essa heurística "DWIM" (do what I mean) evita criar mais um gesture.
+        // Click sneak numa face com filtro = você quer mexer NAQUELE filtro
+        // (toggle modo). Click numa face vazia = você quer overview do pipe.
         if (player.isShiftKeyDown() && held.isEmpty()) {
+            ItemStack[] faceFilter = pipe.getFilter(face);
+            boolean hasFilter = false;
+            for (ItemStack fs : faceFilter) {
+                if (!fs.isEmpty()) { hasFilter = true; break; }
+            }
+            if (hasFilter) {
+                // Toggle filter mode pra essa face
+                ItemPipeBlockEntity.FilterMode fm = pipe.cycleFilterMode(face);
+                String modeStr = fm == ItemPipeBlockEntity.FilterMode.BLACKLIST
+                        ? "§c≠ BLACKLIST§r §7(passa TUDO menos os listados)§r"
+                        : "§a== WHITELIST§r §7(passa SÓ os listados)§r";
+                player.displayClientMessage(Component.literal(
+                        face.getName() + " filtro: " + modeStr), true);
+                return InteractionResult.CONSUME;
+            }
             showStatus(pipe, player, level, pos);
             return InteractionResult.CONSUME;
         }
+
+        // (PipeFilter[Not]Item já foi tratado no topo do método — não chega aqui)
 
         // Held item → add to filter.
         if (!held.isEmpty()) {
@@ -326,10 +356,19 @@ public class ItemPipeBlock extends BaseEntityBlock {
             }
 
             String prefix = broken ? "§c❌ " : "  ";
+            // Indicador do modo do filtro: == (whitelist) ou != (blacklist).
+            // Só aparece quando há filtro configurado — sem filtro o modo é
+            // irrelevante (passa tudo).
+            String filterModeStr = "";
+            if (nonEmpty > 0) {
+                ItemPipeBlockEntity.FilterMode fm = pipe.getFilterMode(d);
+                filterModeStr = fm == ItemPipeBlockEntity.FilterMode.BLACKLIST
+                        ? " §c[!=]§r" : " §a[==]§r";
+            }
             player.displayClientMessage(
                     Component.literal(prefix + d.getName().toUpperCase() + ": " + m.name() + " " + neighborInfo)
                             .withStyle(color)
-                            .append(Component.literal(" | filtro: " + filterText)
+                            .append(Component.literal(" | filtro:" + filterModeStr + " " + filterText)
                                     .withStyle(ChatFormatting.WHITE)),
                     false);
         }
@@ -338,7 +377,9 @@ public class ItemPipeBlock extends BaseEntityBlock {
                         + " | Vel: " + pipe.getSpeed().name())
                         .withStyle(ChatFormatting.AQUA), false);
         player.displayClientMessage(
-                Component.literal("§7Legenda: §6EXTRACT§7=puxa do vizinho · §aINSERT§7=manda pro vizinho · §7DEFAULT§7=passa · §cDISABLED§7=corta. §c❌§7 = setup quebrado."),
+                Component.literal("§7Legenda: §6EXTRACT§7=puxa · §aINSERT§7=manda · §7DEFAULT§7=passa · §cDISABLED§7=corta. " +
+                        "§a[==]§7=whitelist · §c[!=]§7=blacklist. " +
+                        "§e(Shift+vazio numa face COM filtro toggla ==/!=)§r"),
                 false);
     }
 

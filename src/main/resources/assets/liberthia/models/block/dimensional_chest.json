@@ -1,6 +1,10 @@
 {
-  "parent": "block/cube_all",
+  "_comment": "Dimensional Chest — usa cube_bottom_top com 3 texturas vanilla diferentes pra dar look distintivo: end_portal_frame_top em cima (cristal multidimensional), purpur_pillar nas laterais (portal vibes), obsidian embaixo (peso/grounding).",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "minecraft:block/lapis_block"
+    "top":      "minecraft:block/end_portal_frame_top",
+    "side":     "minecraft:block/purpur_pillar",
+    "bottom":   "minecraft:block/obsidian",
+    "particle": "minecraft:block/end_portal_frame_top"
   }
 }

@@ -30,6 +30,14 @@
 21. [Receitas](#21-receitas)
 22. [Registro Completo de Arquivos](#22-registro-completo-de-arquivos)
 23. [Sistema de Sangue e Carne (Blood System)](#23-sistema-de-sangue-e-carne-blood-system)
+24. [Ajustes Pós-v1 (Tarefas 1–8)](#24-ajustes-pós-v1-tarefas-18)
+25. [Sistema Multiblock de Matter Extraction](#25-sistema-multiblock-de-matter-extraction)
+26. [Matter Pill Brewer (v0.1.44)](#26-matter-pill-brewer-v0144)
+27. [Blood Tree — família estendida + proximidade](#27-blood-tree--família-estendida--proximidade)
+28. [Curios Artifacts & Astaron Relics](#28-curios-artifacts--astaron-relics)
+29. [White Matter Vision Swap & Possession](#29-white-matter-vision-swap--possession)
+30. [Painel Admin Web 3-tier](#30-painel-admin-web-3-tier)
+31. [Token Lock & Sincronização Mod↔Backend](#31-token-lock--sincronização-modbackend)
 
 ---
 
@@ -1312,3 +1320,340 @@ lang/{pt_br,en_us}.json                                       8 nomes + 5 toolti
 ### 24.10 Estado do build
 
 Última verificação: `./gradlew build -x test` → **BUILD SUCCESSFUL**, 4 warnings de `ResourceLocation` deprecated (todos pré-existentes, fora do código novo).
+
+---
+
+## 25. Sistema Multiblock de Matter Extraction
+
+Adicionado em v0.1.30→v0.1.33. Sistema inspirado em Create, com 3 blocos principais. Player parado em cima do extractor → ele drena pontos de matter do `MatterProfile` do player, converte em fluido, transporta via canos, armazena em tanques.
+
+### 25.1 Matter Extractor (`MatterExtractorBlock` + `MatterExtractorBlockEntity`)
+
+- Coloca no chão. Player precisa estar **EM CIMA do bloco** (não só próximo — fix em v0.1.21).
+- Tick processa: se há matter no perfil + tank vizinho com espaço, drena `0.5 ponto` do tipo dominante e enche o tank com `100 mB` de fluido equivalente.
+- GUI mostra `bossbar`-style barra de progresso + tipo detectado.
+- Energia: gasta FE da rede (cabos de energia).
+
+### 25.2 Matter Tank (`MatterTankBlock` + `MatterTankBlockEntity`)
+
+- Tank de **8 000 mB**.
+- 2 slots: `SLOT_BUCKET_IN` (top), `SLOT_BUCKET_OUT` (bottom).
+- **Slot IN aceita** (v0.1.44):
+  - `Items.BUCKET` — bucket vazio (recebe fluido do tank, sai cheio no OUT)
+  - `ModItems.{DARK,CLEAR,YELLOW}_MATTER_BUCKET` — bucket cheio (drena no tank, sai vazio no OUT)
+- **Slot OUT** é só saída — quickMove encaminha tudo do player para o IN.
+- **BER renderiza fluido visualmente** dentro do bloco — preenchimento real proporcional ao `tank.getFluidAmount()`, gradient por tipo (violeta DM, cyan CM, dourado YM).
+- Aceita transferência via `IFluidHandler` capability nos 6 lados — pipes conectam direto.
+- Botão "Purgar" na GUI esvazia o tank (operador).
+
+```java
+// Pattern do tick (MatterTankBlockEntity.processBuckets):
+//   Caso 1: bucket cheio em IN  → fill tank 1000 mB + bucket vazio em OUT
+//   Caso 2: bucket vazio em IN + tank ≥ 1000 mB → bucket cheio em OUT
+```
+
+### 25.3 Matter Pipe (`MatterPipeBlock` + `MatterPipeBlockEntity`)
+
+- 3 variantes: `matter_pipe_dark/clear/yellow` — só transportam o fluido correspondente.
+- 1 BlockEntityType compartilhado (lê tipo do `BlockState`).
+- Pattern do `ItemPipe`: filtros aplicáveis SOMENTE no item_pipe (extractor/inserter mostram mensagem "Esse filtro vai no Item Pipe, não aqui").
+
+### 25.4 Pipe Filter
+
+- `PipeFilterItem` — item curio/utility que abre menu de 9 slots. Cada slot define um item permitido.
+- Aplicado apenas em `ItemPipe`. Em `ItemExtractor`/`ItemInserter`, hand interaction → msg `"§7Esse filtro pertence ao §eItem Pipe§7, não a este bloco."`
+
+### 25.5 Fluidos & Buckets
+
+- `ModFluids.DARK_MATTER` / `CLEAR_MATTER` / `YELLOW_MATTER` — Flowing + Source pairs.
+- `ModItems.{DARK,CLEAR,YELLOW}_MATTER_BUCKET` — `BucketItem` registrado com `Items.BUCKET` como container vazio.
+
+---
+
+## 26. Matter Pill Brewer (v0.1.44)
+
+### 26.1 Bloco (`MatterPillBrewerBlock` + `MatterPillBrewerBlockEntity`)
+
+- 3 slots:
+  - `SLOT_INGOT (0)` — aceita `purified_{dark,clear,yellow}_matter_ingot`
+  - `SLOT_BOTTLE (1)` — aceita `Items.GLASS_BOTTLE`
+  - `SLOT_OUTPUT (2)` — pílula gerada
+- Tick: a cada 60 ticks (3 s) — se ambos inputs presentes E saída cabe, consome 1 de cada e gera **3 pílulas** do tipo correspondente.
+- Sem energia (alquimia simples).
+
+```java
+// Mapa ingot → pílula (MatterPillBrewerBlockEntity.ingotToPill):
+PURIFIED_DARK_MATTER_INGOT   → DARK_MATTER_PILL
+PURIFIED_CLEAR_MATTER_INGOT  → CLEAR_MATTER_PILL
+PURIFIED_YELLOW_MATTER_INGOT → YELLOW_MATTER_PILL
+```
+
+### 26.2 Pílulas dedicadas
+
+Antes a `Clear Matter Pill` curava DM (errado — mesmo nome, efeito invertido). Agora:
+
+| Pílula | Purga | Stack |
+|---|---|---|
+| `DarkMatterPillItem` (`dark_matter_pill`) | DM do perfil | 16 |
+| `ClearMatterPillItem` (`clear_matter_pill`) | WM do perfil | 16 |
+| `YellowMatterPillItem` (`yellow_matter_pill`) | YM do perfil | 16 |
+
+Cap de 20 % máx por uso pra não zerar o perfil inteiro de uma vez (v0.1.30).
+
+### 26.3 Menu + Screen
+
+- `MatterPillBrewerMenu` (slots 0/1/2 nos pos 38/62/122) — quickMove: ingot → slot 0, bottle → slot 1.
+- `MatterPillBrewerScreen` — paleta rose-dark + dourado (alquimia), arrow de progresso entre BOTTLE e OUTPUT, ícone "+" decorativo entre ingot e bottle.
+
+### 26.4 Receita + assets
+
+```
+GBG     G = glass_bottle
+DPD     B = brewing_stand
+III     D = liberthia:dark_matter_shard
+        P = liberthia:purified_dark_matter_ingot
+        I = minecraft:iron_ingot
+```
+
+Textures: `matter_pill_brewer_{top,side,bottom}.png` (cópias do `matter_purifier_*` como placeholder).
+Lang: `block.liberthia.matter_pill_brewer = "Boticário de Matéria"` (pt_br) / `"Matter Pill Brewer"` (en_us).
+Pickaxe mineable tag adicionada.
+
+---
+
+## 27. Blood Tree — família estendida + proximidade
+
+### 27.1 Família completa
+
+- **Sanguine** (família original): `sanguine_sapling`, `sanguine_log`, `sanguine_leaves`, `stripped_sanguine_log`
+- **Blood** (família nova): `blood_sapling`, `blood_log`, `blood_leaves`, `stripped_blood_log`
+- Texturas geradas via PIL com paletas vermelho-escuro distintas pra cada família.
+- Saplings crescem via `TreeGrower` + `ConfiguredFeature` datapack JSON.
+
+### 27.2 `BloodLeavesBlock` (custom)
+
+Vanilla `LeavesBlock` decai quando `distance == 7` (longe de qualquer `BlockTags.LOGS`). Mesmo adicionando `blood_log` em `minecraft:logs.json`, casos de borda faziam folhas sumirem.
+
+Fix v0.1.44 — `BloodLeavesBlock extends LeavesBlock`:
+
+```java
+@Override
+public void randomTick(...) {
+    // No-op: folhas de sangue nunca decaem.
+}
+
+@Override
+public BlockState updateShape(...) {
+    return state.setValue(PERSISTENT, true).setValue(DISTANCE, 1);
+}
+```
+
+Folhas continuam dropando sapling no loot table, podem ser quebradas — só não DESAPARECEM mais.
+
+### 27.3 `BloodTreeProximityHandler`
+
+Event handler global rodando em `TickEvent.PlayerTickEvent`:
+
+- A cada **60 ticks (3 s) por player vivo** (skip creative/spectator).
+- Scan caixa 17³ = 4913 blocos. Early-out assim que conta ≥ threshold.
+- **Threshold: 1 bloco** (v0.1.44, era 3) — sapling sozinho já infecta.
+- Lista detectada: `blood_log/leaves/sapling/stripped_blood_log` + `sanguine_log/leaves/sapling/stripped_sanguine_log`.
+- Efeito: `Wither I` 5 s + `MatterProfile.addDark(0.3 × min(count, 8))` — até **2.4 / check** (escalável pra clusters grandes).
+- Action bar message c/ cooldown 1 min via `player.getPersistentData()`.
+
+---
+
+## 28. Curios Artifacts & Astaron Relics
+
+### 28.1 Pendants (3 — slot `necklace`)
+
+- `dark_matter_pendant` — suprime efeitos de proximidade de DM blocks
+- `clear_matter_pendant` — suprime efeitos de proximidade de CM blocks
+- `yellow_matter_pendant` — suprime efeitos de proximidade de YM blocks
+- `white_matter_pendant` — suprime TUDO (já existia desde v0.1.13)
+
+Drenam durabilidade enquanto ativos. Durabilidade configurada via `.durability(N)` no `ModItems` (fix de v0.1.43: items sem `.durability()` ficavam com maxDamage=0 e sumiam).
+
+### 28.2 Astaron Relics (5)
+
+- **Flame Key** (`flame_key`) — abre portas selo de fogo. Item com NBT `GraceTicks=600` pra evitar perda no primeiro drain.
+- **Astaron Access Key** (`astaron_access_key`) — chave-mestra de áreas restritas. Mesmo padrão de grace.
+- **Pulso de Astaron** (`pulso_de_astaron`) — pulsa AoE 12 blocos, dispersa mobs.
+- **Pés Queimantes** (`pes_queimantes_astaron`) — botas Curios (slot `feet`/standalone). `.durability(19200)`. Não somem mais (v0.1.43 fix).
+- **Cinto Sigil** (`cinto_sigil_astaron`) — slot `belt`. Buff de imunidade a fogo enquanto ativo.
+
+`CuriosBridge.damageStack(stack, amount)` agora tem safety check:
+
+```java
+if (stack.getMaxDamage() <= 0) return; // não deleta items sem durability
+```
+
+### 28.3 Clear Matter Sword channeling
+
+- **Hold-to-channel**: enquanto segurando RMB, drena DM/CM do perfil, lifesteal escalonado + dash forward.
+- **Purify option** — sub-item com cooldown que consome **600 000 FE** + zera infecção global do mundo (radius enorme). Inviável em sobrevivência sem rede de energia massiva.
+
+---
+
+## 29. White Matter Vision Swap & Possession
+
+### 29.1 White Matter Vision Swap (v0.1.34)
+
+- Player com `MatterProfile.white >= N` ganha overlay client-side que mostra através de jogadores infectados (highlight contornos).
+- Toggle: ativa automático quando WM cruza threshold (sem item necessário).
+- Aplica pelo `WhiteMatterVisionRenderer` (post-process pass no client).
+
+### 29.2 Possession (v0.1.35)
+
+Sistema de domínio remoto: player segura o item, mira em mob/animal/outro player, RMB → entra no controle remoto da target.
+
+- Captura input via **`ClientTickEvent`** lendo `mc.options.keyUp/Down/Left/Right.isDown()` raw (não `MovementInputUpdateEvent`, que só dispara em mudança).
+- Server-side: `connection.teleport(x, y, z, yaw, pitch)` em cada tick pra sync robusto (fix v0.1.43).
+- Funciona com players E mobs E animais.
+- Despossess automático: distance > N, target morre, ou player solta o item.
+
+---
+
+## 30. Painel Admin Web 3-tier
+
+Sistema completo de administração via navegador. Detalhes operacionais em `ADMIN_PANEL_README.md`.
+
+### 30.1 Arquitetura
+
+```
+React + Vite + Tailwind  ←HTTP+WS→  Spring Boot  ←HTTP+SSE→  Mod (Forge)
+(porta 5173)                        (porta 8080)             (porta 25580)
+                                          ↓
+                                    PostgreSQL (backend_config, snapshots, etc.)
+```
+
+### 30.2 Mod-side — `AdminHttpServer` + `AdminApiHandler`
+
+- `com.sun.net.httpserver.HttpServer` (built-in JDK, zero deps).
+- Sobe em `ServerStartedEvent`, desliga em `ServerStoppingEvent`.
+- Pool de 4 threads daemon (`Liberthia-AdminAPI`).
+- Auth: header `X-Liberthia-Token` ou query `?token=...` validado contra `AdminHttpServer.getActiveToken()`.
+- Prioridade do token: `-Dliberthia.admin.token` > `LIBERTHIA_ADMIN_TOKEN` env > `liberthia-server.toml` > gerado UUID novo.
+- Endpoint `/health` sem auth (probe pelo backend).
+- `AdminBackendRegistrar` faz `POST /api/mod/register` a cada 60 s pro backend descobrir onde o mod está.
+
+### 30.3 Endpoints principais
+
+| Path | Descrição |
+|---|---|
+| `GET /api/server/info` | MOTD, TPS, dimensões, players online |
+| `GET /api/players` | Lista de players online |
+| `GET /api/player/{uuid}/inventory` | main+armor+offhand |
+| `POST /api/player/{uuid}/give` | `{item, count, nbt?, enchantments[]}` |
+| `POST /api/player/{uuid}/effect` | `{effect, duration, amplifier}` |
+| `POST /api/player/{uuid}/teleport` | `{x, y, z, dimension?}` |
+| `POST /api/player/{uuid}/kick` | `{reason}` |
+| `GET/POST /api/matter/{uuid}` | DM/WM/YM do player |
+| `GET /api/items` | ~1800 items (vanilla + mods) |
+| `GET /api/enchantments` | Lista todos encantamentos |
+| `POST /api/command` | Op level 4 |
+| `GET /api/events/sse` | Stream live (login/logout/death/chat) |
+
+### 30.4 Backend Spring Boot
+
+- **Proxy/cache** pro mod. `ModBridgeClient` faz HTTP request com WebClient (timeouts 3 s connect / 8 s response/read/write).
+- **Circuit breaker** no `ModBridgeClient`: abre por 15 s após 3 falhas consecutivas → retorna 503 em ~1 ms em vez de pendurar tomcat.
+- **`ModRegistry`** — registry mutável: URL + token + lastRegisteredAt + lastReachable. Reconstrói `WebClient` quando muda.
+- **`ModEventListener`** — mantém conexão SSE persistente com o mod, fan-out via WebSocket pros clientes do frontend.
+- **`BackendConfig` (JPA)** — KV persistente. Chaves: `MOD_TOKEN`, `MOD_TOKEN_LOCKED`.
+
+### 30.5 Frontend React
+
+- Stack: React 18 + Vite 5 + TypeScript + Tailwind + React Query + Zustand.
+- 100+ páginas em `src/pages/` (Dashboard, PlayerDetail, ModConfig, Cinema, Snapshots, Quotes, etc.).
+- Componentes reutilizáveis: `InventoryGrid`, `ItemPicker`, `EnchantPicker`, `MatterEditor`, `CommandConsole`, `EventLog`.
+- WebSocket reconnecting + zustand store de eventos live.
+
+---
+
+## 31. Token Lock & Sincronização Mod↔Backend
+
+### 31.1 Problema histórico
+
+O mod gera/lê seu próprio token em `world/serverconfig/liberthia-server.toml`. O backend tinha `MOD_TOKEN` em env var (do compose). Os dois divergiam toda vez que o operador esquecia de sincronizar.
+
+Solução parcial v0.1.20+: backend persiste token em `backend_config.MOD_TOKEN` no DB e ele vira fonte de verdade no boot (sobre o env var).
+
+### 31.2 Loop "token muda sozinho" (v0.1.20 → v0.1.43)
+
+Bug perverso: mesmo após admin salvar token pelo painel, a cada 60 s o mod re-registrava com SEU token via `POST /api/mod/register` → backend sobrescrevia o do DB → token "mudava sozinho".
+
+### 31.3 Fix v0.1.44 — Lock manual
+
+Nova chave persistida: `BackendConfig.KEY_MOD_TOKEN_LOCKED`.
+
+**`ModRegistry`**:
+
+```java
+private volatile boolean manualTokenLock = false;
+
+@PostConstruct void init() {
+    // ... carrega MOD_TOKEN ...
+    String lockStr = backendConfig.getValue(KEY_MOD_TOKEN_LOCKED);
+    this.manualTokenLock = "true".equalsIgnoreCase(lockStr);
+}
+
+public synchronized void update(String url, String token, String fromIp) {
+    // ... resolve URL ...
+    if (token != null && !token.equals(this.token)) {
+        if (manualTokenLock) {
+            log.warn("[ModRegistry] mod tentou registrar token novo mas LOCK manual está ativo — IGNORANDO.");
+        } else {
+            backendConfig.setValue(KEY_MOD_TOKEN, token);
+            this.token = token;
+            rebuildClient();
+        }
+    }
+}
+
+public synchronized void applyToken(String newToken) {
+    backendConfig.setValue(KEY_MOD_TOKEN, newToken);
+    backendConfig.setValue(KEY_MOD_TOKEN_LOCKED, "true"); // ativa lock automático
+    this.token = newToken;
+    this.manualTokenLock = true;
+    rebuildClient();
+}
+
+public synchronized void unlockToken() {
+    backendConfig.setValue(KEY_MOD_TOKEN_LOCKED, "false");
+    this.manualTokenLock = false;
+}
+```
+
+### 31.4 Endpoints
+
+| Método | Path | Descrição |
+|---|---|---|
+| GET | `/api/admin/mod-config/token` | `{tokenFingerprint, source, manualLock, lastUpdatedAt, lastRegisteredAt, ...}` |
+| POST | `/api/admin/mod-config/token` | `{token: "uuid"}` — `applyToken()` |
+| POST | `/api/admin/mod-config/test-connection` | `bridge.getServerInfo()` real, ignora cache |
+| POST | `/api/admin/mod-config/unlock` | `unlockToken()` |
+
+### 31.5 Frontend `/mod-config`
+
+- Badge `🔒 travado` / `🔓 destravado` ao lado do source badge no Card 1.
+- Banner verde "Token travado — o auto-register do mod não pode sobrescrever" + botão **🔓 Destravar** quando lock ativo.
+- Banner âmbar "Token NÃO travado" quando destravado.
+- Toast "Token salvo + travado" no save.
+- Auto-refresh 5 s.
+
+### 31.6 Fluxo recomendado
+
+1. Pega o token do log do mod (`[AdminAPI] full token: ...`) ou de `liberthia_admin_url.txt`.
+2. Abre `/mod-config` no painel.
+3. Cola o token no Card 2 → **Salvar** → **Confirmar**.
+4. **Lock automático ATIVADO**. Mod tenta sobrescrever a cada 60 s, backend ignora (warn no log).
+5. Testa com Card 3 → **🔌 Testar agora** — deve retornar TPS/players reais.
+6. Pra liberar (se trocar de servidor MC): clica **🔓 Destravar** no Card 1.
+
+### 31.7 Estado do build (2026-05-21)
+
+- `./gradlew build -x test` → **BUILD SUCCESSFUL**, jar `liberthia-0.1.44.jar` (5.4 MB)
+- Backend: `cd backend && ./gradlew compileJava` → **BUILD SUCCESSFUL**
+- Frontend: `cd frontend && npm run build` → **✓ built in 5.54 s**
+- 5 warnings deprecation `ResourceLocation` pré-existentes (não relacionados ao código novo).

@@ -28,6 +28,7 @@ public final class ModBlocks {
             () -> new DarkMatterBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BLACK)
                     .strength(4.0F, 8.0F)
+                    .requiresCorrectToolForDrops()
                     .lightLevel(state -> 0)
                     .emissiveRendering((s, g, p) -> true)
                     .randomTicks()
@@ -81,6 +82,7 @@ public final class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.GOLD)
                     .strength(5.0F, 10.0F)
+                    .requiresCorrectToolForDrops()
                     .lightLevel(state -> 8)
                     .sound(SoundType.METAL)));
 
@@ -174,16 +176,13 @@ public final class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)));
 
-    public static final RegistryObject<Block> WHITE_MATTER_BOMB_BLOCK = BLOCKS.register("white_matter_bomb",
-            () -> new br.com.murilo.liberthia.block.WhiteMatterBombBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.ICE)
-                    .strength(0.5F)
-                    .sound(SoundType.GLASS)));
+    // REMOVIDO v0.1.13: WHITE_MATTER_BOMB_BLOCK
 
     public static final RegistryObject<Block> PURITY_BEACON = BLOCKS.register("purity_beacon",
             () -> new br.com.murilo.liberthia.logic.PurityBeaconBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.ICE)
                     .strength(5.0F)
+                    .requiresCorrectToolForDrops()
                     .lightLevel(state -> 15)
                     .sound(SoundType.GLASS)));
 
@@ -291,6 +290,7 @@ public final class ModBlocks {
             () -> new br.com.murilo.liberthia.block.EnergyCableBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BLACK)
                     .strength(0.6F)
+                    .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)
                     .noOcclusion()));
 
@@ -298,6 +298,7 @@ public final class ModBlocks {
             () -> new br.com.murilo.liberthia.block.ItemPipeBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GRAY)
                     .strength(0.6F)
+                    .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)
                     .noOcclusion()));
 
@@ -305,6 +306,7 @@ public final class ModBlocks {
             () -> new br.com.murilo.liberthia.block.ItemExtractorBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_ORANGE)
                     .strength(0.6F)
+                    .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)
                     .noOcclusion()));
 
@@ -312,6 +314,7 @@ public final class ModBlocks {
             () -> new br.com.murilo.liberthia.block.ItemInserterBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_GREEN)
                     .strength(0.6F)
+                    .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)
                     .noOcclusion()));
 
@@ -319,6 +322,7 @@ public final class ModBlocks {
             () -> new br.com.murilo.liberthia.block.DimensionalChestBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BLUE)
                     .strength(3.0F, 8.0F)
+                    .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)
                     .lightLevel(s -> 7)));
 
@@ -326,64 +330,118 @@ public final class ModBlocks {
             () -> new br.com.murilo.liberthia.block.MatterRefinerBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_PURPLE)
                     .strength(5.0F, 8.0F)
+                    .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)
                     .lightLevel(s -> 6)));
 
     // --- Cadeia de Refinação ---
     public static final RegistryObject<Block> DARK_MATTER_CHEST = BLOCKS.register("dark_matter_chest",
             () -> new br.com.murilo.liberthia.block.DarkMatterChestBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_PURPLE).strength(3.0F).sound(SoundType.WOOD)));
+                    .mapColor(MapColor.COLOR_PURPLE).strength(3.0F)
+                    .requiresCorrectToolForDrops().sound(SoundType.WOOD)));
 
     public static final RegistryObject<Block> FRAGMENTED_GENERATOR = BLOCKS.register("fragmented_generator",
             () -> new br.com.murilo.liberthia.block.FragmentedGeneratorBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_PURPLE).strength(4.0F).sound(SoundType.METAL).lightLevel(s -> 5)));
+                    .mapColor(MapColor.COLOR_PURPLE).strength(4.0F)
+                    .requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel(s -> 5)));
 
     public static final RegistryObject<Block> LASER_EMITTER = BLOCKS.register("laser_emitter",
             () -> new br.com.murilo.liberthia.block.LaserEmitterBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_RED).strength(5.0F).sound(SoundType.METAL).lightLevel(s -> 8)));
+                    .mapColor(MapColor.COLOR_RED).strength(5.0F)
+                    .requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel(s -> 8)));
 
     public static final RegistryObject<Block> CRYSTALLIZER = BLOCKS.register("crystallizer",
             () -> new br.com.murilo.liberthia.block.CrystallizerBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_PURPLE).strength(6.0F).sound(SoundType.METAL)
+                    .mapColor(MapColor.COLOR_PURPLE).strength(6.0F)
+                    .requiresCorrectToolForDrops().sound(SoundType.METAL)
                     .lightLevel(s -> 10).noOcclusion()));
 
     public static final RegistryObject<Block> AUTO_FARMER = BLOCKS.register("auto_farmer",
             () -> new br.com.murilo.liberthia.block.AutoFarmerBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_GRAY).strength(4.0F).sound(SoundType.METAL).lightLevel(s -> 4)));
+                    .mapColor(MapColor.COLOR_GRAY).strength(4.0F)
+                    .requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel(s -> 4)));
 
     public static final RegistryObject<Block> DIMENSIONAL_EXTRACTOR = BLOCKS.register("dimensional_extractor",
             () -> new br.com.murilo.liberthia.block.DimensionalExtractorBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_PURPLE).strength(4.0F).sound(SoundType.METAL).lightLevel(s -> 6)));
+                    .mapColor(MapColor.COLOR_PURPLE).strength(4.0F)
+                    .requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel(s -> 6)));
 
     public static final RegistryObject<Block> MATTER_ANALYZER = BLOCKS.register("matter_analyzer",
             () -> new br.com.murilo.liberthia.block.MatterAnalyzerBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_PURPLE).strength(3.5F).sound(SoundType.METAL).lightLevel(s -> 6)));
+                    .mapColor(MapColor.COLOR_PURPLE).strength(3.5F)
+                    .requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel(s -> 6)));
 
     public static final RegistryObject<Block> WIRELESS_CHARGER = BLOCKS.register("wireless_charger",
             () -> new br.com.murilo.liberthia.block.WirelessChargerBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_PURPLE).strength(3.5F).sound(SoundType.METAL).lightLevel(s -> 8)));
+                    .mapColor(MapColor.COLOR_PURPLE).strength(3.5F)
+                    .requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel(s -> 8)));
 
     // --- Baterias de Matéria Escura ---
     public static final RegistryObject<Block> BATTERY_BASIC = BLOCKS.register("dm_battery_basic",
             () -> new br.com.murilo.liberthia.block.DarkMatterBatteryBlock(
                     BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE)
-                            .strength(4.0F).sound(SoundType.METAL).lightLevel(s -> 4),
+                            .strength(4.0F).requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL).lightLevel(s -> 4),
                     br.com.murilo.liberthia.block.entity.BasicBatteryBlockEntity::new,
                     () -> ModBlockEntities.BATTERY_BASIC.get()));
 
     public static final RegistryObject<Block> BATTERY_ADVANCED = BLOCKS.register("dm_battery_advanced",
             () -> new br.com.murilo.liberthia.block.DarkMatterBatteryBlock(
                     BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE)
-                            .strength(5.0F).sound(SoundType.METAL).lightLevel(s -> 7),
+                            .strength(5.0F).requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL).lightLevel(s -> 7),
                     br.com.murilo.liberthia.block.entity.AdvancedBatteryBlockEntity::new,
                     () -> ModBlockEntities.BATTERY_ADVANCED.get()));
 
     public static final RegistryObject<Block> BATTERY_QUANTUM = BLOCKS.register("dm_battery_quantum",
             () -> new br.com.murilo.liberthia.block.DarkMatterBatteryBlock(
                     BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK)
-                            .strength(6.0F).sound(SoundType.METAL).lightLevel(s -> 12),
+                            .strength(6.0F).requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL).lightLevel(s -> 12),
                     br.com.murilo.liberthia.block.entity.QuantumBatteryBlockEntity::new,
                     () -> ModBlockEntities.BATTERY_QUANTUM.get()));
+
+    /**
+     * Matter Purifier — bloco com GUI que aceita 1 ingot de matter raw
+     * (dark/clear/yellow) e gera o ingot purificado correspondente.
+     * Precisa de energia. Usado pra craftar as armaduras de matter.
+     */
+    public static final RegistryObject<Block> MATTER_PURIFIER = registerBlock("matter_purifier",
+            () -> new br.com.murilo.liberthia.block.MatterPurifierBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_PURPLE)
+                            .strength(5.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)
+                            .lightLevel(s -> 8)));
+
+    /**
+     * v0.1.44: Matter Pill Brewer — bloco alquímico que fabrica pílulas a partir
+     * de ingots purificados + glass bottle. Sem energia, processo 3s/lote.
+     * Gera 3 pílulas por lote do tipo correspondente (DM/CM/YM).
+     */
+    public static final RegistryObject<Block> MATTER_PILL_BREWER = registerBlock("matter_pill_brewer",
+            () -> new br.com.murilo.liberthia.block.MatterPillBrewerBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_PINK)
+                            .strength(3.0F, 5.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)
+                            .lightLevel(s -> 6)));
+
+    /**
+     * Host Plush — pelúcia decorativa 3D que vai no chão. Bloco rotacionável
+     * com hitbox compacta, water-loggable. Modelo Blockbench em
+     * {@code assets/liberthia/models/item/host_plush.json} (referenciado pelo
+     * blockstate).
+     */
+    public static final RegistryObject<Block> HOST_PLUSH = registerBlock("host_plush",
+            () -> new br.com.murilo.liberthia.block.HostPlushBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_LIGHT_BLUE)
+                            .strength(0.3F, 0.5F)
+                            .sound(SoundType.WOOL)
+                            .noOcclusion()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, java.util.function.Supplier<T> supplier) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);
@@ -393,15 +451,62 @@ public final class ModBlocks {
         return block;
     }
 
-    // --- Glitch Block ---
-    public static final RegistryObject<Block> GLITCH_BLOCK = BLOCKS.register("glitch_block",
-            () -> new br.com.murilo.liberthia.logic.GlitchBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_BLACK)
-                    .strength(2.0F)
-                    .lightLevel(state -> 0)
-                    .emissiveRendering((s, g, p) -> true)
-                    .randomTicks()
-                    .sound(SoundType.AMETHYST)));
+    // ==================================================================
+    // Matter Extraction Network — Matter Extractor (central),
+    // Matter Tank (storage) e Matter Pipe (transport, 3 variantes).
+    // Sistema multiblock inspirado em Create: tanks empilháveis com nível
+    // visual + canos coloridos por tipo + extractor que drena matter de
+    // player próximo. Ver MatterExtractorBlockEntity pra mecânica detalhada.
+    // ==================================================================
+    public static final RegistryObject<Block> MATTER_EXTRACTOR = registerBlock("matter_extractor",
+            () -> new br.com.murilo.liberthia.block.MatterExtractorBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_PURPLE)
+                            .strength(5.0F, 8.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)
+                            .lightLevel(s -> 8)));
+
+    public static final RegistryObject<Block> MATTER_TANK = registerBlock("matter_tank",
+            () -> new br.com.murilo.liberthia.block.MatterTankBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.ICE)
+                            .strength(2.0F, 4.0F)
+                            .sound(SoundType.GLASS)
+                            .noOcclusion()
+                            .lightLevel(s -> 4)));
+
+    public static final RegistryObject<Block> MATTER_PIPE_DARK = registerBlock("matter_pipe_dark",
+            () -> new br.com.murilo.liberthia.block.MatterPipeBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_PURPLE)
+                            .strength(0.8F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)
+                            .noOcclusion(),
+                    () -> ModFluids.DARK_MATTER.get()));
+
+    public static final RegistryObject<Block> MATTER_PIPE_CLEAR = registerBlock("matter_pipe_clear",
+            () -> new br.com.murilo.liberthia.block.MatterPipeBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.ICE)
+                            .strength(0.8F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)
+                            .noOcclusion(),
+                    () -> ModFluids.CLEAR_MATTER.get()));
+
+    public static final RegistryObject<Block> MATTER_PIPE_YELLOW = registerBlock("matter_pipe_yellow",
+            () -> new br.com.murilo.liberthia.block.MatterPipeBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.GOLD)
+                            .strength(0.8F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)
+                            .noOcclusion(),
+                    () -> ModFluids.YELLOW_MATTER.get()));
+
+    // REMOVIDO v0.1.13: GLITCH_BLOCK
 
     // --- Wormhole Block ---
     public static final RegistryObject<Block> WORMHOLE_BLOCK = BLOCKS.register("wormhole_block",
@@ -834,6 +939,518 @@ public final class ModBlocks {
                             .sound(SoundType.WOOD).noOcclusion()
                             .isValidSpawn((s,g,p,e) -> false),
                     ModWoodTypes.SANGUINE_SET));
+
+    // ==================================================================
+    // Blood Tree — wood family separada com sapling que CRESCE de verdade
+    // (TreeGrower + configured_feature em datapack JSON). Tronco vermelho-
+    // vinho escuro, folhas com paleta sangue. Inclui família completa de
+    // wood blocks. Crescimento por bone meal ou random tick natural.
+    // ==================================================================
+    private static BlockBehaviour.Properties bloodWoodProps() {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_RED)
+                .strength(2.0F, 3.0F)
+                .sound(SoundType.WOOD);
+    }
+
+    public static final RegistryObject<Block> BLOOD_LOG = BLOCKS.register("blood_log",
+            () -> new net.minecraft.world.level.block.RotatedPillarBlock(bloodWoodProps()));
+    public static final RegistryObject<Block> STRIPPED_BLOOD_LOG = BLOCKS.register("stripped_blood_log",
+            () -> new net.minecraft.world.level.block.RotatedPillarBlock(bloodWoodProps()));
+    public static final RegistryObject<Block> BLOOD_PLANKS = BLOCKS.register("blood_planks",
+            () -> new Block(bloodWoodProps()));
+    public static final RegistryObject<Block> BLOOD_LEAVES = BLOCKS.register("blood_leaves",
+            () -> new br.com.murilo.liberthia.block.BloodLeavesBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0.2F)
+                    .randomTicks()
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .isValidSpawn((s,g,p,e) -> false)
+                    .isSuffocating((s,g,p) -> false)
+                    .isViewBlocking((s,g,p) -> false)));
+    public static final RegistryObject<Block> BLOOD_SAPLING = BLOCKS.register("blood_sapling",
+            () -> new br.com.murilo.liberthia.block.BloodSaplingBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0F).noCollission()
+                    .randomTicks()
+                    .sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> BLOOD_STAIRS = BLOCKS.register("blood_stairs",
+            () -> new net.minecraft.world.level.block.StairBlock(
+                    () -> BLOOD_PLANKS.get().defaultBlockState(), bloodWoodProps()));
+    public static final RegistryObject<Block> BLOOD_SLAB = BLOCKS.register("blood_slab",
+            () -> new net.minecraft.world.level.block.SlabBlock(bloodWoodProps()));
+    public static final RegistryObject<Block> BLOOD_FENCE = BLOCKS.register("blood_fence",
+            () -> new net.minecraft.world.level.block.FenceBlock(bloodWoodProps()));
+    public static final RegistryObject<Block> BLOOD_FENCE_GATE = BLOCKS.register("blood_fence_gate",
+            () -> new net.minecraft.world.level.block.FenceGateBlock(bloodWoodProps(),
+                    net.minecraft.world.level.block.state.properties.WoodType.OAK));
+    public static final RegistryObject<Block> BLOOD_DOOR = BLOCKS.register("blood_door",
+            () -> new net.minecraft.world.level.block.DoorBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).strength(3.0F)
+                            .sound(SoundType.WOOD).noOcclusion(),
+                    net.minecraft.world.level.block.state.properties.BlockSetType.OAK));
+    public static final RegistryObject<Block> BLOOD_TRAPDOOR = BLOCKS.register("blood_trapdoor",
+            () -> new net.minecraft.world.level.block.TrapDoorBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).strength(3.0F)
+                            .sound(SoundType.WOOD).noOcclusion()
+                            .isValidSpawn((s,g,p,e) -> false),
+                    net.minecraft.world.level.block.state.properties.BlockSetType.OAK));
+
+    // ============================================================
+    // INFECTED VARIANT BLOCKS — v0.1.13
+    // 12 blocos novos: 4 variantes (dirt/sand/stone/grass) × 3 matérias
+    // Cada bloco aplica efeito de status + ganha matéria ao pisar
+    // ============================================================
+    private static BlockBehaviour.Properties dirtBase() {
+        return BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.GRAVEL);
+    }
+    private static BlockBehaviour.Properties sandBase() {
+        return BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.SAND);
+    }
+    private static BlockBehaviour.Properties stoneBase() {
+        return BlockBehaviour.Properties.of().strength(1.5F, 6.0F).requiresCorrectToolForDrops()
+                .sound(SoundType.STONE);
+    }
+    private static BlockBehaviour.Properties grassBase() {
+        return BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.GRASS).randomTicks();
+    }
+
+    // --- DARK MATTER (DM) ---
+    public static final RegistryObject<Block> DM_INFECTED_DIRT = BLOCKS.register("dm_infected_dirt",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.DARK, dirtBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.DARK,
+                    net.minecraft.world.effect.MobEffects.WITHER, 60, 0, 0.5f));
+    public static final RegistryObject<Block> DM_INFECTED_SAND = BLOCKS.register("dm_infected_sand",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.DARK, sandBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.DARK,
+                    net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 80, 0, 0.4f));
+    public static final RegistryObject<Block> DM_INFECTED_STONE = BLOCKS.register("dm_infected_stone",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.DARK, stoneBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.DARK,
+                    net.minecraft.world.effect.MobEffects.BLINDNESS, 40, 0, 0.3f));
+    public static final RegistryObject<Block> DM_INFECTED_GRASS = BLOCKS.register("dm_infected_grass",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.DARK, grassBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.DARK,
+                    net.minecraft.world.effect.MobEffects.HUNGER, 80, 0, 0.6f));
+
+    // --- WHITE MATTER (WM) ---
+    public static final RegistryObject<Block> WM_BLEACHED_DIRT = BLOCKS.register("wm_bleached_dirt",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.WHITE, dirtBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.WHITE,
+                    net.minecraft.world.effect.MobEffects.WEAKNESS, 80, 0, 0.5f));
+    public static final RegistryObject<Block> WM_BLEACHED_SAND = BLOCKS.register("wm_bleached_sand",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.WHITE, sandBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.WHITE,
+                    net.minecraft.world.effect.MobEffects.LEVITATION, 30, 0, 0.4f));
+    public static final RegistryObject<Block> WM_BLEACHED_STONE = BLOCKS.register("wm_bleached_stone",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.WHITE, stoneBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.WHITE,
+                    net.minecraft.world.effect.MobEffects.GLOWING, 100, 0, 0.3f));
+    public static final RegistryObject<Block> WM_BLEACHED_GRASS = BLOCKS.register("wm_bleached_grass",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.WHITE, grassBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.WHITE,
+                    net.minecraft.world.effect.MobEffects.NIGHT_VISION, 200, 0, 0.6f));
+
+    // --- YELLOW MATTER (YM) ---
+    public static final RegistryObject<Block> YM_UNSTABLE_DIRT = BLOCKS.register("ym_unstable_dirt",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.YELLOW, dirtBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.YELLOW,
+                    net.minecraft.world.effect.MobEffects.HUNGER, 100, 0, 0.5f));
+    public static final RegistryObject<Block> YM_UNSTABLE_SAND = BLOCKS.register("ym_unstable_sand",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.YELLOW, sandBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.YELLOW,
+                    net.minecraft.world.effect.MobEffects.CONFUSION, 80, 0, 0.4f));
+    public static final RegistryObject<Block> YM_UNSTABLE_STONE = BLOCKS.register("ym_unstable_stone",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.YELLOW, stoneBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.YELLOW,
+                    net.minecraft.world.effect.MobEffects.UNLUCK, 200, 0, 0.3f));
+    public static final RegistryObject<Block> YM_UNSTABLE_GRASS = BLOCKS.register("ym_unstable_grass",
+            () -> new br.com.murilo.liberthia.block.InfectedVariantBlock(
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.propsFor(
+                            br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.YELLOW, grassBase()),
+                    br.com.murilo.liberthia.block.InfectedVariantBlock.MatterType.YELLOW,
+                    net.minecraft.world.effect.MobEffects.WEAKNESS, 100, 0, 0.6f));
+
+    // ────────────────────────────────────────────────────────────────────
+    // v0.1.22 r24: SPIRIT WORLD — altar de ritual + bloco de pedra espiritual
+    // ────────────────────────────────────────────────────────────────────
+
+    /** Spirit Altar — ritual block (5s animation → Spirit World). */
+    public static final RegistryObject<Block> SPIRIT_ALTAR = BLOCKS.register("spirit_altar",
+            () -> new br.com.murilo.liberthia.block.SpiritAltarBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.OBSIDIAN)
+                            .strength(15.0F, 1200.0F)
+                            .lightLevel(s -> 10)
+                            .noOcclusion()));
+
+    /** Spirit Stone — bloco "místico" pra construções rituais. */
+    public static final RegistryObject<Block> SPIRIT_STONE = BLOCKS.register("spirit_stone",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.DEEPSLATE)
+                            .strength(4.5F, 12.0F)
+                            .lightLevel(s -> 3)));
+
+    // ────────────────────────────────────────────────────────────────────
+    // v0.1.22 r27: DIMENSIONAL ANTENNA — comunicação cross-dim
+    // ────────────────────────────────────────────────────────────────────
+    public static final RegistryObject<Block> DIMENSIONAL_ANTENNA = BLOCKS.register("dimensional_antenna",
+            () -> new br.com.murilo.liberthia.block.DimensionalAntennaBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK)
+                            .strength(3.0F, 15.0F)
+                            .lightLevel(s -> 7)
+                            .noOcclusion()));
+
+    // ────────────────────────────────────────────────────────────────────
+    // v0.1.22 r28: QUANTUM TERMINAL — computador receptor de mensagens
+    // ────────────────────────────────────────────────────────────────────
+    public static final RegistryObject<Block> QUANTUM_TERMINAL = BLOCKS.register("quantum_terminal",
+            () -> new br.com.murilo.liberthia.block.QuantumTerminalBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)
+                            .strength(3.5F, 12.0F)
+                            .lightLevel(s -> 6)
+                            .noOcclusion()));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // v0.1.22 r29: SPIRIT WORLD BLOCKS — identidade visual da dim espiritual
+    // ════════════════════════════════════════════════════════════════════════
+
+    /** Spirit Grass — chão místico da spirit world. */
+    public static final RegistryObject<Block> SPIRIT_GRASS_BLOCK = BLOCKS.register("spirit_grass_block",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GRASS_BLOCK)
+                            .lightLevel(s -> 2)));
+
+    /** Spirit Dirt — terra etérea. */
+    public static final RegistryObject<Block> SPIRIT_DIRT = BLOCKS.register("spirit_dirt",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.DIRT)));
+
+    /** Ethereal Stone — pedra principal do spirit world. */
+    public static final RegistryObject<Block> ETHEREAL_STONE = BLOCKS.register("ethereal_stone",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.STONE)
+                            .lightLevel(s -> 1)));
+
+    public static final RegistryObject<Block> ETHEREAL_STONE_BRICKS = BLOCKS.register("ethereal_stone_bricks",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.STONE_BRICKS)
+                            .lightLevel(s -> 1)));
+
+    /** Soul Brick — tijolo de almas. */
+    public static final RegistryObject<Block> SOUL_BRICK = BLOCKS.register("soul_brick",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.SOUL_SAND)
+                            .strength(3.0F, 6.0F)
+                            .lightLevel(s -> 4)));
+
+    /** Halo Marble — mármore branco-dourado celestial. */
+    public static final RegistryObject<Block> HALO_MARBLE = BLOCKS.register("halo_marble",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.QUARTZ_BLOCK)
+                            .lightLevel(s -> 3)));
+
+    public static final RegistryObject<Block> HALO_MARBLE_BRICKS = BLOCKS.register("halo_marble_bricks",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.QUARTZ_BRICKS)
+                            .lightLevel(s -> 3)));
+
+    /** Dream Glass — vidro translúcido roxo. */
+    public static final RegistryObject<Block> DREAM_GLASS = BLOCKS.register("dream_glass",
+            () -> new net.minecraft.world.level.block.GlassBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .lightLevel(s -> 5)));
+
+    /** Whisperwood Log — madeira fantasma. */
+    public static final RegistryObject<Block> WHISPERWOOD_LOG = BLOCKS.register("whisperwood_log",
+            () -> new net.minecraft.world.level.block.RotatedPillarBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.OAK_LOG)
+                            .lightLevel(s -> 2)));
+
+    public static final RegistryObject<Block> WHISPERWOOD_PLANKS = BLOCKS.register("whisperwood_planks",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.OAK_PLANKS)
+                            .lightLevel(s -> 1)));
+
+    // v0.1.24 r80: usa custom WhisperwoodLeavesBlock pra impedir decay
+    // (pattern do BloodLeavesBlock — folhas viram persistent=true sempre)
+    public static final RegistryObject<Block> WHISPERWOOD_LEAVES = BLOCKS.register("whisperwood_leaves",
+            () -> new br.com.murilo.liberthia.block.WhisperwoodLeavesBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.OAK_LEAVES)
+                            .lightLevel(s -> 6)));
+
+    /** Astral Lantern — lanterna emite luz mística. */
+    public static final RegistryObject<Block> ASTRAL_LANTERN = BLOCKS.register("astral_lantern",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.SEA_LANTERN)
+                            .lightLevel(s -> 15)
+                            .noOcclusion()));
+
+    /** Crystal Spirit Ore — ore que dropa cristais espirituais. */
+    public static final RegistryObject<Block> CRYSTAL_SPIRIT_ORE = BLOCKS.register("crystal_spirit_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK)
+                            .strength(4.0F, 4.0F)
+                            .lightLevel(s -> 8)
+                            .requiresCorrectToolForDrops(),
+                    net.minecraft.util.valueproviders.UniformInt.of(2, 5)));
+
+    /** Sanctum Ward — dome protetor (placeholder block). */
+    public static final RegistryObject<Block> SANCTUM_WARD = BLOCKS.register("sanctum_ward",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.QUARTZ_BLOCK)
+                            .strength(50.0F, 1200.0F)
+                            .lightLevel(s -> 14)
+                            .noOcclusion()));
+
+    /** Holy Censer — bloco que emite fog curativo. */
+    public static final RegistryObject<Block> HOLY_CENSER = BLOCKS.register("holy_censer",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GOLD_BLOCK)
+                            .strength(2.5F, 6.0F)
+                            .lightLevel(s -> 10)
+                            .noOcclusion()));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // v0.1.22 r32: OCCULT SYSTEM — Chalk Marks (5 colors), Candles (5),
+    // Ritual Circle, Spirit Miner
+    // ════════════════════════════════════════════════════════════════════════
+
+    private static net.minecraft.world.level.block.state.BlockBehaviour.Properties chalkProps() {
+        return net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                .of()
+                .noCollission()
+                .noOcclusion()
+                .instabreak()
+                .pushReaction(net.minecraft.world.level.material.PushReaction.DESTROY);
+    }
+    private static net.minecraft.world.level.block.state.BlockBehaviour.Properties candleProps(int lightWhenLit) {
+        return net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                .copy(net.minecraft.world.level.block.Blocks.CANDLE)
+                .noOcclusion();
+    }
+
+    public static final RegistryObject<Block> CHALK_MARK_WHITE = BLOCKS.register("chalk_mark_white",
+            () -> {
+                var b = new br.com.murilo.liberthia.occult.ChalkMarkBlock(chalkProps(), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.WHITE);
+                br.com.murilo.liberthia.occult.ChalkMarkBlock.register(br.com.murilo.liberthia.occult.OccultItems.ChalkColor.WHITE, b);
+                return b;
+            });
+    public static final RegistryObject<Block> CHALK_MARK_GOLDEN = BLOCKS.register("chalk_mark_golden",
+            () -> {
+                var b = new br.com.murilo.liberthia.occult.ChalkMarkBlock(chalkProps(), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.GOLDEN);
+                br.com.murilo.liberthia.occult.ChalkMarkBlock.register(br.com.murilo.liberthia.occult.OccultItems.ChalkColor.GOLDEN, b);
+                return b;
+            });
+    public static final RegistryObject<Block> CHALK_MARK_PURPLE = BLOCKS.register("chalk_mark_purple",
+            () -> {
+                var b = new br.com.murilo.liberthia.occult.ChalkMarkBlock(chalkProps(), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.PURPLE);
+                br.com.murilo.liberthia.occult.ChalkMarkBlock.register(br.com.murilo.liberthia.occult.OccultItems.ChalkColor.PURPLE, b);
+                return b;
+            });
+    public static final RegistryObject<Block> CHALK_MARK_RED = BLOCKS.register("chalk_mark_red",
+            () -> {
+                var b = new br.com.murilo.liberthia.occult.ChalkMarkBlock(chalkProps(), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.RED);
+                br.com.murilo.liberthia.occult.ChalkMarkBlock.register(br.com.murilo.liberthia.occult.OccultItems.ChalkColor.RED, b);
+                return b;
+            });
+    public static final RegistryObject<Block> CHALK_MARK_BLACK = BLOCKS.register("chalk_mark_black",
+            () -> {
+                var b = new br.com.murilo.liberthia.occult.ChalkMarkBlock(chalkProps(), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.BLACK);
+                br.com.murilo.liberthia.occult.ChalkMarkBlock.register(br.com.murilo.liberthia.occult.OccultItems.ChalkColor.BLACK, b);
+                return b;
+            });
+
+    public static final RegistryObject<Block> CANDLE_WHITE_OCCULT = BLOCKS.register("candle_occult_white",
+            () -> new br.com.murilo.liberthia.occult.CandleBlock(candleProps(12), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.WHITE));
+    public static final RegistryObject<Block> CANDLE_GOLDEN_OCCULT = BLOCKS.register("candle_occult_golden",
+            () -> new br.com.murilo.liberthia.occult.CandleBlock(candleProps(15), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.GOLDEN));
+    public static final RegistryObject<Block> CANDLE_PURPLE_OCCULT = BLOCKS.register("candle_occult_purple",
+            () -> new br.com.murilo.liberthia.occult.CandleBlock(candleProps(11), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.PURPLE));
+    public static final RegistryObject<Block> CANDLE_RED_OCCULT = BLOCKS.register("candle_occult_red",
+            () -> new br.com.murilo.liberthia.occult.CandleBlock(candleProps(12), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.RED));
+    public static final RegistryObject<Block> CANDLE_BLACK_OCCULT = BLOCKS.register("candle_occult_black",
+            () -> new br.com.murilo.liberthia.occult.CandleBlock(candleProps(8), br.com.murilo.liberthia.occult.OccultItems.ChalkColor.BLACK));
+
+    public static final RegistryObject<Block> RITUAL_CIRCLE = BLOCKS.register("ritual_circle",
+            () -> new br.com.murilo.liberthia.occult.RitualCircleBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.OBSIDIAN)
+                            .strength(5.0F, 1200.0F)
+                            .lightLevel(s -> 7)
+                            .noOcclusion()));
+
+    public static final RegistryObject<Block> SPIRIT_MINER = BLOCKS.register("spirit_miner",
+            () -> new br.com.murilo.liberthia.occult.SpiritMinerBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)
+                            .strength(4.0F, 12.0F)
+                            .lightLevel(s -> 4)));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // v0.1.22 r33: LOOM PORTAL — bloco do portal pra dim Loom
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Block> LOOM_PORTAL = BLOCKS.register("loom_portal",
+            () -> new br.com.murilo.liberthia.loom.LoomPortalBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.NETHER_PORTAL)
+                            .lightLevel(s -> 11)
+                            .noCollission()
+                            .noOcclusion()
+                            .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK)
+                            .strength(-1.0F)));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r34: LOOM ORES — minérios exclusivos da dimensão Loom
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Block> LOOM_STONE = BLOCKS.register("loom_stone",
+            () -> new net.minecraft.world.level.block.Block(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.END_STONE)
+                            .strength(2.0F, 9.0F)));
+
+    public static final RegistryObject<Block> VOIDITE_ORE = BLOCKS.register("loom_voidite_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.DEEPSLATE_DIAMOND_ORE)
+                            .strength(4.5F, 6.0F)
+                            .lightLevel(s -> 2),
+                    net.minecraft.util.valueproviders.UniformInt.of(2, 5)));
+
+    public static final RegistryObject<Block> RIFTITE_ORE = BLOCKS.register("loom_riftite_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.DEEPSLATE_EMERALD_ORE)
+                            .strength(5.0F, 8.0F)
+                            .lightLevel(s -> 5),
+                    net.minecraft.util.valueproviders.UniformInt.of(3, 7)));
+
+    public static final RegistryObject<Block> UMBRAL_ORE = BLOCKS.register("loom_umbral_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.DEEPSLATE_LAPIS_ORE)
+                            .strength(3.5F, 5.0F)
+                            .lightLevel(s -> 7),
+                    net.minecraft.util.valueproviders.UniformInt.of(2, 4)));
+
+    // r62: Source Jar — block storage de Source/mana cosmico
+    public static final RegistryObject<Block> SOURCE_JAR = BLOCKS.register("source_jar",
+            () -> new br.com.murilo.liberthia.observation.source.SourceJarBlock());
+
+    // r69: Scribes Table — mesa de crafting de spell parchments
+    public static final RegistryObject<Block> SCRIBES_TABLE = BLOCKS.register("scribes_table",
+            () -> new br.com.murilo.liberthia.block.ScribesTableBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.LECTERN)
+                            .strength(2.5F, 5.0F)
+                            .lightLevel(s -> 4)
+                            .noOcclusion()));
+
+    // r72: Rune Block — desenhada com Chalk, ativada ao pisar
+    public static final RegistryObject<Block> RUNE_BLOCK = BLOCKS.register("rune_block",
+            () -> new br.com.murilo.liberthia.observation.block.RuneBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.WHITE_CARPET)
+                            .strength(0.1F, 0.1F)
+                            .lightLevel(s -> 6)
+                            .noCollission()
+                            .noOcclusion()));
+
+    // r73: Imbuement Table — bloco dedicado pra encantar espadas com feitiços
+    public static final RegistryObject<Block> IMBUEMENT_TABLE = BLOCKS.register("imbuement_table",
+            () -> new br.com.murilo.liberthia.observation.block.ImbuementBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.ENCHANTING_TABLE)
+                            .strength(5.0F, 1200.0F)
+                            .lightLevel(s -> 8)
+                            .noOcclusion()));
+
+    // r74: Sourcestone Ore — minério na Spirit World (cosmetic, drops shard)
+    public static final RegistryObject<Block> SOURCESTONE_ORE = BLOCKS.register("sourcestone_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.STONE)
+                            .strength(3.0F, 3.0F)
+                            .lightLevel(s -> 4)
+                            .requiresCorrectToolForDrops(),
+                    net.minecraft.util.valueproviders.UniformInt.of(1, 3)));
+
+    // r74: Spirit Gem Ore — drops Soul Fragment
+    public static final RegistryObject<Block> SPIRIT_GEM_ORE = BLOCKS.register("spirit_gem_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.DEEPSLATE)
+                            .strength(4.5F, 4.5F)
+                            .lightLevel(s -> 6)
+                            .requiresCorrectToolForDrops(),
+                    net.minecraft.util.valueproviders.UniformInt.of(2, 4)));
+
+    // r74: Mana Berry crop
+    public static final RegistryObject<Block> MANA_BERRY_BUSH = BLOCKS.register("mana_berry_bush",
+            () -> new br.com.murilo.liberthia.observation.block.ManaBerryBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.SWEET_BERRY_BUSH)
+                            .lightLevel(s -> 4)
+                            .randomTicks()
+                            .noCollission()));
+
+    // r74: Source Relay
+    public static final RegistryObject<Block> SOURCE_RELAY = BLOCKS.register("source_relay",
+            () -> new br.com.murilo.liberthia.observation.block.SourceRelayBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.LODESTONE)
+                            .strength(3.5F, 3.5F)
+                            .lightLevel(s -> 7)));
+
+    // r77: Spell Binding Pedestal — combina Book + Parchment → Book imprintado
+    public static final RegistryObject<Block> SPELL_BINDING_PEDESTAL = BLOCKS.register("spell_binding_pedestal",
+            () -> new br.com.murilo.liberthia.observation.block.SpellBindingPedestalBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.LECTERN)
+                            .strength(3.0F, 6.0F)
+                            .lightLevel(s -> 8)
+                            .noOcclusion()));
 
     private ModBlocks() {
 

@@ -35,8 +35,36 @@ public class MatterProfile implements INBTSerializable<CompoundTag> {
     public void setYellow(float v) { yellowMatter = clamp(v); recompute(); }
 
     public void addDark(float v)   { setDark(darkMatter + v); }
-    public void addWhite(float v)  { setWhite(whiteMatter + v); }
     public void addYellow(float v) { setYellow(yellowMatter + v); }
+
+    /**
+     * Adiciona White Matter — e, se o delta é positivo, EXPELE proporcionalmente
+     * Dark e Yellow do perfil.
+     *
+     * <p><b>Lore</b>: Matéria Clara é purificadora — quando o portador absorve
+     * mais WM (proximidade de bloco/fluido, injetor, cura), ela "limpa" as
+     * outras duas matérias na mesma taxa. É a justificativa mecânica do bug #8
+     * reportado pelo the_developer: <i>"subir WM no perfil deveria diminuir
+     * DM/YM, mas atualmente apenas adiciona WM"</i>.
+     *
+     * <p><b>Taxa</b>: cada +1 WM expele -0.5 DM e -0.5 YM. A taxa < 1 é
+     * intencional — se fosse 1:1, qualquer salpicada de WM zeraria o perfil
+     * inteiro do player; com 0.5x o WM precisa SUBIR pra valer pra empurrar
+     * as outras matérias pra baixo. Player com 100 DM + 100 YM precisa
+     * absorver +200 WM (que já satura em 100 antes disso) pra zerar tudo.
+     *
+     * <p><b>Deltas negativos</b> (i.e. {@code v < 0}, removendo WM) NÃO disparam
+     * expulsão — só ganhos positivos. Pílulas que zeram WM via {@link #setWhite}
+     * direto também não disparam (setWhite não chama esse método).
+     */
+    public void addWhite(float v) {
+        setWhite(whiteMatter + v);
+        if (v > 0) {
+            float expel = v * 0.5f;
+            if (darkMatter > 0)   setDark(darkMatter - expel);
+            if (yellowMatter > 0) setYellow(yellowMatter - expel);
+        }
+    }
 
     public MatterProfileType getActiveType() { return cachedType; }
 

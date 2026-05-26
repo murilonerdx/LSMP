@@ -88,6 +88,15 @@ public final class SanguineWardEvents {
                 p.removeEffect(ModEffects.BLOOD_INFECTION.get());
             }
             healDrain(p, 1.5D);
+            // v0.1.22: bug #21 — user reportou "conjunto completo não dá cura
+            // passiva". Antes só removia BLOOD_INFECTION + reduzia drain interno
+            // (NBT), mas a HP do player não recuperava sozinha. Agora aplica
+            // REGENERATION I por 200 ticks (10s) refrescado a cada 100t (5s) —
+            // garante regen visível constante enquanto vestir as 4 peças.
+            // Duration 200 + refresh 100 = sempre >= 100 ticks, sem piscar.
+            p.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                    net.minecraft.world.effect.MobEffects.REGENERATION,
+                    200, 0, true, false, true));
             return;
         }
 

@@ -172,6 +172,15 @@ public class DarkMatterAlchemizerBlockEntity extends BlockEntity implements Menu
         if (sl.random.nextFloat() < SUCCESS_CHANCE) {
             // 60% — generate a random rare item.
             ItemStack reward = RARE_LOOT.get(sl.random.nextInt(RARE_LOOT.size())).copy();
+            // ── Marca o item como "Infectado por Matéria Escura" ──
+            // Items produzidos pelo Alchemizer carregam resíduo de DM e por isso
+            // causam infecção passiva no inventário do player (ver
+            // InfectedItemPassiveHandler). Tag NBT lida em:
+            //   - event/MatterInfectionTooltipHandler  (display)
+            //   - event/InfectedItemPassiveHandler     (penalidade)
+            //   - event/DarkMatterRadiationHandler     (radiação extra)
+            //   - block/entity/MatterPurifierBlockEntity (purificação)
+            reward.getOrCreateTag().putBoolean("MatterInfected", true);
             inventory.setStackInSlot(2, reward);
             sl.sendParticles(ParticleTypes.HAPPY_VILLAGER,
                     worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,

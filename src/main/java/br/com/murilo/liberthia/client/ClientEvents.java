@@ -17,6 +17,28 @@ public final class ClientEvents {
         if (KeyBindings.HUD_CONFIG_KEY.consumeClick()) {
             Minecraft.getInstance().setScreen(new HudConfigScreen());
         }
+        // r42: Spell Wheel — abre se segurar X
+        if (KeyBindings.SPELL_WHEEL_KEY.consumeClick()) {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.screen == null) {
+                mc.setScreen(new br.com.murilo.liberthia.magic.custom.client.SpellWheelScreen());
+            }
+        }
+        // r42: Quick Cast — V casta o spell selecionado sem abrir wheel
+        if (KeyBindings.QUICK_CAST_KEY.consumeClick()) {
+            var selected = br.com.murilo.liberthia.magic.custom.CustomSpellClientCache.getSelected();
+            if (selected != null) {
+                br.com.murilo.liberthia.network.ModNetwork.CHANNEL.sendToServer(
+                        new br.com.murilo.liberthia.magic.custom.CastCustomSpellC2SPacket(selected.id));
+            } else {
+                Minecraft mc = Minecraft.getInstance();
+                if (mc.player != null) {
+                    mc.player.displayClientMessage(
+                            net.minecraft.network.chat.Component.literal(
+                                    "§7Nenhum feitiço selecionado — abra §dX§7 pra escolher."), true);
+                }
+            }
+        }
     }
 
     private static long lastGeigerTick = 0;

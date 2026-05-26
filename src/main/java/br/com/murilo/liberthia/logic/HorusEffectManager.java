@@ -66,10 +66,14 @@ public final class HorusEffectManager {
                 target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 120, 0, false, false, false));
             }
 
-            // Whisper sound every 3 seconds
+            // Whisper sound every 3 seconds — PRIVADO pro afetado.
+            // Antes era playSound(null,...) que broadcastava pra todos no
+            // raio. Sussurros da Dark Matter são experiência subjetiva: só
+            // quem tá com o Horus Effect deve escutar. Players limpos ao lado
+            // ficam no silêncio (narrativamente: "ele tá vendo coisas").
             if (data.ticksLeft % 60 == 0) {
-                target.serverLevel().playSound(null, target.blockPosition(),
-                        ModSounds.DARK_WHISPER.get(), SoundSource.HOSTILE, 0.6F, 0.5F);
+                target.playNotifySound(ModSounds.DARK_WHISPER.get(),
+                        SoundSource.HOSTILE, 0.6F, 0.5F);
             }
 
             // Portal particles every second

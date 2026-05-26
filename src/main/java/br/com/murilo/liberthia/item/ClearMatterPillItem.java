@@ -1,67 +1,42 @@
 package br.com.murilo.liberthia.item;
 
-import br.com.murilo.liberthia.capability.IInfectionData;
-import br.com.murilo.liberthia.logic.InfectionLogic;
-import br.com.murilo.liberthia.registry.ModCapabilities;
+import br.com.murilo.liberthia.matter.MatterResistance;
 import br.com.murilo.liberthia.registry.ModEffects;
-import br.com.murilo.liberthia.registry.ModSounds;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
+/**
+ * v0.1.51: Clear Matter Pill — pílula comestível.
+ *
+ * <p>NÃO reduz mais a Clear (White) Matter acumulada. Aplica
+ * {@link ModEffects#CLEAR_MATTER_RESISTANCE} por 30 min — durante esse
+ * tempo o player não ganha mais White Matter e os efeitos negativos de
+ * exposição CM (Glowing, Levitation, etc.) são bloqueados.
+ *
+ * <p>Comestível via {@link FoodProperties} ({@code alwaysEat()}, sem nutrição,
+ * só efeito).
+ */
 public class ClearMatterPillItem extends Item {
-    public ClearMatterPillItem(Properties properties) {
-        super(properties);
+
+    public static FoodProperties FOOD() {
+        return new FoodProperties.Builder()
+                .nutrition(0)
+                .saturationMod(0f)
+                .alwaysEat()
+                .effect(() -> new MobEffectInstance(
+                        ModEffects.CLEAR_MATTER_RESISTANCE.get(),
+                        MatterResistance.DURATION_TICKS,
+                        0, false, true, true), 1.0f)
+                .build();
     }
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-
-        if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.getCapability(ModCapabilities.INFECTION).ifPresent(data -> {
-                if (!data.canTakePills()) {
-                    serverPlayer.displayClientMessage(Component.literal("§c⚠ As pílulas não fazem mais efeito. Você precisa de uma injeção de cura!"), true);
-                    return;
-                }
-
-                // If taking the pill for the first time or renewing
-                data.setPillTimer(36000); // 30 minutes (20 ticks/sec * 60 * 30)
-                data.reduceInfection(10); 
-                data.setDirty(true);
-                
-                player.removeEffect(ModEffects.DARK_INFECTION.get());
-                player.removeEffect(ModEffects.RADIATION_SICKNESS.get());
-                player.addEffect(new MobEffectInstance(ModEffects.CLEAR_SHIELD.get(), 1200, 0, false, true, true));
-
-                level.playSound(null, player.blockPosition(), ModSounds.CLEAR_HUM.get(),
-                        SoundSource.PLAYERS, 0.8F, 1.2F);
-
-                if (!player.getAbilities().instabuild) {
-                    stack.shrink(1);
-                }
-
-                player.getCooldowns().addCooldown(this, 100);
-                InfectionLogic.sync(serverPlayer, data);
-            });
-
-            // INTEGRAÇÃO COM MATTER PROFILE: pílula reduz DM e adiciona WM
-            serverPlayer.getCapability(br.com.murilo.liberthia.matter.MatterProfileProvider.CAP).ifPresent(profile -> {
-                profile.addDark(-25);   // reduz DM em 25
-                profile.addWhite(15);   // adiciona WM em 15
-                br.com.murilo.liberthia.matter.MatterProfileEvents.syncTo(serverPlayer);
-            });
-        }
-
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+    public ClearMatterPillItem(Properties properties) {
+        super(properties.food(FOOD()));
     }
 
     @Override
@@ -71,6 +46,11 @@ public class ClearMatterPillItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return 16;
+        return 32;
+    }
+
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+        return super.finishUsingItem(stack, level, entity);
     }
 }

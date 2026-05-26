@@ -1,65 +1,131 @@
 {
-  "dark_whisper": {
-    "subtitle": "subtitle.liberthia.dark_whisper",
+  "dark_whisper":     { "sounds": [{"name": "liberthia:dark_whisper", "stream": false}] },
+  "dark_pulse":       { "sounds": [{"name": "liberthia:dark_pulse", "stream": false}] },
+  "clear_hum":        { "sounds": [{"name": "liberthia:clear_hum", "stream": false}] },
+  "geiger_tick":      { "sounds": [{"name": "liberthia:geiger_tick", "stream": false}] },
+  "infection_alert":  { "sounds": [{"name": "liberthia:infection_alert", "stream": false}] },
+  "isolation_warning":{ "sounds": [{"name": "liberthia:isolation_warning", "stream": false}] },
+  "flesh_mother_grum":{ "sounds": [{"name": "liberthia:flesh_mother_grum", "stream": false}] },
+  "dark_matter_sword":{ "sounds": [{"name": "liberthia:dark_matter_sword", "stream": false}] },
+  "ambient": {
+    "category": "ambient",
+    "sounds": [{"name": "liberthia:ambient", "stream": true}]
+  },
+  "watcher_step": {
+    "category": "hostile",
+    "sounds": [{"name": "liberthia:watcher_step", "stream": false}]
+  },
+  "watcher_breath": {
+    "category": "hostile",
+    "sounds": [{"name": "liberthia:watcher_breath", "stream": false}]
+  },
+  "peripheral_whisper": {
+    "category": "hostile",
+    "sounds": [{"name": "liberthia:peripheral_whisper", "stream": false}]
+  },
+  "peripheral_blind": {
+    "category": "hostile",
+    "sounds": [{"name": "liberthia:peripheral_blind", "stream": false}]
+  },
+  "screamer_teleport": {
+    "category": "hostile",
+    "sounds": [{"name": "liberthia:screamer_teleport", "stream": false}]
+  },
+  "screamer_scream": {
+    "category": "hostile",
+    "sounds": [{"name": "liberthia:screamer_scream", "stream": false}]
+  },
+  "worm_bite": {
+    "category": "hostile",
+    "sounds": [{"name": "liberthia:worm_bite", "stream": false}]
+  },
+  "portal_ambient": {
+    "category": "block",
+    "sounds": [{"name": "liberthia:portal_ambient", "stream": false}]
+  },
+  "cosmic.whisper_1": {
+    "category": "ambient",
+    "sounds": [{"name": "liberthia:cosmic/whisper_1", "stream": false}]
+  },
+  "cosmic.whisper_2": {
+    "category": "ambient",
+    "sounds": [{"name": "liberthia:cosmic/whisper_2", "stream": false}]
+  },
+  "cosmic.whisper_3": {
+    "category": "ambient",
+    "sounds": [{"name": "liberthia:cosmic/whisper_3", "stream": false}]
+  },
+  "cosmic.azathoth_eye": {
+    "category": "ambient",
+    "sounds": [{"name": "liberthia:cosmic/azathoth_eye", "stream": false}]
+  },
+  "cosmic.glitch": {
+    "category": "ambient",
+    "sounds": [{"name": "liberthia:cosmic/glitch", "stream": false}]
+  },
+  "cosmic.dimensional_tear": {
+    "category": "ambient",
+    "sounds": [{"name": "liberthia:cosmic/dimensional_tear", "stream": false}]
+  },
+
+  "cosmic.distant_whispers": {
+    "category": "ambient",
     "sounds": [
-      {
-        "name": "liberthia:dark_whisper",
-        "stream": false
-      }
+      {"name": "liberthia:whispers/distant_whispers", "stream": false}
     ]
   },
-  "dark_pulse": {
-    "subtitle": "subtitle.liberthia.dark_pulse",
+  "cosmic.eye_pulse": {
+    "category": "ambient",
     "sounds": [
-      {
-        "name": "liberthia:dark_pulse",
-        "stream": false
-      }
+      {"name": "liberthia:eye_artifacts/eye_pulse", "stream": false}
     ]
   },
-  "clear_hum": {
-    "subtitle": "subtitle.liberthia.clear_hum",
+  "cosmic.false_footsteps": {
+    "category": "ambient",
     "sounds": [
-      {
-        "name": "liberthia:clear_hum",
-        "stream": false
-      }
+      {"name": "liberthia:hallucinations/false_footsteps", "stream": false}
     ]
   },
-  "geiger_tick": {
-    "subtitle": "subtitle.liberthia.geiger_tick",
+  "cosmic.void_breathing": {
+    "category": "ambient",
     "sounds": [
-      {
-        "name": "liberthia:geiger_tick",
-        "stream": false
-      }
+      {"name": "liberthia:entity_sounds/void_breathing", "stream": false}
     ]
   },
-  "dark_matter_sword": {
-    "subtitle": "subtitle.liberthia.dark_matter_sword",
+  "cosmic.radio_broadcast": {
+    "category": "ambient",
     "sounds": [
-      {
-        "name": "liberthia:dark_matter_song",
-        "stream": false
-      }
+      {"name": "liberthia:broadcasts/radio_broadcast", "stream": false}
     ]
   },
-  "infection_alert": {
-    "subtitle": "subtitle.liberthia.infection_alert",
+  "cosmic.sky_hum": {
+    "category": "ambient",
     "sounds": [
-      {
-        "name": "liberthia:infection_alert",
-        "stream": false
-      }
+      {"name": "liberthia:sky_events/sky_hum", "stream": true}
     ]
   },
-  "isolation_warning": {
-    "subtitle": "subtitle.liberthia.isolation_warning",
+  "cosmic.tendril_movement": {
+    "category": "ambient",
     "sounds": [
-      {
-        "name": "liberthia:isolation_warning",
-        "stream": false
-      }
+      {"name": "liberthia:tendrils/tendril_movement", "stream": false}
+    ]
+  },
+  "cosmic.reality_distortion": {
+    "category": "ambient",
+    "sounds": [
+      {"name": "liberthia:distortion/reality_distortion", "stream": false}
+    ]
+  },
+  "cosmic.distant_scream": {
+    "category": "ambient",
+    "sounds": [
+      {"name": "liberthia:entity_sounds/distant_scream", "stream": false}
+    ]
+  },
+  "cosmic.audience_presence": {
+    "category": "ambient",
+    "sounds": [
+      {"name": "liberthia:observation/audience_presence", "stream": true}
     ]
   }
 }

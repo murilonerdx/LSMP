@@ -156,6 +156,32 @@ public class DarkMatterGeneratorBlockEntity extends BlockEntity
     private LazyOptional<IEnergyStorage> lazyEnergy = LazyOptional.empty();
 
     /**
+     * Wrapper SOURCE-ONLY do storage interno. Exposto via capability pra
+     * blocos externos.
+     *
+     * <p><b>Por que existe (bug fix v0.1.8):</b> Forge's {@code EnergyStorage}
+     * tem {@code canReceive() = maxReceive > 0}. Como o gerador precisa de
+     * {@code maxReceive > 0} pra burn-fuel insertion funcionar, o
+     * {@code canReceive()} externo também virava {@code true}. Resultado: quando
+     * a bateria fazia push pela rede, o EnergyNetwork.BFS encontrava o
+     * GERADOR como "consumidor" válido e devolvia a energia pra ele.
+     * Loop: gerador → bateria → gerador → bateria → ... Bateria sempre 0.
+     *
+     * <p>Solução: wrapper que NEGA receive externamente. Burn fuel insertion
+     * usa {@code energy.receiveEnergy()} direto (não passa pelo wrapper).
+     */
+    private static final class SourceOnlyEnergyView implements IEnergyStorage {
+        private final IEnergyStorage delegate;
+        SourceOnlyEnergyView(IEnergyStorage delegate) { this.delegate = delegate; }
+        @Override public int receiveEnergy(int max, boolean sim) { return 0; }
+        @Override public int extractEnergy(int max, boolean sim) { return delegate.extractEnergy(max, sim); }
+        @Override public int getEnergyStored() { return delegate.getEnergyStored(); }
+        @Override public int getMaxEnergyStored() { return delegate.getMaxEnergyStored(); }
+        @Override public boolean canExtract() { return true; }
+        @Override public boolean canReceive() { return false; }
+    }
+
+    /**
      * Sync para o cliente. {@link ContainerData} sincroniza como SHORT (16 bits),
      * então valores acima de 32.767 viram negativos. Cada {@code int} é
      * dividido em dois slots: alto (>>16) e baixo (&0xFFFF). O menu reconstrói
@@ -304,7 +330,9 @@ public class DarkMatterGeneratorBlockEntity extends BlockEntity
     public void onLoad() {
         super.onLoad();
         lazyItem = LazyOptional.of(() -> inventory);
-        lazyEnergy = LazyOptional.of(() -> energy);
+        // SOURCE-ONLY: nega receive externo. Sem isso, bateria empurra
+        // energia DE VOLTA pro gerador (loop infinito, vide nota acima).
+        lazyEnergy = LazyOptional.of(() -> (IEnergyStorage) new SourceOnlyEnergyView(energy));
         br.com.murilo.liberthia.persistence.Persistable.LIVE.add(this);
 
         // Diagnóstico: log estado atual no onLoad

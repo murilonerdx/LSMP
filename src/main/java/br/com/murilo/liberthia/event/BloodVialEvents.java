@@ -13,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,6 +21,43 @@ import net.minecraftforge.fml.common.Mod;
 /** Right-click on Blood Fluid with empty Blood Vial → filled vial. */
 @Mod.EventBusSubscriber(modid = LiberthiaMod.MODID)
 public class BloodVialEvents {
+
+    /**
+     * v0.1.16 bug fix: nadar/imergir em Blood Fluid agora aplica BLOOD_INFECTION
+     * + dano leve. Bug reportado: "Nadar no sangue — n da nenhum efeito negativo".
+     *
+     * <p>Checa a cada 40t (2s). Se eyes ou body submerso em BLOOD_TYPE:
+     * <ul>
+     *   <li>Aplica/refresca BLOOD_INFECTION por 100t (5s) — efeito já existente</li>
+     *   <li>Se totalmente submerso (eye + body): 1 ponto de dano (meio coração)</li>
+     * </ul>
+     *
+     * <p>Creative/spectator são exemptos. Sem cooldown — fica drenando vida enquanto
+     * o player ficar lá. Sair do sangue interrompe.
+     */
+    @SubscribeEvent
+    public static void onBloodSwim(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+        Player p = event.player;
+        if (p.level().isClientSide) return;
+        if (p.tickCount % 40 != 0) return;
+        if (p.isCreative() || p.isSpectator()) return;
+
+        var bloodType = br.com.murilo.liberthia.registry.ModFluids.BLOOD_TYPE.get();
+        boolean bodyIn = p.isInFluidType(bloodType);
+        boolean eyeIn = p.isEyeInFluidType(bloodType);
+        if (!bodyIn && !eyeIn) return;
+
+        // BLOOD_INFECTION effect — atualiza por 5s, refresca enquanto submerso
+        p.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                br.com.murilo.liberthia.registry.ModEffects.BLOOD_INFECTION.get(),
+                100, 0, true, false, true));
+
+        // Submersão total = dano (representando aspiração/asfixia em sangue)
+        if (eyeIn && bodyIn) {
+            p.hurt(p.damageSources().magic(), 1.0F);
+        }
+    }
 
     @SubscribeEvent
     public static void onRightClick(PlayerInteractEvent.RightClickItem event) {

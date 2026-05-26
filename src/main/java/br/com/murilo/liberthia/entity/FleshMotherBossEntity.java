@@ -64,7 +64,7 @@ public class FleshMotherBossEntity extends Monster {
     private int wormCooldown = 280;
     private int boltCooldown = 300;
     private int pulseCooldown = 400;
-    private int sonicCooldown = 100;
+    private int sonicCooldown = 200; // v0.1.74: nerf — 10s minimum delay
     private int poundCooldown = 1900;
     private int teleportCooldown = 1200;
     private int shieldHealTick = 0;
@@ -354,12 +354,17 @@ public class FleshMotherBossEntity extends Monster {
         }
 
         if (nearest != null && --sonicCooldown <= 0) {
-            sonicCooldown = phase3 ? 80 : phase2 ? 120 : 180;
+            // v0.1.74: nerf — sonic com delay mínimo de 10s (200 ticks) em
+            // TODAS as fases. User reportou que não conseguia chegar perto
+            // dela por causa de sonic spam.
+            sonicCooldown = 200;
             sonicBoom(nearest);
         }
 
         if (phase2 && --poundCooldown <= 0) {
-            poundCooldown = phase3 ? 120 : 200;
+            // v0.1.74: nerf — ground pound (knockback) com delay mínimo de
+            // 10s (200 ticks). Mesmo motivo do sonic: spam impedia engajamento.
+            poundCooldown = 200;
             groundPound();
         }
 
@@ -399,10 +404,11 @@ public class FleshMotherBossEntity extends Monster {
     private Player findNearestValidPlayer(double range) {
         AABB box = this.getBoundingBox().inflate(range);
 
+        // v0.1.22 r18: filter isProtected — pula players com Sigil/Crown/
+        // creative. Mira em players SEM proteção. Outros continuam normais.
         return level()
                 .getEntitiesOfClass(Player.class, box, player ->
-                        !player.isCreative()
-                                && !player.isSpectator()
+                        !br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(player)
                                 && player.isAlive()
                                 && player.distanceToSqr(this) <= range * range
                 )
@@ -454,7 +460,8 @@ public class FleshMotherBossEntity extends Monster {
         AABB box = new AABB(blockPosition()).inflate(radius);
 
         for (Player player : level().getEntitiesOfClass(Player.class, box)) {
-            if (player.isCreative() || player.isSpectator()) {
+            // v0.1.22 r18: pula Sigil/Crown/creative — atacam só players SEM proteção.
+            if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(player)) {
                 continue;
             }
 
@@ -556,7 +563,8 @@ public class FleshMotherBossEntity extends Monster {
         AABB lineBox = new AABB(origin, origin.add(direction.scale(range))).inflate(2.5D);
 
         for (Player player : serverLevel.getEntitiesOfClass(Player.class, lineBox)) {
-            if (player.isCreative() || player.isSpectator()) {
+            // v0.1.22 r18: pula Sigil/Crown/creative — atacam só players SEM proteção.
+            if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(player)) {
                 continue;
             }
 
@@ -590,7 +598,8 @@ public class FleshMotherBossEntity extends Monster {
         AABB box = new AABB(blockPosition()).inflate(8.0D);
 
         for (Player player : serverLevel.getEntitiesOfClass(Player.class, box)) {
-            if (player.isCreative() || player.isSpectator()) {
+            // v0.1.22 r18: pula Sigil/Crown/creative — atacam só players SEM proteção.
+            if (br.com.murilo.liberthia.logic.BloodKinPassage.isProtected(player)) {
                 continue;
             }
 

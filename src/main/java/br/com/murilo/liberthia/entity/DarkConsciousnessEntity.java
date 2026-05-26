@@ -99,16 +99,13 @@ public class DarkConsciousnessEntity extends Monster {
         List<Player> nearbyPlayers = level().getEntitiesOfClass(
                 Player.class, new AABB(blockPosition()).inflate(16.0));
 
-        // Whisper disturbing messages to nearby players
+        // r82 FIX: whisper disturbing messages no chat — DESABILITADO
+        // User reportou spam infinito ("I was born from your mistake" etc.)
+        // toda vez que entrava em Spirit World e tinha Dark Consciousness perto.
+        // Reativar APENAS via título/actionbar se necessário (1x por phase).
         if (whisperCooldown <= 0 && !nearbyPlayers.isEmpty()) {
-            whisperCooldown = 100 + random.nextInt(200); // 5-15 seconds
-            String key = WHISPER_KEYS[random.nextInt(WHISPER_KEYS.length)];
-            for (Player player : nearbyPlayers) {
-                player.displayClientMessage(
-                        Component.translatable(key)
-                                .withStyle(net.minecraft.ChatFormatting.DARK_PURPLE, net.minecraft.ChatFormatting.ITALIC),
-                        false);
-            }
+            whisperCooldown = 100 + random.nextInt(200);
+            // sem chat — só consume cooldown pra não recalcular o array
         }
 
         // Teleport towards target when far away

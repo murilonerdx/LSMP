@@ -28,13 +28,7 @@ public final class ModEntities {
                             .updateInterval(2)
                             .build("dark_matter_spore"));
 
-    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.CleansingGrenadeEntity>> CLEANSING_GRENADE = 
-            ENTITY_TYPES.register("cleansing_grenade",
-                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.CleansingGrenadeEntity>of(br.com.murilo.liberthia.entity.CleansingGrenadeEntity::new, MobCategory.MISC)
-                            .sized(0.25F, 0.25F)
-                            .clientTrackingRange(4)
-                            .updateInterval(10)
-                            .build("cleansing_grenade"));
+    // REMOVIDO v0.1.13: CLEANSING_GRENADE entity
 
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.CorruptedZombieEntity>> CORRUPTED_ZOMBIE =
             ENTITY_TYPES.register("corrupted_zombie",
@@ -56,6 +50,15 @@ public final class ModEntities {
                             .sized(0.6F, 1.8F)
                             .clientTrackingRange(16)
                             .build("clone_player"));
+
+    // v0.1.22 r24: SoulBody — corpo físico do player enquanto consciência
+    // está no spirit world. Renderizado pelo ClonePlayerRenderer.
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.SoulBodyEntity>> SOUL_BODY =
+            ENTITY_TYPES.register("soul_body",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.SoulBodyEntity>of(br.com.murilo.liberthia.entity.SoulBodyEntity::new, MobCategory.MISC)
+                            .sized(0.6F, 1.8F)
+                            .clientTrackingRange(32)
+                            .build("soul_body"));
 
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.WhiteMatterExplosionEntity>> WHITE_MATTER_EXPLOSION =
             ENTITY_TYPES.register("white_matter_explosion",
@@ -278,6 +281,118 @@ public final class ModEntities {
                             .sized(0.6F, 1.95F)
                             .clientTrackingRange(8)
                             .build("disarmer"));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // v0.1.22 r33: LOOM DIMENSION ENTITIES
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.loom.entity.WatcherStalkerEntity>> LOOM_WATCHER =
+            ENTITY_TYPES.register("loom_watcher",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.loom.entity.WatcherStalkerEntity>of(
+                                    br.com.murilo.liberthia.loom.entity.WatcherStalkerEntity::new, MobCategory.MONSTER)
+                            .sized(0.7F, 2.4F)
+                            .clientTrackingRange(48)
+                            .fireImmune()
+                            .build("loom_watcher"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.loom.entity.PeripheralObserverEntity>> LOOM_PERIPHERAL =
+            ENTITY_TYPES.register("loom_peripheral",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.loom.entity.PeripheralObserverEntity>of(
+                                    br.com.murilo.liberthia.loom.entity.PeripheralObserverEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.0F)
+                            .clientTrackingRange(64)
+                            .build("loom_peripheral"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.loom.entity.ScreamerTeleporterEntity>> LOOM_SCREAMER =
+            ENTITY_TYPES.register("loom_screamer",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.loom.entity.ScreamerTeleporterEntity>of(
+                                    br.com.murilo.liberthia.loom.entity.ScreamerTeleporterEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(32)
+                            .build("loom_screamer"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.loom.entity.DimensionalWormEntity>> LOOM_WORM =
+            ENTITY_TYPES.register("loom_worm",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.loom.entity.DimensionalWormEntity>of(
+                                    br.com.murilo.liberthia.loom.entity.DimensionalWormEntity::new, MobCategory.MONSTER)
+                            .sized(0.5F, 0.3F)
+                            .clientTrackingRange(16)
+                            .build("loom_worm"));
+
+    // r48: REFLECTION ENTITY — clone player com AI natural (Reflection Seed)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.observatory.ReflectionEntity>> REFLECTION_ENTITY =
+            ENTITY_TYPES.register("reflection_entity",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.observatory.ReflectionEntity>of(
+                                    br.com.murilo.liberthia.cosmic.observatory.ReflectionEntity::new, MobCategory.MISC)
+                            .sized(0.6F, 1.8F)
+                            .clientTrackingRange(48)
+                            .build("reflection_entity"));
+
+    // r74: Bookwyrm Familiar — pet que auto-casta spell em hostile mob
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.observation.entity.BookwyrmEntity>>
+            BOOKWYRM = ENTITY_TYPES.register("bookwyrm",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.observation.entity.BookwyrmEntity>of(
+                                    br.com.murilo.liberthia.observation.entity.BookwyrmEntity::new,
+                                    MobCategory.CREATURE)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(16)
+                            .build("bookwyrm"));
+
+    // r64: Observation projectile — spell que voa com SynchedEntityData color, trail glow, hit detection
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.observation.entity.EntityObservationProjectile>>
+            OBSERVATION_PROJECTILE = ENTITY_TYPES.register("observation_projectile",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.observation.entity.EntityObservationProjectile>of(
+                                    br.com.murilo.liberthia.observation.entity.EntityObservationProjectile::new,
+                                    MobCategory.MISC)
+                            .sized(0.4F, 0.4F)
+                            .clientTrackingRange(32)
+                            .updateInterval(10)
+                            .noSummon()
+                            .fireImmune()
+                            .build("observation_projectile"));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r81: HORROR FRAMEWORK ENTITIES — 4 iconic horror entities
+    // ════════════════════════════════════════════════════════════════════════
+
+    /** Empty Man — uncanny humanoid distante. Desaparece se aproximar. */
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.EmptyManEntity>> EMPTY_MAN =
+            ENTITY_TYPES.register("empty_man",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.EmptyManEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.EmptyManEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(64)
+                            .build("empty_man"));
+
+    /** Observer — SCP-173 style. Move só sem line of sight. */
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity>> OBSERVER =
+            ENTITY_TYPES.register("observer",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.7F, 2.0F)
+                            .clientTrackingRange(48)
+                            .build("observer"));
+
+    /** Absence — invisible void creature. Detect by particles missing. */
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.AbsenceEntity>> ABSENCE =
+            ENTITY_TYPES.register("absence",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.AbsenceEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.AbsenceEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.8F)
+                            .clientTrackingRange(32)
+                            .build("absence"));
+
+    /** Remembered — memetic horror. Manifesta com menção em chat. */
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.RememberedEntity>> REMEMBERED =
+            ENTITY_TYPES.register("remembered",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.RememberedEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.RememberedEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.8F)
+                            .clientTrackingRange(32)
+                            .build("remembered"));
 
     private ModEntities() {}
 
