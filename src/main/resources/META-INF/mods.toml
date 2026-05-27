@@ -23,3 +23,12 @@ mandatory=true
 versionRange="[1.20.1,1.20.2)"
 ordering="NONE"
 side="BOTH"
+
+# r147: Patchouli OPCIONAL — se instalado, LIBERTHIA_MANUAL abre via Patchouli
+# (livro guiado bonito). Se não, abre nossa GUI custom.
+[[dependencies.liberthia]]
+modId="patchouli"
+mandatory=false
+versionRange="[1.20.1,)"
+ordering="AFTER"
+side="BOTH"

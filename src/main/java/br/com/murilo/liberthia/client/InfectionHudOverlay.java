@@ -35,8 +35,10 @@ public final class InfectionHudOverlay implements IGuiOverlay {
     }
 
     private void renderInfectionHud(Minecraft minecraft, GuiGraphics guiGraphics, int screenWidth, int screenHeight, int infection) {
-        int x = LiberthiaConfig.CLIENT.infectionX.get();
-        int y = LiberthiaConfig.CLIENT.infectionY.get();
+        // r164: posição via Unified HUD system
+        var hudId = br.com.murilo.liberthia.client.hud.unified.HudId.INFECTION_HUD;
+        int x = br.com.murilo.liberthia.client.hud.unified.ClientHudPositions.x(hudId, screenWidth);
+        int y = br.com.murilo.liberthia.client.hud.unified.ClientHudPositions.y(hudId, screenHeight);
         int width = 110;
         int height = 10;
         int filled = (int) (width * (infection / 100.0F));

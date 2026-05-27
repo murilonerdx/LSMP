@@ -1928,6 +1928,49 @@ public final class ModItems {
     public static final RegistryObject<Item> SPELL_PARCHMENT = ITEMS.register("spell_parchment",
             () -> new br.com.murilo.liberthia.observation.item.SpellParchmentItem(new Item.Properties()));
 
+    // r138: Caster Wand — varinha customizável que bind 1 spell via offhand scroll
+    public static final RegistryObject<Item> CASTER_WAND = ITEMS.register("caster_wand",
+            () -> new br.com.murilo.liberthia.magic.spell.wand.CasterWandItem(new Item.Properties()));
+
+    // r138: Lay Line — block item (rare drop, normally only worldgen)
+    public static final RegistryObject<Item> LAY_LINE_ITEM = ITEMS.register("lay_line",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.LAY_LINE.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // r138: Spell Mutator — bloco que combina 2 scrolls
+    public static final RegistryObject<Item> SPELL_MUTATOR_ITEM = ITEMS.register("spell_mutator",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SPELL_MUTATOR.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r155 Phase 2: Arcane Workbench BlockItem
+    public static final RegistryObject<Item> ARCANE_WORKBENCH_ITEM = ITEMS.register("arcane_workbench",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ARCANE_WORKBENCH.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // r162: Class Pedestal BlockItem
+    public static final RegistryObject<Item> CLASS_PEDESTAL_ITEM = ITEMS.register("class_pedestal",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.CLASS_PEDESTAL.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // r139: Spirit World ores + plantas (block items)
+    public static final RegistryObject<Item> SPIRIT_CRYSTAL_ORE_ITEM = ITEMS.register("spirit_crystal_ore",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SPIRIT_CRYSTAL_ORE.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> SOUL_IRON_ORE_ITEM = ITEMS.register("soul_iron_ore",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SOUL_IRON_ORE.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> WHISPER_PETAL_BUSH_ITEM = ITEMS.register("whisper_petal_bush",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.WHISPER_PETAL_BUSH.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> GHOST_MUSHROOM_BLOCK_ITEM = ITEMS.register("ghost_mushroom_block",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.GHOST_MUSHROOM.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // r139: Glyph Brazier — bloco onde player faz rituais
+    public static final RegistryObject<Item> GLYPH_BRAZIER_ITEM = ITEMS.register("glyph_brazier",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.GLYPH_BRAZIER.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
     // r69: Scribes Table — block item
     public static final RegistryObject<Item> SCRIBES_TABLE_ITEM = ITEMS.register("scribes_table",
             () -> new net.minecraft.world.item.BlockItem(ModBlocks.SCRIBES_TABLE.get(),
@@ -2112,6 +2155,918 @@ public final class ModItems {
     public static final RegistryObject<Item> VEINBOUND_CHESTPLATE = ITEMS.register("veinbound_chestplate",
             () -> new br.com.murilo.liberthia.cosmic.horror.item.VeinboundChestplateItem(
                     new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    /** r85: Scrying Lens — highlight de blocos através de paredes. */
+    public static final RegistryObject<Item> SCRYING_LENS = ITEMS.register("scrying_lens",
+            () -> new br.com.murilo.liberthia.magic.scrying.ScryingLensItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r86: RITUAL TABLETS — 8 tablets, um pra cada ritual
+    public static final RegistryObject<Item> RITUAL_TABLET_SUNRISE = ITEMS.register("ritual_tablet_sunrise",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "sunrise"));
+    public static final RegistryObject<Item> RITUAL_TABLET_MOONFALL = ITEMS.register("ritual_tablet_moonfall",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "moonfall"));
+    public static final RegistryObject<Item> RITUAL_TABLET_FLIGHT = ITEMS.register("ritual_tablet_flight",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "flight_zone"));
+    public static final RegistryObject<Item> RITUAL_TABLET_HEALING = ITEMS.register("ritual_tablet_healing",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "healing_aura"));
+    public static final RegistryObject<Item> RITUAL_TABLET_FORESTATION = ITEMS.register("ritual_tablet_forestation",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "forestation"));
+    public static final RegistryObject<Item> RITUAL_TABLET_WARDING = ITEMS.register("ritual_tablet_warding",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "warding"));
+    public static final RegistryObject<Item> RITUAL_TABLET_AWAKENING = ITEMS.register("ritual_tablet_awakening",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "awakening"));
+    public static final RegistryObject<Item> RITUAL_TABLET_SCRYING = ITEMS.register("ritual_tablet_scrying",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "scrying"));
+
+    // r88: Dominion Wand
+    public static final RegistryObject<Item> DOMINION_WAND = ITEMS.register("dominion_wand",
+            () -> new br.com.murilo.liberthia.automation.DominionWandItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r92: Storage / Travel
+    public static final RegistryObject<Item> VOID_JAR = ITEMS.register("void_jar",
+            () -> new br.com.murilo.liberthia.storage.VoidJarItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> WARP_SCROLL = ITEMS.register("warp_scroll",
+            () -> new br.com.murilo.liberthia.storage.WarpScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), false));
+    public static final RegistryObject<Item> STABLE_WARP_SCROLL = ITEMS.register("stable_warp_scroll",
+            () -> new br.com.murilo.liberthia.storage.WarpScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), true));
+
+    // r93: 7 School Scrolls
+    public static final RegistryObject<Item> SCROLL_FIRE = ITEMS.register("scroll_fire",
+            () -> new br.com.murilo.liberthia.magic.scroll.SchoolScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.FIRE));
+    public static final RegistryObject<Item> SCROLL_ICE = ITEMS.register("scroll_ice",
+            () -> new br.com.murilo.liberthia.magic.scroll.SchoolScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ICE));
+    public static final RegistryObject<Item> SCROLL_LIGHTNING = ITEMS.register("scroll_lightning",
+            () -> new br.com.murilo.liberthia.magic.scroll.SchoolScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.LIGHTNING));
+    public static final RegistryObject<Item> SCROLL_BLOOD = ITEMS.register("scroll_blood",
+            () -> new br.com.murilo.liberthia.magic.scroll.SchoolScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.BLOOD));
+    public static final RegistryObject<Item> SCROLL_ELDRITCH = ITEMS.register("scroll_eldritch",
+            () -> new br.com.murilo.liberthia.magic.scroll.SchoolScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ELDRITCH));
+    public static final RegistryObject<Item> SCROLL_HOLY = ITEMS.register("scroll_holy",
+            () -> new br.com.murilo.liberthia.magic.scroll.SchoolScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.HOLY));
+    public static final RegistryObject<Item> SCROLL_NATURE = ITEMS.register("scroll_nature",
+            () -> new br.com.murilo.liberthia.magic.scroll.SchoolScrollItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.NATURE));
+
+    // r93: 5 Affinity Rings
+    public static final RegistryObject<Item> RING_FIREWARP = ITEMS.register("ring_firewarp",
+            () -> new br.com.murilo.liberthia.magic.affinity.AffinityRingItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.affinity.AffinityRingItem.Type.FIREWARP));
+    public static final RegistryObject<Item> RING_LURKER = ITEMS.register("ring_lurker",
+            () -> new br.com.murilo.liberthia.magic.affinity.AffinityRingItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.affinity.AffinityRingItem.Type.LURKER));
+    public static final RegistryObject<Item> RING_TELEPORT = ITEMS.register("ring_teleport",
+            () -> new br.com.murilo.liberthia.magic.affinity.AffinityRingItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.affinity.AffinityRingItem.Type.TELEPORT));
+    public static final RegistryObject<Item> RING_CAPACITY = ITEMS.register("ring_capacity",
+            () -> new br.com.murilo.liberthia.magic.affinity.AffinityRingItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.affinity.AffinityRingItem.Type.CAPACITY));
+    public static final RegistryObject<Item> RING_BLOODBORN = ITEMS.register("ring_bloodborn",
+            () -> new br.com.murilo.liberthia.magic.affinity.AffinityRingItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.affinity.AffinityRingItem.Type.BLOODBORN));
+
+    // r93: Arcane Salvage — drop de wizard mobs
+    public static final RegistryObject<Item> ARCANE_SALVAGE = ITEMS.register("arcane_salvage",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // r91: Counterspell — interrompe wizards próximos
+    public static final RegistryObject<Item> COUNTERSPELL = ITEMS.register("counterspell",
+            () -> new br.com.murilo.liberthia.magic.casting.CounterspellItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r90: 15 Perk Threads
+    public static final RegistryObject<Item> PERK_JUMP = ITEMS.register("perk_jump",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties(), "jump"));
+    public static final RegistryObject<Item> PERK_STEP_HEIGHT = ITEMS.register("perk_step_height",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties(), "step_height"));
+    public static final RegistryObject<Item> PERK_REPAIRING = ITEMS.register("perk_repairing",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties(), "repairing"));
+    public static final RegistryObject<Item> PERK_VAMPIRIC = ITEMS.register("perk_vampiric",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "vampiric"));
+    public static final RegistryObject<Item> PERK_MAGIC_RESIST = ITEMS.register("perk_magic_resist",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "magic_resist"));
+    public static final RegistryObject<Item> PERK_TOUGHNESS = ITEMS.register("perk_toughness",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "toughness"));
+    public static final RegistryObject<Item> PERK_FEATHER = ITEMS.register("perk_feather",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties(), "feather"));
+    public static final RegistryObject<Item> PERK_GLIDING = ITEMS.register("perk_gliding",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties(), "gliding"));
+    public static final RegistryObject<Item> PERK_MAGIC_CAPACITY = ITEMS.register("perk_magic_capacity",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "magic_capacity"));
+    public static final RegistryObject<Item> PERK_SPELL_DAMAGE = ITEMS.register("perk_spell_damage",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "spell_damage"));
+    public static final RegistryObject<Item> PERK_SATURATION = ITEMS.register("perk_saturation",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties(), "saturation"));
+    public static final RegistryObject<Item> PERK_KNOCKBACK_RESIST = ITEMS.register("perk_knockback_resist",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties(), "knockback_resist"));
+    public static final RegistryObject<Item> PERK_POTION_DURATION = ITEMS.register("perk_potion_duration",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties(), "potion_duration"));
+    public static final RegistryObject<Item> PERK_LOOTING = ITEMS.register("perk_looting",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "looting"));
+    public static final RegistryObject<Item> PERK_BONDED = ITEMS.register("perk_bonded",
+            () -> new br.com.murilo.liberthia.magic.perk.PerkThreadItem(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "bonded"));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r94: STAFF WEAPONS — 7 escolas, com cooldowns variados
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Item> STAFF_FIRE = ITEMS.register("staff_fire",
+            () -> new br.com.murilo.liberthia.magic.weapon.StaffItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.FIRE, 20, 4.0F));
+    public static final RegistryObject<Item> STAFF_ICE = ITEMS.register("staff_ice",
+            () -> new br.com.murilo.liberthia.magic.weapon.StaffItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ICE, 18, 3.0F));
+    public static final RegistryObject<Item> STAFF_LIGHTNING = ITEMS.register("staff_lightning",
+            () -> new br.com.murilo.liberthia.magic.weapon.StaffItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.LIGHTNING, 30, 4.0F));
+    public static final RegistryObject<Item> STAFF_BLOOD = ITEMS.register("staff_blood",
+            () -> new br.com.murilo.liberthia.magic.weapon.StaffItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.BLOOD, 25, 5.0F));
+    public static final RegistryObject<Item> STAFF_ELDRITCH = ITEMS.register("staff_eldritch",
+            () -> new br.com.murilo.liberthia.magic.weapon.StaffItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ELDRITCH, 28, 5.0F));
+    public static final RegistryObject<Item> STAFF_HOLY = ITEMS.register("staff_holy",
+            () -> new br.com.murilo.liberthia.magic.weapon.StaffItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.HOLY, 22, 4.0F));
+    public static final RegistryObject<Item> STAFF_NATURE = ITEMS.register("staff_nature",
+            () -> new br.com.murilo.liberthia.magic.weapon.StaffItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.NATURE, 16, 3.0F));
+
+    // r94: 5 Upgrade Orbs
+    public static final RegistryObject<Item> ORB_MANA_BOOST = ITEMS.register("orb_mana_boost",
+            () -> new br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem.Type.MANA_BOOST));
+    public static final RegistryObject<Item> ORB_COOLDOWN = ITEMS.register("orb_cooldown",
+            () -> new br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem.Type.COOLDOWN_REDUCTION));
+    public static final RegistryObject<Item> ORB_SPELL_DAMAGE = ITEMS.register("orb_spell_damage",
+            () -> new br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem.Type.SPELL_DAMAGE));
+    public static final RegistryObject<Item> ORB_HEALTH = ITEMS.register("orb_health",
+            () -> new br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON),
+                    br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem.Type.HEALTH));
+    public static final RegistryObject<Item> ORB_SOURCE_REGEN = ITEMS.register("orb_source_regen",
+            () -> new br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.weapon.UpgradeOrbItem.Type.SOURCE_REGEN));
+
+    // r94: 7 School Focus — crafting reagent
+    public static final RegistryObject<Item> FOCUS_FIRE = ITEMS.register("focus_fire",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> FOCUS_ICE = ITEMS.register("focus_ice",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> FOCUS_LIGHTNING = ITEMS.register("focus_lightning",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> FOCUS_BLOOD = ITEMS.register("focus_blood",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> FOCUS_ELDRITCH = ITEMS.register("focus_eldritch",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> FOCUS_HOLY = ITEMS.register("focus_holy",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> FOCUS_NATURE = ITEMS.register("focus_nature",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // r96: Iconic spell items
+    public static final RegistryObject<Item> SPECTRAL_HAMMER = ITEMS.register("spectral_hammer",
+            () -> new br.com.murilo.liberthia.magic.spells.SpectralHammerItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> LIGHTNING_LANCE = ITEMS.register("lightning_lance",
+            () -> new br.com.murilo.liberthia.magic.spells.LightningLanceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> DEVOUR_JAW = ITEMS.register("devour_jaw",
+            () -> new br.com.murilo.liberthia.magic.spells.DevourJawItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r97: JarOfLight + EnchantersGauntlet
+    public static final RegistryObject<Item> JAR_OF_LIGHT = ITEMS.register("jar_of_light",
+            () -> new br.com.murilo.liberthia.storage.JarOfLightItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ENCHANTERS_GAUNTLET = ITEMS.register("enchanters_gauntlet",
+            () -> new br.com.murilo.liberthia.magic.weapon.EnchantersGauntletItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r101: 7 Wizard Chestplates
+    public static final RegistryObject<Item> WIZARD_CHEST_FIRE = ITEMS.register("wizard_chest_fire",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardChestplateItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.FIRE));
+    public static final RegistryObject<Item> WIZARD_CHEST_ICE = ITEMS.register("wizard_chest_ice",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardChestplateItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ICE));
+    public static final RegistryObject<Item> WIZARD_CHEST_LIGHTNING = ITEMS.register("wizard_chest_lightning",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardChestplateItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.LIGHTNING));
+    public static final RegistryObject<Item> WIZARD_CHEST_BLOOD = ITEMS.register("wizard_chest_blood",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardChestplateItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.BLOOD));
+    public static final RegistryObject<Item> WIZARD_CHEST_ELDRITCH = ITEMS.register("wizard_chest_eldritch",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardChestplateItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ELDRITCH));
+    public static final RegistryObject<Item> WIZARD_CHEST_HOLY = ITEMS.register("wizard_chest_holy",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardChestplateItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.HOLY));
+    public static final RegistryObject<Item> WIZARD_CHEST_NATURE = ITEMS.register("wizard_chest_nature",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardChestplateItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.NATURE));
+
+    // r103: Magic Crops
+    public static final RegistryObject<Item> MAGE_BLOOM_SEED = ITEMS.register("mage_bloom_seed",
+            () -> new net.minecraft.world.item.ItemNameBlockItem(
+                    br.com.murilo.liberthia.registry.ModBlocks.MAGE_BLOOM_CROP.get(),
+                    new Item.Properties()));
+    public static final RegistryObject<Item> MAGE_BLOOM_FIBER = ITEMS.register("mage_bloom_fiber",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> SOURCE_BERRY = ITEMS.register("source_berry",
+            () -> new br.com.murilo.liberthia.magic.crop.SourceBerryItem(
+                    br.com.murilo.liberthia.registry.ModBlocks.SOURCE_BERRY_BUSH.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // r104: Spell Bow
+    public static final RegistryObject<Item> SPELL_BOW = ITEMS.register("spell_bow",
+            () -> new br.com.murilo.liberthia.magic.weapon.SpellBowItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r108: 3 More Iconic Spells
+    public static final RegistryObject<Item> ICE_TOMB_SPELL = ITEMS.register("ice_tomb_spell",
+            () -> new br.com.murilo.liberthia.magic.spells.IceTombSpellItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> ASCENSION_SPELL = ITEMS.register("ascension_spell",
+            () -> new br.com.murilo.liberthia.magic.spells.AscensionSpellItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> HEAT_SURGE_SPELL = ITEMS.register("heat_surge_spell",
+            () -> new br.com.murilo.liberthia.magic.spells.HeatSurgeSpellItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r107: 21 Wizard Armor Pieces (7 schools × 3 slots)
+    public static final RegistryObject<Item> WIZARD_HELM_FIRE = ITEMS.register("wizard_helm_fire",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.FIRE,
+                    net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> WIZARD_LEGS_FIRE = ITEMS.register("wizard_legs_fire",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.FIRE,
+                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> WIZARD_BOOTS_FIRE = ITEMS.register("wizard_boots_fire",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.FIRE,
+                    net.minecraft.world.item.ArmorItem.Type.BOOTS));
+    public static final RegistryObject<Item> WIZARD_HELM_ICE = ITEMS.register("wizard_helm_ice",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ICE,
+                    net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> WIZARD_LEGS_ICE = ITEMS.register("wizard_legs_ice",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ICE,
+                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> WIZARD_BOOTS_ICE = ITEMS.register("wizard_boots_ice",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ICE,
+                    net.minecraft.world.item.ArmorItem.Type.BOOTS));
+    public static final RegistryObject<Item> WIZARD_HELM_LIGHTNING = ITEMS.register("wizard_helm_lightning",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.LIGHTNING,
+                    net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> WIZARD_LEGS_LIGHTNING = ITEMS.register("wizard_legs_lightning",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.LIGHTNING,
+                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> WIZARD_BOOTS_LIGHTNING = ITEMS.register("wizard_boots_lightning",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.LIGHTNING,
+                    net.minecraft.world.item.ArmorItem.Type.BOOTS));
+    public static final RegistryObject<Item> WIZARD_HELM_BLOOD = ITEMS.register("wizard_helm_blood",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.BLOOD,
+                    net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> WIZARD_LEGS_BLOOD = ITEMS.register("wizard_legs_blood",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.BLOOD,
+                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> WIZARD_BOOTS_BLOOD = ITEMS.register("wizard_boots_blood",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.BLOOD,
+                    net.minecraft.world.item.ArmorItem.Type.BOOTS));
+    public static final RegistryObject<Item> WIZARD_HELM_ELDRITCH = ITEMS.register("wizard_helm_eldritch",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ELDRITCH,
+                    net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> WIZARD_LEGS_ELDRITCH = ITEMS.register("wizard_legs_eldritch",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ELDRITCH,
+                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> WIZARD_BOOTS_ELDRITCH = ITEMS.register("wizard_boots_eldritch",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ELDRITCH,
+                    net.minecraft.world.item.ArmorItem.Type.BOOTS));
+    public static final RegistryObject<Item> WIZARD_HELM_HOLY = ITEMS.register("wizard_helm_holy",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.HOLY,
+                    net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> WIZARD_LEGS_HOLY = ITEMS.register("wizard_legs_holy",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.HOLY,
+                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> WIZARD_BOOTS_HOLY = ITEMS.register("wizard_boots_holy",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.HOLY,
+                    net.minecraft.world.item.ArmorItem.Type.BOOTS));
+    public static final RegistryObject<Item> WIZARD_HELM_NATURE = ITEMS.register("wizard_helm_nature",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.NATURE,
+                    net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> WIZARD_LEGS_NATURE = ITEMS.register("wizard_legs_nature",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.NATURE,
+                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> WIZARD_BOOTS_NATURE = ITEMS.register("wizard_boots_nature",
+            () -> new br.com.murilo.liberthia.magic.armor.WizardArmorPieceItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.NATURE,
+                    net.minecraft.world.item.ArmorItem.Type.BOOTS));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r110: BlockItems pra todos os blocks novos (r82-r109) ficarem placeable
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Item> VOLCANIC_SOURCELINK_ITEM = ITEMS.register("volcanic_sourcelink",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.VOLCANIC_SOURCELINK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MYCELIAL_SOURCELINK_ITEM = ITEMS.register("mycelial_sourcelink",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MYCELIAL_SOURCELINK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> VITALIC_SOURCELINK_ITEM = ITEMS.register("vitalic_sourcelink",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.VITALIC_SOURCELINK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMICAL_SOURCELINK_ITEM = ITEMS.register("alchemical_sourcelink",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ALCHEMICAL_SOURCELINK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RITUAL_BRAZIER_ITEM = ITEMS.register("ritual_brazier",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.RITUAL_BRAZIER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SPELL_PRISM_ITEM = ITEMS.register("spell_prism",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SPELL_PRISM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SPELL_TURRET_ITEM = ITEMS.register("spell_turret",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SPELL_TURRET.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SPELL_SENSOR_ITEM = ITEMS.register("spell_sensor",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SPELL_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MIRROR_WEAVE_ITEM = ITEMS.register("mirror_weave",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MIRROR_WEAVE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SKY_WEAVE_ITEM = ITEMS.register("sky_weave",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SKY_WEAVE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GHOST_WEAVE_ITEM = ITEMS.register("ghost_weave",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.GHOST_WEAVE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FALSE_WEAVE_ITEM = ITEMS.register("false_weave",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.FALSE_WEAVE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_FIRE_FIRE_ITEM = ITEMS.register("magic_fire_fire",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGIC_FIRE_FIRE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_FIRE_ICE_ITEM = ITEMS.register("magic_fire_ice",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGIC_FIRE_ICE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_FIRE_LIGHTNING_ITEM = ITEMS.register("magic_fire_lightning",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGIC_FIRE_LIGHTNING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_FIRE_BLOOD_ITEM = ITEMS.register("magic_fire_blood",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGIC_FIRE_BLOOD.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_FIRE_ELDRITCH_ITEM = ITEMS.register("magic_fire_eldritch",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGIC_FIRE_ELDRITCH.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_FIRE_HOLY_ITEM = ITEMS.register("magic_fire_holy",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGIC_FIRE_HOLY.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_FIRE_NATURE_ITEM = ITEMS.register("magic_fire_nature",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGIC_FIRE_NATURE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGELIGHT_TORCH_ITEM = ITEMS.register("magelight_torch",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGELIGHT_TORCH.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MOB_JAR_ITEM = ITEMS.register("mob_jar",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MOB_JAR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POTION_JAR_ITEM = ITEMS.register("potion_jar",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.POTION_JAR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SCRYER_OCULUS_ITEM = ITEMS.register("scryer_oculus",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SCRYER_OCULUS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> REPOSITORY_ITEM = ITEMS.register("repository",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.REPOSITORY.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FIRE_WALL_ITEM = ITEMS.register("fire_wall",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.FIRE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ICE_WALL_ITEM = ITEMS.register("ice_wall",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ICE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHTNING_WALL_ITEM = ITEMS.register("lightning_wall",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.LIGHTNING_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HOLY_WALL_ITEM = ITEMS.register("holy_wall",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.HOLY_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WHIRLWIND_ITEM = ITEMS.register("whirlwind",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.WHIRLWIND.get(), new Item.Properties()));
+    public static final RegistryObject<Item> AUTO_MINER_ITEM = ITEMS.register("auto_miner",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.AUTO_MINER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGE_CAULDRON_ITEM = ITEMS.register("mage_cauldron",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGE_CAULDRON.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INSCRIPTION_TABLE_ITEM = ITEMS.register("inscription_table",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.INSCRIPTION_TABLE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SCROLL_FORGE_ITEM = ITEMS.register("scroll_forge",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SCROLL_FORGE.get(), new Item.Properties()));
+    // r80 ores BlockItems
+    public static final RegistryObject<Item> SOURCESTONE_ORE_ITEM_NEW = ITEMS.register("sourcestone_ore_v2",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SOURCESTONE_ORE.get(), new Item.Properties()));
+
+    // r81: Cosmic Horror entity spawn eggs (registered as ForgeSpawnEggItem)
+    public static final RegistryObject<Item> EMPTY_MAN_EGG = ITEMS.register("empty_man_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.EMPTY_MAN, 0x222222, 0xAAAAAA, new Item.Properties()));
+    public static final RegistryObject<Item> OBSERVER_EGG = ITEMS.register("observer_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.OBSERVER, 0x333366, 0x9999CC, new Item.Properties()));
+    public static final RegistryObject<Item> ABSENCE_EGG = ITEMS.register("absence_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.ABSENCE, 0x000000, 0x222222, new Item.Properties()));
+    public static final RegistryObject<Item> REMEMBERED_EGG = ITEMS.register("remembered_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.REMEMBERED, 0x550055, 0xAA66AA, new Item.Properties()));
+
+    // r87 Wizard spawn eggs
+    public static final RegistryObject<Item> PYROMANCER_EGG = ITEMS.register("pyromancer_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.PYROMANCER, 0xFF6633, 0xFFAA66, new Item.Properties()));
+    public static final RegistryObject<Item> CRYOMANCER_EGG = ITEMS.register("cryomancer_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.CRYOMANCER, 0x66CCFF, 0xAADDFF, new Item.Properties()));
+    public static final RegistryObject<Item> ELECTROMANCER_EGG = ITEMS.register("electromancer_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.ELECTROMANCER, 0xFFFF44, 0xFFFFAA, new Item.Properties()));
+    public static final RegistryObject<Item> NECROMANCER_EGG = ITEMS.register("necromancer_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.NECROMANCER, 0x990033, 0xCC4477, new Item.Properties()));
+    public static final RegistryObject<Item> ELDRITCH_CULTIST_EGG = ITEMS.register("eldritch_cultist_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.ELDRITCH_CULTIST, 0x6633CC, 0x9966DD, new Item.Properties()));
+    public static final RegistryObject<Item> APOTHECARIST_EGG = ITEMS.register("apothecarist_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.APOTHECARIST, 0x66CC66, 0xAADDAA, new Item.Properties()));
+    public static final RegistryObject<Item> KEEPER_EGG = ITEMS.register("keeper_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.KEEPER, 0xFFEEAA, 0xFFFFEE, new Item.Properties()));
+    public static final RegistryObject<Item> ARCHEVOKER_EGG = ITEMS.register("archevoker_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.ARCHEVOKER, 0x6633CC, 0xCC66FF, new Item.Properties()));
+
+    // r95 Familiar spawn eggs
+    public static final RegistryObject<Item> WISP_PICKER_EGG = ITEMS.register("wisp_picker_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.WISP_PICKER, 0xFFFFAA, 0xFFFFEE, new Item.Properties()));
+    public static final RegistryObject<Item> GROVE_SPRITE_EGG = ITEMS.register("grove_sprite_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.GROVE_SPRITE, 0x33AA33, 0x66CC66, new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_REAPER_EGG = ITEMS.register("soul_reaper_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.SOUL_REAPER, 0x440044, 0x880088, new Item.Properties()));
+    public static final RegistryObject<Item> WHELP_EGG = ITEMS.register("whelp_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.WHELP, 0xFF6633, 0xFFAA66, new Item.Properties()));
+    public static final RegistryObject<Item> CARBUNCLE_EGG = ITEMS.register("carbuncle_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.CARBUNCLE, 0xCCAA66, 0xFFDD99, new Item.Properties()));
+    public static final RegistryObject<Item> AMETHYST_GOLEM_EGG = ITEMS.register("amethyst_golem_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.AMETHYST_GOLEM, 0x9966CC, 0xCC99FF, new Item.Properties()));
+
+    // r98 Boss spawn eggs
+    public static final RegistryObject<Item> ABYSSAL_LICH_EGG = ITEMS.register("abyssal_lich_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.ABYSSAL_LICH, 0x330044, 0x880088, new Item.Properties()));
+    public static final RegistryObject<Item> LICH_STALKER_EGG = ITEMS.register("lich_stalker_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.LICH_STALKER, 0x222244, 0x444466, new Item.Properties()));
+    public static final RegistryObject<Item> LICH_HUNTER_EGG = ITEMS.register("lich_hunter_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.LICH_HUNTER, 0x442266, 0x664488, new Item.Properties()));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r111-r112: Universal Spell Scrolls — 50+ feitiços portados do Iron's Spells
+    // ════════════════════════════════════════════════════════════════════════
+
+    private static RegistryObject<Item> spell(String spellId, Rarity rarity) {
+        return ITEMS.register("spell_" + spellId, () ->
+                new br.com.murilo.liberthia.magic.spell.UniversalSpellScrollItem(
+                        new Item.Properties().rarity(rarity), spellId));
+    }
+
+    // ─── FIRE (8) ───
+    public static final RegistryObject<Item> SPELL_FIREBALL          = spell("fireball",         Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_BURNING_DASH      = spell("burning_dash",     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_INFERNO           = spell("inferno",          Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_MAGMA_BOMB        = spell("magma_bomb",       Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_SUN_BEAM          = spell("sun_beam",         Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_PHOENIX_REBORN    = spell("phoenix_reborn",   Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_CAUTERIZE         = spell("cauterize",        Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_HEAT_WAVE         = spell("heat_wave",        Rarity.RARE);
+
+    // ─── ICE (8) ───
+    public static final RegistryObject<Item> SPELL_FROSTBOLT         = spell("frostbolt",        Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_ICE_SPIKE         = spell("ice_spike",        Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_FROST_NOVA        = spell("frost_nova",       Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_GLACIAL_STORM     = spell("glacial_storm",    Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_FROST_STEP        = spell("frost_step",       Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_FROZEN_GROUND     = spell("frozen_ground",    Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_RAY_OF_FROST      = spell("ray_of_frost",     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_ICE_LANCE         = spell("ice_lance",        Rarity.RARE);
+
+    // ─── LIGHTNING (8) ───
+    public static final RegistryObject<Item> SPELL_LIGHTNING_BOLT    = spell("lightning_bolt",   Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_SPARK_BURST       = spell("spark_burst",      Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_CHAIN_LIGHTNING   = spell("chain_lightning",  Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_SHOCK             = spell("shock",            Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_THUNDER_STEP      = spell("thunder_step",     Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_STORM_CLOUD       = spell("storm_cloud",      Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_STATIC_FIELD      = spell("static_field",     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_LIGHTNING_LANCE   = spell("lightning_lance_spell", Rarity.RARE);
+
+    // ─── BLOOD (8) ───
+    public static final RegistryObject<Item> SPELL_BLOOD_STEP        = spell("blood_step",       Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_LIFEDRAIN         = spell("lifedrain",        Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_HEARTSTOP         = spell("heartstop",        Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_BLOOD_SPEAR       = spell("blood_spear",      Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_SANGUINE_BIND     = spell("sanguine_bind",    Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_CRIMSON_MIST      = spell("crimson_mist",     Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_VAMPIRIC_TOUCH    = spell("vampiric_touch",   Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_BLOOD_PACT        = spell("blood_pact",       Rarity.EPIC);
+
+    // ─── ELDRITCH (6) ───
+    public static final RegistryObject<Item> SPELL_VOID_TENTACLE     = spell("void_tentacle",    Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_MIND_SPIKE        = spell("mind_spike",       Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_ELDRITCH_BLAST    = spell("eldritch_blast",   Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_SOUL_TEAR         = spell("soul_tear",        Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_MADNESS_WAVE      = spell("madness_wave",     Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_COSMIC_VOID       = spell("cosmic_void_spell",Rarity.EPIC);
+
+    // ─── HOLY (8) ───
+    public static final RegistryObject<Item> SPELL_GREATER_HEAL      = spell("greater_heal",     Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_SMITE             = spell("smite",            Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_DIVINE_LIGHT      = spell("divine_light",     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_SUN_STRIKE        = spell("sun_strike",       Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_HOLY_LANCE        = spell("holy_lance_spell", Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_HEALING_AURA      = spell("healing_aura",     Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_SACRED_GROUND     = spell("sacred_ground",    Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_JUDGMENT          = spell("judgment",         Rarity.EPIC);
+
+    // ─── NATURE (6) ───
+    public static final RegistryObject<Item> SPELL_VINE_TANGLE       = spell("vine_tangle",      Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_EARTH_WALL        = spell("earth_wall",       Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_STONE_SHARD       = spell("stone_shard",      Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_WISPS_HEAL        = spell("wisps_heal",       Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_ROOTS             = spell("roots",            Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_BRAMBLE_STORM     = spell("bramble_storm",    Rarity.EPIC);
+
+    // ─── EVOCATION (4) ───
+    public static final RegistryObject<Item> SPELL_MAGIC_MISSILE     = spell("magic_missile",    Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_BONE_SPEAR        = spell("bone_spear",       Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_MAGIC_SHIELD      = spell("magic_shield",     Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_SUMMON_VEX        = spell("summon_vex",       Rarity.RARE);
+
+    // ─── r119 MOBILITY (5) — flight + dashes ───
+    public static final RegistryObject<Item> SPELL_WINGS_OF_SOURCE   = spell("wings_of_source",  Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_PHASE_DASH        = spell("phase_dash",       Rarity.RARE);
+    public static final RegistryObject<Item> SPELL_WIND_STEP         = spell("wind_step",        Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_LEVITATE_SELF     = spell("levitate_self",    Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_BLINK             = spell("blink",            Rarity.UNCOMMON);
+
+    // ─── r119 APOLÃO TIER (4) — supreme >1000 damage spells ───
+    public static final RegistryObject<Item> SPELL_SOLAR_APOCALYPSE      = spell("solar_apocalypse",        Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_ELDRITCH_METEOR       = spell("eldritch_meteor",         Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_DIVINE_JUDGMENT_APOLAO = spell("divine_judgment_apolao", Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_APOCALYPSE            = spell("apocalypse",              Rarity.EPIC);
+
+    // ─── r120 VAZIO — feitiço supremo das ametistas ───
+    public static final RegistryObject<Item> SPELL_VOID         = spell("void",         Rarity.EPIC);
+    public static final RegistryObject<Item> SPELL_VOID_LASER   = spell("void_laser",   Rarity.EPIC);
+
+    /** Reagente especial usado pra craftar Void spell — amethyst destilada. */
+    public static final RegistryObject<Item> VOID_REAGENT = ITEMS.register("void_reagent",
+            () -> new br.com.murilo.liberthia.magic.glyph.SpiritReagentItem(
+                    new Item.Properties().rarity(Rarity.EPIC), "Amethyst Shrines / Ritual"));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r116: Spirit Reagents — drops do Spirit World pra craft glyphs/spells
+    // ════════════════════════════════════════════════════════════════════════
+    private static RegistryObject<Item> reagent(String id, String dropSource, Rarity rarity) {
+        return ITEMS.register(id, () ->
+                new br.com.murilo.liberthia.magic.glyph.SpiritReagentItem(
+                        new Item.Properties().rarity(rarity), dropSource));
+    }
+
+    public static final RegistryObject<Item> WISP_ESSENCE =
+            reagent("wisp_essence", "Pale Spirits", Rarity.UNCOMMON);
+    public static final RegistryObject<Item> ASTRAL_DUST =
+            reagent("astral_dust", "Sourcestone Ore", Rarity.UNCOMMON);
+    public static final RegistryObject<Item> WHISPERWOOD_RESIN =
+            reagent("whisperwood_resin", "Whisperwood Trees", Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MEMORY_SHARD =
+            reagent("memory_shard", "Observer / Spirit Ores", Rarity.RARE);
+    public static final RegistryObject<Item> ECTOPLASM_STRAND =
+            reagent("ectoplasm_strand", "Absence / Cosmic Horror", Rarity.RARE);
+    public static final RegistryObject<Item> PHANTOM_INK =
+            reagent("phantom_ink", "Empty Man / Remembered", Rarity.RARE);
+    public static final RegistryObject<Item> VEIL_FRAGMENT =
+            reagent("veil_fragment", "Loom Mobs / Portal Events", Rarity.EPIC);
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r139: NOVOS Spirit World drops + ritual ingredients
+    // ════════════════════════════════════════════════════════════════════════
+    /** Drop de Shade — usado em Decay rituals. */
+    public static final RegistryObject<Item> SHADOW_ESSENCE =
+            reagent("shadow_essence", "Shade — Spirit World", Rarity.UNCOMMON);
+    /** Drop de Loom Watcher — usado em Reflection rituals. */
+    public static final RegistryObject<Item> LOOM_EYE =
+            reagent("loom_eye", "Loom Watcher — Spirit World", Rarity.RARE);
+    /** Drop de Whisper Beast — usado em Silence rituals. */
+    public static final RegistryObject<Item> WHISPER_VIAL =
+            reagent("whisper_vial", "Whisper Beast — Spirit World", Rarity.RARE);
+    /** Drop de Dark Consciousness — usado em Tendril rituals. */
+    public static final RegistryObject<Item> DARK_TENDRIL =
+            reagent("dark_tendril", "Dark Consciousness — Spirit World", Rarity.RARE);
+    /** Drop de Spirit Crystal Ore — gem usada em vários rituals e crafts. */
+    public static final RegistryObject<Item> SPIRIT_CRYSTAL =
+            reagent("spirit_crystal", "Spirit Crystal Ore — Spirit World", Rarity.RARE);
+    /** Drop de Soul Iron Ore — material upgrade. */
+    public static final RegistryObject<Item> SOUL_IRON_RAW =
+            reagent("soul_iron_raw", "Soul Iron Ore — Spirit World", Rarity.UNCOMMON);
+    /** Smelted from Soul Iron Raw — usado em wands e weapons spirit-tier. */
+    public static final RegistryObject<Item> SOUL_IRON_INGOT =
+            reagent("soul_iron_ingot", "Furnace — Soul Iron Raw", Rarity.UNCOMMON);
+    /** Drop de Whisper Petal Bush — usado em Silence/Stealth rituals. */
+    public static final RegistryObject<Item> WHISPER_PETAL =
+            reagent("whisper_petal", "Whisper Petal Bush — Spirit World", Rarity.UNCOMMON);
+    /** Drop de Ghost Mushroom — usado em Light/Heal rituals. */
+    public static final RegistryObject<Item> GHOST_MUSHROOM =
+            reagent("ghost_mushroom", "Ghost Mushroom Block — Spirit World", Rarity.UNCOMMON);
+    /** Sacred Ash — drop de queima ritualística + ingrediente comum. */
+    public static final RegistryObject<Item> SACRED_ASH =
+            reagent("sacred_ash", "Burn a Witch / Soul Fire Ritual", Rarity.COMMON);
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r117: Spirit Robes — armadura mágica (4 peças com Source bonuses)
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Item> SPIRIT_ROBES_HELM = ITEMS.register("spirit_robes_helm",
+            () -> new br.com.murilo.liberthia.magic.armor.SpiritRobesItem(
+                    net.minecraft.world.item.ArmorItem.Type.HELMET,
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SPIRIT_ROBES_CHEST = ITEMS.register("spirit_robes_chest",
+            () -> new br.com.murilo.liberthia.magic.armor.SpiritRobesItem(
+                    net.minecraft.world.item.ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SPIRIT_ROBES_LEGS = ITEMS.register("spirit_robes_legs",
+            () -> new br.com.murilo.liberthia.magic.armor.SpiritRobesItem(
+                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SPIRIT_ROBES_BOOTS = ITEMS.register("spirit_robes_boots",
+            () -> new br.com.murilo.liberthia.magic.armor.SpiritRobesItem(
+                    net.minecraft.world.item.ArmorItem.Type.BOOTS,
+                    new Item.Properties().rarity(Rarity.RARE)));
+
+    // r118: Glyph Inscriber BlockItem
+    public static final RegistryObject<Item> GLYPH_INSCRIBER_ITEM = ITEMS.register("glyph_inscriber",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.GLYPH_INSCRIBER.get(),
+                    new Item.Properties().rarity(Rarity.RARE)));
+
+    // r119: Spell Weaver BlockItem
+    public static final RegistryObject<Item> SPELL_WEAVER_ITEM = ITEMS.register("spell_weaver",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SPELL_WEAVER.get(),
+                    new Item.Properties().rarity(Rarity.EPIC)));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r119: Modifier Glyphs — para usar no SpellWeaver
+    // ════════════════════════════════════════════════════════════════════════
+    private static RegistryObject<Item> modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier mod, Rarity rarity) {
+        return ITEMS.register("modifier_" + mod.id, () ->
+                new br.com.murilo.liberthia.magic.spell.composition.SpellModifierItem(
+                        new Item.Properties().rarity(rarity), mod));
+    }
+
+    public static final RegistryObject<Item> MOD_AMPLIFY    = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.AMPLIFY,    Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_AOE        = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.AOE,        Rarity.RARE);
+    public static final RegistryObject<Item> MOD_PIERCE     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.PIERCE,     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_MULTISHOT  = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.MULTISHOT,  Rarity.RARE);
+    public static final RegistryObject<Item> MOD_CHAIN      = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.CHAIN,      Rarity.RARE);
+    public static final RegistryObject<Item> MOD_IGNITE     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.IGNITE,     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_FREEZE     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.FREEZE,     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_KNOCKBACK  = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.KNOCKBACK,  Rarity.COMMON);
+    public static final RegistryObject<Item> MOD_LIFESTEAL  = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.LIFESTEAL,  Rarity.RARE);
+    public static final RegistryObject<Item> MOD_RANGE      = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.RANGE,      Rarity.COMMON);
+    public static final RegistryObject<Item> MOD_SUSTAIN    = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.SUSTAIN,    Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_PENETRATE  = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.PENETRATE,  Rarity.RARE);
+    public static final RegistryObject<Item> MOD_APOLAO     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.APOLAO,     Rarity.EPIC);
+
+    // r119: Grimoire item
+    public static final RegistryObject<Item> GRIMOIRE_BOOK = ITEMS.register("grimoire_book",
+            () -> new br.com.murilo.liberthia.magic.grimoire.GrimoireBookItem(
+                    new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
+
+    // r135: AN-inspired features faltantes
+    // r140 fix: renomeado pra mob_capture_jar — conflitava com Storage Jar (mob_jar) do r92
+    public static final RegistryObject<Item> MOB_JAR = ITEMS.register("mob_capture_jar",
+            () -> new br.com.murilo.liberthia.magic.mobjar.MobJarItem(
+                    new Item.Properties().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> SPELL_MIRROR = ITEMS.register("spell_mirror",
+            () -> new br.com.murilo.liberthia.magic.item.SpellMirrorItem(
+                    new Item.Properties().rarity(Rarity.RARE)));
+
+    // r135: Agronomic Sourcelink (5° sourcelink) + Drygmy egg
+    public static final RegistryObject<Item> AGRONOMIC_SOURCELINK_ITEM = ITEMS.register("agronomic_sourcelink",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.AGRONOMIC_SOURCELINK.get(),
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> DRYGMY_EGG = ITEMS.register("drygmy_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                    ModEntities.DRYGMY, 0x88CC44, 0xCCEE88, new Item.Properties()));
+
+    // r117: Conduit + Transmuter block items
+    public static final RegistryObject<Item> SPIRIT_CONDUIT_ITEM = ITEMS.register("spirit_conduit",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SPIRIT_CONDUIT.get(),
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SOURCE_TRANSMUTER_ITEM = ITEMS.register("source_transmuter",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SOURCE_TRANSMUTER.get(),
+                    new Item.Properties().rarity(Rarity.RARE)));
+
+    // r148: Spell Factory — item dinâmico que aceita qualquer spell criada via JSON
+    public static final RegistryObject<Item> FACTORY_SPELL_SCROLL = ITEMS.register("factory_spell_scroll",
+            () -> new br.com.murilo.liberthia.magic.factory.DynamicSpellItem(
+                    new Item.Properties()));
+
+    // r154: Glyph de Cooldown Reduction — -10% CD, +15% custo por glyph stacked
+    public static final RegistryObject<Item> CDR_GLYPH = ITEMS.register("glyph_cooldown_reduction",
+            () -> new br.com.murilo.liberthia.magic.modifier.CooldownReductionGlyphItem(
+                    new Item.Properties()));
+
+    // r159: Componentes do Arcane Workbench
+    public static final RegistryObject<Item> MAGIC_TABLET = ITEMS.register("magic_tablet",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.MagicTablet(
+                    new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_ORB = ITEMS.register("arcane_orb",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.ArcaneOrb(
+                    new Item.Properties()));
+    public static final RegistryObject<Item> SCHOOL_RUNE_FIRE = ITEMS.register("school_rune_fire",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.SchoolRune(
+                    new Item.Properties(), "fire"));
+    public static final RegistryObject<Item> SCHOOL_RUNE_ICE = ITEMS.register("school_rune_ice",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.SchoolRune(
+                    new Item.Properties(), "ice"));
+    public static final RegistryObject<Item> SCHOOL_RUNE_LIGHTNING = ITEMS.register("school_rune_lightning",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.SchoolRune(
+                    new Item.Properties(), "lightning"));
+    public static final RegistryObject<Item> SCHOOL_RUNE_BLOOD = ITEMS.register("school_rune_blood",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.SchoolRune(
+                    new Item.Properties(), "blood"));
+    public static final RegistryObject<Item> SCHOOL_RUNE_ELDRITCH = ITEMS.register("school_rune_eldritch",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.SchoolRune(
+                    new Item.Properties(), "eldritch"));
+    public static final RegistryObject<Item> SCHOOL_RUNE_HOLY = ITEMS.register("school_rune_holy",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.SchoolRune(
+                    new Item.Properties(), "holy"));
+    public static final RegistryObject<Item> SCHOOL_RUNE_NATURE = ITEMS.register("school_rune_nature",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneComponentItems.SchoolRune(
+                    new Item.Properties(), "nature"));
+
+    // r150: Spawn eggs pros 8 Wooden Horror variants
+    public static final RegistryObject<Item> WOODEN_CHARCOAL_EGG = ITEMS.register("wooden_charcoal_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WOODEN_CHARCOAL,
+                    0x1a1a1a, 0x2a2a2a, new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_PALE_OAK_EGG = ITEMS.register("wooden_pale_oak_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WOODEN_PALE_OAK,
+                    0xe8d8b8, 0xc8b888, new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_ROTTED_BIRCH_EGG = ITEMS.register("wooden_rotted_birch_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WOODEN_ROTTED_BIRCH,
+                    0x888878, 0x555548, new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_BLEEDING_MAPLE_EGG = ITEMS.register("wooden_bleeding_maple_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WOODEN_BLEEDING_MAPLE,
+                    0x8a2828, 0x4a1010, new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_MOSSY_EGG = ITEMS.register("wooden_mossy_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WOODEN_MOSSY,
+                    0x4a7a3a, 0x2a4a20, new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_FROZEN_PINE_EGG = ITEMS.register("wooden_frozen_pine_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WOODEN_FROZEN_PINE,
+                    0x88c8e0, 0x4a8aa8, new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_BURNING_ACACIA_EGG = ITEMS.register("wooden_burning_acacia_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WOODEN_BURNING_ACACIA,
+                    0xd86820, 0xa84810, new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_CURSED_MAHOGANY_EGG = ITEMS.register("wooden_cursed_mahogany_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WOODEN_CURSED_MAHOGANY,
+                    0x4a2868, 0x2a1048, new Item.Properties()));
+
+    // ════════════════════════════════════════════════════════════════
+    // r164: Magic Accessories — 9 items (3 slot types × 3 effects)
+    // ════════════════════════════════════════════════════════════════
+    // Mana Regen (0.5/s base, anel = mais barato, cinto = mais forte)
+    public static final RegistryObject<Item> RING_MANA_FLOW = ITEMS.register("ring_mana_flow",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties(),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.RING,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.MANA_REGEN,
+                    0.5F));
+    public static final RegistryObject<Item> GLOVE_MANA_CHANNELER = ITEMS.register("glove_mana_channeler",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties(),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.GLOVE,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.MANA_REGEN,
+                    1.0F));
+    public static final RegistryObject<Item> BELT_MANA_RESERVOIR = ITEMS.register("belt_mana_reservoir",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.BELT,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.MANA_REGEN,
+                    2.0F));
+
+    // Sanity Regen
+    public static final RegistryObject<Item> RING_LUCIDITY = ITEMS.register("ring_lucidity",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties(),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.RING,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.SANITY_REGEN,
+                    0.2F));
+    public static final RegistryObject<Item> GLOVE_LUCID_VEIL = ITEMS.register("glove_lucid_veil",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties(),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.GLOVE,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.SANITY_REGEN,
+                    0.5F));
+    public static final RegistryObject<Item> BELT_SANCTUM_SASH = ITEMS.register("belt_sanctum_sash",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.BELT,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.SANITY_REGEN,
+                    1.0F));
+
+    // Spell Power (% damage)
+    public static final RegistryObject<Item> RING_ARCANE_POWER = ITEMS.register("ring_arcane_power",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties(),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.RING,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.SPELL_POWER,
+                    0.05F));
+    public static final RegistryObject<Item> GLOVE_BATTLEMAGE = ITEMS.register("glove_battlemage",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties(),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.GLOVE,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.SPELL_POWER,
+                    0.10F));
+    public static final RegistryObject<Item> BELT_ARCHMAGE = ITEMS.register("belt_archmage",
+            () -> new br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.SlotKind.BELT,
+                    br.com.murilo.liberthia.magic.accessory.MagicAccessoryItem.Effect.SPELL_POWER,
+                    0.20F));
 
     private ModItems() {
     }

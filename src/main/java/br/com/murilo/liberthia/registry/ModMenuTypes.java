@@ -115,6 +115,26 @@ public final class ModMenuTypes {
     public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.SpellBindingPedestalMenu>> SPELL_BINDING_PEDESTAL =
             registerMenuType("spell_binding_pedestal", br.com.murilo.liberthia.menu.SpellBindingPedestalMenu::new);
 
+    // r118: Glyph Inscriber — GUI bonita pra crafting de reagents → spell scroll
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.glyph.inscriber.GlyphInscriberMenu>> GLYPH_INSCRIBER =
+            registerMenuType("glyph_inscriber", br.com.murilo.liberthia.magic.glyph.inscriber.GlyphInscriberMenu::new);
+
+    // r119: Spell Weaver — combina base + modifier glyphs em scroll composto
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.spell.weaver.SpellWeaverMenu>> SPELL_WEAVER =
+            registerMenuType("spell_weaver", br.com.murilo.liberthia.magic.spell.weaver.SpellWeaverMenu::new);
+
+    // r119: Grimoire — book GUI com 9 slots de scroll
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.grimoire.GrimoireMenu>> GRIMOIRE =
+            registerMenuType("grimoire", br.com.murilo.liberthia.magic.grimoire.GrimoireMenu::new);
+
+    // r138: Spell Mutator — combina 2 scrolls em hibrido
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.spell.mutator.SpellMutatorMenu>> SPELL_MUTATOR =
+            registerMenuType("spell_mutator", br.com.murilo.liberthia.magic.spell.mutator.SpellMutatorMenu::new);
+
+    // r155 Phase 2: Arcane Workbench — combina base scroll + modifier glyphs
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.workbench.ArcaneWorkbenchMenu>> ARCANE_WORKBENCH =
+            registerMenuType("arcane_workbench", br.com.murilo.liberthia.magic.workbench.ArcaneWorkbenchMenu::new);
+
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

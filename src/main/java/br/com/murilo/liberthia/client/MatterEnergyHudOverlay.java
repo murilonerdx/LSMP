@@ -24,9 +24,11 @@ public class MatterEnergyHudOverlay implements IGuiOverlay {
 
         RenderSystem.enableBlend();
 
-        int baseX = 10;
-        int baseY = 70;
-        int spacing = 8;
+        // r164: posição via Unified HUD system (drag-and-drop persistente)
+        var hudId = br.com.murilo.liberthia.client.hud.unified.HudId.MATTER_ENERGY;
+        int baseX = br.com.murilo.liberthia.client.hud.unified.ClientHudPositions.x(hudId, screenWidth);
+        int baseY = br.com.murilo.liberthia.client.hud.unified.ClientHudPositions.y(hudId, screenHeight);
+        int spacing = 7; // r164: compactado de 8→7
 
         // Dark Energy bar (purple)
         if (dark > 0) {

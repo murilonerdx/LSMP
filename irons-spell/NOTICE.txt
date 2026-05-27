@@ -1,0 +1,7 @@
+This project is a community-created and publicly shareable work.
+
+The project, including community assets and textures, is intended to remain
+open for modification, redistribution, and reuse.
+
+No exclusive ownership over community contributions is claimed unless explicitly
+stated by individual contributors.

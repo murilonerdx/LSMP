@@ -37,6 +37,38 @@ public final class KeyBindings {
             KEY_CATEGORY_LIBERTHIA
     );
 
+    /** r138: Spell Hotbar slots — 3 quick-cast bindings (default Z, B, N). */
+    public static final KeyMapping SPELL_HOTBAR_1 = new KeyMapping(
+            "key.liberthia.spell_hotbar_1",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_Z,
+            KEY_CATEGORY_LIBERTHIA
+    );
+    public static final KeyMapping SPELL_HOTBAR_2 = new KeyMapping(
+            "key.liberthia.spell_hotbar_2",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_B,
+            KEY_CATEGORY_LIBERTHIA
+    );
+    public static final KeyMapping SPELL_HOTBAR_3 = new KeyMapping(
+            "key.liberthia.spell_hotbar_3",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_N,
+            KEY_CATEGORY_LIBERTHIA
+    );
+
+    /** r155: Spell Wheel — abre menu radial de 8 slots (hold R). */
+    public static final KeyMapping SPELL_WHEEL_RADIAL = new KeyMapping(
+            "key.liberthia.spell_wheel_radial",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_R,
+            KEY_CATEGORY_LIBERTHIA
+    );
+
     private KeyBindings() {
     }
 }

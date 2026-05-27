@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "YYY",
-    "YYY",
-    "YYY"
+    "XXX",
+    "XXX",
+    "XXX"
   ],
   "key": {
-    "Y": {
+    "X": {
       "item": "liberthia:yellow_matter_ingot"
     }
   },
   "result": {
-    "item": "liberthia:yellow_matter_block"
+    "item": "liberthia:yellow_matter_block",
+    "count": 1
   }
 }

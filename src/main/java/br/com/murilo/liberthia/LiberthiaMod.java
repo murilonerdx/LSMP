@@ -26,6 +26,10 @@ public class LiberthiaMod {
         ModBlocks.register(modBus);
         ModItems.register(modBus);
         ModFluids.register(modBus);
+        // r138: Worldgen features (Wizard Tower)
+        br.com.murilo.liberthia.registry.ModFeatures.register(modBus);
+        // r83: Synergy mob effects (Chilled/Frostbite/Burning/Immolate/Bleed/Hemorrhage/Static/StormMark/Heartstop)
+        br.com.murilo.liberthia.magic.effect.SynergyEffects.register(modBus);
         ModSounds.register(modBus);
         ModEntities.register(modBus);
         ModCapabilities.register(modBus);
@@ -134,5 +138,7 @@ public class LiberthiaMod {
         event.enqueueWork(ModNetwork::register);
         // r81: inicializa o Horror Framework (registra os 18 sistemas)
         event.enqueueWork(br.com.murilo.liberthia.cosmic.framework.HorrorFramework::init);
+        // r116: inicializa receitas de Spirit Glyphs (Spirit Reagent → Spell Scroll)
+        event.enqueueWork(br.com.murilo.liberthia.magic.glyph.SpiritGlyphRecipeInit::registerAll);
     }
 }

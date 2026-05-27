@@ -28,6 +28,24 @@ public final class ClientParticleEvents {
                 ModParticles.DARK_BLOOD.get(),
                 DarkBloodParticle.Provider::new
         );
+
+        // r113: AAA spell trail (animated spritesheet per school)
+        event.registerSpriteSet(
+                ModParticles.SPELL_TRAIL.get(),
+                br.com.murilo.liberthia.magic.spell.particle.SpellTrailParticle.Provider::new
+        );
+
+        // r120: Void infection particle (purple wisp animated)
+        event.registerSpriteSet(
+                ModParticles.VOID_INFECTION.get(),
+                br.com.murilo.liberthia.magic.spell.voidspell.VoidInfectionParticle.Provider::new
+        );
+
+        // r120: Mini black hole collapse particle
+        event.registerSpriteSet(
+                ModParticles.MINI_BLACK_HOLE.get(),
+                br.com.murilo.liberthia.magic.spell.voidspell.MiniBlackHoleParticle.Provider::new
+        );
     }
 
     private ClientParticleEvents() {

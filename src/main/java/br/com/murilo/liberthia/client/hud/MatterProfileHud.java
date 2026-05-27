@@ -34,38 +34,23 @@ public class MatterProfileHud implements IGuiOverlay {
         // Não desenha se tudo zerado (não polui a tela)
         if (dm <= 0.5f && wm <= 0.5f && ym <= 0.5f) return;
 
-        // Posição lida do config
-        HudPosition pos = HudPosition.current();
+        // r164: posição via Unified HUD system (drag-and-drop persistente)
+        var hudId = br.com.murilo.liberthia.client.hud.unified.HudId.MATTER_PROFILE;
         int totalW = BAR_W * 3 + GAP * 2;
-        int x0, y0;
-        switch (pos) {
-            case TOP_LEFT     -> { x0 = MARGIN;                              y0 = VERTICAL_OFFSET; }
-            case BOTTOM_LEFT  -> { x0 = MARGIN;                              y0 = screenHeight - VERTICAL_OFFSET - BAR_H - 12; }
-            case BOTTOM_RIGHT -> { x0 = screenWidth - MARGIN - totalW;       y0 = screenHeight - VERTICAL_OFFSET - BAR_H - 12; }
-            default           -> { x0 = screenWidth - MARGIN - totalW;       y0 = VERTICAL_OFFSET; }
-        }
+        int x0 = br.com.murilo.liberthia.client.hud.unified.ClientHudPositions.x(hudId, screenWidth);
+        int y0 = br.com.murilo.liberthia.client.hud.unified.ClientHudPositions.y(hudId, screenHeight);
 
         drawBar(g, x0,                          y0, dm, 0xFF8B40D8, 0xFF1A0830);
         drawBar(g, x0 + (BAR_W + GAP),          y0, wm, 0xFFE6E6FF, 0xFF202030);
         drawBar(g, x0 + (BAR_W + GAP) * 2,      y0, ym, 0xFFFFD23F, 0xFF302000);
 
-        // Label do perfil ativo (abaixo das barras).
-        // Alinhamento HORIZONTAL depende da posição do HUD:
-        //   - posições RIGHT: texto alinhado pela DIREITA (fim do texto = fim das barras)
-        //   - posições LEFT:  texto alinhado pela ESQUERDA (início do texto = início das barras)
-        // Antes o cálculo era único (x0 - font.width + totalW) que funciona pro right-alignment
-        // — mas em posições _LEFT, x0=MARGIN(6) e o resultado era textX NEGATIVO,
-        // empurrando metade do texto pra fora da tela à esquerda.
+        // Label do perfil ativo (abaixo das barras), alinhado à esquerda das barras
         MatterProfileType type = ClientMatterProfileCache.activeType();
         if (type != MatterProfileType.NONE) {
             String label = labelFor(type);
             int color = colorFor(type);
-            boolean isLeft = (pos == HudPosition.TOP_LEFT || pos == HudPosition.BOTTOM_LEFT);
-            int textX = isLeft
-                    ? x0                                        // alinha pela esquerda
-                    : x0 + totalW - mc.font.width(label);       // alinha pela direita
             g.drawString(mc.font, Component.literal(label),
-                    textX, y0 + BAR_H + 2, color, true);
+                    x0, y0 + BAR_H + 2, color, true);
         }
     }
 

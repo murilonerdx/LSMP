@@ -226,6 +226,128 @@ public final class ModBlockEntities {
                             br.com.murilo.liberthia.observation.block.SpellBindingPedestalBlockEntity::new,
                             ModBlocks.SPELL_BINDING_PEDESTAL.get()).build(null));
 
+    // r97: Repository BE
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.storage.RepositoryBlockEntity>> REPOSITORY =
+            BLOCK_ENTITIES.register("repository",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.storage.RepositoryBlockEntity::new,
+                            ModBlocks.REPOSITORY.get()).build(null));
+
+    // r100: Auto-blocks BE
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.automation.AutoMinerBlock.Tile>> AUTO_MINER =
+            BLOCK_ENTITIES.register("auto_miner",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.automation.AutoMinerBlock.Tile::new,
+                            ModBlocks.AUTO_MINER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.automation.MageCauldronBlock.Tile>> MAGE_CAULDRON =
+            BLOCK_ENTITIES.register("mage_cauldron",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.automation.MageCauldronBlock.Tile::new,
+                            ModBlocks.MAGE_CAULDRON.get()).build(null));
+
+    // r92: Mob Jar + Potion Jar BE
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.storage.MobJarBlockEntity>> MOB_JAR =
+            BLOCK_ENTITIES.register("mob_jar",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.storage.MobJarBlockEntity::new,
+                            ModBlocks.MOB_JAR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.storage.PotionJarBlockEntity>> POTION_JAR =
+            BLOCK_ENTITIES.register("potion_jar",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.storage.PotionJarBlockEntity::new,
+                            ModBlocks.POTION_JAR.get()).build(null));
+
+    // r88: Spell Turret BE
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.automation.SpellTurretBlockEntity>> SPELL_TURRET =
+            BLOCK_ENTITIES.register("spell_turret",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.automation.SpellTurretBlockEntity::new,
+                            ModBlocks.SPELL_TURRET.get()).build(null));
+
+    // r86: Ritual Brazier BE
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.ritual.RitualBrazierBlockEntity>> RITUAL_BRAZIER =
+            BLOCK_ENTITIES.register("ritual_brazier",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.ritual.RitualBrazierBlockEntity::new,
+                            ModBlocks.RITUAL_BRAZIER.get()).build(null));
+
+    // r84: SOURCELINK block entities
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.sourcelink.VolcanicSourcelinkBlockEntity>> VOLCANIC_SOURCELINK =
+            BLOCK_ENTITIES.register("volcanic_sourcelink",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.sourcelink.VolcanicSourcelinkBlockEntity::new,
+                            ModBlocks.VOLCANIC_SOURCELINK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.sourcelink.MycelialSourcelinkBlockEntity>> MYCELIAL_SOURCELINK =
+            BLOCK_ENTITIES.register("mycelial_sourcelink",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.sourcelink.MycelialSourcelinkBlockEntity::new,
+                            ModBlocks.MYCELIAL_SOURCELINK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.sourcelink.VitalicSourcelinkBlockEntity>> VITALIC_SOURCELINK =
+            BLOCK_ENTITIES.register("vitalic_sourcelink",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.sourcelink.VitalicSourcelinkBlockEntity::new,
+                            ModBlocks.VITALIC_SOURCELINK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.sourcelink.AlchemicalSourcelinkBlockEntity>> ALCHEMICAL_SOURCELINK =
+            BLOCK_ENTITIES.register("alchemical_sourcelink",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.sourcelink.AlchemicalSourcelinkBlockEntity::new,
+                            ModBlocks.ALCHEMICAL_SOURCELINK.get()).build(null));
+
+    // r135: 5° Sourcelink — Agronomic
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.sourcelink.AgronomicSourcelinkBlockEntity>> AGRONOMIC_SOURCELINK =
+            BLOCK_ENTITIES.register("agronomic_sourcelink",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.sourcelink.AgronomicSourcelinkBlockEntity::new,
+                            ModBlocks.AGRONOMIC_SOURCELINK.get()).build(null));
+
+    // r118: Glyph Inscriber
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.glyph.inscriber.GlyphInscriberBlockEntity>> GLYPH_INSCRIBER =
+            BLOCK_ENTITIES.register("glyph_inscriber",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.glyph.inscriber.GlyphInscriberBlockEntity::new,
+                            ModBlocks.GLYPH_INSCRIBER.get()).build(null));
+
+    // r119: Spell Weaver
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.spell.weaver.SpellWeaverBlockEntity>> SPELL_WEAVER =
+            BLOCK_ENTITIES.register("spell_weaver",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.spell.weaver.SpellWeaverBlockEntity::new,
+                            ModBlocks.SPELL_WEAVER.get()).build(null));
+
+    // r117: Spirit Conduit + Source Transmuter
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.conduit.SpiritConduitBlockEntity>> SPIRIT_CONDUIT =
+            BLOCK_ENTITIES.register("spirit_conduit",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.conduit.SpiritConduitBlockEntity::new,
+                            ModBlocks.SPIRIT_CONDUIT.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.conduit.SourceTransmuterBlockEntity>> SOURCE_TRANSMUTER =
+            BLOCK_ENTITIES.register("source_transmuter",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.conduit.SourceTransmuterBlockEntity::new,
+                            ModBlocks.SOURCE_TRANSMUTER.get()).build(null));
+
+    // r138: Lay Line — gera Source ambiente
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.layline.LayLineBlock.Tile>> LAY_LINE =
+            BLOCK_ENTITIES.register("lay_line",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.layline.LayLineBlock.Tile::new,
+                            ModBlocks.LAY_LINE.get()).build(null));
+
+    // r138: Spell Mutator — combina 2 scrolls em hibrido
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.spell.mutator.SpellMutatorBlockEntity>> SPELL_MUTATOR =
+            BLOCK_ENTITIES.register("spell_mutator",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.spell.mutator.SpellMutatorBlockEntity::new,
+                            ModBlocks.SPELL_MUTATOR.get()).build(null));
+
+    // r155 Phase 2: Arcane Workbench — base scroll + 7 mod glyphs → composed scroll
+    public static final RegistryObject<BlockEntityType<br.com.murilo.liberthia.magic.workbench.ArcaneWorkbenchBlockEntity>> ARCANE_WORKBENCH =
+            BLOCK_ENTITIES.register("arcane_workbench",
+                    () -> BlockEntityType.Builder.of(
+                            br.com.murilo.liberthia.magic.workbench.ArcaneWorkbenchBlockEntity::new,
+                            ModBlocks.ARCANE_WORKBENCH.get()).build(null));
+
     private ModBlockEntities() {
     }
 

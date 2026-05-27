@@ -82,6 +82,50 @@ public final class ModEffects {
             MOB_EFFECTS.register("dimensional_infection",
                     br.com.murilo.liberthia.loom.effect.LoomEffects.DimensionalInfectionEffect::new);
 
+    // ════════════════════════════════════════════════════════════════════════
+    // r156: 20 Custom MobEffects — divertidos/criativos/assustadores
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<MobEffect> DIMENSIONAL_BLINDNESS =
+            MOB_EFFECTS.register("dimensional_blindness", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.DimensionalBlindness::new);
+    public static final RegistryObject<MobEffect> DEVIL_FOOTSTEPS =
+            MOB_EFFECTS.register("devil_footsteps", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.DevilFootsteps::new);
+    public static final RegistryObject<MobEffect> BLOOD_MOON_AURA =
+            MOB_EFFECTS.register("blood_moon_aura", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.BloodMoon::new);
+    public static final RegistryObject<MobEffect> SHADOW_DOUBLE =
+            MOB_EFFECTS.register("shadow_double", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.ShadowDouble::new);
+    public static final RegistryObject<MobEffect> WHISPERS =
+            MOB_EFFECTS.register("cosmic_whispers", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.Whispers::new);
+    public static final RegistryObject<MobEffect> VERTIGO =
+            MOB_EFFECTS.register("vertigo", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.Vertigo::new);
+    public static final RegistryObject<MobEffect> HUNGRY_VOID =
+            MOB_EFFECTS.register("hungry_void", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.HungryVoid::new);
+    public static final RegistryObject<MobEffect> GHOST_TOUCH =
+            MOB_EFFECTS.register("ghost_touch", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.GhostTouch::new);
+    public static final RegistryObject<MobEffect> SOUL_LINK =
+            MOB_EFFECTS.register("soul_link", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.SoulLink::new);
+    public static final RegistryObject<MobEffect> HAUNTED_INVENTORY =
+            MOB_EFFECTS.register("haunted_inventory", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.HauntedInventory::new);
+    public static final RegistryObject<MobEffect> MIRROR_WALK =
+            MOB_EFFECTS.register("mirror_walk", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.MirrorWalk::new);
+    public static final RegistryObject<MobEffect> TIME_DILATION =
+            MOB_EFFECTS.register("time_dilation", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.TimeDilation::new);
+    public static final RegistryObject<MobEffect> REVERSE_GRAVITY =
+            MOB_EFFECTS.register("reverse_gravity", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.ReverseGravity::new);
+    public static final RegistryObject<MobEffect> MAGNET_FIST =
+            MOB_EFFECTS.register("magnet_fist", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.MagnetFist::new);
+    public static final RegistryObject<MobEffect> POX_SWARM =
+            MOB_EFFECTS.register("pox_swarm", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.PoxSwarm::new);
+    public static final RegistryObject<MobEffect> NIGHTMARE =
+            MOB_EFFECTS.register("nightmare", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.Nightmare::new);
+    public static final RegistryObject<MobEffect> LIBERTHIA_BLESSING =
+            MOB_EFFECTS.register("liberthia_blessing", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.LiberthiaBlessing::new);
+    public static final RegistryObject<MobEffect> CRYSTAL_BLOOM =
+            MOB_EFFECTS.register("crystal_bloom", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.CrystalBloom::new);
+    public static final RegistryObject<MobEffect> OMINOUS_AURA =
+            MOB_EFFECTS.register("ominous_aura", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.OminousAura::new);
+    public static final RegistryObject<MobEffect> STARDUST =
+            MOB_EFFECTS.register("stardust", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.Stardust::new);
+
     private ModEffects() {
     }
 

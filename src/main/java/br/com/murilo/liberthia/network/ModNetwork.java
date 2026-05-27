@@ -546,6 +546,69 @@ public final class ModNetwork {
                 br.com.murilo.liberthia.observation.network.HudPositionS2CPacket::decode,
                 br.com.murilo.liberthia.observation.network.HudPositionS2CPacket::handle
         );
+        // r113: Screen shake (S2C) — aplicado em ViewportEvent.ComputeCameraAngles
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.spell.ScreenShakeS2CPacket.class,
+                br.com.murilo.liberthia.magic.spell.ScreenShakeS2CPacket::encode,
+                br.com.murilo.liberthia.magic.spell.ScreenShakeS2CPacket::decode,
+                br.com.murilo.liberthia.magic.spell.ScreenShakeS2CPacket::handle
+        );
+        // r136: Source sync server -> client (HUD bug fix)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.observation.source.SourceSyncS2CPacket.class,
+                br.com.murilo.liberthia.observation.source.SourceSyncS2CPacket::encode,
+                br.com.murilo.liberthia.observation.source.SourceSyncS2CPacket::decode,
+                br.com.murilo.liberthia.observation.source.SourceSyncS2CPacket::handle
+        );
+        // r138: Spell Hotbar (action C2S + sync S2C)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.spell.hotbar.SpellHotbarActionC2SPacket.class,
+                br.com.murilo.liberthia.magic.spell.hotbar.SpellHotbarActionC2SPacket::encode,
+                br.com.murilo.liberthia.magic.spell.hotbar.SpellHotbarActionC2SPacket::decode,
+                br.com.murilo.liberthia.magic.spell.hotbar.SpellHotbarActionC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.spell.hotbar.SpellHotbarSyncS2CPacket.class,
+                br.com.murilo.liberthia.magic.spell.hotbar.SpellHotbarSyncS2CPacket::encode,
+                br.com.murilo.liberthia.magic.spell.hotbar.SpellHotbarSyncS2CPacket::decode,
+                br.com.murilo.liberthia.magic.spell.hotbar.SpellHotbarSyncS2CPacket::handle
+        );
+
+        // r164: Grimoire wheel — seleciona slot ativo direto pelo X radial
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.grimoire.SelectGrimoireSlotC2SPacket.class,
+                br.com.murilo.liberthia.magic.grimoire.SelectGrimoireSlotC2SPacket::encode,
+                br.com.murilo.liberthia.magic.grimoire.SelectGrimoireSlotC2SPacket::decode,
+                br.com.murilo.liberthia.magic.grimoire.SelectGrimoireSlotC2SPacket::handle
+        );
+
+        // r164: Unified HUD positions — sync per-player, persistente no NBT do player
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.client.hud.unified.HudPositionsSyncS2CPacket.class,
+                br.com.murilo.liberthia.client.hud.unified.HudPositionsSyncS2CPacket::encode,
+                br.com.murilo.liberthia.client.hud.unified.HudPositionsSyncS2CPacket::decode,
+                br.com.murilo.liberthia.client.hud.unified.HudPositionsSyncS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.client.hud.unified.UpdateHudPositionC2SPacket.class,
+                br.com.murilo.liberthia.client.hud.unified.UpdateHudPositionC2SPacket::encode,
+                br.com.murilo.liberthia.client.hud.unified.UpdateHudPositionC2SPacket::decode,
+                br.com.murilo.liberthia.client.hud.unified.UpdateHudPositionC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.client.hud.unified.OpenHudEditorS2CPacket.class,
+                br.com.murilo.liberthia.client.hud.unified.OpenHudEditorS2CPacket::encode,
+                br.com.murilo.liberthia.client.hud.unified.OpenHudEditorS2CPacket::decode,
+                br.com.murilo.liberthia.client.hud.unified.OpenHudEditorS2CPacket::handle
+        );
     }
 
     public static void sendToPlayer(ServerPlayer player, Object packet) {
@@ -556,5 +619,10 @@ public final class ModNetwork {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             sendToPlayer(player, packet);
         }
+    }
+
+    /** r138: helper pra enviar packet do client pro server. */
+    public static void sendToServer(Object packet) {
+        CHANNEL.sendToServer(packet);
     }
 }

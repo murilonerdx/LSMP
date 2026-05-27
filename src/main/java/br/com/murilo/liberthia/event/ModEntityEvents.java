@@ -25,6 +25,12 @@ public class ModEntityEvents {
         event.put(ModEntities.SOUL_BODY.get(), br.com.murilo.liberthia.entity.ClonePlayerEntity.createAttributes().build());
         event.put(ModEntities.DARK_CONSCIOUSNESS.get(), br.com.murilo.liberthia.entity.DarkConsciousnessEntity.createAttributes().build());
         event.put(ModEntities.BLOOD_WORM.get(), br.com.murilo.liberthia.entity.BloodWormEntity.createAttributes().build());
+        // r120: Void Larva attributes
+        event.put(ModEntities.VOID_LARVA.get(),
+                br.com.murilo.liberthia.magic.spell.voidspell.VoidLarvaEntity.createAttributes().build());
+        // r135: Drygmy familiar
+        event.put(ModEntities.DRYGMY.get(),
+                br.com.murilo.liberthia.magic.familiar.DrygmyEntity.createAttributes().build());
         event.put(ModEntities.FLESH_CRAWLER.get(), br.com.murilo.liberthia.entity.FleshCrawlerEntity.createAttributes().build());
         event.put(ModEntities.GORE_WORM.get(), br.com.murilo.liberthia.entity.GoreWormEntity.createAttributes().build());
         event.put(ModEntities.BLOOD_CULTIST.get(), br.com.murilo.liberthia.entity.BloodCultistEntity.createAttributes().build());
@@ -63,6 +69,48 @@ public class ModEntityEvents {
                 br.com.murilo.liberthia.cosmic.horror.entity.AbsenceEntity.createAttributes().build());
         event.put(ModEntities.REMEMBERED.get(),
                 br.com.murilo.liberthia.cosmic.horror.entity.RememberedEntity.createAttributes().build());
+        // r150: 8 Wooden Horror variants — todos compartilham createAttributes()
+        var woodenAttrs = br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.createAttributes();
+        event.put(ModEntities.WOODEN_CHARCOAL.get(), woodenAttrs.build());
+        event.put(ModEntities.WOODEN_PALE_OAK.get(), woodenAttrs.build());
+        event.put(ModEntities.WOODEN_ROTTED_BIRCH.get(), woodenAttrs.build());
+        event.put(ModEntities.WOODEN_BLEEDING_MAPLE.get(), woodenAttrs.build());
+        event.put(ModEntities.WOODEN_MOSSY.get(), woodenAttrs.build());
+        event.put(ModEntities.WOODEN_FROZEN_PINE.get(), woodenAttrs.build());
+        event.put(ModEntities.WOODEN_BURNING_ACACIA.get(), woodenAttrs.build());
+        event.put(ModEntities.WOODEN_CURSED_MAHOGANY.get(), woodenAttrs.build());
+        // r87: Wizard mobs
+        event.put(ModEntities.PYROMANCER.get(),
+                br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity.createWizardAttributes().build());
+        event.put(ModEntities.CRYOMANCER.get(),
+                br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity.createWizardAttributes().build());
+        event.put(ModEntities.ELECTROMANCER.get(),
+                br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity.createWizardAttributes().build());
+        event.put(ModEntities.NECROMANCER.get(),
+                br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity.createWizardAttributes().build());
+        event.put(ModEntities.ELDRITCH_CULTIST.get(),
+                br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity.createWizardAttributes().build());
+        // r95: Familiars
+        event.put(ModEntities.WISP_PICKER.get(),
+                br.com.murilo.liberthia.magic.familiar.WispPickerEntity.createAttributes().build());
+        event.put(ModEntities.GROVE_SPRITE.get(),
+                br.com.murilo.liberthia.magic.familiar.GroveSpriteEntity.createAttributes().build());
+        event.put(ModEntities.SOUL_REAPER.get(),
+                br.com.murilo.liberthia.magic.familiar.SoulReaperEntity.createAttributes().build());
+        // r106: Wizards
+        event.put(ModEntities.APOTHECARIST.get(),
+                br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity.createWizardAttributes().build());
+        event.put(ModEntities.KEEPER.get(),
+                br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity.createWizardAttributes().build());
+        event.put(ModEntities.ARCHEVOKER.get(),
+                br.com.murilo.liberthia.magic.wizard.ArchevokerEntity.createArchevokerAttributes().build());
+        // r109: Familiars
+        event.put(ModEntities.WHELP.get(),
+                br.com.murilo.liberthia.magic.familiar.WhelpEntity.createAttributes().build());
+        event.put(ModEntities.CARBUNCLE.get(),
+                br.com.murilo.liberthia.magic.familiar.CarbuncleEntity.createAttributes().build());
+        event.put(ModEntities.AMETHYST_GOLEM.get(),
+                br.com.murilo.liberthia.magic.familiar.AmethystGolemEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -132,6 +180,24 @@ public class ModEntityEvents {
                 (type, level, spawnType, pos, rand) -> level.getDifficulty() != net.minecraft.world.Difficulty.PEACEFUL,
                 SpawnPlacementRegisterEvent.Operation.AND);
         event.register(ModEntities.REMEMBERED.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, spawnType, pos, rand) -> level.getDifficulty() != net.minecraft.world.Difficulty.PEACEFUL,
+                SpawnPlacementRegisterEvent.Operation.AND);
+
+        // r87: Wizard spawn placements
+        event.register(ModEntities.PYROMANCER.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.CRYOMANCER.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.ELECTROMANCER.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.NECROMANCER.get(),
+                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntities.ELDRITCH_CULTIST.get(),
                 SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 (type, level, spawnType, pos, rand) -> level.getDifficulty() != net.minecraft.world.Difficulty.PEACEFUL,
                 SpawnPlacementRegisterEvent.Operation.AND);

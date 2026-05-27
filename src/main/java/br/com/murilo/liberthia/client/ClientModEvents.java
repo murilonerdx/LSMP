@@ -20,7 +20,15 @@ import br.com.murilo.liberthia.registry.ModBlocks;
 public class ClientModEvents {
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        // r120: Void Larva (silverfish reskin) + Mini Black Hole
+        event.registerEntityRenderer(ModEntities.VOID_LARVA.get(),
+                br.com.murilo.liberthia.magic.spell.voidspell.VoidLarvaRenderer::new);
+        event.registerEntityRenderer(ModEntities.MINI_BLACK_HOLE.get(),
+                br.com.murilo.liberthia.magic.spell.voidspell.MiniBlackHoleRenderer::new);
         event.registerEntityRenderer(ModEntities.BLACK_HOLE.get(), BlackHoleRenderer::new);
+        // r135: Drygmy familiar (passive farm helper)
+        event.registerEntityRenderer(ModEntities.DRYGMY.get(),
+                br.com.murilo.liberthia.magic.familiar.DrygmyRenderer::new);
         event.registerEntityRenderer(ModEntities.DARK_MATTER_SPORE.get(), br.com.murilo.liberthia.client.renderer.DarkMatterSporeRenderer::new);
         // REMOVIDO v0.1.13: CLEANSING_GRENADE renderer
         event.registerEntityRenderer(ModEntities.CORRUPTED_ZOMBIE.get(), br.com.murilo.liberthia.client.renderer.CorruptedZombieRenderer::new);
@@ -71,6 +79,11 @@ public class ClientModEvents {
                 net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.PURIFYING_FLASK.get(),
                 net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        // r113: SpellProjectileEntity — renderer 3D AAA com 3 camadas billboarded
+        // (outer aura + inner core + hot white center) + spin + pulse, tinted
+        // por SpellSchool. Combinado com o trail de spritesheet animado.
+        event.registerEntityRenderer(ModEntities.SPELL_PROJECTILE.get(),
+                br.com.murilo.liberthia.magic.spell.client.SpellProjectileRenderer::new);
         event.registerEntityRenderer(ModEntities.POSSESSED_ZOMBIE.get(),
                 net.minecraft.client.renderer.entity.ZombieRenderer::new);
         event.registerEntityRenderer(ModEntities.POSSESSED_SKELETON.get(),
@@ -180,17 +193,28 @@ public class ClientModEvents {
                         return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/zombie.png");
                     }
                 });
+        // r145: Observer agora usa textura de madeira customizada (totem-like)
+        // — antes usava textura do Warden em modelo de Zombie (UV mismatch = textura bugada)
         event.registerEntityRenderer(ModEntities.OBSERVER.get(),
                 ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity>>(
                         ctx,
                         new net.minecraft.client.model.HumanoidModel<>(
-                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.ZOMBIE)),
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
                         0.5F) {
                     @Override
                     public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity e) {
-                        return new net.minecraft.resources.ResourceLocation("textures/entity/warden/warden.png");
+                        return new net.minecraft.resources.ResourceLocation("liberthia", "textures/entity/observer.png");
                     }
                 });
+        // r150: 8 Wooden Horror variants — cada um aponta pra sua textura
+        registerWoodenHorrorRenderer(event, ModEntities.WOODEN_CHARCOAL.get(), "wooden_charcoal");
+        registerWoodenHorrorRenderer(event, ModEntities.WOODEN_PALE_OAK.get(), "wooden_pale_oak");
+        registerWoodenHorrorRenderer(event, ModEntities.WOODEN_ROTTED_BIRCH.get(), "wooden_rotted_birch");
+        registerWoodenHorrorRenderer(event, ModEntities.WOODEN_BLEEDING_MAPLE.get(), "wooden_bleeding_maple");
+        registerWoodenHorrorRenderer(event, ModEntities.WOODEN_MOSSY.get(), "wooden_mossy");
+        registerWoodenHorrorRenderer(event, ModEntities.WOODEN_FROZEN_PINE.get(), "wooden_frozen_pine");
+        registerWoodenHorrorRenderer(event, ModEntities.WOODEN_BURNING_ACACIA.get(), "wooden_burning_acacia");
+        registerWoodenHorrorRenderer(event, ModEntities.WOODEN_CURSED_MAHOGANY.get(), "wooden_cursed_mahogany");
         // Absence: renderer no-op (invisível por design)
         event.registerEntityRenderer(ModEntities.ABSENCE.get(),
                 ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.cosmic.horror.entity.AbsenceEntity>(ctx) {
@@ -211,6 +235,139 @@ public class ClientModEvents {
                         return new net.minecraft.resources.ResourceLocation("textures/entity/skeleton/skeleton.png");
                     }
                 });
+
+        // r87/r163: Wizards — HumanoidMobRenderer com texture custom (r163 — antes
+        // todos usavam villager.png que dava texture missing pra alguns mobs).
+        registerWizardRenderer(event, ModEntities.PYROMANCER.get(),       "liberthia:textures/entity/wizard/pyromancer.png");
+        registerWizardRenderer(event, ModEntities.CRYOMANCER.get(),       "liberthia:textures/entity/wizard/cryomancer.png");
+        registerWizardRenderer(event, ModEntities.ELECTROMANCER.get(),    "liberthia:textures/entity/wizard/electromancer.png");
+        registerWizardRenderer(event, ModEntities.NECROMANCER.get(),      "liberthia:textures/entity/wizard/necromancer.png");
+        registerWizardRenderer(event, ModEntities.ELDRITCH_CULTIST.get(), "liberthia:textures/entity/wizard/eldritch_cultist.png");
+
+        // r95: Familiar renderers — minimal renderer (particles via aiStep handle visual)
+        event.registerEntityRenderer(ModEntities.WISP_PICKER.get(),
+                ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.magic.familiar.WispPickerEntity>(ctx) {
+                    @Override public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.magic.familiar.WispPickerEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/misc/white.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.GROVE_SPRITE.get(),
+                ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.magic.familiar.GroveSpriteEntity>(ctx) {
+                    @Override public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.magic.familiar.GroveSpriteEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/misc/white.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.SOUL_REAPER.get(),
+                ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.magic.familiar.SoulReaperEntity>(ctx) {
+                    @Override public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.magic.familiar.SoulReaperEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/misc/white.png");
+                    }
+                });
+        // r106: 3 More Wizards
+        registerWizardRenderer(event, ModEntities.APOTHECARIST.get(), "minecraft:textures/entity/villager/villager.png");
+        registerWizardRenderer(event, ModEntities.KEEPER.get(), "minecraft:textures/entity/villager/villager.png");
+        registerWizardRenderer(event, ModEntities.ARCHEVOKER.get(), "minecraft:textures/entity/illager/evoker.png");
+
+        // r109: 3 More Familiars (no-op renderers — particles via aiStep)
+        event.registerEntityRenderer(ModEntities.WHELP.get(),
+                ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.magic.familiar.WhelpEntity>(ctx) {
+                    @Override public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.magic.familiar.WhelpEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/misc/white.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.CARBUNCLE.get(),
+                ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.magic.familiar.CarbuncleEntity>(ctx) {
+                    @Override public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.magic.familiar.CarbuncleEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/misc/white.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.AMETHYST_GOLEM.get(),
+                ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.magic.familiar.AmethystGolemEntity>(ctx) {
+                    @Override public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.magic.familiar.AmethystGolemEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/misc/white.png");
+                    }
+                });
+
+        // r164 CRASH FIX: estes 4 entities estavam REGISTERED em ModEntities
+        // mas NÃO TINHAM renderer client — quando spawnavam (Cryomancer cast,
+        // Abyssal Lich boss summon) o EntityRenderDispatcher pegava null e
+        // crashava com NullPointerException no LevelRenderer.
+        event.registerEntityRenderer(ModEntities.FROZEN_HUMANOID.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.magic.spells.FrozenHumanoidEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.magic.spells.FrozenHumanoidEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.magic.spells.FrozenHumanoidEntity e) {
+                        return new net.minecraft.resources.ResourceLocation(
+                                "minecraft", "textures/entity/skeleton/stray.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.ABYSSAL_LICH.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.magic.boss.AbyssalLichEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.magic.boss.AbyssalLichEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.6F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.magic.boss.AbyssalLichEntity e) {
+                        return new net.minecraft.resources.ResourceLocation(
+                                "minecraft", "textures/entity/illager/evoker.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.LICH_STALKER.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.magic.boss.LichStalkerEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.magic.boss.LichStalkerEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.magic.boss.LichStalkerEntity e) {
+                        return new net.minecraft.resources.ResourceLocation(
+                                "minecraft", "textures/entity/skeleton/wither_skeleton.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.LICH_HUNTER.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.magic.boss.LichHunterEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.magic.boss.LichHunterEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.magic.boss.LichHunterEntity e) {
+                        return new net.minecraft.resources.ResourceLocation(
+                                "minecraft", "textures/entity/skeleton/skeleton.png");
+                    }
+                });
+
+        // r164 CRASH FIX #2: BOOKWYRM (familiar registrado em ModEntities mas sem
+        // renderer client). Spawna no spirit_world creature list (gen_r164_horror_spawns.py)
+        // — sem renderer = NullPointerException no LevelRenderer.
+        event.registerEntityRenderer(ModEntities.BOOKWYRM.get(),
+                ctx -> new net.minecraft.client.renderer.entity.EntityRenderer<br.com.murilo.liberthia.observation.entity.BookwyrmEntity>(ctx) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.observation.entity.BookwyrmEntity e) {
+                        return new net.minecraft.resources.ResourceLocation(
+                                "minecraft", "textures/entity/parrot/parrot_blue.png");
+                    }
+                });
+    }
+
+    @SuppressWarnings({"unchecked","rawtypes"})
+    private static <T extends br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity> void registerWizardRenderer(
+            net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers event,
+            net.minecraft.world.entity.EntityType<T> type, String texturePath) {
+        event.registerEntityRenderer(type, ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<T, net.minecraft.client.model.HumanoidModel<T>>(
+                ctx, new net.minecraft.client.model.HumanoidModel<>(
+                        ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                0.5F) {
+            @Override
+            public net.minecraft.resources.ResourceLocation getTextureLocation(T e) {
+                return new net.minecraft.resources.ResourceLocation("textures/entity/illager/evoker.png");
+            }
+        });
     }
 
     @SubscribeEvent
@@ -257,6 +414,21 @@ public class ClientModEvents {
             // r77: Spell Binding Pedestal screen
             MenuScreens.register(ModMenuTypes.SPELL_BINDING_PEDESTAL.get(),
                     br.com.murilo.liberthia.client.screen.SpellBindingPedestalScreen::new);
+            // r118: Glyph Inscriber — GUI bonita pra craft de reagents → scroll
+            MenuScreens.register(ModMenuTypes.GLYPH_INSCRIBER.get(),
+                    br.com.murilo.liberthia.client.screen.GlyphInscriberScreen::new);
+            // r119: Spell Weaver — GUI pra compor scrolls com modifier glyphs
+            MenuScreens.register(ModMenuTypes.SPELL_WEAVER.get(),
+                    br.com.murilo.liberthia.client.screen.SpellWeaverScreen::new);
+            // r138: Spell Mutator — GUI pra combinar 2 scrolls em hibrido
+            MenuScreens.register(ModMenuTypes.SPELL_MUTATOR.get(),
+                    br.com.murilo.liberthia.client.screen.SpellMutatorScreen::new);
+            // r155 Phase 2: Arcane Workbench — GUI 9 slots (base + 7 mods + output)
+            MenuScreens.register(ModMenuTypes.ARCANE_WORKBENCH.get(),
+                    br.com.murilo.liberthia.magic.workbench.ArcaneWorkbenchScreen::new);
+            // r119: Grimoire — book GUI with 9 scroll slots
+            MenuScreens.register(ModMenuTypes.GRIMOIRE.get(),
+                    br.com.murilo.liberthia.client.screen.GrimoireScreen::new);
             MenuScreens.register(ModMenuTypes.DARK_MATTER_FORGE.get(), DarkMatterForgeScreen::new);
             MenuScreens.register(ModMenuTypes.MATTER_INFUSER.get(), MatterInfuserScreen::new);
             MenuScreens.register(ModMenuTypes.RESEARCH_TABLE.get(), ResearchTableScreen::new);
@@ -310,6 +482,16 @@ public class ClientModEvents {
                     (stack, level, entity, seed) ->
                             stack.hasTag() && stack.getTag().contains("src") ? 1f : 0f);
 
+            // r155 Phase 3: Factory Spell Scroll — model override por spell ID
+            // Cada spell tem um índice fixo (1..42), retornado como float.
+            // factory_spell_scroll.json tem overrides matchando cada threshold.
+            net.minecraft.client.renderer.item.ItemProperties.register(
+                    br.com.murilo.liberthia.registry.ModItems.FACTORY_SPELL_SCROLL.get(),
+                    new net.minecraft.resources.ResourceLocation(
+                            br.com.murilo.liberthia.LiberthiaMod.MODID, "spell_index"),
+                    (stack, level, entity, seed) ->
+                            br.com.murilo.liberthia.magic.factory.FactorySpellIndex.indexFor(stack));
+
             // Sample Vial: matter_type property — escolhe textura por matéria dominante.
             // Valores (sincronizados com sample_vial.json):
             //   0.0 → vazio (sample_vial.png)
@@ -358,6 +540,18 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_FLUID_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHALK_SYMBOL.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.THORN_BRIAR.get(), RenderType.cutout());
+            // r143: Spirit World plants (cross shape - needs cutout pra alpha funcionar)
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.WHISPER_PETAL_BUSH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.GHOST_MUSHROOM.get(), RenderType.cutout());
+            // r149: Magic Fire (7 escolas) + Magelight Torch — cutout pra remover fundo preto
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGIC_FIRE_FIRE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGIC_FIRE_ICE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGIC_FIRE_LIGHTNING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGIC_FIRE_BLOOD.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGIC_FIRE_ELDRITCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGIC_FIRE_HOLY.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGIC_FIRE_NATURE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGELIGHT_TORCH.get(), RenderType.cutout());
             // r34: OCCULT chalks + candles + portal — RENDER LAYER CUTOUT
             // (sem isso, fundo transparente vira PRETO no chão)
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHALK_MARK_WHITE.get(), RenderType.cutout());
@@ -386,5 +580,25 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_DOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_TRAPDOOR.get(), RenderType.cutout());
         });
+    }
+
+    /** r150: helper pra registrar renderer dos 8 Wooden Horror variants. */
+    private static void registerWoodenHorrorRenderer(
+            net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers event,
+            net.minecraft.world.entity.EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity> type,
+            String textureName) {
+        event.registerEntityRenderer(type,
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>>(
+                        ctx,
+                        new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("liberthia",
+                                "textures/entity/" + textureName + ".png");
+                    }
+                });
     }
 }

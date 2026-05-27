@@ -1417,6 +1417,273 @@ public final class ModBlocks {
                     net.minecraft.util.valueproviders.UniformInt.of(1, 3)));
 
     // r74: Spirit Gem Ore — drops Soul Fragment
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r89: ATMOSPHERIC BLOCKS — Weaves, Magic Fire, Magelight, Light Block
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Block> MIRROR_WEAVE = BLOCKS.register("mirror_weave",
+            () -> new br.com.murilo.liberthia.atmospheric.WeaveBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .noOcclusion(),
+                    br.com.murilo.liberthia.atmospheric.WeaveBlock.Mode.MIRROR));
+    public static final RegistryObject<Block> SKY_WEAVE = BLOCKS.register("sky_weave",
+            () -> new br.com.murilo.liberthia.atmospheric.WeaveBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .noOcclusion(),
+                    br.com.murilo.liberthia.atmospheric.WeaveBlock.Mode.SKY));
+    public static final RegistryObject<Block> GHOST_WEAVE = BLOCKS.register("ghost_weave",
+            () -> new br.com.murilo.liberthia.atmospheric.WeaveBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .noOcclusion(),
+                    br.com.murilo.liberthia.atmospheric.WeaveBlock.Mode.GHOST));
+    public static final RegistryObject<Block> FALSE_WEAVE = BLOCKS.register("false_weave",
+            () -> new br.com.murilo.liberthia.atmospheric.WeaveBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.STONE)
+                            .noOcclusion(),
+                    br.com.murilo.liberthia.atmospheric.WeaveBlock.Mode.FALSE));
+
+    // Magic Fire 7 cores
+    // r149: properties COMPLETAS — sem .copy(FIRE) que copia hardness -1 (não-quebrável)
+    // .strength(0F) = instant break, .noCollission() = atravessável, .noOcclusion() = render correto
+    private static net.minecraft.world.level.block.state.BlockBehaviour.Properties magicFireProps(int light) {
+        return net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
+                .mapColor(net.minecraft.world.level.material.MapColor.FIRE)
+                .replaceable()
+                .noCollission()
+                .strength(0F)
+                .lightLevel(s -> light)
+                .sound(net.minecraft.world.level.block.SoundType.WOOL)
+                .noLootTable()
+                .noOcclusion();
+    }
+    public static final RegistryObject<Block> MAGIC_FIRE_FIRE = BLOCKS.register("magic_fire_fire",
+            () -> new br.com.murilo.liberthia.atmospheric.MagicFireBlock(
+                    magicFireProps(15), br.com.murilo.liberthia.magic.school.SpellSchool.FIRE));
+    public static final RegistryObject<Block> MAGIC_FIRE_ICE = BLOCKS.register("magic_fire_ice",
+            () -> new br.com.murilo.liberthia.atmospheric.MagicFireBlock(
+                    magicFireProps(12), br.com.murilo.liberthia.magic.school.SpellSchool.ICE));
+    public static final RegistryObject<Block> MAGIC_FIRE_LIGHTNING = BLOCKS.register("magic_fire_lightning",
+            () -> new br.com.murilo.liberthia.atmospheric.MagicFireBlock(
+                    magicFireProps(14), br.com.murilo.liberthia.magic.school.SpellSchool.LIGHTNING));
+    public static final RegistryObject<Block> MAGIC_FIRE_BLOOD = BLOCKS.register("magic_fire_blood",
+            () -> new br.com.murilo.liberthia.atmospheric.MagicFireBlock(
+                    magicFireProps(13), br.com.murilo.liberthia.magic.school.SpellSchool.BLOOD));
+    public static final RegistryObject<Block> MAGIC_FIRE_ELDRITCH = BLOCKS.register("magic_fire_eldritch",
+            () -> new br.com.murilo.liberthia.atmospheric.MagicFireBlock(
+                    magicFireProps(10), br.com.murilo.liberthia.magic.school.SpellSchool.ELDRITCH));
+    public static final RegistryObject<Block> MAGIC_FIRE_HOLY = BLOCKS.register("magic_fire_holy",
+            () -> new br.com.murilo.liberthia.atmospheric.MagicFireBlock(
+                    magicFireProps(15), br.com.murilo.liberthia.magic.school.SpellSchool.HOLY));
+    public static final RegistryObject<Block> MAGIC_FIRE_NATURE = BLOCKS.register("magic_fire_nature",
+            () -> new br.com.murilo.liberthia.atmospheric.MagicFireBlock(
+                    magicFireProps(12), br.com.murilo.liberthia.magic.school.SpellSchool.NATURE));
+
+    public static final RegistryObject<Block> MAGELIGHT_TORCH = BLOCKS.register("magelight_torch",
+            () -> new br.com.murilo.liberthia.atmospheric.MagelightTorchBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.LANTERN)
+                            .lightLevel(s -> 15)
+                            .strength(0.1F)
+                            .noOcclusion()
+                            .noCollission()));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r92: STORAGE JARS + SCRYER OCULUS
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Block> MOB_JAR = BLOCKS.register("mob_jar",
+            () -> new br.com.murilo.liberthia.storage.MobJarBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .lightLevel(s -> 6)
+                            .strength(0.5F, 1.0F)
+                            .noOcclusion()));
+    public static final RegistryObject<Block> POTION_JAR = BLOCKS.register("potion_jar",
+            () -> new br.com.murilo.liberthia.storage.PotionJarBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .lightLevel(s -> 4)
+                            .strength(0.5F, 1.0F)
+                            .noOcclusion()));
+    public static final RegistryObject<Block> SCRYER_OCULUS = BLOCKS.register("scryer_oculus",
+            () -> new br.com.murilo.liberthia.storage.ScryerOculusBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK)
+                            .lightLevel(s -> 12)
+                            .strength(3.0F, 6.0F)));
+
+    // r97: Repository — sorting chest
+    public static final RegistryObject<Block> REPOSITORY = BLOCKS.register("repository",
+            () -> new br.com.murilo.liberthia.storage.RepositoryBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.CHEST)
+                            .strength(2.5F, 4.0F)));
+
+    // r99: ELEMENTAL WALLS
+    public static final RegistryObject<Block> FIRE_WALL = BLOCKS.register("fire_wall",
+            () -> new br.com.murilo.liberthia.magic.walls.ElementalWallBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.FIRE)
+                            .lightLevel(s -> 14)
+                            .noOcclusion()
+                            .randomTicks(),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.FIRE,
+                    net.minecraft.core.particles.ParticleTypes.FLAME));
+    public static final RegistryObject<Block> ICE_WALL = BLOCKS.register("ice_wall",
+            () -> new br.com.murilo.liberthia.magic.walls.ElementalWallBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.BLUE_ICE)
+                            .lightLevel(s -> 10)
+                            .noOcclusion()
+                            .randomTicks(),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.ICE,
+                    net.minecraft.core.particles.ParticleTypes.SNOWFLAKE));
+    public static final RegistryObject<Block> LIGHTNING_WALL = BLOCKS.register("lightning_wall",
+            () -> new br.com.murilo.liberthia.magic.walls.ElementalWallBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .lightLevel(s -> 12)
+                            .noOcclusion()
+                            .randomTicks(),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.LIGHTNING,
+                    net.minecraft.core.particles.ParticleTypes.ELECTRIC_SPARK));
+    public static final RegistryObject<Block> HOLY_WALL = BLOCKS.register("holy_wall",
+            () -> new br.com.murilo.liberthia.magic.walls.ElementalWallBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .lightLevel(s -> 15)
+                            .noOcclusion()
+                            .randomTicks(),
+                    br.com.murilo.liberthia.magic.school.SpellSchool.HOLY,
+                    net.minecraft.core.particles.ParticleTypes.END_ROD));
+
+    // r100: Auto-blocks
+    public static final RegistryObject<Block> WHIRLWIND = BLOCKS.register("whirlwind",
+            () -> new br.com.murilo.liberthia.automation.WhirlwindBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .lightLevel(s -> 6)
+                            .noOcclusion()
+                            .noCollission()));
+    public static final RegistryObject<Block> AUTO_MINER = BLOCKS.register("auto_miner",
+            () -> new br.com.murilo.liberthia.automation.AutoMinerBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.DEEPSLATE)
+                            .lightLevel(s -> 5)
+                            .strength(4.0F, 8.0F)));
+    public static final RegistryObject<Block> MAGE_CAULDRON = BLOCKS.register("mage_cauldron",
+            () -> new br.com.murilo.liberthia.automation.MageCauldronBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.CAULDRON)
+                            .lightLevel(s -> 8)
+                            .strength(2.5F, 5.0F)));
+
+    // r103: Magic Crops
+    public static final RegistryObject<Block> MAGE_BLOOM_CROP = BLOCKS.register("mage_bloom_crop",
+            () -> new br.com.murilo.liberthia.magic.crop.MageBloomCrop(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.WHEAT)));
+    public static final RegistryObject<Block> SOURCE_BERRY_BUSH = BLOCKS.register("source_berry_bush",
+            () -> new br.com.murilo.liberthia.magic.crop.SourceBerryBush(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.SWEET_BERRY_BUSH)));
+
+    // r105: Scribe Tables
+    public static final RegistryObject<Block> INSCRIPTION_TABLE = BLOCKS.register("inscription_table",
+            () -> new br.com.murilo.liberthia.magic.scribe.InscriptionTableBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.LECTERN)
+                            .lightLevel(s -> 6)
+                            .strength(2.5F, 5.0F)
+                            .noOcclusion()));
+    public static final RegistryObject<Block> SCROLL_FORGE = BLOCKS.register("scroll_forge",
+            () -> new br.com.murilo.liberthia.magic.scribe.ScrollForgeBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.SMITHING_TABLE)
+                            .lightLevel(s -> 8)
+                            .strength(3.0F, 6.0F)));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r88: AUTOMATION — Prism, Turret, Sensor
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Block> SPELL_PRISM = BLOCKS.register("spell_prism",
+            () -> new br.com.murilo.liberthia.automation.SpellPrismBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
+                            .lightLevel(s -> 4)
+                            .strength(2.0F, 4.0F)
+                            .noOcclusion()));
+    public static final RegistryObject<Block> SPELL_TURRET = BLOCKS.register("spell_turret",
+            () -> new br.com.murilo.liberthia.automation.SpellTurretBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.DEEPSLATE)
+                            .lightLevel(s -> 6)
+                            .strength(3.5F, 6.0F)));
+    public static final RegistryObject<Block> SPELL_SENSOR = BLOCKS.register("spell_sensor",
+            () -> new br.com.murilo.liberthia.automation.SpellSensorBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.SCULK_SENSOR)
+                            .lightLevel(s -> s.getValue(br.com.murilo.liberthia.automation.SpellSensorBlock.POWERED) ? 10 : 2)
+                            .strength(2.0F, 4.0F)));
+
+    // r86: RITUAL BRAZIER — usado com Ritual Tablets pra iniciar rituais
+    public static final RegistryObject<Block> RITUAL_BRAZIER = BLOCKS.register("ritual_brazier",
+            () -> new br.com.murilo.liberthia.magic.ritual.RitualBrazierBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.STONE_BRICKS)
+                            .lightLevel(s -> 10)
+                            .strength(3.5F, 6.0F)
+                            .noOcclusion()));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r84: SOURCELINKS — 4 Source generators
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<Block> VOLCANIC_SOURCELINK = BLOCKS.register("volcanic_sourcelink",
+            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.MAGMA_BLOCK)
+                            .lightLevel(s -> 10)
+                            .strength(3.0F, 6.0F),
+                    br.com.murilo.liberthia.magic.sourcelink.VolcanicSourcelinkBlockEntity::new,
+                    () -> ModBlockEntities.VOLCANIC_SOURCELINK.get()));
+    public static final RegistryObject<Block> MYCELIAL_SOURCELINK = BLOCKS.register("mycelial_sourcelink",
+            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.MYCELIUM)
+                            .lightLevel(s -> 6)
+                            .strength(2.0F, 4.0F),
+                    br.com.murilo.liberthia.magic.sourcelink.MycelialSourcelinkBlockEntity::new,
+                    () -> ModBlockEntities.MYCELIAL_SOURCELINK.get()));
+    public static final RegistryObject<Block> VITALIC_SOURCELINK = BLOCKS.register("vitalic_sourcelink",
+            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.REDSTONE_BLOCK)
+                            .lightLevel(s -> 8)
+                            .strength(3.0F, 5.0F),
+                    br.com.murilo.liberthia.magic.sourcelink.VitalicSourcelinkBlockEntity::new,
+                    () -> ModBlockEntities.VITALIC_SOURCELINK.get()));
+    public static final RegistryObject<Block> ALCHEMICAL_SOURCELINK = BLOCKS.register("alchemical_sourcelink",
+            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.PURPUR_BLOCK)
+                            .lightLevel(s -> 7)
+                            .strength(2.5F, 4.5F),
+                    br.com.murilo.liberthia.magic.sourcelink.AlchemicalSourcelinkBlockEntity::new,
+                    () -> ModBlockEntities.ALCHEMICAL_SOURCELINK.get()));
+
+    // r135: 5° Sourcelink — Agronomic (Source de crops)
+    public static final RegistryObject<Block> AGRONOMIC_SOURCELINK = BLOCKS.register("agronomic_sourcelink",
+            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.MOSS_BLOCK)
+                            .lightLevel(s -> 5)
+                            .strength(2.0F, 3.5F),
+                    br.com.murilo.liberthia.magic.sourcelink.AgronomicSourcelinkBlockEntity::new,
+                    () -> ModBlockEntities.AGRONOMIC_SOURCELINK.get()));
+
     public static final RegistryObject<Block> SPIRIT_GEM_ORE = BLOCKS.register("spirit_gem_ore",
             () -> new net.minecraft.world.level.block.DropExperienceBlock(
                     net.minecraft.world.level.block.state.BlockBehaviour.Properties
@@ -1450,6 +1717,117 @@ public final class ModBlocks {
                             .copy(net.minecraft.world.level.block.Blocks.LECTERN)
                             .strength(3.0F, 6.0F)
                             .lightLevel(s -> 8)
+                            .noOcclusion()));
+
+    // r118: Glyph Inscriber — bloco com GUI nativo de crafting
+    public static final RegistryObject<Block> GLYPH_INSCRIBER = BLOCKS.register("glyph_inscriber",
+            () -> new br.com.murilo.liberthia.magic.glyph.inscriber.GlyphInscriberBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F, 8.0F)
+                            .lightLevel(s -> 6)
+                            .sound(net.minecraft.world.level.block.SoundType.WOOD)
+                            .noOcclusion()));
+
+    // r119: Spell Weaver — combina base scroll + modifier glyphs em scroll composto
+    public static final RegistryObject<Block> SPELL_WEAVER = BLOCKS.register("spell_weaver",
+            () -> new br.com.murilo.liberthia.magic.spell.weaver.SpellWeaverBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 12.0F)
+                            .lightLevel(s -> 8)
+                            .sound(net.minecraft.world.level.block.SoundType.AMETHYST)
+                            .noOcclusion()));
+
+    // r117: Spirit Conduit (Spirit World) + Source Transmuter (Overworld)
+    public static final RegistryObject<Block> SPIRIT_CONDUIT = BLOCKS.register("spirit_conduit",
+            () -> new br.com.murilo.liberthia.magic.conduit.SpiritConduitBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.5F, 8.0F)
+                            .lightLevel(s -> 7)
+                            .sound(net.minecraft.world.level.block.SoundType.AMETHYST)
+                            .noOcclusion()));
+
+    public static final RegistryObject<Block> SOURCE_TRANSMUTER = BLOCKS.register("source_transmuter",
+            () -> new br.com.murilo.liberthia.magic.conduit.SourceTransmuterBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(2.0F, 10.0F)
+                            .lightLevel(s -> 4)
+                            .sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    // r138: Lay Line — bloco natural worldgen-spawned que gera Source ambiente
+    public static final RegistryObject<Block> LAY_LINE = BLOCKS.register("lay_line",
+            () -> new br.com.murilo.liberthia.magic.layline.LayLineBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(50F, 1200F)
+                            .lightLevel(s -> 12)
+                            .sound(net.minecraft.world.level.block.SoundType.AMETHYST)
+                            .noOcclusion()
+                            .requiresCorrectToolForDrops()));
+
+    // r138: Spell Mutator — combina 2 scrolls em 1 hibrido
+    public static final RegistryObject<Block> SPELL_MUTATOR = BLOCKS.register("spell_mutator",
+            () -> new br.com.murilo.liberthia.magic.spell.mutator.SpellMutatorBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 9.0F)
+                            .lightLevel(s -> 9)
+                            .sound(net.minecraft.world.level.block.SoundType.AMETHYST)
+                            .noOcclusion()));
+
+    // r155 Phase 2: Arcane Workbench — base scroll + modifier glyphs → composed scroll
+    public static final RegistryObject<Block> ARCANE_WORKBENCH = BLOCKS.register("arcane_workbench",
+            () -> new br.com.murilo.liberthia.magic.workbench.ArcaneWorkbenchBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.5F, 10.0F)
+                            .lightLevel(s -> 10)
+                            .sound(net.minecraft.world.level.block.SoundType.AMETHYST)
+                            .noOcclusion()));
+
+    // r162: Class Pedestal — escolha a classe de mago
+    public static final RegistryObject<Block> CLASS_PEDESTAL = BLOCKS.register("class_pedestal",
+            () -> new br.com.murilo.liberthia.magic.mageclass.ClassPedestalBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(4.0F, 15.0F)
+                            .lightLevel(s -> 13)
+                            .sound(net.minecraft.world.level.block.SoundType.AMETHYST)
+                            .noOcclusion()));
+
+    // r139: Spirit Crystal Ore — drops Spirit Crystal usado em rituais
+    public static final RegistryObject<Block> SPIRIT_CRYSTAL_ORE = BLOCKS.register("spirit_crystal_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(
+                    BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DEEPSLATE_DIAMOND_ORE)
+                            .strength(4.5F, 5F)
+                            .lightLevel(s -> 4)
+                            .requiresCorrectToolForDrops(),
+                    net.minecraft.util.valueproviders.UniformInt.of(3, 7)));
+
+    // r139: Soul Iron Ore — drops Soul Iron Raw (smelt -> Soul Iron Ingot)
+    public static final RegistryObject<Block> SOUL_IRON_ORE = BLOCKS.register("soul_iron_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(
+                    BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DEEPSLATE_IRON_ORE)
+                            .strength(3.5F, 4F)
+                            .requiresCorrectToolForDrops(),
+                    net.minecraft.util.valueproviders.UniformInt.of(1, 3)));
+
+    // r139: Whisper Petal Bush — planta que drop Whisper Petal
+    public static final RegistryObject<Block> WHISPER_PETAL_BUSH = BLOCKS.register("whisper_petal_bush",
+            () -> new net.minecraft.world.level.block.FlowerBlock(
+                    net.minecraft.world.effect.MobEffects.SLOW_FALLING, 4,
+                    BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.POPPY)
+                            .lightLevel(s -> 5)));
+
+    // r139: Ghost Mushroom — light-emitting mushroom drop
+    public static final RegistryObject<Block> GHOST_MUSHROOM = BLOCKS.register("ghost_mushroom",
+            () -> new net.minecraft.world.level.block.BushBlock(
+                    BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.RED_MUSHROOM)
+                            .lightLevel(s -> 10)
+                            .noCollission()
+                            .randomTicks()) {});
+
+    // r139: Glyph Brazier — bloco onde player faz ritual pra ganhar glyphs
+    public static final RegistryObject<Block> GLYPH_BRAZIER = BLOCKS.register("glyph_brazier",
+            () -> new br.com.murilo.liberthia.magic.ritual.GlyphBrazierBlock(
+                    BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.SOUL_CAMPFIRE)
+                            .strength(2.5F, 6F)
+                            .lightLevel(s -> 11)
                             .noOcclusion()));
 
     private ModBlocks() {

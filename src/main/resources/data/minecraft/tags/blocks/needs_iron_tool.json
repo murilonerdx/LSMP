@@ -1,4 +1,7 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "liberthia:spirit_crystal_ore",
+    "liberthia:soul_iron_ore"
+  ]
 }

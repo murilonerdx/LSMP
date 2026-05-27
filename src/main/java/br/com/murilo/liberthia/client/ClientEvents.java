@@ -17,13 +17,9 @@ public final class ClientEvents {
         if (KeyBindings.HUD_CONFIG_KEY.consumeClick()) {
             Minecraft.getInstance().setScreen(new HudConfigScreen());
         }
-        // r42: Spell Wheel — abre se segurar X
-        if (KeyBindings.SPELL_WHEEL_KEY.consumeClick()) {
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.screen == null) {
-                mc.setScreen(new br.com.murilo.liberthia.magic.custom.client.SpellWheelScreen());
-            }
-        }
+        // r164: O X (SPELL_WHEEL_KEY) agora é tratado em SpellHotbarKeyHandler.
+        // Se player segura Grimoire → abre GrimoireWheelScreen (9 slots).
+        // Senão → abre o Custom Spell Wheel. Removido daqui pra evitar double-consume.
         // r42: Quick Cast — V casta o spell selecionado sem abrir wheel
         if (KeyBindings.QUICK_CAST_KEY.consumeClick()) {
             var selected = br.com.murilo.liberthia.magic.custom.CustomSpellClientCache.getSelected();

@@ -364,13 +364,15 @@ public final class ModEntities {
                             .clientTrackingRange(64)
                             .build("empty_man"));
 
-    /** Observer — SCP-173 style. Move só sem line of sight. */
+    /** Observer — SCP-173 style. Move só sem line of sight.
+     *  r145: hitbox padrao humanoid (0.6 × 1.95) — antes 0.7×2.0 dava mismatch
+     *  com modelo PLAYER e hit detection bugado. */
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity>> OBSERVER =
             ENTITY_TYPES.register("observer",
                     () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity>of(
                                     br.com.murilo.liberthia.cosmic.horror.entity.ObserverEntity::new,
                                     MobCategory.MONSTER)
-                            .sized(0.7F, 2.0F)
+                            .sized(0.6F, 1.95F)
                             .clientTrackingRange(48)
                             .build("observer"));
 
@@ -393,6 +395,244 @@ public final class ModEntities {
                             .sized(0.6F, 1.8F)
                             .clientTrackingRange(32)
                             .build("remembered"));
+
+    // ════════════════════════════════════════════════════════════════════════
+    // r87: WIZARD MOBS — 5 archetypes
+    // ════════════════════════════════════════════════════════════════════════
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.wizard.PyromancerEntity>> PYROMANCER =
+            ENTITY_TYPES.register("pyromancer",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.wizard.PyromancerEntity>of(
+                                    br.com.murilo.liberthia.magic.wizard.PyromancerEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(48)
+                            .build("pyromancer"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.wizard.CryomancerEntity>> CRYOMANCER =
+            ENTITY_TYPES.register("cryomancer",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.wizard.CryomancerEntity>of(
+                                    br.com.murilo.liberthia.magic.wizard.CryomancerEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(48)
+                            .build("cryomancer"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.wizard.ElectromancerEntity>> ELECTROMANCER =
+            ENTITY_TYPES.register("electromancer",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.wizard.ElectromancerEntity>of(
+                                    br.com.murilo.liberthia.magic.wizard.ElectromancerEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(48)
+                            .build("electromancer"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.wizard.NecromancerEntity>> NECROMANCER =
+            ENTITY_TYPES.register("necromancer",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.wizard.NecromancerEntity>of(
+                                    br.com.murilo.liberthia.magic.wizard.NecromancerEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(48)
+                            .build("necromancer"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.wizard.EldritchCultistEntity>> ELDRITCH_CULTIST =
+            ENTITY_TYPES.register("eldritch_cultist",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.wizard.EldritchCultistEntity>of(
+                                    br.com.murilo.liberthia.magic.wizard.EldritchCultistEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(48)
+                            .build("eldritch_cultist"));
+
+    // r95: FAMILIARS
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.familiar.WispPickerEntity>> WISP_PICKER =
+            ENTITY_TYPES.register("wisp_picker",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.familiar.WispPickerEntity>of(
+                                    br.com.murilo.liberthia.magic.familiar.WispPickerEntity::new,
+                                    MobCategory.CREATURE)
+                            .sized(0.4F, 0.4F)
+                            .clientTrackingRange(16)
+                            .build("wisp_picker"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.familiar.GroveSpriteEntity>> GROVE_SPRITE =
+            ENTITY_TYPES.register("grove_sprite",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.familiar.GroveSpriteEntity>of(
+                                    br.com.murilo.liberthia.magic.familiar.GroveSpriteEntity::new,
+                                    MobCategory.CREATURE)
+                            .sized(0.5F, 0.7F)
+                            .clientTrackingRange(16)
+                            .build("grove_sprite"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.familiar.SoulReaperEntity>> SOUL_REAPER =
+            ENTITY_TYPES.register("soul_reaper",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.familiar.SoulReaperEntity>of(
+                                    br.com.murilo.liberthia.magic.familiar.SoulReaperEntity::new,
+                                    MobCategory.CREATURE)
+                            .sized(0.5F, 1.2F)
+                            .clientTrackingRange(16)
+                            .build("soul_reaper"));
+
+    // r98: PHASED BOSS + 2 minions
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.boss.AbyssalLichEntity>> ABYSSAL_LICH =
+            ENTITY_TYPES.register("abyssal_lich",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.boss.AbyssalLichEntity>of(
+                                    br.com.murilo.liberthia.magic.boss.AbyssalLichEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.8F, 2.5F)
+                            .clientTrackingRange(80)
+                            .fireImmune()
+                            .build("abyssal_lich"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.boss.LichStalkerEntity>> LICH_STALKER =
+            ENTITY_TYPES.register("lich_stalker",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.boss.LichStalkerEntity>of(
+                                    br.com.murilo.liberthia.magic.boss.LichStalkerEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(32)
+                            .build("lich_stalker"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.boss.LichHunterEntity>> LICH_HUNTER =
+            ENTITY_TYPES.register("lich_hunter",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.boss.LichHunterEntity>of(
+                                    br.com.murilo.liberthia.magic.boss.LichHunterEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(32)
+                            .build("lich_hunter"));
+
+    // r99: Frozen Humanoid statue
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.spells.FrozenHumanoidEntity>> FROZEN_HUMANOID =
+            ENTITY_TYPES.register("frozen_humanoid",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.spells.FrozenHumanoidEntity>of(
+                                    br.com.murilo.liberthia.magic.spells.FrozenHumanoidEntity::new,
+                                    MobCategory.MISC)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(32)
+                            .build("frozen_humanoid"));
+
+    // r106: 3 More Wizards
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.wizard.ApothecaristEntity>> APOTHECARIST =
+            ENTITY_TYPES.register("apothecarist",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.wizard.ApothecaristEntity>of(
+                                    br.com.murilo.liberthia.magic.wizard.ApothecaristEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(48)
+                            .build("apothecarist"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.wizard.KeeperEntity>> KEEPER =
+            ENTITY_TYPES.register("keeper",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.wizard.KeeperEntity>of(
+                                    br.com.murilo.liberthia.magic.wizard.KeeperEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(48)
+                            .build("keeper"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.wizard.ArchevokerEntity>> ARCHEVOKER =
+            ENTITY_TYPES.register("archevoker",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.wizard.ArchevokerEntity>of(
+                                    br.com.murilo.liberthia.magic.wizard.ArchevokerEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.6F, 2.1F)
+                            .clientTrackingRange(64)
+                            .build("archevoker"));
+
+    // r109: 3 More Familiars
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.familiar.WhelpEntity>> WHELP =
+            ENTITY_TYPES.register("whelp",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.familiar.WhelpEntity>of(
+                                    br.com.murilo.liberthia.magic.familiar.WhelpEntity::new,
+                                    MobCategory.CREATURE)
+                            .sized(0.5F, 0.6F)
+                            .clientTrackingRange(16)
+                            .build("whelp"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.familiar.CarbuncleEntity>> CARBUNCLE =
+            ENTITY_TYPES.register("carbuncle",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.familiar.CarbuncleEntity>of(
+                                    br.com.murilo.liberthia.magic.familiar.CarbuncleEntity::new,
+                                    MobCategory.CREATURE)
+                            .sized(0.4F, 0.5F)
+                            .clientTrackingRange(16)
+                            .build("carbuncle"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.familiar.AmethystGolemEntity>> AMETHYST_GOLEM =
+            ENTITY_TYPES.register("amethyst_golem",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.familiar.AmethystGolemEntity>of(
+                                    br.com.murilo.liberthia.magic.familiar.AmethystGolemEntity::new,
+                                    MobCategory.CREATURE)
+                            .sized(0.8F, 1.6F)
+                            .clientTrackingRange(20)
+                            .build("amethyst_golem"));
+
+    // r120: Void Larva — silverfish reskin spawned by VoidInfection
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.spell.voidspell.VoidLarvaEntity>> VOID_LARVA =
+            ENTITY_TYPES.register("void_larva",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.spell.voidspell.VoidLarvaEntity>of(
+                                    br.com.murilo.liberthia.magic.spell.voidspell.VoidLarvaEntity::new,
+                                    MobCategory.MONSTER)
+                            .sized(0.5F, 0.4F)
+                            .clientTrackingRange(10)
+                            .build("void_larva"));
+
+    // r120: Mini Black Hole — explosion entity spawned by void spell
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.spell.voidspell.MiniBlackHoleEntity>> MINI_BLACK_HOLE =
+            ENTITY_TYPES.register("mini_black_hole",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.spell.voidspell.MiniBlackHoleEntity>of(
+                                    br.com.murilo.liberthia.magic.spell.voidspell.MiniBlackHoleEntity::new,
+                                    MobCategory.MISC)
+                            .sized(1.5F, 1.5F)
+                            .clientTrackingRange(16)
+                            .updateInterval(2)
+                            .build("mini_black_hole"));
+
+    // r135: Drygmy familiar — passive farm helper (AN-style)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.familiar.DrygmyEntity>> DRYGMY =
+            ENTITY_TYPES.register("drygmy",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.familiar.DrygmyEntity>of(
+                                    br.com.murilo.liberthia.magic.familiar.DrygmyEntity::new,
+                                    MobCategory.CREATURE)
+                            .sized(0.7F, 1.2F)
+                            .clientTrackingRange(10)
+                            .build("drygmy"));
+
+    // r112: Real spell projectile (substitui raycast AOE da SpellLibrary)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.spell.SpellProjectileEntity>> SPELL_PROJECTILE =
+            ENTITY_TYPES.register("spell_projectile",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.spell.SpellProjectileEntity>of(
+                                    br.com.murilo.liberthia.magic.spell.SpellProjectileEntity::new,
+                                    MobCategory.MISC)
+                            .sized(0.4F, 0.4F)
+                            .clientTrackingRange(8)
+                            .updateInterval(2)  // update bem rápido pro trail
+                            .build("spell_projectile"));
+
+    // r150: 8 Wooden Horror variants (uma classe base, cor única por variante)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>> WOODEN_CHARCOAL =
+            registerWoodenHorror("wooden_charcoal",
+                    br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant.CHARCOAL);
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>> WOODEN_PALE_OAK =
+            registerWoodenHorror("wooden_pale_oak",
+                    br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant.PALE_OAK);
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>> WOODEN_ROTTED_BIRCH =
+            registerWoodenHorror("wooden_rotted_birch",
+                    br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant.ROTTED_BIRCH);
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>> WOODEN_BLEEDING_MAPLE =
+            registerWoodenHorror("wooden_bleeding_maple",
+                    br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant.BLEEDING_MAPLE);
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>> WOODEN_MOSSY =
+            registerWoodenHorror("wooden_mossy",
+                    br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant.MOSSY);
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>> WOODEN_FROZEN_PINE =
+            registerWoodenHorror("wooden_frozen_pine",
+                    br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant.FROZEN_PINE);
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>> WOODEN_BURNING_ACACIA =
+            registerWoodenHorror("wooden_burning_acacia",
+                    br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant.BURNING_ACACIA);
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>> WOODEN_CURSED_MAHOGANY =
+            registerWoodenHorror("wooden_cursed_mahogany",
+                    br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant.CURSED_MAHOGANY);
+
+    private static RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>>
+            registerWoodenHorror(String id, br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.Variant variant) {
+        return ENTITY_TYPES.register(id,
+                () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity>of(
+                                (type, level) -> new br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity(type, level, variant),
+                                MobCategory.MONSTER)
+                        .sized(0.6F, 1.95F)
+                        .clientTrackingRange(40)
+                        .build(id));
+    }
 
     private ModEntities() {}
 

@@ -20,6 +20,11 @@ public final class ModParticles {
     public static final RegistryObject<ConfigurableParticleType> ENGINE_PARTICLE =
             PARTICLE_TYPES.register("engine_particle", () -> new ConfigurableParticleType(false));
 
+    // r113: AAA spell trail particle (animated spritesheet per school)
+    public static final RegistryObject<br.com.murilo.liberthia.magic.spell.particle.SpellTrailParticleType> SPELL_TRAIL =
+            PARTICLE_TYPES.register("spell_trail",
+                    br.com.murilo.liberthia.magic.spell.particle.SpellTrailParticleType::new);
+
     // r35: COSMIC HORROR custom particles
     public static final RegistryObject<SimpleParticleType> COSMIC_ORBIT =
             PARTICLE_TYPES.register("cosmic_orbit", () -> new SimpleParticleType(true));
@@ -88,6 +93,14 @@ public final class ModParticles {
     public static final RegistryObject<ParticleType<br.com.murilo.liberthia.observation.particle.LineData>> OBSERVATION_LINE =
             PARTICLE_TYPES.register("observation_line",
                     () -> new br.com.murilo.liberthia.observation.particle.LineParticleType());
+
+    // r120: VOID INFECTION particle — purple animated wisp (8 frames)
+    public static final RegistryObject<SimpleParticleType> VOID_INFECTION =
+            PARTICLE_TYPES.register("void_infection", () -> new SimpleParticleType(true));
+
+    // r120: MINI BLACK HOLE explosion particle — collapse spritesheet (6 frames)
+    public static final RegistryObject<SimpleParticleType> MINI_BLACK_HOLE =
+            PARTICLE_TYPES.register("mini_black_hole", () -> new SimpleParticleType(true));
 
     private ModParticles() {
     }

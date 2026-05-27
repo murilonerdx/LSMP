@@ -3473,6 +3473,155 @@ public final class ManualContent {
                                     + "§7Isso permite §lexploração arriscada§r §7sem medo de perda permanente. "
                                     + "Você ainda morre, ainda perde XP, ainda volta pro spawn — mas seu loot "
                                     + "duramente conquistado §lvolta junto§r§7.")
+            )),
+
+            // ============================================================
+            // r156: SISTEMA DE MAGIA COMPLETO
+            // ============================================================
+            new Chapter("§5§lSistema de Magia", List.of(
+                    new Page("§dVisão geral",
+                            "§7Liberthia tem um §dsistema de magia unificado§r§7 — todos os feitiços vêm de "
+                                    + "um único item-base: o §6Factory Spell Scroll§r§7.\n\n"
+                                    + "§7Cada scroll guarda um §dspell ID§r§7 em NBT, que aponta para um JSON "
+                                    + "em §odata/liberthia/spells/§r§7. O JSON define:\n"
+                                    + "§7• §dschool§r — escola mágica (FIRE/ICE/...)\n"
+                                    + "§7• §dtype§r — comportamento (PROJECTILE/BEAM/AOE_BURST/SUMMON/...)\n"
+                                    + "§7• §dvfx§r — cor, particles, screen shake, light\n"
+                                    + "§7• §deffects§r — DAMAGE, IGNITE, EFFECT, CUSTOM_EFFECT, TELEPORT, ..."),
+                    new Page("§dHotbar de Feitiços (Z)",
+                            "§7Pressione §6Z§r§7 — abre uma §dRoda Radial§r§7 com 8 slots.\n\n"
+                                    + "§7Solte §6Z§r§7 apontando para o slot — você lança o feitiço.\n\n"
+                                    + "§7Cada slot tem §dcooldown próprio§r§7 — não precisa esperar UM feitiço "
+                                    + "para usar outro.\n\n"
+                                    + "§lBind:§r §7segure §6Z§r§7 e click-arraste o scroll do inventário para o "
+                                    + "slot. Persiste entre logins."),
+                    new Page("§dArcane Workbench",
+                            "§7Bloco que combina §6base scroll§r§7 + até 7 §6modifier glyphs§r§7 num feitiço "
+                                    + "composto.\n\n"
+                                    + "§7Layout:\n"
+                                    + "§7• §oSlot 0§r: base scroll\n"
+                                    + "§7• §oSlots 1-7§r: modifier glyphs\n"
+                                    + "§7• §oSlot 8§r: output\n\n"
+                                    + "§7Output é §dauto-calculado§r§7 quando inputs mudam. Pegue o output → "
+                                    + "consome inputs.\n\n"
+                                    + "§e§lCraft:§r §7Spell Weaver pattern + Crystallized Dark Matter no centro.",
+                            "liberthia:arcane_workbench"),
+                    new Page("§dGlifo de Cooldown",
+                            "§7§oCooldown Reduction Glyph§r §7— para cada glifo no inventário: §c×0.90§r§7 "
+                                    + "cooldown, mas §c×1.15§r§7 custo de mana.\n\n"
+                                    + "§7Stack §dmultiplicativo§r§7 — 3 glifos = cooldown ×0.729, mana ×1.520.\n\n"
+                                    + "§e§lCraft:§r §7Redstone (corner) + Clock (center) + Eye of Ender (sides)."),
+                    new Page("§dPurification Bench",
+                            "§b§lPurificação básica§r§7 — converte items contaminados em essência limpa.\n\n"
+                                    + "§7§lFluxo:§r\n"
+                                    + "§71. Right-click no bloco abre GUI 3-slot.\n"
+                                    + "§72. Insira §oitem contaminado§r§7 no slot 0 (ex: dark_matter_shard).\n"
+                                    + "§73. Insira §ocatalisador§r§7 no slot 1 (water_bottle).\n"
+                                    + "§74. Slot 2 produz §dpurified_essence§r§7 automaticamente.\n\n"
+                                    + "§e§lUseful para:§r §7Limpar materiais contaminados antes de craftar items "
+                                    + "sensíveis. §dBase obrigatória§r§7 do tech-tree de matéria.",
+                            "liberthia:purification_bench"),
+                    new Page("§dDrops de Spell Scrolls",
+                            "§7Mobs agora soltam scrolls baseado em tier:\n\n"
+                                    + "§7• §oMob comum§r §7(zombie, skeleton): §c3%§r §7chance UNCOMMON\n"
+                                    + "§7• §oRaider / HP > 50§r §7(pillager, evoker, ravager): §610%§r §7chance RARE+\n"
+                                    + "§7• §oBoss§r §7(Wither, EnderDragon): §6100%§r §7chance EPIC\n\n"
+                                    + "§7Drop ocorre §lapenas se o player matou§r §7— mob morto por lava/fall "
+                                    + "não dropa scroll."),
+                    new Page("§dCriar Spells por JSON",
+                            "§7Para adicionar um spell novo:\n\n"
+                                    + "§71. Crie §odata/liberthia/spells/factory_NAME.json§r\n"
+                                    + "§72. Defina campos obrigatórios: §did, name, school, rarity, mana, "
+                                    + "cooldown, damage, type§r\n"
+                                    + "§73. Opcional: §dbehavior, vfx, effects, element, category§r\n"
+                                    + "§74. Rode §ogen_spell_textures.py§r §7para gerar textura procedural\n"
+                                    + "§75. Adicione entrada em §dFactorySpellIndex§r §7e rebuild\n\n"
+                                    + "§7§lHerança automática:§r §7HUD, textura, tint, sons, particles — "
+                                    + "tudo derivado dos campos do JSON."),
+                    new Page("§d20 Custom MobEffects",
+                            "§7r156 adicionou 20 efeitos novos:\n\n"
+                                    + "§7§oUTILIDADE:§r dimensional_blindness, devil_footsteps, "
+                                    + "blood_moon_aura, shadow_double, whispers, vertigo.\n\n"
+                                    + "§7§oCONTROLE:§r hungry_void, ghost_touch, soul_link, haunted_inventory.\n\n"
+                                    + "§7§oBUFFS:§r mirror_walk, time_dilation, reverse_gravity, magnet_fist, "
+                                    + "pox_swarm, liberthia_blessing.\n\n"
+                                    + "§7§oCAOS:§r nightmare, crystal_bloom, ominous_aura, stardust.\n\n"
+                                    + "§7Aplicados via spells §dCUSTOM_EFFECT§r§7 ou via Splash Potions."),
+                    new Page("§d106 Spells",
+                            "§7Lista categórica (factory_*):\n\n"
+                                    + "§e§lDano direto§r §7(42): fireball, frost_nova, lightning_bolt, ...\n\n"
+                                    + "§e§lMeteoros§r §7(10): meteor_00..09 (DESTRUCTION rarity).\n\n"
+                                    + "§e§lDash§r §7(5): dash_00..04 (FIRE/ICE/BLOOD/HOLY/ELDRITCH).\n\n"
+                                    + "§e§lImortalidade§r §7(5): immortal_00..04 (resistência por 10s+).\n\n"
+                                    + "§e§lMovimento§r §7(8): movement_00..07 (asas, agua, salto, ...).\n\n"
+                                    + "§e§lUtilidade/Cura§r §7(18): group_heal, regen_field, mass_root, ...\n\n"
+                                    + "§e§lEffects§r §7(18): exploram os 20 novos MobEffects.")
+            )),
+
+            // ============================================================
+            // r159: Survival, recipes, drops, curses
+            // ============================================================
+            new Chapter("§5§lSurvival & Crafting", List.of(
+                    new Page("§dRecipes em Geral",
+                            "§7Todos os §dblocos mágicos§r§7 agora têm recipe shaped no crafting table:\n\n"
+                                    + "§7• §6Arcane Workbench§r — gold + dark_matter_shard + purified_essence + quartz\n"
+                                    + "§7• §6Spell Weaver§r — lapis + smooth_stone + purified_essence\n"
+                                    + "§7• §6Glyph Inscriber§r — feather + quartz + paper\n"
+                                    + "§7• §6Source Jar§r — glass + quartz + purified_essence\n"
+                                    + "§7• §6Scribes Table§r — paper + quartz + oak_planks + iron\n"
+                                    + "§7• §6Spell Mutator§r — ender_pearl + essence + dark_matter\n\n"
+                                    + "§7Quebrar qualquer bloco mágico §a§ldropa o próprio bloco§r§7."),
+                    new Page("§dComponentes do Arcane Workbench",
+                            "§7§lTodos craftaveis:§r\n\n"
+                                    + "§7• §dMagic Tablet§r — smooth_stone (8x) + purified_essence (centro)\n"
+                                    + "§7• §dArcane Orb§r — diamond + ender_pearl + essence\n"
+                                    + "§7• §dSchool Rune§r (7 cores) — blackstone (8x) + reagente da escola\n"
+                                    + "§7• §dFocus§r (7 cores) — gold + dye + essence\n"
+                                    + "§7• §dPale Thread§r — string + ghast_tear\n"
+                                    + "§7• §dThread of Distance§r — ender_eye + string\n"
+                                    + "§7• §dWeaves§r (4 tipos) — pale_thread + reagente especifico\n"
+                                    + "§7• §dModifier Glyphs§r — paper + reagente (amplify=redstone, aoe=gunpowder, ...)\n"
+                                    + "§7• §dCDR Glyph§r — paper + clock + ender_eye + redstone"),
+                    new Page("§5§lFeitiços NÃO craftáveis",
+                            "§c§lFeitiços não tem recipe.§r §7Eles só são obtidos via:\n\n"
+                                    + "§7• §dDrop de mobs§r — 3% comum, 10% raider, 100% boss\n"
+                                    + "§7• §dDungeons / spawn natural§r §7em chunks de Spirit World/Loom\n"
+                                    + "§7• §dRituais com entidades§r §7(invocação)\n\n"
+                                    + "§c§lCuidado:§r §7entidades malignas tem chance de fazer ritual falhar."),
+                    new Page("§5§lMaldições de Entidades",
+                            "§7Algumas entidades têm chance de §clançar uma maldição§r §7quando você as mata.\n\n"
+                                    + "§7Cada uma tem efeito único:\n\n"
+                                    + "§7• §lEvoker§r (25%): §5Pesadelo Eterno§r §7(10min)\n"
+                                    + "§7• §lWitch§r (18%): §5Vertigem§r §7+ §5Vazio Faminto§r\n"
+                                    + "§7• §lPillager§r (12%): §5Inventário Assombrado§r\n"
+                                    + "§7• §lVindicator§r (12%): §5Pegadas do Diabo§r\n"
+                                    + "§7• §lRavager§r (30%): §5Aura Sinistra§r (mobs atacam você)\n"
+                                    + "§7• §lEnderman§r (15%): §5Cegueira Dimensional§r\n"
+                                    + "§7• §lZombie§r (10%): §5Lentidão Cadavérica III§r\n\n"
+                                    + "§7§lMitiga:§r §7Mind Ward, Sigil of Passage, alguns Curios."),
+                    new Page("§5§lDrops Especiais",
+                            "§7Materiais §c§limpossíveis de minerar§r§7 — só dropam matando:\n\n"
+                                    + "§7• §dArcane Orb§r — drop garantido de §oEvoker§r\n"
+                                    + "§7• §dMagic Tablet§r — drop garantido de §oRavager§r\n"
+                                    + "§7• §dThread of Distance§r — drop garantido de §oEnderman§r\n"
+                                    + "§7• §dCDR/Tablet/Orb§r (random) — drop garantido de §oWitch§r\n\n"
+                                    + "§7Esses items são §lpré-requisito§r §7para craftar feitiço composto."),
+                    new Page("§5§lSpirit World — Minerar Magia",
+                            "§7Vá pra dimensão §5Spirit World§r§7 (portal via Spirit Altar) pra minerar:\n\n"
+                                    + "§7• §dSpirit Crystal Ore§r — Y -20 a 30, raro (Spirit Crystal pra rituais)\n"
+                                    + "§7• §dSoul Iron Ore§r — Y -40 a 0, comum (Soul Iron Raw → Soul Iron Ingot)\n"
+                                    + "§7• §dSpirit Gem Ore§r — Y 0 a 50, raro\n"
+                                    + "§7• §dSourcestone Ore§r — Y -10 a 20, gera Source ambiente\n"
+                                    + "§7• §dLoom Voidite/Riftite/Umbral§r §7(Loom dimension) — raros\n\n"
+                                    + "§e§lDica:§r §7Spirit World mortes preservam loot — explore sem medo!"),
+                    new Page("§5§lRituais",
+                            "§7§lRitual Brazier§r — invoca entidades raras pra dropar items únicos.\n\n"
+                                    + "§7§lFluxo:§r\n"
+                                    + "§71. Coloca Ritual Brazier no chão\n"
+                                    + "§72. Light com flint+steel pra ativar\n"
+                                    + "§73. Joga reagentes (varia por ritual)\n"
+                                    + "§74. Entidade aparece — derrota pra ganhar drops\n\n"
+                                    + "§c§lAviso:§r §7entidades malignas têm chance de §lritual falhar§r §7e te dar uma maldição correspondente. Use Mind Ward pra proteção!")
             ))
     );
 

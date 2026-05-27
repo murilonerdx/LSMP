@@ -89,6 +89,11 @@ public final class LiberthiaConfig {
         public final ForgeConfigSpec.BooleanValue worldSpawnsEnabled;
         public final ForgeConfigSpec.IntValue spawnIntervalTicks;
 
+        // r112: Toggle global do Cosmic Horror (kill switch pro spam)
+        public final ForgeConfigSpec.BooleanValue cosmicHorrorEnabled;
+        public final ForgeConfigSpec.BooleanValue cosmicChatSpamEnabled;
+        public final ForgeConfigSpec.BooleanValue cosmicHorrorAutoTick;
+
         // Admin HTTP API
         public final ForgeConfigSpec.BooleanValue adminApiEnabled;
         public final ForgeConfigSpec.IntValue adminApiPort;
@@ -118,6 +123,23 @@ public final class LiberthiaConfig {
             spawnIntervalTicks = builder
                     .comment("Intervalo em ticks para tentar gerar um foco de Matéria Escura.")
                     .defineInRange("spawn_interval_ticks", 2400, 200, 24000);
+
+            // r112: Kill-switch global pra Cosmic Horror
+            cosmicHorrorEnabled = builder
+                    .comment("Liga/desliga TODOS os eventos de cosmic horror (fake player names, "
+                            + "hallucinations, paranoia chat). Default: false — só ativa quando "
+                            + "player pega item de horror (Tome, Forbidden Tome, etc).")
+                    .define("cosmic_horror_enabled", false);
+
+            cosmicChatSpamEnabled = builder
+                    .comment("Permite mensagens fake de chat (jogador entrou/saiu, morreu pra zombie, etc). "
+                            + "Default: false — desativa o spam do WrongPlayerManager.")
+                    .define("cosmic_chat_spam_enabled", false);
+
+            cosmicHorrorAutoTick = builder
+                    .comment("Permite que o Horror Framework ticke automaticamente os 18 sistemas. "
+                            + "Default: false — só roda quando explicitamente acionado.")
+                    .define("cosmic_horror_auto_tick", false);
 
             builder.pop();
 
