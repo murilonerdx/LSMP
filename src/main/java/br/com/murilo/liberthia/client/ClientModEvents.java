@@ -25,7 +25,19 @@ public class ClientModEvents {
                 br.com.murilo.liberthia.magic.spell.voidspell.VoidLarvaRenderer::new);
         event.registerEntityRenderer(ModEntities.MINI_BLACK_HOLE.get(),
                 br.com.murilo.liberthia.magic.spell.voidspell.MiniBlackHoleRenderer::new);
+        // r165: Void Tentacle — billboard sprite renderer com flipbook animation
+        event.registerEntityRenderer(ModEntities.VOID_TENTACLE.get(),
+                br.com.murilo.liberthia.magic.spell.voidspell.VoidTentacleRenderer::new);
+        // r165: Void Effect — generic sprite-animation renderer (5 types)
+        event.registerEntityRenderer(ModEntities.VOID_EFFECT.get(),
+                br.com.murilo.liberthia.magic.spell.voidspell.VoidEffectRenderer::new);
+        // r166: Sprite VFX — registry-based renderer (20 effect types, 1288 frames)
+        event.registerEntityRenderer(ModEntities.SPRITE_VFX.get(),
+                br.com.murilo.liberthia.magic.spell.vfx.SpriteVfxRenderer::new);
         event.registerEntityRenderer(ModEntities.BLACK_HOLE.get(), BlackHoleRenderer::new);
+        // r178: Manifestação do Vazio (sombra + olhos vermelhos girando + tentáculos)
+        event.registerEntityRenderer(ModEntities.VOID_MANIFESTATION.get(),
+                br.com.murilo.liberthia.client.renderer.VoidManifestationRenderer::new);
         // r135: Drygmy familiar (passive farm helper)
         event.registerEntityRenderer(ModEntities.DRYGMY.get(),
                 br.com.murilo.liberthia.magic.familiar.DrygmyRenderer::new);
@@ -45,6 +57,7 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.SOUL_BODY.get(), br.com.murilo.liberthia.client.renderer.ClonePlayerRenderer::new);
         event.registerEntityRenderer(ModEntities.DARK_CONSCIOUSNESS.get(), br.com.murilo.liberthia.client.renderer.DarkConsciousnessRenderer::new);
         event.registerEntityRenderer(ModEntities.EYE_OF_HORUS.get(), br.com.murilo.liberthia.client.renderer.EyeOfHorusRenderer::new);
+        event.registerEntityRenderer(ModEntities.LURKER.get(), br.com.murilo.liberthia.cosmic.lurker.LurkerRenderer::new);
         // Reuse vanilla Silverfish renderer as fast, stable base for BloodWorm
         event.registerEntityRenderer(ModEntities.BLOOD_WORM.get(),
                 ctx -> new br.com.murilo.liberthia.client.renderer.BloodWormRenderer(ctx, "blood_worm"));
@@ -100,6 +113,11 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(
                 br.com.murilo.liberthia.registry.ModBlockEntities.MATTER_TANK.get(),
                 br.com.murilo.liberthia.client.renderer.MatterTankRenderer::new);
+
+        // r173: Potion Jar BER — líquido (Source roxo) animado enchendo por dentro.
+        event.registerBlockEntityRenderer(
+                br.com.murilo.liberthia.registry.ModBlockEntities.POTION_JAR.get(),
+                br.com.murilo.liberthia.client.renderer.PotionJarRenderer::new);
 
 
 
@@ -206,6 +224,100 @@ public class ClientModEvents {
                         return new net.minecraft.resources.ResourceLocation("liberthia", "textures/entity/observer.png");
                     }
                 });
+        // O Visitante + A Mulher do Horizonte — humanoides (modelo PLAYER), textura vanilla
+        event.registerEntityRenderer(ModEntities.VISITANTE.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.VisitanteEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.VisitanteEntity>>(
+                        ctx,
+                        new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.VisitanteEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/zombie.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.MULHER_HORIZONTE.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.MulherDoHorizonteEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.MulherDoHorizonteEntity>>(
+                        ctx,
+                        new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.MulherDoHorizonteEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/zombie.png");
+                    }
+                });
+        // r178: O Ídolo — humanoide pálido alto, textura própria
+        event.registerEntityRenderer(ModEntities.IDOL.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.idol.IdolEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.idol.IdolEntity>>(
+                        ctx,
+                        new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.idol.IdolEntity en) {
+                        return new net.minecraft.resources.ResourceLocation(
+                                br.com.murilo.liberthia.LiberthiaMod.MODID, "textures/entity/idol.png");
+                    }
+                });
+        // r178: O Sem-Rosto (textura pálida do Ídolo) + O do Teto (zombie vanilla)
+        event.registerEntityRenderer(ModEntities.FACELESS.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.FacelessEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.FacelessEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.FacelessEntity en) {
+                        return new net.minecraft.resources.ResourceLocation(br.com.murilo.liberthia.LiberthiaMod.MODID, "textures/entity/idol.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.CEILING_LURKER.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.CeilingLurkerEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.CeilingLurkerEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.CeilingLurkerEntity en) {
+                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/zombie.png");
+                    }
+                });
+        // r178: O Coletor de Olhos (husk vanilla) + O Vizinho (zombie aldeão vanilla)
+        event.registerEntityRenderer(ModEntities.EYE_COLLECTOR.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.EyeCollectorEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.EyeCollectorEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.EyeCollectorEntity en) {
+                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/husk.png");
+                    }
+                });
+        event.registerEntityRenderer(ModEntities.NEIGHBOR.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.NeighborEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.NeighborEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.NeighborEntity en) {
+                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie_villager/zombie_villager.png");
+                    }
+                });
+        // O Caçador — piloto SmartBrainLib (humanoide, textura zombie vanilla)
+        event.registerEntityRenderer(ModEntities.CACADOR.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.CacadorEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.CacadorEntity>>(
+                        ctx,
+                        new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.CacadorEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/zombie.png");
+                    }
+                });
+        // O Espreitador — humanoide pálido (textura husk vanilla)
+        event.registerEntityRenderer(ModEntities.ESPREITADOR.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.EspreitadorEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.EspreitadorEntity>>(
+                        ctx,
+                        new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
+                        0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.EspreitadorEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/husk.png");
+                    }
+                });
         // r150: 8 Wooden Horror variants — cada um aponta pra sua textura
         registerWoodenHorrorRenderer(event, ModEntities.WOODEN_CHARCOAL.get(), "wooden_charcoal");
         registerWoodenHorrorRenderer(event, ModEntities.WOODEN_PALE_OAK.get(), "wooden_pale_oak");
@@ -264,9 +376,9 @@ public class ClientModEvents {
                     }
                 });
         // r106: 3 More Wizards
-        registerWizardRenderer(event, ModEntities.APOTHECARIST.get(), "minecraft:textures/entity/villager/villager.png");
-        registerWizardRenderer(event, ModEntities.KEEPER.get(), "minecraft:textures/entity/villager/villager.png");
-        registerWizardRenderer(event, ModEntities.ARCHEVOKER.get(), "minecraft:textures/entity/illager/evoker.png");
+        registerWizardRenderer(event, ModEntities.APOTHECARIST.get(), "liberthia:textures/entity/wizard/apothecarist.png");
+        registerWizardRenderer(event, ModEntities.KEEPER.get(), "liberthia:textures/entity/wizard/keeper.png");
+        registerWizardRenderer(event, ModEntities.ARCHEVOKER.get(), "liberthia:textures/entity/wizard/archevoker.png");
 
         // r109: 3 More Familiars (no-op renderers — particles via aiStep)
         event.registerEntityRenderer(ModEntities.WHELP.get(),
@@ -359,13 +471,17 @@ public class ClientModEvents {
     private static <T extends br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity> void registerWizardRenderer(
             net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers event,
             net.minecraft.world.entity.EntityType<T> type, String texturePath) {
+        // r178 FIX: usa a textura REAL passada em texturePath (antes ignorava e
+        // retornava evoker.png hardcoded → todos os wizards saíam iguais/bugados).
+        final net.minecraft.resources.ResourceLocation tex =
+                new net.minecraft.resources.ResourceLocation(texturePath);
         event.registerEntityRenderer(type, ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<T, net.minecraft.client.model.HumanoidModel<T>>(
                 ctx, new net.minecraft.client.model.HumanoidModel<>(
                         ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)),
                 0.5F) {
             @Override
             public net.minecraft.resources.ResourceLocation getTextureLocation(T e) {
-                return new net.minecraft.resources.ResourceLocation("textures/entity/illager/evoker.png");
+                return tex;
             }
         });
     }
@@ -432,6 +548,8 @@ public class ClientModEvents {
             MenuScreens.register(ModMenuTypes.DARK_MATTER_FORGE.get(), DarkMatterForgeScreen::new);
             MenuScreens.register(ModMenuTypes.MATTER_INFUSER.get(), MatterInfuserScreen::new);
             MenuScreens.register(ModMenuTypes.RESEARCH_TABLE.get(), ResearchTableScreen::new);
+            MenuScreens.register(ModMenuTypes.MATTER_TESTER.get(),
+                    br.com.murilo.liberthia.client.screen.MatterTesterScreen::new);
             MenuScreens.register(ModMenuTypes.CONTAINMENT_CHAMBER.get(), ContainmentChamberScreen::new);
             MenuScreens.register(ModMenuTypes.MATTER_TRANSMUTER.get(), MatterTransmuterScreen::new);
             MenuScreens.register(ModMenuTypes.DARK_MATTER_ALCHEMIZER.get(), DarkMatterAlchemizerScreen::new);
@@ -473,6 +591,24 @@ public class ClientModEvents {
             // v0.1.22 r28: Quantum Terminal
             MenuScreens.register(ModMenuTypes.QUANTUM_TERMINAL.get(),
                     br.com.murilo.liberthia.client.screen.QuantumTerminalScreen::new);
+
+            // r164: Inscription Table — recipe list à esquerda + 3 slots
+            MenuScreens.register(ModMenuTypes.INSCRIPTION_TABLE.get(),
+                    br.com.murilo.liberthia.magic.scribe.client.InscriptionTableScreen::new);
+
+            // r165: Scroll Forge — Focus → Scroll GUI bonita
+            MenuScreens.register(ModMenuTypes.SCROLL_FORGE.get(),
+                    br.com.murilo.liberthia.magic.scribe.client.ScrollForgeScreen::new);
+
+            // r166: Impressora — GUI com lista de pendências + slot de papel
+            MenuScreens.register(ModMenuTypes.PRINTER.get(),
+                    br.com.murilo.liberthia.client.screen.PrinterScreen::new);
+
+            // r172: Tear de Threads — 5 slots + preview de propriedades
+            MenuScreens.register(ModMenuTypes.THREAD_LOOM.get(),
+                    br.com.murilo.liberthia.client.screen.ThreadLoomScreen::new);
+            MenuScreens.register(ModMenuTypes.ORB_INFUSER.get(),
+                    br.com.murilo.liberthia.client.screen.OrbInfuserScreen::new);
 
             // Sample Vial: model override "filled" baseado no NBT (legacy, mantido).
             net.minecraft.client.renderer.item.ItemProperties.register(
@@ -516,6 +652,25 @@ public class ClientModEvents {
                         return 0.2f;  // DM (também é fallback se tudo igual)
                     });
 
+            // r176: EMF Meter — property "emf" acende mais LEDs conforme o nível de
+            // horror na região. O CORPO é fixo (geometria idêntica em todos os modelos):
+            // só os LEDs do topo mudam de cor/quantidade → NÃO "pula" na mão. O valor já
+            // vem suavizado do NBT (EmfMeterItem), então os LEDs sobem/descem liso.
+            net.minecraft.client.renderer.item.ItemProperties.register(
+                    br.com.murilo.liberthia.registry.ModItems.EMF_METER.get(),
+                    new net.minecraft.resources.ResourceLocation(
+                            br.com.murilo.liberthia.LiberthiaMod.MODID, "emf"),
+                    (stack, lvl, entity, seed) ->
+                            br.com.murilo.liberthia.cosmic.emf.EmfMeterItem.readEmf(stack));
+
+            // r178: Núcleo do Abismo → property "crystallized" (0 = abismo, 1 = vazio cristalizado)
+            net.minecraft.client.renderer.item.ItemProperties.register(
+                    br.com.murilo.liberthia.registry.ModItems.ABYSSAL_CORE.get(),
+                    new net.minecraft.resources.ResourceLocation(
+                            br.com.murilo.liberthia.LiberthiaMod.MODID, "crystallized"),
+                    (stack, lvl, entity, seed) ->
+                            br.com.murilo.liberthia.item.AbyssalCoreItem.isCrystallized(stack) ? 1.0F : 0.0F);
+
             // Cutout render so connection arms transparency works
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ENERGY_CABLE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ITEM_PIPE.get(), RenderType.cutout());
@@ -526,6 +681,8 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.MATTER_PIPE_YELLOW.get(), RenderType.cutout());
             // Matter tank — translucent pra deixar ver fluido por dentro do vidro
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.MATTER_TANK.get(), RenderType.translucent());
+            // r173: Potion Jar — translucent pra ver o Source roxo enchendo por dentro
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTION_JAR.get(), RenderType.translucent());
 
             event.enqueueWork(() ->
                     MenuScreens.register(ModMenuTypes.SPIRITUAL_TRADE.get(), SpiritualTradeScreen::new)

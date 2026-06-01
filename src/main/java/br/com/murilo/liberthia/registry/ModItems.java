@@ -215,6 +215,9 @@ public final class ModItems {
     public static final RegistryObject<Item> RESEARCH_TABLE_ITEM = ITEMS.register("research_table",
             () -> new BlockItem(ModBlocks.RESEARCH_TABLE.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> MATTER_TESTER_ITEM = ITEMS.register("matter_tester",
+            () -> new BlockItem(ModBlocks.MATTER_TESTER.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> CONTAINMENT_CHAMBER_ITEM = ITEMS.register("containment_chamber",
             () -> new BlockItem(ModBlocks.CONTAINMENT_CHAMBER.get(), new Item.Properties()));
 
@@ -478,6 +481,12 @@ public final class ModItems {
     // --- White Matter Syringe ---
     public static final RegistryObject<Item> WHITE_MATTER_SYRINGE = ITEMS.register("white_matter_syringe",
             () -> new WhiteMatterSyringeItem(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // Seringas das outras matérias (igual a clear/white, mas DM e YM)
+    public static final RegistryObject<Item> DARK_MATTER_SYRINGE = ITEMS.register("dark_matter_syringe",
+            () -> new DarkMatterSyringeItem(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> YELLOW_MATTER_SYRINGE = ITEMS.register("yellow_matter_syringe",
+            () -> new YellowMatterSyringeItem(new Item.Properties().stacksTo(4).rarity(net.minecraft.world.item.Rarity.RARE)));
 
     // --- New Block Items ---
     // REMOVIDO v0.1.13: GLITCH_BLOCK_ITEM
@@ -873,6 +882,137 @@ public final class ModItems {
                     () -> new net.minecraftforge.common.ForgeSpawnEggItem(
                             ModEntities.FLESH_MOTHER_BOSS, 0x3a0000, 0xc41818,
                             new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // Mobs de terror observadores
+    public static final RegistryObject<Item> VISITANTE_SPAWN_EGG =
+            ITEMS.register("visitante_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.VISITANTE, 0x0A0A0A, 0x6E0A0A,
+                            new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> MULHER_HORIZONTE_SPAWN_EGG =
+            ITEMS.register("mulher_horizonte_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.MULHER_HORIZONTE, 0x1A1A22, 0x884466,
+                            new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> CACADOR_SPAWN_EGG =
+            ITEMS.register("cacador_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.CACADOR, 0x2B1A12, 0x8C1F1F,
+                            new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> ESPREITADOR_SPAWN_EGG =
+            ITEMS.register("espreitador_spawn_egg",
+                    () -> new net.minecraftforge.common.ForgeSpawnEggItem(
+                            ModEntities.ESPREITADOR, 0x3A3630, 0x101010,
+                            new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // Mapa Invertido — artefato de "visão invertida" (vê o lado de lá)
+    public static final RegistryObject<Item> MAPA_INVERTIDO =
+            ITEMS.register("mapa_invertido",
+                    () -> new MapaInvertidoItem(
+                            new Item.Properties().stacksTo(1)
+                                    .rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // Walkie Talkie — rádio portátil via Simple Voice Chat (código secreto)
+    public static final RegistryObject<Item> WALKIE_TALKIE =
+            ITEMS.register("walkie_talkie",
+                    () -> new WalkieTalkieItem(
+                            new Item.Properties().stacksTo(1)
+                                    .rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // Chicote Celestial — prende inimigos com correntes de luz por 10s
+    public static final RegistryObject<Item> CHICOTE_CELESTIAL =
+            ITEMS.register("chicote_celestial",
+                    () -> new ChicoteCelestialItem(
+                            new Item.Properties().stacksTo(1).durability(256)
+                                    .rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // Computador — agora é um BLOCO (estação de dados ao lado do Matter Analyzer)
+    public static final RegistryObject<Item> COMPUTADOR =
+            ITEMS.register("computador",
+                    () -> new net.minecraft.world.item.BlockItem(ModBlocks.COMPUTER_BLOCK.get(),
+                            new Item.Properties().stacksTo(1)
+                                    .rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    // Impressora (bloco) — gera livros com os dados do Computador
+    public static final RegistryObject<Item> PRINTER_ITEM =
+            ITEMS.register("printer",
+                    () -> new net.minecraft.world.item.BlockItem(ModBlocks.PRINTER.get(),
+                            new Item.Properties()));
+
+    // r172: Tear de Threads (bloco) + Thread Customizada
+    public static final RegistryObject<Item> THREAD_LOOM_ITEM =
+            ITEMS.register("thread_loom",
+                    () -> new net.minecraft.world.item.BlockItem(ModBlocks.THREAD_LOOM.get(),
+                            new Item.Properties()));
+    public static final RegistryObject<Item> CUSTOM_THREAD =
+            ITEMS.register("custom_thread",
+                    () -> new br.com.murilo.liberthia.magic.thread.CustomThreadItem(new Item.Properties()));
+
+    // r174: Infusor de Orbs + Orb Customizado
+    public static final RegistryObject<Item> ORB_INFUSER_ITEM =
+            ITEMS.register("orb_infuser",
+                    () -> new net.minecraft.world.item.BlockItem(ModBlocks.ORB_INFUSER.get(),
+                            new Item.Properties()));
+    public static final RegistryObject<Item> CUSTOM_ORB =
+            ITEMS.register("custom_orb",
+                    () -> new br.com.murilo.liberthia.magic.orb.CustomOrbItem(new Item.Properties()));
+
+    // r173: Spawn egg do Lurker (rosto no escuro) — pra testar/spawnar manualmente
+    public static final RegistryObject<Item> LURKER_SPAWN_EGG =
+            ITEMS.register("lurker_spawn_egg",
+                    () -> new br.com.murilo.liberthia.cosmic.lurker.LurkerSpawnEggItem(
+                            new Item.Properties()));
+
+    // r174: EMF Meter (caça-fantasmas) + Irregularidade Dimensional (fonte, admin)
+    public static final RegistryObject<Item> EMF_METER =
+            ITEMS.register("emf_meter",
+                    () -> new br.com.murilo.liberthia.cosmic.emf.EmfMeterItem(new Item.Properties()));
+    public static final RegistryObject<Item> DIMENSIONAL_IRREGULARITY =
+            ITEMS.register("dimensional_irregularity",
+                    () -> new br.com.murilo.liberthia.cosmic.emf.DimensionalIrregularityItem(new Item.Properties()));
+
+    // r178: Câmera — tira foto; às vezes "captura algo que não estava lá"
+    public static final RegistryObject<Item> CAMERA =
+            ITEMS.register("camera",
+                    () -> new br.com.murilo.liberthia.cosmic.idol.CameraItem(new Item.Properties()));
+
+    // r178: Fotografia — resultado da câmera; mostra a imagem REAL capturada no slot
+    public static final RegistryObject<Item> PHOTOGRAPH =
+            ITEMS.register("photograph",
+                    () -> new br.com.murilo.liberthia.cosmic.idol.PhotographItem(new Item.Properties()));
+
+    // r178: Núcleo do Abismo / Núcleo do Vazio Cristalizado (lore Vazio/Terminus/Kali)
+    public static final RegistryObject<Item> ABYSSAL_CORE =
+            ITEMS.register("abyssal_core",
+                    () -> new br.com.murilo.liberthia.item.AbyssalCoreItem(new Item.Properties()));
+
+    // r178: Olho do Vazio — invoca a Manifestação do Vazio (sombra+olhos+tentáculos)
+    public static final RegistryObject<Item> VOID_EYE =
+            ITEMS.register("void_eye",
+                    () -> new br.com.murilo.liberthia.item.VoidEyeItem(new Item.Properties()));
+
+    // r178: Relíquias de terror
+    public static final RegistryObject<Item> BLACK_MIRROR =
+            ITEMS.register("black_mirror",
+                    () -> new br.com.murilo.liberthia.cosmic.relic.BlackMirrorItem(new Item.Properties()));
+    public static final RegistryObject<Item> SANITY_CANDLE =
+            ITEMS.register("sanity_candle",
+                    () -> new br.com.murilo.liberthia.cosmic.relic.SanityCandleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROKEN_RADIO =
+            ITEMS.register("broken_radio",
+                    () -> new br.com.murilo.liberthia.cosmic.relic.BrokenRadioItem(new Item.Properties()));
+    public static final RegistryObject<Item> CURSED_DOLL =
+            ITEMS.register("cursed_doll",
+                    () -> new br.com.murilo.liberthia.cosmic.relic.CursedDollItem(new Item.Properties()));
+
+    // r174: Ovo do Observador (Window Watcher)
+    public static final RegistryObject<Item> WINDOW_WATCHER_EGG =
+            ITEMS.register("window_watcher_egg",
+                    () -> new br.com.murilo.liberthia.loom.entity.WindowWatcherEggItem(new Item.Properties()));
+    // HD — armazena/transfere dados entre Computadores
+    public static final RegistryObject<Item> HARD_DRIVE =
+            ITEMS.register("hard_drive",
+                    () -> new br.com.murilo.liberthia.item.HardDriveItem(
+                            new Item.Properties().stacksTo(16)));
 
     // --- Ordem × Sangue (Fase 5) ---
     public static final RegistryObject<Item> ORDER_SHRINE_ITEM = ITEMS.register("order_shrine",
@@ -1687,6 +1827,11 @@ public final class ModItems {
             () -> new br.com.murilo.liberthia.magic.CreativeGrimoireItem(
                     new Item.Properties().rarity(Rarity.EPIC)));
 
+    // Incensário da Névoa — emissor de neblina de terror (sistema FogZoneData)
+    public static final RegistryObject<Item> MIST_CENSER = ITEMS.register("mist_censer",
+            () -> new br.com.murilo.liberthia.item.MistCenserItem(
+                    new Item.Properties().rarity(Rarity.RARE).stacksTo(1)));
+
     // r42: SPELL CRAFTING TABLE (item portátil) — abre GUI de craft de custom spells
     public static final RegistryObject<Item> SPELL_CRAFTING_TABLE = ITEMS.register("spell_crafting_table",
             () -> new br.com.murilo.liberthia.magic.custom.SpellCraftingItem(
@@ -1924,6 +2069,16 @@ public final class ModItems {
     public static final RegistryObject<Item> GLYPH_EFFECT_EXPLOSION = registerGlyph("glyph_effect_explosion", "liberthia:effect/explosion");
     public static final RegistryObject<Item> GLYPH_EFFECT_FANGS     = registerGlyph("glyph_effect_fangs",     "liberthia:effect/fangs");
 
+    // ─── r172: 8 glifos novos e divertidos (customização avançada) ───
+    public static final RegistryObject<Item> GLYPH_VAMPIRIC_GAZE = registerGlyph("glyph_vampiric_gaze", "liberthia:glyph/vampiric_gaze");
+    public static final RegistryObject<Item> GLYPH_GRAVITY_PULL  = registerGlyph("glyph_gravity_pull",  "liberthia:glyph/gravity_pull");
+    public static final RegistryObject<Item> GLYPH_REPULSE       = registerGlyph("glyph_repulse",       "liberthia:glyph/repulse");
+    public static final RegistryObject<Item> GLYPH_PETRIFY       = registerGlyph("glyph_petrify",       "liberthia:glyph/petrify");
+    public static final RegistryObject<Item> GLYPH_SOOTHE        = registerGlyph("glyph_soothe",        "liberthia:glyph/soothe");
+    public static final RegistryObject<Item> GLYPH_SCORCH        = registerGlyph("glyph_scorch",        "liberthia:glyph/scorch");
+    public static final RegistryObject<Item> GLYPH_UPDRAFT       = registerGlyph("glyph_updraft",       "liberthia:glyph/updraft");
+    public static final RegistryObject<Item> GLYPH_ENFEEBLE      = registerGlyph("glyph_enfeeble",      "liberthia:glyph/enfeeble");
+
     // r68: Spell Parchment — armazena recipe construída no NBT
     public static final RegistryObject<Item> SPELL_PARCHMENT = ITEMS.register("spell_parchment",
             () -> new br.com.murilo.liberthia.observation.item.SpellParchmentItem(new Item.Properties()));
@@ -1966,10 +2121,7 @@ public final class ModItems {
             () -> new net.minecraft.world.item.BlockItem(ModBlocks.GHOST_MUSHROOM.get(),
                     new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
 
-    // r139: Glyph Brazier — bloco onde player faz rituais
-    public static final RegistryObject<Item> GLYPH_BRAZIER_ITEM = ITEMS.register("glyph_brazier",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.GLYPH_BRAZIER.get(),
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    // r165: Glyph Brazier removido — ritual package deletado.
 
     // r69: Scribes Table — block item
     public static final RegistryObject<Item> SCRIBES_TABLE_ITEM = ITEMS.register("scribes_table",
@@ -2161,31 +2313,7 @@ public final class ModItems {
             () -> new br.com.murilo.liberthia.magic.scrying.ScryingLensItem(
                     new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
 
-    // r86: RITUAL TABLETS — 8 tablets, um pra cada ritual
-    public static final RegistryObject<Item> RITUAL_TABLET_SUNRISE = ITEMS.register("ritual_tablet_sunrise",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "sunrise"));
-    public static final RegistryObject<Item> RITUAL_TABLET_MOONFALL = ITEMS.register("ritual_tablet_moonfall",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "moonfall"));
-    public static final RegistryObject<Item> RITUAL_TABLET_FLIGHT = ITEMS.register("ritual_tablet_flight",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "flight_zone"));
-    public static final RegistryObject<Item> RITUAL_TABLET_HEALING = ITEMS.register("ritual_tablet_healing",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "healing_aura"));
-    public static final RegistryObject<Item> RITUAL_TABLET_FORESTATION = ITEMS.register("ritual_tablet_forestation",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "forestation"));
-    public static final RegistryObject<Item> RITUAL_TABLET_WARDING = ITEMS.register("ritual_tablet_warding",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "warding"));
-    public static final RegistryObject<Item> RITUAL_TABLET_AWAKENING = ITEMS.register("ritual_tablet_awakening",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON), "awakening"));
-    public static final RegistryObject<Item> RITUAL_TABLET_SCRYING = ITEMS.register("ritual_tablet_scrying",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualTabletItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE), "scrying"));
+    // r165: Ritual tablets removidos — ritual package foi deletado
 
     // r88: Dominion Wand
     public static final RegistryObject<Item> DOMINION_WAND = ITEMS.register("dominion_wand",
@@ -2553,16 +2681,7 @@ public final class ModItems {
     // ════════════════════════════════════════════════════════════════════════
     // r110: BlockItems pra todos os blocks novos (r82-r109) ficarem placeable
     // ════════════════════════════════════════════════════════════════════════
-    public static final RegistryObject<Item> VOLCANIC_SOURCELINK_ITEM = ITEMS.register("volcanic_sourcelink",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.VOLCANIC_SOURCELINK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> MYCELIAL_SOURCELINK_ITEM = ITEMS.register("mycelial_sourcelink",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.MYCELIAL_SOURCELINK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> VITALIC_SOURCELINK_ITEM = ITEMS.register("vitalic_sourcelink",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.VITALIC_SOURCELINK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ALCHEMICAL_SOURCELINK_ITEM = ITEMS.register("alchemical_sourcelink",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ALCHEMICAL_SOURCELINK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RITUAL_BRAZIER_ITEM = ITEMS.register("ritual_brazier",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.RITUAL_BRAZIER.get(), new Item.Properties()));
+    // r164: Sourcelinks (4) e Ritual Brazier removidos.
     public static final RegistryObject<Item> SPELL_PRISM_ITEM = ITEMS.register("spell_prism",
             () -> new net.minecraft.world.item.BlockItem(ModBlocks.SPELL_PRISM.get(), new Item.Properties()));
     public static final RegistryObject<Item> SPELL_TURRET_ITEM = ITEMS.register("spell_turret",
@@ -2609,10 +2728,7 @@ public final class ModItems {
             () -> new net.minecraft.world.item.BlockItem(ModBlocks.LIGHTNING_WALL.get(), new Item.Properties()));
     public static final RegistryObject<Item> HOLY_WALL_ITEM = ITEMS.register("holy_wall",
             () -> new net.minecraft.world.item.BlockItem(ModBlocks.HOLY_WALL.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WHIRLWIND_ITEM = ITEMS.register("whirlwind",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.WHIRLWIND.get(), new Item.Properties()));
-    public static final RegistryObject<Item> AUTO_MINER_ITEM = ITEMS.register("auto_miner",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.AUTO_MINER.get(), new Item.Properties()));
+    // r164: WHIRLWIND e AUTO_MINER removidos.
     public static final RegistryObject<Item> MAGE_CAULDRON_ITEM = ITEMS.register("mage_cauldron",
             () -> new net.minecraft.world.item.BlockItem(ModBlocks.MAGE_CAULDRON.get(), new Item.Properties()));
     public static final RegistryObject<Item> INSCRIPTION_TABLE_ITEM = ITEMS.register("inscription_table",
@@ -2793,6 +2909,54 @@ public final class ModItems {
     public static final RegistryObject<Item> SPELL_VOID         = spell("void",         Rarity.EPIC);
     public static final RegistryObject<Item> SPELL_VOID_LASER   = spell("void_laser",   Rarity.EPIC);
 
+    // ─── r172 ACESSÍVEIS (15) — mobilidade/utilidade, custo baixo, efeito real ───
+    public static final RegistryObject<Item> SPELL_AIR_DASH        = spell("air_dash",        Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_FEATHER_GRACE   = spell("feather_grace",   Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_GUST_LEAP       = spell("gust_leap",       Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_SHADOW_STEP     = spell("shadow_step",     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_SWIFT_CURRENT   = spell("swift_current",   Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_STONE_SKIN      = spell("stone_skin",      Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_EMBER_SPARK     = spell("ember_spark",     Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_FROST_TOUCH     = spell("frost_touch",     Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_STATIC_JOLT     = spell("static_jolt",     Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_MINOR_HEAL      = spell("minor_heal",      Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_THORN_WHIP      = spell("thorn_whip",      Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_GLIDE           = spell("glide",           Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_BLINK_SHORT     = spell("blink_short",     Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_WARMTH          = spell("warmth",          Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_NIMBLE_REFLEXES = spell("nimble_reflexes", Rarity.UNCOMMON);
+
+    // ─── r172 SCROLLS DE COMBATE (8) — danos variados ───
+    public static final RegistryObject<Item> SPELL_ARC_BOLT     = spell("arc_bolt",     Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_CINDER_BURST  = spell("cinder_burst",  Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_FROST_SHARD   = spell("frost_shard",   Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_THUNDER_CLAP  = spell("thunder_clap",  Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_VENOM_SPIT    = spell("venom_spit",    Rarity.COMMON);
+    public static final RegistryObject<Item> SPELL_BLOOD_LASH    = spell("blood_lash",    Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_MINOR_SMITE   = spell("minor_smite",   Rarity.UNCOMMON);
+    public static final RegistryObject<Item> SPELL_VOID_GRIP     = spell("void_grip",     Rarity.UNCOMMON);
+
+    // ─── r172 ORBES ARCANOS (5) — consumíveis com buffs reais (slot Orb) ───
+    private static RegistryObject<Item> arcaneOrb(String id, br.com.murilo.liberthia.magic.weapon.ArcaneOrbConsumable.Type t) {
+        return ITEMS.register(id, () -> new br.com.murilo.liberthia.magic.weapon.ArcaneOrbConsumable(
+                new Item.Properties(), t));
+    }
+    public static final RegistryObject<Item> ORB_HEALING   = arcaneOrb("orb_healing",   br.com.murilo.liberthia.magic.weapon.ArcaneOrbConsumable.Type.HEALING);
+    public static final RegistryObject<Item> ORB_WARDING   = arcaneOrb("orb_warding",   br.com.murilo.liberthia.magic.weapon.ArcaneOrbConsumable.Type.WARDING);
+    public static final RegistryObject<Item> ORB_SWIFTNESS = arcaneOrb("orb_swiftness", br.com.murilo.liberthia.magic.weapon.ArcaneOrbConsumable.Type.SWIFTNESS);
+    public static final RegistryObject<Item> ORB_INSIGHT   = arcaneOrb("orb_insight",   br.com.murilo.liberthia.magic.weapon.ArcaneOrbConsumable.Type.INSIGHT);
+    public static final RegistryObject<Item> ORB_MIGHT     = arcaneOrb("orb_might",     br.com.murilo.liberthia.magic.weapon.ArcaneOrbConsumable.Type.MIGHT);
+
+    // ─── r172 FOCUS extras (5) — reagentes aceitos no slot Focus ───
+    private static RegistryObject<Item> focus(String id) {
+        return ITEMS.register(id, () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    }
+    public static final RegistryObject<Item> FOCUS_ARCANE  = focus("focus_arcane");
+    public static final RegistryObject<Item> FOCUS_VOID    = focus("focus_void");
+    public static final RegistryObject<Item> FOCUS_STORM   = focus("focus_storm");
+    public static final RegistryObject<Item> FOCUS_VERDANT = focus("focus_verdant");
+    public static final RegistryObject<Item> FOCUS_RADIANT = focus("focus_radiant");
+
     /** Reagente especial usado pra craftar Void spell — amethyst destilada. */
     public static final RegistryObject<Item> VOID_REAGENT = ITEMS.register("void_reagent",
             () -> new br.com.murilo.liberthia.magic.glyph.SpiritReagentItem(
@@ -2908,6 +3072,17 @@ public final class ModItems {
     public static final RegistryObject<Item> MOD_SUSTAIN    = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.SUSTAIN,    Rarity.UNCOMMON);
     public static final RegistryObject<Item> MOD_PENETRATE  = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.PENETRATE,  Rarity.RARE);
     public static final RegistryObject<Item> MOD_APOLAO     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.APOLAO,     Rarity.EPIC);
+    // r173: 10 novas Runas (modifiers) com efeitos reais
+    public static final RegistryObject<Item> MOD_POISON     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.POISON,     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_WITHER     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.WITHER,     Rarity.RARE);
+    public static final RegistryObject<Item> MOD_SLOW       = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.SLOW,       Rarity.COMMON);
+    public static final RegistryObject<Item> MOD_WEAKEN     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.WEAKEN,     Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_BLIND      = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.BLIND,      Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_GRAVITY    = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.GRAVITY,    Rarity.RARE);
+    public static final RegistryObject<Item> MOD_LEVITATE   = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.LEVITATE,   Rarity.RARE);
+    public static final RegistryObject<Item> MOD_WARD       = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.WARD,       Rarity.UNCOMMON);
+    public static final RegistryObject<Item> MOD_HASTEN     = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.HASTEN,     Rarity.COMMON);
+    public static final RegistryObject<Item> MOD_SMITE      = modifier(br.com.murilo.liberthia.magic.spell.composition.SpellModifier.SMITE,      Rarity.RARE);
 
     // r119: Grimoire item
     public static final RegistryObject<Item> GRIMOIRE_BOOK = ITEMS.register("grimoire_book",
@@ -2924,10 +3099,7 @@ public final class ModItems {
             () -> new br.com.murilo.liberthia.magic.item.SpellMirrorItem(
                     new Item.Properties().rarity(Rarity.RARE)));
 
-    // r135: Agronomic Sourcelink (5° sourcelink) + Drygmy egg
-    public static final RegistryObject<Item> AGRONOMIC_SOURCELINK_ITEM = ITEMS.register("agronomic_sourcelink",
-            () -> new net.minecraft.world.item.BlockItem(ModBlocks.AGRONOMIC_SOURCELINK.get(),
-                    new Item.Properties().rarity(Rarity.RARE)));
+    // r164: AGRONOMIC_SOURCELINK removido.
     public static final RegistryObject<Item> DRYGMY_EGG = ITEMS.register("drygmy_egg",
             () -> new net.minecraftforge.common.ForgeSpawnEggItem(
                     ModEntities.DRYGMY, 0x88CC44, 0xCCEE88, new Item.Properties()));

@@ -945,8 +945,11 @@ public final class InfectionLogic {
         if (severity >= 5) {
             player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 80, severity >= 50 ? 2 : 1, true, false, true));
         }
-        if (severity >= 10) {
-            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 80, severity >= 60 ? 2 : 1, true, false, true));
+        // r177: Fadiga de Mineração agora SÓ em infecção alta (>=45) e SÓ nível I
+        // (mineração mais lenta, mas NÃO impossível). Antes começava em severity 10 e
+        // ia a nível III (amp 2) — isso travava QUALQUER picareta ("não quebro nada").
+        if (severity >= 45) {
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 80, 0, true, false, true));
         }
         if (severity >= 15) {
             player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, severity >= 70 ? 1 : 0, true, false, true));

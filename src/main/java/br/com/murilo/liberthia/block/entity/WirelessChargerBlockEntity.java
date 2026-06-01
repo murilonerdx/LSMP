@@ -168,6 +168,9 @@ public class WirelessChargerBlockEntity extends BlockEntity
                     .snapshot(sl, pos, be.saveWithFullMetadata());
         }
 
+        // Otimização: varredura/carga de players só a cada 4 ticks (corta ~75% do scan).
+        if (level.getGameTime() % 4 != 0) return;
+
         int range = be.currentRange();
         int charging = 0;
         int totalDrained = 0;

@@ -1,6 +1,1 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "liberthia:item/yellow_matter_chestplate"
-  }
-}
+{"parent": "minecraft:item/generated", "textures": {"layer0": "liberthia:item/yellow_matter_chestplate"}}

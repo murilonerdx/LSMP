@@ -51,7 +51,17 @@ public class BloodHoundEntity extends Wolf implements Enemy {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        // r175: inteligência de matilha — congela ao ser encarado, cerca por
+        // ângulos distintos, espreita a última posição vista e abre portas.
+        if (this.getNavigation() instanceof net.minecraft.world.entity.ai.navigation.GroundPathNavigation gpn) {
+            gpn.setCanOpenDoors(true);
+            gpn.setCanPassDoors(true);
+        }
+        this.goalSelector.addGoal(1, new br.com.murilo.liberthia.cosmic.ai.GazeFreezeGoal(this, 20.0D));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.15D, true));
+        this.goalSelector.addGoal(3, new br.com.murilo.liberthia.cosmic.ai.StalkMemoryGoal(this, 1.2D));
+        this.goalSelector.addGoal(4, new br.com.murilo.liberthia.cosmic.ai.SurroundTargetGoal(this, 1.15D, 5.0D));
+        this.goalSelector.addGoal(4, new net.minecraft.world.entity.ai.goal.OpenDoorGoal(this, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 10.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));

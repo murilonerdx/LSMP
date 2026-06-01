@@ -138,6 +138,13 @@ public final class YellowMatterInstabilityEvents {
             return;
         }
 
+        // FIX (#51): só rompe o fluxo por dano de um ATACANTE externo. Auto-dano de
+        // matéria/instabilidade (sem entidade ou o próprio player) não interrompe.
+        net.minecraft.world.damagesource.DamageSource hurtSrc = event.getSource();
+        if (hurtSrc.getEntity() == null || hurtSrc.getEntity() == player) {
+            return;
+        }
+
         UUID playerId = player.getUUID();
 
         ItemStack useItem = player.getUseItem();

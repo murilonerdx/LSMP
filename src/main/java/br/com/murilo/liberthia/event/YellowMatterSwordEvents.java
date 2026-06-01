@@ -42,6 +42,14 @@ public final class YellowMatterSwordEvents {
             return;
         }
 
+        // FIX (#51): só rompe o laser por dano de um ATACANTE externo (mob/player).
+        // Dano próprio do sistema de matéria/instabilidade (ou ambiente) NÃO
+        // interrompe — antes o auto-dano de matéria máxima quebrava o próprio laser.
+        net.minecraft.world.damagesource.DamageSource src = event.getSource();
+        if (src.getEntity() == null || src.getEntity() == player) {
+            return;
+        }
+
         int seconds = Math.max(1, channelTicks / 20);
 
         // Backlash: quanto mais tempo canalizando, pior a interrupção.

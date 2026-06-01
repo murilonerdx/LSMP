@@ -41,7 +41,8 @@ public class MatterAnalyzerScreen extends AbstractContainerScreen<MatterAnalyzer
     private enum Tab {
         ANALYZE("Análise", 0xFFE0B0FF),
         CURES("Curas", 0xFFB0E0FF),
-        PROFILE("Perfil", 0xFFFFD080);
+        PROFILE("Perfil", 0xFFFFD080),
+        BLOOD("Sangue", 0xFFFF5555);
 
         final String label;
         final int accentColor;
@@ -73,6 +74,19 @@ public class MatterAnalyzerScreen extends AbstractContainerScreen<MatterAnalyzer
         // Tabs no topo, área de 22x12 cada, alinhada com o painel.
         int x = (this.width - imageWidth) / 2;
         int y = (this.height - imageHeight) / 2;
+
+        // Botão "Exportar" → manda a leitura pro Computador (tabs Análise/Sangue).
+        if ((activeTab == Tab.ANALYZE || activeTab == Tab.BLOOD)
+                && mx >= x + 114 && mx < x + 170 && my >= y + 3 && my < y + 15) {
+            ModNetwork.CHANNEL.sendToServer(new br.com.murilo.liberthia.network.packet.AnalyzerToComputerC2SPacket());
+            if (this.minecraft != null) {
+                this.minecraft.getSoundManager().play(
+                        net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                                net.minecraft.sounds.SoundEvents.UI_BUTTON_CLICK.value(), 1.0F));
+            }
+            return true;
+        }
+
         for (int i = 0; i < Tab.values().length; i++) {
             int tx = x + 6 + i * 38;
             int ty = y - 14;
@@ -129,6 +143,15 @@ public class MatterAnalyzerScreen extends AbstractContainerScreen<MatterAnalyzer
             case ANALYZE -> renderAnalyzeTab(g, x, y);
             case CURES   -> renderCuresTab(g, x, y);
             case PROFILE -> renderProfileTab(g, x, y);
+            case BLOOD   -> renderBloodTab(g, x, y);
+        }
+
+        // Botão "Exportar → PC" (tabs Análise/Sangue) — salva a leitura num Computador.
+        if (activeTab == Tab.ANALYZE || activeTab == Tab.BLOOD) {
+            int bx = x + 114, by = y + 3, bw = 56, bh = 12;
+            g.fill(bx, by, bx + bw, by + bh, 0xFF000000);
+            g.fill(bx + 1, by + 1, bx + bw - 1, by + bh - 1, 0xFF103820);
+            g.drawString(this.font, Component.literal("§bSalvar PC"), bx + 7, by + 2, 0xFFFFFF, false);
         }
 
         // Player inv panel (sempre visível em qualquer tab)
@@ -157,10 +180,21 @@ public class MatterAnalyzerScreen extends AbstractContainerScreen<MatterAnalyzer
         for (int sy = panelY + 3; sy < panelY + panelH - 2; sy += 4)
             g.fill(panelX + 2, sy, panelX + panelW - 2, sy + 1, 0xFF003020);
 
-        MatterContent c = menu.currentContent();
-        drawMatterRow(g, panelX + 4, panelY + 4,  "DM", c.dark(),   0xFF8B40D8);
-        drawMatterRow(g, panelX + 4, panelY + 16, "WM", c.white(),  0xFFE6E6FF);
-        drawMatterRow(g, panelX + 4, panelY + 28, "YM", c.yellow(), 0xFFFFD23F);
+        // Se for uma SERINGA DE SANGUE cheia, as 3 barras mostram o perfil de
+        // matéria do PLAYER de quem o sangue foi tirado (análise de sangue).
+        ItemStack in = menu.getInputStack();
+        boolean blood = in.getItem() instanceof br.com.murilo.liberthia.item.BloodSyringeItem
+                && br.com.murilo.liberthia.item.BloodSyringeItem.isFilled(in);
+        if (blood) {
+            drawMatterRow(g, panelX + 4, panelY + 4,  "DM", br.com.murilo.liberthia.item.BloodSyringeItem.getDark(in),   0xFF8B40D8);
+            drawMatterRow(g, panelX + 4, panelY + 16, "WM", br.com.murilo.liberthia.item.BloodSyringeItem.getWhite(in),  0xFFE6E6FF);
+            drawMatterRow(g, panelX + 4, panelY + 28, "YM", br.com.murilo.liberthia.item.BloodSyringeItem.getYellow(in), 0xFFFFD23F);
+        } else {
+            MatterContent c = menu.currentContent();
+            drawMatterRow(g, panelX + 4, panelY + 4,  "DM", c.dark(),   0xFF8B40D8);
+            drawMatterRow(g, panelX + 4, panelY + 16, "WM", c.white(),  0xFFE6E6FF);
+            drawMatterRow(g, panelX + 4, panelY + 28, "YM", c.yellow(), 0xFFFFD23F);
+        }
     }
 
     // ─────────────────────────────────────────────────── TAB: CURAS
@@ -253,6 +287,52 @@ public class MatterAnalyzerScreen extends AbstractContainerScreen<MatterAnalyzer
         return "Use Yellow Matter Pill.";
     }
 
+    // ─────────────────────────────────────────────────── TAB: SANGUE
+    // Layout espelha a tab Análise: slot da seringa à ESQUERDA (a seringa fica
+    // DENTRO do quadro, não flutuando) + painel-tela à DIREITA com os dados.
+    // Como o conteúdo fica todo à direita do slot, o item nunca sobrepõe os
+    // textos — por isso o blood tab NÃO entra no re-render de render().
+    private void renderBloodTab(GuiGraphics g, int x, int y) {
+        // Fundo avermelhado da "máquina"
+        g.fill(x + 6, y + 16, x + imageWidth - 6, y + 76, 0xFF1A0606);
+        for (int gy = y + 18; gy < y + 76; gy += 4)
+            g.fill(x + 8, gy, x + imageWidth - 8, gy + 1, 0xFF250A0A);
+
+        // Slot da seringa (mesma posição do menu: 24,35)
+        slot(g, x + 24 - 1, y + 35 - 1, 0xFFD04040);
+        g.drawString(this.font, Component.literal("§7Amostra"), x + 11, y + 58, 0xFFCCCCCC, false);
+
+        // Painel-tela à direita (x+58..x+168) — não encosta no slot (x+22..x+42)
+        int px = x + 58, py = y + 18, pw = imageWidth - 58 - 8, ph = 54;
+        g.fill(px, py, px + pw, py + ph, 0xFF000000);
+        g.fill(px + 1, py + 1, px + pw - 1, py + ph - 1, 0xFF200808);
+
+        ItemStack in = menu.getInputStack();
+        boolean blood = in.getItem() instanceof br.com.murilo.liberthia.item.BloodSyringeItem
+                && br.com.murilo.liberthia.item.BloodSyringeItem.isFilled(in);
+        if (!blood) {
+            g.drawString(this.font, Component.literal("§cInsira uma"),        px + 6, py + 8,  0xFFFFFF, false);
+            g.drawString(this.font, Component.literal("§cSeringa de Sangue"), px + 6, py + 20, 0xFFFFFF, false);
+            g.drawString(this.font, Component.literal("§ccheia."),            px + 6, py + 32, 0xFFFFFF, false);
+            g.drawString(this.font, Component.literal("§8(extraia de alguém)"), px + 6, py + 44, 0xCCCCCC, false);
+            return;
+        }
+
+        int inf = br.com.murilo.liberthia.item.BloodSyringeItem.getStoredInfection(in);
+        if (inf < 0) inf = 0;
+        String src = br.com.murilo.liberthia.item.BloodSyringeItem.getSource(in);
+        if (src.isEmpty()) src = "?";
+
+        g.drawString(this.font, Component.literal("§4❤ §f" + truncate(src, 13)), px + 4, py + 3, 0xFFFFFF, false);
+
+        int infColor = inf == 0 ? 0xFF35D85B : inf < 25 ? 0xFFFFE23F
+                : inf < 50 ? 0xFFFFA030 : inf < 75 ? 0xFFFF4040 : 0xFF8B0000;
+        drawMatterRowW(g, px + 4, py + 14, "INF", inf, infColor, 52);
+        drawMatterRowW(g, px + 4, py + 24, "DM", br.com.murilo.liberthia.item.BloodSyringeItem.getDark(in),   0xFF8B40D8, 52);
+        drawMatterRowW(g, px + 4, py + 34, "WM", br.com.murilo.liberthia.item.BloodSyringeItem.getWhite(in),  0xFFE6E6FF, 52);
+        drawMatterRowW(g, px + 4, py + 44, "YM", br.com.murilo.liberthia.item.BloodSyringeItem.getYellow(in), 0xFFFFD23F, 52);
+    }
+
     // ─────────────────────────────────────────────────── helpers (compartilhados)
     private void drawMatterRow(GuiGraphics g, int x, int y, String label, float value, int color) {
         g.drawString(this.font, Component.literal(label), x, y, 0xFFCCFF, false);
@@ -267,6 +347,20 @@ public class MatterAnalyzerScreen extends AbstractContainerScreen<MatterAnalyzer
         }
         String txt = String.format("%.0f", value);
         g.drawString(this.font, Component.literal(txt), bx + bw + 4, y, 0xCCCCCC, false);
+    }
+
+    /** Variante do drawMatterRow com largura de barra configurável (pra painéis estreitos). */
+    private void drawMatterRowW(GuiGraphics g, int x, int y, String label, float value, int color, int bw) {
+        g.drawString(this.font, Component.literal(label), x, y, 0xFFCCFF, false);
+        int bx = x + 22, by = y + 1, bh = 6;
+        g.fill(bx - 1, by - 1, bx + bw + 1, by + bh + 1, 0xFF000000);
+        g.fill(bx, by, bx + bw, by + bh, 0xFF101020);
+        int filled = (int) (bw * Math.min(1f, value / 100f));
+        if (filled > 0) {
+            g.fill(bx, by, bx + filled, by + bh, color);
+            g.fill(bx, by, bx + filled, by + 1, 0xFFFFFFFF);
+        }
+        g.drawString(this.font, Component.literal(String.format("%.0f", value)), bx + bw + 3, y, 0xCCCCCC, false);
     }
 
     private void slot(GuiGraphics g, int x, int y, int hi) {
@@ -301,6 +395,20 @@ public class MatterAnalyzerScreen extends AbstractContainerScreen<MatterAnalyzer
             if (input.isEmpty()) {
                 g.drawString(this.font, Component.literal("[ Insira uma amostra ]")
                         .withStyle(ChatFormatting.DARK_GRAY), 60, 62, 0xFFFFFF, false);
+            } else if (input.getItem() instanceof br.com.murilo.liberthia.item.BloodSyringeItem
+                    && br.com.murilo.liberthia.item.BloodSyringeItem.isFilled(input)) {
+                int inf = br.com.murilo.liberthia.item.BloodSyringeItem.getStoredInfection(input);
+                String src = br.com.murilo.liberthia.item.BloodSyringeItem.getSource(input);
+                if (src.isEmpty()) src = "?";
+                ChatFormatting col = inf < 0 ? ChatFormatting.GRAY
+                        : inf == 0 ? ChatFormatting.GREEN
+                        : inf < 25 ? ChatFormatting.YELLOW
+                        : inf < 50 ? ChatFormatting.GOLD
+                        : inf < 75 ? ChatFormatting.RED : ChatFormatting.DARK_RED;
+                g.drawString(this.font, Component.literal("§4❤ " + truncate(src, 10))
+                        .withStyle(ChatFormatting.RED), 8, 62, 0xFFFFFF, false);
+                g.drawString(this.font, Component.literal("Infecção: " + (inf < 0 ? "?" : inf + "%"))
+                        .withStyle(col), 70, 62, 0xFFFFFF, false);
             } else {
                 MatterContent c = menu.currentContent();
                 MatterContent.Mutation mut = c.dominantMutation();
@@ -337,7 +445,9 @@ public class MatterAnalyzerScreen extends AbstractContainerScreen<MatterAnalyzer
         // A re-renderização tira o item visualmente sem afetar layout — o
         // slot continua funcional no menu pra player interagir, mas o item
         // não desenha em cima do conteúdo.
-        if (activeTab != Tab.ANALYZE) {
+        // BLOOD não entra aqui: seu conteúdo fica todo à direita do slot, então
+        // a seringa pode aparecer normalmente dentro do quadro (sem flutuar).
+        if (activeTab == Tab.CURES || activeTab == Tab.PROFILE) {
             int x = (this.width - imageWidth) / 2;
             int y = (this.height - imageHeight) / 2;
             // Re-desenha conteúdo da tab por cima do item

@@ -56,6 +56,26 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> COSMIC_DISTANT_SCREAM = register("cosmic.distant_scream");
     public static final RegistryObject<SoundEvent> COSMIC_AUDIENCE_PRESENCE = register("cosmic.audience_presence");
 
+    // >>> gen_horror_ambience (auto) — nao editar a mao
+    public static final RegistryObject<SoundEvent> AMBIENCE_DREAD_DRONE = register("ambience.dread_drone");
+    public static final RegistryObject<SoundEvent> AMBIENCE_SUB_RUMBLE = register("ambience.sub_rumble");
+    public static final RegistryObject<SoundEvent> AMBIENCE_SKY_HUM = register("ambience.sky_hum");
+    public static final RegistryObject<SoundEvent> AMBIENCE_VOID_BREATHING = register("ambience.void_breathing");
+    public static final RegistryObject<SoundEvent> AMBIENCE_WIND_HOWL = register("ambience.wind_howl");
+    public static final RegistryObject<SoundEvent> AMBIENCE_AUDIENCE_PRESENCE = register("ambience.audience_presence");
+    public static final RegistryObject<SoundEvent> AMBIENCE_DISTANT_WHISPERS = register("ambience.distant_whispers");
+    public static final RegistryObject<SoundEvent> AMBIENCE_GRANULAR_TEXTURE = register("ambience.granular_texture");
+    public static final RegistryObject<SoundEvent> AMBIENCE_HEARTBEAT = register("ambience.heartbeat");
+    public static final RegistryObject<SoundEvent> AMBIENCE_FALSE_FOOTSTEPS = register("ambience.false_footsteps");
+    public static final RegistryObject<SoundEvent> AMBIENCE_RISER = register("ambience.riser");
+    public static final RegistryObject<SoundEvent> AMBIENCE_REVERSE_STINGER = register("ambience.reverse_stinger");
+    public static final RegistryObject<SoundEvent> AMBIENCE_STINGER_HIT = register("ambience.stinger_hit");
+    public static final RegistryObject<SoundEvent> AMBIENCE_METALLIC_GROAN = register("ambience.metallic_groan");
+    public static final RegistryObject<SoundEvent> AMBIENCE_BELL_TOLL = register("ambience.bell_toll");
+    public static final RegistryObject<SoundEvent> AMBIENCE_STATIC_BURST = register("ambience.static_burst");
+    public static final RegistryObject<SoundEvent> AMBIENCE_TENDRIL_MOVEMENT = register("ambience.tendril_movement");
+    // <<< gen_horror_ambience
+
     private ModSounds() {
     }
 

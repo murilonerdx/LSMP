@@ -151,7 +151,8 @@ public class LaserEmitterBlockEntity extends BlockEntity {
             if (hitBe instanceof CrystallizerBlockEntity c) {
                 c.onLaserHit(pos, level.getGameTime());
             }
-            damageEntitiesInBeam(level, pos, d, hitDist);
+            // Otimização: dano/scan do feixe a cada 3 ticks (ainda letal rápido).
+            if (level.getGameTime() % 3 == 0) damageEntitiesInBeam(level, pos, d, hitDist);
         }
 
         if (changed) be.markUpdated();

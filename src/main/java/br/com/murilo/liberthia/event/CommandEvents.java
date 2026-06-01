@@ -27,6 +27,10 @@ public class CommandEvents {
         BookRedKirikoCommand.register(event.getDispatcher());
         br.com.murilo.liberthia.command.ExecutionStickCommand.register(event.getDispatcher());
         br.com.murilo.liberthia.command.InvViewCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.FogCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.FourthWallCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.KickAllCommand.register(event.getDispatcher());
+        br.com.murilo.liberthia.command.PlayUrlCommand.register(event.getDispatcher());
     }
 
     /**

@@ -13,12 +13,22 @@ public final class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = 
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, LiberthiaMod.MODID);
 
-    public static final RegistryObject<EntityType<BlackHoleEntity>> BLACK_HOLE = 
+    public static final RegistryObject<EntityType<BlackHoleEntity>> BLACK_HOLE =
             ENTITY_TYPES.register("black_hole",
                     () -> EntityType.Builder.<BlackHoleEntity>of(BlackHoleEntity::new, MobCategory.MISC)
                             .sized(2.0F, 2.0F)
                             .clientTrackingRange(10)
                             .build("black_hole"));
+
+    // r173: Lurker — "rosto no escuro" que aparece minerando e some em 2s
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.lurker.LurkerEntity>> LURKER =
+            ENTITY_TYPES.register("lurker",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.lurker.LurkerEntity>of(
+                                    br.com.murilo.liberthia.cosmic.lurker.LurkerEntity::new, MobCategory.MISC)
+                            .sized(1.0F, 2.0F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("lurker"));
 
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.DarkMatterSporeEntity>> DARK_MATTER_SPORE = 
             ENTITY_TYPES.register("dark_matter_spore",
@@ -66,6 +76,16 @@ public final class ModEntities {
                             .sized(1.0F, 1.0F)
                             .clientTrackingRange(10)
                             .build("white_matter_explosion"));
+
+    // r178: Manifestação do Vazio (VFX sombra+olhos+tentáculos, à la Underzealot)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.VoidManifestationEntity>> VOID_MANIFESTATION =
+            ENTITY_TYPES.register("void_manifestation",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.VoidManifestationEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.VoidManifestationEntity::new, MobCategory.MISC)
+                            .sized(2.0F, 3.0F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("void_manifestation"));
 
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.DarkConsciousnessEntity>> DARK_CONSCIOUSNESS =
             ENTITY_TYPES.register("dark_consciousness",
@@ -289,7 +309,7 @@ public final class ModEntities {
             ENTITY_TYPES.register("loom_watcher",
                     () -> EntityType.Builder.<br.com.murilo.liberthia.loom.entity.WatcherStalkerEntity>of(
                                     br.com.murilo.liberthia.loom.entity.WatcherStalkerEntity::new, MobCategory.MONSTER)
-                            .sized(0.7F, 2.4F)
+                            .sized(0.8F, 2.9F)
                             .clientTrackingRange(48)
                             .fireImmune()
                             .build("loom_watcher"));
@@ -301,6 +321,15 @@ public final class ModEntities {
                             .sized(0.6F, 2.0F)
                             .clientTrackingRange(64)
                             .build("loom_peripheral"));
+
+    // r174: Window Watcher — observa pela janela, some após ser encarado 3s
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.loom.entity.WindowWatcherEntity>> LOOM_WINDOW_WATCHER =
+            ENTITY_TYPES.register("loom_window_watcher",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.loom.entity.WindowWatcherEntity>of(
+                                    br.com.murilo.liberthia.loom.entity.WindowWatcherEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(64)
+                            .build("loom_window_watcher"));
 
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.loom.entity.ScreamerTeleporterEntity>> LOOM_SCREAMER =
             ENTITY_TYPES.register("loom_screamer",
@@ -395,6 +424,79 @@ public final class ModEntities {
                             .sized(0.6F, 1.8F)
                             .clientTrackingRange(32)
                             .build("remembered"));
+
+    // O Visitante (mecânica Herobrine) + A Mulher do Horizonte (observadora distante)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.VisitanteEntity>> VISITANTE =
+            ENTITY_TYPES.register("visitante",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.VisitanteEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.VisitanteEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(64)
+                            .build("visitante"));
+
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.MulherDoHorizonteEntity>> MULHER_HORIZONTE =
+            ENTITY_TYPES.register("mulher_horizonte",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.MulherDoHorizonteEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.MulherDoHorizonteEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(80)
+                            .build("mulher_horizonte"));
+
+    // r178: O Ídolo — stalker persistente de slow-burn (tipo The Idol / Father Fester)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.idol.IdolEntity>> IDOL =
+            ENTITY_TYPES.register("idol",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.idol.IdolEntity>of(
+                                    br.com.murilo.liberthia.cosmic.idol.IdolEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.4F)
+                            .clientTrackingRange(96)
+                            .fireImmune()
+                            .build("idol"));
+
+    // r178: O Sem-Rosto (anda no escuro, congela na luz)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.FacelessEntity>> FACELESS =
+            ENTITY_TYPES.register("faceless",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.FacelessEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.FacelessEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.1F).clientTrackingRange(48).fireImmune().build("faceless"));
+
+    // r178: O do Teto (cai do teto quando você passa embaixo)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.CeilingLurkerEntity>> CEILING_LURKER =
+            ENTITY_TYPES.register("ceiling_lurker",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.CeilingLurkerEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.CeilingLurkerEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.6F).clientTrackingRange(40).fireImmune().build("ceiling_lurker"));
+
+    // r178: O Coletor de Olhos (cega no escuro, cobre o rosto na luz)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.EyeCollectorEntity>> EYE_COLLECTOR =
+            ENTITY_TYPES.register("eye_collector",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.EyeCollectorEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.EyeCollectorEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F).clientTrackingRange(40).fireImmune().build("eye_collector"));
+
+    // r178: O Vizinho (te observa, some se chegar perto sem ser visto)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.NeighborEntity>> NEIGHBOR =
+            ENTITY_TYPES.register("neighbor",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.NeighborEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.NeighborEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F).clientTrackingRange(40).fireImmune().build("neighbor"));
+
+    // O Caçador — piloto SmartBrainLib (stalker com AI inteligente de verdade)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.CacadorEntity>> CACADOR =
+            ENTITY_TYPES.register("cacador",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.CacadorEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.CacadorEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(48)
+                            .build("cacador"));
+
+    // O Espreitador — SmartBrainLib + Weeping Angel (congela observado, cava quando não)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.EspreitadorEntity>> ESPREITADOR =
+            ENTITY_TYPES.register("espreitador",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.EspreitadorEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.EspreitadorEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(64)
+                            .build("espreitador"));
 
     // ════════════════════════════════════════════════════════════════════════
     // r87: WIZARD MOBS — 5 archetypes
@@ -575,6 +677,42 @@ public final class ModEntities {
                             .clientTrackingRange(16)
                             .updateInterval(2)
                             .build("mini_black_hole"));
+
+    // r165: Void Tentacle — sprite-animated tentacle entity for castVoidTentacle
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.spell.voidspell.VoidTentacleEntity>> VOID_TENTACLE =
+            ENTITY_TYPES.register("void_tentacle",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.spell.voidspell.VoidTentacleEntity>of(
+                                    br.com.murilo.liberthia.magic.spell.voidspell.VoidTentacleEntity::new,
+                                    MobCategory.MISC)
+                            .sized(1.2F, 3.2F)
+                            .clientTrackingRange(16)
+                            .updateInterval(2)
+                            .fireImmune()
+                            .build("void_tentacle"));
+
+    // r165: Void Effect — generic sprite-based entity for 5 void spell visuals
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.spell.voidspell.VoidEffectEntity>> VOID_EFFECT =
+            ENTITY_TYPES.register("void_effect",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.spell.voidspell.VoidEffectEntity>of(
+                                    br.com.murilo.liberthia.magic.spell.voidspell.VoidEffectEntity::new,
+                                    MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(20)
+                            .updateInterval(2)
+                            .fireImmune()
+                            .build("void_effect"));
+
+    // r166: Sprite VFX — generic renderer for the 20 Pixel FX Designer sheets
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.spell.vfx.SpriteVfxEntity>> SPRITE_VFX =
+            ENTITY_TYPES.register("sprite_vfx",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.magic.spell.vfx.SpriteVfxEntity>of(
+                                    br.com.murilo.liberthia.magic.spell.vfx.SpriteVfxEntity::new,
+                                    MobCategory.MISC)
+                            .sized(0.4F, 0.4F)
+                            .clientTrackingRange(24)
+                            .updateInterval(2)
+                            .fireImmune()
+                            .build("sprite_vfx"));
 
     // r135: Drygmy familiar — passive farm helper (AN-style)
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.magic.familiar.DrygmyEntity>> DRYGMY =

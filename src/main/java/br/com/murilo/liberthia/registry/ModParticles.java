@@ -102,6 +102,17 @@ public final class ModParticles {
     public static final RegistryObject<SimpleParticleType> MINI_BLACK_HOLE =
             PARTICLE_TYPES.register("mini_black_hole", () -> new SimpleParticleType(true));
 
+    // r178: Manifestação do Vazio — olho vermelho que VOA + fumaça-sombra (custom, não-vanilla)
+    public static final RegistryObject<SimpleParticleType> VOID_FLYING_EYE =
+            PARTICLE_TYPES.register("void_flying_eye", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> VOID_SHADOW_WISP =
+            PARTICLE_TYPES.register("void_shadow_wisp", () -> new SimpleParticleType(true));
+
+    // Névoa de terror — partícula translúcida colorida (blending normal, não additive)
+    public static final RegistryObject<ParticleType<br.com.murilo.liberthia.fog.particle.FogMistData>> FOG_MIST =
+            PARTICLE_TYPES.register("fog_mist",
+                    () -> new br.com.murilo.liberthia.fog.particle.FogMistParticleType());
+
     private ModParticles() {
     }
 }

@@ -33,6 +33,8 @@ public final class ModCommonEvents {
         SpiritualCommand.register(event.getDispatcher());
         // r148: Spell Factory commands
         br.com.murilo.liberthia.command.SpellFactoryCommand.register(event.getDispatcher());
+        // r166: Sprite VFX testing — /liberthia vfx spawn/list/self
+        br.com.murilo.liberthia.command.VfxTestCommand.register(event.getDispatcher());
     }
 
     @SubscribeEvent
@@ -41,6 +43,8 @@ public final class ModCommonEvents {
             SpiritualState.syncTo(serverPlayer);
             // r147: dá o Liberthia Manual no primeiro login, uma vez só.
             giveStarterManual(serverPlayer);
+            // Neblinas de terror: manda as zonas ativas pro client que entrou.
+            br.com.murilo.liberthia.fog.FogZoneData.get(serverPlayer.serverLevel()).syncTo(serverPlayer);
         }
     }
 

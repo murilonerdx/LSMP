@@ -67,8 +67,16 @@ repositories {
         name = 'Illusive Soulworks Maven'
         url = 'https://maven.theillusivec4.top/'
     }
+    maven {
+        // SmartBrainLib (Tslat) — AI de mobs avançada (sensors/memories/behaviors).
+        name = 'Tslat Cloudsmith (SmartBrainLib)'
+        url = 'https://dl.cloudsmith.io/public/tslat/sbl/maven/'
+    }
     mavenCentral()
 }
+
+// Habilita JarInJar — bundla deps (SmartBrainLib) dentro do nosso jar.
+jarJar.enable()
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
@@ -84,6 +92,12 @@ dependencies {
     // curios-forge-5.12.1+1.20.1 instalado pra que a integração ative.
     // Sem ele, a Containment Glove ainda funciona em qualquer slot do inventário.
     compileOnly fg.deobf('top.theillusivec4.curios:curios-forge:5.12.1+1.20.1:api')
+    // SmartBrainLib — AI avançada de mobs. implementation (compile + runtime de dev) +
+    // jarJar (bundla a versão de produção dentro do nosso jar pra não exigir download).
+    implementation fg.deobf('net.tslat.smartbrainlib:SmartBrainLib-forge-1.20.1:1.14')
+    jarJar(group: 'net.tslat.smartbrainlib', name: 'SmartBrainLib-forge-1.20.1', version: '[1.14,2.0)') {
+        jarJar.ranged(it, '[1.14,2.0)')
+    }
 }
 
 def replaceProperties = [

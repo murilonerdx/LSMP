@@ -108,7 +108,7 @@ public class DarkMatterBatteryBlockEntity extends BlockEntity
             CompoundTag snapshot = br.com.murilo.liberthia.persistence.LiberthiaPersistence
                     .get(sl).getSnapshot(sl, worldPosition);
             if (snapshot != null) {
-                br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+                br.com.murilo.liberthia.LiberthiaMod.LOGGER.debug(
                         "[Liberthia] Restaurando Battery em {} via backup file", worldPosition);
                 restoreFromSnapshot(snapshot);
             }

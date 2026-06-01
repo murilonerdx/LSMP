@@ -138,7 +138,7 @@ public final class DarkMatterRadiationHandler {
         }
         int total = dmBlocks + infected;
         if (total > 0) {
-            LOG.info("countDarkMatter: dm blocks={}, infected items={}, total={}",
+            LOG.debug("countDarkMatter: dm blocks={}, infected items={}, total={}",
                     dmBlocks, infected, total);
         }
         return total;

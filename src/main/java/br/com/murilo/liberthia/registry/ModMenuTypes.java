@@ -37,6 +37,9 @@ public final class ModMenuTypes {
     public static final RegistryObject<MenuType<ResearchTableMenu>> RESEARCH_TABLE = registerMenuType(
             "research_table", ResearchTableMenu::new);
 
+    public static final RegistryObject<MenuType<MatterTesterMenu>> MATTER_TESTER = registerMenuType(
+            "matter_tester", MatterTesterMenu::new);
+
     public static final RegistryObject<MenuType<ContainmentChamberMenu>> CONTAINMENT_CHAMBER = registerMenuType(
             "containment_chamber", ContainmentChamberMenu::new);
 
@@ -134,6 +137,25 @@ public final class ModMenuTypes {
     // r155 Phase 2: Arcane Workbench — combina base scroll + modifier glyphs
     public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.workbench.ArcaneWorkbenchMenu>> ARCANE_WORKBENCH =
             registerMenuType("arcane_workbench", br.com.murilo.liberthia.magic.workbench.ArcaneWorkbenchMenu::new);
+
+    // r164: Inscription Table — recipe list à esquerda + 3 slots (input/ink/output)
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.scribe.InscriptionTableMenu>> INSCRIPTION_TABLE =
+            registerMenuType("inscription_table", br.com.murilo.liberthia.magic.scribe.InscriptionTableMenu::new);
+
+    // r165: Scroll Forge — Focus → Scroll GUI
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.scribe.ScrollForgeMenu>> SCROLL_FORGE =
+            registerMenuType("scroll_forge", br.com.murilo.liberthia.magic.scribe.ScrollForgeMenu::new);
+
+    // r166: Impressora — slot de papel + lista de relatórios do Computador vizinho
+    public static final RegistryObject<MenuType<PrinterMenu>> PRINTER =
+            registerMenuType("printer", PrinterMenu::new);
+
+    // r172: Tear de Threads
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.thread.ThreadLoomMenu>> THREAD_LOOM =
+            registerMenuType("thread_loom", br.com.murilo.liberthia.magic.thread.ThreadLoomMenu::new);
+
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.orb.OrbInfuserMenu>> ORB_INFUSER =
+            registerMenuType("orb_infuser", br.com.murilo.liberthia.magic.orb.OrbInfuserMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

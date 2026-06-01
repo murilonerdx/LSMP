@@ -50,6 +50,8 @@ public class ModEntityEvents {
                 br.com.murilo.liberthia.loom.entity.WatcherStalkerEntity.createAttributes().build());
         event.put(ModEntities.LOOM_PERIPHERAL.get(),
                 br.com.murilo.liberthia.loom.entity.PeripheralObserverEntity.createAttributes().build());
+        event.put(ModEntities.LOOM_WINDOW_WATCHER.get(),
+                br.com.murilo.liberthia.loom.entity.WindowWatcherEntity.createAttributes().build());
         event.put(ModEntities.LOOM_SCREAMER.get(),
                 br.com.murilo.liberthia.loom.entity.ScreamerTeleporterEntity.createAttributes().build());
         event.put(ModEntities.LOOM_WORM.get(),
@@ -69,6 +71,24 @@ public class ModEntityEvents {
                 br.com.murilo.liberthia.cosmic.horror.entity.AbsenceEntity.createAttributes().build());
         event.put(ModEntities.REMEMBERED.get(),
                 br.com.murilo.liberthia.cosmic.horror.entity.RememberedEntity.createAttributes().build());
+        event.put(ModEntities.VISITANTE.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.VisitanteEntity.createAttributes().build());
+        event.put(ModEntities.MULHER_HORIZONTE.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.MulherDoHorizonteEntity.createAttributes().build());
+        event.put(ModEntities.IDOL.get(),
+                br.com.murilo.liberthia.cosmic.idol.IdolEntity.createAttributes().build());
+        event.put(ModEntities.FACELESS.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.FacelessEntity.createAttributes().build());
+        event.put(ModEntities.CEILING_LURKER.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.CeilingLurkerEntity.createAttributes().build());
+        event.put(ModEntities.EYE_COLLECTOR.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.EyeCollectorEntity.createAttributes().build());
+        event.put(ModEntities.NEIGHBOR.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.NeighborEntity.createAttributes().build());
+        event.put(ModEntities.CACADOR.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.CacadorEntity.createAttributes().build());
+        event.put(ModEntities.ESPREITADOR.get(),
+                br.com.murilo.liberthia.cosmic.horror.entity.EspreitadorEntity.createAttributes().build());
         // r150: 8 Wooden Horror variants — todos compartilham createAttributes()
         var woodenAttrs = br.com.murilo.liberthia.cosmic.horror.entity.WoodenHorrorEntity.createAttributes();
         event.put(ModEntities.WOODEN_CHARCOAL.get(), woodenAttrs.build());
@@ -104,6 +124,17 @@ public class ModEntityEvents {
                 br.com.murilo.liberthia.magic.wizard.AbstractWizardEntity.createWizardAttributes().build());
         event.put(ModEntities.ARCHEVOKER.get(),
                 br.com.murilo.liberthia.magic.wizard.ArchevokerEntity.createArchevokerAttributes().build());
+        // r178 HOTFIX: Lich boss + adds — tinham createAttributes() mas NÃO estavam
+        // registrados aqui → NPE (AttributeSupplier null) ao spawnar via ovo = crash.
+        event.put(ModEntities.ABYSSAL_LICH.get(),
+                br.com.murilo.liberthia.magic.boss.AbyssalLichEntity.createAttributes().build());
+        event.put(ModEntities.LICH_STALKER.get(),
+                br.com.murilo.liberthia.magic.boss.LichStalkerEntity.createAttributes().build());
+        event.put(ModEntities.LICH_HUNTER.get(),
+                br.com.murilo.liberthia.magic.boss.LichHunterEntity.createAttributes().build());
+        // r178 HOTFIX: Frozen Humanoid (Ice Tomb spell) — Monster sem atributos → mesmo crash.
+        event.put(ModEntities.FROZEN_HUMANOID.get(),
+                br.com.murilo.liberthia.magic.spells.FrozenHumanoidEntity.createAttributes().build());
         // r109: Familiars
         event.put(ModEntities.WHELP.get(),
                 br.com.murilo.liberthia.magic.familiar.WhelpEntity.createAttributes().build());

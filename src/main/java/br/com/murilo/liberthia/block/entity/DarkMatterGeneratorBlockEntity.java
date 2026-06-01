@@ -65,7 +65,7 @@ public class DarkMatterGeneratorBlockEntity extends BlockEntity
                 // SNAPSHOT IMEDIATO em mudança de inventário
                 br.com.murilo.liberthia.persistence.LiberthiaPersistence.get(sl)
                         .snapshot(sl, worldPosition, saveWithFullMetadata());
-                br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+                br.com.murilo.liberthia.LiberthiaMod.LOGGER.debug(
                         "[Generator@{}] onContentsChanged slot={} stack={}x{} (snapshot salvo)",
                         worldPosition, slot, getStackInSlot(slot).getCount(),
                         getStackInSlot(slot).getItem());
@@ -336,7 +336,7 @@ public class DarkMatterGeneratorBlockEntity extends BlockEntity
         br.com.murilo.liberthia.persistence.Persistable.LIVE.add(this);
 
         // Diagnóstico: log estado atual no onLoad
-        br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+        br.com.murilo.liberthia.LiberthiaMod.LOGGER.debug(
                 "[Generator@{}] onLoad — fuel={}x energy={} burnFuel={} stateEmpty={}",
                 worldPosition,
                 inventory.getStackInSlot(SLOT_FUEL).getCount(),
@@ -347,20 +347,20 @@ public class DarkMatterGeneratorBlockEntity extends BlockEntity
             CompoundTag snapshot = br.com.murilo.liberthia.persistence.LiberthiaPersistence
                     .get(sl).getSnapshot(sl, worldPosition);
             if (snapshot != null) {
-                br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+                br.com.murilo.liberthia.LiberthiaMod.LOGGER.debug(
                         "[Generator@{}] NBT vanilla VAZIO, snapshot tem fuel={} energy={} burnFuel={} — restaurando",
                         worldPosition,
                         snapshot.contains("inventory") ? "presente" : "ausente",
                         snapshot.contains("energy") ? "presente" : "ausente",
                         snapshot.getInt("burnFuel"));
                 restoreFromSnapshot(snapshot);
-                br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+                br.com.murilo.liberthia.LiberthiaMod.LOGGER.debug(
                         "[Generator@{}] Pós-restore: fuel={}x energy={} burnFuel={}",
                         worldPosition,
                         inventory.getStackInSlot(SLOT_FUEL).getCount(),
                         energy.getEnergyStored(), burnFuel);
             } else {
-                br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+                br.com.murilo.liberthia.LiberthiaMod.LOGGER.debug(
                         "[Generator@{}] NBT vanilla VAZIO E sem snapshot — estado perdido",
                         worldPosition);
             }

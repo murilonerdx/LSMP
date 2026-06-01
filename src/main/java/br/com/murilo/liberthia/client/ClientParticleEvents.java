@@ -46,6 +46,12 @@ public final class ClientParticleEvents {
                 ModParticles.MINI_BLACK_HOLE.get(),
                 br.com.murilo.liberthia.magic.spell.voidspell.MiniBlackHoleParticle.Provider::new
         );
+
+        // Névoa de terror — puff translúcido suave (fumaça de verdade)
+        event.registerSpriteSet(
+                ModParticles.FOG_MIST.get(),
+                br.com.murilo.liberthia.fog.particle.FogMistParticle.Provider::new
+        );
     }
 
     private ClientParticleEvents() {

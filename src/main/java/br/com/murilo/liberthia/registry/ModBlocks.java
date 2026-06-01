@@ -214,6 +214,14 @@ public final class ModBlocks {
                     .strength(2.5F)
                     .sound(SoundType.WOOD)));
 
+    public static final RegistryObject<Block> MATTER_TESTER = BLOCKS.register("matter_tester",
+            () -> new br.com.murilo.liberthia.block.MatterTesterBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE)
+                    .strength(4.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(state -> 5)
+                    .sound(SoundType.METAL)));
+
     public static final RegistryObject<Block> CONTAINMENT_CHAMBER = BLOCKS.register("containment_chamber",
             () -> new br.com.murilo.liberthia.block.ContainmentChamberBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.ICE)
@@ -1515,6 +1523,38 @@ public final class ModBlocks {
                             .lightLevel(s -> 12)
                             .strength(3.0F, 6.0F)));
 
+    // Computador (bloco) — estação de dados ao lado do Matter Analyzer
+    public static final RegistryObject<Block> COMPUTER_BLOCK = BLOCKS.register("computador",
+            () -> new br.com.murilo.liberthia.storage.ComputerBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)
+                            .lightLevel(s -> 6)
+                            .strength(2.0F, 6.0F)
+                            .noOcclusion()));
+    // Impressora — coloque ao lado do Computador pra imprimir livros
+    public static final RegistryObject<Block> PRINTER = BLOCKS.register("printer",
+            () -> new br.com.murilo.liberthia.storage.PrinterBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)
+                            .strength(2.0F, 6.0F)
+                            .noOcclusion()));
+
+    // r172: Tear de Threads — monta Threads Customizadas com itens vanilla
+    public static final RegistryObject<Block> THREAD_LOOM = BLOCKS.register("thread_loom",
+            () -> new br.com.murilo.liberthia.magic.thread.ThreadLoomBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK)
+                            .strength(1.5F, 6.0F)
+                            .noOcclusion()));
+
+    // r174: Infusor de Orbs — itens raros → Orb Customizado
+    public static final RegistryObject<Block> ORB_INFUSER = BLOCKS.register("orb_infuser",
+            () -> new br.com.murilo.liberthia.magic.orb.OrbInfuserBlock(
+                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
+                            .copy(net.minecraft.world.level.block.Blocks.PRISMARINE_BRICKS)
+                            .strength(1.5F, 6.0F)
+                            .noOcclusion()));
+
     // r97: Repository — sorting chest
     public static final RegistryObject<Block> REPOSITORY = BLOCKS.register("repository",
             () -> new br.com.murilo.liberthia.storage.RepositoryBlock(
@@ -1560,20 +1600,7 @@ public final class ModBlocks {
                     br.com.murilo.liberthia.magic.school.SpellSchool.HOLY,
                     net.minecraft.core.particles.ParticleTypes.END_ROD));
 
-    // r100: Auto-blocks
-    public static final RegistryObject<Block> WHIRLWIND = BLOCKS.register("whirlwind",
-            () -> new br.com.murilo.liberthia.automation.WhirlwindBlock(
-                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.GLASS)
-                            .lightLevel(s -> 6)
-                            .noOcclusion()
-                            .noCollission()));
-    public static final RegistryObject<Block> AUTO_MINER = BLOCKS.register("auto_miner",
-            () -> new br.com.murilo.liberthia.automation.AutoMinerBlock(
-                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.DEEPSLATE)
-                            .lightLevel(s -> 5)
-                            .strength(4.0F, 8.0F)));
+    // r164: WHIRLWIND e AUTO_MINER removidos (não faziam sentido).
     public static final RegistryObject<Block> MAGE_CAULDRON = BLOCKS.register("mage_cauldron",
             () -> new br.com.murilo.liberthia.automation.MageCauldronBlock(
                     net.minecraft.world.level.block.state.BlockBehaviour.Properties
@@ -1604,7 +1631,8 @@ public final class ModBlocks {
                     net.minecraft.world.level.block.state.BlockBehaviour.Properties
                             .copy(net.minecraft.world.level.block.Blocks.SMITHING_TABLE)
                             .lightLevel(s -> 8)
-                            .strength(3.0F, 6.0F)));
+                            .strength(3.0F, 6.0F)
+                            .noOcclusion()));
 
     // ════════════════════════════════════════════════════════════════════════
     // r88: AUTOMATION — Prism, Turret, Sensor
@@ -1624,65 +1652,22 @@ public final class ModBlocks {
                             .strength(3.5F, 6.0F)));
     public static final RegistryObject<Block> SPELL_SENSOR = BLOCKS.register("spell_sensor",
             () -> new br.com.murilo.liberthia.automation.SpellSensorBlock(
+                    // r164 FIX: NÃO copia de SCULK_SENSOR (causava crash de chunk save por
+                    // herdar propriedades específicas de sculk). Usa STONE como base e fixed
+                    // light level pra evitar lambda eval com state ainda não bound.
                     net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.SCULK_SENSOR)
-                            .lightLevel(s -> s.getValue(br.com.murilo.liberthia.automation.SpellSensorBlock.POWERED) ? 10 : 2)
-                            .strength(2.0F, 4.0F)));
+                            .copy(net.minecraft.world.level.block.Blocks.STONE)
+                            .lightLevel(s -> {
+                                try {
+                                    return s.hasProperty(br.com.murilo.liberthia.automation.SpellSensorBlock.POWERED)
+                                            && s.getValue(br.com.murilo.liberthia.automation.SpellSensorBlock.POWERED)
+                                            ? 10 : 2;
+                                } catch (Throwable e) { return 2; }
+                            })
+                            .strength(2.0F, 4.0F)
+                            .sound(net.minecraft.world.level.block.SoundType.METAL)));
 
-    // r86: RITUAL BRAZIER — usado com Ritual Tablets pra iniciar rituais
-    public static final RegistryObject<Block> RITUAL_BRAZIER = BLOCKS.register("ritual_brazier",
-            () -> new br.com.murilo.liberthia.magic.ritual.RitualBrazierBlock(
-                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.STONE_BRICKS)
-                            .lightLevel(s -> 10)
-                            .strength(3.5F, 6.0F)
-                            .noOcclusion()));
-
-    // ════════════════════════════════════════════════════════════════════════
-    // r84: SOURCELINKS — 4 Source generators
-    // ════════════════════════════════════════════════════════════════════════
-    public static final RegistryObject<Block> VOLCANIC_SOURCELINK = BLOCKS.register("volcanic_sourcelink",
-            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
-                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.MAGMA_BLOCK)
-                            .lightLevel(s -> 10)
-                            .strength(3.0F, 6.0F),
-                    br.com.murilo.liberthia.magic.sourcelink.VolcanicSourcelinkBlockEntity::new,
-                    () -> ModBlockEntities.VOLCANIC_SOURCELINK.get()));
-    public static final RegistryObject<Block> MYCELIAL_SOURCELINK = BLOCKS.register("mycelial_sourcelink",
-            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
-                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.MYCELIUM)
-                            .lightLevel(s -> 6)
-                            .strength(2.0F, 4.0F),
-                    br.com.murilo.liberthia.magic.sourcelink.MycelialSourcelinkBlockEntity::new,
-                    () -> ModBlockEntities.MYCELIAL_SOURCELINK.get()));
-    public static final RegistryObject<Block> VITALIC_SOURCELINK = BLOCKS.register("vitalic_sourcelink",
-            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
-                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.REDSTONE_BLOCK)
-                            .lightLevel(s -> 8)
-                            .strength(3.0F, 5.0F),
-                    br.com.murilo.liberthia.magic.sourcelink.VitalicSourcelinkBlockEntity::new,
-                    () -> ModBlockEntities.VITALIC_SOURCELINK.get()));
-    public static final RegistryObject<Block> ALCHEMICAL_SOURCELINK = BLOCKS.register("alchemical_sourcelink",
-            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
-                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.PURPUR_BLOCK)
-                            .lightLevel(s -> 7)
-                            .strength(2.5F, 4.5F),
-                    br.com.murilo.liberthia.magic.sourcelink.AlchemicalSourcelinkBlockEntity::new,
-                    () -> ModBlockEntities.ALCHEMICAL_SOURCELINK.get()));
-
-    // r135: 5° Sourcelink — Agronomic (Source de crops)
-    public static final RegistryObject<Block> AGRONOMIC_SOURCELINK = BLOCKS.register("agronomic_sourcelink",
-            () -> new br.com.murilo.liberthia.magic.sourcelink.SourcelinkBlock(
-                    net.minecraft.world.level.block.state.BlockBehaviour.Properties
-                            .copy(net.minecraft.world.level.block.Blocks.MOSS_BLOCK)
-                            .lightLevel(s -> 5)
-                            .strength(2.0F, 3.5F),
-                    br.com.murilo.liberthia.magic.sourcelink.AgronomicSourcelinkBlockEntity::new,
-                    () -> ModBlockEntities.AGRONOMIC_SOURCELINK.get()));
+    // r164: RITUAL_BRAZIER e os 5 SOURCELINKS (volcanic/mycelial/vitalic/alchemical/agronomic) removidos.
 
     public static final RegistryObject<Block> SPIRIT_GEM_ORE = BLOCKS.register("spirit_gem_ore",
             () -> new net.minecraft.world.level.block.DropExperienceBlock(
@@ -1822,13 +1807,7 @@ public final class ModBlocks {
                             .noCollission()
                             .randomTicks()) {});
 
-    // r139: Glyph Brazier — bloco onde player faz ritual pra ganhar glyphs
-    public static final RegistryObject<Block> GLYPH_BRAZIER = BLOCKS.register("glyph_brazier",
-            () -> new br.com.murilo.liberthia.magic.ritual.GlyphBrazierBlock(
-                    BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.SOUL_CAMPFIRE)
-                            .strength(2.5F, 6F)
-                            .lightLevel(s -> 11)
-                            .noOcclusion()));
+    // r165: GlyphBrazierBlock removido — ritual package foi deletado
 
     private ModBlocks() {
 

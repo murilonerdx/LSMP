@@ -48,6 +48,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.DARK_MATTER_FORGE_ITEM.get());
                         output.accept(ModItems.MATTER_INFUSER_ITEM.get());
                         output.accept(ModItems.RESEARCH_TABLE_ITEM.get());
+                        output.accept(ModItems.MATTER_TESTER_ITEM.get());
                         output.accept(ModItems.CONTAINMENT_CHAMBER_ITEM.get());
                         output.accept(ModItems.MATTER_TRANSMUTER_ITEM.get());
                         output.accept(ModItems.DARK_MATTER_ALCHEMIZER_ITEM.get());
@@ -173,6 +174,8 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.YELLOW_MATTER_BUCKET.get());
                         // --- Medical ---
                         output.accept(ModItems.WHITE_MATTER_SYRINGE.get());
+                        output.accept(ModItems.DARK_MATTER_SYRINGE.get());
+                        output.accept(ModItems.YELLOW_MATTER_SYRINGE.get());
                         // --- Special Items ---
                         output.accept(ModItems.PROTECTION_RUBY.get());
                         // --- New Materials ---
@@ -259,6 +262,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.POSSESSED_SKELETON_EGG.get());
                         // --- Boss artifacts ---
                         output.accept(ModItems.CURSED_IDOL.get());
+                        output.accept(ModItems.MIST_CENSER.get());
                         output.accept(ModItems.VEILED_LANTERN.get());
                         output.accept(ModItems.PULSING_HEART.get());
                         // --- New monster spawn eggs ---
@@ -406,24 +410,11 @@ public final class ModCreativeTabs {
                     // r142: STAFF_FIRE não tem texture — usa GRIMOIRE_OF_OBSERVATION (foil + book look)
                     .icon(() -> ModItems.GRIMOIRE_OF_OBSERVATION.get().getDefaultInstance())
                     .displayItems((params, out) -> {
-                        // ─── r84: Sourcelinks ───
-                        out.accept(ModItems.VOLCANIC_SOURCELINK_ITEM.get());
-                        out.accept(ModItems.MYCELIAL_SOURCELINK_ITEM.get());
-                        out.accept(ModItems.VITALIC_SOURCELINK_ITEM.get());
-                        out.accept(ModItems.ALCHEMICAL_SOURCELINK_ITEM.get());
+                        // r164: Sourcelinks removidos.
                         // ─── r85: Scrying ───
                         out.accept(ModItems.SCRYING_LENS.get());
                         out.accept(ModItems.SCRYER_OCULUS_ITEM.get());
-                        // ─── r86: Rituals ───
-                        out.accept(ModItems.RITUAL_BRAZIER_ITEM.get());
-                        out.accept(ModItems.RITUAL_TABLET_SUNRISE.get());
-                        out.accept(ModItems.RITUAL_TABLET_MOONFALL.get());
-                        out.accept(ModItems.RITUAL_TABLET_FLIGHT.get());
-                        out.accept(ModItems.RITUAL_TABLET_HEALING.get());
-                        out.accept(ModItems.RITUAL_TABLET_FORESTATION.get());
-                        out.accept(ModItems.RITUAL_TABLET_WARDING.get());
-                        out.accept(ModItems.RITUAL_TABLET_AWAKENING.get());
-                        out.accept(ModItems.RITUAL_TABLET_SCRYING.get());
+                        // r165: Ritual Brazier + Ritual Tablets removidos — ritual system deletado.
                         // ─── r88: Automation ───
                         out.accept(ModItems.DOMINION_WAND.get());
                         out.accept(ModItems.SPELL_PRISM_ITEM.get());
@@ -528,9 +519,7 @@ public final class ModCreativeTabs {
                         out.accept(ModItems.ICE_WALL_ITEM.get());
                         out.accept(ModItems.LIGHTNING_WALL_ITEM.get());
                         out.accept(ModItems.HOLY_WALL_ITEM.get());
-                        // ─── r100: Auto-blocks ───
-                        out.accept(ModItems.WHIRLWIND_ITEM.get());
-                        out.accept(ModItems.AUTO_MINER_ITEM.get());
+                        // ─── r100: Auto-blocks (r164: Whirlwind+AutoMiner removidos) ───
                         out.accept(ModItems.MAGE_CAULDRON_ITEM.get());
                         // ─── r101: Wizard Chestplates ───
                         out.accept(ModItems.WIZARD_CHEST_FIRE.get());
@@ -685,6 +674,43 @@ public final class ModCreativeTabs {
                         out.accept(ModItems.SPELL_VOID.get());
                         out.accept(ModItems.SPELL_VOID_LASER.get());
                         out.accept(ModItems.VOID_REAGENT.get());
+                        // r172 ACESSÍVEIS (15) — mobilidade/utilidade custo baixo
+                        out.accept(ModItems.SPELL_AIR_DASH.get());
+                        out.accept(ModItems.SPELL_FEATHER_GRACE.get());
+                        out.accept(ModItems.SPELL_GUST_LEAP.get());
+                        out.accept(ModItems.SPELL_SHADOW_STEP.get());
+                        out.accept(ModItems.SPELL_SWIFT_CURRENT.get());
+                        out.accept(ModItems.SPELL_STONE_SKIN.get());
+                        out.accept(ModItems.SPELL_EMBER_SPARK.get());
+                        out.accept(ModItems.SPELL_FROST_TOUCH.get());
+                        out.accept(ModItems.SPELL_STATIC_JOLT.get());
+                        out.accept(ModItems.SPELL_MINOR_HEAL.get());
+                        out.accept(ModItems.SPELL_THORN_WHIP.get());
+                        out.accept(ModItems.SPELL_GLIDE.get());
+                        out.accept(ModItems.SPELL_BLINK_SHORT.get());
+                        out.accept(ModItems.SPELL_WARMTH.get());
+                        out.accept(ModItems.SPELL_NIMBLE_REFLEXES.get());
+                        // r172 scrolls de combate (8)
+                        out.accept(ModItems.SPELL_ARC_BOLT.get());
+                        out.accept(ModItems.SPELL_CINDER_BURST.get());
+                        out.accept(ModItems.SPELL_FROST_SHARD.get());
+                        out.accept(ModItems.SPELL_THUNDER_CLAP.get());
+                        out.accept(ModItems.SPELL_VENOM_SPIT.get());
+                        out.accept(ModItems.SPELL_BLOOD_LASH.get());
+                        out.accept(ModItems.SPELL_MINOR_SMITE.get());
+                        out.accept(ModItems.SPELL_VOID_GRIP.get());
+                        // r172 orbes arcanos (5)
+                        out.accept(ModItems.ORB_HEALING.get());
+                        out.accept(ModItems.ORB_WARDING.get());
+                        out.accept(ModItems.ORB_SWIFTNESS.get());
+                        out.accept(ModItems.ORB_INSIGHT.get());
+                        out.accept(ModItems.ORB_MIGHT.get());
+                        // r172 focus extras (5)
+                        out.accept(ModItems.FOCUS_ARCANE.get());
+                        out.accept(ModItems.FOCUS_VOID.get());
+                        out.accept(ModItems.FOCUS_STORM.get());
+                        out.accept(ModItems.FOCUS_VERDANT.get());
+                        out.accept(ModItems.FOCUS_RADIANT.get());
                         // Modifier glyphs
                         out.accept(ModItems.MOD_AMPLIFY.get());
                         out.accept(ModItems.MOD_AOE.get());
@@ -699,6 +725,17 @@ public final class ModCreativeTabs {
                         out.accept(ModItems.MOD_SUSTAIN.get());
                         out.accept(ModItems.MOD_PENETRATE.get());
                         out.accept(ModItems.MOD_APOLAO.get());
+                        // r173: 10 novas Runas (modifiers)
+                        out.accept(ModItems.MOD_POISON.get());
+                        out.accept(ModItems.MOD_WITHER.get());
+                        out.accept(ModItems.MOD_SLOW.get());
+                        out.accept(ModItems.MOD_WEAKEN.get());
+                        out.accept(ModItems.MOD_BLIND.get());
+                        out.accept(ModItems.MOD_GRAVITY.get());
+                        out.accept(ModItems.MOD_LEVITATE.get());
+                        out.accept(ModItems.MOD_WARD.get());
+                        out.accept(ModItems.MOD_HASTEN.get());
+                        out.accept(ModItems.MOD_SMITE.get());
 
                         // ════════════════════════════════════════════════════════
                         // r142: Items mágicos antes da tab principal (vision swap pra baixo)
@@ -740,6 +777,33 @@ public final class ModCreativeTabs {
 
                         // r143: moved from main tab
                         out.accept(ModItems.BOOKWYRM_SPAWN_EGG.get());
+                        out.accept(ModItems.VISITANTE_SPAWN_EGG.get());
+                        out.accept(ModItems.MULHER_HORIZONTE_SPAWN_EGG.get());
+                        out.accept(ModItems.CACADOR_SPAWN_EGG.get());
+                        out.accept(ModItems.ESPREITADOR_SPAWN_EGG.get());
+                        out.accept(ModItems.LURKER_SPAWN_EGG.get());
+                        out.accept(ModItems.EMF_METER.get());
+                        out.accept(ModItems.DIMENSIONAL_IRREGULARITY.get());
+                        out.accept(ModItems.CAMERA.get());
+                        out.accept(ModItems.PHOTOGRAPH.get());
+                        out.accept(ModItems.ABYSSAL_CORE.get());
+                        out.accept(br.com.murilo.liberthia.item.AbyssalCoreItem.crystallized(ModItems.ABYSSAL_CORE.get()));
+                        out.accept(ModItems.VOID_EYE.get());
+                        out.accept(ModItems.BLACK_MIRROR.get());
+                        out.accept(ModItems.SANITY_CANDLE.get());
+                        out.accept(ModItems.BROKEN_RADIO.get());
+                        out.accept(ModItems.CURSED_DOLL.get());
+                        out.accept(ModItems.WINDOW_WATCHER_EGG.get());
+                        out.accept(ModItems.MAPA_INVERTIDO.get());
+                        out.accept(ModItems.WALKIE_TALKIE.get());
+                        out.accept(ModItems.CHICOTE_CELESTIAL.get());
+                        out.accept(ModItems.COMPUTADOR.get());
+                        out.accept(ModItems.PRINTER_ITEM.get());
+                        out.accept(ModItems.HARD_DRIVE.get());
+                        out.accept(ModItems.THREAD_LOOM_ITEM.get());
+                        out.accept(ModItems.CUSTOM_THREAD.get());
+                        out.accept(ModItems.ORB_INFUSER_ITEM.get());
+                        out.accept(ModItems.CUSTOM_ORB.get());
                         out.accept(ModItems.BOUND_AFRIT_CRYSTAL.get());
                         out.accept(ModItems.BOUND_DJINNI_CRYSTAL.get());
                         out.accept(ModItems.BOUND_FOLIOT_CRYSTAL.get());
@@ -768,6 +832,15 @@ public final class ModCreativeTabs {
                         out.accept(ModItems.GLYPH_EFFECT_BLIND.get());
                         out.accept(ModItems.GLYPH_EFFECT_EXPLOSION.get());
                         out.accept(ModItems.GLYPH_EFFECT_FANGS.get());
+                        // r172 glifos novos
+                        out.accept(ModItems.GLYPH_VAMPIRIC_GAZE.get());
+                        out.accept(ModItems.GLYPH_GRAVITY_PULL.get());
+                        out.accept(ModItems.GLYPH_REPULSE.get());
+                        out.accept(ModItems.GLYPH_PETRIFY.get());
+                        out.accept(ModItems.GLYPH_SOOTHE.get());
+                        out.accept(ModItems.GLYPH_SCORCH.get());
+                        out.accept(ModItems.GLYPH_UPDRAFT.get());
+                        out.accept(ModItems.GLYPH_ENFEEBLE.get());
                         out.accept(ModItems.GLYPH_EFFECT_FREEZE.get());
                         out.accept(ModItems.GLYPH_EFFECT_GRAVITY.get());
                         out.accept(ModItems.GLYPH_EFFECT_HARM.get());
@@ -874,8 +947,14 @@ public final class ModCreativeTabs {
                         out.accept(ModItems.TOME_WEBWEAVER.get());
 
                         // r153: TODOS os factory spells (carregados dos JSONs em data/liberthia/spells/)
-                        // Itera a registry — fica vazio se nenhum recipe foi carregado ainda.
                         for (String spellId : br.com.murilo.liberthia.magic.factory.SpellRecipeRegistry.ids()) {
+                            try {
+                                out.accept(br.com.murilo.liberthia.magic.factory.DynamicSpellItem
+                                        .stackFor(ModItems.FACTORY_SPELL_SCROLL.get(), spellId));
+                            } catch (Throwable ignored) {}
+                        }
+                        // r168: TODOS os spells do SpellLibrary (in-code, ~150 incluindo os 50 r168)
+                        for (String spellId : br.com.murilo.liberthia.magic.spell.SpellLibrary.ALL.keySet()) {
                             try {
                                 out.accept(br.com.murilo.liberthia.magic.factory.DynamicSpellItem
                                         .stackFor(ModItems.FACTORY_SPELL_SCROLL.get(), spellId));

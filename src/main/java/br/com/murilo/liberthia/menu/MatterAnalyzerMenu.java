@@ -49,6 +49,9 @@ public class MatterAnalyzerMenu extends AbstractContainerMenu {
 
     public ItemStack getInputStack() { return be.getInputStack(); }
 
+    /** Posição do bloco analyzer — usado pra achar um Computador adjacente. */
+    public net.minecraft.core.BlockPos getAnalyzerPos() { return be.getBlockPos(); }
+
     @Override
     public ItemStack quickMoveStack(Player p, int idx) {
         Slot slot = slots.get(idx);

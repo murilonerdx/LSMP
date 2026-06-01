@@ -3,12 +3,12 @@
   "pattern": [
     " I ",
     "IRI",
-    " B "
+    " Y "
   ],
   "key": {
     "Y": {"item": "minecraft:stick"},
     "I": {"item": "minecraft:netherite_ingot"},
-    "R": {"item": "minecraft:sanguine_core"}
+    "R": {"item": "liberthia:sanguine_core"}
   },
   "result": {
     "item": "liberthia:sword_brum",

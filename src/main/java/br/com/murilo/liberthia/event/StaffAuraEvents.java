@@ -114,6 +114,8 @@ public final class StaffAuraEvents {
     // ---------------------------------------------------------------- magnetic
     private static void tickMagnetic(ServerLevel sl, ServerPlayer p, ItemStack stack) {
         if (!StaffActiveLogic.isActive(stack, sl)) return;
+        // Otimização: scan/pull a cada 2 ticks (imperceptível, corta metade do custo).
+        if (p.tickCount % 2 != 0) return;
 
         Vec3 c = p.position().add(0, 0.8, 0);
         AABB box = new AABB(p.position(), p.position()).inflate(6.0);

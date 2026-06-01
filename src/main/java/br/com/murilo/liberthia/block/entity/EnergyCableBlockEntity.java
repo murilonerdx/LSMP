@@ -57,7 +57,7 @@ public class EnergyCableBlockEntity extends BlockEntity {
         setChanged();
         if (level != null && !level.isClientSide()) {
             // Log INFO (não debug) pra aparecer sem precisar habilitar debug logs
-            br.com.murilo.liberthia.LiberthiaMod.LOGGER.info(
+            br.com.murilo.liberthia.LiberthiaMod.LOGGER.debug(
                     "[Liberthia] Cable {} face {} -> {}, disabledFaces={}",
                     worldPosition, d.getName(), next, disabledFaces);
 

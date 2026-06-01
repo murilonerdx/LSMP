@@ -3622,6 +3622,70 @@ public final class ManualContent {
                                     + "§73. Joga reagentes (varia por ritual)\n"
                                     + "§74. Entidade aparece — derrota pra ganhar drops\n\n"
                                     + "§c§lAviso:§r §7entidades malignas têm chance de §lritual falhar§r §7e te dar uma maldição correspondente. Use Mind Ward pra proteção!")
+            )),
+
+            // ============================================================
+            // r164: Capítulo novo — Items/Blocos mágicos que não tinham doc
+            // ============================================================
+            new Chapter("§dRecursos Mágicos AN", List.of(
+                    new Page("§dSpirit Conduit",
+                            "§7§lO que é:§r §7bloco que canaliza energia espiritual de outros blocos AN. "
+                                    + "Funciona como §dnó central§r de rede de Source.\n\n"
+                                    + "§7§lComo usar:§r\n"
+                                    + "§71. Coloca no centro de onde quer canalizar\n"
+                                    + "§72. Source Links próximos (8 blocos) automaticamente conectam\n"
+                                    + "§73. Players parados perto recebem source passivo\n"
+                                    + "§74. Right-click pra ver capacidade atual\n\n"
+                                    + "§e§lDica:§r §7stacka com Sourcelinks formando uma 'fazenda de mana'. "
+                                    + "Volcanic + Spirit Conduit em ilha de lava = 200+ source/min passivo.",
+                            "liberthia:spirit_conduit"),
+
+                    new Page("§dSource Transmuter",
+                            "§7§lO que é:§r §7bloco que §dconverte§r um tipo de source/material em outro. "
+                                    + "Tipo arcane workbench mas pra transformar source bruto.\n\n"
+                                    + "§7§lComo usar:§r\n"
+                                    + "§71. Right-click pra abrir GUI (3 slots)\n"
+                                    + "§72. Slot 1: item de entrada (ex: arcane shard)\n"
+                                    + "§73. Slot 2: catalisador (ex: ametista, lapis, glowstone)\n"
+                                    + "§74. Slot 3: §ddiferent§r resultado baseado na combinação\n"
+                                    + "§75. Consome source da rede (precisa ter Sourcelink ou Spirit Conduit perto)\n\n"
+                                    + "§7§lExemplos:§r\n"
+                                    + "§7• shard + ametista → §dprism shard§7\n"
+                                    + "§7• shard + lapis → §dlapis-infused source§7\n"
+                                    + "§7• shard + glowstone → §dgleaming source§7\n\n"
+                                    + "§c§lAviso:§r §7sem source disponível, não converte — vai mostrar §c'Sem Source'§7 no GUI.",
+                            "liberthia:source_transmuter"),
+
+                    new Page("§dGlyph Inscription",
+                            "§7§lO que é:§r §7equivalente à §dScribes Table§r mas focado em inscrever §dGlyphs avançados§r "
+                                    + "que precisam de ingredientes raros pra gravar.\n\n"
+                                    + "§7§lComo usar:§r\n"
+                                    + "§71. Coloca pergaminho vazio no slot esquerdo\n"
+                                    + "§72. Coloca §a1+ Glyph§r na fileira do meio (qualquer combinação)\n"
+                                    + "§73. Olha a lista de §dreceitas disponíveis§r na barra lateral\n"
+                                    + "§74. Click numa receita pra ver §ditem necessário§r + §dingredientes§r\n"
+                                    + "§75. Adiciona os items, pega o output\n\n"
+                                    + "§e§lDica:§r §7se a receita não aparece, falta algum glyph básico — "
+                                    + "pelo menos 1 Method (projétil/toque/self) é recomendado.\n\n"
+                                    + "§7Diferente da Scribes Table normal, este suporta §dglyphs de boss§r "
+                                    + "(Wilden Chimera, Lich Stalker, Black Veil) que não cabem na Scribes regular.",
+                            "liberthia:glyph_inscription"),
+
+                    new Page("§dSourcelinks — Visão Geral",
+                            "§7§lO que são:§r §74 blocos que §dGERAM Source passivo§r consumindo recursos do ambiente.\n\n"
+                                    + "§7§lComo funciona (todos):§r\n"
+                                    + "§7• Tickam a cada 3 segundos\n"
+                                    + "§7• Acumulam até a capacidade interna (1000 source)\n"
+                                    + "§7• §aDistribuem ~5 source/tick§r pros players num raio de §a8 blocos§r\n"
+                                    + "§7• Right-click pra ver source/capacidade + dica de geração\n\n"
+                                    + "§7§lTipos:§r\n"
+                                    + "§c• Volcanic§r §7— consome §clava§r adjacente (10% chance/tick vira basalt)\n"
+                                    + "§2• Mycelial§r §7— consome §2micélio§r + crescimento de fungos\n"
+                                    + "§c• Vitalic§r §7— consome HP de §cmobs próximos§r\n"
+                                    + "§d• Alchemical§r §7— consome §dpoções/items mágicos§r jogados em cima\n"
+                                    + "§6• Agronomic§r §7— consome §6crops maduros§r adjacentes\n\n"
+                                    + "§e§lSetup recomendado:§r §7Volcanic numa ilha de lava + 4 Spirit Conduits "
+                                    + "em volta = farm de source praticamente infinita.")
             ))
     );
 

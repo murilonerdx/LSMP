@@ -270,6 +270,33 @@ public final class ModNetwork {
                 ClearMatterTeleportC2SPacket::handle
         );
 
+        // Neblinas de terror (zonas de fog) — sync server->client
+        CHANNEL.registerMessage(
+                packetId++,
+                FogZonesSyncS2CPacket.class,
+                FogZonesSyncS2CPacket::encode,
+                FogZonesSyncS2CPacket::decode,
+                FogZonesSyncS2CPacket::handle
+        );
+
+        // Quarta parede — dispara efeito meta no client (morte/F3/crosshair/crash)
+        CHANNEL.registerMessage(
+                packetId++,
+                FourthWallTriggerS2CPacket.class,
+                FourthWallTriggerS2CPacket::encode,
+                FourthWallTriggerS2CPacket::decode,
+                FourthWallTriggerS2CPacket::handle
+        );
+
+        // Névoa pessoal — névoa de visão que segue UM player (só ele vê)
+        CHANNEL.registerMessage(
+                packetId++,
+                PersonalFogS2CPacket.class,
+                PersonalFogS2CPacket::encode,
+                PersonalFogS2CPacket::decode,
+                PersonalFogS2CPacket::handle
+        );
+
         // --- v1: Vision Swap (White Matter ≥ 50 random pick) ---
         CHANNEL.registerMessage(
                 packetId++,
@@ -454,6 +481,15 @@ public final class ModNetwork {
                 br.com.murilo.liberthia.cosmic.hallucination.HallucinationS2CPacket::handle
         );
 
+        // r173: Scare — quebra de 4ª parede (alert/crash/kick/shake/static/flash)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.cosmic.scare.ScareS2CPacket.class,
+                br.com.murilo.liberthia.cosmic.scare.ScareS2CPacket::encode,
+                br.com.murilo.liberthia.cosmic.scare.ScareS2CPacket::decode,
+                br.com.murilo.liberthia.cosmic.scare.ScareS2CPacket::handle
+        );
+
         // r50: Caretaker Console packets — start/stop fake msg session
         CHANNEL.registerMessage(
                 packetId++,
@@ -587,6 +623,40 @@ public final class ModNetwork {
                 br.com.murilo.liberthia.magic.grimoire.SelectGrimoireSlotC2SPacket::handle
         );
 
+        // r164: Arcane Workbench — set custom spell name
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.workbench.SetSpellNameC2SPacket.class,
+                br.com.murilo.liberthia.magic.workbench.SetSpellNameC2SPacket::encode,
+                br.com.murilo.liberthia.magic.workbench.SetSpellNameC2SPacket::decode,
+                br.com.murilo.liberthia.magic.workbench.SetSpellNameC2SPacket::handle
+        );
+
+        // r164: Class Pedestal — abrir UI + selecionar classe
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.mageclass.OpenClassPedestalS2CPacket.class,
+                br.com.murilo.liberthia.magic.mageclass.OpenClassPedestalS2CPacket::encode,
+                br.com.murilo.liberthia.magic.mageclass.OpenClassPedestalS2CPacket::decode,
+                br.com.murilo.liberthia.magic.mageclass.OpenClassPedestalS2CPacket::handle
+        );
+
+        // r164: BlockInfoScreen genérica — pros blocos sem GUI dedicada
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.OpenBlockInfoS2CPacket.class,
+                br.com.murilo.liberthia.network.packet.OpenBlockInfoS2CPacket::encode,
+                br.com.murilo.liberthia.network.packet.OpenBlockInfoS2CPacket::decode,
+                br.com.murilo.liberthia.network.packet.OpenBlockInfoS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.mageclass.SelectClassC2SPacket.class,
+                br.com.murilo.liberthia.magic.mageclass.SelectClassC2SPacket::encode,
+                br.com.murilo.liberthia.magic.mageclass.SelectClassC2SPacket::decode,
+                br.com.murilo.liberthia.magic.mageclass.SelectClassC2SPacket::handle
+        );
+
         // r164: Unified HUD positions — sync per-player, persistente no NBT do player
         CHANNEL.registerMessage(
                 packetId++,
@@ -608,6 +678,129 @@ public final class ModNetwork {
                 br.com.murilo.liberthia.client.hud.unified.OpenHudEditorS2CPacket::encode,
                 br.com.murilo.liberthia.client.hud.unified.OpenHudEditorS2CPacket::decode,
                 br.com.murilo.liberthia.client.hud.unified.OpenHudEditorS2CPacket::handle
+        );
+
+        // r164: Inscription Table — client clicou numa recipe entry
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.magic.scribe.SelectInscriptionRecipeC2SPacket.class,
+                br.com.murilo.liberthia.magic.scribe.SelectInscriptionRecipeC2SPacket::encode,
+                br.com.murilo.liberthia.magic.scribe.SelectInscriptionRecipeC2SPacket::decode,
+                br.com.murilo.liberthia.magic.scribe.SelectInscriptionRecipeC2SPacket::handle
+        );
+
+        // Mapa Invertido — ativa a "visão invertida" (post-shader) por X ticks
+        CHANNEL.registerMessage(
+                packetId++,
+                InvertedVisionS2CPacket.class,
+                InvertedVisionS2CPacket::encode,
+                InvertedVisionS2CPacket::decode,
+                InvertedVisionS2CPacket::handle
+        );
+
+        // Walkie Talkie — tela do código secreto (S2C) + salvar (C2S)
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenWalkieScreenS2CPacket.class,
+                OpenWalkieScreenS2CPacket::encode,
+                OpenWalkieScreenS2CPacket::decode,
+                OpenWalkieScreenS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                SetWalkieFreqC2SPacket.class,
+                SetWalkieFreqC2SPacket::encode,
+                SetWalkieFreqC2SPacket::decode,
+                SetWalkieFreqC2SPacket::handle
+        );
+
+        // Computador — abrir terminal (S2C) + salvar arquivos (C2S)
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenComputerScreenS2CPacket.class,
+                OpenComputerScreenS2CPacket::encode,
+                OpenComputerScreenS2CPacket::decode,
+                OpenComputerScreenS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                SaveComputerC2SPacket.class,
+                SaveComputerC2SPacket::encode,
+                SaveComputerC2SPacket::decode,
+                SaveComputerC2SPacket::handle
+        );
+
+        // Matter Analyzer → exporta leitura pro Computador adjacente
+        CHANNEL.registerMessage(
+                packetId++,
+                AnalyzerToComputerC2SPacket.class,
+                AnalyzerToComputerC2SPacket::encode,
+                AnalyzerToComputerC2SPacket::decode,
+                AnalyzerToComputerC2SPacket::handle
+        );
+
+        // Computador (bloco) — abrir tela + login + config + imprimir + HD
+        CHANNEL.registerMessage(
+                packetId++,
+                OpenComputerBlockS2CPacket.class,
+                OpenComputerBlockS2CPacket::encode,
+                OpenComputerBlockS2CPacket::decode,
+                OpenComputerBlockS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                ComputerLoginC2SPacket.class,
+                ComputerLoginC2SPacket::encode,
+                ComputerLoginC2SPacket::decode,
+                ComputerLoginC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                ComputerConfigC2SPacket.class,
+                ComputerConfigC2SPacket::encode,
+                ComputerConfigC2SPacket::decode,
+                ComputerConfigC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                ComputerPrintC2SPacket.class,
+                ComputerPrintC2SPacket::encode,
+                ComputerPrintC2SPacket::decode,
+                ComputerPrintC2SPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                ComputerHdC2SPacket.class,
+                ComputerHdC2SPacket::encode,
+                ComputerHdC2SPacket::decode,
+                ComputerHdC2SPacket::handle
+        );
+
+        // Impressora — imprime relatório do Computador vizinho num livro
+        CHANNEL.registerMessage(
+                packetId++,
+                PrinterPrintC2SPacket.class,
+                PrinterPrintC2SPacket::encode,
+                PrinterPrintC2SPacket::decode,
+                PrinterPrintC2SPacket::handle
+        );
+
+        // Computador — inserir/ejetar HD do slot
+        CHANNEL.registerMessage(
+                packetId++,
+                ComputerHdSlotC2SPacket.class,
+                ComputerHdSlotC2SPacket::encode,
+                ComputerHdSlotC2SPacket::decode,
+                ComputerHdSlotC2SPacket::handle
+        );
+
+        // r178: Câmera — manda o cliente capturar a tela como foto (APPEND-ONLY: fim da lista)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.CapturePhotoS2CPacket.class,
+                br.com.murilo.liberthia.network.packet.CapturePhotoS2CPacket::encode,
+                br.com.murilo.liberthia.network.packet.CapturePhotoS2CPacket::decode,
+                br.com.murilo.liberthia.network.packet.CapturePhotoS2CPacket::handle
         );
     }
 

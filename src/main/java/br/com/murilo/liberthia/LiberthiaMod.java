@@ -39,6 +39,7 @@ public class LiberthiaMod {
         ModBlockEntities.register(modBus);
         ModMenuTypes.register(modBus);
         ModCreativeTabs.register(modBus);
+        ModRecipes.register(modBus);
 
         modBus.addListener(this::commonSetup);
         modBus.register(ModConfigEvents.class);
@@ -130,6 +131,11 @@ public class LiberthiaMod {
         // + conversão TNT (DarkMatterShard → YellowMatterIngot via explosão).
         // Permite progression sem depender só de minérios raros.
         MinecraftForge.EVENT_BUS.register(new br.com.murilo.liberthia.event.MatterDropEvents());
+
+        // r177/r178: AfkObserverManager, BlinkInDarkManager, IdolManager, IdolCommand,
+        // HauntDirector, DarkFearManager, SoundMimicManager, NightmareSleepManager —
+        // todos @Mod.EventBusSubscriber (auto-registram no FORGE bus). NÃO registrar
+        // manualmente aqui também (causava registro DUPLO = timers contando em dobro).
 
         ModParticles.PARTICLE_TYPES.register(modBus);
     }
