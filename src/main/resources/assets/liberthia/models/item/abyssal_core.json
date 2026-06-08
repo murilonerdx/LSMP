@@ -1,0 +1,12 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "liberthia:item/abyssal_core"
+  },
+  "overrides": [
+    {
+      "predicate": { "liberthia:crystallized": 1.0 },
+      "model": "liberthia:item/abyssal_core_crystallized"
+    }
+  ]
+}
