@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "liberthia:block/imbuement_table_top",
+    "bottom": "liberthia:block/imbuement_table_bottom",
+    "side": "liberthia:block/imbuement_table_side"
+  }
+}

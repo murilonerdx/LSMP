@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "liberthia:block/computador_top",
+    "bottom": "liberthia:block/computador_top",
+    "side": "liberthia:block/computador"
+  }
+}

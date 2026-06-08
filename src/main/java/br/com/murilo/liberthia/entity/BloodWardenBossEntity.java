@@ -83,6 +83,9 @@ public class BloodWardenBossEntity extends Monster {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        // r179: caça a facção da ORDEM (Paladinos) proativamente
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, net.minecraft.world.entity.Mob.class, 10, true, false,
+                e -> br.com.murilo.liberthia.faction.FactionTag.get(e) == br.com.murilo.liberthia.faction.Faction.ORDER));
     }
 
     @Override

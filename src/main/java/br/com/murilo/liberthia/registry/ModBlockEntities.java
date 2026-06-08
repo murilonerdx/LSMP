@@ -15,6 +15,36 @@ public final class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<PurificationBenchBlockEntity>> PURIFICATION_BENCH = BLOCK_ENTITIES.register("purification_bench",
             () -> BlockEntityType.Builder.of(PurificationBenchBlockEntity::new, ModBlocks.PURIFICATION_BENCH.get()).build(null));
 
+    // r180: Motor de Entropia
+    public static final RegistryObject<BlockEntityType<EntropyEngineBlockEntity>> ENTROPY_ENGINE =
+            BLOCK_ENTITIES.register("entropy_engine",
+                    () -> BlockEntityType.Builder.of(EntropyEngineBlockEntity::new, ModBlocks.ENTROPY_ENGINE.get()).build(null));
+
+    // r180b: Âncora de Realidade
+    public static final RegistryObject<BlockEntityType<RealityAnchorBlockEntity>> REALITY_ANCHOR =
+            BLOCK_ENTITIES.register("reality_anchor",
+                    () -> BlockEntityType.Builder.of(RealityAnchorBlockEntity::new, ModBlocks.REALITY_ANCHOR.get()).build(null));
+
+    // r180b: Raio Estabilizador
+    public static final RegistryObject<BlockEntityType<StabilizerBeamBlockEntity>> STABILIZER_BEAM =
+            BLOCK_ENTITIES.register("stabilizer_beam",
+                    () -> BlockEntityType.Builder.of(StabilizerBeamBlockEntity::new, ModBlocks.STABILIZER_BEAM.get()).build(null));
+
+    // r180b: Reator de Sanidade
+    public static final RegistryObject<BlockEntityType<SanityReactorBlockEntity>> SANITY_REACTOR =
+            BLOCK_ENTITIES.register("sanity_reactor",
+                    () -> BlockEntityType.Builder.of(SanityReactorBlockEntity::new, ModBlocks.SANITY_REACTOR.get()).build(null));
+
+    // r180b: Sifão de Fenda
+    public static final RegistryObject<BlockEntityType<RiftSiphonBlockEntity>> RIFT_SIPHON =
+            BLOCK_ENTITIES.register("rift_siphon",
+                    () -> BlockEntityType.Builder.of(RiftSiphonBlockEntity::new, ModBlocks.RIFT_SIPHON.get()).build(null));
+
+    // r180: Pilar Protetor (anti-magia)
+    public static final RegistryObject<BlockEntityType<WardPillarBlockEntity>> WARD_PILLAR =
+            BLOCK_ENTITIES.register("ward_pillar",
+                    () -> BlockEntityType.Builder.of(WardPillarBlockEntity::new, ModBlocks.WARD_PILLAR.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<RitualPedestalBlockEntity>> RITUAL_PEDESTAL =
             BLOCK_ENTITIES.register("ritual_pedestal",
                     () -> BlockEntityType.Builder.of(
@@ -353,6 +383,11 @@ public final class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(
                             br.com.murilo.liberthia.magic.scribe.ScrollForgeBlockEntity::new,
                             ModBlocks.SCROLL_FORGE.get()).build(null));
+
+    // r185 — Forja de Fendas
+    public static final RegistryObject<BlockEntityType<RiftForgeBlockEntity>> RIFT_FORGE =
+            BLOCK_ENTITIES.register("rift_forge",
+                    () -> BlockEntityType.Builder.of(RiftForgeBlockEntity::new, ModBlocks.RIFT_FORGE.get()).build(null));
 
     private ModBlockEntities() {
     }

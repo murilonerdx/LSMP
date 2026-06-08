@@ -57,14 +57,20 @@ public class LiberthiaManualScreen extends Screen {
     private record SearchHit(int chapterIdx, int pageIdx, String chapterTitle,
                               String pageTitle, String snippet) {}
 
-    public LiberthiaManualScreen() {
+    /** r180: categoria do livro temático (ALL = manual completo). */
+    private final ManualContent.Category category;
+
+    public LiberthiaManualScreen() { this(ManualContent.Category.ALL); }
+
+    public LiberthiaManualScreen(ManualContent.Category category) {
         super(Component.translatable("item.liberthia.liberthia_manual"));
+        this.category = category == null ? ManualContent.Category.ALL : category;
     }
 
     private List<ManualContent.Chapter> getChapters() {
         try {
             String lang = Minecraft.getInstance().getLanguageManager().getSelected();
-            return ManualContent.chaptersForLocale(lang);
+            return ManualContent.chaptersFor(lang, category);
         } catch (Throwable t) {
             return ManualContent.CHAPTERS;
         }

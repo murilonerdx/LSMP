@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "liberthia:item/factory_spell_scroll_blood_moon_aura"
+  }
+}

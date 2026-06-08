@@ -1,0 +1,7 @@
+{
+  "parent": "liberthia:block/source_jar_template",
+  "textures": {
+    "side": "liberthia:block/source_jar_9",
+    "particle": "liberthia:block/source_jar_9"
+  }
+}

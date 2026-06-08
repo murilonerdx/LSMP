@@ -1,12 +1,5 @@
 package br.com.murilo.liberthia.faction;
 
-import br.com.murilo.liberthia.entity.BloodCultistEntity;
-import br.com.murilo.liberthia.entity.BloodOrbEntity;
-import br.com.murilo.liberthia.entity.BloodPriestEntity;
-import br.com.murilo.liberthia.entity.BloodWormEntity;
-import br.com.murilo.liberthia.entity.FleshCrawlerEntity;
-import br.com.murilo.liberthia.entity.GoreWormEntity;
-import br.com.murilo.liberthia.entity.WoundedPilgrimEntity;
 import net.minecraft.world.entity.Entity;
 
 /**
@@ -18,14 +11,10 @@ public final class FactionTag {
 
     public static Faction get(Entity e) {
         if (e == null) return Faction.NEUTRAL;
-        if (e instanceof BloodCultistEntity
-                || e instanceof BloodPriestEntity
-                || e instanceof WoundedPilgrimEntity
-                || e instanceof BloodWormEntity
-                || e instanceof FleshCrawlerEntity
-                || e instanceof GoreWormEntity
-                || e instanceof BloodOrbEntity
-                || e instanceof br.com.murilo.liberthia.entity.FleshMotherBossEntity) {
+        // r179: usa a lista canônica do BloodKin (inclui BloodMage, BloodHound,
+        // BloodWarden, WeavingShade, Disarmer). Antes FactionTag estava dessincronizado
+        // → o Paladino não reconhecia metade da facção de sangue como inimiga (#64-66).
+        if (br.com.murilo.liberthia.logic.BloodKin.is(e)) {
             return Faction.BLOOD;
         }
         if (e instanceof br.com.murilo.liberthia.entity.OrderPaladinEntity) {

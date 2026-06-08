@@ -44,16 +44,18 @@ public class TrackerDataS2CPacket {
     }
 
     public static void handle(TrackerDataS2CPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> handleClient(msg));
-        });
+        ctx.get().enqueueWork(() ->
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> Client.apply(msg)));
         ctx.get().setPacketHandled(true);
     }
 
-    private static void handleClient(TrackerDataS2CPacket msg) {
-        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-        if (mc.screen instanceof TrackerScreen screen) {
-            screen.updateData(msg.name, msg.x, msg.y, msg.z, msg.dimension, msg.signalLost);
+    /** Client-only — classe SEPARADA: o servidor nunca verifica refs de client. */
+    private static final class Client {
+        static void apply(TrackerDataS2CPacket msg) {
+            net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+            if (mc.screen instanceof TrackerScreen screen) {
+                screen.updateData(msg.name, msg.x, msg.y, msg.z, msg.dimension, msg.signalLost);
+            }
         }
     }
 }

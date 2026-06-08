@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "liberthia:block/scribes_table_top",
+    "bottom": "liberthia:block/scribes_table_side",
+    "side": "liberthia:block/scribes_table_side"
+  }
+}

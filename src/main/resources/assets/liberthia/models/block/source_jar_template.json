@@ -1,0 +1,63 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "side": "liberthia:block/source_jar_0",
+    "top": "liberthia:block/source_jar_top",
+    "bottom": "liberthia:block/source_jar_bottom",
+    "particle": "liberthia:block/source_jar_0"
+  },
+  "elements": [
+    {
+      "from": [2, 0, 2],
+      "to": [14, 2, 14],
+      "comment": "Base do jarro (mais larga)",
+      "faces": {
+        "down":  {"texture": "#bottom", "uv": [2, 2, 14, 14]},
+        "up":    {"texture": "#bottom", "uv": [2, 2, 14, 14]},
+        "north": {"texture": "#side", "uv": [2, 14, 14, 16]},
+        "south": {"texture": "#side", "uv": [2, 14, 14, 16]},
+        "east":  {"texture": "#side", "uv": [2, 14, 14, 16]},
+        "west":  {"texture": "#side", "uv": [2, 14, 14, 16]}
+      }
+    },
+    {
+      "from": [3, 2, 3],
+      "to": [13, 13, 13],
+      "comment": "Corpo do jarro (vidro)",
+      "faces": {
+        "down":  {"texture": "#bottom"},
+        "up":    {"texture": "#bottom"},
+        "north": {"texture": "#side", "uv": [3, 3, 13, 14]},
+        "south": {"texture": "#side", "uv": [3, 3, 13, 14]},
+        "east":  {"texture": "#side", "uv": [3, 3, 13, 14]},
+        "west":  {"texture": "#side", "uv": [3, 3, 13, 14]}
+      }
+    },
+    {
+      "from": [5, 13, 5],
+      "to": [11, 14, 11],
+      "comment": "Pescoço (mais estreito)",
+      "faces": {
+        "down":  {"texture": "#bottom"},
+        "up":    {"texture": "#bottom"},
+        "north": {"texture": "#side", "uv": [5, 2, 11, 3]},
+        "south": {"texture": "#side", "uv": [5, 2, 11, 3]},
+        "east":  {"texture": "#side", "uv": [5, 2, 11, 3]},
+        "west":  {"texture": "#side", "uv": [5, 2, 11, 3]}
+      }
+    },
+    {
+      "from": [4, 14, 4],
+      "to": [12, 16, 12],
+      "comment": "Tampa de rolha",
+      "faces": {
+        "down":  {"texture": "#top"},
+        "up":    {"texture": "#top"},
+        "north": {"texture": "#top", "uv": [4, 0, 12, 2]},
+        "south": {"texture": "#top", "uv": [4, 0, 12, 2]},
+        "east":  {"texture": "#top", "uv": [4, 0, 12, 2]},
+        "west":  {"texture": "#top", "uv": [4, 0, 12, 2]}
+      }
+    }
+  ]
+}

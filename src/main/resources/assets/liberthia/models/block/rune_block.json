@@ -1,0 +1,21 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "rune": "liberthia:block/rune_block",
+    "particle": "liberthia:block/rune_block"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 1, 16],
+      "faces": {
+        "up":    {"texture": "#rune"},
+        "down":  {"texture": "#rune"},
+        "north": {"texture": "#rune", "uv": [0, 14, 16, 16]},
+        "south": {"texture": "#rune", "uv": [0, 14, 16, 16]},
+        "east":  {"texture": "#rune", "uv": [0, 14, 16, 16]},
+        "west":  {"texture": "#rune", "uv": [0, 14, 16, 16]}
+      }
+    }
+  ]
+}

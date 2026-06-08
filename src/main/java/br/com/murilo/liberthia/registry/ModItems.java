@@ -106,6 +106,78 @@ public final class ModItems {
     public static final RegistryObject<Item> DARK_MATTER_BUCKET = ITEMS.register("dark_matter_bucket",
             () -> new BucketItem(ModFluids.DARK_MATTER.get(), new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
+    // r184 — Soro Dimensional: cura das doenças dimensionais
+    public static final RegistryObject<Item> DIMENSIONAL_SERUM = ITEMS.register("dimensional_serum",
+            () -> new br.com.murilo.liberthia.item.DimensionalSerumItem(new Item.Properties().stacksTo(8)));
+
+    // r187 — Escala de Astaron (medidor de radiação + cósmicos)
+    public static final RegistryObject<Item> ASTARON_SCALE = ITEMS.register("astaron_scale",
+            () -> new br.com.murilo.liberthia.item.AstaronScaleItem(new Item.Properties().stacksTo(1)));
+
+    // r191 — drop do Astrônomo Cego
+    public static final RegistryObject<Item> CONSTELLATION_CORE = ITEMS.register("constellation_core",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> BLIND_ASTRONOMER_SPAWN_EGG = ITEMS.register("blind_astronomer_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.BLIND_ASTRONOMER, 0x0A0A28, 0x88CCFF,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // r192 — drop da Colmeia Rainha
+    public static final RegistryObject<Item> HIVE_HEART = ITEMS.register("hive_heart",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> HIVE_QUEEN_SPAWN_EGG = ITEMS.register("hive_queen_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.HIVE_QUEEN, 0x1E2A14, 0x9AE060,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // r194 — Equipamentos dos chefes
+    private static net.minecraft.world.item.Item astralArmor(net.minecraft.world.item.ArmorItem.Type t) {
+        return new net.minecraft.world.item.ArmorItem(br.com.murilo.liberthia.item.AstralArmorMaterial.INSTANCE, t,
+                new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant());
+    }
+    private static net.minecraft.world.item.Item parasiticArmor(net.minecraft.world.item.ArmorItem.Type t) {
+        return new net.minecraft.world.item.ArmorItem(br.com.murilo.liberthia.item.ParasiticArmorMaterial.INSTANCE, t,
+                new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant());
+    }
+    public static final RegistryObject<Item> ASTRAL_HELMET = ITEMS.register("astral_helmet", () -> astralArmor(net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> ASTRAL_CHESTPLATE = ITEMS.register("astral_chestplate", () -> astralArmor(net.minecraft.world.item.ArmorItem.Type.CHESTPLATE));
+    public static final RegistryObject<Item> ASTRAL_LEGGINGS = ITEMS.register("astral_leggings", () -> astralArmor(net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> ASTRAL_BOOTS = ITEMS.register("astral_boots", () -> astralArmor(net.minecraft.world.item.ArmorItem.Type.BOOTS));
+    public static final RegistryObject<Item> PARASITIC_HELMET = ITEMS.register("parasitic_helmet", () -> parasiticArmor(net.minecraft.world.item.ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> PARASITIC_CHESTPLATE = ITEMS.register("parasitic_chestplate", () -> parasiticArmor(net.minecraft.world.item.ArmorItem.Type.CHESTPLATE));
+    public static final RegistryObject<Item> PARASITIC_LEGGINGS = ITEMS.register("parasitic_leggings", () -> parasiticArmor(net.minecraft.world.item.ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> PARASITIC_BOOTS = ITEMS.register("parasitic_boots", () -> parasiticArmor(net.minecraft.world.item.ArmorItem.Type.BOOTS));
+    public static final RegistryObject<Item> GRAVITY_STAFF = ITEMS.register("gravity_staff", () -> new br.com.murilo.liberthia.item.GravityStaffItem(new Item.Properties()));
+    public static final RegistryObject<Item> DIMENSIONAL_TELESCOPE = ITEMS.register("dimensional_telescope", () -> new br.com.murilo.liberthia.item.DimensionalTelescopeItem(new Item.Properties()));
+    public static final RegistryObject<Item> PARASITIC_PICKAXE = ITEMS.register("parasitic_pickaxe", br.com.murilo.liberthia.item.ParasiticToolItems.Pickaxe::new);
+    public static final RegistryObject<Item> PARASITIC_SWORD = ITEMS.register("parasitic_sword", br.com.murilo.liberthia.item.ParasiticToolItems.Sword::new);
+    public static final RegistryObject<Item> PARASITIC_AXE = ITEMS.register("parasitic_axe", br.com.murilo.liberthia.item.ParasiticToolItems.Axe::new);
+    public static final RegistryObject<Item> LIVING_BACKPACK = ITEMS.register("living_backpack", () -> new br.com.murilo.liberthia.item.LivingBackpackItem(new Item.Properties()));
+
+    // r195 — 10 Relíquias de Astaron (loot-only, buffs anti-cósmico, slot Curios)
+    private static RegistryObject<Item> relic(String id, String desc) {
+        return ITEMS.register(id, () -> new br.com.murilo.liberthia.item.AstaronRelicItem(desc));
+    }
+    public static final RegistryObject<Item> ASTARON_EYE_RELIC = relic("astaron_eye_relic", "Visão noturna + revela criaturas cósmicas próximas (colar).");
+    public static final RegistryObject<Item> ASTARON_MIND_AMULET = relic("astaron_mind_amulet", "Regenera sanidade + Resistência (colar).");
+    public static final RegistryObject<Item> ASTARON_HUNTER_GAUNTLET = relic("astaron_hunter_gauntlet", "+150% de dano contra criaturas cósmicas (mãos).");
+    public static final RegistryObject<Item> ASTARON_WARDEN_SASH = relic("astaron_warden_sash", "+Vida máxima + Resistência (cinto).");
+    public static final RegistryObject<Item> ASTARON_VOID_TREADS = relic("astaron_void_treads", "Queda lenta + cósmicos não te perseguem (pés).");
+    public static final RegistryObject<Item> ASTARON_MIRROR_RING = relic("astaron_mirror_ring", "Reflete 40% do dano cósmico (anel).");
+    public static final RegistryObject<Item> ASTARON_FACELESS_CROWN = relic("astaron_faceless_crown", "Imune a dreno de sanidade por ver cósmicos + pacifica (cabeça).");
+    public static final RegistryObject<Item> ASTARON_ESSENCE_RELIC = relic("astaron_essence_relic", "Regeneração + Absorção constantes (amuleto).");
+    public static final RegistryObject<Item> ASTARON_VOID_CORE = relic("astaron_void_core", "Força + Pressa (bracelete).");
+    public static final RegistryObject<Item> ASTARON_STAR_PENDANT = relic("astaron_star_pendant", "Imune a fogo/afogamento/Wither/Veneno (amuleto).");
+
+    // r185 — Adaga Corta-Fendas (3 níveis)
+    public static final RegistryObject<Item> RIFT_CUTTER_T1 = ITEMS.register("rift_cutter_t1",
+            () -> new br.com.murilo.liberthia.item.RiftCutterItem(br.com.murilo.liberthia.item.RiftTier.OVERWORLD_ONLY,
+                    new Item.Properties().durability(1024).rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> RIFT_CUTTER_T2 = ITEMS.register("rift_cutter_t2",
+            () -> new br.com.murilo.liberthia.item.RiftCutterItem(br.com.murilo.liberthia.item.RiftTier.OVERWORLD_NETHER,
+                    new Item.Properties().durability(2048).rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> RIFT_CUTTER_T3 = ITEMS.register("rift_cutter_t3",
+            () -> new br.com.murilo.liberthia.item.RiftCutterItem(br.com.murilo.liberthia.item.RiftTier.ALL_DIMENSIONS,
+                    new Item.Properties().durability(4096).rarity(net.minecraft.world.item.Rarity.EPIC)));
+
     public static final RegistryObject<Item> CLEAR_MATTER_INJECTOR = ITEMS.register("clear_matter_injector",
             () -> new ClearMatterInjectorItem(new Item.Properties().stacksTo(16)));
 
@@ -336,6 +408,20 @@ public final class ModItems {
     public static final RegistryObject<Item> LIBERTHIA_MANUAL = ITEMS.register("liberthia_manual",
             () -> new br.com.murilo.liberthia.item.LiberthiaManualItem(
                     new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r180: manual dividido em 3 tomos temáticos (horror / matéria & máquinas / magia)
+    public static final RegistryObject<Item> CODEX_COSMIC = ITEMS.register("codex_cosmic",
+            () -> new br.com.murilo.liberthia.item.ThemedManualItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.manual.ManualContent.Category.COSMIC, "Tomo do Horror Cósmico"));
+    public static final RegistryObject<Item> CODEX_MATTER = ITEMS.register("codex_matter",
+            () -> new br.com.murilo.liberthia.item.ThemedManualItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.manual.ManualContent.Category.MATTER, "Tomo das Matérias & Máquinas"));
+    public static final RegistryObject<Item> CODEX_MAGIC = ITEMS.register("codex_magic",
+            () -> new br.com.murilo.liberthia.item.ThemedManualItem(
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE),
+                    br.com.murilo.liberthia.manual.ManualContent.Category.MAGIC, "Tomo da Magia"));
 
     public static final RegistryObject<Item> BATTERY_BASIC_ITEM = ITEMS.register("dm_battery_basic",
             () -> new BlockItem(ModBlocks.BATTERY_BASIC.get(), new Item.Properties()
@@ -894,6 +980,126 @@ public final class ModItems {
                     () -> new net.minecraftforge.common.ForgeSpawnEggItem(
                             ModEntities.MULHER_HORIZONTE, 0x1A1A22, 0x884466,
                             new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r180: O Observado + Pastor do Silêncio (spawn eggs) + artefatos divinos
+    public static final RegistryObject<Item> O_OBSERVADO_SPAWN_EGG = ITEMS.register("o_observado_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.O_OBSERVADO, 0x301E3C, 0xFFDC46,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> SILENCE_SHEPHERD_SPAWN_EGG = ITEMS.register("silence_shepherd_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.SILENCE_SHEPHERD, 0x787C82, 0x3C3E44,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> ASCENSION_SEAL = ITEMS.register("ascension_seal",
+            () -> new br.com.murilo.liberthia.item.AscensionSealItem(new Item.Properties()));
+    public static final RegistryObject<Item> ETERNITY_CROWN = ITEMS.register("eternity_crown",
+            () -> new br.com.murilo.liberthia.item.EternityCrownItem(new Item.Properties()));
+
+    // r180: Arquivista do Fim + Amalgamado Cego + Olho Parasita (spawn eggs)
+    public static final RegistryObject<Item> END_ARCHIVIST_SPAWN_EGG = ITEMS.register("end_archivist_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.END_ARCHIVIST, 0x26241C, 0xC8AA46,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> BLIND_AMALGAM_SPAWN_EGG = ITEMS.register("blind_amalgam_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.BLIND_AMALGAM, 0x962833, 0xEBDC78,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> PARASITIC_EYE_SPAWN_EGG = ITEMS.register("parasitic_eye_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.PARASITIC_EYE, 0xE1D7CD, 0x962828,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> CINDER_PARASITE_SPAWN_EGG = ITEMS.register("cinder_parasite_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.CINDER_PARASITE, 0x301010, 0xFF6A20,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> GAZE_LEECH_SPAWN_EGG = ITEMS.register("gaze_leech_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.GAZE_LEECH, 0x20142A, 0xA030D0,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> BLIND_WEAVER_SPAWN_EGG = ITEMS.register("blind_weaver_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.BLIND_WEAVER, 0x101018, 0x4848B0,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MAW_CRAWLER_SPAWN_EGG = ITEMS.register("maw_crawler_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.MAW_CRAWLER, 0x2A1010, 0xB02828,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> WHISPER_MITE_SPAWN_EGG = ITEMS.register("whisper_mite_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.WHISPER_MITE, 0x182018, 0x60A060,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> DREAD_ORB_SPAWN_EGG = ITEMS.register("dread_orb_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.DREAD_ORB, 0x100820, 0x6A28B0,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> FLESH_WATCHER_SPAWN_EGG = ITEMS.register("flesh_watcher_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.FLESH_WATCHER, 0x301818, 0xC05858,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> VOID_TICK_SPAWN_EGG = ITEMS.register("void_tick_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.VOID_TICK, 0x0A0A14, 0x3838A8,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> GLOOM_MOTH_SPAWN_EGG = ITEMS.register("gloom_moth_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.GLOOM_MOTH, 0x14141C, 0x484868,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ROT_EYE_SPAWN_EGG = ITEMS.register("rot_eye_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.ROT_EYE, 0x1A200A, 0x88A828,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> SCREAM_LARVA_SPAWN_EGG = ITEMS.register("scream_larva_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.SCREAM_LARVA, 0x201810, 0xD8B848,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MIRROR_SPAWN_SPAWN_EGG = ITEMS.register("mirror_spawn_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.MIRROR_SPAWN, 0x181820, 0x8888C8,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> PARASITE_HOST_SPAWN_EGG = ITEMS.register("parasite_host_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.PARASITE_HOST, 0x18200A, 0x68C838,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> COLOSSAL_EYE_SPAWN_EGG = ITEMS.register("colossal_eye_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.COLOSSAL_EYE, 0x100818, 0x9838D8,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+    // r180: Cobaia (sujeito de teste de matéria) + Amostra de Matéria
+    public static final RegistryObject<Item> COBAIA_SPAWN_EGG = ITEMS.register("cobaia_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(ModEntities.COBAIA, 0xC8C4B0, 0x78DC78,
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MATTER_SAMPLE = ITEMS.register("matter_sample",
+            () -> new br.com.murilo.liberthia.item.MatterSampleItem(new Item.Properties()));
+    public static final RegistryObject<Item> COBAIA_ANALYZER_ITEM = ITEMS.register("cobaia_analyzer",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.COBAIA_ANALYZER.get(), new Item.Properties()));
+    // r180: Âncora Mental — supressor dos impulsos da Matéria Escura
+    public static final RegistryObject<Item> MIND_ANCHOR = ITEMS.register("mind_anchor",
+            () -> new br.com.murilo.liberthia.item.MindAnchorItem(new Item.Properties()));
+    // r180: Motor de Entropia (máquina de energia metafísica)
+    public static final RegistryObject<Item> ENTROPY_ENGINE_ITEM = ITEMS.register("entropy_engine",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ENTROPY_ENGINE.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    // r180b: Âncora de Realidade (bloco estabilizador)
+    public static final RegistryObject<Item> REALITY_ANCHOR_ITEM = ITEMS.register("reality_anchor",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.REALITY_ANCHOR.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    // r180b: Raio Estabilizador (bloco) + Cristal de Foco (item) — trio de contenção
+    public static final RegistryObject<Item> STABILIZER_BEAM_ITEM = ITEMS.register("stabilizer_beam",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.STABILIZER_BEAM.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> FOCUS_CRYSTAL = ITEMS.register("focus_crystal",
+            () -> new br.com.murilo.liberthia.item.FocusCrystalItem(new Item.Properties()));
+    // r180b: Reator de Sanidade (gerador FE metafísico)
+    public static final RegistryObject<Item> SANITY_REACTOR_ITEM = ITEMS.register("sanity_reactor",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.SANITY_REACTOR.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    public static final RegistryObject<Item> RIFT_SIPHON_ITEM = ITEMS.register("rift_siphon",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.RIFT_SIPHON.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    // r180b: Pistola de Matérias (arma que mistura matérias)
+    public static final RegistryObject<Item> MATTER_PISTOL = ITEMS.register("matter_pistol",
+            () -> new br.com.murilo.liberthia.item.MatterPistolItem(new Item.Properties()));
+    // r180: Counter ao Mana and Artifice — Selo Nulo (ward) + Quebra-Feitiços (arma)
+    public static final RegistryObject<Item> NULL_SEAL = ITEMS.register("null_seal",
+            () -> new br.com.murilo.liberthia.item.NullSealItem(new Item.Properties()));
+    public static final RegistryObject<Item> SPELLBREAKER = ITEMS.register("spellbreaker",
+            () -> new br.com.murilo.liberthia.item.SpellbreakerItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    // r180: linha Antimagia — Selador (20s), Espada Anti-Magia, Pilar Protetor
+    public static final RegistryObject<Item> MAGIC_SEAL = ITEMS.register("magic_seal",
+            () -> new br.com.murilo.liberthia.item.MagicSealItem(new Item.Properties()));
+    public static final RegistryObject<Item> ANTIMAGIC_SWORD = ITEMS.register("antimagic_sword",
+            () -> new br.com.murilo.liberthia.item.AntiMagicSwordItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final RegistryObject<Item> WARD_PILLAR_ITEM = ITEMS.register("ward_pillar",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.WARD_PILLAR.get(),
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+    // r180: Lança de Varatha (arma lendária do submundo)
+    public static final RegistryObject<Item> VARATHA_SPEAR = ITEMS.register("varatha_spear",
+            () -> new br.com.murilo.liberthia.item.VarathaSpearItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).durability(1200)));
     public static final RegistryObject<Item> CACADOR_SPAWN_EGG =
             ITEMS.register("cacador_spawn_egg",
                     () -> new net.minecraftforge.common.ForgeSpawnEggItem(
@@ -1028,9 +1234,7 @@ public final class ModItems {
     public static final RegistryObject<Item> HEMOMANCER_STAFF = ITEMS.register("hemomancer_staff",
             () -> new br.com.murilo.liberthia.item.HemomancerStaffItem(
                     new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
-    public static final RegistryObject<Item> BLOOD_BOW = ITEMS.register("blood_bow",
-            () -> new br.com.murilo.liberthia.item.BloodBowItem(
-                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    // BLOOD_BOW removido (nota admin report #62) — item desregistrado.
     public static final RegistryObject<Item> BLOOD_RITUAL_DAGGER = ITEMS.register("blood_ritual_dagger",
             () -> new br.com.murilo.liberthia.item.BloodRitualDaggerItem(
                     net.minecraft.world.item.Tiers.IRON, 5, -2.0F,
@@ -1405,6 +1609,27 @@ public final class ModItems {
     public static final RegistryObject<Item> DARK_MATTER_BOOTS = ITEMS.register("dark_matter_boots",
             () -> new ArmorItem(DarkMatterArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS,
                     new Item.Properties().rarity(Rarity.EPIC)));
+
+    // r180b: conjunto ANTI-MAGIA (linha ciano) + escudo. Resistência mágica via WardFieldHandler.
+    public static final RegistryObject<Item> ANTIMAGIC_HELMET = ITEMS.register("antimagic_helmet",
+            () -> new br.com.murilo.liberthia.item.AntiMagicArmorItem(
+                    br.com.murilo.liberthia.item.AntiMagicArmorMaterial.INSTANCE, ArmorItem.Type.HELMET,
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ANTIMAGIC_CHESTPLATE = ITEMS.register("antimagic_chestplate",
+            () -> new br.com.murilo.liberthia.item.AntiMagicArmorItem(
+                    br.com.murilo.liberthia.item.AntiMagicArmorMaterial.INSTANCE, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ANTIMAGIC_LEGGINGS = ITEMS.register("antimagic_leggings",
+            () -> new br.com.murilo.liberthia.item.AntiMagicArmorItem(
+                    br.com.murilo.liberthia.item.AntiMagicArmorMaterial.INSTANCE, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ANTIMAGIC_BOOTS = ITEMS.register("antimagic_boots",
+            () -> new br.com.murilo.liberthia.item.AntiMagicArmorItem(
+                    br.com.murilo.liberthia.item.AntiMagicArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS,
+                    new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ANTIMAGIC_SHIELD = ITEMS.register("antimagic_shield",
+            () -> new br.com.murilo.liberthia.item.AntiMagicShieldItem(
+                    new Item.Properties().rarity(Rarity.RARE)));
 
     // ────────────────────────────────────────────────────────────────────
     // v1: Vision Swap Lens — espia pelos olhos de quem tem WM ≥ 50.
@@ -2512,6 +2737,23 @@ public final class ModItems {
     public static final RegistryObject<Item> ENCHANTERS_GAUNTLET = ITEMS.register("enchanters_gauntlet",
             () -> new br.com.murilo.liberthia.magic.weapon.EnchantersGauntletItem(
                     new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+
+    // r179: Abridor de Fenda Dimensional + 4 blocos de irregularidade (BlockItems)
+    public static final RegistryObject<Item> RIFT_OPENER = ITEMS.register("rift_opener",
+            () -> new br.com.murilo.liberthia.item.RiftOpenerItem(new Item.Properties()));
+    public static final RegistryObject<Item> RIFT_RESIDUE_ITEM = ITEMS.register("rift_residue",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.RIFT_RESIDUE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WARPED_SPACE_ITEM = ITEMS.register("warped_space",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.WARPED_SPACE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> VOID_SCAR_ITEM = ITEMS.register("void_scar",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.VOID_SCAR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DIMENSIONAL_FLUX_ITEM = ITEMS.register("dimensional_flux",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.DIMENSIONAL_FLUX.get(), new Item.Properties()));
+
+    // r179: Tônico de Lucidez — restaura sanidade (item de lucidez)
+    public static final RegistryObject<Item> LUCID_TONIC = ITEMS.register("lucid_tonic",
+            () -> new br.com.murilo.liberthia.item.LucidTonicItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
 
     // r101: 7 Wizard Chestplates
     public static final RegistryObject<Item> WIZARD_CHEST_FIRE = ITEMS.register("wizard_chest_fire",

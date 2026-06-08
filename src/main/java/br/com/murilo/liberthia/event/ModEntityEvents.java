@@ -18,6 +18,30 @@ public class ModEntityEvents {
 
     @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
+        // r180: novos mobs cósmicos
+        event.put(ModEntities.O_OBSERVADO.get(), br.com.murilo.liberthia.cosmic.horror.entity.ObservadoEntity.createAttributes().build());
+        event.put(ModEntities.SILENCE_SHEPHERD.get(), br.com.murilo.liberthia.cosmic.horror.entity.SilenceShepherdEntity.createAttributes().build());
+        event.put(ModEntities.END_ARCHIVIST.get(), br.com.murilo.liberthia.cosmic.horror.entity.EndArchivistEntity.createAttributes().build());
+        event.put(ModEntities.BLIND_AMALGAM.get(), br.com.murilo.liberthia.cosmic.horror.entity.BlindAmalgamEntity.createAttributes().build());
+        event.put(ModEntities.PARASITIC_EYE.get(), br.com.murilo.liberthia.cosmic.horror.entity.ParasiticEyeEntity.createAttributes().build());
+        event.put(ModEntities.CINDER_PARASITE.get(), br.com.murilo.liberthia.cosmic.horror.entity.CinderParasiteEntity.createAttributes().build());
+        event.put(ModEntities.DIMENSIONAL_WORM.get(), br.com.murilo.liberthia.cosmic.horror.entity.DimensionalWormEntity.createAttributes().build());
+        event.put(ModEntities.GAZE_LEECH.get(), br.com.murilo.liberthia.cosmic.horror.entity.GazeLeechEntity.createAttributes().build());
+        event.put(ModEntities.BLIND_WEAVER.get(), br.com.murilo.liberthia.cosmic.horror.entity.BlindWeaverEntity.createAttributes().build());
+        event.put(ModEntities.MAW_CRAWLER.get(), br.com.murilo.liberthia.cosmic.horror.entity.MawCrawlerEntity.createAttributes().build());
+        event.put(ModEntities.WHISPER_MITE.get(), br.com.murilo.liberthia.cosmic.horror.entity.WhisperMiteEntity.createAttributes().build());
+        event.put(ModEntities.DREAD_ORB.get(), br.com.murilo.liberthia.cosmic.horror.entity.DreadOrbEntity.createAttributes().build());
+        event.put(ModEntities.FLESH_WATCHER.get(), br.com.murilo.liberthia.cosmic.horror.entity.FleshWatcherEntity.createAttributes().build());
+        event.put(ModEntities.VOID_TICK.get(), br.com.murilo.liberthia.cosmic.horror.entity.VoidTickEntity.createAttributes().build());
+        event.put(ModEntities.GLOOM_MOTH.get(), br.com.murilo.liberthia.cosmic.horror.entity.GloomMothEntity.createAttributes().build());
+        event.put(ModEntities.ROT_EYE.get(), br.com.murilo.liberthia.cosmic.horror.entity.RotEyeEntity.createAttributes().build());
+        event.put(ModEntities.SCREAM_LARVA.get(), br.com.murilo.liberthia.cosmic.horror.entity.ScreamLarvaEntity.createAttributes().build());
+        event.put(ModEntities.MIRROR_SPAWN.get(), br.com.murilo.liberthia.cosmic.horror.entity.MirrorSpawnEntity.createAttributes().build());
+        event.put(ModEntities.PARASITE_HOST.get(), br.com.murilo.liberthia.cosmic.horror.entity.ParasiteHostEntity.createAttributes().build());
+        event.put(ModEntities.COLOSSAL_EYE.get(), br.com.murilo.liberthia.cosmic.horror.entity.ColossalEyeEntity.createAttributes().build());
+        event.put(ModEntities.BLIND_ASTRONOMER.get(), br.com.murilo.liberthia.entity.BlindAstronomerBossEntity.createAttributes().build());
+        event.put(ModEntities.HIVE_QUEEN.get(), br.com.murilo.liberthia.entity.HiveQueenBossEntity.createAttributes().build());
+        event.put(ModEntities.COBAIA.get(), br.com.murilo.liberthia.entity.CobaiaEntity.createAttributes().build());
         event.put(ModEntities.CORRUPTED_ZOMBIE.get(), CorruptedZombieEntity.createAttributes().build());
         event.put(ModEntities.SPORE_SPITTER.get(), SporeSpitterEntity.createAttributes().build());
         event.put(ModEntities.CLONE_PLAYER.get(), br.com.murilo.liberthia.entity.ClonePlayerEntity.createAttributes().build());

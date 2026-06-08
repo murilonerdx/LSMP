@@ -157,6 +157,22 @@ public final class ModMenuTypes {
     public static final RegistryObject<MenuType<br.com.murilo.liberthia.magic.orb.OrbInfuserMenu>> ORB_INFUSER =
             registerMenuType("orb_infuser", br.com.murilo.liberthia.magic.orb.OrbInfuserMenu::new);
 
+    // r180c: máquinas tech (GUI genérica in→out + energia + progresso)
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.TechMachineMenu>> TECH_MACHINE =
+            registerMenuType("tech_machine", br.com.murilo.liberthia.menu.TechMachineMenu::new);
+
+    // r182: GUI de energia unificada (geradores/células/carregador/reator) — energia + slot + atividade
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.TechEnergyMenu>> TECH_ENERGY =
+            registerMenuType("tech_energy", br.com.murilo.liberthia.menu.TechEnergyMenu::new);
+
+    // r184: máquinas Arcanas (framework genérico N-in/M-out + energia + progresso)
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.ArcaneMachineMenu>> ARCANE_MACHINE =
+            registerMenuType("arcane_machine", br.com.murilo.liberthia.menu.ArcaneMachineMenu::new);
+
+    // r185 — Forja de Fendas
+    public static final RegistryObject<MenuType<br.com.murilo.liberthia.menu.RiftForgeMenu>> RIFT_FORGE =
+            registerMenuType("rift_forge", br.com.murilo.liberthia.menu.RiftForgeMenu::new);
+
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

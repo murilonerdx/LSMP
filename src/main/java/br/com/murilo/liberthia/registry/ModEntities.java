@@ -87,6 +87,16 @@ public final class ModEntities {
                             .fireImmune()
                             .build("void_manifestation"));
 
+    // r179: Fenda Dimensional (rasgo animado no ar → Mundo Espiritual). MISC = sem atributos.
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.dimension.DimensionalRiftEntity>> DIMENSIONAL_RIFT =
+            ENTITY_TYPES.register("dimensional_rift",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.dimension.DimensionalRiftEntity>of(
+                                    br.com.murilo.liberthia.dimension.DimensionalRiftEntity::new, MobCategory.MISC)
+                            .sized(1.2F, 2.4F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("dimensional_rift"));
+
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.DarkConsciousnessEntity>> DARK_CONSCIOUSNESS =
             ENTITY_TYPES.register("dark_consciousness",
                     () -> EntityType.Builder.<br.com.murilo.liberthia.entity.DarkConsciousnessEntity>of(br.com.murilo.liberthia.entity.DarkConsciousnessEntity::new, MobCategory.MONSTER)
@@ -498,6 +508,127 @@ public final class ModEntities {
                             .clientTrackingRange(64)
                             .build("espreitador"));
 
+    // r180: O Observado (cresce/fortalece quando observado; espelho derrota)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.ObservadoEntity>> O_OBSERVADO =
+            ENTITY_TYPES.register("o_observado",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.ObservadoEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.ObservadoEntity::new, MobCategory.MONSTER)
+                            .sized(0.7F, 2.0F)
+                            .clientTrackingRange(64)
+                            .build("o_observado"));
+
+    // r180: O Pastor do Silêncio (figura alta lenta, sino mudo = dano psíquico)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.SilenceShepherdEntity>> SILENCE_SHEPHERD =
+            ENTITY_TYPES.register("silence_shepherd",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.SilenceShepherdEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.SilenceShepherdEntity::new, MobCategory.MONSTER)
+                            .sized(0.7F, 2.6F)
+                            .clientTrackingRange(64)
+                            .build("silence_shepherd"));
+
+    // r180: Arquivista do Fim (segue + edita o player; congela o mundo ao morrer)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.EndArchivistEntity>> END_ARCHIVIST =
+            ENTITY_TYPES.register("end_archivist",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.EndArchivistEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.EndArchivistEntity::new, MobCategory.MONSTER)
+                            .sized(0.7F, 2.3F).clientTrackingRange(64).build("end_archivist"));
+
+    // r180: Amalgamado Cego (Flukemarm — gera olhos parasitas; explode ao morrer)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.BlindAmalgamEntity>> BLIND_AMALGAM =
+            ENTITY_TYPES.register("blind_amalgam",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.BlindAmalgamEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.BlindAmalgamEntity::new, MobCategory.MONSTER)
+                            .sized(1.8F, 1.8F).clientTrackingRange(64).fireImmune().build("blind_amalgam"));
+
+    // r180: Olho Parasita (observador voador gerado pelo Amalgamado)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.ParasiticEyeEntity>> PARASITIC_EYE =
+            ENTITY_TYPES.register("parasitic_eye",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.ParasiticEyeEntity>of(
+                                    br.com.murilo.liberthia.cosmic.horror.entity.ParasiticEyeEntity::new, MobCategory.MONSTER)
+                            .sized(0.5F, 0.5F).clientTrackingRange(48).build("parasitic_eye"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.CinderParasiteEntity>> CINDER_PARASITE =
+            ENTITY_TYPES.register("cinder_parasite",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.CinderParasiteEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.CinderParasiteEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("cinder_parasite"));
+    // r184 — Verme Dimensional (gerado pela Infecção Dimensional)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.DimensionalWormEntity>> DIMENSIONAL_WORM =
+            ENTITY_TYPES.register("dimensional_worm",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.DimensionalWormEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.DimensionalWormEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 0.6F).clientTrackingRange(40).build("dimensional_worm"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.GazeLeechEntity>> GAZE_LEECH =
+            ENTITY_TYPES.register("gaze_leech",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.GazeLeechEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.GazeLeechEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("gaze_leech"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.BlindWeaverEntity>> BLIND_WEAVER =
+            ENTITY_TYPES.register("blind_weaver",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.BlindWeaverEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.BlindWeaverEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("blind_weaver"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.MawCrawlerEntity>> MAW_CRAWLER =
+            ENTITY_TYPES.register("maw_crawler",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.MawCrawlerEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.MawCrawlerEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("maw_crawler"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.WhisperMiteEntity>> WHISPER_MITE =
+            ENTITY_TYPES.register("whisper_mite",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.WhisperMiteEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.WhisperMiteEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("whisper_mite"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.DreadOrbEntity>> DREAD_ORB =
+            ENTITY_TYPES.register("dread_orb",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.DreadOrbEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.DreadOrbEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("dread_orb"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.FleshWatcherEntity>> FLESH_WATCHER =
+            ENTITY_TYPES.register("flesh_watcher",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.FleshWatcherEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.FleshWatcherEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("flesh_watcher"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.VoidTickEntity>> VOID_TICK =
+            ENTITY_TYPES.register("void_tick",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.VoidTickEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.VoidTickEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("void_tick"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.GloomMothEntity>> GLOOM_MOTH =
+            ENTITY_TYPES.register("gloom_moth",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.GloomMothEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.GloomMothEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("gloom_moth"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.RotEyeEntity>> ROT_EYE =
+            ENTITY_TYPES.register("rot_eye",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.RotEyeEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.RotEyeEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("rot_eye"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.ScreamLarvaEntity>> SCREAM_LARVA =
+            ENTITY_TYPES.register("scream_larva",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.ScreamLarvaEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.ScreamLarvaEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("scream_larva"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.MirrorSpawnEntity>> MIRROR_SPAWN =
+            ENTITY_TYPES.register("mirror_spawn",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.MirrorSpawnEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.MirrorSpawnEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("mirror_spawn"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.ParasiteHostEntity>> PARASITE_HOST =
+            ENTITY_TYPES.register("parasite_host",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.ParasiteHostEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.ParasiteHostEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("parasite_host"));
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.cosmic.horror.entity.ColossalEyeEntity>> COLOSSAL_EYE =
+            ENTITY_TYPES.register("colossal_eye",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.cosmic.horror.entity.ColossalEyeEntity>of(br.com.murilo.liberthia.cosmic.horror.entity.ColossalEyeEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 1.0F).clientTrackingRange(48).build("colossal_eye"));
+
+    // r180b: Lança de Varatha arremessada (Retorno Espiritual — bumerangue)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.ThrownVarathaEntity>> THROWN_VARATHA =
+            ENTITY_TYPES.register("thrown_varatha",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.ThrownVarathaEntity>of(
+                                    br.com.murilo.liberthia.entity.ThrownVarathaEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F).clientTrackingRange(64).updateInterval(1).build("thrown_varatha"));
+
+    // r180b: bala de matéria (Pistola de Matérias)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.MatterBulletEntity>> MATTER_BULLET =
+            ENTITY_TYPES.register("matter_bullet",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.MatterBulletEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.MatterBulletEntity::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F).clientTrackingRange(64).updateInterval(1).build("matter_bullet"));
+
+    // r180: Cobaia (sujeito de teste de matéria — injetar/amostrar; muta a 100%)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.CobaiaEntity>> COBAIA =
+            ENTITY_TYPES.register("cobaia",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.CobaiaEntity>of(
+                                    br.com.murilo.liberthia.entity.CobaiaEntity::new, MobCategory.CREATURE)
+                            .sized(0.6F, 1.95F).clientTrackingRange(48).build("cobaia"));
+
     // ════════════════════════════════════════════════════════════════════════
     // r87: WIZARD MOBS — 5 archetypes
     // ════════════════════════════════════════════════════════════════════════
@@ -771,6 +902,38 @@ public final class ModEntities {
                         .clientTrackingRange(40)
                         .build(id));
     }
+
+    // r191 — Chefe Astrônomo Cego (3 fases)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.BlindAstronomerBossEntity>> BLIND_ASTRONOMER =
+            ENTITY_TYPES.register("blind_astronomer",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.BlindAstronomerBossEntity>of(
+                                    br.com.murilo.liberthia.entity.BlindAstronomerBossEntity::new, MobCategory.MONSTER)
+                            .sized(0.9F, 2.7F).clientTrackingRange(64).fireImmune().build("blind_astronomer"));
+
+    // r192 — Chefe Colmeia Rainha do Abismo (3 fases)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.HiveQueenBossEntity>> HIVE_QUEEN =
+            ENTITY_TYPES.register("hive_queen",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.HiveQueenBossEntity>of(
+                                    br.com.murilo.liberthia.entity.HiveQueenBossEntity::new, MobCategory.MONSTER)
+                            .sized(1.95F, 2.2F).clientTrackingRange(64).fireImmune().build("hive_queen"));
+
+    // r186 — Buraco Negro de Matéria Escura (vivo, gerado por excesso de esporos)
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.DarkMatterBlackHoleEntity>> DARK_MATTER_BLACK_HOLE =
+            ENTITY_TYPES.register("dark_matter_black_hole",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.DarkMatterBlackHoleEntity>of(
+                                    br.com.murilo.liberthia.entity.DarkMatterBlackHoleEntity::new, MobCategory.MISC)
+                            .sized(3.0F, 3.0F).clientTrackingRange(32).updateInterval(3).fireImmune()
+                            .build("dark_matter_black_hole"));
+
+    // r185 — Portal de Fenda (verde) aberto pela Adaga Corta-Fendas
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.RiftPortalEntity>> RIFT_PORTAL =
+            ENTITY_TYPES.register("rift_portal",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.RiftPortalEntity>of(
+                                    br.com.murilo.liberthia.entity.RiftPortalEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 2.0F)
+                            .clientTrackingRange(64)
+                            .updateInterval(20)
+                            .build("rift_portal"));
 
     private ModEntities() {}
 

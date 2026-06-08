@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "liberthia:block/whisper_petal_bush"
+  }
+}

@@ -84,7 +84,6 @@ public class FactionEvents {
         return s.is(ModItems.BLOOD_SCYTHE.get())
                 || s.is(ModItems.HEMOMANCER_STAFF.get())
                 || s.is(ModItems.BLOOD_RITUAL_DAGGER.get())
-                || s.is(ModItems.BLOOD_BOW.get())
                 || s.is(ModItems.RUSTED_DAGGER.get());
     }
 

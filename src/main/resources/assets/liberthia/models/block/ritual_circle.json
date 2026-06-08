@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "liberthia:block/ritual_circle_top",
+    "up": "liberthia:block/ritual_circle_top",
+    "north": "liberthia:block/ritual_circle_side",
+    "south": "liberthia:block/ritual_circle_side",
+    "west": "liberthia:block/ritual_circle_side",
+    "east": "liberthia:block/ritual_circle_side",
+    "particle": "liberthia:block/ritual_circle_top"
+  }
+}

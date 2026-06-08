@@ -42,6 +42,62 @@ public final class ModBlocks {
                     .randomTicks()
                     .sound(SoundType.GLASS)));
 
+    // ── r179: 4 blocos de irregularidade dimensional ──
+    public static final RegistryObject<Block> RIFT_RESIDUE = BLOCKS.register("rift_residue",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(3.0F, 6.0F)
+                    .lightLevel(s -> 7).emissiveRendering((s, g, p) -> true).sound(SoundType.AMETHYST)));
+    public static final RegistryObject<Block> WARPED_SPACE = BLOCKS.register("warped_space",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_MAGENTA).strength(2.0F, 4.0F)
+                    .lightLevel(s -> 4).sound(SoundType.STONE)));
+    public static final RegistryObject<Block> VOID_SCAR = BLOCKS.register("void_scar",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK).strength(5.0F, 9.0F)
+                    .sound(SoundType.DEEPSLATE)));
+    public static final RegistryObject<Block> DIMENSIONAL_FLUX = BLOCKS.register("dimensional_flux",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED).strength(2.0F, 3.0F)
+                    .lightLevel(s -> 6).emissiveRendering((s, g, p) -> true).randomTicks().sound(SoundType.NETHERRACK)));
+
+    // r180: Analisador de Sujeito (máquina de análise da Cobaia)
+    public static final RegistryObject<Block> COBAIA_ANALYZER = BLOCKS.register("cobaia_analyzer",
+            () -> new br.com.murilo.liberthia.block.CobaiaAnalyzerBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL).strength(3.5F, 6.0F).requiresCorrectToolForDrops()
+                    .lightLevel(s -> 5).sound(SoundType.METAL)));
+
+    // r180: Motor de Entropia (gera FE consumindo realidade + sobe corrupção)
+    public static final RegistryObject<Block> ENTROPY_ENGINE = BLOCKS.register("entropy_engine",
+            () -> new br.com.murilo.liberthia.block.EntropyEngineBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK).strength(5.0F, 12.0F).requiresCorrectToolForDrops()
+                    .lightLevel(s -> 7).emissiveRendering((s, g, p) -> true).sound(SoundType.NETHERITE_BLOCK)));
+    // r180b: Âncora de Realidade — estabiliza (reduz corrupção + acalma a mente). Oposto do Entropy Engine.
+    public static final RegistryObject<Block> REALITY_ANCHOR = BLOCKS.register("reality_anchor",
+            () -> new br.com.murilo.liberthia.block.RealityAnchorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE).strength(5.0F, 12.0F).requiresCorrectToolForDrops()
+                    .lightLevel(s -> 10).emissiveRendering((s, g, p) -> true).sound(SoundType.NETHERITE_BLOCK)));
+    // r180b: Raio Estabilizador — feixe direcional purificador (trio de contenção).
+    public static final RegistryObject<Block> STABILIZER_BEAM = BLOCKS.register("stabilizer_beam",
+            () -> new br.com.murilo.liberthia.block.StabilizerBeamBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_CYAN).strength(5.0F, 12.0F).requiresCorrectToolForDrops()
+                    .lightLevel(s -> 8).emissiveRendering((s, g, p) -> true).sound(SoundType.NETHERITE_BLOCK)));
+    // r180b: Reator de Sanidade — gerador FE que devora sanidade (gerador metafísico).
+    public static final RegistryObject<Block> SANITY_REACTOR = BLOCKS.register("sanity_reactor",
+            () -> new br.com.murilo.liberthia.block.SanityReactorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(5.0F, 12.0F).requiresCorrectToolForDrops()
+                    .lightLevel(s -> 7).emissiveRendering((s, g, p) -> true).sound(SoundType.NETHERITE_BLOCK)));
+    // r180b: Sifão de Fenda — gerador FE que suga energia de Fendas Dimensionais.
+    public static final RegistryObject<Block> RIFT_SIPHON = BLOCKS.register("rift_siphon",
+            () -> new br.com.murilo.liberthia.block.RiftSiphonBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE).strength(5.0F, 12.0F).requiresCorrectToolForDrops()
+                    .lightLevel(s -> 9).emissiveRendering((s, g, p) -> true).sound(SoundType.NETHERITE_BLOCK)));
+
+    // r180: Pilar Protetor (campo anti-magia FE-powered)
+    public static final RegistryObject<Block> WARD_PILLAR = BLOCKS.register("ward_pillar",
+            () -> new br.com.murilo.liberthia.block.WardPillarBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_CYAN).strength(4.0F, 10.0F).requiresCorrectToolForDrops()
+                    .lightLevel(s -> 9).emissiveRendering((s, g, p) -> true).sound(SoundType.AMETHYST)));
+
     public static final RegistryObject<Block> RITUAL_PEDESTAL =
             registerBlock("ritual_pedestal",
                     () -> new RitualPedestalBlock(BlockBehaviour.Properties.of()
@@ -262,6 +318,20 @@ public final class ModBlocks {
                     .randomTicks()
                     .sound(SoundType.WOOD)));
 
+    // r186: --- Terreno infectado pela Matéria Escura (overhaul do motor) ---
+    public static final RegistryObject<Block> DARK_INFECTED_GRASS = registerBlock("dark_infected_grass",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK).strength(0.6F).sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> DARK_INFECTED_DIRT = registerBlock("dark_infected_dirt",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK).strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final RegistryObject<Block> DARK_INFECTED_SAND = registerBlock("dark_infected_sand",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK).strength(0.5F).sound(SoundType.SAND)));
+    public static final RegistryObject<Block> DARK_INFECTED_STONE = registerBlock("dark_infected_stone",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK).strength(2.5F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
     // --- White Matter TNT ---
     public static final RegistryObject<Block> WHITE_MATTER_TNT = BLOCKS.register("white_matter_tnt",
             () -> new br.com.murilo.liberthia.logic.WhiteMatterTNTBlock(BlockBehaviour.Properties.of()
@@ -450,6 +520,15 @@ public final class ModBlocks {
                             .strength(0.3F, 0.5F)
                             .sound(SoundType.WOOL)
                             .noOcclusion()));
+
+    // r185 — Forja de Fendas (forja a Adaga Corta-Fendas III)
+    public static final RegistryObject<Block> RIFT_FORGE = registerBlock("rift_forge",
+            () -> new br.com.murilo.liberthia.block.RiftForgeBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(6.0F, 18.0F)
+                    .requiresCorrectToolForDrops()
+                    .lightLevel(s -> 12)
+                    .sound(SoundType.NETHERITE_BLOCK)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, java.util.function.Supplier<T> supplier) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);
@@ -751,7 +830,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BLOOD_COAL_ORE = BLOCKS.register("blood_coal_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_RED)
-                    .strength(3.0F, 3.0F)
+                    .strength(1.5F, 3.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE),
                     UniformInt.of(0, 2)));
@@ -759,7 +838,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BLOOD_IRON_ORE = BLOCKS.register("blood_iron_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_RED)
-                    .strength(3.0F, 3.0F)
+                    .strength(1.5F, 3.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE),
                     UniformInt.of(0, 0)));
@@ -767,7 +846,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BLOOD_GOLD_ORE = BLOCKS.register("blood_gold_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_RED)
-                    .strength(3.0F, 3.0F)
+                    .strength(1.5F, 3.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE),
                     UniformInt.of(0, 0)));
@@ -775,7 +854,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BLOOD_DIAMOND_ORE = BLOCKS.register("blood_diamond_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_RED)
-                    .strength(3.0F, 3.0F)
+                    .strength(1.5F, 3.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE),
                     UniformInt.of(3, 7)));
@@ -783,7 +862,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BLOOD_REDSTONE_ORE = BLOCKS.register("blood_redstone_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_RED)
-                    .strength(3.0F, 3.0F)
+                    .strength(1.5F, 3.0F)
                     .requiresCorrectToolForDrops()
                     .lightLevel(s -> 6)
                     .sound(SoundType.STONE),
@@ -792,7 +871,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BLOOD_LAPIS_ORE = BLOCKS.register("blood_lapis_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_RED)
-                    .strength(3.0F, 3.0F)
+                    .strength(1.5F, 3.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE),
                     UniformInt.of(2, 5)));
@@ -800,7 +879,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BLOOD_EMERALD_ORE = BLOCKS.register("blood_emerald_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_RED)
-                    .strength(3.0F, 3.0F)
+                    .strength(1.5F, 3.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE),
                     UniformInt.of(3, 7)));

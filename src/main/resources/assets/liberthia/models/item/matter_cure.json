@@ -1,0 +1,7 @@
+{
+  "_comment": "Matter Cure — usa textura propria 16x16 (frasco azul com cruz medica branca).",
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "liberthia:item/matter_cure"
+  }
+}

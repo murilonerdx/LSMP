@@ -31,6 +31,91 @@ public final class ModCreativeTabs {
                     .displayItems((parameters, output) -> {
                         // --- Blocos ---
                         output.accept(ModItems.DARK_MATTER_BLOCK_ITEM.get());
+                        // r179: Fenda Dimensional + 4 blocos de irregularidade
+                        output.accept(ModItems.RIFT_OPENER.get());
+                        output.accept(ModItems.RIFT_RESIDUE_ITEM.get());
+                        output.accept(ModItems.WARPED_SPACE_ITEM.get());
+                        output.accept(ModItems.VOID_SCAR_ITEM.get());
+                        output.accept(ModItems.DIMENSIONAL_FLUX_ITEM.get());
+                        output.accept(ModItems.LUCID_TONIC.get()); // r179: tônico de lucidez
+                        // r180: novos mobs + artefatos divinos
+                        output.accept(ModItems.O_OBSERVADO_SPAWN_EGG.get());
+                        output.accept(ModItems.SILENCE_SHEPHERD_SPAWN_EGG.get());
+                        output.accept(ModItems.ASCENSION_SEAL.get());
+                        output.accept(ModItems.ETERNITY_CROWN.get());
+                        output.accept(ModItems.END_ARCHIVIST_SPAWN_EGG.get());
+                        output.accept(ModItems.BLIND_AMALGAM_SPAWN_EGG.get());
+                        output.accept(ModItems.PARASITIC_EYE_SPAWN_EGG.get());
+                        output.accept(ModItems.CINDER_PARASITE_SPAWN_EGG.get());
+                        output.accept(ModItems.CONSTELLATION_CORE.get());
+                        output.accept(ModItems.BLIND_ASTRONOMER_SPAWN_EGG.get());
+                        output.accept(ModItems.HIVE_HEART.get());
+                        output.accept(ModItems.HIVE_QUEEN_SPAWN_EGG.get());
+                        // r194 — equipamentos dos chefes
+                        output.accept(ModItems.ASTRAL_HELMET.get());
+                        output.accept(ModItems.ASTRAL_CHESTPLATE.get());
+                        output.accept(ModItems.ASTRAL_LEGGINGS.get());
+                        output.accept(ModItems.ASTRAL_BOOTS.get());
+                        output.accept(ModItems.PARASITIC_HELMET.get());
+                        output.accept(ModItems.PARASITIC_CHESTPLATE.get());
+                        output.accept(ModItems.PARASITIC_LEGGINGS.get());
+                        output.accept(ModItems.PARASITIC_BOOTS.get());
+                        output.accept(ModItems.GRAVITY_STAFF.get());
+                        output.accept(ModItems.DIMENSIONAL_TELESCOPE.get());
+                        output.accept(ModItems.PARASITIC_PICKAXE.get());
+                        output.accept(ModItems.PARASITIC_SWORD.get());
+                        output.accept(ModItems.PARASITIC_AXE.get());
+                        output.accept(ModItems.LIVING_BACKPACK.get());
+                        // r195 — 10 relíquias de Astaron (loot-only; aqui pra testar/ver)
+                        output.accept(ModItems.ASTARON_EYE_RELIC.get());
+                        output.accept(ModItems.ASTARON_MIND_AMULET.get());
+                        output.accept(ModItems.ASTARON_HUNTER_GAUNTLET.get());
+                        output.accept(ModItems.ASTARON_WARDEN_SASH.get());
+                        output.accept(ModItems.ASTARON_VOID_TREADS.get());
+                        output.accept(ModItems.ASTARON_MIRROR_RING.get());
+                        output.accept(ModItems.ASTARON_FACELESS_CROWN.get());
+                        output.accept(ModItems.ASTARON_ESSENCE_RELIC.get());
+                        output.accept(ModItems.ASTARON_VOID_CORE.get());
+                        output.accept(ModItems.ASTARON_STAR_PENDANT.get());
+                        output.accept(ModItems.GAZE_LEECH_SPAWN_EGG.get());
+                        output.accept(ModItems.BLIND_WEAVER_SPAWN_EGG.get());
+                        output.accept(ModItems.MAW_CRAWLER_SPAWN_EGG.get());
+                        output.accept(ModItems.WHISPER_MITE_SPAWN_EGG.get());
+                        output.accept(ModItems.DREAD_ORB_SPAWN_EGG.get());
+                        output.accept(ModItems.FLESH_WATCHER_SPAWN_EGG.get());
+                        output.accept(ModItems.VOID_TICK_SPAWN_EGG.get());
+                        output.accept(ModItems.GLOOM_MOTH_SPAWN_EGG.get());
+                        output.accept(ModItems.ROT_EYE_SPAWN_EGG.get());
+                        output.accept(ModItems.SCREAM_LARVA_SPAWN_EGG.get());
+                        output.accept(ModItems.MIRROR_SPAWN_SPAWN_EGG.get());
+                        output.accept(ModItems.PARASITE_HOST_SPAWN_EGG.get());
+                        output.accept(ModItems.COLOSSAL_EYE_SPAWN_EGG.get());
+                        output.accept(ModItems.COBAIA_SPAWN_EGG.get());
+                        output.accept(ModItems.MATTER_SAMPLE.get());
+                        output.accept(ModItems.COBAIA_ANALYZER_ITEM.get());
+                        output.accept(ModItems.MIND_ANCHOR.get());
+                        output.accept(ModItems.ENTROPY_ENGINE_ITEM.get());
+                        output.accept(ModItems.REALITY_ANCHOR_ITEM.get());
+                        output.accept(ModItems.STABILIZER_BEAM_ITEM.get());
+                        output.accept(ModItems.FOCUS_CRYSTAL.get());
+                        output.accept(ModItems.SANITY_REACTOR_ITEM.get());
+                        output.accept(ModItems.RIFT_SIPHON_ITEM.get());
+                        output.accept(ModItems.MATTER_PISTOL.get());
+                        output.accept(ModItems.NULL_SEAL.get());
+                        output.accept(ModItems.SPELLBREAKER.get());
+                        output.accept(ModItems.MAGIC_SEAL.get());
+                        output.accept(ModItems.ANTIMAGIC_SWORD.get());
+                        output.accept(ModItems.WARD_PILLAR_ITEM.get());
+                        output.accept(ModItems.VARATHA_SPEAR.get());
+                        output.accept(ModItems.CODEX_COSMIC.get());
+                        output.accept(ModItems.CODEX_MATTER.get());
+                        output.accept(ModItems.CODEX_MAGIC.get());
+                        output.accept(ModItems.DIMENSIONAL_SERUM.get());
+                        output.accept(ModItems.ASTARON_SCALE.get());
+                        output.accept(ModItems.RIFT_CUTTER_T1.get());
+                        output.accept(ModItems.RIFT_CUTTER_T2.get());
+                        output.accept(ModItems.RIFT_CUTTER_T3.get());
+                        output.accept(ModBlocks.RIFT_FORGE.get());
                         output.accept(ModItems.CORRUPTED_SOIL_ITEM.get());
                         output.accept(ModItems.CLEAR_MATTER_BLOCK_ITEM.get());
                         output.accept(ModItems.CLEAR_MATTER_BLOCK_ITEM.get());
@@ -291,6 +376,11 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.DARK_MATTER_CHESTPLATE.get());
                         output.accept(ModItems.DARK_MATTER_LEGGINGS.get());
                         output.accept(ModItems.DARK_MATTER_BOOTS.get());
+                        output.accept(ModItems.ANTIMAGIC_HELMET.get());
+                        output.accept(ModItems.ANTIMAGIC_CHESTPLATE.get());
+                        output.accept(ModItems.ANTIMAGIC_LEGGINGS.get());
+                        output.accept(ModItems.ANTIMAGIC_BOOTS.get());
+                        output.accept(ModItems.ANTIMAGIC_SHIELD.get());
 
                         output.accept(ModItems.BONE_SEAL.get());
                         output.accept(ModItems.GOLD_SEAL.get());
@@ -1167,7 +1257,6 @@ public final class ModCreativeTabs {
                         out.accept(ModItems.ORDER_PALADIN_EGG.get());
                         // ─── Weapons / Magic (Fase 4) ───
                         out.accept(ModItems.HEMOMANCER_STAFF.get());
-                        out.accept(ModItems.BLOOD_BOW.get());
                         out.accept(ModItems.BLOOD_RITUAL_DAGGER.get());
                         out.accept(ModItems.BLOOD_PACT_AMULET.get());
                         // ─── Alquimia de Sangue (Fase 3) ───
@@ -1266,6 +1355,156 @@ public final class ModCreativeTabs {
 
     private ModCreativeTabs() {
     }
+
+    // r180c: Liberthia Tech — Powah/Mekanism-style energia, máquinas, ferramentas, materiais.
+    public static final RegistryObject<CreativeModeTab> TECH = CREATIVE_MODE_TABS.register("tech",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.liberthia.tech"))
+                    .icon(() -> ModTech.STEEL_INGOT.get().getDefaultInstance())
+                    .withTabsBefore(new ResourceLocation(LiberthiaMod.MODID, "main"))
+                    .displayItems((parameters, output) -> {
+                        // ─── Lote 1: materiais base ───
+                        output.accept(ModTech.STEEL_INGOT.get());
+                        output.accept(ModTech.STEEL_PLATE.get());
+                        output.accept(ModTech.STEEL_BLOCK_ITEM.get());
+                        output.accept(ModTech.ENERGIZED_STEEL.get());
+                        output.accept(ModTech.CONTROL_CIRCUIT.get());
+                        // ─── Lote 2: dusts + componentes ───
+                        output.accept(ModTech.IRON_DUST.get());
+                        output.accept(ModTech.GOLD_DUST.get());
+                        output.accept(ModTech.COPPER_DUST.get());
+                        output.accept(ModTech.STEEL_DUST.get());
+                        output.accept(ModTech.COPPER_COIL.get());
+                        // ─── Lote 3: energia ───
+                        output.accept(ModTech.ENERGY_CELL_BASIC_ITEM.get());
+                        output.accept(ModTech.ENERGY_CELL_ADVANCED_ITEM.get());
+                        output.accept(ModTech.ENERGY_CELL_ULTIMATE_ITEM.get());
+                        output.accept(ModTech.SOLAR_PANEL_ITEM.get());
+                        output.accept(ModTech.THERMO_GENERATOR_ITEM.get());
+                        // ─── Lote 4: máquinas ───
+                        output.accept(ModTech.CRUSHER_ITEM.get());
+                        output.accept(ModTech.ENERGIZED_SMELTER_ITEM.get());
+                        output.accept(ModTech.COMPRESSOR_ITEM.get());
+                        output.accept(ModTech.ALLOY_SMELTER_ITEM.get());
+                        output.accept(ModTech.SAWMILL_ITEM.get());
+                        // ─── Lote 5: ferramentas energizadas ───
+                        output.accept(ModTech.ENERGIZED_PICKAXE.get());
+                        output.accept(ModTech.ENERGIZED_AXE.get());
+                        output.accept(ModTech.ENERGIZED_SHOVEL.get());
+                        output.accept(ModTech.ENERGIZED_SWORD.get());
+                        output.accept(ModTech.ENERGIZED_DRILL.get());
+                        output.accept(ModTech.PAXEL.get());
+                        // ─── Lote 6: power armor ───
+                        output.accept(ModTech.POWER_HELMET.get());
+                        output.accept(ModTech.POWER_CHESTPLATE.get());
+                        output.accept(ModTech.POWER_LEGGINGS.get());
+                        output.accept(ModTech.POWER_BOOTS.get());
+                        // ─── Lote 7: utilidade ───
+                        output.accept(ModTech.BATTERY.get());
+                        output.accept(ModTech.CHARGER_ITEM.get());
+                        output.accept(ModTech.TECH_WRENCH.get());
+                        output.accept(ModTech.ITEM_MAGNET.get());
+                        output.accept(ModTech.JETPACK.get());
+                        // ─── Lote 8: componentes + geradores + portable charger ───
+                        output.accept(ModTech.REINFORCED_PLATE.get());
+                        output.accept(ModTech.ENERGIZED_CIRCUIT.get());
+                        output.accept(ModTech.PORTABLE_CHARGER.get());
+                        output.accept(ModTech.FURNATOR_ITEM.get());
+                        output.accept(ModTech.MAGMATOR_ITEM.get());
+                        // ─── Integração: Reator de Matéria Escura ───
+                        output.accept(ModTech.MATTER_REACTOR_ITEM.get());
+                        // ─── Motores de entropia (espalham + revert) ───
+                        output.accept(ModTech.CRYSTALIZED_DARK_MATTER_ITEM.get());
+                        output.accept(ModTech.ENTROPY_CORE_ITEM.get());
+                        output.accept(ModTech.BLACK_MATTER_ENGINE_ITEM.get());
+                        // ─── Onda 1: máquinas arcanas + intermediários (cadeia multi-etapa) ───
+                        output.accept(ModTech.METAL_PRESS.get());
+                        output.accept(ModTech.ARCANE_INFUSER.get());
+                        output.accept(ModTech.TECH_ASSEMBLER.get());
+                        output.accept(ModTech.MANA_CONDENSER.get());
+                        output.accept(ModTech.CRYSTAL_SMELTER.get());
+                        // r188 — 16 máquinas novas + 8 intermediários
+                        output.accept(ModTech.QUANTUM_PULVERIZER.get());
+                        output.accept(ModTech.CRYSTALLIZATION_CHAMBER.get());
+                        output.accept(ModTech.COIL_WINDER.get());
+                        output.accept(ModTech.MATTER_CONDENSER_T.get());
+                        output.accept(ModTech.NANO_ASSEMBLER.get());
+                        output.accept(ModTech.ENERGY_DISTILLER.get());
+                        output.accept(ModTech.FLUX_FORGE.get());
+                        output.accept(ModTech.MANA_CRYSTALLIZER.get());
+                        output.accept(ModTech.ARCANE_CIRCUIT_PRINTER.get());
+                        output.accept(ModTech.DARK_ALLOY_SMELTER.get());
+                        output.accept(ModTech.PHOTON_INFUSER.get());
+                        output.accept(ModTech.MATTER_REPLICATOR.get());
+                        output.accept(ModTech.CRYSTAL_GROWER.get());
+                        output.accept(ModTech.ESSENCE_COMPRESSOR.get());
+                        output.accept(ModTech.RUNE_ETCHER.get());
+                        output.accept(ModTech.SINGULARITY_PRESS.get());
+                        // r189 — +18 máquinas
+                        output.accept(ModTech.ARCANE_COLLECTOR.get());
+                        output.accept(ModTech.MANA_REACTOR.get());
+                        output.accept(ModTech.CRYSTAL_RESONATOR.get());
+                        output.accept(ModTech.ENDER_CONDENSER.get());
+                        output.accept(ModTech.SOUL_EXTRACTOR.get());
+                        output.accept(ModTech.BLAZE_REACTOR.get());
+                        output.accept(ModTech.MATTER_FABRICATOR.get());
+                        output.accept(ModTech.CIRCUIT_ASSEMBLER.get());
+                        output.accept(ModTech.PLATE_PRESS.get());
+                        output.accept(ModTech.WIRE_DRAWER.get());
+                        output.accept(ModTech.GEM_POLISHER.get());
+                        output.accept(ModTech.INGOT_FORMER.get());
+                        output.accept(ModTech.ARCANE_SYNTHESIZER.get());
+                        output.accept(ModTech.FLUX_DYNAMO.get());
+                        output.accept(ModTech.SHARD_SPLITTER.get());
+                        output.accept(ModTech.COSMIC_DISTILLER.get());
+                        output.accept(ModTech.RUNE_INSCRIBER.get());
+                        output.accept(ModTech.SINGULARITY_CORE_FORGE.get());
+                        output.accept(ModTech.QUANTUM_DUST.get());
+                        output.accept(ModTech.PHOTON_CRYSTAL.get());
+                        output.accept(ModTech.RESONANCE_COIL.get());
+                        output.accept(ModTech.DARK_MATTER_CELL_CORE.get());
+                        output.accept(ModTech.ASSEMBLED_MATRIX.get());
+                        output.accept(ModTech.ENERGY_ESSENCE.get());
+                        output.accept(ModTech.MANA_CRYSTAL.get());
+                        output.accept(ModTech.VOID_ALLOY_INGOT.get());
+                        output.accept(ModBlocks.DARK_INFECTED_GRASS.get());
+                        output.accept(ModBlocks.DARK_INFECTED_DIRT.get());
+                        output.accept(ModBlocks.DARK_INFECTED_SAND.get());
+                        output.accept(ModBlocks.DARK_INFECTED_STONE.get());
+                        output.accept(ModTech.HARDENED_PLATE.get());
+                        output.accept(ModTech.WARDED_PLATE.get());
+                        output.accept(ModTech.MANA_CAPACITOR.get());
+                        output.accept(ModTech.ARCANE_ALLOY.get());
+                        output.accept(ModTech.WARDED_MODULE.get());
+                        // ─── Onda 2 ───
+                        output.accept(ModTech.FLIGHT_BEACON.get());
+                        output.accept(ModTech.BEACON_FLIGHT_UPGRADE.get());
+                    })
+                    .build());
+
+    // ════════════ Tecno-Arcano (anti-magia) ════════════
+    public static final RegistryObject<CreativeModeTab> ANTIMAGIC = CREATIVE_MODE_TABS.register("antimagic",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.liberthia.antimagic"))
+                    .icon(() -> ModTech.WARDED_HELMET.get().getDefaultInstance())
+                    .withTabsBefore(new ResourceLocation(LiberthiaMod.MODID, "tech"))
+                    .displayItems((params, out) -> {
+                        // componentes tier (um puxa o outro)
+                        out.accept(ModTech.WARDED_CORE.get());
+                        out.accept(ModTech.ARCANE_DISRUPTOR.get());
+                        out.accept(ModTech.NULL_MATRIX.get());
+                        // Armadura Bastião + Escudo Dissonante
+                        out.accept(ModTech.WARDED_HELMET.get());
+                        out.accept(ModTech.WARDED_CHESTPLATE.get());
+                        out.accept(ModTech.WARDED_LEGGINGS.get());
+                        out.accept(ModTech.WARDED_BOOTS.get());
+                        out.accept(ModTech.WARDED_SHIELD.get());
+                        // Selos
+                        out.accept(ModTech.MANA_SUPPRESSOR_ITEM.get());
+                        out.accept(ModTech.ARCANE_SENTINEL_ITEM.get());
+                        out.accept(ModTech.ARCANE_TURRET.get());
+                    })
+                    .build());
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);

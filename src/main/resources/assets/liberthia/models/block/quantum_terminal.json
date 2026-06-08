@@ -1,0 +1,89 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "liberthia:block/quantum_terminal_front",
+    "front": "liberthia:block/quantum_terminal_front",
+    "side": "liberthia:block/quantum_terminal_side",
+    "top": "liberthia:block/quantum_terminal_top",
+    "bottom": "liberthia:block/quantum_terminal_bottom"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [1, 0, 1],
+      "to": [15, 12, 15],
+      "faces": {
+        "down":  { "uv": [1, 1, 15, 15], "texture": "#bottom", "cullface": "down" },
+        "up":    { "uv": [1, 1, 15, 15], "texture": "#top" },
+        "north": { "uv": [1, 4, 15, 16], "texture": "#front" },
+        "south": { "uv": [1, 4, 15, 16], "texture": "#side" },
+        "west":  { "uv": [1, 4, 15, 16], "texture": "#side" },
+        "east":  { "uv": [1, 4, 15, 16], "texture": "#side" }
+      }
+    },
+    {
+      "name": "screen_bezel",
+      "from": [2, 3, 0.4],
+      "to": [14, 11, 1],
+      "faces": {
+        "north": { "uv": [2, 5, 14, 13], "texture": "#front" },
+        "south": { "uv": [2, 5, 14, 13], "texture": "#front" },
+        "up":    { "uv": [2, 0, 14, 1], "texture": "#side" },
+        "down":  { "uv": [2, 0, 14, 1], "texture": "#side" },
+        "west":  { "uv": [0, 5, 1, 13], "texture": "#side" },
+        "east":  { "uv": [0, 5, 1, 13], "texture": "#side" }
+      }
+    },
+    {
+      "name": "antenna_nub",
+      "from": [12, 12, 12],
+      "to": [14, 15, 14],
+      "faces": {
+        "north": { "uv": [12, 1, 14, 4], "texture": "#side" },
+        "south": { "uv": [12, 1, 14, 4], "texture": "#side" },
+        "west":  { "uv": [12, 1, 14, 4], "texture": "#side" },
+        "east":  { "uv": [12, 1, 14, 4], "texture": "#side" },
+        "up":    { "uv": [12, 12, 14, 14], "texture": "#top" }
+      }
+    },
+    {
+      "name": "antenna_tip",
+      "from": [12.7, 15, 12.7],
+      "to": [13.3, 16, 13.3],
+      "faces": {
+        "north": { "uv": [12.7, 0, 13.3, 1], "texture": "#side" },
+        "south": { "uv": [12.7, 0, 13.3, 1], "texture": "#side" },
+        "west":  { "uv": [12.7, 0, 13.3, 1], "texture": "#side" },
+        "east":  { "uv": [12.7, 0, 13.3, 1], "texture": "#side" },
+        "up":    { "uv": [12.7, 12.7, 13.3, 13.3], "texture": "#top" }
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.625, 0.625, 0.625]
+    },
+    "ground": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 3, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "fixed": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    }
+  }
+}

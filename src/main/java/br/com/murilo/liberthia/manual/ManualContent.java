@@ -449,11 +449,6 @@ public final class ManualContent {
                                     + "§7Cada kill consome 1 saúde do wielder, mas dá §oRegen II§r§7 por 5s e drop "
                                     + "extra. Drop de §dBlood Mage§r§7.",
                             "liberthia:blood_scythe"),
-                    new Page("Blood Bow",
-                            "§4Arco que dispara §lflechas sangrentas§r§4.§r\n\n"
-                                    + "§7Não consome flechas — usa 1 HP por shot. Causa §oBleed§r§7 (sangramento, "
-                                    + "1 dano/s por 5s).",
-                            "liberthia:blood_bow"),
                     new Page("Blood Ritual Dagger",
                             "§4Adaga curta de ritual.§r\n\n"
                                     + "§7Right-click no ar = sacrificar 4 HP pra +30 §dDM§r§7 no perfil. Right-click "
@@ -1360,13 +1355,6 @@ public final class ManualContent {
                                     + "Imune ao §dblood_fire§r§7. Drena §o1 HP/min§r§7 do jogador (custo).\n\n"
                                     + "§e§lCraft:§r §7Congealed Blood + Iron + Sanguine Leather."),
 
-                    new Page("Blood Bow",
-                            "§4Arco vampírico.§r\n\n"
-                                    + "§7Dispara flechas que §olifesteal§r§7 — 25% do dano vira HP pro atirador. "
-                                    + "Não funciona em players (PvP-safe).\n\n"
-                                    + "§e§lCraft:§r §7Receita em data/recipes/blood_bow.json — Sanguine Wood + "
-                                    + "String + Blood Vial Filled.",
-                            "liberthia:blood_bow"),
 
                     new Page("Blood Scythe",
                             "§4Foice sangrenta.§r\n\n"
@@ -3704,5 +3692,37 @@ public final class ManualContent {
      */
     public static List<Chapter> chaptersForLocale(String localeCode) {
         return CHAPTERS;
+    }
+
+    // ── r180: divisão do manual em 3 livros temáticos ──
+    public enum Category { ALL, COSMIC, MATTER, MAGIC }
+
+    /** Classifica um capítulo pela palavra-chave do título. */
+    public static Category categoryOf(String rawTitle) {
+        String t = rawTitle.toLowerCase(java.util.Locale.ROOT).replaceAll("§.", "");
+        if (containsAny(t, "bem-vindo", "welcome", "notas finais", "final notes", "quick reference",
+                "mudanças", "changes", "receitas conhecidas", "known recipes", "lore & livros",
+                "lore & books", "três ilhas", "three islands")) return Category.ALL;
+        if (containsAny(t, "cosmic", "horror", "sangue", "blood", "sanguine", "loom", "forbidden tome",
+                "pale watch", "outro lado", "other side", "mobs", "spawn egg")) return Category.COSMIC;
+        if (containsAny(t, "ritual", "grimório", "grimoire", "magia", "magic", "selos", "seal",
+                "espiritual", "spiritual", "sacro", "order (", "lendário", "legendary")) return Category.MAGIC;
+        return Category.MATTER; // matérias & máquinas = padrão
+    }
+
+    /** Capítulos de um livro temático: os da categoria + os gerais (ALL). */
+    public static List<Chapter> chaptersFor(String localeCode, Category cat) {
+        if (cat == null || cat == Category.ALL) return chaptersForLocale(localeCode);
+        java.util.List<Chapter> out = new java.util.ArrayList<>();
+        for (Chapter c : chaptersForLocale(localeCode)) {
+            Category cc = categoryOf(c.title());
+            if (cc == cat || cc == Category.ALL) out.add(c);
+        }
+        return out.isEmpty() ? chaptersForLocale(localeCode) : out;
+    }
+
+    private static boolean containsAny(String s, String... keys) {
+        for (String k : keys) if (s.contains(k)) return true;
+        return false;
     }
 }

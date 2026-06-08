@@ -19,6 +19,10 @@ public final class ModEffects {
     public static final RegistryObject<MobEffect> DARK_INFECTION =
             MOB_EFFECTS.register("dark_infection", DarkInfectionEffect::new);
 
+    // r180: Antimagia — o selo do sistema anti-magia (sem voo, magia anulada, lento)
+    public static final RegistryObject<MobEffect> ANTIMAGIA =
+            MOB_EFFECTS.register("antimagia", br.com.murilo.liberthia.effect.AntimagiaEffect::new);
+
     public static final RegistryObject<MobEffect> RADIATION_SICKNESS =
             MOB_EFFECTS.register("radiation_sickness", RadiationSicknessEffect::new);
 
@@ -125,6 +129,19 @@ public final class ModEffects {
             MOB_EFFECTS.register("ominous_aura", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.OminousAura::new);
     public static final RegistryObject<MobEffect> STARDUST =
             MOB_EFFECTS.register("stardust", br.com.murilo.liberthia.effect.r156.CustomEffectsR156.Stardust::new);
+
+    // r184 — Doenças Dimensionais (permanentes até o Soro Dimensional)
+    public static final RegistryObject<MobEffect> DIMENSIONAL_MEMORY =
+            MOB_EFFECTS.register("dimensional_memory", br.com.murilo.liberthia.effect.DimensionalMemoryEffect::new);
+    // "dimensional_infection" já é usado pelo sistema loom; a doença usa o id "dimensional_blight"
+    public static final RegistryObject<MobEffect> DIMENSIONAL_BLIGHT =
+            MOB_EFFECTS.register("dimensional_blight", br.com.murilo.liberthia.effect.DimensionalInfectionEffect::new);
+    public static final RegistryObject<MobEffect> DIMENSIONAL_PARANOIA =
+            MOB_EFFECTS.register("dimensional_paranoia", br.com.murilo.liberthia.effect.DimensionalParanoiaEffect::new);
+
+    // r185 — Radiação Dimensional (emanada pela Adaga Corta-Fendas)
+    public static final RegistryObject<MobEffect> DIMENSIONAL_RADIATION =
+            MOB_EFFECTS.register("dimensional_radiation", br.com.murilo.liberthia.effect.DimensionalRadiationEffect::new);
 
     private ModEffects() {
     }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "liberthia:block/spell_binding_pedestal_top",
+    "bottom": "liberthia:block/spell_binding_pedestal_bottom",
+    "side": "liberthia:block/spell_binding_pedestal_side"
+  }
+}

@@ -37,4 +37,14 @@ public class BloodPactAmuletItem extends Item {
         if (slot == EquipmentSlot.OFFHAND) return offhand;
         return super.getAttributeModifiers(slot, stack);
     }
+
+    @Override
+    public void appendHoverText(ItemStack stack, net.minecraft.world.level.Level level,
+                                java.util.List<net.minecraft.network.chat.Component> tip,
+                                net.minecraft.world.item.TooltipFlag flag) {
+        tip.add(net.minecraft.network.chat.Component.literal("§4Pacto de Sangue"));
+        tip.add(net.minecraft.network.chat.Component.literal("§7Equipe no slot de §ccolar§7 (Curios) §oou§r§7 segure na §coff-hand§7:"));
+        tip.add(net.minecraft.network.chat.Component.literal("  §a+3§7 de ataque · §c−4 vida máx§7 (−2 corações)"));
+        tip.add(net.minecraft.network.chat.Component.literal("§8§oUm pacto exige sacrifício."));
+    }
 }

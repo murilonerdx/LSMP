@@ -60,6 +60,20 @@
     "liberthia:spell_weaver",
     "liberthia:arcane_workbench",
     "liberthia:computador",
-    "liberthia:printer"
+    "liberthia:printer",
+    "liberthia:rift_residue",
+    "liberthia:warped_space",
+    "liberthia:void_scar",
+    "liberthia:dimensional_flux",
+    "liberthia:blood_coal_ore",
+    "liberthia:blood_iron_ore",
+    "liberthia:blood_gold_ore",
+    "liberthia:blood_diamond_ore",
+    "liberthia:blood_redstone_ore",
+    "liberthia:blood_lapis_ore",
+    "liberthia:blood_emerald_ore",
+    "liberthia:cobaia_analyzer",
+    "liberthia:entropy_engine",
+    "liberthia:ward_pillar"
   ]
 }

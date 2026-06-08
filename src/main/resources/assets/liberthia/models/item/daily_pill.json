@@ -1,0 +1,7 @@
+{
+  "_comment": "Daily Pill — usa textura propria 16x16 (capsula branca+amarela horizontal).",
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "liberthia:item/daily_pill"
+  }
+}

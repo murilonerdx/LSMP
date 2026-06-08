@@ -113,6 +113,12 @@ public final class LiberthiaConfig {
         public final ForgeConfigSpec.IntValue telemetryPushIntervalSeconds;
         public final ForgeConfigSpec.ConfigValue<String> telemetryBackendUrl;
 
+        // r186: Motor de Matéria Escura (overhaul)
+        public final ForgeConfigSpec.BooleanValue blackMatterEngineEnabled;
+        public final ForgeConfigSpec.IntValue blackMatterEngineMaxRadius;
+        public final ForgeConfigSpec.IntValue blackMatterEngineSpeedMultiplier;
+        public final ForgeConfigSpec.IntValue blackMatterCrystalChancePercent;
+
         private Server(ForgeConfigSpec.Builder builder) {
             builder.comment("Configuração dos surtos de Matéria Escura no mundo.").push("world");
 
@@ -141,6 +147,22 @@ public final class LiberthiaConfig {
                             + "Default: false — só roda quando explicitamente acionado.")
                     .define("cosmic_horror_auto_tick", false);
 
+            builder.pop();
+
+            // r186: Motor de Matéria Escura — controle da infecção do terreno
+            builder.comment("Motor de Matéria Escura — controle da infecção do terreno.").push("black_matter_engine");
+            blackMatterEngineEnabled = builder
+                    .comment("Quando false, o Motor de Matéria Escura para (sem spread/efeitos).")
+                    .define("enabled", true);
+            blackMatterEngineMaxRadius = builder
+                    .comment("Raio máximo (blocos) da infecção. Cresce sem teto de código; este é o limite configurável.")
+                    .defineInRange("max_radius", 128, 8, 2048);
+            blackMatterEngineSpeedMultiplier = builder
+                    .comment("Multiplicador de velocidade da infecção (1=normal, 10=máximo).")
+                    .defineInRange("speed_multiplier", 1, 1, 10);
+            blackMatterCrystalChancePercent = builder
+                    .comment("Chance % (1-100) de gerar crystalized_dark_matter ao infectar. Default 8 (raro).")
+                    .defineInRange("crystal_chance_percent", 8, 1, 100);
             builder.pop();
 
             builder.comment("Painel de administração via HTTP. Permite controlar players de fora do jogo.").push("admin_api");

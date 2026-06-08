@@ -25,6 +25,7 @@ public class LiberthiaMod {
 
         ModBlocks.register(modBus);
         ModItems.register(modBus);
+        br.com.murilo.liberthia.registry.ModTech.register(modBus);
         ModFluids.register(modBus);
         // r138: Worldgen features (Wizard Tower)
         br.com.murilo.liberthia.registry.ModFeatures.register(modBus);
@@ -34,6 +35,7 @@ public class LiberthiaMod {
         ModEntities.register(modBus);
         ModCapabilities.register(modBus);
         ModEffects.register(modBus);
+        br.com.murilo.liberthia.registry.ModEnchantments.register(modBus);
         ModMobEffects.register(modBus);
         ModPotions.register(modBus);
         ModBlockEntities.register(modBus);

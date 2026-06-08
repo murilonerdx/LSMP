@@ -1,0 +1,35 @@
+{
+  "parent": "liberthia:item/emf_meter_0",
+  "overrides": [
+    {
+      "predicate": {
+        "liberthia:emf": 0.1
+      },
+      "model": "liberthia:item/emf_meter_1"
+    },
+    {
+      "predicate": {
+        "liberthia:emf": 0.28
+      },
+      "model": "liberthia:item/emf_meter_2"
+    },
+    {
+      "predicate": {
+        "liberthia:emf": 0.45
+      },
+      "model": "liberthia:item/emf_meter_3"
+    },
+    {
+      "predicate": {
+        "liberthia:emf": 0.63
+      },
+      "model": "liberthia:item/emf_meter_4"
+    },
+    {
+      "predicate": {
+        "liberthia:emf": 0.82
+      },
+      "model": "liberthia:item/emf_meter_5"
+    }
+  ]
+}

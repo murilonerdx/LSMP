@@ -35,9 +35,20 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.SPRITE_VFX.get(),
                 br.com.murilo.liberthia.magic.spell.vfx.SpriteVfxRenderer::new);
         event.registerEntityRenderer(ModEntities.BLACK_HOLE.get(), BlackHoleRenderer::new);
+        event.registerEntityRenderer(ModEntities.DARK_MATTER_BLACK_HOLE.get(),
+                br.com.murilo.liberthia.client.renderer.DarkMatterBlackHoleRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLIND_ASTRONOMER.get(),
+                br.com.murilo.liberthia.client.renderer.BlindAstronomerRenderer::new);
+        event.registerEntityRenderer(ModEntities.HIVE_QUEEN.get(),
+                br.com.murilo.liberthia.client.renderer.HiveQueenRenderer::new);
         // r178: Manifestação do Vazio (sombra + olhos vermelhos girando + tentáculos)
         event.registerEntityRenderer(ModEntities.VOID_MANIFESTATION.get(),
                 br.com.murilo.liberthia.client.renderer.VoidManifestationRenderer::new);
+        // r179: Fenda Dimensional (rasgo billboard animado)
+        event.registerEntityRenderer(ModEntities.DIMENSIONAL_RIFT.get(),
+                br.com.murilo.liberthia.client.renderer.DimensionalRiftRenderer::new);
+        event.registerEntityRenderer(ModEntities.RIFT_PORTAL.get(),
+                br.com.murilo.liberthia.client.renderer.RiftPortalRenderer::new);
         // r135: Drygmy familiar (passive farm helper)
         event.registerEntityRenderer(ModEntities.DRYGMY.get(),
                 br.com.murilo.liberthia.magic.familiar.DrygmyRenderer::new);
@@ -80,6 +91,9 @@ public class ClientModEvents {
                 br.com.murilo.liberthia.client.renderer.OrderPaladinRenderer::new);
         event.registerEntityRenderer(ModEntities.BLOOD_PEARL.get(),
                 ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        // r180b: bala de matéria — renderiza o ingot da matéria voando
+        event.registerEntityRenderer(ModEntities.MATTER_BULLET.get(),
+                ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, false));
         event.registerEntityRenderer(ModEntities.VEILING_ORB.get(),
                 net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.MIND_SPLINTER_DART.get(),
@@ -118,6 +132,11 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(
                 br.com.murilo.liberthia.registry.ModBlockEntities.POTION_JAR.get(),
                 br.com.murilo.liberthia.client.renderer.PotionJarRenderer::new);
+
+        // r181: Matter Reactor BER — orbe de matéria escura flutuante/girando (integração tech↔dark matter)
+        event.registerBlockEntityRenderer(
+                br.com.murilo.liberthia.registry.ModTech.MATTER_REACTOR_BE.get(),
+                br.com.murilo.liberthia.client.renderer.MatterReactorRenderer::new);
 
 
 
@@ -233,7 +252,8 @@ public class ClientModEvents {
                         0.5F) {
                     @Override
                     public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.VisitanteEntity e) {
-                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/zombie.png");
+                        // r179: skin custom do Visitante (antes usava a textura vanilla do zumbi)
+                        return new net.minecraft.resources.ResourceLocation("liberthia", "textures/entity/visitante.png");
                     }
                 });
         event.registerEntityRenderer(ModEntities.MULHER_HORIZONTE.get(),
@@ -244,7 +264,8 @@ public class ClientModEvents {
                         0.5F) {
                     @Override
                     public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.cosmic.horror.entity.MulherDoHorizonteEntity e) {
-                        return new net.minecraft.resources.ResourceLocation("textures/entity/zombie/zombie.png");
+                        // r179: skin custom (antes usava a textura vanilla do zumbi)
+                        return new net.minecraft.resources.ResourceLocation("liberthia", "textures/entity/mulher_horizonte.png");
                     }
                 });
         // r178: O Ídolo — humanoide pálido alto, textura própria
@@ -436,8 +457,9 @@ public class ClientModEvents {
                     @Override
                     public net.minecraft.resources.ResourceLocation getTextureLocation(
                             br.com.murilo.liberthia.magic.boss.LichStalkerEntity e) {
+                        // r179: skin custom 64x64 (antes wither_skeleton 64x32 = sem braços/pernas no modelo PLAYER)
                         return new net.minecraft.resources.ResourceLocation(
-                                "minecraft", "textures/entity/skeleton/wither_skeleton.png");
+                                "liberthia", "textures/entity/lich_stalker.png");
                     }
                 });
         event.registerEntityRenderer(ModEntities.LICH_HUNTER.get(),
@@ -448,8 +470,127 @@ public class ClientModEvents {
                     @Override
                     public net.minecraft.resources.ResourceLocation getTextureLocation(
                             br.com.murilo.liberthia.magic.boss.LichHunterEntity e) {
+                        // r179: skin custom 64x64 (antes skeleton 64x32 = sem braços/pernas no modelo PLAYER)
                         return new net.minecraft.resources.ResourceLocation(
-                                "minecraft", "textures/entity/skeleton/skeleton.png");
+                                "liberthia", "textures/entity/lich_hunter.png");
+                    }
+                });
+
+        // r180: O Observado — humanoide que ESCALA com o growth (cresce ao ser observado)
+        event.registerEntityRenderer(ModEntities.O_OBSERVADO.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.ObservadoEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.ObservadoEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.cosmic.horror.entity.ObservadoEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("liberthia", "textures/entity/o_observado.png");
+                    }
+                    @Override
+                    protected void scale(br.com.murilo.liberthia.cosmic.horror.entity.ObservadoEntity e,
+                                         com.mojang.blaze3d.vertex.PoseStack ps, float pt) {
+                        float s = 1.0F + e.getGrowth() * 1.3F; // até ~2.3× quando muito observado
+                        ps.scale(s, s, s);
+                    }
+                });
+
+        // r180: O Pastor do Silêncio — figura ALTA e esguia
+        event.registerEntityRenderer(ModEntities.SILENCE_SHEPHERD.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.SilenceShepherdEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.SilenceShepherdEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.cosmic.horror.entity.SilenceShepherdEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("liberthia", "textures/entity/silence_shepherd.png");
+                    }
+                    @Override
+                    protected void scale(br.com.murilo.liberthia.cosmic.horror.entity.SilenceShepherdEntity e,
+                                         com.mojang.blaze3d.vertex.PoseStack ps, float pt) {
+                        ps.scale(1.05F, 1.4F, 1.05F); // alto e solene
+                    }
+                });
+
+        // r180: Arquivista do Fim — humanoide alto
+        event.registerEntityRenderer(ModEntities.END_ARCHIVIST.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.cosmic.horror.entity.EndArchivistEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.cosmic.horror.entity.EndArchivistEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(
+                            br.com.murilo.liberthia.cosmic.horror.entity.EndArchivistEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("liberthia", "textures/entity/end_archivist.png");
+                    }
+                    @Override
+                    protected void scale(br.com.murilo.liberthia.cosmic.horror.entity.EndArchivistEntity e,
+                                         com.mojang.blaze3d.vertex.PoseStack ps, float pt) {
+                        ps.scale(1.0F, 1.2F, 1.0F);
+                    }
+                });
+
+        // r187: Amalgamado Cego — modelo 3D real (carne fundida)
+        event.registerEntityRenderer(ModEntities.BLIND_AMALGAM.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.AmalgamRenderer<>(ctx, "amalgam", 1.3F));
+        // r187: Olho Parasita — modelo 3D real (olho flutuante)
+        event.registerEntityRenderer(ModEntities.PARASITIC_EYE.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.FloatingEyeRenderer<>(ctx, "floating_eye", 1.12F));
+        // r187: Parasita de Brasa — rastejante 3D
+        event.registerEntityRenderer(ModEntities.CINDER_PARASITE.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.CrawlerRenderer<>(ctx, "crawler", 1.4F));
+        // r187: Verme Dimensional — verme segmentado 3D (cósmico)
+        event.registerEntityRenderer(ModEntities.DIMENSIONAL_WORM.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.WormRenderer<>(ctx, "worm_dimensional", 1.2F));
+        // r187: Sanguessuga do Olhar — olho flutuante 3D
+        event.registerEntityRenderer(ModEntities.GAZE_LEECH.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.FloatingEyeRenderer<>(ctx, "floating_eye", 1.6F));
+        // r187: Tecelão Cego — rastejante 3D
+        event.registerEntityRenderer(ModEntities.BLIND_WEAVER.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.CrawlerRenderer<>(ctx, "crawler", 1.4F));
+        // r187: Devora-Carne Rastejante — rastejante 3D
+        event.registerEntityRenderer(ModEntities.MAW_CRAWLER.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.CrawlerRenderer<>(ctx, "crawler", 1.4F));
+        // r187: Ácaro do Sussurro — inseto 3D
+        event.registerEntityRenderer(ModEntities.WHISPER_MITE.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.MiteRenderer<>(ctx, "mite", 2.3F, false));
+        // r187: Orbe do Pavor — olho flutuante 3D
+        event.registerEntityRenderer(ModEntities.DREAD_ORB.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.FloatingEyeRenderer<>(ctx, "floating_eye", 1.6F));
+        // r187: Vigia de Carne — rastejante 3D
+        event.registerEntityRenderer(ModEntities.FLESH_WATCHER.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.CrawlerRenderer<>(ctx, "crawler", 1.4F));
+        // r187: Carrapato do Vazio — inseto 3D
+        event.registerEntityRenderer(ModEntities.VOID_TICK.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.MiteRenderer<>(ctx, "mite", 2.3F, false));
+        // r187: Mariposa do Breu — inseto 3D COM ASAS que batem
+        event.registerEntityRenderer(ModEntities.GLOOM_MOTH.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.MiteRenderer<>(ctx, "mite", 2.3F, true));
+        // r187: Olho Podre — olho flutuante 3D
+        event.registerEntityRenderer(ModEntities.ROT_EYE.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.FloatingEyeRenderer<>(ctx, "floating_eye", 1.6F));
+        // r187: Larva Gritante — inseto 3D
+        event.registerEntityRenderer(ModEntities.SCREAM_LARVA.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.MiteRenderer<>(ctx, "mite", 2.3F, false));
+        // r187: Cria do Espelho — inseto 3D
+        event.registerEntityRenderer(ModEntities.MIRROR_SPAWN.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.MiteRenderer<>(ctx, "mite", 2.3F, false));
+        // r187: Hospedeiro Parasitado — rastejante 3D
+        event.registerEntityRenderer(ModEntities.PARASITE_HOST.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.CrawlerRenderer<>(ctx, "crawler", 1.4F));
+        // r187: Olho Colossal — olho flutuante 3D gigante
+        event.registerEntityRenderer(ModEntities.COLOSSAL_EYE.get(),
+                ctx -> new br.com.murilo.liberthia.client.renderer.FloatingEyeRenderer<>(ctx, "floating_eye", 1.6F));
+        // r180b: Lança de Varatha arremessada (Retorno Espiritual)
+        event.registerEntityRenderer(ModEntities.THROWN_VARATHA.get(),
+                br.com.murilo.liberthia.client.renderer.ThrownVarathaRenderer::new);
+
+        // r180: Cobaia — humanoide sujeito de teste
+        event.registerEntityRenderer(ModEntities.COBAIA.get(),
+                ctx -> new net.minecraft.client.renderer.entity.HumanoidMobRenderer<br.com.murilo.liberthia.entity.CobaiaEntity, net.minecraft.client.model.HumanoidModel<br.com.murilo.liberthia.entity.CobaiaEntity>>(
+                        ctx, new net.minecraft.client.model.HumanoidModel<>(
+                                ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F) {
+                    @Override
+                    public net.minecraft.resources.ResourceLocation getTextureLocation(br.com.murilo.liberthia.entity.CobaiaEntity e) {
+                        return new net.minecraft.resources.ResourceLocation("liberthia", "textures/entity/cobaia.png");
                     }
                 });
 
@@ -490,6 +631,18 @@ public class ClientModEvents {
     public static void onRegisterLayers(net.minecraftforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(br.com.murilo.liberthia.client.model.BloodWormModel.LAYER,
                 br.com.murilo.liberthia.client.model.BloodWormModel::createBodyLayer);
+        // r187: Olho Flutuante 3D (família de mobs-olho)
+        event.registerLayerDefinition(br.com.murilo.liberthia.client.model.FloatingEyeModel.LAYER,
+                br.com.murilo.liberthia.client.model.FloatingEyeModel::createBodyLayer);
+        // r187: Rastejante 3D (mobs rastejantes)
+        event.registerLayerDefinition(br.com.murilo.liberthia.client.model.CrawlerModel.LAYER,
+                br.com.murilo.liberthia.client.model.CrawlerModel::createBodyLayer);
+        // r187: Inseto/Mariposa 3D (mobs-inseto)
+        event.registerLayerDefinition(br.com.murilo.liberthia.client.model.MiteModel.LAYER,
+                br.com.murilo.liberthia.client.model.MiteModel::createBodyLayer);
+        // r187: Amalgamado Cego 3D
+        event.registerLayerDefinition(br.com.murilo.liberthia.client.model.AmalgamModel.LAYER,
+                br.com.murilo.liberthia.client.model.AmalgamModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -521,6 +674,9 @@ public class ClientModEvents {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(ModMenuTypes.PURIFICATION_BENCH.get(), PurificationBenchScreen::new);
+            MenuScreens.register(ModMenuTypes.TECH_MACHINE.get(), TechMachineScreen::new);
+            MenuScreens.register(ModMenuTypes.TECH_ENERGY.get(), br.com.murilo.liberthia.client.screen.TechEnergyScreen::new);
+            MenuScreens.register(ModMenuTypes.ARCANE_MACHINE.get(), br.com.murilo.liberthia.client.screen.ArcaneMachineScreen::new);
             // r69: Scribes Table — GUI de crafting de spell parchments
             MenuScreens.register(ModMenuTypes.SCRIBES_TABLE.get(),
                     br.com.murilo.liberthia.client.screen.ScribesTableScreen::new);
@@ -609,6 +765,9 @@ public class ClientModEvents {
                     br.com.murilo.liberthia.client.screen.ThreadLoomScreen::new);
             MenuScreens.register(ModMenuTypes.ORB_INFUSER.get(),
                     br.com.murilo.liberthia.client.screen.OrbInfuserScreen::new);
+            // r185 — Forja de Fendas
+            MenuScreens.register(ModMenuTypes.RIFT_FORGE.get(),
+                    br.com.murilo.liberthia.client.screen.RiftForgeScreen::new);
 
             // Sample Vial: model override "filled" baseado no NBT (legacy, mantido).
             net.minecraft.client.renderer.item.ItemProperties.register(

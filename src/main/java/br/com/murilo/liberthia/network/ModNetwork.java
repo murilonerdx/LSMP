@@ -802,6 +802,49 @@ public final class ModNetwork {
                 br.com.murilo.liberthia.network.packet.CapturePhotoS2CPacket::decode,
                 br.com.murilo.liberthia.network.packet.CapturePhotoS2CPacket::handle
         );
+
+        // r180c: Jetpack — C2S, cliente avisa que está propulsando p/ servidor drenar FE (APPEND-ONLY: fim da lista)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.JetpackActiveC2SPacket.class,
+                br.com.murilo.liberthia.network.packet.JetpackActiveC2SPacket::encode,
+                br.com.murilo.liberthia.network.packet.JetpackActiveC2SPacket::decode,
+                br.com.murilo.liberthia.network.packet.JetpackActiveC2SPacket::handle
+        );
+
+        // r185: Adaga Corta-Fendas — abre GUI de coords (S2C) + salva coords (C2S) (APPEND-ONLY: fim da lista)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.OpenRiftCutterCoordScreenS2CPacket.class,
+                br.com.murilo.liberthia.network.packet.OpenRiftCutterCoordScreenS2CPacket::encode,
+                br.com.murilo.liberthia.network.packet.OpenRiftCutterCoordScreenS2CPacket::decode,
+                br.com.murilo.liberthia.network.packet.OpenRiftCutterCoordScreenS2CPacket::handle
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.SaveRiftCutterCoordsC2SPacket.class,
+                br.com.murilo.liberthia.network.packet.SaveRiftCutterCoordsC2SPacket::encode,
+                br.com.murilo.liberthia.network.packet.SaveRiftCutterCoordsC2SPacket::decode,
+                br.com.murilo.liberthia.network.packet.SaveRiftCutterCoordsC2SPacket::handle
+        );
+
+        // r187: Escala de Astaron — sync S2C (radiação/cósmicos/cor do céu)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.S2CAstaronSyncPacket.class,
+                br.com.murilo.liberthia.network.packet.S2CAstaronSyncPacket::encode,
+                br.com.murilo.liberthia.network.packet.S2CAstaronSyncPacket::decode,
+                br.com.murilo.liberthia.network.packet.S2CAstaronSyncPacket::handle
+        );
+
+        // r190: Cutscene — S2C reproduz/para/reinicia vídeo no cliente (APPEND-ONLY: fim da lista)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.cutscene.CutsceneS2CPacket.class,
+                br.com.murilo.liberthia.cutscene.CutsceneS2CPacket::encode,
+                br.com.murilo.liberthia.cutscene.CutsceneS2CPacket::decode,
+                br.com.murilo.liberthia.cutscene.CutsceneS2CPacket::handle
+        );
     }
 
     public static void sendToPlayer(ServerPlayer player, Object packet) {

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "liberthia:block/matter_extractor_side",
+    "down":   "liberthia:block/matter_extractor_top",
+    "up":     "liberthia:block/matter_extractor_top",
+    "north":  "liberthia:block/matter_extractor_front",
+    "south":  "liberthia:block/matter_extractor_side",
+    "west":   "liberthia:block/matter_extractor_side",
+    "east":   "liberthia:block/matter_extractor_side"
+  }
+}

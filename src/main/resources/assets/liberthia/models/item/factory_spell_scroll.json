@@ -1,0 +1,710 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "liberthia:item/factory_spell_scroll"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "liberthia:spell_index": 1.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_aetheric_pulse"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 2.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_amethyst_lance"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 3.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_amethyst_shards"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 4.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_arcane_ward"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 5.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_aurora_beam"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 6.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_berserker_rage"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 7.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_blessing"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 8.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_blink_step"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 9.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_blood_moon_aura"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 10.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_burning_aura"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 11.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_chrono_dash"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 12.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_critical_strike"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 13.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_crystal_bloom"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 14.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_crystal_storm"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 15.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dash_00"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 16.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dash_01"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 17.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dash_02"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 18.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dash_03"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 19.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dash_04"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 20.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_death_beam"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 21.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_devil_walk"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 22.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dim_blind_curse"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 23.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dimensional_rupture"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 24.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dispell"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 25.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_divine_mantle"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 26.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dragon_breath"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 27.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_dragon_roar"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 28.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_earthquake"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 29.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_fireball"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 30.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_frost_armor"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 31.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_frost_nova"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 32.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_ghost_step"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 33.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_glacial_tomb"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 34.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_gravity_well"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 35.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_great_spell"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 36.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_group_glow"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 37.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_group_haste"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 38.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_group_heal"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 39.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_group_invis"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 40.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_group_jump"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 41.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_group_resist"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 42.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_group_speed"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 43.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_group_strength"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 44.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_haunted_inv"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 45.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_hemorrhage_wave"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 46.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_homing_missile"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 47.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_ice_storm"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 48.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_immortal_00"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 49.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_immortal_01"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 50.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_immortal_02"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 51.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_immortal_03"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 52.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_immortal_04"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 53.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_iron_skin"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 54.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_lava_lance"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 55.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_levitate_self"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 56.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_life_drain"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 57.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_magnet_pull"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 58.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_mana_burst"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 59.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_mana_drain"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 60.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_mass_root"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 61.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_mass_silence"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 62.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_mass_slow"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 63.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 64.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_00"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 65.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_01"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 66.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_02"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 67.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_03"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 68.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_04"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 69.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_05"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 70.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_06"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 71.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_07"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 72.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_08"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 73.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_09"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 74.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_meteor_storm"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 75.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_mind_lance"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 76.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_mirror_walk"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 77.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_movement_00"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 78.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_movement_01"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 79.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_movement_02"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 80.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_movement_03"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 81.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_movement_04"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 82.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_movement_05"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 83.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_movement_06"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 84.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_movement_07"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 85.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_mud_prison"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 86.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_necrotic_storm"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 87.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_nightmare"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 88.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_phase_dash"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 89.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_phoenix_dive"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 90.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_pox_swarm"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 91.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_purify_aura"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 92.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_regeneration_field"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 93.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_sand_blast"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 94.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_shadow_cloak"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 95.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_shadow_clone"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 96.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_solar_flare"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 97.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_soul_link"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 98.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_soul_shatter"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 99.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_steam_explosion"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 100.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_stone_shield"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 101.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_tempest_strike"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 102.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_thunder_step"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 103.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_time_dilate"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 104.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_triple_shot"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 105.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_vampires_kiss"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 106.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_vampiric_touch"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 107.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_vazio_roxo"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 108.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_vertigo_curse"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 109.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_void_aegis"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 110.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_void_dash"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 111.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_void_heart"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 112.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_void_lance"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 113.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_void_pull"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 114.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_void_singularity"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 115.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_volcanic_storm"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 116.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_whispers_curse"
+    },
+    {
+      "predicate": {
+        "liberthia:spell_index": 117.0
+      },
+      "model": "liberthia:item/factory_spell_scroll_wisp_swarm"
+    }
+  ]
+}

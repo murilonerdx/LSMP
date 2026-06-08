@@ -1,0 +1,707 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "liberthia:item/host_plush"
+	},
+	"elements": [
+		{
+			"name": "Head Item",
+			"from": [8, 13.25, 9],
+			"to": [8, 13.25, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Hat",
+			"from": [8, 13.25, 9],
+			"to": [8, 13.25, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Head",
+			"from": [2, 13.25, 3],
+			"to": [14, 25.25, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [2, 2, 4, 4], "texture": "#0"},
+				"east": {"uv": [0, 2, 2, 4], "texture": "#0"},
+				"south": {"uv": [6, 2, 8, 4], "texture": "#0"},
+				"west": {"uv": [4, 2, 6, 4], "texture": "#0"},
+				"up": {"uv": [4, 2, 2, 0], "texture": "#0"},
+				"down": {"uv": [6, 0, 4, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Jacket",
+			"from": [3, 3.75, 4],
+			"to": [13, 13.75, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [1.5, 13.5, 3, 15], "texture": "#0"},
+				"east": {"uv": [0, 13.5, 1.5, 15], "texture": "#0"},
+				"south": {"uv": [4.5, 13.5, 6, 15], "texture": "#0"},
+				"west": {"uv": [3, 13.5, 4.5, 15], "texture": "#0"},
+				"up": {"uv": [3, 13.5, 1.5, 12], "texture": "#0"},
+				"down": {"uv": [4.5, 12, 3, 13.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Body",
+			"from": [3.5, 4.25, 4.5],
+			"to": [12.5, 13.25, 13.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [1.5, 5.5, 3, 7], "texture": "#0"},
+				"east": {"uv": [0, 5.5, 1.5, 7], "texture": "#0"},
+				"south": {"uv": [4.5, 5.5, 6, 7], "texture": "#0"},
+				"west": {"uv": [3, 5.5, 4.5, 7], "texture": "#0"},
+				"up": {"uv": [3, 5.5, 1.5, 4], "texture": "#0"},
+				"down": {"uv": [4.5, 4, 3, 5.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Shoulder",
+			"from": [8, 13.25, 9],
+			"to": [8, 13.25, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Shoulder",
+			"from": [8, 13.25, 9],
+			"to": [8, 13.25, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Sleeve",
+			"from": [0.25, 10, 7.25],
+			"to": [3.75, 13.5, 10.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [15, 10.5, 14.5, 11], "texture": "#0"},
+				"east": {"uv": [15.5, 10.5, 15, 11], "texture": "#0"},
+				"south": {"uv": [16, 10.5, 15.5, 11], "texture": "#0"},
+				"west": {"uv": [14.5, 10.5, 14, 11], "texture": "#0"},
+				"up": {"uv": [14.5, 10.5, 15, 10], "texture": "#0"},
+				"down": {"uv": [15, 10, 15.5, 10.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Arm",
+			"from": [0.5, 10.25, 7.5],
+			"to": [3.5, 13.25, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [15, 2.5, 14.5, 3], "texture": "#0"},
+				"east": {"uv": [15.5, 2.5, 15, 3], "texture": "#0"},
+				"south": {"uv": [16, 2.5, 15.5, 3], "texture": "#0"},
+				"west": {"uv": [14.5, 2.5, 14, 3], "texture": "#0"},
+				"up": {"uv": [14.5, 2.5, 15, 2], "texture": "#0"},
+				"down": {"uv": [15, 2, 15.5, 2.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Glove",
+			"from": [-1.25, 4, 5.75],
+			"to": [5.25, 10.5, 12.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [10, 10.75, 9, 11.75], "texture": "#0"},
+				"east": {"uv": [11, 10.75, 10, 11.75], "texture": "#0"},
+				"south": {"uv": [12, 10.75, 11, 11.75], "texture": "#0"},
+				"west": {"uv": [9, 10.75, 8, 11.75], "texture": "#0"},
+				"up": {"uv": [9, 10.75, 10, 9.75], "texture": "#0"},
+				"down": {"uv": [10, 9.75, 11, 10.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Hand",
+			"from": [-1, 4.25, 6],
+			"to": [5, 10.25, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [10, 2.75, 9, 3.75], "texture": "#0"},
+				"east": {"uv": [11, 2.75, 10, 3.75], "texture": "#0"},
+				"south": {"uv": [12, 2.75, 11, 3.75], "texture": "#0"},
+				"west": {"uv": [9, 2.75, 8, 3.75], "texture": "#0"},
+				"up": {"uv": [9, 2.75, 10, 1.75], "texture": "#0"},
+				"down": {"uv": [10, 1.75, 11, 2.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Hand Item",
+			"from": [3, 18.75, 9],
+			"to": [3, 18.75, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Sleeve",
+			"from": [12.25, 10, 7.25],
+			"to": [15.75, 13.5, 10.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [8.5, 14.25, 9, 14.75], "texture": "#0"},
+				"east": {"uv": [8.25, 14, 8.75, 14.5], "texture": "#0"},
+				"south": {"uv": [9.75, 13.5, 10.25, 14], "texture": "#0"},
+				"west": {"uv": [8.75, 15, 9.25, 15.5], "texture": "#0"},
+				"up": {"uv": [9.25, 14, 8.75, 13.5], "texture": "#0"},
+				"down": {"uv": [10, 13.75, 9.5, 14.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Arm",
+			"from": [12.5, 10.25, 7.5],
+			"to": [15.5, 13.25, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [14.5, 6.5, 15, 7], "texture": "#0"},
+				"east": {"uv": [14, 6.5, 14.5, 7], "texture": "#0"},
+				"south": {"uv": [15.5, 6.5, 16, 7], "texture": "#0"},
+				"west": {"uv": [15, 6.5, 15.5, 7], "texture": "#0"},
+				"up": {"uv": [15, 6.5, 14.5, 6], "texture": "#0"},
+				"down": {"uv": [15.5, 6, 15, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Glove",
+			"from": [10.75, 4, 5.75],
+			"to": [17.25, 10.5, 12.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [9, 14.75, 10, 15.75], "texture": "#0"},
+				"east": {"uv": [8, 14.75, 9, 15.75], "texture": "#0"},
+				"south": {"uv": [11, 14.75, 12, 15.75], "texture": "#0"},
+				"west": {"uv": [10, 14.75, 11, 15.75], "texture": "#0"},
+				"up": {"uv": [10, 14.75, 9, 13.75], "texture": "#0"},
+				"down": {"uv": [11, 13.75, 10, 14.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Hand",
+			"from": [11, 4.25, 6],
+			"to": [17, 10.25, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [9, 6.75, 10, 7.75], "texture": "#0"},
+				"east": {"uv": [8, 6.75, 9, 7.75], "texture": "#0"},
+				"south": {"uv": [11, 6.75, 12, 7.75], "texture": "#0"},
+				"west": {"uv": [10, 6.75, 11, 7.75], "texture": "#0"},
+				"up": {"uv": [10, 6.75, 9, 5.75], "texture": "#0"},
+				"down": {"uv": [11, 5.75, 10, 6.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Hand Item",
+			"from": [13, 18.75, 9],
+			"to": [13, 18.75, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 4, 0, 4], "texture": "#0"},
+				"east": {"uv": [0, 4, 0, 4], "texture": "#0"},
+				"south": {"uv": [0, 4, 0, 4], "texture": "#0"},
+				"west": {"uv": [0, 4, 0, 4], "texture": "#0"},
+				"up": {"uv": [0, 4, 0, 4], "texture": "#0"},
+				"down": {"uv": [0, 4, 0, 4], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Cuff",
+			"from": [3.1, 2.58, 6.25],
+			"to": [8.1, 4.58, 11.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [14.5, 8.75, 13.75, 9], "texture": "#0"},
+				"east": {"uv": [15.25, 8.75, 14.5, 9], "texture": "#0"},
+				"south": {"uv": [16, 8.75, 15.25, 9], "texture": "#0"},
+				"west": {"uv": [13.75, 8.75, 13, 9], "texture": "#0"},
+				"up": {"uv": [13.75, 8.75, 14.5, 8], "texture": "#0"},
+				"down": {"uv": [14.5, 8, 15.25, 8.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Ankle",
+			"from": [3.35, 2.83, 6.5],
+			"to": [7.85, 4.33, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [14.5, 0.75, 13.75, 1], "texture": "#0"},
+				"east": {"uv": [15.25, 0.75, 14.5, 1], "texture": "#0"},
+				"south": {"uv": [16, 0.75, 15.25, 1], "texture": "#0"},
+				"west": {"uv": [13.75, 0.75, 13, 1], "texture": "#0"},
+				"up": {"uv": [13.75, 0.75, 14.5, 0], "texture": "#0"},
+				"down": {"uv": [14.5, 0, 15.25, 0.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Shoe",
+			"from": [3.1, -0.42, 3.25],
+			"to": [8.1, 3.08, 11.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [10, 9.25, 9.25, 9.75], "texture": "#0"},
+				"east": {"uv": [11.25, 9.25, 10, 9.75], "texture": "#0"},
+				"south": {"uv": [12, 9.25, 11.25, 9.75], "texture": "#0"},
+				"west": {"uv": [9.25, 9.25, 8, 9.75], "texture": "#0"},
+				"up": {"uv": [9.25, 9.25, 10, 8], "texture": "#0"},
+				"down": {"uv": [10, 8, 10.75, 9.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Foot",
+			"from": [3.35, -0.17, 3.5],
+			"to": [7.85, 2.83, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [10, 1.25, 9.25, 1.75], "texture": "#0"},
+				"east": {"uv": [11.25, 1.25, 10, 1.75], "texture": "#0"},
+				"south": {"uv": [12, 1.25, 11.25, 1.75], "texture": "#0"},
+				"west": {"uv": [9.25, 1.25, 8, 1.75], "texture": "#0"},
+				"up": {"uv": [9.25, 1.25, 10, 0], "texture": "#0"},
+				"down": {"uv": [10, 0, 10.75, 1.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Pants Leg",
+			"from": [3.85, 4.08, 7.25],
+			"to": [7.35, 7.58, 10.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [15, 9.5, 14.5, 10], "texture": "#0"},
+				"east": {"uv": [15.5, 9.5, 15, 10], "texture": "#0"},
+				"south": {"uv": [16, 9.5, 15.5, 10], "texture": "#0"},
+				"west": {"uv": [14.5, 9.5, 14, 10], "texture": "#0"},
+				"up": {"uv": [14.5, 9.5, 15, 9], "texture": "#0"},
+				"down": {"uv": [15, 9, 15.5, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Left Leg",
+			"from": [4.1, 4.33, 7.5],
+			"to": [7.1, 7.33, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [15, 1.5, 14.5, 2], "texture": "#0"},
+				"east": {"uv": [15.5, 1.5, 15, 2], "texture": "#0"},
+				"south": {"uv": [16, 1.5, 15.5, 2], "texture": "#0"},
+				"west": {"uv": [14.5, 1.5, 14, 2], "texture": "#0"},
+				"up": {"uv": [14.5, 1.5, 15, 1], "texture": "#0"},
+				"down": {"uv": [15, 1, 15.5, 1.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Cuff",
+			"from": [7.9, 2.58, 6.25],
+			"to": [12.9, 4.58, 11.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [13.75, 8.75, 14.5, 9], "texture": "#0"},
+				"east": {"uv": [13, 8.75, 13.75, 9], "texture": "#0"},
+				"south": {"uv": [15.25, 8.75, 16, 9], "texture": "#0"},
+				"west": {"uv": [14.5, 8.75, 15.25, 9], "texture": "#0"},
+				"up": {"uv": [14.5, 8.75, 13.75, 8], "texture": "#0"},
+				"down": {"uv": [15.25, 8, 14.5, 8.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Ankle",
+			"from": [8.15, 2.83, 6.5],
+			"to": [12.65, 4.33, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [13.75, 0.75, 14.5, 1], "texture": "#0"},
+				"east": {"uv": [13, 0.75, 13.75, 1], "texture": "#0"},
+				"south": {"uv": [15.25, 0.75, 16, 1], "texture": "#0"},
+				"west": {"uv": [14.5, 0.75, 15.25, 1], "texture": "#0"},
+				"up": {"uv": [14.5, 0.75, 13.75, 0], "texture": "#0"},
+				"down": {"uv": [15.25, 0, 14.5, 0.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Shoe",
+			"from": [7.9, -0.42, 3.25],
+			"to": [12.9, 3.08, 11.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [9.25, 9.25, 10, 9.75], "texture": "#0"},
+				"east": {"uv": [8, 9.25, 9.25, 9.75], "texture": "#0"},
+				"south": {"uv": [11.25, 9.25, 12, 9.75], "texture": "#0"},
+				"west": {"uv": [10, 9.25, 11.25, 9.75], "texture": "#0"},
+				"up": {"uv": [10, 9.25, 9.25, 8], "texture": "#0"},
+				"down": {"uv": [10.75, 8, 10, 9.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Foot",
+			"from": [8.15, -0.17, 3.5],
+			"to": [12.65, 2.83, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [9.25, 1.25, 10, 1.75], "texture": "#0"},
+				"east": {"uv": [8, 1.25, 9.25, 1.75], "texture": "#0"},
+				"south": {"uv": [11.25, 1.25, 12, 1.75], "texture": "#0"},
+				"west": {"uv": [10, 1.25, 11.25, 1.75], "texture": "#0"},
+				"up": {"uv": [10, 1.25, 9.25, 0], "texture": "#0"},
+				"down": {"uv": [10.75, 0, 10, 1.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Pants Leg",
+			"from": [8.65, 4.08, 7.25],
+			"to": [12.15, 7.58, 10.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [15, 9.5, 14.5, 10], "texture": "#0"},
+				"east": {"uv": [15.5, 9.5, 15, 10], "texture": "#0"},
+				"south": {"uv": [16, 9.5, 15.5, 10], "texture": "#0"},
+				"west": {"uv": [14.5, 9.5, 14, 10], "texture": "#0"},
+				"up": {"uv": [14.5, 9.5, 15, 9], "texture": "#0"},
+				"down": {"uv": [15, 9, 15.5, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Right Leg",
+			"from": [8.9, 4.33, 7.5],
+			"to": [11.9, 7.33, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [15, 1.5, 14.5, 2], "texture": "#0"},
+				"east": {"uv": [15.5, 1.5, 15, 2], "texture": "#0"},
+				"south": {"uv": [16, 1.5, 15.5, 2], "texture": "#0"},
+				"west": {"uv": [14.5, 1.5, 14, 2], "texture": "#0"},
+				"up": {"uv": [14.5, 1.5, 15, 1], "texture": "#0"},
+				"down": {"uv": [15, 1, 15.5, 1.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 156, 0],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, -180, 0],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 154, 0],
+			"translation": [0.75, -1.25, -4.25],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 126, 0],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"ground": {
+			"translation": [0, 2.75, 0],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"gui": {
+			"rotation": [0, -180, 0],
+			"scale": [0.45, 0.45, 0.45]
+		},
+		"head": {
+			"scale": [0.62, 0.62, 0.62]
+		},
+		"fixed": {
+			"translation": [0, -1.5, 0],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"on_shelf": {
+			"rotation": [0, 180, 0],
+			"scale": [0.35, 0.35, 0.35]
+		}
+	},
+	"groups": [
+		{
+			"name": "head",
+			"origin": [8, 13.25, 9],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				{
+					"name": "Head Item",
+					"origin": [8, 13.25, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [0]
+				},
+				{
+					"name": "Hat",
+					"origin": [8, 13.25, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [1]
+				},
+				{
+					"name": "Head",
+					"origin": [8, 13.25, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [2]
+				}
+			]
+		},
+		{
+			"name": "body",
+			"origin": [8, 13.25, 9],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				{
+					"name": "Jacket",
+					"origin": [8, 13.25, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [3]
+				},
+				{
+					"name": "Body",
+					"origin": [8, 13.25, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [4]
+				},
+				{
+					"name": "Left Shoulder",
+					"origin": [8, 13.25, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [5]
+				},
+				{
+					"name": "Right Shoulder",
+					"origin": [8, 13.25, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [6]
+				}
+			]
+		},
+		{
+			"name": "left_arm",
+			"origin": [3, 11.75, 9],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				{
+					"name": "Left Sleeve",
+					"origin": [3, 11.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [7]
+				},
+				{
+					"name": "Left Arm",
+					"origin": [3, 11.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [8]
+				},
+				{
+					"name": "Left Glove",
+					"origin": [3, 11.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [9]
+				},
+				{
+					"name": "Left Hand",
+					"origin": [3, 11.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [10]
+				},
+				{
+					"name": "Left Hand Item",
+					"origin": [3, 18.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [11]
+				}
+			]
+		},
+		{
+			"name": "right_arm",
+			"origin": [13, 11.75, 9],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				{
+					"name": "Right Sleeve",
+					"origin": [13, 11.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [12]
+				},
+				{
+					"name": "Right Arm",
+					"origin": [13, 11.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [13]
+				},
+				{
+					"name": "Right Glove",
+					"origin": [13, 11.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [14]
+				},
+				{
+					"name": "Right Hand",
+					"origin": [13, 11.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [15]
+				},
+				{
+					"name": "Right Hand Item",
+					"origin": [13, 18.75, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [16]
+				}
+			]
+		},
+		{
+			"name": "left_leg",
+			"origin": [5.6, 9.08, 9],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				{
+					"name": "Left Cuff",
+					"origin": [5.6, 8.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [17]
+				},
+				{
+					"name": "Left Ankle",
+					"origin": [5.6, 8.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [18]
+				},
+				{
+					"name": "Left Shoe",
+					"origin": [5.6, 8.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [19]
+				},
+				{
+					"name": "Left Foot",
+					"origin": [5.6, 8.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [20]
+				},
+				{
+					"name": "Left Pants Leg",
+					"origin": [5.6, 9.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [21]
+				},
+				{
+					"name": "Left Leg",
+					"origin": [5.6, 9.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [22]
+				}
+			]
+		},
+		{
+			"name": "right_leg",
+			"origin": [10.4, 9.08, 9],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				{
+					"name": "Right Cuff",
+					"origin": [10.4, 8.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [23]
+				},
+				{
+					"name": "Right Ankle",
+					"origin": [10.4, 8.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [24]
+				},
+				{
+					"name": "Right Shoe",
+					"origin": [10.4, 8.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [25]
+				},
+				{
+					"name": "Right Foot",
+					"origin": [10.4, 8.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [26]
+				},
+				{
+					"name": "Right Pants Leg",
+					"origin": [10.4, 9.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [27]
+				},
+				{
+					"name": "Right Leg",
+					"origin": [10.4, 9.08, 9],
+					"scope": 0,
+					"color": 0,
+					"children": [28]
+				}
+			]
+		}
+	]
+}

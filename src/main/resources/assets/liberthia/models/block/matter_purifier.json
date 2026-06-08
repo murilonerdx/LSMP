@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top":    "liberthia:block/matter_purifier_top",
+    "bottom": "liberthia:block/matter_purifier_bottom",
+    "side":   "liberthia:block/matter_purifier_side"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "liberthia:block/thread_loom_top",
+    "bottom": "liberthia:block/thread_loom_bottom",
+    "side": "liberthia:block/thread_loom_side"
+  }
+}

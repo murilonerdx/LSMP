@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "liberthia:block/blood_planks",
+    "top": "liberthia:block/blood_planks",
+    "side": "liberthia:block/blood_planks"
+  }
+}
