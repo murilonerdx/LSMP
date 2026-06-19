@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:sourcestone_ore"
+    },
+    "title": {
+      "translate": "advancement.liberthia.sourcestone.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.sourcestone.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "got_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:sourcestone_ore"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:spirit/enter_spirit"
+}

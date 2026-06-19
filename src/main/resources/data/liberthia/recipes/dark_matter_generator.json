@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IRI",
+    "FCF",
+    "IRI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "R": { "item": "minecraft:redstone" },
+    "F": { "item": "minecraft:furnace" },
+    "C": { "item": "liberthia:dark_matter_cell" }
+  },
+  "result": { "item": "liberthia:dark_matter_generator" }
+}

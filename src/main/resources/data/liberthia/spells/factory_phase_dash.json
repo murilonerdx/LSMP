@@ -1,0 +1,22 @@
+{
+  "id": "factory_phase_dash",
+  "name": "Investida Espectral",
+  "school": "ELDRITCH",
+  "rarity": "RARE",
+  "mana": 22,
+  "cooldown": 60,
+  "damage": 0,
+  "range": 0,
+  "type": "DASH",
+  "lore": "Salta pra frente atravessando alvos. Mobility tool.",
+  "behavior": {
+    "dash_distance": 12.0
+  },
+  "vfx": {
+    "color_primary": "#9966ff",
+    "trail_density": 18,
+    "trail_size": 1.6,
+    "impact_scale": 0.8,
+    "screen_shake": 0.3
+  }
+}

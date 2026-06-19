@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ASA",
+    "FBF",
+    "ACA"
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_block" },
+    "S": { "item": "liberthia:soul_fragment" },
+    "F": { "item": "liberthia:soul_fragment" },
+    "B": { "item": "minecraft:brewing_stand" },
+    "C": { "item": "liberthia:source_catalyst" }
+  },
+  "result": {
+    "item": "liberthia:spell_mutator",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I I",
+    "IQI",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Q": {
+      "item": "minecraft:cauldron"
+    },
+    "C": {
+      "item": "liberthia:purified_essence"
+    }
+  },
+  "result": {
+    "item": "liberthia:mage_cauldron",
+    "count": 1
+  }
+}

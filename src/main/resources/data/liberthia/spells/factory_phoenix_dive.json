@@ -1,0 +1,30 @@
+{
+  "id": "factory_phoenix_dive",
+  "name": "Mergulho da Fênix",
+  "school": "FIRE",
+  "rarity": "RARE",
+  "mana": 38,
+  "cooldown": 140,
+  "damage": 16,
+  "range": 0,
+  "type": "DASH",
+  "lore": "Mergulha pra frente — explode no fim. Imuniza fogo durante o vôo.",
+  "behavior": {
+    "dash_distance": 16.0
+  },
+  "vfx": {
+    "color_primary": "#ff5500",
+    "color_secondary": "#ffaa00",
+    "trail_density": 22,
+    "trail_size": 1.8,
+    "impact_scale": 1.8,
+    "screen_shake": 0.8,
+    "impact_light": 15
+  },
+  "effects": [
+    {
+      "type": "FIRE_RESISTANCE",
+      "duration": 60
+    }
+  ]
+}

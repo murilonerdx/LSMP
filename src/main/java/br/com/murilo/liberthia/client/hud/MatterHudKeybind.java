@@ -2,10 +2,8 @@ package br.com.murilo.liberthia.client.hud;
 
 import br.com.murilo.liberthia.LiberthiaMod;
 import com.mojang.blaze3d.platform.InputConstants;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -14,10 +12,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 /**
- * Keybind {@code F8} (default) — cicla a posição do HUD de matéria entre os
- * 4 cantos da tela. Estado persiste em {@code config/liberthia_hud.txt}.
+ * Keybind {@code F8} (default) — abre/fecha o <b>editor unificado de HUD</b>
+ * ({@link br.com.murilo.liberthia.client.hud.unified.UnifiedHudEditorScreen}),
+ * onde TODOS os HUDs do mod podem ser arrastados livremente.
  *
- * <p>Para ver/mudar: §lOptions → Controls → Liberthia§r.
+ * <p>report #80 fix: antes o F8 ciclava o {@code HudPosition} (4 cantos) de um
+ * sistema ANTIGO que o {@code MatterProfileHud} não lê mais (ele renderiza pela
+ * posição do sistema unificado, {@code ClientHudPositions}+{@code HudId}). Por
+ * isso o F8 mostrava a mensagem mas o HUD não saía do lugar. Agora o F8 abre o
+ * mesmo editor de {@code /liberthia hud editor}.
+ *
+ * <p>Para ver/mudar a tecla: §lOptions → Controls → Liberthia§r.
  *
  * <p>É registrado em DUAS event-bus:
  * <ul>
@@ -57,12 +62,13 @@ public final class MatterHudKeybind {
             if (event.phase != TickEvent.Phase.END) return;
             if (CYCLE == null) return;
             while (CYCLE.consumeClick()) {
-                HudPosition pos = HudPosition.cycle();
                 Minecraft mc = Minecraft.getInstance();
-                if (mc.player != null) {
-                    mc.player.displayClientMessage(
-                            Component.literal("HUD: " + pos.name())
-                                    .withStyle(ChatFormatting.LIGHT_PURPLE), true);
+                if (mc.player == null) continue;
+                // #80: toggle o editor unificado de HUD (arrasta qualquer HUD).
+                if (mc.screen instanceof br.com.murilo.liberthia.client.hud.unified.UnifiedHudEditorScreen) {
+                    mc.setScreen(null);
+                } else if (mc.screen == null) {
+                    mc.setScreen(new br.com.murilo.liberthia.client.hud.unified.UnifiedHudEditorScreen());
                 }
             }
         }

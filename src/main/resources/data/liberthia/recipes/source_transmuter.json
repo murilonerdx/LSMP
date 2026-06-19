@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ASA",
+    "DCD",
+    "OSO"
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "S": { "item": "liberthia:source_gem" },
+    "D": { "item": "liberthia:dark_matter_ingot" },
+    "C": { "item": "liberthia:source_crystal" },
+    "O": { "item": "minecraft:obsidian" }
+  },
+  "result": {
+    "item": "liberthia:source_transmuter",
+    "count": 1
+  }
+}

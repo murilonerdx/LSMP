@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CBC",
+    "IEI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "C": { "item": "liberthia:lightning_coil" },
+    "B": { "item": "liberthia:dm_battery_basic" },
+    "E": { "item": "minecraft:ender_eye" }
+  },
+  "result": { "item": "liberthia:wireless_charger" }
+}

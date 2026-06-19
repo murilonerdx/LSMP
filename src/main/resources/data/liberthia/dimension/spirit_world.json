@@ -1,0 +1,11 @@
+{
+  "type": "liberthia:spirit_world",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "liberthia:spirit_world"
+    },
+    "settings": "minecraft:overworld"
+  }
+}

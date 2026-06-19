@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "RAR",
+    "GBG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glowstone_dust" },
+    "R": { "item": "minecraft:redstone" },
+    "A": { "item": "minecraft:amethyst_shard" },
+    "B": { "item": "minecraft:blaze_powder" }
+  },
+  "result": {
+    "item": "liberthia:source_catalyst",
+    "count": 1
+  }
+}

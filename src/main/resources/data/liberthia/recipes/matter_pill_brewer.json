@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GBG",
+    "DPD",
+    "III"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass_bottle" },
+    "B": { "item": "minecraft:brewing_stand" },
+    "D": { "item": "liberthia:dark_matter_shard" },
+    "P": { "item": "liberthia:purified_dark_matter_ingot" },
+    "I": { "item": "minecraft:iron_ingot" }
+  },
+  "result": {
+    "item": "liberthia:matter_pill_brewer",
+    "count": 1
+  }
+}

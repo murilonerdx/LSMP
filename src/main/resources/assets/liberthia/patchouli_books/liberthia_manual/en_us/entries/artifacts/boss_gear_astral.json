@@ -1,0 +1,38 @@
+{
+  "name": "Armadura Astral",
+  "icon": "liberthia:astral_chestplate",
+  "category": "liberthia:artifacts",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Espólio das Estrelas",
+      "text": "Forjada com $(item)Núcleo da Constelação$() arrancado de um chefe cósmico, a $(l)Armadura Astral$() carrega a luz fria do vazio.$(br2)Set $(5)épico$() e $(o)à prova de fogo$(). Cada peça pede o Núcleo + diamantes.$(br2)Vestir as $(l)4 peças$() ativa o $(2)bônus de conjunto$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bônus de Conjunto",
+      "text": "Com o $(l)set completo$() vestido, enquanto durar:$(br2)$(li)$(b)Visão Noturna$() — enxergue no escuro$(br)$(li)$(b)Queda Lenta$() — desça abismos sem dano$(br)$(li)$(b)Resistência II$() — corta o dano recebido$(br2)$(o)Os efeitos se renovam sozinhos a cada segundo enquanto o set estiver vestido.$()"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:astral_helmet",
+      "text": "$(item)Elmo Astral$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:astral_chestplate",
+      "text": "$(item)Peitoral Astral$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:astral_leggings",
+      "text": "$(item)Calças Astrais$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:astral_boots",
+      "text": "$(item)Botas Astrais$()."
+    }
+  ]
+}

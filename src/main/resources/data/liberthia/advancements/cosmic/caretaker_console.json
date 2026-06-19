@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:caretaker_console"
+    },
+    "title": {
+      "translate": "advancement.liberthia.caretaker_console.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.caretaker_console.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:caretaker_console"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:cosmic/root"
+}

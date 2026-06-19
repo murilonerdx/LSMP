@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PAP",
+    "AEA",
+    "PAP"
+  ],
+  "key": {
+    "P": { "item": "minecraft:prismarine_bricks" },
+    "A": { "item": "minecraft:amethyst_shard" },
+    "E": { "item": "minecraft:ender_eye" }
+  },
+  "result": { "item": "liberthia:orb_infuser" }
+}

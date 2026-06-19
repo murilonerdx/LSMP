@@ -1,0 +1,9 @@
+{
+  "name": "Standard",
+  "trail_density": 10,
+  "trail_size": 1.2,
+  "impact_scale": 1.0,
+  "impact_particles": 60,
+  "screen_shake": 0.3,
+  "impact_light": 10
+}

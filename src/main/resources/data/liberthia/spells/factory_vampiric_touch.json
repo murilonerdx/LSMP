@@ -1,0 +1,31 @@
+{
+  "id": "factory_vampiric_touch",
+  "name": "Toque Vampírico",
+  "school": "BLOOD",
+  "rarity": "UNCOMMON",
+  "mana": 18,
+  "cooldown": 50,
+  "damage": 6,
+  "range": 4,
+  "type": "TOUCH",
+  "lore": "Toque drenante — rouba HP do alvo e cura o caster.",
+  "behavior": {
+    "touch_range": 4.0
+  },
+  "vfx": {
+    "color_primary": "#cc0000",
+    "color_secondary": "#660000",
+    "impact_scale": 1.0,
+    "screen_shake": 0.3
+  },
+  "effects": [
+    {
+      "type": "LIFESTEAL",
+      "magnitude": 1.0
+    },
+    {
+      "type": "WITHER",
+      "duration": 80
+    }
+  ]
+}

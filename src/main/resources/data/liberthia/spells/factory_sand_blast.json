@@ -1,0 +1,35 @@
+{
+  "id": "factory_sand_blast",
+  "name": "Jato de Areia",
+  "school": "NATURE",
+  "rarity": "UNCOMMON",
+  "category": "PROJECTILE",
+  "element": "EARTH",
+  "secondary_element": "AIR",
+  "mana": 22,
+  "cooldown": 40,
+  "damage": 6,
+  "range": 14,
+  "type": "CONE",
+  "lore": "Jato abrasivo — cega + lentidão. Element combo: SAND.",
+  "behavior": {
+    "radius": 7.0,
+    "cone_angle": 55.0
+  },
+  "vfx": {
+    "color_primary": "#ddcc88",
+    "trail_density": 16,
+    "impact_scale": 1.1
+  },
+  "effects": [
+    {
+      "type": "BLINDNESS",
+      "duration": 100
+    },
+    {
+      "type": "SLOWNESS",
+      "duration": 80,
+      "amplifier": 1
+    }
+  ]
+}

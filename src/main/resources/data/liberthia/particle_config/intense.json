@@ -1,0 +1,9 @@
+{
+  "name": "Intense",
+  "trail_density": 20,
+  "trail_size": 1.6,
+  "impact_scale": 1.5,
+  "impact_particles": 120,
+  "screen_shake": 0.6,
+  "impact_light": 13
+}

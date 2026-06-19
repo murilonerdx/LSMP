@@ -1,0 +1,37 @@
+{
+  "id": "factory_blessing",
+  "name": "Bênção de Liberthia",
+  "school": "HOLY",
+  "rarity": "EPIC",
+  "mana": 80,
+  "cooldown": 300,
+  "damage": 0,
+  "range": 24,
+  "type": "SELF_BUFF",
+  "lore": "Cura periódica + glowing.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#aa66ff",
+    "color_secondary": "#ffffff",
+    "trail_density": 8,
+    "trail_size": 1.2,
+    "impact_scale": 1.0,
+    "impact_particles": 60,
+    "screen_shake": 0.3,
+    "impact_light": 10
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "liberthia_blessing",
+      "duration": 400
+    }
+  ],
+  "element": "HOLY",
+  "category": "UTILITY"
+}

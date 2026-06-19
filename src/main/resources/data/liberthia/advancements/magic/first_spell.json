@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:spell_fireball"
+    },
+    "title": {
+      "translate": "advancement.liberthia.first_spell.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.first_spell.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "got_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:spell_fireball",
+              "liberthia:spell_frostbolt",
+              "liberthia:spell_lightning_bolt",
+              "liberthia:spell_magic_missile"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:magic/root"
+}

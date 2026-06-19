@@ -1,0 +1,63 @@
+{
+  "name": "10 Admin Cosmic Artifacts",
+  "icon": "liberthia:black_veil",
+  "category": "liberthia:admin",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Ferramentas de Curator",
+      "text": "10 artefatos admin de alta-potência. Cada um manipula a percepção dos players próximos.$(br2)Nenhum precisa do target ser hostil — afetam quem está dentro do raio."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:black_veil",
+      "text": "$(item)Black Veil$()$(br2)Right-click. Crepúsculo localizado — players próximos veem $(thing)blackout$() por 10s."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:tendril_crown",
+      "text": "$(item)Tendril Crown$()$(br2)Equipe na cabeça. Tentáculos sombrios saem do seu corpo periodicamente, atingem mobs próximos."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:false_sun",
+      "text": "$(item)False Sun$()$(br2)Right-click no céu. Cria sol $(o)falso§r que ilumina/queima players num raio de 48b."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:mirror_pulse",
+      "text": "$(item)Mirror Pulse$()$(br2)Right-click. Onda de pulse — todos players num raio veem você como $(thing)si mesmos$() por 5s."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:silent_bell",
+      "text": "$(item)Silent Bell$()$(br2)Right-click. Silêncio absoluto em 24b por 10s. Players não ouvem nada — só whispers."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:open_eye",
+      "text": "$(item)Open Eye$()$(br2)Mostra todos players no mapa do mundo (server-wide) num overlay HUD client-only."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:thread_of_distance",
+      "text": "$(item)Thread of Distance$()$(br2)Right-click numa entidade $(thing)distante$(). Cria thread visual + você pode puxá-la pra perto."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:flesh_signal",
+      "text": "$(item)Flesh Signal$()$(br2)Broadcast em chat: \"§4§oalguém está cantando§r\" pra todos. Cosmetic horror radio."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:deep_water",
+      "text": "$(item)Deep Water$()$(br2)Right-click. Visual flood: tela de players próximos parece $(thing)afogada$() por 8s."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:audience_mark",
+      "text": "$(item)Audience Mark$()$(br2)Marca players com olhos invisíveis ao redor — sound playAudiencePresence dispara pra eles."
+    }
+  ]
+}

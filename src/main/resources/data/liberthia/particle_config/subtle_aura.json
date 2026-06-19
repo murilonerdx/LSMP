@@ -1,0 +1,9 @@
+{
+  "name": "Subtle Aura",
+  "trail_density": 6,
+  "trail_size": 0.9,
+  "impact_scale": 0.5,
+  "impact_particles": 15,
+  "screen_shake": 0.0,
+  "impact_light": 6
+}

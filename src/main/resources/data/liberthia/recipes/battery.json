@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IRI",
+    "KDK",
+    "IRI"
+  ],
+  "key": {
+    "I": {
+      "item": "liberthia:steel_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    }
+  },
+  "result": {
+    "item": "liberthia:battery",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Liberthia Tech",
+  "icon": "liberthia:steel_ingot",
+  "category": "liberthia:tech",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Energia (FE)",
+      "text": "A linha $(l)Liberthia Tech$() roda em $(item)Forge Energy (FE)$() — estilo Powah/Mekanism.$(br2)$(li)$(item)Geradores$() produzem FE$(br)$(li)$(item)Células$() armazenam$(br)$(li)$(item)Máquinas/Ferramentas$() consomem$(br2)Ligue tudo com $(item)cabos de energia$() ou por adjacência. Procure a aba criativa $(l)Liberthia Tech$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Como usar qualquer bloco",
+      "text": "$(item)Clique direito$() em qualquer bloco tech abre a $(l)GUI$():$(br2)$(li)Barra de energia (passe o mouse = FE exato)$(br)$(li)Slots de entrada/saída ou combustível$(br)$(li)Barra de progresso/queima$(br2)Geradores e máquinas precisam de FE — ligue-os à rede pra funcionar."
+    }
+  ]
+}

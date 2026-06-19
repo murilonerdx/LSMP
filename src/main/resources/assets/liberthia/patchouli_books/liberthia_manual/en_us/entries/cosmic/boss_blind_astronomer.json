@@ -1,0 +1,54 @@
+{
+  "name": "O Astrônomo Cego",
+  "icon": "liberthia:constellation_core",
+  "category": "liberthia:cosmic",
+  "sortnum": 60,
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "liberthia:blind_astronomer",
+      "name": "O Astrônomo Cego",
+      "text": "Chefe cósmico de $(l)320 de vida$() e 3 fases. Imune a fogo, veneno e wither. Não pode ser empurrado."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Lore",
+      "text": "Ele arrancou os próprios olhos para enxergar além do céu. O que viu nunca o deixou.$(br2)Agora cartografa estrelas mortas e dobra a gravidade ao redor de quem ousa observá-lo. $(o)Cuidado: encará-lo demais corrói a mente.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 1 — Observador",
+      "text": "Acima de $(l)66%$() de vida. Reduz 35% do dano recebido.$(br2)$(li)$(item)Olhar Estelar$(): raio que causa dano + Lentidão e Fraqueza$(br)$(li)$(item)Chuva de Meteoros$(): marca o chão; após ~3s, explosões em área$(br)$(li)$(item)Constelação Viva$(): rajada de estrelas ao redor de você."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 2 — Cartógrafo do Vazio",
+      "text": "Abaixo de $(l)66%$(). Ele levita; o céu vira um vazio. Reduz 45% do dano.$(br2)$(li)$(item)Buraco de Gravidade$(): puxa tudo num raio de 16 blocos$(br)$(li)$(item)Eclipse$(): fica invisível por 10s — só o brilho dele o denuncia. Aplica Escuridão."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 2 — Loucura Cósmica",
+      "text": "$(warn)Olhar direto para ele$() enche um medidor de loucura. Quando enche, dispara um efeito aleatório:$(br2)$(li)Náusea$(br)$(li)Escuridão$(br)$(li)Teleporte forçado para longe$(br2)$(o)Desvie o olhar de tempos em tempos para esvaziar o medidor.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 3 — Horizonte dos Sonhos Mortos",
+      "text": "Abaixo de $(l)33%$(). O corpo se quebra e as estrelas saem de dentro dele. Gravidade reduzida — você cai devagar.$(br2)$(li)$(item)Colapso da Realidade$(): distorce o espaço ao redor$(br)$(li)$(item)Estrela Morta$(): te marca; afaste-se dos outros — explode após ~10s causando 20 de dano em área."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 3 — Supernova",
+      "text": "$(warn)[SUPERNOVA]$() — ele carrega por ~8s e detona.$(br2)$(li)Sem cobertura / linha de visão: $(c)35 de dano$() + fogo$(br)$(li)Atrás de um bloco sólido: só 8 de dano$(br2)$(o)Esconda-se atrás de algo antes da explosão!$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 3 — Singularidade Final",
+      "text": "Abaixo de $(l)10%$() de vida, ativa a $(warn)[SINGULARIDADE FINAL]$().$(br2)Tudo num raio de 24 blocos é puxado para o vazio sem parar. É o último fôlego dele — termine-o rápido antes que a singularidade te consuma."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:constellation_core",
+      "text": "$(l)Drop$(): ao morrer, larga $(item)Núcleo da Constelação$() (5 a 7 unidades). Fragmento cristalizado de uma estrela que ele cartografou — reagente cósmico de alto nível."
+    }
+  ]
+}

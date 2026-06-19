@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EDE",
+    "DXD",
+    "ECE"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    },
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:energy_cell_ultimate",
+    "count": 1
+  }
+}

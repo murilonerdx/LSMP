@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "liberthia_tools",
+  "pattern": [
+    "G G",
+    "GIG",
+    " G "
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass_pane" },
+    "I": { "item": "minecraft:iron_nugget" }
+  },
+  "result": {
+    "item": "liberthia:sample_vial",
+    "count": 1
+  }
+}

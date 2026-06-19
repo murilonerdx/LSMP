@@ -1,0 +1,36 @@
+{
+  "id": "factory_vampires_kiss",
+  "name": "Beijo do Vampiro",
+  "school": "BLOOD",
+  "rarity": "RARE",
+  "mana": 25,
+  "cooldown": 70,
+  "damage": 10,
+  "range": 4,
+  "type": "TOUCH",
+  "lore": "Toque íntimo. Drena vida + envelhece o alvo (weakness).",
+  "behavior": {
+    "touch_range": 4.0
+  },
+  "vfx": {
+    "color_primary": "#aa0044",
+    "impact_scale": 1.0,
+    "screen_shake": 0.3
+  },
+  "effects": [
+    {
+      "type": "LIFESTEAL",
+      "magnitude": 1.5
+    },
+    {
+      "type": "WEAKNESS",
+      "duration": 200,
+      "amplifier": 2
+    },
+    {
+      "type": "SLOWNESS",
+      "duration": 100,
+      "amplifier": 1
+    }
+  ]
+}

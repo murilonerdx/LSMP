@@ -1,0 +1,88 @@
+{
+  "name": "Os Quinze (Cryptic)",
+  "icon": "liberthia:pulled_string",
+  "category": "liberthia:artifacts",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Os Quinze",
+      "text": "15 artefatos $(o)achados, não feitos$(). Sussurros materializados.$(br2)Tooltips são $(o)vagas de propósito$(). Use, observe, descubra. Aqui há $(o)pistas$() — mas o real você sente no jogo."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:pulled_string",
+      "text": "$(item)Linha Puxada$()$(br2)Passivo. Quem te empurra, $(thing)vem junto$() (knockback reverso)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:quiet_mark",
+      "text": "$(item)Marca Silenciosa$()$(br2)Right-click marca entidade. Por 10s ela está $(thing)marcada$() — dano contra ela é $(good)+50%$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:lonely_echo",
+      "text": "$(item)Eco Solitário$()$(br2)Passivo. Quem te observa muito ouve $(o)passos atrás$() que não são seus."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:folded_distance",
+      "text": "$(item)Distância Dobrada$()$(br2)$(o)Shift + Right-click$() numa entidade — vocês $(thing)trocam de posição$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:throat_salt",
+      "text": "$(item)Sal da Garganta$()$(br2)Right-click. Tudo em 8b silencia: weakness + confusion 6s."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:soft_wound",
+      "text": "$(item)Ferida Macia$()$(br2)Passivo. Seu próximo ataque é $(o)adiado 3s$() mas dá $(thing)3x dano$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:looking_glass",
+      "text": "$(item)Espelho que Olha$()$(br2)Passivo. Projéteis (arrow, pearl) que vêm pra você $(thing)voltam$() pra quem atirou."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:half_step",
+      "text": "$(item)Meio Passo$()$(br2)Passivo. Você $(thing)esquiva$() o primeiro ataque recebido. CD 10 minutos."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:bent_iron",
+      "text": "$(item)Ferro Torto$()$(br2)Passivo. 50% chance degrada a arma do atacante quando você toma dano."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:pale_coin",
+      "text": "$(item)Moeda Pálida$()$(br2)Passivo. Quando você morre, ganha $(good)+50 XP$() extra em vez de drops do mob."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:wet_bell",
+      "text": "$(item)Sino Encharcado$()$(br2)Right-click. Slowness IV em todos em 12b por 5s."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:marrow_whistle",
+      "text": "$(item)Assobio de Marfim$()$(br2)Right-click invoca esqueleto $(good)aliado$() com damage boost por 60s. CD 2min."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:listening_glass",
+      "text": "$(item)Vidro que Escuta$()$(br2)Right-click. Mira em qualquer entidade até 50b e vê HP atual/max."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sunken_ring",
+      "text": "$(item)Anel Submerso$()$(br2)Passivo. Water Breathing + Slow Falling $(thing)infinitos$() enquanto carrega."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:hand_on_glass",
+      "text": "$(item)Mão no Vidro$()$(br2)Passivo. Quando você morre, $(good)1 item$() (o melhor) é preservado e devolvido no respawn."
+    }
+  ]
+}

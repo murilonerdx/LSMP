@@ -1,0 +1,38 @@
+{
+  "id": "factory_dragon_roar",
+  "name": "Rugido do Dragão",
+  "school": "FIRE",
+  "rarity": "EPIC",
+  "category": "CHANNELED",
+  "element": "FIRE",
+  "secondary_element": "AIR",
+  "mana": 60,
+  "cooldown": 200,
+  "damage": 16,
+  "range": 14,
+  "type": "CONE",
+  "lore": "Rugido massivo — fogo + ar. Element combo: LIGHTNING.",
+  "behavior": {
+    "radius": 14.0,
+    "cone_angle": 75.0,
+    "ignite_blocks": true,
+    "knockback_strength": 2.0,
+    "crit_chance": 0.25,
+    "crit_multiplier": 2.0
+  },
+  "vfx": {
+    "color_primary": "#ffaa00",
+    "color_secondary": "#ffff66",
+    "trail_density": 24,
+    "impact_scale": 1.8,
+    "screen_shake": 1.4,
+    "screen_shake_ticks": 18,
+    "impact_light": 15
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 160
+    }
+  ]
+}

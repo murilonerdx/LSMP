@@ -1,0 +1,388 @@
+{
+  "source_file": "13_vortex_spritesheet.png",
+  "sheet_size": [
+    800,
+    800
+  ],
+  "grid": [
+    8,
+    8
+  ],
+  "cell_size_native": [
+    100,
+    100
+  ],
+  "output_frame_size": [
+    64,
+    64
+  ],
+  "frame_count": 61,
+  "frames": [
+    {
+      "index": 0,
+      "row": 0,
+      "col": 0,
+      "opaque_pixels": 1313
+    },
+    {
+      "index": 1,
+      "row": 0,
+      "col": 1,
+      "opaque_pixels": 1339
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "col": 2,
+      "opaque_pixels": 1328
+    },
+    {
+      "index": 3,
+      "row": 0,
+      "col": 3,
+      "opaque_pixels": 1345
+    },
+    {
+      "index": 4,
+      "row": 0,
+      "col": 4,
+      "opaque_pixels": 1336
+    },
+    {
+      "index": 5,
+      "row": 0,
+      "col": 5,
+      "opaque_pixels": 1350
+    },
+    {
+      "index": 6,
+      "row": 0,
+      "col": 6,
+      "opaque_pixels": 1334
+    },
+    {
+      "index": 7,
+      "row": 0,
+      "col": 7,
+      "opaque_pixels": 1340
+    },
+    {
+      "index": 8,
+      "row": 1,
+      "col": 0,
+      "opaque_pixels": 1350
+    },
+    {
+      "index": 9,
+      "row": 1,
+      "col": 1,
+      "opaque_pixels": 1339
+    },
+    {
+      "index": 10,
+      "row": 1,
+      "col": 2,
+      "opaque_pixels": 1350
+    },
+    {
+      "index": 11,
+      "row": 1,
+      "col": 3,
+      "opaque_pixels": 1364
+    },
+    {
+      "index": 12,
+      "row": 1,
+      "col": 4,
+      "opaque_pixels": 1358
+    },
+    {
+      "index": 13,
+      "row": 1,
+      "col": 5,
+      "opaque_pixels": 1347
+    },
+    {
+      "index": 14,
+      "row": 1,
+      "col": 6,
+      "opaque_pixels": 1334
+    },
+    {
+      "index": 15,
+      "row": 1,
+      "col": 7,
+      "opaque_pixels": 1327
+    },
+    {
+      "index": 16,
+      "row": 2,
+      "col": 0,
+      "opaque_pixels": 1321
+    },
+    {
+      "index": 17,
+      "row": 2,
+      "col": 1,
+      "opaque_pixels": 1332
+    },
+    {
+      "index": 18,
+      "row": 2,
+      "col": 2,
+      "opaque_pixels": 1316
+    },
+    {
+      "index": 19,
+      "row": 2,
+      "col": 3,
+      "opaque_pixels": 1326
+    },
+    {
+      "index": 20,
+      "row": 2,
+      "col": 4,
+      "opaque_pixels": 1316
+    },
+    {
+      "index": 21,
+      "row": 2,
+      "col": 5,
+      "opaque_pixels": 1325
+    },
+    {
+      "index": 22,
+      "row": 2,
+      "col": 6,
+      "opaque_pixels": 1336
+    },
+    {
+      "index": 23,
+      "row": 2,
+      "col": 7,
+      "opaque_pixels": 1327
+    },
+    {
+      "index": 24,
+      "row": 3,
+      "col": 0,
+      "opaque_pixels": 1333
+    },
+    {
+      "index": 25,
+      "row": 3,
+      "col": 1,
+      "opaque_pixels": 1313
+    },
+    {
+      "index": 26,
+      "row": 3,
+      "col": 2,
+      "opaque_pixels": 1338
+    },
+    {
+      "index": 27,
+      "row": 3,
+      "col": 3,
+      "opaque_pixels": 1310
+    },
+    {
+      "index": 28,
+      "row": 3,
+      "col": 4,
+      "opaque_pixels": 1322
+    },
+    {
+      "index": 29,
+      "row": 3,
+      "col": 5,
+      "opaque_pixels": 1332
+    },
+    {
+      "index": 30,
+      "row": 3,
+      "col": 6,
+      "opaque_pixels": 1306
+    },
+    {
+      "index": 31,
+      "row": 3,
+      "col": 7,
+      "opaque_pixels": 1330
+    },
+    {
+      "index": 32,
+      "row": 4,
+      "col": 0,
+      "opaque_pixels": 1326
+    },
+    {
+      "index": 33,
+      "row": 4,
+      "col": 1,
+      "opaque_pixels": 1324
+    },
+    {
+      "index": 34,
+      "row": 4,
+      "col": 2,
+      "opaque_pixels": 1337
+    },
+    {
+      "index": 35,
+      "row": 4,
+      "col": 3,
+      "opaque_pixels": 1335
+    },
+    {
+      "index": 36,
+      "row": 4,
+      "col": 4,
+      "opaque_pixels": 1356
+    },
+    {
+      "index": 37,
+      "row": 4,
+      "col": 5,
+      "opaque_pixels": 1336
+    },
+    {
+      "index": 38,
+      "row": 4,
+      "col": 6,
+      "opaque_pixels": 1353
+    },
+    {
+      "index": 39,
+      "row": 4,
+      "col": 7,
+      "opaque_pixels": 1323
+    },
+    {
+      "index": 40,
+      "row": 5,
+      "col": 0,
+      "opaque_pixels": 1353
+    },
+    {
+      "index": 41,
+      "row": 5,
+      "col": 1,
+      "opaque_pixels": 1350
+    },
+    {
+      "index": 42,
+      "row": 5,
+      "col": 2,
+      "opaque_pixels": 1335
+    },
+    {
+      "index": 43,
+      "row": 5,
+      "col": 3,
+      "opaque_pixels": 1331
+    },
+    {
+      "index": 44,
+      "row": 5,
+      "col": 4,
+      "opaque_pixels": 1323
+    },
+    {
+      "index": 45,
+      "row": 5,
+      "col": 5,
+      "opaque_pixels": 1298
+    },
+    {
+      "index": 46,
+      "row": 5,
+      "col": 6,
+      "opaque_pixels": 1298
+    },
+    {
+      "index": 47,
+      "row": 5,
+      "col": 7,
+      "opaque_pixels": 1304
+    },
+    {
+      "index": 48,
+      "row": 6,
+      "col": 0,
+      "opaque_pixels": 1298
+    },
+    {
+      "index": 49,
+      "row": 6,
+      "col": 1,
+      "opaque_pixels": 1292
+    },
+    {
+      "index": 50,
+      "row": 6,
+      "col": 2,
+      "opaque_pixels": 1293
+    },
+    {
+      "index": 51,
+      "row": 6,
+      "col": 3,
+      "opaque_pixels": 1279
+    },
+    {
+      "index": 52,
+      "row": 6,
+      "col": 4,
+      "opaque_pixels": 1277
+    },
+    {
+      "index": 53,
+      "row": 6,
+      "col": 5,
+      "opaque_pixels": 1284
+    },
+    {
+      "index": 54,
+      "row": 6,
+      "col": 6,
+      "opaque_pixels": 1288
+    },
+    {
+      "index": 55,
+      "row": 6,
+      "col": 7,
+      "opaque_pixels": 1286
+    },
+    {
+      "index": 56,
+      "row": 7,
+      "col": 0,
+      "opaque_pixels": 1287
+    },
+    {
+      "index": 57,
+      "row": 7,
+      "col": 1,
+      "opaque_pixels": 1302
+    },
+    {
+      "index": 58,
+      "row": 7,
+      "col": 2,
+      "opaque_pixels": 1318
+    },
+    {
+      "index": 59,
+      "row": 7,
+      "col": 3,
+      "opaque_pixels": 1323
+    },
+    {
+      "index": 60,
+      "row": 7,
+      "col": 4,
+      "opaque_pixels": 1313
+    }
+  ]
+}

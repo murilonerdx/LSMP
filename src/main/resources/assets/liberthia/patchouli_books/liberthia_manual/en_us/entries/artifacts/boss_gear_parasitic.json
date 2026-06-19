@@ -1,0 +1,38 @@
+{
+  "name": "Armadura Parasítica",
+  "icon": "liberthia:parasitic_chestplate",
+  "category": "liberthia:artifacts",
+  "sortnum": 22,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Espólio da Colmeia",
+      "text": "Cultivada sobre o $(item)Coração da Colmeia$() de um chefe parasita, a $(l)Armadura Parasítica$() respira junto com quem a veste — carne viva moldada em proteção.$(br2)Set $(2)épico$() e $(o)à prova de fogo$(). Vestir as $(l)4 peças$() desperta o $(2)bônus de conjunto$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bônus de Conjunto",
+      "text": "Com o $(l)set completo$() vestido, enquanto durar:$(br2)$(li)$(b)Regeneração$() — cura contínua de vida$(br)$(li)$(b)Resistência$() — reduz o dano recebido$(br)$(li)$(b)Absorção II$() — escudo extra de corações dourados$(br2)$(o)Os efeitos se renovam sozinhos a cada segundo enquanto o set estiver vestido.$()"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:parasitic_helmet",
+      "text": "$(item)Elmo Parasítico$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:parasitic_chestplate",
+      "text": "$(item)Peitoral Parasítico$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:parasitic_leggings",
+      "text": "$(item)Calças Parasíticas$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:parasitic_boots",
+      "text": "$(item)Botas Parasíticas$()."
+    }
+  ]
+}

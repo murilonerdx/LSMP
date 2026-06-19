@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "W W",
+    "W W"
+  ],
+  "key": {
+    "W": {
+      "item": "liberthia:whisperwood_resin"
+    }
+  },
+  "result": {
+    "item": "liberthia:spirit_robes_legs",
+    "count": 1
+  }
+}

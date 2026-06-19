@@ -1,0 +1,23 @@
+{
+  "name": "Loom Dimension",
+  "icon": "liberthia:dark_matter_laser",
+  "category": "liberthia:dimensions",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "O Tear",
+      "text": "Dimensão acessível via $(item)Sky Tear Horn$() e estruturas de Loom geradas no Spirit World.$(br2)3 mobs custom:$(br)$(li)$(item)Loom Watcher$()$(br)$(li)$(item)Loom Peripheral$()$(br)$(li)$(item)Loom Screamer$()"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sky_tear_horn",
+      "text": "$(item)Sky Tear Horn$()$(br2)Right-click pra abrir tear no céu — entrance pro Loom."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:dark_matter_laser",
+      "text": "$(item)Dark Matter Laser$()$(br2)Hold-to-fire. Funciona contra Loom mobs + pode ser usado no Spirit World pra ferramentas."
+    }
+  ]
+}

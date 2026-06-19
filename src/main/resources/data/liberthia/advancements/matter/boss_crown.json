@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:boss_crown"
+    },
+    "title": {
+      "translate": "advancement.liberthia.boss_crown.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.boss_crown.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:boss_crown"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:matter/matter_pill"
+}

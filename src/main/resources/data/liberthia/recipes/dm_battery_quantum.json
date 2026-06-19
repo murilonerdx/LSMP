@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SMS",
+    "BAB",
+    "SMS"
+  ],
+  "key": {
+    "S": { "item": "liberthia:singularity_core" },
+    "M": { "item": "liberthia:matter_core" },
+    "B": { "item": "liberthia:dm_battery_advanced" },
+    "A": { "item": "liberthia:active_dark_matter" }
+  },
+  "result": { "item": "liberthia:dm_battery_quantum" }
+}

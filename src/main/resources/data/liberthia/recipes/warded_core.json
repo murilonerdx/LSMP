@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ERE",
+    "RKR",
+    "ERE"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    }
+  },
+  "result": {
+    "item": "liberthia:warded_core",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "liberthia:dark_matter_ingot"
+    }
+  },
+  "result": {
+    "item": "liberthia:dark_matter_block",
+    "count": 1
+  }
+}

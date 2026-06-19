@@ -1,0 +1,28 @@
+{
+  "name": "Controles do Grimoire",
+  "icon": "liberthia:grimoire",
+  "category": "liberthia:spells",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:grimoire",
+      "text": "$(item)Grimoire$()$(br2)Item central do sistema de magia. Personal — feitiços ficam no $(thing)player NBT$(), não no item."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Controles (r58)",
+      "text": "$(li)$(good)Right-click$(): §lCASTA§r o feitiço selecionado$(br2)$(li)$(good)Shift+Right-click$(): §lABRE§r o Spell Wheel (radial menu)$(br2)$(li)$(good)Tecla X$(): também abre o Spell Wheel$(br2)No wheel:$(br)$(li)Hover + click ou solte X = §lSELECIONA§r (não casta)$(br)$(li)ESC fecha sem mudar"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Origem do Feitiço",
+      "text": "Feitiços saem da $(thing)MÃO$() do player — visivelmente fora do campo central de visão (offset side 0.7, down 0.7, forward 0.5).$(br2)Projéteis, beams, e teleport trails todos respeitam isso."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:creative_grimoire",
+      "text": "$(item)Creative Grimoire$()$(br2)Versão admin/creative — TODOS os feitiços liberados, $(thing)mana infinita$(). Útil pra testes."
+    }
+  ]
+}

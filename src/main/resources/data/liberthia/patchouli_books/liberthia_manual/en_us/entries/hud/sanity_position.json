@@ -1,0 +1,23 @@
+{
+  "name": "Sanidade HUD",
+  "icon": "minecraft:compass",
+  "category": "liberthia:hud",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Posição da Barra",
+      "text": "Você pode customizar onde a barra de §5Sanidade§r aparece.$(br2)$(o)/liberthia hud sanity show$() — info atual$(br)$(o)/liberthia hud sanity anchor <0-3>$() — canto base$(br)$(li)0 = top-left$(br)$(li)1 = top-right$(br)$(li)2 = bottom-left$(br)$(li)3 = bottom-right (default)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Reposicionar",
+      "text": "$(o)/liberthia hud sanity move <x> <y>$()$(br)Move relativo ao anchor.$(br2)$(o)/liberthia hud sanity toggle$()$(br)Liga/desliga a HUD.$(br2)$(o)/liberthia hud sanity reset$()$(br)Volta pro default (anchor=3, x=92, y=50)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Persistência",
+      "text": "Config salva em $(o)config/liberthia-client.toml$().$(br2)Keys:$(br)$(li)sanity_x, sanity_y$(br)$(li)sanity_anchor$(br)$(li)sanity_hud_visible"
+    }
+  ]
+}

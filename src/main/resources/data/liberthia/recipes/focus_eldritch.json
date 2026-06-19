@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " U ",
+    "GPG",
+    " U "
+  ],
+  "key": {
+    "U": {
+      "item": "minecraft:purple_dye"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "liberthia:focus_eldritch",
+    "count": 1
+  }
+}

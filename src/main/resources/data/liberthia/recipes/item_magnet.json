@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I I",
+    "KEK",
+    " D "
+  ],
+  "key": {
+    "I": {
+      "item": "liberthia:steel_ingot"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    }
+  },
+  "result": {
+    "item": "liberthia:item_magnet",
+    "count": 1
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Observation Magic (r61)",
+  "icon": "liberthia:spellsword",
+  "category": "liberthia:cosmic",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Magia Completa",
+      "text": "Sistema funcional baseado em $(thing)Ars Nouveau patterns$():$(br2)$(li)Source (mana) com regen contemplativo$(br)$(li)15+ glyphs (5 WatchMethod, 6 Manifestation, 4 Distortion)$(br)$(li)Spellsword com 4 presets$(br)$(li)Source Gem consumível$(br)$(li)VFX cinematográfico em 3 fases$(br)$(li)HUD bar de Source"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Source — Mana Cósmico",
+      "text": "$(thing)100 max default$(). Diferente de mana clássica:$(br2)$(good)Regen:$() apenas quando você $(o)observa$() — parado + olhar fixo por 3 segundos, regen +2/s.$(br2)$(warn)NÃO regen:$() andando, lutando, olhando rápido.$(br2)O HUD pulsa quando regen ativo."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:source_gem",
+      "text": "$(item)Source Gem$()$(br2)Right-click pra absorver $(good)+25 Source$(). Consumível. Útil pra emergency em combate."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:spellsword",
+      "text": "$(item)Espada de Observação$()$(br2)4 presets via $(o)Shift+Right-click$():$(br)$(li)Tendril (default)$(br)$(li)Decay + Linger$(br)$(li)Silence + Amplify$(br)$(li)Whisper + Echo$(br2)Right-click no ar: casta. Hit normal: 30% chance proc."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Glyphs — 5 WatchMethods",
+      "text": "$(li)$(thing)Direct Gaze$() — onde olha (32b raycast)$(br)$(li)$(thing)Peripheral$() — canto do olho (±60°)$(br)$(li)$(thing)Memory$() — último lugar lembrado$(br)$(li)$(thing)Silence$() — só se ninguém te observa$(br)$(li)$(thing)Reflection$() — atrás de você"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Glyphs — 6 Manifestations",
+      "text": "$(li)$(thing)Tendril$() — tentáculos em raio$(br)$(li)$(thing)Silence$() — slow + blind + weakness$(br)$(li)$(thing)Mirror$() — invoca clone do caster$(br)$(li)$(thing)Whisper$() — força hallucinations$(br)$(li)$(thing)Decay$() — wither + dmg$(br)$(li)$(thing)Glimpse$() — glow target 30s"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Glyphs — 4 Distortions",
+      "text": "$(li)$(thing)Amplify$() — ×1.5 intensity, +1 reach$(br)$(li)$(thing)Linger$() — +60 ticks duration$(br)$(li)$(thing)Echo$() — repete efeito (0.7× cada)$(br)$(li)$(thing)Secret$() — -1 perception level"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Pipeline VFX",
+      "text": "Cada cast tem 3 fases visuais (inspired em AN ProjectileTimeline):$(br2)$(li)$(thing)Spiral In$() — particles espirais entrando no caster (pré-cast)$(br)$(li)$(thing)Burst Out$() — explosão radial no hit + soul flare central$(br)$(li)$(thing)Linger$() — smoke ribbon se duration > 60t$(br2)Cor das particles = cor do spell."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Test commands",
+      "text": "$(o)/liberthia observe info$()$(br)Lista todos parts registrados (15 atualmente).$(br2)$(o)/liberthia observe test$()$(br)Casta DirectGaze+Tendril+Amplify em quem você olha.$(br2)Spellsword + Source Gem disponíveis no creative tab."
+    }
+  ]
+}

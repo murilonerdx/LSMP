@@ -1,0 +1,63 @@
+{
+  "name": "Eldritch Artifacts",
+  "icon": "liberthia:watching_eye",
+  "category": "liberthia:artifacts",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "10 Eldritch Artifacts",
+      "text": "Artefatos cósmicos profundos. Cada um interfere com a percepção dos players próximos.$(br2)Use com cuidado — eles $(o)vazam$() para outros."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:watching_eye",
+      "text": "$(item)Watching Eye$()$(br2)Marca players num raio de 32b. Eles veem partículas de olhos seguindo eles."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:black_signal_radio",
+      "text": "$(item)Black Signal Radio$()$(br2)Emite frequência cósmica. Players próximos ouvem distorção + whispers."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:hollow_mask",
+      "text": "$(item)Hollow Mask$()$(br2)Quando equipado no slot Head, você fica $(thing)sem rosto$() pra outros players."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:flesh_lantern",
+      "text": "$(item)Flesh Lantern$()$(br2)Ilumina mas $(o)distorce$() o que está iluminado — players próximos veem tudo \"errado\"."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:false_totem",
+      "text": "$(item)False Totem$()$(br2)Totem de Não-Morrendo $(o)falso$(). Quando você \"morre\", você §lparece§r morto mas continua vivo (death animation falsa, players ao redor te veem morto)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:infection_needle",
+      "text": "$(item)Infection Needle$()$(br2)Right-click numa entidade injeta corrupção. Hallucinations passam pra ela."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:book_impossible",
+      "text": "$(item)Book of the Impossible$()$(br2)Right-click lê passagem random — chance de trigger Cosmic Horror em quem leu."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:mimic_heart",
+      "text": "$(item)Mimic Heart$()$(br2)Right-click spawn um $(thing)clone vivo$() do player apontado. Clone copia armadura, hand, skin."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:red_tape",
+      "text": "$(item)Red Tape$()$(br2)Right-click em bloco, marca a área. Players entrando recebem unease + distorção subtle."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:null_bell",
+      "text": "$(item)Null Bell$()$(br2)Right-click. Silêncio absoluto em 16b por 8s — todos os sons param."
+    }
+  ]
+}

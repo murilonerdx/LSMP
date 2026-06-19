@@ -1,0 +1,13 @@
+{
+  "name": "Combustível: Matéria Escura",
+  "icon": "liberthia:dark_matter_bucket",
+  "category": "liberthia:tech",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Balde de Matéria Escura",
+      "text": "O $(item)Magmator$() agora aceita $(item)baldes de matéria escura$() além de lava — e a matéria escura $(l)queima MUITO mais$() (energia massiva). O balde vazio volta pro slot.$(br2)Colete matéria escura líquida com um balde e abasteça o Magmator."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "liberthia:upside_sea",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "liberthia:upside_sea"
+    },
+    "settings": "minecraft:overworld"
+  }
+}

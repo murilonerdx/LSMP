@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "GPG",
+    " A "
+  ],
+  "key": {
+    "S": { "item": "minecraft:string" },
+    "G": { "item": "minecraft:gold_ingot" },
+    "P": { "item": "liberthia:purified_clear_matter_ingot" },
+    "A": { "item": "minecraft:amethyst_shard" }
+  },
+  "result": {
+    "item": "liberthia:refined_containment_pendant",
+    "count": 1
+  }
+}

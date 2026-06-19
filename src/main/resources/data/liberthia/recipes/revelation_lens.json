@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GEG",
+    "EAE",
+    "GSG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:gold_ingot" },
+    "E": { "item": "minecraft:ender_eye" },
+    "A": { "item": "liberthia:active_dark_matter" },
+    "S": { "item": "minecraft:spyglass" }
+  },
+  "result": { "item": "liberthia:revelation_lens" }
+}

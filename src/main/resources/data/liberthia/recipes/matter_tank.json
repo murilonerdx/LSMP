@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GBG",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "B": { "item": "minecraft:iron_block" }
+  },
+  "result": { "item": "liberthia:matter_tank", "count": 4 }
+}

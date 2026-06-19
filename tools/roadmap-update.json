@@ -1,0 +1,60 @@
+{
+  "version": "0.1.21",
+  "generatedAt": "2026-05-20T23:00:00Z",
+  "items": [
+    {
+      "title": "Matter Analyzer GUI completa",
+      "description": "✅ ENTREGUE em v0.1.20. Tabs internos: Análise (item inserido), Curas (lista das 3 pílulas), Perfil (DM/WM/YM do jogador + recomendação). 'Histórico de exposição' virou 'Perfil' — log persistente exigiria capability nova (fica pra futura release).",
+      "category": "DELIVERED",
+      "emoji": "🔬",
+      "tag": "tool",
+      "priority": 10,
+      "targetVersion": "0.1.21"
+    },
+    {
+      "title": "Bússola Dimensional — busca em chunks carregados apenas",
+      "description": "Bug #1 (gabisousa02): bússola busca o rift mais distante em vez do mais próximo quando o player está longe do spawn. Fix: limitar busca a chunks já carregados + força refresh em re-uso no mesmo lugar.",
+      "category": "IN_PROGRESS",
+      "emoji": "🧭",
+      "tag": "fix",
+      "priority": 20,
+      "targetVersion": "0.1.17"
+    },
+    {
+      "title": "Mecânica: White Matter expele Dark/Yellow",
+      "description": "✅ ENTREGUE em v0.1.20. Bug #8 (the_developer) fechado. MatterProfile.addWhite(v) agora expele -0.5×v DM + -0.5×v YM quando v>0. Pílulas que setam via setWhite() não disparam expulsão (preserva intenção de zerar só WM).",
+      "category": "DELIVERED",
+      "emoji": "⚪",
+      "tag": "mechanic",
+      "priority": 15,
+      "targetVersion": "0.1.21"
+    },
+    {
+      "title": "Mod: Pipe Filter (whitelist explícito)",
+      "description": "✅ ENTREGUE em v0.1.20. Item PipeFilterItem registrado, right-click numa face de Item Pipe força WHITELIST mode (idempotente). Par completo agora: pipe_filter (whitelist) + pipe_filter_not (blacklist).",
+      "category": "DELIVERED",
+      "emoji": "🔁",
+      "tag": "item",
+      "priority": 5,
+      "targetVersion": "0.1.21"
+    },
+    {
+      "title": "Wiki sync automático via webhook do GitHub",
+      "description": "Quando um PR mexer em ModItems.java/ModBlocks.java/recipes/, rodar tools/generate-wiki-update.py + dispatch pro endpoint /api/admin/feature-wiki/bulk-import.",
+      "category": "PLANNED",
+      "emoji": "📚",
+      "tag": "automation",
+      "priority": 8,
+      "targetVersion": "0.2.0"
+    },
+    {
+      "title": "Voice Clips — UI mostra arquivos órfãos no disco",
+      "description": "Hoje cleanupOrphanFiles roda em background. Adicionar dashboard que mostra contagem de órfãos detectados + botão pra limpar manualmente.",
+      "category": "PLANNED",
+      "emoji": "🎙",
+      "tag": "ui",
+      "priority": 7,
+      "targetVersion": "0.1.17"
+    }
+  ]
+}

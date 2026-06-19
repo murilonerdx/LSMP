@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VWV",
+    "VGV",
+    "OOO"
+  ],
+  "key": {
+    "V": {
+      "item": "liberthia:veil_fragment"
+    },
+    "W": {
+      "item": "liberthia:wisp_essence"
+    },
+    "G": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "liberthia:glyph_inscriber",
+    "count": 1
+  }
+}

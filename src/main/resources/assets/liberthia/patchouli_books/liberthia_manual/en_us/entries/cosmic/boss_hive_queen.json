@@ -1,0 +1,59 @@
+{
+  "name": "A Colmeia Rainha do Abismo",
+  "icon": "liberthia:hive_heart",
+  "category": "liberthia:cosmic",
+  "sortnum": 61,
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "liberthia:hive_queen",
+      "name": "A Colmeia Rainha do Abismo",
+      "text": "Chefe biológico de $(l)360 de vida$() e 3 fases. Imune a fogo, veneno e wither. Não pode ser empurrada."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Lore",
+      "text": "Ela não é uma criatura: é um $(o)organismo inteiro$() fingindo ter um corpo. Cada larva, cada esporo, cada parasita é parte da mesma mente.$(br2)Matar a Rainha é só o começo — o que vive dentro dela ainda vai emergir."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Consciência Compartilhada",
+      "text": "$(warn)Ela aprende.$() Bater sempre com a $(l)mesma arma$() faz o dano cair progressivamente (até -60%).$(br2)$(o)Alterne entre armas diferentes$() para manter o dano alto. Cada troca reseta o aprendizado dela."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 1 — Mãe das Larvas",
+      "text": "Acima de $(l)66%$() de vida. Reduz 35% do dano recebido.$(br2)$(li)$(item)Nuvem de Esporos$(): Veneno + Fome num raio de 8 blocos$(br)$(li)$(item)Enxame de Larvas$(): invoca larvas com Força (limite de 12 vivas)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 2 — Mente Coletiva",
+      "text": "Abaixo de $(l)66%$(). A carapaça rompe. Reduz 45% do dano.$(br2)$(li)$(item)Grito da Colmeia$(): boom sônico — Náusea, Lentidão e Fraqueza$(br)$(li)$(item)Chamado da Rainha$(): enfurece todo o enxame (Força + Velocidade)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 2 — Parasita Dominador",
+      "text": "$(li)$(item)Parasita Dominador$(): um parasita te alcança e aplica Escuridão + Lentidão extrema por 5s, como se você perdesse o controle.$(br2)$(o)Continua usando todas as habilidades da Fase 1 ao mesmo tempo.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 3 — Verdadeiro Organismo",
+      "text": "Abaixo de $(l)33%$(). A Rainha era só um corpo — o Organismo emerge.$(br2)$(li)$(item)Raízes Vivas$(): te prendem ao chão (sem pular)$(br)$(li)$(item)Vínculo Neural / Infestação$(): pulsos crescentes — Lentidão, depois Náusea, depois Cegueira$(br)$(li)$(item)Enxame Maciço$(): invoca de 6 a 8 larvas."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fase 3 — Apocalipse Biológico",
+      "text": "Abaixo de $(l)15%$() de vida, ativa o $(warn)[APOCALIPSE BIOLÓGICO]$().$(br2)A arena vira um organismo vivo: ela fica $(c)vulnerável (+25% de dano recebido)$(), mas a sala pulsa esporos que ferem todos por ~30s. É o momento de despejar todo o seu dano."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Infecção",
+      "text": "$(warn)Cada golpe corpo a corpo dela$() te aplica Wither, Fome e Fraqueza por 30s.$(br2)$(o)Não fique no alcance dela mais do que o necessário — a infecção drena sua vida com o tempo.$()"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:hive_heart",
+      "text": "$(l)Drop$(): ao morrer, larga $(item)Coração da Colmeia$() (5 a 7 unidades). O núcleo pulsante que sustentava toda a consciência coletiva — reagente biológico raríssimo."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IFI",
+    "ACA",
+    "IRI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "F": { "item": "minecraft:blast_furnace" },
+    "A": { "item": "liberthia:active_dark_matter" },
+    "C": { "item": "liberthia:dark_matter_cell" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "item": "liberthia:matter_refiner" }
+}

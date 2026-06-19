@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "CDC",
+    "CDC"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_block"
+    },
+    "D": {
+      "item": "liberthia:dark_matter_block"
+    },
+    "C": {
+      "item": "liberthia:dark_matter_catalyst"
+    }
+  },
+  "result": {
+    "item": "liberthia:ward_pillar",
+    "count": 1
+  }
+}

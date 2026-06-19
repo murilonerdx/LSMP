@@ -1,0 +1,23 @@
+{
+  "name": "Reflection Seed",
+  "icon": "liberthia:reflection_seed",
+  "category": "liberthia:admin",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:reflection_seed",
+      "text": "$(item)Reflection Seed$()$(br2)Right-click mirando em outro player. Spawn um $(thing)Reflection Entity$() — clone vivo dele com armadura, mainhand, offhand, e skin."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Comportamento da Cópia",
+      "text": "$(li)Random walk até 8b do spawn$(br)$(li)Look at nearest player$(br)$(li)Despawn invisible quando $(thing)observed$() (dot > 0.85)$(br)$(li)Lifetime: 5 min máximo$(br)$(li)Não tem dano — propósito é unease"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Diferença do Clone Army",
+      "text": "$(item)Reflection Seed$(): admin tool, clone $(o)passivo$() de OUTRO player.$(br2)$(item)Clone Army$(): consumível, 5 clones $(o)agressivos$() do MESMO player. Atacam aggressores, explodem ao morrer."
+    }
+  ]
+}

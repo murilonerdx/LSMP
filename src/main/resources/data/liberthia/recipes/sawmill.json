@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SKS",
+    "ETE",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "liberthia:steel_ingot"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "T": {
+      "item": "minecraft:stonecutter"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:sawmill",
+    "count": 1
+  }
+}

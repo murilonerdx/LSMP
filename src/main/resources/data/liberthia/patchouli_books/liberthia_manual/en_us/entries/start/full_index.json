@@ -1,0 +1,23 @@
+{
+  "name": "Índice Completo",
+  "icon": "minecraft:writable_book",
+  "category": "liberthia:start",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Categorias Principais",
+      "text": "$(li)$(matter)Matérias$(): Dark/Clear/Yellow Matter, ciclo de corrupção$(br2)$(li)$(thing)Rituais$(): Sigilos, candles, ritual circles, invocação$(br2)$(li)$(thing)Feitiços$(): Grimoire + Custom Spell System (Mesa de Feitiços)$(br2)$(li)$(cosmic)Horror Cósmico$(): Tomo Proibido, Sanidade, Cosmic Collapse"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mais Categorias",
+      "text": "$(li)$(thing)Artefatos$(): 60+ items místicos$(br2)$(li)$(thing)Dimensões$(): Spirit World, Loom, Liminais$(br2)$(li)$(thing)Sistema de Som$(): 10 sons cósmicos$(br2)$(li)$(thing)HUD & Comandos$(): config + /liberthia$(br2)$(li)$(thing)Admin$(): Caretaker Console, Reflection Seed"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Versões",
+      "text": "Build atual: $(thing)v0.1.119$()$(br)Revisão: $(thing)r59$()$(br2)Mais de 450 items registrados, 12 dimensões/anomalias, 18 hallucination types, 10 cosmic sounds.$(br2)Docs r59 inclui $(good)9 categorias$() e §l40+§r entries cobrindo TODO o sistema."
+    }
+  ]
+}

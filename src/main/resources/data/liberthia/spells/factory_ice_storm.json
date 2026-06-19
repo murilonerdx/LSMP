@@ -1,0 +1,39 @@
+{
+  "id": "factory_ice_storm",
+  "name": "Tempestade de Gelo",
+  "school": "ICE",
+  "rarity": "EPIC",
+  "category": "AOE",
+  "element": "WATER",
+  "secondary_element": "AIR",
+  "mana": 75,
+  "cooldown": 220,
+  "damage": 8,
+  "range": 28,
+  "type": "RAIN",
+  "lore": "Lanças de gelo do céu — element combo: ICE.",
+  "behavior": {
+    "radius": 9.0,
+    "rain_strikes": 16,
+    "rain_duration_ticks": 120,
+    "knockback_strength": 0.3
+  },
+  "vfx": {
+    "color_primary": "#aaeeff",
+    "color_secondary": "#ffffff",
+    "impact_scale": 1.2,
+    "screen_shake": 0.6,
+    "impact_light": 12
+  },
+  "effects": [
+    {
+      "type": "FREEZE",
+      "duration": 120
+    },
+    {
+      "type": "SLOWNESS",
+      "duration": 160,
+      "amplifier": 2
+    }
+  ]
+}

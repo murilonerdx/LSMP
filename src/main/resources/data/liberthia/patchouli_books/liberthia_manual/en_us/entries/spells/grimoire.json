@@ -1,0 +1,22 @@
+{
+  "name": "O Grimoire",
+  "icon": "liberthia:grimoire",
+  "category": "liberthia:spells",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O $(item)Grimoire$() é seu livro de feitiços fixos. Conforme você completa rituais que ensinam magia, seus feitiços ficam gravados.$(br2)$(bold)Como obter:$()$(br)• Craft: Book + Lapis x2 + Purified Dark Ingot + Eye of Ender$(br)• Drop raro de Witches (1%) e Evokers (5%)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Controles",
+      "text": "$(bold)Right-Click$(): casta o feitiço atual (consome mana)$(br)$(bold)Shift+Right-Click$(): cicla pro próximo aprendido$(br2)Tooltip mostra: nome, escola, custo, descrição.$(br2)Você começa SEM feitiços — precisa aprender via rituais."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mana",
+      "text": "Cada feitiço consome $(thing)mana$(). Barra abaixo da XP bar.$(br2)• Máximo: 100$(br)• Regen: +2/sec passivo$(br)• Vazio → cheio: 50 segundos$(br2)Custos típicos: 15-30 mana spell normal, 60-95 spell endgame."
+    }
+  ]
+}

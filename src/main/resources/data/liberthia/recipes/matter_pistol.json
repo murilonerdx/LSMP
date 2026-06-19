@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DIY",
+    "WCI",
+    " I "
+  ],
+  "key": {
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    },
+    "Y": {
+      "item": "liberthia:yellow_matter_ingot"
+    },
+    "W": {
+      "item": "liberthia:clear_matter_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "liberthia:dark_matter_catalyst"
+    }
+  },
+  "result": {
+    "item": "liberthia:matter_pistol",
+    "count": 1
+  }
+}

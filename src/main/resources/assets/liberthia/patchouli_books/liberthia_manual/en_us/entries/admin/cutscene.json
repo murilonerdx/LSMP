@@ -1,0 +1,33 @@
+{
+  "name": "Cutscene (Admin)",
+  "icon": "liberthia:camera",
+  "category": "liberthia:admin",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "O que é",
+      "text": "Comando admin (permissão nível $(thing)2$()/OP) que reproduz um $(item)vídeo$() na tela de um ou mais players — pra abertura de evento, lore, trailer ou jumpscare combinado.$(br2)Base: $(o)/liberthia cutscene$()$(br2)Por padrão o vídeo roda como $(l)cinematográfico DENTRO do jogo$(), travando a tela. Não precisa abrir navegador."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "play",
+      "text": "$(l)/liberthia cutscene play <url> [alvos] [modo]$()$(br2)$(li)$(thing)url$() — link do vídeo (entre aspas se tiver espaços)$(br)$(li)$(thing)alvos$() — selector de players (@a, @p, nome…); se omitir, é em você$(br)$(li)$(thing)modo$() — $(thing)browser$() | $(thing)cinematic$() | $(thing)both$()$(br2)Sem modo = padrão $(l)cinematic$() (in-game)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Modos",
+      "text": "$(li)$(thing)cinematic$() — janela cinematográfica dentro do jogo, ESC travado. Padrão.$(br)$(li)$(thing)browser$() — força abrir o link no navegador do player.$(br)$(li)$(thing)both$() — combina os dois.$(br2)$(warn)Para um vídeo do YouTube tocar DE VERDADE dentro do jogo é preciso o mod $(l)MCEF$() instalado. Sem ele, use o modo padrão (cinematic)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Controle",
+      "text": "$(li)$(l)stop [alvos]$() — para a cutscene em andamento$(br)$(li)$(l)restart [alvos]$() — reinicia do começo$(br)$(li)$(l)link <url> [alvos]$() — manda só o link (sem travar tela)$(br)$(li)$(l)reset [alvos]$() — limpa o estado da cutscene$(br2)Todos aceitam $(thing)alvos$() opcional; sem ele, aplica em você."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Exemplos",
+      "text": "$(o)/liberthia cutscene play \"https://...\" @a$()$(br)— toca em todo mundo (cinematic).$(br2)$(o)/liberthia cutscene play \"https://...\" @a browser$()$(br)— abre no navegador de todos.$(br2)$(o)/liberthia cutscene stop @a$()$(br)— corta na hora.$(br2)$(warn)URL vazia falha com aviso vermelho."
+    }
+  ]
+}

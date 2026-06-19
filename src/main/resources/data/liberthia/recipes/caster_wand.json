@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  A",
+    " SC",
+    "F  "
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "S": { "item": "minecraft:stick" },
+    "C": { "item": "liberthia:source_crystal" },
+    "F": { "item": "liberthia:soul_fragment" }
+  },
+  "result": {
+    "item": "liberthia:caster_wand",
+    "count": 1
+  }
+}

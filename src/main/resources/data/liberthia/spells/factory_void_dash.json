@@ -1,0 +1,36 @@
+{
+  "id": "factory_void_dash",
+  "name": "Dash do Vazio",
+  "school": "ELDRITCH",
+  "rarity": "RARE",
+  "mana": 40,
+  "cooldown": 100,
+  "damage": 10,
+  "range": 20,
+  "type": "DASH",
+  "lore": "Dash através de dimensões. Deixa rastro escuro.",
+  "behavior": {
+    "dashDistance": 14.0,
+    "speed": 3.0
+  },
+  "vfx": {
+    "color_primary": "#7A3DFF",
+    "color_secondary": "#140018",
+    "trail_density": 18,
+    "trail_size": 1.5,
+    "impact_scale": 1.0,
+    "impact_particles": 80,
+    "screen_shake": 0.5,
+    "impact_light": 10
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "shadow_double",
+      "duration": 80,
+      "magnitude": 0.0
+    }
+  ],
+  "element": "ELDRITCH",
+  "category": "DASH"
+}

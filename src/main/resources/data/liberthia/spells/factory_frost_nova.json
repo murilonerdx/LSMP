@@ -1,0 +1,32 @@
+{
+  "id": "factory_frost_nova",
+  "name": "Nova Gélida",
+  "school": "ICE",
+  "rarity": "UNCOMMON",
+  "mana": 30,
+  "cooldown": 100,
+  "damage": 8,
+  "range": 6,
+  "type": "NOVA",
+  "lore": "Onda congelante explode do caster, congelando tudo ao redor.",
+  "behavior": {
+    "radius": 6.0
+  },
+  "vfx": {
+    "color_primary": "#aaeeff",
+    "color_secondary": "#ffffff",
+    "impact_scale": 1.8,
+    "screen_shake": 0.6
+  },
+  "effects": [
+    {
+      "type": "FREEZE",
+      "duration": 100
+    },
+    {
+      "type": "SLOWNESS",
+      "duration": 140,
+      "amplifier": 2
+    }
+  ]
+}

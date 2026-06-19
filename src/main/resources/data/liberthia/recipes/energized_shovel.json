@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E",
+    "D",
+    "U"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    },
+    "U": {
+      "item": "liberthia:copper_coil"
+    }
+  },
+  "result": {
+    "item": "liberthia:energized_shovel",
+    "count": 1
+  }
+}

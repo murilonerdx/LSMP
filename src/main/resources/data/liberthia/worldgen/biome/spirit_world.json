@@ -1,0 +1,330 @@
+{
+  "temperature": 0.4,
+  "downfall": 0.6,
+  "has_precipitation": true,
+  "temperature_modifier": "none",
+  "creature_spawn_probability": 0.05,
+  "effects": {
+    "sky_color": 2949183,
+    "fog_color": 4196352,
+    "water_color": 6291625,
+    "water_fog_color": 1769599,
+    "grass_color": 12320767,
+    "foliage_color": 10497279,
+    "mood_sound": {
+      "sound": "minecraft:ambient.soul_sand_valley.mood",
+      "tick_delay": 4000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.soul_sand_valley.additions",
+      "tick_chance": 0.0222
+    },
+    "ambient_sound": "minecraft:ambient.soul_sand_valley.loop",
+    "particle": {
+      "options": {
+        "type": "minecraft:soul"
+      },
+      "probability": 0.008
+    }
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "liberthia:loom_peripheral",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "liberthia:loom_screamer",
+        "weight": 20,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:loom_watcher",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:loom_worm",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:dark_consciousness",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:empty_man",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:observer",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:absence",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:remembered",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:pyromancer",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:cryomancer",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:electromancer",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:necromancer",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:eldritch_cultist",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wooden_charcoal",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wooden_pale_oak",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wooden_rotted_birch",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wooden_bleeding_maple",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wooden_mossy",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wooden_frozen_pine",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wooden_burning_acacia",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wooden_cursed_mahogany",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:blood_cultist",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:blood_mage",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:blood_priest",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:flesh_crawler",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "liberthia:gore_worm",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:blood_worm",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:possessed_zombie",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:possessed_skeleton",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:corrupted_zombie",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:spore_spitter",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:disarmer",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:weaving_shade",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "creature": [
+      {
+        "type": "liberthia:wounded_pilgrim",
+        "weight": 20,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:bookwyrm",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:wisp_picker",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:grove_sprite",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:whelp",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:carbuncle",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:drygmy",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": []
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "liberthia:spirit_crystal_ore",
+      "liberthia:soul_iron_ore",
+      "liberthia:spirit_gem_ore",
+      "liberthia:sourcestone_ore",
+      "liberthia:crystal_spirit_ore",
+      "liberthia:dark_matter_ore",
+      "liberthia:white_matter_ore",
+      "liberthia:deepslate_dark_matter_ore",
+      "liberthia:loom_voidite_ore",
+      "liberthia:loom_riftite_ore",
+      "liberthia:loom_umbral_ore"
+    ],
+    [
+      "liberthia:deco_spirit_stone",
+      "liberthia:deco_soul_brick",
+      "liberthia:deco_halo_marble",
+      "liberthia:deco_halo_marble_bricks",
+      "liberthia:deco_ethereal_stone",
+      "liberthia:deco_ethereal_stone_bricks",
+      "liberthia:deco_sanctum_ward",
+      "liberthia:deco_astral_lantern"
+    ],
+    [],
+    [
+      "liberthia:whisperwood_tree"
+    ],
+    []
+  ]
+}

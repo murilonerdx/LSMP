@@ -1,0 +1,30 @@
+{
+  "id": "factory_burning_aura",
+  "name": "Aura Flamejante",
+  "school": "FIRE",
+  "rarity": "RARE",
+  "mana": 40,
+  "cooldown": 200,
+  "damage": 3,
+  "range": 5,
+  "type": "AURA",
+  "lore": "Aura ígnea ao redor do caster por 8s. Pulsa dano em todos próximos.",
+  "behavior": {
+    "radius": 4.5,
+    "aura_duration_ticks": 160,
+    "aura_tick_interval": 20,
+    "ignite_blocks": false
+  },
+  "vfx": {
+    "color_primary": "#ff6600",
+    "color_secondary": "#ffaa00",
+    "impact_scale": 0.8,
+    "screen_shake": 0.2
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 40
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "temperature": 0.6,
+  "downfall": 0.9,
+  "has_precipitation": false,
+  "temperature_modifier": "none",
+  "creature_spawn_probability": 0.03,
+  "effects": {
+    "sky_color": 1389815,
+    "fog_color": 3361854,
+    "water_color": 1924480,
+    "water_fog_color": 393472,
+    "grass_color": 6324428,
+    "foliage_color": 5337006,
+    "mood_sound": {
+      "sound": "minecraft:ambient.underwater.loop",
+      "tick_delay": 4800,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.underwater.loop.additions",
+      "tick_chance": 0.0111
+    },
+    "ambient_sound": "minecraft:ambient.underwater.loop",
+    "particle": {
+      "options": {
+        "type": "minecraft:dripping_water"
+      },
+      "probability": 0.0025
+    }
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "liberthia:blood_worm",
+        "weight": 12,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "liberthia:gore_worm",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:flesh_crawler",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:loom_peripheral",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:dark_consciousness",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "liberthia:observer",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": []
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

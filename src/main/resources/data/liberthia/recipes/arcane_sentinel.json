@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SDS",
+    "DND",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "liberthia:steel_ingot"
+    },
+    "D": {
+      "item": "liberthia:arcane_disruptor"
+    },
+    "N": {
+      "item": "liberthia:null_matrix"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:arcane_sentinel",
+    "count": 1
+  }
+}

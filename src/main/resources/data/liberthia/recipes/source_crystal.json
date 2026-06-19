@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ADA",
+    "ACA"
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "D": { "item": "minecraft:diamond" },
+    "C": { "item": "liberthia:source_catalyst" }
+  },
+  "result": {
+    "item": "liberthia:source_crystal",
+    "count": 1
+  }
+}

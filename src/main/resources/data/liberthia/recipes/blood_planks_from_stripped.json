@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "liberthia:stripped_blood_log"}
+  ],
+  "result": {"item": "liberthia:blood_planks", "count": 4}
+}

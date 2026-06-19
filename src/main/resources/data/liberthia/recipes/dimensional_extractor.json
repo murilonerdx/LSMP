@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IEI",
+    "PCP",
+    "IBI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "E": { "item": "minecraft:ender_eye" },
+    "P": { "item": "minecraft:ender_pearl" },
+    "C": { "item": "minecraft:diamond" },
+    "B": { "item": "minecraft:gold_block" }
+  },
+  "result": { "item": "liberthia:dimensional_extractor" }
+}

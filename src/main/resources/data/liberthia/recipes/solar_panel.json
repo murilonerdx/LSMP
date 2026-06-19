@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "KLK",
+    "SCS"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "L": {
+      "item": "minecraft:daylight_detector"
+    },
+    "S": {
+      "item": "liberthia:steel_ingot"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:solar_panel",
+    "count": 1
+  }
+}

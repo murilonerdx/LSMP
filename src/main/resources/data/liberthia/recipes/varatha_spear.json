@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  D",
+    " N ",
+    " R "
+  ],
+  "key": {
+    "D": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "R": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "liberthia:varatha_spear",
+    "count": 1
+  }
+}

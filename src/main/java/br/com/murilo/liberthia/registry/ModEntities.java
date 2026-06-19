@@ -183,6 +183,15 @@ public final class ModEntities {
                             .updateInterval(20)
                             .build("bleeding_arrow"));
 
+    public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.projectile.HuntressArrowEntity>> HUNTRESS_ARROW =
+            ENTITY_TYPES.register("huntress_arrow",
+                    () -> EntityType.Builder.<br.com.murilo.liberthia.entity.projectile.HuntressArrowEntity>of(
+                                    br.com.murilo.liberthia.entity.projectile.HuntressArrowEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(8)
+                            .updateInterval(20)
+                            .build("huntress_arrow"));
+
     public static final RegistryObject<EntityType<br.com.murilo.liberthia.entity.OrderPaladinEntity>> ORDER_PALADIN =
             ENTITY_TYPES.register("order_paladin",
                     () -> EntityType.Builder.<br.com.murilo.liberthia.entity.OrderPaladinEntity>of(

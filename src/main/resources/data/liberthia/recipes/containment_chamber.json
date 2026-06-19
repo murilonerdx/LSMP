@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "liberthia_blocks",
+  "pattern": [
+    "OIO",
+    "GDG",
+    "OIO"
+  ],
+  "key": {
+    "O": { "item": "minecraft:obsidian" },
+    "I": { "item": "minecraft:iron_block" },
+    "G": { "item": "minecraft:glass" },
+    "D": { "item": "liberthia:dark_matter_shard" }
+  },
+  "result": {
+    "item": "liberthia:containment_chamber",
+    "count": 1
+  }
+}

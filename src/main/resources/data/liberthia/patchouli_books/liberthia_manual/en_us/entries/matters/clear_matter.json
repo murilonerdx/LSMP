@@ -1,0 +1,33 @@
+{
+  "name": "Clear Matter",
+  "icon": "liberthia:clear_matter_ingot",
+  "category": "liberthia:matters",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "A Pureza",
+      "text": "$(matter)Clear Matter$() é a $(thing)purificação$() da Dark Matter — neutraliza corrupção, dá absorption, e cura infecções."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:clear_matter_ingot",
+      "text": "$(item)Clear Matter Ingot$()$(br2)Produzido no $(item)Matter Purifier$() a partir de Dark Matter Ingot + Yellow Matter Catalyst."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:clear_matter_sword",
+      "text": "$(item)Clear Matter Sword$()$(br2)Lifesteal 30% + dash on shift+attack. Absorption ao hitar entidades infectadas."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:clear_matter_pill",
+      "text": "$(item)Clear Matter Pill$()$(br2)Purga TODA matter do player. Edible. 30s saturação."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:clear_matter_injector",
+      "text": "$(item)Clear Matter Injector$()$(br2)Right-click em entidade: cura. Shift+rclick: cura você mesmo. Drena 1 dose por uso."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "display_name": "Asas da Fonte",
+  "output": { "item": "liberthia:spell_wings_of_source", "count": 1 },
+  "ingredients": [
+    { "item": "liberthia:wisp_essence",   "count": 4 },
+    { "item": "liberthia:astral_dust",    "count": 3 },
+    { "item": "liberthia:veil_fragment",  "count": 1 }
+  ]
+}

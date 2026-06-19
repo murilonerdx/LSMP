@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "liberthia:block/arcane_sentinel"
+    },
+    "lit=true": {
+      "model": "liberthia:block/arcane_sentinel"
+    }
+  }
+}

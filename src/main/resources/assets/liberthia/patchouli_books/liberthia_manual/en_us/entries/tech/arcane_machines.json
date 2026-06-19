@@ -1,0 +1,28 @@
+{
+  "name": "Máquinas Arcanas (Cadeia)",
+  "icon": "liberthia:tech_assembler",
+  "category": "liberthia:tech",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Crafting Multi-Etapa",
+      "text": "Os itens avançados NÃO saem de craft simples — você precisa de uma $(l)cadeia de máquinas$().$(br2)Cada máquina tem GUI: coloque o item na $(item)entrada$(), ela consome $(item)FE$() e produz na $(item)saída$(). A saída de uma vira entrada da próxima."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cadeia da Armadura Bastião",
+      "text": "$(li)$(item)Prensa Metálica$(): 2 aço → Placa Endurecida$(br)$(li)$(item)Infusor Arcano$(): placa + fragmento de matéria escura → Placa Bastião$(br)$(li)$(item)Condensador de Mana$(): ametista → Capacitor de Mana$(br)$(li)$(item)Fundidora de Cristais$(): capacitor + lingote → Liga Arcana$(br)$(li)$(item)Montadora$(): Placa Bastião + Liga + circuito → $(l)Módulo Bastião$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Armadura insana",
+      "text": "A $(item)Armadura Bastião$() agora exige $(l)Módulos Bastião$() — ou seja, toda a cadeia acima. É de propósito $(warn)difícil$(): é a armadura anti-magia definitiva.$(br2)Ligue todas as máquinas à rede de FE."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:tech_assembler",
+      "text": "$(item)Montadora Tecnológica$() — o coração da linha de montagem."
+    }
+  ]
+}

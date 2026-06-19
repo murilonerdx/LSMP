@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "PSP",
+    " EP"
+  ],
+  "key": {
+    "P": { "item": "liberthia:purified_clear_matter_ingot" },
+    "S": { "item": "minecraft:spyglass" },
+    "E": { "item": "minecraft:ender_eye" }
+  },
+  "result": {
+    "item": "liberthia:vision_swap_lens",
+    "count": 1
+  }
+}

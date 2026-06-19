@@ -1,0 +1,38 @@
+{
+  "id": "factory_mass_root",
+  "name": "Raízes em Massa",
+  "school": "NATURE",
+  "rarity": "RARE",
+  "mana": 45,
+  "cooldown": 150,
+  "damage": 4,
+  "range": 24,
+  "type": "AURA",
+  "lore": "Raízes prendem inimigos próximos.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#aa66ff",
+    "color_secondary": "#ffffff",
+    "trail_density": 8,
+    "trail_size": 1.2,
+    "impact_scale": 1.0,
+    "impact_particles": 60,
+    "screen_shake": 0.3,
+    "impact_light": 10
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "time_dilation",
+      "duration": 200,
+      "magnitude": 4
+    }
+  ],
+  "element": "NATURE",
+  "category": "AOE"
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XCX",
+    "XXX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "liberthia:dark_matter_ingot"
+    },
+    "C": {
+      "item": "liberthia:dark_matter_catalyst"
+    }
+  },
+  "result": {
+    "item": "liberthia:antimagic_shield",
+    "count": 1
+  }
+}

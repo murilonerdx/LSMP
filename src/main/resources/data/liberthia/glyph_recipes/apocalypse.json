@@ -1,0 +1,10 @@
+{
+  "display_name": "APOCALIPSE (Apolão)",
+  "output": { "item": "liberthia:spell_apocalypse", "count": 1 },
+  "ingredients": [
+    { "item": "liberthia:veil_fragment",   "count": 6 },
+    { "item": "liberthia:ectoplasm_strand","count": 4 },
+    { "item": "liberthia:phantom_ink",     "count": 4 },
+    { "item": "liberthia:memory_shard",    "count": 3 }
+  ]
+}

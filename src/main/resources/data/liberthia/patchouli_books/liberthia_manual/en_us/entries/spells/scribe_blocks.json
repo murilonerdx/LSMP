@@ -1,0 +1,63 @@
+{
+  "name": "Bancadas de Feitiçaria",
+  "icon": "liberthia:arcane_workbench",
+  "category": "liberthia:spells",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "As 5 Bancadas",
+      "text": "Pra criar feitiços e glyphs você usa estes blocos. Todos são $(thing)quebráveis com picareta$() e dropam de volta.$(br2)$(li)$(l)Arcane Workbench$() — monta o feitiço final$(br)$(li)$(l)Glyph Inscriber$() — fabrica glyphs$(br)$(li)$(l)Spell Weaver$() — combina modificadores$(br)$(li)$(l)Inscription Table$() — pergaminhos$(br)$(li)$(l)Scroll Forge$() — scrolls de escola"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Arcane Workbench",
+      "text": "A bancada principal. Cada slot é $(thing)tipado$() (a cor da borda indica o tipo) — passe o mouse pra ver o que entra em cada um.$(br2)$(li)Linha 1: Tablet, Weave, Thread, Scroll$(br)$(li)Linha 2: Orb, Focus, School$(br)$(li)Linha 3: ModGlyph, Glyph, Parchment $(bold)→ SAÍDA$()$(br2)Escreva um $(thing)nome$() no campo embaixo. Retire a saída pra consumir os ingredientes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:arcane_workbench",
+      "text": "Receita da Arcane Workbench."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Glyph Inscriber",
+      "text": "Fabrica $(matter)glyphs$(). Coloque os 4 reagentes nos slots em $(thing)cruz$() (cima/baixo/esquerda/direita) e o glyph aparece no slot de $(thing)saída$() à direita.$(br2)Passe o mouse num slot vazio pra ver os reagentes válidos. O painel lateral (à esquerda) lista as receitas possíveis."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:glyph_inscriber",
+      "text": "Receita do Glyph Inscriber."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Spell Weaver",
+      "text": "Combina um $(thing)feitiço base$() (slot esquerdo) com até 7 $(thing)modificadores$() (fileira do meio) e gera um $(matter)Feitiço Composto$() no slot direito.$(br2)O painel à esquerda mostra os $(thing)stats finais$() (mana, dano, cooldown) do resultado."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:spell_weaver",
+      "text": "Receita do Spell Weaver."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Inscription Table",
+      "text": "Transforma livros/itens em $(thing)pergaminhos$(). No painel esquerdo escolha a $(thing)receita$() (clique nela), coloque o $(thing)Livro$() e a $(thing)Tinta$() nos slots, e retire a $(thing)Saída$().$(br2)Passe o mouse numa receita pra ver os ingredientes que ela pede."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:inscription_table",
+      "text": "Receita da Inscription Table."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Scroll Forge",
+      "text": "Converte um $(thing)Focus de Escola$() (Fogo, Gelo, Raio, Sangue, Eldritch, Sagrado, Natureza) no $(thing)Scroll$() daquela escola.$(br2)Coloque o Focus no slot esquerdo → o Scroll aparece à direita. Retire o Scroll pra gastar 1 Focus. O painel mostra a legenda das escolas."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:scroll_forge",
+      "text": "Receita do Scroll Forge."
+    }
+  ]
+}

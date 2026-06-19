@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "GPG",
+    " G "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:green_dye"
+    },
+    "P": {
+      "item": "liberthia:purified_essence"
+    }
+  },
+  "result": {
+    "item": "liberthia:focus_nature",
+    "count": 1
+  }
+}

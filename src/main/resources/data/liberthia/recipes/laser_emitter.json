@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGE",
+    "CDC",
+    "IGI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "G": { "item": "minecraft:glass" },
+    "E": { "item": "minecraft:ender_eye" },
+    "C": { "item": "liberthia:lightning_coil" },
+    "D": { "item": "liberthia:active_dark_matter" }
+  },
+  "result": { "item": "liberthia:laser_emitter" }
+}

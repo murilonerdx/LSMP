@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "KMK",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "liberthia:steel_ingot"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "M": {
+      "item": "minecraft:magma_block"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:thermo_generator",
+    "count": 1
+  }
+}

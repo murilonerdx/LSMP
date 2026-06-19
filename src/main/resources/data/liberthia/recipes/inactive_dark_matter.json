@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": { "item": "liberthia:dark_matter_shard" }
+  },
+  "result": { "item": "liberthia:inactive_dark_matter" }
+}

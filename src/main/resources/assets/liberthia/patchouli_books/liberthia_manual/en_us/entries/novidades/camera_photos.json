@@ -1,0 +1,23 @@
+{
+  "name": "Câmera & Fotografias",
+  "icon": "liberthia:camera",
+  "category": "liberthia:novidades",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Câmera",
+      "text": "A $(item)Câmera$() tira uma foto da sua tela (flash + clique de obturador) e gera uma $(item)Fotografia$() no inventário com a $(thing)imagem real$() que você capturou.$(br2)Quanto mais terror perto (EMF alto), maior a chance da foto $(o)sair estranha$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:camera",
+      "text": "Ferro + Vidro + Olho de Ender (a lente) + Redstone."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:photograph",
+      "text": "$(item)Fotografia$()$(br2)A miniatura da foto aparece $(thing)no slot$() do inventário. Versão $(4)amaldiçoada$() tem moldura vermelha — algo no fundo que você não viu. Ficam salvas em $(o)liberthia_photos/$()."
+    }
+  ]
+}

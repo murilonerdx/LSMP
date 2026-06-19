@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "liberthia:block/magmator"
+    },
+    "lit=true": {
+      "model": "liberthia:block/magmator"
+    }
+  }
+}

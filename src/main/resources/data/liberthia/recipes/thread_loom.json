@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TST",
+    "SLS",
+    "OOO"
+  ],
+  "key": {
+    "T": { "item": "liberthia:custom_thread" },
+    "S": { "item": "minecraft:string" },
+    "L": { "item": "minecraft:loom" },
+    "O": { "item": "minecraft:obsidian" }
+  },
+  "result": {
+    "item": "liberthia:thread_loom",
+    "count": 1
+  }
+}

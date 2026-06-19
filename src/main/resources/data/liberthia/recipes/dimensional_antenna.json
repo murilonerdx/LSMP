@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ADA",
+    "DEC",
+    "SSS"
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_cluster" },
+    "D": { "item": "liberthia:dark_matter_shard" },
+    "E": { "item": "minecraft:ender_eye" },
+    "C": { "item": "minecraft:copper_block" },
+    "S": { "item": "minecraft:smooth_stone" }
+  },
+  "result": {
+    "item": "liberthia:dimensional_antenna",
+    "count": 1
+  }
+}

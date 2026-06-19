@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "liberthia:block/quantum_terminal", "y": 0 },
+    "facing=east":  { "model": "liberthia:block/quantum_terminal", "y": 90 },
+    "facing=south": { "model": "liberthia:block/quantum_terminal", "y": 180 },
+    "facing=west":  { "model": "liberthia:block/quantum_terminal", "y": 270 }
+  }
+}

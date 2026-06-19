@@ -1,0 +1,66 @@
+{
+  "version": "0.1.21",
+  "generatedAt": "2026-05-20T23:00:00Z",
+  "rewards": [
+    {
+      "name": "Yellow Matter Ingot x4",
+      "description": "4 ingots de Yellow Matter — pra craftar armadura completa.",
+      "imageUrl": "",
+      "category": "item",
+      "costPoints": 250,
+      "giveCommand": "/give {player} liberthia:yellow_matter_ingot 4",
+      "perTesterLimit": 0,
+      "enabled": true
+    },
+    {
+      "name": "Singularity Core",
+      "description": "Drop ultra-raro — recompensa de testers ativos.",
+      "imageUrl": "",
+      "category": "item",
+      "costPoints": 1000,
+      "giveCommand": "/give {player} liberthia:singularity_core 1",
+      "perTesterLimit": 1,
+      "enabled": true
+    },
+    {
+      "name": "Pipe Filter NOT x4",
+      "description": "Kit inicial do novo filtro negativo de pipe — alterna WHITELIST/BLACKLIST com 1 click.",
+      "imageUrl": "",
+      "category": "tool",
+      "costPoints": 50,
+      "giveCommand": "/give {player} liberthia:pipe_filter_not 4",
+      "perTesterLimit": 0,
+      "enabled": true
+    },
+    {
+      "name": "Dark Matter Pill",
+      "description": "Pílula que purga Dark Matter — útil pra testers que se infectaram demais durante testes.",
+      "imageUrl": "",
+      "category": "consumable",
+      "costPoints": 100,
+      "giveCommand": "/give {player} liberthia:dark_matter_pill 2",
+      "perTesterLimit": 5,
+      "enabled": true
+    },
+    {
+      "name": "Clear Matter Pill",
+      "description": "Pílula que purga Clear Matter (esquecimento, teleporte involuntário).",
+      "imageUrl": "",
+      "category": "consumable",
+      "costPoints": 100,
+      "giveCommand": "/give {player} liberthia:clear_matter_pill 2",
+      "perTesterLimit": 5,
+      "enabled": true
+    },
+    {
+      "name": "Yellow Matter Pill",
+      "description": "Pílula que purga Yellow Matter (crises emocionais, descontrole).",
+      "imageUrl": "",
+      "category": "consumable",
+      "costPoints": 100,
+      "giveCommand": "/give {player} liberthia:yellow_matter_pill 2",
+      "perTesterLimit": 5,
+      "enabled": true
+    }
+  ]
+}

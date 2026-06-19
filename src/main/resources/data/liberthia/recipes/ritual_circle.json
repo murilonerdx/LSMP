@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OAO",
+    "ACA",
+    "OAO"
+  ],
+  "key": {
+    "O": { "item": "minecraft:obsidian" },
+    "A": { "item": "minecraft:amethyst_shard" },
+    "C": { "item": "minecraft:ender_eye" }
+  },
+  "result": {
+    "item": "liberthia:ritual_circle",
+    "count": 1
+  }
+}

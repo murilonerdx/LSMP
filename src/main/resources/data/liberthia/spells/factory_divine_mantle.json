@@ -1,0 +1,33 @@
+{
+  "id": "factory_divine_mantle",
+  "name": "Manto Divino",
+  "school": "HOLY",
+  "rarity": "RARE",
+  "mana": 40,
+  "cooldown": 300,
+  "damage": 0,
+  "range": 5,
+  "type": "AURA",
+  "lore": "Aura curativa em volta do caster. Regenera self e aliados.",
+  "behavior": {
+    "radius": 6.0,
+    "aura_duration_ticks": 300,
+    "aura_tick_interval": 20
+  },
+  "vfx": {
+    "color_primary": "#ffe680",
+    "impact_scale": 1.0,
+    "screen_shake": 0.1
+  },
+  "effects": [
+    {
+      "type": "REGENERATION",
+      "duration": 40,
+      "amplifier": 1
+    },
+    {
+      "type": "GLOWING",
+      "duration": 40
+    }
+  ]
+}

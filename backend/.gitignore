@@ -1,0 +1,30 @@
+# ─── Gradle ───
+.gradle/
+build/
+bin/
+!gradle/wrapper/gradle-wrapper.jar
+
+# ─── IDEs ───
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# ─── Logs ───
+*.log
+logs/
+
+# ─── Dados de runtime (gerados pela aplicação) ───
+liberthia_snapshot_cache/
+data/voice-clips/
+
+# ─── Env / secrets ───
+.env
+*.env
+!.env.example
+
+# ─── OS ───
+.DS_Store
+Thumbs.db

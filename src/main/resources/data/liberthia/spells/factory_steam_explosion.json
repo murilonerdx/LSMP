@@ -1,0 +1,40 @@
+{
+  "id": "factory_steam_explosion",
+  "name": "Explosão de Vapor",
+  "school": "FIRE",
+  "rarity": "EPIC",
+  "category": "EXPLOSION",
+  "element": "FIRE",
+  "secondary_element": "WATER",
+  "mana": 55,
+  "cooldown": 140,
+  "damage": 14,
+  "range": 16,
+  "type": "EXPLOSION",
+  "lore": "Vapor superquente — escalda + cega. Element combo: STEAM.",
+  "behavior": {
+    "radius": 5.0,
+    "height": 4.0,
+    "knockback_strength": 1.0,
+    "crit_chance": 0.2,
+    "crit_multiplier": 2.0
+  },
+  "vfx": {
+    "color_primary": "#aaaaee",
+    "color_secondary": "#ffffff",
+    "impact_scale": 2.0,
+    "screen_shake": 1.2,
+    "impact_light": 13,
+    "impact_particles": 180
+  },
+  "effects": [
+    {
+      "type": "BLINDNESS",
+      "duration": 80
+    },
+    {
+      "type": "IGNITE",
+      "duration": 60
+    }
+  ]
+}

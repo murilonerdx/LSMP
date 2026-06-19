@@ -1,0 +1,33 @@
+{
+  "id": "factory_wisp_swarm",
+  "name": "Enxame de Wisps",
+  "school": "NATURE",
+  "rarity": "UNCOMMON",
+  "mana": 30,
+  "cooldown": 50,
+  "damage": 4,
+  "range": 20,
+  "type": "MULTI_SHOT",
+  "lore": "5 pequenos wisps mágicos numa nuvem. Cada um pica leve.",
+  "behavior": {
+    "speed": 1.5,
+    "projectile_count": 5,
+    "spread_degrees": 50,
+    "lifetime_ticks": 50,
+    "pierce": true
+  },
+  "vfx": {
+    "color_primary": "#aaffaa",
+    "color_secondary": "#88ff00",
+    "trail_density": 6,
+    "trail_size": 0.7,
+    "impact_scale": 0.6
+  },
+  "effects": [
+    {
+      "type": "POISON",
+      "duration": 60,
+      "amplifier": 1
+    }
+  ]
+}

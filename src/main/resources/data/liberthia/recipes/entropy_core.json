@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NXN",
+    "XBX",
+    "NCN"
+  ],
+  "key": {
+    "N": {
+      "item": "liberthia:null_matrix"
+    },
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "B": {
+      "item": "liberthia:crystalized_dark_matter"
+    },
+    "C": {
+      "item": "liberthia:energized_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:entropy_core",
+    "count": 1
+  }
+}

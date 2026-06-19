@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "EXE",
+    " U "
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "U": {
+      "item": "liberthia:copper_coil"
+    }
+  },
+  "result": {
+    "item": "liberthia:energized_drill",
+    "count": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:glyph_inscriber"
+    },
+    "title": {
+      "translate": "advancement.liberthia.glyph_inscriber.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.glyph_inscriber.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:glyph_inscriber"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:magic/scribes_table"
+}

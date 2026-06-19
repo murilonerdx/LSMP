@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["CNC", "SBS", "DDD"],
+  "key": {
+    "C": {"item": "liberthia:crystalized_dark_matter"},
+    "N": {"item": "minecraft:nether_star"},
+    "S": {"item": "liberthia:ascension_seal"},
+    "B": {"item": "minecraft:beacon"},
+    "D": {"item": "liberthia:dark_matter_block"}
+  },
+  "result": {"item": "liberthia:beacon_flight_upgrade", "count": 1}
+}

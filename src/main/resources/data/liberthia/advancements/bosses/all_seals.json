@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:netherite_seal"
+    },
+    "title": {
+      "translate": "advancement.liberthia.all_seals.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.all_seals.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "got_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:bone_seal",
+              "liberthia:gold_seal",
+              "liberthia:diamond_seal",
+              "liberthia:netherite_seal"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:bosses/root"
+}

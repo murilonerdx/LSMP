@@ -1,0 +1,9 @@
+{
+  "name": "Minimal",
+  "trail_density": 4,
+  "trail_size": 0.8,
+  "impact_scale": 0.7,
+  "impact_particles": 25,
+  "screen_shake": 0.1,
+  "impact_light": 8
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Armadura & Escudo",
+  "icon": "liberthia:warded_chestplate",
+  "category": "liberthia:antimagic",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Armadura Bastião (FE)",
+      "text": "4 peças movidas a FE. Resiste a $(l)TODO dano mágico$() — $(good)−15% por peça$().$(br2)Com o $(l)conjunto completo$(), aplica $(item)Antimagia$() nos magos que te atacam (enfraquece eles).$(br2)$(warn)Sem FE$() = netherite comum. Recarregue num Carregador."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Escudo Dissonante (FE)",
+      "text": "$(l)Bloqueando$(), anula $(good)90% de QUALQUER dano mágico$() — qualquer escola, vanilla ou Mana & Artifice — consumindo FE."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:warded_chestplate",
+      "text": "$(item)Peitoral Bastião$() — feito de Núcleos Bastião."
+    }
+  ]
+}

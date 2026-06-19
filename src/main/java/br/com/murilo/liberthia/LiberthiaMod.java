@@ -68,6 +68,20 @@ public class LiberthiaMod {
         // Sem registro manual, o @Mod.EventBusSubscriber às vezes não cola.
         MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.event.CommandEvents.class);
 
+        // Manutenção: aplica restaurações de chunk agendadas ANTES do mundo
+        // carregar (ServerAboutToStartEvent). Registro manual = padrão confiável.
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.maintenance.MaintenanceEvents.class);
+
+        // Arco da Caçadora — Tiro Marcado: +30% de dano em alvos marcados.
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.event.HuntressMarkHandler.class);
+
+        // A Lua do Medo — evento de noite raro (sorteio, efeito Medo, mobs fortes,
+        // anti-invasão de casa, sem dormir, nevoeiro/sons, doppelgangers/fendas).
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.event.FearMoonEvents.class);
+
+        // Punhos Celestiais — combo 3 golpes + dash ofensivo + fúria celestial.
+        MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.event.CelestialFistsHandler.class);
+
         // r54: Spirit World chat block — bloqueia /tell, /msg, /w, /say, /me e chat
         // normal pra players em spirit world. Player precisa achar saída física.
         MinecraftForge.EVENT_BUS.register(br.com.murilo.liberthia.dimension.SpiritWorldChatBlocker.class);

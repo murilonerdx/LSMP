@@ -1,0 +1,92 @@
+# ============================================================================
+# Liberthia Admin Stack — backend + frontend (nginx) + postgres
+#
+# Como subir:
+#   docker compose up -d --build
+#
+# Como subir só DB pra dev local (rodar backend/frontend nativo):
+#   docker compose up -d postgres
+#
+# Variáveis (env file ou shell):
+#   LIBERTHIA_PASSWORD       senha pra entrar no painel (default: changeme)
+#   LIBERTHIA_FRONTEND_PORT  porta do nginx do frontend (default: 8888)
+#   MOD_HOST                 IP/host do servidor MC com mod Liberthia
+#                            default: host.docker.internal (host do docker)
+#   MOD_PORT                 default 25580
+#   MOD_TOKEN                token compartilhado (vê no chat com /liberthia admin link)
+# ============================================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: liberthia-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-liberthia}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-liberthia}
+      POSTGRES_DB: ${POSTGRES_DB:-liberthia}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-liberthia}"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks: [liberthia_net]
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: liberthia-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      LIBERTHIA_PASSWORD: ${LIBERTHIA_PASSWORD:-changeme}
+      LIBERTHIA_SECRET: ${LIBERTHIA_SECRET:-}
+      MOD_URL: http://${MOD_HOST:-host.docker.internal}:${MOD_PORT:-25580}
+      MOD_TOKEN: ${MOD_TOKEN:-}
+      # Postgres (pra futuro — backend ainda não usa, mas tá pronto)
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-liberthia}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-liberthia}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-liberthia}
+      JAVA_OPTS: "-Xms256m -Xmx512m"
+    # Em produção (VPS), comente o `ports` abaixo pra NÃO expor o backend
+    # publicamente — só o nginx do frontend acessa via network interna.
+    # Em dev local, mantenha pra testar /api/* direto via curl.
+    ports:
+      - "${BACKEND_PORT:-8090}:8090"
+    expose:
+      - "8090"
+    volumes:
+      - backend_snapshots:/app/liberthia_snapshot_cache
+    extra_hosts:
+      # Permite que o backend alcance o servidor MC rodando no host (Linux)
+      - "host.docker.internal:host-gateway"
+    networks: [liberthia_net]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: liberthia-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      # Container expõe nginx em 8999 (NÃO 80 — VPS tem outros serviços na 80).
+      # Default no host: 8888. Mapeia host:container.
+      - "${LIBERTHIA_FRONTEND_PORT:-8888}:8999"
+    networks: [liberthia_net]
+
+volumes:
+  postgres_data:
+  backend_snapshots:
+
+networks:
+  liberthia_net:
+    driver: bridge

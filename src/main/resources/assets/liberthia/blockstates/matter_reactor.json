@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "liberthia:block/matter_reactor"
+    },
+    "lit=true": {
+      "model": "liberthia:block/matter_reactor"
+    }
+  }
+}

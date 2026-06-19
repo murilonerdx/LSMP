@@ -1,0 +1,6 @@
+{"variants":{
+  "age=0":{"model":"liberthia:block/mana_berry_bush_stage0"},
+  "age=1":{"model":"liberthia:block/mana_berry_bush_stage1"},
+  "age=2":{"model":"liberthia:block/mana_berry_bush_stage2"},
+  "age=3":{"model":"liberthia:block/mana_berry_bush_stage3"}
+}}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "liberthia_essences",
+  "pattern": [
+    " G ",
+    "DPD",
+    " G "
+  ],
+  "key": {
+    "G": { "item": "minecraft:glowstone_dust" },
+    "D": { "item": "liberthia:purified_dark_matter_ingot" },
+    "P": { "item": "liberthia:purified_clear_matter_ingot" }
+  },
+  "result": {
+    "item": "liberthia:purified_essence",
+    "count": 2
+  }
+}

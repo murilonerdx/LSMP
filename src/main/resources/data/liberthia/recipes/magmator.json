@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SKS",
+    "SLS",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "liberthia:steel_ingot"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "L": {
+      "item": "minecraft:magma_block"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:magmator",
+    "count": 1
+  }
+}

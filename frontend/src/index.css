@@ -1,0 +1,459 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --liberthia-glow: 170, 64, 232;
+  --liberthia-deep: 36, 12, 56;
+}
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  background-color: #07030d;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(170, 64, 232, 0.18), transparent 55%),
+    radial-gradient(at 100% 0%, rgba(60, 220, 255, 0.10), transparent 55%),
+    radial-gradient(at 50% 100%, rgba(255, 80, 180, 0.10), transparent 60%),
+    linear-gradient(180deg, #07030d 0%, #0a0410 100%);
+  background-attachment: fixed;
+  color: #f3eaff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animated grid backdrop */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(170, 64, 232, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(170, 64, 232, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+  animation: gridShift 60s linear infinite;
+}
+
+@keyframes gridShift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 56px 56px, 56px 56px; }
+}
+
+#root { position: relative; z-index: 1; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6B2A8C, #3B1A5C);
+  border-radius: 5px;
+  border: 2px solid rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #aa40e8, #6B2A8C); }
+
+/* Selection */
+::selection { background: rgba(170,64,232,0.45); color: #fff; }
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl bg-white/[0.03] border border-white/10;
+  }
+
+  .card {
+    @apply relative rounded-2xl p-5 transition-all duration-300;
+    background: linear-gradient(135deg, rgba(70, 25, 105, 0.45) 0%, rgba(30, 10, 50, 0.55) 100%);
+    border: 1px solid rgba(170, 64, 232, 0.18);
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+    backdrop-filter: blur(14px);
+  }
+  .card:hover {
+    border-color: rgba(170, 64, 232, 0.35);
+    box-shadow:
+      0 12px 40px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(170, 64, 232, 0.2),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    transform: translateY(-2px);
+  }
+
+  .card-glow {
+    @apply card relative overflow-hidden;
+  }
+  .card-glow::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(170, 64, 232, 0.8), transparent);
+  }
+  .card-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 0%), rgba(170,64,232,0.06), transparent 40%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .card-glow:hover::after { opacity: 1; }
+
+  .btn {
+    @apply relative px-4 py-2 rounded-xl text-white text-sm font-semibold
+           transition-all active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed
+           overflow-hidden;
+    background: linear-gradient(135deg, #aa40e8, #6B2A8C);
+    box-shadow:
+      0 4px 14px rgba(170, 64, 232, 0.35),
+      inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #c057ff, #8638b0);
+    box-shadow:
+      0 6px 20px rgba(170, 64, 232, 0.5),
+      inset 0 1px 0 rgba(255,255,255,0.22);
+  }
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  .btn:hover:not(:disabled)::after { left: 100%; }
+
+  .btn-ghost {
+    @apply px-3 py-1.5 rounded-lg text-sm transition-all border;
+    background: rgba(255,255,255,0.02);
+    border-color: rgba(170, 64, 232, 0.25);
+    color: #d8c2ff;
+  }
+  .btn-ghost:hover {
+    background: rgba(170,64,232,0.12);
+    border-color: rgba(170,64,232,0.45);
+    color: #fff;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 rounded-xl text-white text-sm font-semibold transition-all active:scale-[0.97];
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4), inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .btn-danger:hover { background: linear-gradient(135deg, #f56565, #dc2626); }
+
+  .btn-success {
+    @apply px-4 py-2 rounded-xl text-white text-sm font-semibold transition-all active:scale-[0.97];
+    background: linear-gradient(135deg, #10b981, #047857);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .btn-success:hover { background: linear-gradient(135deg, #34d399, #059669); }
+
+  .btn-cyan {
+    @apply px-4 py-2 rounded-xl text-white text-sm font-semibold transition-all active:scale-[0.97];
+    background: linear-gradient(135deg, #06b6d4, #0e7490);
+    box-shadow: 0 4px 14px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .btn-cyan:hover { background: linear-gradient(135deg, #22d3ee, #0891b2); }
+
+  .btn-amber {
+    @apply px-4 py-2 rounded-xl text-white text-sm font-semibold transition-all active:scale-[0.97];
+    background: linear-gradient(135deg, #f59e0b, #b45309);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .btn-amber:hover { background: linear-gradient(135deg, #fbbf24, #d97706); }
+
+  .btn-sm { @apply px-2.5 py-1 text-xs rounded-lg; }
+
+  .input {
+    @apply rounded-lg px-3 py-2 text-sm w-full focus:outline-none transition;
+    background: rgba(15, 8, 25, 0.7);
+    border: 1px solid rgba(170, 64, 232, 0.25);
+    color: #f3eaff;
+  }
+  .input:focus {
+    border-color: rgba(170, 64, 232, 0.7);
+    box-shadow: 0 0 0 3px rgba(170, 64, 232, 0.18);
+    background: rgba(20, 10, 35, 0.85);
+  }
+
+  .label {
+    @apply text-[10px] uppercase tracking-[0.2em] font-bold;
+    color: rgba(216, 194, 255, 0.6);
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+           transition-all relative;
+    color: rgba(216, 194, 255, 0.7);
+  }
+  .nav-link:hover {
+    background: rgba(170, 64, 232, 0.1);
+    color: #fff;
+    transform: translateX(2px);
+  }
+  .nav-link-active {
+    background: linear-gradient(90deg, rgba(170, 64, 232, 0.25), transparent) !important;
+    color: #fff !important;
+    box-shadow: inset 3px 0 0 #aa40e8;
+  }
+  .nav-link-active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 3px; height: 60%;
+    background: linear-gradient(180deg, #aa40e8, #6B2A8C);
+    border-radius: 2px;
+    box-shadow: 0 0 12px rgba(170, 64, 232, 0.7);
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider;
+  }
+  .badge-green { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+  .badge-red { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+  .badge-purple { background: rgba(170,64,232,0.18); color: #d8b4fe; border: 1px solid rgba(170,64,232,0.35); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: #67e8f9; border: 1px solid rgba(6,182,212,0.3); }
+
+  .stat-card { @apply card-glow flex flex-col gap-1; }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #d8b4fe 0%, #aa40e8 50%, #c057ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-text-cyan {
+    background: linear-gradient(135deg, #67e8f9 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Section divider with glow */
+  .divider-glow {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(170,64,232,0.4), transparent);
+    margin: 1.5rem 0;
+  }
+
+  /* Glowing button focus ring on press */
+  .pulse-glow:hover {
+    animation: pulseGlow 1.5s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(170,64,232,0.4); }
+    50% { box-shadow: 0 0 35px rgba(170,64,232,0.7); }
+  }
+
+  /* Tooltip-like info pill */
+  .pill {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs;
+    background: rgba(170,64,232,0.1);
+    border: 1px solid rgba(170,64,232,0.25);
+    color: #d8b4fe;
+  }
+
+  /* Animated gradient border on focus / hover for premium feel */
+  .ring-glow {
+    position: relative;
+  }
+  .ring-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(170,64,232,0.5), transparent, rgba(6,182,212,0.4));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .ring-glow:hover::before { opacity: 1; }
+
+  /* Loader/skeleton */
+  .skeleton {
+    @apply rounded-lg;
+    background: linear-gradient(90deg, rgba(170,64,232,0.06), rgba(170,64,232,0.18), rgba(170,64,232,0.06));
+    background-size: 200% 100%;
+    animation: shimmer 1.4s linear infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Page header big title */
+  .page-title {
+    @apply text-2xl md:text-3xl font-bold tracking-tight gradient-text;
+  }
+}
+
+/* ============================================================================
+   Mobile-specific tweaks
+   ============================================================================ */
+@media (max-width: 768px) {
+  /* Cards menos padding em mobile pra ganhar espaço */
+  .card, .card-glow {
+    padding: 0.85rem;
+    border-radius: 1rem;
+  }
+
+  /* Inputs com touch targets maiores */
+  .input {
+    font-size: 14px;
+    padding: 0.6rem 0.75rem;
+    min-height: 40px;
+  }
+
+  /* Buttons com targets maiores */
+  .btn, .btn-ghost, .btn-danger, .btn-success, .btn-cyan, .btn-amber {
+    min-height: 40px;
+    font-size: 14px;
+  }
+  .btn-sm {
+    min-height: 32px;
+    padding: 0.4rem 0.6rem;
+  }
+
+  /* Nav links com mais respiro */
+  .nav-link {
+    padding: 0.7rem 0.75rem;
+    font-size: 14px;
+  }
+
+  /* Tab strip menor */
+  .tab-item {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  /* Code blocks quebram em vez de scroll */
+  code, pre {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* Tabelas com scroll horizontal forçado */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Touch device — sem hover effects bagunçados */
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+  }
+  .btn::after { display: none; }
+}
+
+/* Fade-in for routed pages */
+.route-fade {
+  animation: fadeUp 0.4s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.toast-anim { animation: toastIn 0.25s ease-out; }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* Code editor look */
+.code-editor {
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  background: rgba(8, 4, 16, 0.7);
+  border: 1px solid rgba(170, 64, 232, 0.25);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #f3eaff;
+  resize: vertical;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  /* Quebra texto longo sem espaços (URLs, strings juntas, etc) */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  overflow-y: auto;
+}
+.code-editor:focus {
+  border-color: rgba(170, 64, 232, 0.7);
+  box-shadow: 0 0 0 3px rgba(170, 64, 232, 0.18);
+}
+
+/* Subtle pulse ring for live indicator */
+.live-dot {
+  position: relative;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #34d399;
+}
+.live-dot::after {
+  content: '';
+  position: absolute; inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #34d399;
+  animation: livePulse 1.6s ease-out infinite;
+}
+@keyframes livePulse {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Mini chips for tags */
+.chip {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-mono;
+  background: rgba(170, 64, 232, 0.12);
+  border: 1px solid rgba(170, 64, 232, 0.25);
+  color: #d8b4fe;
+}
+
+/* Tab strip */
+.tab-strip {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: rgba(15, 8, 25, 0.5);
+  border: 1px solid rgba(170, 64, 232, 0.18);
+}
+.tab-item {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #d8c2ff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tab-item:hover { background: rgba(170, 64, 232, 0.1); color: #fff; }
+.tab-item.active {
+  background: linear-gradient(135deg, #aa40e8, #6B2A8C);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(170, 64, 232, 0.35);
+}
+
+/* Vortex spin para Dimensional Rift */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 6s linear infinite; }

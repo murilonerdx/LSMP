@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GBG",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "B": { "item": "liberthia:clear_matter_bucket" }
+  },
+  "result": { "item": "liberthia:matter_pipe_clear", "count": 8 }
+}

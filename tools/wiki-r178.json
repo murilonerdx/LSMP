@@ -1,0 +1,172 @@
+{
+  "entries": [
+    {
+      "slug": "camera",
+      "title": "Câmera",
+      "category": "TOOL",
+      "itemId": "liberthia:camera",
+      "summary": "Tira fotos reais da tela que aparecem no inventário.",
+      "contentMd": "A Câmera tira uma foto da sua tela (flash branco + clique de obturador) e gera uma Fotografia no inventário.\n\nA imagem REAL capturada é salva e renderizada no slot do item — você vê a miniatura do que fotografou.\n\nQuanto mais coisas de terror perto (EMF alto), maior a chance da foto 'sair estranha': um rosto pisca, a moldura fica vermelha e a mensagem revela que tinha algo atrás de você.\n\nCooldown: 30 ticks.\n\nReceita (bancada):\n  I I I\n  G Q R\n  I I I\nI = Ferro, G = Vidro, Q = Olho de Ender (lente), R = Redstone.",
+      "addedInVersion": "0.1.270",
+      "tags": "câmera, foto, terror, ferramenta",
+      "published": true
+    },
+    {
+      "slug": "photograph",
+      "title": "Fotografia",
+      "category": "ITEM",
+      "itemId": "liberthia:photograph",
+      "summary": "A foto tirada pela Câmera — mostra a imagem real no slot.",
+      "contentMd": "Resultado de usar a Câmera. A miniatura da imagem capturada é desenhada por cima do slot no inventário (decorator client-side, técnica NativeImage→DynamicTexture).\n\nVariante normal: moldura branca. Variante amaldiçoada: moldura vermelha piscando + brilho encantado + a descrição 'Há algo no fundo que você não viu'.\n\nAs fotos ficam salvas em .minecraft/liberthia_photos/ e sobrevivem entre sessões.",
+      "addedInVersion": "0.1.270",
+      "tags": "foto, lore, terror",
+      "published": true
+    },
+    {
+      "slug": "abyssal-core",
+      "title": "Núcleo do Abismo",
+      "category": "ARTIFACT",
+      "itemId": "liberthia:abyssal_core",
+      "summary": "Esfera abissal que concede Proteção do Mar; cristaliza com ametista.",
+      "contentMd": "Item de lore do Vazio/Terminus (Kali). Uma esfera de cristal azul profundo com um núcleo âmbar selado pulsando.\n\nNo inventário ou na mão: concede Proteção do Mar (Conduit Power) e emite partículas do conduíte.\n\nCristalização — adicione uma Ametista de uma de duas formas:\n  • Bancada: Núcleo do Abismo + Caco de Ametista (shapeless) → Núcleo do Vazio Cristalizado.\n  • Atalho: segure o núcleo e clique com o botão direito com uma Ametista no inventário.\n\nÉ EPIC, à prova de fogo, com brilho encantado.",
+      "creditsJson": "[\"Lore do Vazio com a galera do Vazio + Kali\"]",
+      "addedInVersion": "0.1.270",
+      "tags": "vazio, terminus, kali, lore, conduit",
+      "published": true
+    },
+    {
+      "slug": "crystallized-void-core",
+      "title": "Núcleo do Vazio Cristalizado",
+      "category": "ARTIFACT",
+      "itemId": "liberthia:abyssal_core",
+      "summary": "A fusão do Abismo com o Vazio — Absorção + Regeneração.",
+      "contentMd": "Forma cristalizada do Núcleo do Abismo (após adicionar ametista).\n\nNo inventário/mão: concede Absorção I + Regeneração I, com partículas do conduíte + portal roxo girando ao redor.\n\nNome e descrição em roxo. Mesmo item base do Núcleo do Abismo, com NBT crystallized=1 — a textura troca automaticamente via ItemProperty.",
+      "creditsJson": "[\"Lore do Vazio com a galera do Vazio + Kali\"]",
+      "addedInVersion": "0.1.270",
+      "tags": "vazio, terminus, kali, lore, ametista",
+      "published": true
+    },
+    {
+      "slug": "void-eye",
+      "title": "Olho do Vazio",
+      "category": "ARTIFACT",
+      "itemId": "liberthia:void_eye",
+      "summary": "Invoca a Manifestação do Vazio — sombra com olhos voadores e tentáculos.",
+      "contentMd": "Use no chão (botão direito) para invocar a Manifestação do Vazio, inspirada na invocação do Underzealot/Gloomoth do Alex's Caves.\n\nA manifestação é uma sombra de fumaça negra densa e estável, com olhos vermelhos que VOAM em espiral pra fora (partículas custom, não vanilla) e tentáculos animados que erguem da escuridão.\n\nDura ~11 segundos, aplica Escuridão em quem chega perto (sem dano — é puro pavor). Cooldown de 6s.",
+      "addedInVersion": "0.1.270",
+      "tags": "vazio, horror, vfx, invocação",
+      "published": true
+    },
+    {
+      "slug": "black-mirror",
+      "title": "Espelho Negro",
+      "category": "ITEM",
+      "itemId": "liberthia:black_mirror",
+      "summary": "Inverte a tela; às vezes algo se mexe no reflexo.",
+      "contentMd": "Ao usar, a tela inteira espelha (efeito MIRROR — flip horizontal).\n\nÀs vezes algo 'se mexe no reflexo': um rosto pisca (FLASH) e a sanidade cai 3 pontos. A chance escala com a intensidade de terror da região (EMF).\n\nCooldown de 40 ticks.",
+      "addedInVersion": "0.1.270",
+      "tags": "horror, sanidade, espelho",
+      "published": true
+    },
+    {
+      "slug": "sanity-candle",
+      "title": "Vela da Sanidade",
+      "category": "ITEM",
+      "itemId": "liberthia:sanity_candle",
+      "summary": "Restaura sanidade e protege suas tochas por 60s.",
+      "contentMd": "Acende uma chama protetora. Ao usar:\n  • +8 de sanidade.\n  • Marca você como 'protegido' (NBT liberthia.warded_until) por 60 segundos.\n\nEnquanto protegido, o sistema de medo na escuridão (DarkFearManager) NÃO apaga suas tochas. Um conforto raro num mundo que te observa. Empilha até 16.",
+      "addedInVersion": "0.1.270",
+      "tags": "sanidade, consumível, proteção, luz",
+      "published": true
+    },
+    {
+      "slug": "broken-radio",
+      "title": "Rádio Quebrado",
+      "category": "ITEM",
+      "itemId": "liberthia:broken_radio",
+      "summary": "Capta transmissões que não deviam existir.",
+      "contentMd": "Sintoniza estática e capta 'transmissões' do além: sussurros distantes, passos falsos, gritos, respiração no vácuo.\n\n40% de chance, a cada uso, de uma voz na estática falar diretamente com você (narrador). Nunca toca a mesma coisa. Cooldown de 60 ticks.",
+      "addedInVersion": "0.1.270",
+      "tags": "horror, som, áudio",
+      "published": true
+    },
+    {
+      "slug": "cursed-doll",
+      "title": "Boneca Amaldiçoada",
+      "category": "ITEM",
+      "itemId": "liberthia:cursed_doll",
+      "summary": "Convida coisas a te observar.",
+      "contentMd": "Segure a boneca e use: ela 'vira a cabeça pra você' (susto EYES) e invoca um Observador logo atrás de você — no canto do olho — que some quando você olha. Cooldown de 100 ticks.",
+      "addedInVersion": "0.1.270",
+      "tags": "horror, observador, boneca",
+      "published": true
+    },
+    {
+      "slug": "matter-tester",
+      "title": "Testador de Matéria",
+      "category": "BLOCK",
+      "itemId": "liberthia:matter_tester",
+      "summary": "Combina e analisa duas amostras de matéria, com logs no Computador.",
+      "contentMd": "Máquina de bancada que combina e testa DUAS amostras de matéria (não consome — é um scanner).\n\nColoque matéria nos dois slots (itens de matéria ou Sample Vials). Após um scan de ~5s, a máquina classifica a reação:\n  • Branca + Amarela → Estrategista\n  • Escura + Amarela → Instável (explosiva)\n  • Escura + Branca → Simbiótica\n  • Puras → Selvagem / Cognitiva / Errática\n\nA GUI mostra um reator pulsante, painel de resultado colorido (barras DM/WM/YM) e logs dos últimos 16 testes, com selo '✦ NOVA DESCOBERTA' na primeira vez de cada reação.\n\nSe encostada num Computador (qualquer um dos 6 lados, com HD + energia), cada teste envia um relatório completo pro HD (salvo em NBT + JSON).",
+      "creditsJson": "[\"Ideia: gabisousa02\"]",
+      "addedInVersion": "0.1.270",
+      "tags": "matéria, máquina, computador, análise",
+      "published": true
+    },
+    {
+      "slug": "faceless",
+      "title": "O Sem-Rosto",
+      "category": "MOB",
+      "itemId": "liberthia:faceless",
+      "summary": "Só se move no escuro; a luz te protege.",
+      "contentMd": "Humanoide pálido que SÓ se move no ESCURO (luz local ≤ 7) e quando não está sendo observado.\n\nNa luz, ou quando você o encara, congela completamente — a luz é segurança. No escuro avança rápido e silencioso e ataca em contato (6 de dano). Imune a fogo. 30 HP.",
+      "addedInVersion": "0.1.270",
+      "tags": "mob, horror, escuridão",
+      "published": true
+    },
+    {
+      "slug": "ceiling-lurker",
+      "title": "O do Teto",
+      "category": "MOB",
+      "itemId": "liberthia:ceiling_lurker",
+      "summary": "Despenca do teto quando você passa embaixo.",
+      "contentMd": "Fica pendurado no teto (sem gravidade), imóvel e silencioso. Quando você passa embaixo dele, despenca e te persegue por ~10 segundos antes de desistir. Olhe pra cima antes de andar. 24 HP, 8 de dano.",
+      "addedInVersion": "0.1.270",
+      "tags": "mob, horror, teto, emboscada",
+      "published": true
+    },
+    {
+      "slug": "eye-collector",
+      "title": "O Coletor de Olhos",
+      "category": "MOB",
+      "itemId": "liberthia:eye_collector",
+      "summary": "Te cega no escuro; cobre o rosto na luz.",
+      "contentMd": "Espreita no escuro e 'quer os seus olhos'. No escuro avança devagar e, em contato, aplica Blindness + Darkness. Na luz cobre o rosto e congela. 26 HP.",
+      "addedInVersion": "0.1.270",
+      "tags": "mob, horror, cegueira",
+      "published": true
+    },
+    {
+      "slug": "neighbor",
+      "title": "O Vizinho",
+      "category": "MOB",
+      "itemId": "liberthia:neighbor",
+      "summary": "Nunca ataca — só se aproxima quando você não olha.",
+      "contentMd": "Nunca ataca. Te observa de longe e se aproxima devagar quando você NÃO está olhando. Se você o encara, congela e devolve o olhar. Se chegar perto demais sem ser visto, simplesmente desaparece em fumaça. Presença pura, sem violência. 20 HP.",
+      "addedInVersion": "0.1.270",
+      "tags": "mob, horror, observação",
+      "published": true
+    },
+    {
+      "slug": "void-manifestation",
+      "title": "Manifestação do Vazio",
+      "category": "MOB",
+      "itemId": "liberthia:void_manifestation",
+      "summary": "A sombra de muitos olhos invocada pelo Olho do Vazio.",
+      "contentMd": "VFX vivo invocado pelo Olho do Vazio: uma massa de fumaça negra densa e estável, com 3 olhos vermelhos que orbitam e piscam, tentáculos em leque erguendo da escuridão, e olhos voadores extras saindo em espiral.\n\nNão dá dano — aplica Escuridão em quem fica perto. Dura ~11 segundos e dissipa. Sons graves do Warden acompanham a invocação.",
+      "addedInVersion": "0.1.270",
+      "tags": "vazio, horror, vfx",
+      "published": true
+    }
+  ]
+}

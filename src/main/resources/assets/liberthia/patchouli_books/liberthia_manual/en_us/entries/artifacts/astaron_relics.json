@@ -1,0 +1,73 @@
+{
+  "name": "Relíquias de Astaron",
+  "icon": "liberthia:astaron_eye_relic",
+  "category": "liberthia:artifacts",
+  "sortnum": 25,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "As 10 Relíquias",
+      "text": "Dez fragmentos de $(5)Astaron$() forjados contra o horror cósmico. Cada relíquia concede um $(o)buff anti-cósmico$() passivo enquanto equipada.$(br2)$(warn)NÃO existe receita$(). São $(l)loot-only$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Onde dropam",
+      "text": "Aparecem em baús de fim de jogo com chance baixa (~6%):$(br)$(li)Cidade Antiga$(li)Tesouro de End City$(li)Biblioteca de Fortaleza$(li)Tesouro de Bastião$(li)Mansão da Floresta$(li)Masmorra simples$(li)Tesouro enterrado"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Como equipar",
+      "text": "Equipe num slot $(item)Curios$() (colar, anel, cabeça, cinto, pés, etc.). O efeito é descrito no tooltip de cada relíquia.$(br2)Todas têm raridade $(5)Épica$() e são à prova de fogo."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_eye_relic",
+      "text": "$(item)Olho de Astaron$() $(8)(colar)$()$(br2)Visão noturna constante + revela (brilho) criaturas cósmicas num raio de 20b."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_mind_amulet",
+      "text": "$(item)Amuleto da Mente$() $(8)(colar)$()$(br2)Regenera sanidade ao longo do tempo + Resistência constante."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_hunter_gauntlet",
+      "text": "$(item)Manopla do Caçador$() $(8)(mãos)$()$(br2)$(c)+150% de dano$() contra criaturas cósmicas (golpe sai a ×2.5)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_warden_sash",
+      "text": "$(item)Faixa do Guardião$() $(8)(cinto)$()$(br2)+Vida máxima (Health Boost) + Resistência constante."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_void_treads",
+      "text": "$(item)Pisadas do Vazio$() $(8)(pés)$()$(br2)Queda lenta + cósmicos num raio de 32b deixam de te perseguir."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_mirror_ring",
+      "text": "$(item)Anel-Espelho$() $(8)(anel)$()$(br2)Reflete $(c)40%$() do dano cósmico de volta ao atacante (e reduz o dano que você recebe)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_faceless_crown",
+      "text": "$(item)Coroa Sem-Rosto$() $(8)(cabeça)$()$(br2)Pacifica cósmicos a 10b — imune ao dreno de sanidade por encarar o horror."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_essence_relic",
+      "text": "$(item)Essência de Astaron$() $(8)(amuleto)$()$(br2)Regeneração + Absorção constantes."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_void_core",
+      "text": "$(item)Núcleo do Vazio$() $(8)(bracelete)$()$(br2)Força (Damage Boost) + Pressa (Haste) constantes."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_star_pendant",
+      "text": "$(item)Pingente Estelar$() $(8)(amuleto)$()$(br2)Imune a fogo, afogamento, Wither e Veneno."
+    }
+  ]
+}

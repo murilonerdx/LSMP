@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DAD",
+    "ASA",
+    "DAD"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "S": {
+      "item": "minecraft:amethyst_block"
+    }
+  },
+  "result": {
+    "item": "liberthia:spell_binding_pedestal",
+    "count": 1
+  }
+}

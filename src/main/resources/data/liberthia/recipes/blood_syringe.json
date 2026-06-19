@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "liberthia:blood_vial" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:redstone" }
+  ],
+  "result": {
+    "item": "liberthia:blood_syringe",
+    "count": 1
+  }
+}

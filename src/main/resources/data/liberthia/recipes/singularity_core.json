@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DMD",
+    "MSM",
+    "DMD"
+  ],
+  "key": {
+    "D": { "item": "liberthia:dark_matter_block" },
+    "M": { "item": "liberthia:matter_core" },
+    "S": { "item": "minecraft:nether_star" }
+  },
+  "result": { "item": "liberthia:singularity_core" }
+}

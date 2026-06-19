@@ -1,0 +1,38 @@
+{
+  "id": "factory_hemorrhage_wave",
+  "name": "Onda Hemorrágica",
+  "school": "BLOOD",
+  "rarity": "RARE",
+  "mana": 38,
+  "cooldown": 100,
+  "damage": 9,
+  "range": 8,
+  "type": "CONE",
+  "lore": "Cone de espinhos de sangue. Causa hemorragia + envenenamento.",
+  "behavior": {
+    "radius": 8.0,
+    "cone_angle": 60.0
+  },
+  "vfx": {
+    "color_primary": "#aa0044",
+    "color_secondary": "#66aa33",
+    "trail_density": 12,
+    "impact_scale": 1.2
+  },
+  "effects": [
+    {
+      "type": "WITHER",
+      "duration": 100,
+      "amplifier": 1
+    },
+    {
+      "type": "POISON",
+      "duration": 120,
+      "amplifier": 1
+    },
+    {
+      "type": "LIFESTEAL",
+      "magnitude": 0.4
+    }
+  ]
+}

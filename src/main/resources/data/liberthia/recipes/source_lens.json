@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GAG",
+    "AFA",
+    "GAG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "A": { "item": "minecraft:amethyst_shard" },
+    "F": { "item": "liberthia:soul_fragment" }
+  },
+  "result": {
+    "item": "liberthia:source_lens",
+    "count": 1
+  }
+}

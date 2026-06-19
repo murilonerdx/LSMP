@@ -1,0 +1,38 @@
+{
+  "name": "Magia — Visão Geral",
+  "icon": "liberthia:grimoire",
+  "category": "liberthia:spells",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "5 Sistemas",
+      "text": "A magia de Liberthia não é UM sistema só — são $(l)cinco$() jeitos diferentes de conjurar, que convivem:$(br2)$(li)Grimoire (clássico)$(br)$(li)Custom Spells (Mesa de Feitiços)$(br)$(li)Glyphs (observação)$(br)$(li)Escolas & Magos$(br)$(li)Casting avançado (varinhas, familiares)$(br2)Todos gastam $(thing)mana$(), regenerada com o tempo."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:grimoire",
+      "text": "$(l)1. Grimoire$()$(br2)O livro central. Feitiços ficam no $(thing)NBT do player$() (não no item). Right-click casta o ativo; $(thing)Shift+Right$() ou tecla $(thing)X$() abre o Spell Wheel. Tipos: projétil, beam, AOE, buff, cura, teleporte, invocação, dreno, maldição."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:spell_crafting_table",
+      "text": "$(l)2. Custom Spells$()$(br2)Monte feitiços únicos combinando $(thing)Forma$() + $(thing)Elemento$() + $(thing)Sprite VFX$() + $(thing)Poder 1-5$(). Mana e dano são calculados sozinhos. Até 24 por player, acessíveis pelo Spell Wheel."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:glyph_direct_gaze",
+      "text": "$(l)3. Glyphs (Observação)$()$(br2)75+ glifos físicos em 3 tipos — $(#5DC1E0)Method$(), $(#D670D6)Manifestation$(), $(#FFD700)Distortion$() — montam receitas. Muitos Methods conjuram pra $(o)onde você olha$(): o ato de observar é o gatilho."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "4. Escolas & Magos",
+      "text": "Feitiços pertencem a $(thing)escolas$() (fogo, gelo, void, etc.) com dano e resistência próprios. Alguns inimigos são magos especialistas — $(o)Piromante$(), $(o)Criomante$() — que castam contra você.$(br2)Equipar $(thing)trajes$()/perks dá afinidade e reduz custo de uma escola."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:caster_wand",
+      "text": "$(l)5. Casting Avançado$()$(br2)Varinhas e a $(item)Mesa de Escriba$()/$(item)Spell Weaver$() pra compor feitiços, $(thing)Counterspell$() pra cancelar conjurações inimigas, e $(thing)familiares$() invocados que lutam ao seu lado."
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"type": "minecraft:crafting_shaped", "pattern": ["LLL", "LHL", "LCL"], "key": {"L": {"item": "minecraft:leather"}, "H": {"item": "liberthia:hive_heart"}, "C": {"item": "minecraft:chest"}}, "result": {"item": "liberthia:living_backpack", "count": 1}}

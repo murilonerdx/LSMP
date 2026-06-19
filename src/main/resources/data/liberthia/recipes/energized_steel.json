@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SRS",
+    "RKR",
+    "SGS"
+  ],
+  "key": {
+    "S": {
+      "item": "liberthia:steel_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    }
+  },
+  "result": {
+    "item": "liberthia:energized_steel",
+    "count": 1
+  }
+}

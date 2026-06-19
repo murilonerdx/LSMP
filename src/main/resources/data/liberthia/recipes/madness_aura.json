@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["EIE", "ICI", "EIE"],
+  "key": {
+    "E": { "item": "minecraft:ender_eye" },
+    "I": { "item": "liberthia:dark_matter_shard" },
+    "C": { "item": "liberthia:purified_dark_matter_ingot" }
+  },
+  "result": { "item": "liberthia:madness_aura", "count": 1 }
+}

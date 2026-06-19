@@ -1,0 +1,8 @@
+{
+  "display_name": "Salto de Fase",
+  "output": { "item": "liberthia:spell_phase_dash", "count": 1 },
+  "ingredients": [
+    { "item": "liberthia:phantom_ink",   "count": 3 },
+    { "item": "liberthia:astral_dust",   "count": 2 }
+  ]
+}

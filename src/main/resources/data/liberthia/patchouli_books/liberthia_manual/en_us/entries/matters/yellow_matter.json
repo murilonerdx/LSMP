@@ -1,0 +1,33 @@
+{
+  "name": "Yellow Matter",
+  "icon": "liberthia:yellow_matter_ingot",
+  "category": "liberthia:matters",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "A Instabilidade",
+      "text": "$(matter)Yellow Matter$() é o §lcatalisador§r. Instável — explode com TNT/lightning. Mas $(thing)necessário$() pra purificar Dark Matter."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:yellow_matter_ingot",
+      "text": "$(item)Yellow Matter Ingot$()$(br2)Obtenção: $(item)Dark Matter Shard$() + TNT (drop). Cuidado — entidades próximas tomam dano."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:yellow_matter_sword",
+      "text": "$(item)Yellow Matter Sword$()$(br2)Lightning strike on hit (chance 25%). Burns inventory of target."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:yellow_matter_shield",
+      "text": "$(item)Yellow Matter Shield$()$(br2)Bloqueia + lightning counter-strike no atacante. Durability: 800."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Armadura Yellow",
+      "text": "Set completo: $(item)Helmet$() + $(item)Chestplate$() + $(item)Leggings$() + $(item)Boots$().$(br2)Bonus set: imunidade a lightning + thunder resistance."
+    }
+  ]
+}

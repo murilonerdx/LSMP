@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "liberthia:containment_glove",
+    "liberthia:refined_containment_glove",
+    "liberthia:glove_mana_channeler",
+    "liberthia:glove_lucid_veil",
+    "liberthia:glove_battlemage",
+    "liberthia:enchanters_gauntlet",
+    "liberthia:ring_mana_flow",
+    "liberthia:ring_lucidity",
+    "liberthia:ring_arcane_power",
+    "liberthia:ring_bloodborn",
+    "liberthia:ring_capacity",
+    "liberthia:ring_firewarp",
+    "liberthia:ring_lurker",
+    "liberthia:ring_teleport",
+    "liberthia:astaron_hunter_gauntlet",
+    "liberthia:celestial_fists"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PSP",
+    "PSP"
+  ],
+  "key": {
+    "P": {"item": "liberthia:blood_planks"},
+    "S": {"item": "minecraft:stick"}
+  },
+  "result": {"item": "liberthia:blood_fence", "count": 3}
+}

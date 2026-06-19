@@ -1,0 +1,38 @@
+{
+  "id": "factory_amethyst_lance",
+  "name": "Lança de Ametista",
+  "school": "ELDRITCH",
+  "rarity": "RARE",
+  "mana": 45,
+  "cooldown": 90,
+  "damage": 14,
+  "range": 30,
+  "type": "PROJECTILE",
+  "lore": "Lança cristalina perfura através de armaduras.",
+  "behavior": {
+    "speed": 2.8,
+    "lifetime_ticks": 70,
+    "pierce": true,
+    "aoe_radius": 0.5
+  },
+  "vfx": {
+    "color_primary": "#7A3DFF",
+    "color_secondary": "#E7CCFF",
+    "trail_density": 16,
+    "trail_size": 1.6,
+    "impact_scale": 1.2,
+    "impact_particles": 80,
+    "screen_shake": 0.4,
+    "impact_light": 11
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "ghost_touch",
+      "duration": 80,
+      "magnitude": 0.0
+    }
+  ],
+  "element": "ELDRITCH",
+  "category": "PROJECTILE"
+}

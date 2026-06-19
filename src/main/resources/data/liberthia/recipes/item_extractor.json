@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "RHR",
+    "IPI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "P": { "item": "liberthia:item_pipe" },
+    "R": { "item": "minecraft:redstone" },
+    "H": { "item": "minecraft:hopper" }
+  },
+  "result": { "item": "liberthia:item_extractor" }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Energia & Geradores",
+  "icon": "liberthia:matter_reactor",
+  "category": "liberthia:tech",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Geradores",
+      "text": "$(li)$(item)Painel Solar$(): FE de dia, a céu aberto$(br)$(li)$(item)Gerador Térmico$(): lava adjacente$(br)$(li)$(item)Furnator$(): coloque combustível (carvão/madeira/blaze)$(br)$(li)$(item)Magmator$(): balde de lava (devolve o balde)$(br)$(li)$(item)Reator de Matéria Escura$(): queima matéria escura — orbe flutuante girando"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Armazenar & Distribuir",
+      "text": "$(item)Células de Energia$() — Básica (1M), Avançada (4M), Ultimate (16M FE) — guardam e empurram FE pela rede.$(br2)$(item)Carregador$(): põe um item FE no slot pra encher, e ainda $(item)carrega o inventário$() de quem chega perto (raio 5)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:matter_reactor",
+      "text": "$(item)Reator de Matéria Escura$(): o gerador supremo — abastece toda a rede queimando matéria escura."
+    }
+  ]
+}

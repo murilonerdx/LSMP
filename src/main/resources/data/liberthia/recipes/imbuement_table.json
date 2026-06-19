@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ASA",
+    "DCD",
+    "AAA"
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_block" },
+    "S": { "item": "liberthia:soul_fragment" },
+    "D": { "item": "minecraft:diamond" },
+    "C": { "item": "liberthia:source_crystal" }
+  },
+  "result": {
+    "item": "liberthia:imbuement_table",
+    "count": 1
+  }
+}

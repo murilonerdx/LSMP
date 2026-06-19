@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E E",
+    "EDE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    }
+  },
+  "result": {
+    "item": "liberthia:power_chestplate",
+    "count": 1
+  }
+}

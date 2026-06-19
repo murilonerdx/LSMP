@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "GDG",
+    "IRI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "G": { "item": "minecraft:glass" },
+    "D": { "item": "liberthia:dark_matter_cell" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "item": "liberthia:crystallizer" }
+}

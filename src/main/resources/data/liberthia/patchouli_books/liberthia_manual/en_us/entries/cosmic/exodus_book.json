@@ -1,0 +1,23 @@
+{
+  "name": "Livro do Êxodo",
+  "icon": "liberthia:exodus_book",
+  "category": "liberthia:cosmic",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:exodus_book",
+      "text": "$(item)Livro do Êxodo$()$(br2)$(o)\"A primeira página é vazia.$(br)A segunda também.$(br)A décima diz uma palavra.$(br)As outras você queima ao ler.\"$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Função",
+      "text": "Right-click no $(spirit)Spirit World$() $(thing)quebra a Tome Curse$() + teleporta de volta. Item é $(warn)consumido$() (one-time use).$(br2)Aplica:$(br)$(li)Regeneration II (20s)$(br)$(li)Saturation I (10s)$(br)$(li)Hero of the Village (5min)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Obtenção",
+      "text": "$(warn)APENAS$() como drop de entidades sumonadas via ritual cósmico.$(br2)Não pode ser crafted. Pergunte aos $(thing)Invocados$()."
+    }
+  ]
+}

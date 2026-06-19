@@ -1,0 +1,31 @@
+{
+  "id": "factory_meteor_06",
+  "name": "Tempestade Meteoritica",
+  "school": "FIRE",
+  "rarity": "EPIC",
+  "mana": 120,
+  "cooldown": 400,
+  "damage": 40,
+  "range": 24,
+  "type": "AOE_BURST",
+  "lore": "Tempestade contínua de pedras flamejantes.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#ff5500",
+    "color_secondary": "#ffaa00",
+    "trail_density": 20,
+    "trail_size": 2.0,
+    "impact_scale": 2.5,
+    "impact_particles": 120,
+    "screen_shake": 1.0,
+    "impact_light": 15
+  },
+  "effects": [],
+  "element": "FIRE",
+  "category": "DESTRUCTION"
+}

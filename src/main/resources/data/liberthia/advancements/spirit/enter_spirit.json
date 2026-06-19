@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:spiritual_link"
+    },
+    "title": {
+      "translate": "advancement.liberthia.enter_spirit.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.enter_spirit.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "entered": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "liberthia:spirit_world"
+      }
+    }
+  },
+  "parent": "liberthia:spirit/root"
+}

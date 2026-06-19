@@ -1,0 +1,34 @@
+{
+  "id": "factory_critical_strike",
+  "name": "Golpe Crítico",
+  "school": "FIRE",
+  "rarity": "RARE",
+  "category": "CRITICAL",
+  "element": "FIRE",
+  "mana": 30,
+  "cooldown": 60,
+  "damage": 8,
+  "range": 24,
+  "type": "PROJECTILE",
+  "lore": "60% chance de crítico. Dano dobrado em headshots.",
+  "behavior": {
+    "speed": 2.5,
+    "crit_chance": 0.6,
+    "crit_multiplier": 2.5,
+    "knockback_strength": 0.4,
+    "lifetime_ticks": 50
+  },
+  "vfx": {
+    "color_primary": "#ffaa00",
+    "trail_density": 12,
+    "impact_scale": 1.4,
+    "screen_shake": 0.8,
+    "impact_light": 14
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 60
+    }
+  ]
+}

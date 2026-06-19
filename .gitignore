@@ -1,8 +1,41 @@
+# ─── Forge mod (Gradle) ───
 .gradle/
 build/
 out/
+bin/
+local.properties
+.gradletasknamecache
+
+# Dev run dirs
 run/
 run-data/
+
+# ─── IDEs ───
 .idea/
 *.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# ─── Logs / OS ───
+logs/
+*.log
+.DS_Store
+Thumbs.db
+
+# ─── Env / secrets ───
+.env
+*.env
+!.env.example
+
+# ─── Misc ───
+tmp/
 .claude/
+
+# ─── Deploy configs com segredos REAIS (mantidos só localmente) ───
+# Os templates limpos versionados são docker-compose.yml + deploy/docker-stack.yml
+docker-stack.user.yml
+/docker-stack.yml
+/docker-stack.fixed.yml
+/test-stack.yml

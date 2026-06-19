@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "shape=dot": {
+      "model": "liberthia:block/chalk_mark_golden"
+    },
+    "shape=line": {
+      "model": "liberthia:block/chalk_mark_golden"
+    },
+    "shape=circle": {
+      "model": "liberthia:block/chalk_mark_golden"
+    },
+    "shape=sigil": {
+      "model": "liberthia:block/chalk_mark_golden"
+    }
+  }
+}

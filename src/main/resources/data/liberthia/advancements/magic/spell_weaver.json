@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:spell_weaver"
+    },
+    "title": {
+      "translate": "advancement.liberthia.spell_weaver.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.spell_weaver.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:spell_weaver"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:magic/grimoire"
+}

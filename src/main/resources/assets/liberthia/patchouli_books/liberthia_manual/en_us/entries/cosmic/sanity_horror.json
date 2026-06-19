@@ -1,0 +1,18 @@
+{
+  "name": "Sanidade & Horror",
+  "icon": "liberthia:void_eye",
+  "category": "liberthia:cosmic",
+  "sortnum": 52,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Sanidade",
+      "text": "Começa em $(l)100$(). Ela CAI quando você:$(br)$(li)fica no $(item)escuro$()$(br)$(li)$(item)minera$() por muito tempo no subsolo$(br)$(li)$(item)vê criaturas$() cósmicas/horror$(br2)Recupere na $(good)luz/sol$(), com $(item)Tônico Lúcido$() e velas."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Quando o horror começa",
+      "text": "$(warn)Só abaixo de 40% de sanidade$() começam: vozes, alucinações, o Visitante, sustos e os spawns de horror.$(br2)E $(l)pioram$() quanto menor a sanidade. $(good)Acima de 40% você está seguro$() — nada de horror do nada."
+    }
+  ]
+}

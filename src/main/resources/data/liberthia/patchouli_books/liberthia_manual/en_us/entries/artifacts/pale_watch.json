@@ -1,0 +1,43 @@
+{
+  "name": "Pale Watch — 5 Artefatos",
+  "icon": "liberthia:clone_army",
+  "category": "liberthia:artifacts",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Família Pale Watch",
+      "text": "5 artefatos espirituais avançados forjados com minérios das dimensões do Outro Lado.$(br2)$(li)$(item)Exército Pálido$()$(br)$(li)$(item)Olhar Reverso$()$(br)$(li)$(item)Respiração Pálida$()$(br)$(li)$(item)Paralisia Branca$()$(br)$(li)$(item)Guia Pálida$()$(br2)Todos requerem $(item)Ferro Pálido$(), $(item)Aço da Alma$(), ou $(item)Cristal do Rifte$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Exército Pálido",
+      "item": "liberthia:clone_army",
+      "text": "Right-click invoca §l5 Cópias Pálidas§r — entidades $(thing)reais$() com sua skin, armadura e armas.$(br2)$(good)Ataques: $()auto-target em quem te bater (4 dmg + knockback)$(br)$(good)Buffs: $()Speed II + DamageBoost II + Resistance II$(br)$(good)Morte: $()explosão AOE 8 dmg + soul flame$(br2)$(warn)Custo: $(o)-15 sanity, cd 5min"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Olhar Reverso",
+      "item": "liberthia:staredown_pendant",
+      "text": "Passivo. Se alguém te encara por $(thing)>3s$(), o mouse dele $(o)treme e gira sozinho$() por $(thing)8 segundos$().$(br2)Cooldown por observador: 20s.$(br)Você recebe alerta in-game."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Respiração Pálida",
+      "item": "liberthia:pale_blink_pendant",
+      "text": "$(o)Shift + Right-click$() teleporta você $(thing)pra TRÁS$() da entidade mirada (até 30b).$(br2)Ideal pra backstab e fugir de ranged.$(br)Cooldown: 15s."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Paralisia Branca",
+      "item": "liberthia:paralyze_pendant",
+      "text": "Passivo. Ao tomar dano de uma entidade, ela recebe:$(br)$(li)Slowness VI (3s)$(br)$(li)Jump-prevent (3s)$(br)$(li)Weakness III (3s)$(br)$(li)Nausea (3s)$(br2)Cooldown 10s — combina poderoso com $(item)Exército Pálido$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Guia Pálida",
+      "item": "liberthia:spirit_guide",
+      "text": "Right-click no $(spirit)Spirit World$() mostra trail de particles apontando o portal de retorno + distância.$(br2)$(warn)Só funciona no Outro Lado.$(br)Não funciona se você está Tome-cursed."
+    }
+  ]
+}

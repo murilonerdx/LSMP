@@ -1,0 +1,38 @@
+{
+  "name": "Relíquias de Terror",
+  "icon": "liberthia:black_mirror",
+  "category": "liberthia:novidades",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Itens de Terror (r178)",
+      "text": "Quatro relíquias + o Olho do Vazio. Quanto mais terror na região (EMF), mais fortes os efeitos."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:void_eye",
+      "text": "$(item)Olho do Vazio$()$(br2)Use no chão pra invocar a $(5)Manifestação do Vazio$(): sombra de fumaça negra com olhos vermelhos voando e tentáculos. Dura ~11s."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:black_mirror",
+      "text": "$(item)Espelho Negro$()$(br2)Inverte a tela. Às vezes algo se mexe no reflexo — um rosto pisca e a sanidade cai."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sanity_candle",
+      "text": "$(item)Vela da Sanidade$()$(br2)+8 sanidade e te protege por 60s: a escuridão não apaga suas tochas."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:broken_radio",
+      "text": "$(item)Rádio Quebrado$()$(br2)Capta transmissões que não deviam existir. 40% de chance de uma voz falar com você."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:cursed_doll",
+      "text": "$(item)Boneca Amaldiçoada$()$(br2)Vira a cabeça pra você e invoca um Observador atrás, que some quando você olha."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "liberthia:blood_log",
+    "liberthia:stripped_blood_log",
+    "liberthia:sanguine_log",
+    "liberthia:stripped_sanguine_log"
+  ]
+}

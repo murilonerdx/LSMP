@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EXE",
+    "XBX",
+    "ECE"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "B": {
+      "item": "liberthia:dark_matter_block"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:matter_reactor",
+    "count": 1
+  }
+}

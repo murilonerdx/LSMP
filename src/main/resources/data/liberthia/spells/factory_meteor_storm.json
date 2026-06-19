@@ -1,0 +1,30 @@
+{
+  "id": "factory_meteor_storm",
+  "name": "Tempestade de Meteoros",
+  "school": "FIRE",
+  "rarity": "EPIC",
+  "mana": 90,
+  "cooldown": 400,
+  "damage": 12,
+  "range": 28,
+  "type": "RAIN",
+  "lore": "12 meteoros caem em sequência em uma área. Devastação total.",
+  "behavior": {
+    "radius": 8.0,
+    "rain_strikes": 12,
+    "rain_duration_ticks": 100,
+    "ignite_blocks": true
+  },
+  "vfx": {
+    "color_primary": "#ff5500",
+    "impact_scale": 1.4,
+    "screen_shake": 0.8,
+    "impact_light": 14
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 100
+    }
+  ]
+}

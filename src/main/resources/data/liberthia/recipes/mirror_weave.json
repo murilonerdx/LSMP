@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GTG",
+    "TST",
+    "GTG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "T": {
+      "item": "liberthia:pale_thread"
+    },
+    "S": {
+      "item": "liberthia:purified_essence"
+    }
+  },
+  "result": {
+    "item": "liberthia:mirror_weave",
+    "count": 1
+  }
+}

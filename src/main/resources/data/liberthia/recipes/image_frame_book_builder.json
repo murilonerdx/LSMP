@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PFP",
+    "FBF",
+    "PFP"
+  ],
+  "key": {
+    "P": { "item": "minecraft:paper" },
+    "F": { "item": "minecraft:item_frame" },
+    "B": { "item": "minecraft:writable_book" }
+  },
+  "result": { "item": "liberthia:image_frame_book_builder" }
+}

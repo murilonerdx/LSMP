@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "RDR",
+    "IPI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "P": { "item": "liberthia:item_pipe" },
+    "R": { "item": "minecraft:redstone" },
+    "D": { "item": "minecraft:dispenser" }
+  },
+  "result": { "item": "liberthia:item_inserter" }
+}

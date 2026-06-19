@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SGS",
+    "GRG",
+    "SGS"
+  ],
+  "key": {
+    "S": { "item": "minecraft:sugar" },
+    "G": { "item": "minecraft:gold_ingot" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "item": "liberthia:speed_upgrade" }
+}

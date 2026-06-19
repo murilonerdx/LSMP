@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:glass_bottle" },
+    { "item": "minecraft:ghast_tear" },
+    { "item": "minecraft:ender_pearl" },
+    { "item": "minecraft:glistering_melon_slice" },
+    { "item": "minecraft:dragon_breath" }
+  ],
+  "result": { "item": "liberthia:dimensional_serum", "count": 1 }
+}

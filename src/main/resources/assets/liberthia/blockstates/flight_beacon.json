@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "liberthia:block/flight_beacon"
+    },
+    "lit=true": {
+      "model": "liberthia:block/flight_beacon"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "KEK",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "liberthia:steel_ingot"
+    },
+    "P": {
+      "item": "liberthia:steel_plate"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:charger",
+    "count": 1
+  }
+}

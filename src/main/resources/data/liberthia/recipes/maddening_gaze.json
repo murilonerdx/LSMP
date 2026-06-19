@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["BAB", "ANE", "BAB"],
+  "key": {
+    "B": { "item": "minecraft:blaze_powder" },
+    "A": { "item": "minecraft:amethyst_shard" },
+    "N": { "item": "minecraft:nether_star" },
+    "E": { "item": "minecraft:ender_eye" }
+  },
+  "result": { "item": "liberthia:maddening_gaze", "count": 1 }
+}

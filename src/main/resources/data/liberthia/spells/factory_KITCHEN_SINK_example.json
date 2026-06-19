@@ -1,0 +1,87 @@
+{
+  "_comment": "KITCHEN SINK — exemplo com TODOS os campos do Spell Factory r151.",
+  "_comment2": "Campos opcionais TEM defaults — só especifique o que quer customizar.",
+
+  "id": "kitchen_sink_example",
+  "name": "Exemplo Kitchen Sink",
+  "lore": "Spell de demonstração com todos os campos preenchidos.",
+
+  "school": "FIRE",
+  "rarity": "EPIC",
+  "category": "DESTRUCTION",
+
+  "element": "FIRE",
+  "secondary_element": "AIR",
+
+  "mana": 50,
+  "cooldown": 120,
+  "damage": 16,
+  "range": 28,
+
+  "type": "PROJECTILE",
+
+  "behavior": {
+    "speed": 2.0,
+    "lifetime_ticks": 100,
+    "pierce": false,
+    "aoe_radius": 3.0,
+    "ignite_blocks": true,
+
+    "projectile_count": 1,
+    "spread_degrees": 0,
+    "homing": false,
+
+    "radius": 6.0,
+    "cone_angle": 60.0,
+    "rain_strikes": 8,
+    "rain_duration_ticks": 80,
+
+    "aura_duration_ticks": 200,
+    "aura_tick_interval": 20,
+
+    "dash_distance": 12.0,
+    "touch_range": 4.0,
+
+    "beam_max_ticks": 40,
+    "beam_range": 24.0,
+
+    "crit_chance": 0.30,
+    "crit_multiplier": 2.5,
+    "knockback_strength": 1.2,
+    "height": 5.0,
+    "self_shake": true,
+    "penetrate_blocks": false
+  },
+
+  "vfx": {
+    "color_primary": "#ff5500",
+    "color_secondary": "#ffaa00",
+
+    "sprite": "auto",
+
+    "trail_density": 12,
+    "trail_size": 1.4,
+    "trail_lifetime": 18,
+
+    "charge_intensity": 0.8,
+
+    "impact_scale": 1.6,
+    "impact_particles": 140,
+    "impact_light": 14,
+
+    "screen_shake": 0.9,
+    "screen_shake_ticks": 12,
+
+    "sound_cast_start": "minecraft:entity.blaze.shoot",
+    "sound_cast_finish": "minecraft:entity.firework_rocket.launch",
+    "sound_impact": "minecraft:entity.generic.explode"
+  },
+
+  "effects": [
+    { "type": "IGNITE",     "duration": 120, "amplifier": 0, "magnitude": 1.0 },
+    { "type": "KNOCKBACK",  "duration": 0,   "amplifier": 0, "magnitude": 1.5 },
+    { "type": "WITHER",     "duration": 100, "amplifier": 1, "magnitude": 1.0 },
+    { "type": "LIFESTEAL",  "duration": 0,   "amplifier": 0, "magnitude": 0.3 },
+    { "type": "BLINDNESS",  "duration": 80,  "amplifier": 0, "magnitude": 1.0 }
+  ]
+}

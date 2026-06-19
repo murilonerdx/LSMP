@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "EHE",
+    " S "
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_block" },
+    "E": { "item": "minecraft:echo_shard" },
+    "H": { "item": "minecraft:heart_of_the_sea" },
+    "S": { "item": "minecraft:sculk_catalyst" }
+  },
+  "result": {
+    "item": "liberthia:pulso",
+    "count": 1
+  }
+}

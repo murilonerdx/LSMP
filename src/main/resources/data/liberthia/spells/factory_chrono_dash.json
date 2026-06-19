@@ -1,0 +1,27 @@
+{
+  "id": "factory_chrono_dash",
+  "name": "Investida do Tempo",
+  "school": "ELDRITCH",
+  "rarity": "RARE",
+  "category": "DASH",
+  "element": "AIR",
+  "mana": 26,
+  "cooldown": 60,
+  "damage": 4,
+  "range": 0,
+  "type": "DASH",
+  "lore": "Investida acelerada — concede Chronosurge.",
+  "behavior": {
+    "dash_distance": 18.0,
+    "knockback_strength": 0.5,
+    "crit_chance": 0.35,
+    "crit_multiplier": 2.0
+  },
+  "vfx": {
+    "color_primary": "#ffaa44",
+    "trail_density": 24,
+    "trail_size": 2.0,
+    "screen_shake": 0.5,
+    "impact_light": 13
+  }
+}

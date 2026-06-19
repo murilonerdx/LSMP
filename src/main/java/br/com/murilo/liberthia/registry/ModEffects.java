@@ -23,6 +23,14 @@ public final class ModEffects {
     public static final RegistryObject<MobEffect> ANTIMAGIA =
             MOB_EFFECTS.register("antimagia", br.com.murilo.liberthia.effect.AntimagiaEffect::new);
 
+    // Arco da Caçadora — Tiro Marcado: alvo recebe +30% de dano (HuntressMarkHandler)
+    public static final RegistryObject<MobEffect> MARKED =
+            MOB_EFFECTS.register("marked", br.com.murilo.liberthia.effect.MarkedEffect::new);
+
+    // Lua do Medo — efeito Medo (marker; Fraqueza V + Velocidade IV via FearMoonEvents)
+    public static final RegistryObject<MobEffect> MEDO =
+            MOB_EFFECTS.register("medo", br.com.murilo.liberthia.effect.MedoEffect::new);
+
     public static final RegistryObject<MobEffect> RADIATION_SICKNESS =
             MOB_EFFECTS.register("radiation_sickness", RadiationSicknessEffect::new);
 

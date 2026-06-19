@@ -1,0 +1,21 @@
+{
+  "name": "item.liberthia.liberthia_manual",
+  "landing_text": "Bem-vindo ao §lLiberthia§r — um mundo de três matérias (Escura, Clara, Amarela), rituais ocultistas, dimensões espirituais, horror cósmico e arquitetura liminal.$(br2)Este tomo contém TODO o conhecimento que você precisa pra sobreviver.$(br2)$(bold)Categorias:$()$(br)$(li)Matérias: ciclo DM/CM/YM$(br)$(li)Rituais: invocação e sigilos$(br)$(li)Feitiços: Grimoire e Custom Spells$(br)$(li)Horror Cósmico: Tomo, Sanidade, alucinações$(br)$(li)Artefatos: 60+ items místicos$(br)$(li)Dimensões: Spirit, Loom, Liminais$(br)$(li)Sistema de Som: 10 sons cósmicos$(br)$(li)HUD: configuração e comandos$()",
+  "subtitle": "Catálogo Completo — r59",
+  "book_texture": "patchouli:textures/gui/book_brown.png",
+  "model": "liberthia:item/liberthia_manual",
+  "creative_tab": "liberthia.main",
+  "use_blocky_font": false,
+  "i18n": false,
+  "show_progress": true,
+  "version": 6,
+  "use_resource_pack": true,
+  "macros": {
+    "$(matter)": "$(#9d4dd6)",
+    "$(spirit)": "$(#d34c4c)",
+    "$(cosmic)": "$(#5dc1e0)",
+    "$(item)": "$(thing)",
+    "$(warn)": "$(#cc0000)",
+    "$(good)": "$(#00aa00)"
+  }
+}

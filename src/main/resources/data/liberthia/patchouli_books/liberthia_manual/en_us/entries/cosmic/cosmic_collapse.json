@@ -1,0 +1,17 @@
+{
+  "name": "Cosmic Collapse",
+  "icon": "liberthia:creative_grimoire",
+  "category": "liberthia:cosmic",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Cosmic Collapse$() é o feitiço mais devastador do mod — 14 segundos cinematográficos.$(br2)Aprendido via ritual de Azathoth (ou Creative Grimoire). Custa 95 mana (quase tudo) e tem CD de 2min."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "6 Phases (timeline)",
+      "text": "$(bold)1. Pre-Summoning (2s)$(): caster levita, glyphs orbitam$(br)$(bold)2. Reality Instability (3s)$(): cracks + chromatic$(br)$(bold)3. Dimensional Rupture (4s)$(): rasgo no céu$(br)$(bold)4. Entity Manifestation (3s)$(): warden gigante$(br)$(bold)5. Cosmic Collapse$(): implosão 24 HP raio 12b$(br)$(bold)6. Post Corruption (8s)$(): black fog persiste"
+    }
+  ]
+}

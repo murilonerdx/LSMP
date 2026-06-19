@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ISI",
+    "SDS",
+    "ISI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "S": { "item": "liberthia:dark_matter_shard" },
+    "D": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "item": "liberthia:dark_matter_cell" }
+}

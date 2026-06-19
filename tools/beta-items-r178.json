@@ -1,0 +1,157 @@
+{
+  "version": "0.1.270",
+  "generatedAt": "2026-06-01T12:00:00Z",
+  "items": [
+    {
+      "name": "Câmera",
+      "itemId": "liberthia:camera",
+      "kind": "ITEM",
+      "category": "tool",
+      "description": "Tira uma foto da tela (flash + obturador). A imagem REAL capturada vira uma Fotografia no inventário, mostrando a miniatura no slot. Quanto mais terror perto (EMF alto), maior a chance da foto 'sair estranha'. Craft: ferro + vidro + olho de ender + redstone.",
+      "lore": "O que a lente captura nem sempre é o que seus olhos viram.",
+      "giveCommand": "/give @p liberthia:camera 1",
+      "enabled": true
+    },
+    {
+      "name": "Fotografia",
+      "itemId": "liberthia:photograph",
+      "kind": "ITEM",
+      "category": "lore",
+      "description": "Resultado da Câmera. Mostra no slot do inventário a imagem real que foi tirada (decorator client-side). Versão 'amaldiçoada' (moldura vermelha + brilho) revela algo no fundo que você não viu.",
+      "lore": "Um instante preservado — ou algo que se intrometeu nele.",
+      "giveCommand": "/give @p liberthia:photograph 1",
+      "enabled": true
+    },
+    {
+      "name": "Núcleo do Abismo",
+      "itemId": "liberthia:abyssal_core",
+      "kind": "ITEM",
+      "category": "lore",
+      "description": "Esfera de cristal azul com núcleo âmbar selado. No inventário/mão concede Proteção do Mar (Conduit Power) + partículas do conduíte. Adicione uma Ametista (bancada shapeless OU clique-direito) pra cristalizar no Núcleo do Vazio.",
+      "lore": "Um núcleo abissal surgido de um corpo ancestral. Pulsa com energia selada.",
+      "giveCommand": "/give @p liberthia:abyssal_core 1",
+      "recipeJson": "{\"type\":\"liberthia:abyssal_core_crystallize\",\"category\":\"misc\",\"note\":\"shapeless: abyssal_core + amethyst_shard -> crystallized\"}",
+      "enabled": true
+    },
+    {
+      "name": "Núcleo do Vazio Cristalizado",
+      "itemId": "liberthia:abyssal_core_crystallized",
+      "kind": "ARTIFACT",
+      "category": "lore",
+      "description": "Forma cristalizada do Núcleo do Abismo (com ametista). Concede Absorção I + Regeneração I + partículas de conduíte e portal roxo. Item de lore do Vazio/Terminus/Kali. (Mesmo item base, NBT crystallized=1).",
+      "lore": "A fusão do Abismo com o Vazio. Cristalizado por ametistas carregadas de vozes ecoantes de uma entidade antiga.",
+      "giveCommand": "/give @p liberthia:abyssal_core{crystallized:1b} 1",
+      "enabled": true
+    },
+    {
+      "name": "Olho do Vazio",
+      "itemId": "liberthia:void_eye",
+      "kind": "ARTIFACT",
+      "category": "horror",
+      "description": "Use no chão pra invocar a Manifestação do Vazio: sombra de fumaça negra densa com olhos vermelhos voando (sprites custom) e tentáculos saindo da escuridão (à la Underzealot do Alex's Caves). Dura ~11s. Cooldown 6s.",
+      "lore": "Uma sombra de muitos olhos se ergue do nada.",
+      "giveCommand": "/give @p liberthia:void_eye 1",
+      "enabled": true
+    },
+    {
+      "name": "Espelho Negro",
+      "itemId": "liberthia:black_mirror",
+      "kind": "ITEM",
+      "category": "horror",
+      "description": "Ao usar, a tela inteira espelha (inverte). Às vezes algo se mexe no reflexo: um rosto pisca e a sanidade cai 3. Chance escala com o terror da região (EMF).",
+      "lore": "O lado de lá sempre esteve te observando de volta.",
+      "giveCommand": "/give @p liberthia:black_mirror 1",
+      "enabled": true
+    },
+    {
+      "name": "Vela da Sanidade",
+      "itemId": "liberthia:sanity_candle",
+      "kind": "ITEM",
+      "category": "consumable",
+      "description": "Acende uma chama protetora: +8 de sanidade e te marca como 'protegido' por 60s — nesse tempo a escuridão (DarkFearManager) não apaga suas tochas.",
+      "lore": "A chama te acalma. Por um instante, você não está sozinho... do jeito bom.",
+      "giveCommand": "/give @p liberthia:sanity_candle 1",
+      "enabled": true
+    },
+    {
+      "name": "Rádio Quebrado",
+      "itemId": "liberthia:broken_radio",
+      "kind": "ITEM",
+      "category": "horror",
+      "description": "Sintoniza estática e capta 'transmissões' que não deviam existir: sussurros distantes, passos falsos, gritos. 40% de chance de uma voz na estática falar diretamente com você (narrador).",
+      "lore": "...você está aí?... eu sei que está...",
+      "giveCommand": "/give @p liberthia:broken_radio 1",
+      "enabled": true
+    },
+    {
+      "name": "Boneca Amaldiçoada",
+      "itemId": "liberthia:cursed_doll",
+      "kind": "ITEM",
+      "category": "horror",
+      "description": "Segure e use: a boneca 'vira a cabeça pra você' (susto EYES) e um Observador aparece logo atrás de você (no canto do olho), sumindo quando você olha.",
+      "lore": "A boneca virou a cabeça para você.",
+      "giveCommand": "/give @p liberthia:cursed_doll 1",
+      "enabled": true
+    },
+    {
+      "name": "Testador de Matéria",
+      "itemId": "liberthia:matter_tester",
+      "kind": "BLOCK",
+      "category": "machine",
+      "description": "Máquina de bancada que combina e analisa DUAS amostras de matéria (Branca+Amarela=Estrategista, Escura+Amarela=Instável, etc.). GUI com reator pulsante, painel de resultado colorido (barras DM/WM/YM) e logs. Encostada num Computador, manda relatórios completos pro HD. Não consome as amostras.",
+      "lore": "Toda mistura conta uma história — e algumas explodem.",
+      "giveCommand": "/give @p liberthia:matter_tester 1",
+      "enabled": true
+    },
+    {
+      "name": "O Sem-Rosto",
+      "itemId": "liberthia:faceless",
+      "kind": "FEATURE",
+      "category": "mob",
+      "description": "Humanoide pálido que só se move no ESCURO. Na luz (>7) congela completamente. No escuro avança rápido e silencioso e ataca em contato (6 dmg). A luz te protege.",
+      "lore": "Não desligue a tocha.",
+      "giveCommand": "/summon liberthia:faceless ~ ~ ~",
+      "enabled": true
+    },
+    {
+      "name": "O do Teto",
+      "itemId": "liberthia:ceiling_lurker",
+      "kind": "FEATURE",
+      "category": "mob",
+      "description": "Fica pendurado no teto (sem gravidade), imóvel. Quando você passa embaixo, despenca e persegue por ~10s. Olhe pra cima antes de andar.",
+      "lore": "Estava ali o tempo todo.",
+      "giveCommand": "/summon liberthia:ceiling_lurker ~ ~ ~",
+      "enabled": true
+    },
+    {
+      "name": "O Coletor de Olhos",
+      "itemId": "liberthia:eye_collector",
+      "kind": "FEATURE",
+      "category": "mob",
+      "description": "Espreita no escuro e 'quer os seus olhos'. No escuro avança e, em contato, te cega (Blindness + Darkness). Na luz cobre o rosto e congela.",
+      "lore": "Ele quer os seus olhos.",
+      "giveCommand": "/summon liberthia:eye_collector ~ ~ ~",
+      "enabled": true
+    },
+    {
+      "name": "O Vizinho",
+      "itemId": "liberthia:neighbor",
+      "kind": "FEATURE",
+      "category": "mob",
+      "description": "Nunca ataca. Te observa de longe e se aproxima quando você NÃO está olhando. Se você o encara, congela e devolve o olhar. Se chegar perto demais sem você ver, simplesmente desaparece.",
+      "lore": "Presença pura, sem violência.",
+      "giveCommand": "/summon liberthia:neighbor ~ ~ ~",
+      "enabled": true
+    },
+    {
+      "name": "Manifestação do Vazio",
+      "itemId": "liberthia:void_manifestation",
+      "kind": "FEATURE",
+      "category": "mob",
+      "description": "A sombra do Vazio invocada pelo Olho do Vazio: fumaça negra densa estável + olhos vermelhos voadores (partículas custom VoidFlyingEye) + tentáculos animados saindo da escuridão. VFX puro — aplica Escuridão em quem chega perto, não dá dano.",
+      "lore": "Muitos olhos. Nenhum rosto.",
+      "giveCommand": "/summon liberthia:void_manifestation ~ ~ ~",
+      "enabled": true
+    }
+  ]
+}

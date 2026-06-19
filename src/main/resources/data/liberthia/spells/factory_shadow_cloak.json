@@ -1,0 +1,30 @@
+{
+  "id": "factory_shadow_cloak",
+  "name": "Manto das Sombras",
+  "school": "ELDRITCH",
+  "rarity": "RARE",
+  "mana": 35,
+  "cooldown": 400,
+  "damage": 0,
+  "range": 0,
+  "type": "SELF",
+  "lore": "Vira invisível e ganha velocidade. 20s de invisibilidade.",
+  "behavior": {},
+  "vfx": {
+    "color_primary": "#552288",
+    "impact_scale": 1.0,
+    "screen_shake": 0.2
+  },
+  "effects": [
+    {
+      "type": "STRENGTH",
+      "duration": 400,
+      "amplifier": 0
+    },
+    {
+      "type": "SPEED",
+      "duration": 400,
+      "amplifier": 2
+    }
+  ]
+}

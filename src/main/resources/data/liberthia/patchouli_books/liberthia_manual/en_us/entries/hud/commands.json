@@ -1,0 +1,23 @@
+{
+  "name": "Comandos /liberthia",
+  "icon": "minecraft:command_block",
+  "category": "liberthia:hud",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Comandos Principais",
+      "text": "$(o)/liberthia matter clear$() — limpa matter do alvo$(br2)$(o)/liberthia reset$() — reseta player (sanity, infection, etc)$(br2)$(o)/liberthia spirit return$() — força return do spirit$(br2)$(o)/liberthia sound test <type>$() — toca cosmic sound$(br2)$(o)/liberthia hud sanity <subcommand>$() — config HUD"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Admin",
+      "text": "$(o)/liberthia admin$() — abre AdminToolScreen$(br2)$(o)/liberthia immortal <player>$() — imortalidade total$(br2)$(o)/liberthia bossfight <player> <name>$() — torna alvo em boss$(br2)$(o)/liberthia summon <entity>$() — invoca cosmic horror entities"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Sound test types",
+      "text": "$(o)whispers, eye_pulse, footsteps, breathing, radio, sky_hum, tendril, distortion, scream, audience, all$()$(br2)O comando $(o)all$() executa todos os 10 sons em 10s."
+    }
+  ]
+}

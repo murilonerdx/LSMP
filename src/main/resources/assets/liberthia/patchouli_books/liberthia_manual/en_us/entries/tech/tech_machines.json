@@ -1,0 +1,18 @@
+{
+  "name": "Máquinas",
+  "icon": "liberthia:crusher",
+  "category": "liberthia:tech",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Processamento",
+      "text": "Todas têm GUI: $(item)entrada à esquerda$(), $(item)saída à direita$(), consomem FE.$(br2)$(li)$(item)Triturador$(): minério → 2 pós (ore doubling)$(br)$(li)$(item)Fundidor Energizado$(): funde qualquer coisa$(br)$(li)$(item)Compressor$(): lingote → placa$(br)$(li)$(item)Forja de Liga$(): ferro → aço$(br)$(li)$(item)Serraria$(): tronco → 6 tábuas"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:crusher",
+      "text": "$(item)Triturador$() — dobre seus minérios. Ligue à rede FE."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Visão Geral",
+  "icon": "liberthia:ritual_circle_item",
+  "category": "liberthia:rituals",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O sistema de rituais permite invocar $(thing)entidades$(), purificar áreas, e $(thing)aprender feitiços$().$(br2)$(bold)Componentes:$()$(br)• $(item)Ritual Circle$(): bloco central$(br)• $(thing)Chalks$() (5 cores): desenham no chão$(br)• $(thing)Candles$() (5 cores): fontes de cera$(br)• $(thing)Sigils$(): selos rúnicos$(br)• $(thing)Catalisadores$(): items consumidos"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Como executar",
+      "text": "1. Coloque Ritual Circle no centro$(br)2. Desenhe 8 chalks em volta (raio 4)$(br)3. Coloque 4-8 candles ACESAS em volta$(br)4. Right-click no Circle → coloque sigils nos 4 slots$(br)5. Adicione catalisadores$(br)6. Click INICIAR$(br2)Se receita bater, executa em 5-15s."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "factory_vazio_roxo",
+  "name": "§5§lVazio Roxo",
+  "school": "ELDRITCH",
+  "rarity": "EPIC",
+  "mana": 90,
+  "cooldown": 400,
+  "damage": 28,
+  "range": 35,
+  "type": "PROJECTILE",
+  "lore": "Esfera ametista densa que colapsa espaço. Silenciosa. Pesada. Anormal.",
+  "behavior": {
+    "speed": 0.6,
+    "lifetime_ticks": 100,
+    "pierce": false,
+    "aoe_radius": 5.5,
+    "ignite_blocks": false,
+    "knockback_strength": 0.0
+  },
+  "vfx": {
+    "color_primary": "#7A3DFF",
+    "color_secondary": "#2B0040",
+    "trail_density": 30,
+    "trail_size": 2.4,
+    "impact_scale": 3.5,
+    "impact_particles": 280,
+    "screen_shake": 1.4,
+    "impact_light": 13
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "hungry_void",
+      "duration": 200,
+      "magnitude": 1.0
+    },
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "vertigo",
+      "duration": 200,
+      "magnitude": 1.0
+    },
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "dimensional_blindness",
+      "duration": 100,
+      "magnitude": 0.0
+    },
+    {
+      "type": "KNOCKBACK",
+      "magnitude": 2.5
+    }
+  ],
+  "element": "ELDRITCH",
+  "category": "DESTRUCTION"
+}

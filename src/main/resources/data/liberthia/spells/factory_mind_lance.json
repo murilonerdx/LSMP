@@ -1,0 +1,33 @@
+{
+  "id": "factory_mind_lance",
+  "name": "Lança Mental",
+  "school": "ELDRITCH",
+  "rarity": "RARE",
+  "mana": 28,
+  "cooldown": 70,
+  "damage": 13,
+  "range": 32,
+  "type": "HOMING",
+  "lore": "Míssil que persegue alvos. Nauseia ao impacto.",
+  "behavior": {
+    "speed": 1.4,
+    "homing": true,
+    "lifetime_ticks": 120
+  },
+  "vfx": {
+    "color_primary": "#aa66ff",
+    "trail_density": 14,
+    "screen_shake": 0.5
+  },
+  "effects": [
+    {
+      "type": "NAUSEA",
+      "duration": 200
+    },
+    {
+      "type": "WEAKNESS",
+      "duration": 120,
+      "amplifier": 1
+    }
+  ]
+}

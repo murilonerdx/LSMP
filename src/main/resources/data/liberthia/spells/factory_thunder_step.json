@@ -1,0 +1,23 @@
+{
+  "id": "factory_thunder_step",
+  "name": "Passo do Trovão",
+  "school": "LIGHTNING",
+  "rarity": "RARE",
+  "mana": 22,
+  "cooldown": 60,
+  "damage": 6,
+  "range": 0,
+  "type": "DASH",
+  "lore": "Salto elétrico — explode no início e fim. Aturde inimigos.",
+  "behavior": {
+    "dash_distance": 14.0
+  },
+  "vfx": {
+    "color_primary": "#ffff66",
+    "trail_density": 20,
+    "trail_size": 1.8,
+    "impact_scale": 1.2,
+    "screen_shake": 0.7,
+    "impact_light": 14
+  }
+}

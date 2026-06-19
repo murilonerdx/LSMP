@@ -1,0 +1,28 @@
+{
+  "name": "Cosmic Sound Framework",
+  "icon": "minecraft:bell",
+  "category": "liberthia:sounds",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "10 Sons Custom",
+      "text": "10 sons cósmicos delivered $(thing)per-player$() via ClientboundSoundPacket — outros players próximos NÃO ouvem.$(br2)$(li)distant_whispers$(br)$(li)eye_pulse$(br)$(li)false_footsteps$(br)$(li)void_breathing$(br)$(li)radio_broadcast$(br)$(li)sky_hum$(br)$(li)tendril_movement$(br)$(li)reality_distortion$(br)$(li)distant_scream$(br)$(li)audience_presence"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Auto-hook",
+      "text": "Cada $(item)Hallucination$() dispara o sound apropriado automaticamente via $(thing)CosmicSoundManager.playForHallucination(sp, type)$().$(br2)Mapping:$(br)$(li)FAKE_WHISPER → whispers$(br)$(li)FAKE_FOOTSTEP → footsteps$(br)$(li)HEARTBEAT_PULSE → eye_pulse$(br)$(li)REVERSE_AUDIO_PULSE → radio$(br)$(li)REALITY_SHAKE → distortion"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Comando de Teste",
+      "text": "$(o)/liberthia sound test <type> [player]$()$(br2)Types: whispers, eye_pulse, footsteps, breathing, radio, sky_hum, tendril, distortion, scream, audience, all$(br2)$(o)all$() toca todos com 1s delay entre cada (10s total)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Per-Player Cooldown",
+      "text": "Cada player tem cooldown próprio por sound type pra não spammar. Defaults:$(br2)$(li)whispers: 4s$(br)$(li)eye_pulse: 5s$(br)$(li)footsteps: 2s$(br)$(li)scream: 60s (raro)$(br)$(li)audience: 40s"
+    }
+  ]
+}

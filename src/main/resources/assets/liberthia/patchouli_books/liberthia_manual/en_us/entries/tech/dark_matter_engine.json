@@ -1,0 +1,43 @@
+{
+  "name": "Motor de Matéria Escura",
+  "icon": "liberthia:black_matter_engine",
+  "category": "liberthia:tech",
+  "sortnum": 36,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "$(matter)O Motor$()",
+      "text": "O $(item)Motor de Matéria Escura$() é uma máquina viva de corrupção. Enquanto NÃO for destruído, ele converte os blocos da região em $(matter)matéria escura$() e blocos infectados, sem parar.$(br2)A cada tipo de bloco corresponde uma versão corrompida: grama vira $(item)Grama Infectada Escura$(), terra vira $(item)Terra Infectada$(), areia vira $(item)Areia Infectada$(), pedra vira $(item)Pedra Infectada$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(matter)Espalhamento Infinito$()",
+      "text": "O raio começa pequeno e $(l)cresce ILIMITADO$() com o tempo, até o teto da config. A intensidade também sobe, deixando a infecção mais profunda e mais rápida.$(br2)Não há limite natural: deixado sozinho, ele engole o bioma inteiro. Madeira vira $(item)Tronco Corrompido$(); minérios e pedra viram $(item)Pedra Corrompida$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(warn)Radiação e Perigo$()",
+      "text": "Os blocos infectados emitem $(warn)RADIAÇÃO$(). Players na zona sofrem $(warn)fome, dano$() e $(warn)Doença da Radiação$(); bem perto do núcleo a radiação é dimensional.$(br2)A infecção também $(warn)FERE mobs$() até a morte — exceto criaturas cósmicas, imunes à própria corrupção. Exposição longa pode até transmitir uma $(matter)doença dimensional$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(good)Campo de Proteção$()",
+      "text": "O núcleo se defende sozinho: mobs hostis num raio de 6 blocos tomam $(warn)dano$() e são $(l)REPELIDOS$() com força.$(br2)$(good)Quebrar o motor REVERTE TUDO$() ao original — cada troca é mapeada num JSON na pasta do mundo. Cuidado: blocos com inventário (baús, máquinas) e o próprio motor nunca são convertidos."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Comandos /liberthia engine",
+      "text": "Para ops (nível 2):$(br2)$(li)$(item)/liberthia engine$() — lista motores ativos$(br)$(li)$(item)/liberthia engine global enable|disable$() — liga/desliga TODOS$(br)$(li)$(item)/liberthia engine speed <1-10>$()$(br)$(li)$(item)/liberthia engine radius <8-2048>$()$(br)$(li)$(item)/liberthia engine <id> enable|disable|clear$()"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:black_matter_engine",
+      "text": "$(item)Motor de Matéria Escura$() — catalisador + lingotes + cristal + circuito energizado."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:entropy_core",
+      "text": "$(item)Núcleo de Entropia$() — variante que abre rifts dimensionais em vez de matéria escura."
+    }
+  ]
+}

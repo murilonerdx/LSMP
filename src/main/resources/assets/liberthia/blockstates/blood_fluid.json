@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "level=0": { "model": "liberthia:block/blood_fluid" },
+    "level=1": { "model": "liberthia:block/blood_fluid" },
+    "level=2": { "model": "liberthia:block/blood_fluid" },
+    "level=3": { "model": "liberthia:block/blood_fluid" },
+    "level=4": { "model": "liberthia:block/blood_fluid" },
+    "level=5": { "model": "liberthia:block/blood_fluid" },
+    "level=6": { "model": "liberthia:block/blood_fluid" },
+    "level=7": { "model": "liberthia:block/blood_fluid" },
+    "level=8": { "model": "liberthia:block/blood_fluid" },
+    "level=9": { "model": "liberthia:block/blood_fluid" },
+    "level=10": { "model": "liberthia:block/blood_fluid" },
+    "level=11": { "model": "liberthia:block/blood_fluid" },
+    "level=12": { "model": "liberthia:block/blood_fluid" },
+    "level=13": { "model": "liberthia:block/blood_fluid" },
+    "level=14": { "model": "liberthia:block/blood_fluid" },
+    "level=15": { "model": "liberthia:block/blood_fluid" }
+  }
+}

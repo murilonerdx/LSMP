@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DBY",
+    "PCP",
+    "DBY"
+  ],
+  "key": {
+    "B": { "item": "minecraft:book" },
+    "C": { "item": "minecraft:writable_book" },
+    "D": { "item": "liberthia:dark_matter_shard" },
+    "Y": { "item": "liberthia:yellow_matter_ingot" },
+    "P": { "item": "minecraft:paper" }
+  },
+  "result": {
+    "item": "liberthia:liberthia_manual",
+    "count": 1
+  }
+}

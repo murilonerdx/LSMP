@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "liberthia:blood_coal_ore",
+    "liberthia:blood_iron_ore",
+    "liberthia:blood_gold_ore",
+    "liberthia:blood_diamond_ore",
+    "liberthia:blood_redstone_ore",
+    "liberthia:blood_lapis_ore",
+    "liberthia:blood_emerald_ore",
+    "liberthia:cobaia_analyzer"
+  ]
+}

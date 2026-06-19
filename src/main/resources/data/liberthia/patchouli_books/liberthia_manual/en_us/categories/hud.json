@@ -1,0 +1,6 @@
+{
+  "name": "HUD & Comandos",
+  "description": "Configuração de HUD, comandos /liberthia, integração admin web, keybinds. Configure tudo do seu jeito.",
+  "icon": "minecraft:compass",
+  "sortnum": 8
+}

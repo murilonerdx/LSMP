@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:scribes_table"
+    },
+    "title": {
+      "translate": "advancement.liberthia.scribes_table.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.scribes_table.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:scribes_table"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:magic/first_glyph"
+}

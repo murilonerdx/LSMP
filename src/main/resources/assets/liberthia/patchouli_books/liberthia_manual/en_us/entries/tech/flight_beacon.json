@@ -1,0 +1,18 @@
+{
+  "name": "Farol de Voo",
+  "icon": "liberthia:flight_beacon",
+  "category": "liberthia:tech",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Voo por Energia",
+      "text": "O $(item)Farol de Voo$() permite que QUALQUER player num raio de 16 blocos $(l)VOE$() (estilo criativo) usando só $(item)FE$().$(br2)Enquanto tiver energia, o campo te concede voo; ao sair do raio ou faltar FE, o voo é revogado. Ligue à rede de energia."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:flight_beacon",
+      "text": "Pena + Pérola do End + circuitos + aço energizado."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:spell_apocalypse"
+    },
+    "title": {
+      "translate": "advancement.liberthia.apolao_spell.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.apolao_spell.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "got_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:spell_solar_apocalypse",
+              "liberthia:spell_eldritch_meteor",
+              "liberthia:spell_apocalypse",
+              "liberthia:spell_void"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:magic/spell_weaver"
+}

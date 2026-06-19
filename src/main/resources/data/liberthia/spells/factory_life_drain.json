@@ -1,0 +1,36 @@
+{
+  "id": "factory_life_drain",
+  "name": "Drenar Vida",
+  "school": "BLOOD",
+  "rarity": "RARE",
+  "mana": 40,
+  "cooldown": 150,
+  "damage": 6,
+  "range": 24,
+  "type": "TARGETED",
+  "lore": "Drena vida e cura você.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#aa66ff",
+    "color_secondary": "#ffffff",
+    "trail_density": 8,
+    "trail_size": 1.2,
+    "impact_scale": 1.0,
+    "impact_particles": 60,
+    "screen_shake": 0.3,
+    "impact_light": 10
+  },
+  "effects": [
+    {
+      "type": "LIFESTEAL",
+      "magnitude": 1
+    }
+  ],
+  "element": "BLOOD",
+  "category": "UTILITY"
+}

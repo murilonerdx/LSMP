@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GRG",
+    "UKU",
+    "GRG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "U": {
+      "item": "liberthia:copper_coil"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    }
+  },
+  "result": {
+    "item": "liberthia:control_circuit",
+    "count": 1
+  }
+}

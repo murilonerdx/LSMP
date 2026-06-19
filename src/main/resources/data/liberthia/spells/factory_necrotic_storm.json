@@ -1,0 +1,35 @@
+{
+  "id": "factory_necrotic_storm",
+  "name": "Tempestade Necrótica",
+  "school": "BLOOD",
+  "rarity": "EPIC",
+  "mana": 75,
+  "cooldown": 280,
+  "damage": 9,
+  "range": 28,
+  "type": "RAIN",
+  "lore": "Chuva de sangue necrótico. Wither contínuo numa área grande.",
+  "behavior": {
+    "radius": 9.0,
+    "rain_strikes": 18,
+    "rain_duration_ticks": 140
+  },
+  "vfx": {
+    "color_primary": "#660033",
+    "color_secondary": "#330000",
+    "impact_scale": 1.0,
+    "screen_shake": 0.7,
+    "impact_light": 8
+  },
+  "effects": [
+    {
+      "type": "WITHER",
+      "duration": 160,
+      "amplifier": 1
+    },
+    {
+      "type": "WEAKNESS",
+      "duration": 120
+    }
+  ]
+}

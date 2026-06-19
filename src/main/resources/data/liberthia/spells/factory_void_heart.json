@@ -1,0 +1,59 @@
+{
+  "id": "factory_void_heart",
+  "name": "§5§lCoração do Vazio Roxo",
+  "school": "ELDRITCH",
+  "rarity": "EPIC",
+  "mana": 120,
+  "cooldown": 600,
+  "damage": 40,
+  "range": 35,
+  "type": "AOE_BURST",
+  "lore": "Variante suprema. Múltiplas luas ametistas colapsam numa singularidade gigante. Eclipse temporário.",
+  "behavior": {
+    "radius": 10.0,
+    "aoe_radius": 10.0,
+    "lifetime_ticks": 140
+  },
+  "vfx": {
+    "color_primary": "#7A3DFF",
+    "color_secondary": "#05010A",
+    "trail_density": 40,
+    "trail_size": 3.0,
+    "impact_scale": 5.0,
+    "impact_particles": 400,
+    "screen_shake": 2.0,
+    "impact_light": 15
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "hungry_void",
+      "duration": 300,
+      "magnitude": 2.0
+    },
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "time_dilation",
+      "duration": 300,
+      "magnitude": 1.0
+    },
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "vertigo",
+      "duration": 300,
+      "magnitude": 1.0
+    },
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "dimensional_blindness",
+      "duration": 200,
+      "magnitude": 0.0
+    },
+    {
+      "type": "KNOCKBACK",
+      "magnitude": 4.0
+    }
+  ],
+  "element": "ELDRITCH",
+  "category": "DESTRUCTION"
+}

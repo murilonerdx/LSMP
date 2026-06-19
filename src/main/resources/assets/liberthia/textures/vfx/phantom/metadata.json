@@ -1,0 +1,388 @@
+{
+  "source_file": "14_phantom_spritesheet.png",
+  "sheet_size": [
+    800,
+    800
+  ],
+  "grid": [
+    8,
+    8
+  ],
+  "cell_size_native": [
+    100,
+    100
+  ],
+  "output_frame_size": [
+    64,
+    64
+  ],
+  "frame_count": 61,
+  "frames": [
+    {
+      "index": 0,
+      "row": 0,
+      "col": 0,
+      "opaque_pixels": 540
+    },
+    {
+      "index": 1,
+      "row": 0,
+      "col": 1,
+      "opaque_pixels": 535
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "col": 2,
+      "opaque_pixels": 537
+    },
+    {
+      "index": 3,
+      "row": 0,
+      "col": 3,
+      "opaque_pixels": 537
+    },
+    {
+      "index": 4,
+      "row": 0,
+      "col": 4,
+      "opaque_pixels": 543
+    },
+    {
+      "index": 5,
+      "row": 0,
+      "col": 5,
+      "opaque_pixels": 542
+    },
+    {
+      "index": 6,
+      "row": 0,
+      "col": 6,
+      "opaque_pixels": 556
+    },
+    {
+      "index": 7,
+      "row": 0,
+      "col": 7,
+      "opaque_pixels": 560
+    },
+    {
+      "index": 8,
+      "row": 1,
+      "col": 0,
+      "opaque_pixels": 553
+    },
+    {
+      "index": 9,
+      "row": 1,
+      "col": 1,
+      "opaque_pixels": 549
+    },
+    {
+      "index": 10,
+      "row": 1,
+      "col": 2,
+      "opaque_pixels": 549
+    },
+    {
+      "index": 11,
+      "row": 1,
+      "col": 3,
+      "opaque_pixels": 558
+    },
+    {
+      "index": 12,
+      "row": 1,
+      "col": 4,
+      "opaque_pixels": 559
+    },
+    {
+      "index": 13,
+      "row": 1,
+      "col": 5,
+      "opaque_pixels": 560
+    },
+    {
+      "index": 14,
+      "row": 1,
+      "col": 6,
+      "opaque_pixels": 560
+    },
+    {
+      "index": 15,
+      "row": 1,
+      "col": 7,
+      "opaque_pixels": 560
+    },
+    {
+      "index": 16,
+      "row": 2,
+      "col": 0,
+      "opaque_pixels": 560
+    },
+    {
+      "index": 17,
+      "row": 2,
+      "col": 1,
+      "opaque_pixels": 563
+    },
+    {
+      "index": 18,
+      "row": 2,
+      "col": 2,
+      "opaque_pixels": 570
+    },
+    {
+      "index": 19,
+      "row": 2,
+      "col": 3,
+      "opaque_pixels": 575
+    },
+    {
+      "index": 20,
+      "row": 2,
+      "col": 4,
+      "opaque_pixels": 576
+    },
+    {
+      "index": 21,
+      "row": 2,
+      "col": 5,
+      "opaque_pixels": 587
+    },
+    {
+      "index": 22,
+      "row": 2,
+      "col": 6,
+      "opaque_pixels": 576
+    },
+    {
+      "index": 23,
+      "row": 2,
+      "col": 7,
+      "opaque_pixels": 580
+    },
+    {
+      "index": 24,
+      "row": 3,
+      "col": 0,
+      "opaque_pixels": 582
+    },
+    {
+      "index": 25,
+      "row": 3,
+      "col": 1,
+      "opaque_pixels": 585
+    },
+    {
+      "index": 26,
+      "row": 3,
+      "col": 2,
+      "opaque_pixels": 589
+    },
+    {
+      "index": 27,
+      "row": 3,
+      "col": 3,
+      "opaque_pixels": 582
+    },
+    {
+      "index": 28,
+      "row": 3,
+      "col": 4,
+      "opaque_pixels": 584
+    },
+    {
+      "index": 29,
+      "row": 3,
+      "col": 5,
+      "opaque_pixels": 584
+    },
+    {
+      "index": 30,
+      "row": 3,
+      "col": 6,
+      "opaque_pixels": 587
+    },
+    {
+      "index": 31,
+      "row": 3,
+      "col": 7,
+      "opaque_pixels": 579
+    },
+    {
+      "index": 32,
+      "row": 4,
+      "col": 0,
+      "opaque_pixels": 579
+    },
+    {
+      "index": 33,
+      "row": 4,
+      "col": 1,
+      "opaque_pixels": 581
+    },
+    {
+      "index": 34,
+      "row": 4,
+      "col": 2,
+      "opaque_pixels": 583
+    },
+    {
+      "index": 35,
+      "row": 4,
+      "col": 3,
+      "opaque_pixels": 586
+    },
+    {
+      "index": 36,
+      "row": 4,
+      "col": 4,
+      "opaque_pixels": 581
+    },
+    {
+      "index": 37,
+      "row": 4,
+      "col": 5,
+      "opaque_pixels": 577
+    },
+    {
+      "index": 38,
+      "row": 4,
+      "col": 6,
+      "opaque_pixels": 574
+    },
+    {
+      "index": 39,
+      "row": 4,
+      "col": 7,
+      "opaque_pixels": 574
+    },
+    {
+      "index": 40,
+      "row": 5,
+      "col": 0,
+      "opaque_pixels": 573
+    },
+    {
+      "index": 41,
+      "row": 5,
+      "col": 1,
+      "opaque_pixels": 573
+    },
+    {
+      "index": 42,
+      "row": 5,
+      "col": 2,
+      "opaque_pixels": 568
+    },
+    {
+      "index": 43,
+      "row": 5,
+      "col": 3,
+      "opaque_pixels": 573
+    },
+    {
+      "index": 44,
+      "row": 5,
+      "col": 4,
+      "opaque_pixels": 545
+    },
+    {
+      "index": 45,
+      "row": 5,
+      "col": 5,
+      "opaque_pixels": 546
+    },
+    {
+      "index": 46,
+      "row": 5,
+      "col": 6,
+      "opaque_pixels": 552
+    },
+    {
+      "index": 47,
+      "row": 5,
+      "col": 7,
+      "opaque_pixels": 557
+    },
+    {
+      "index": 48,
+      "row": 6,
+      "col": 0,
+      "opaque_pixels": 556
+    },
+    {
+      "index": 49,
+      "row": 6,
+      "col": 1,
+      "opaque_pixels": 546
+    },
+    {
+      "index": 50,
+      "row": 6,
+      "col": 2,
+      "opaque_pixels": 550
+    },
+    {
+      "index": 51,
+      "row": 6,
+      "col": 3,
+      "opaque_pixels": 547
+    },
+    {
+      "index": 52,
+      "row": 6,
+      "col": 4,
+      "opaque_pixels": 547
+    },
+    {
+      "index": 53,
+      "row": 6,
+      "col": 5,
+      "opaque_pixels": 545
+    },
+    {
+      "index": 54,
+      "row": 6,
+      "col": 6,
+      "opaque_pixels": 549
+    },
+    {
+      "index": 55,
+      "row": 6,
+      "col": 7,
+      "opaque_pixels": 556
+    },
+    {
+      "index": 56,
+      "row": 7,
+      "col": 0,
+      "opaque_pixels": 543
+    },
+    {
+      "index": 57,
+      "row": 7,
+      "col": 1,
+      "opaque_pixels": 534
+    },
+    {
+      "index": 58,
+      "row": 7,
+      "col": 2,
+      "opaque_pixels": 541
+    },
+    {
+      "index": 59,
+      "row": 7,
+      "col": 3,
+      "opaque_pixels": 542
+    },
+    {
+      "index": 60,
+      "row": 7,
+      "col": 4,
+      "opaque_pixels": 540
+    }
+  ]
+}

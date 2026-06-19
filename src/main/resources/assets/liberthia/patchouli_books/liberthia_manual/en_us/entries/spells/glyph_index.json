@@ -1,0 +1,48 @@
+{
+  "name": "Glyph Index — 75+ Glyphs",
+  "icon": "liberthia:glyph_direct_gaze",
+  "category": "liberthia:spells",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Sistema de Glyphs",
+      "text": "$(matter)Glyphs$() são as unidades atómicas dos feitiços. Cada um é um item físico que se combina em ordem pra formar uma $(thing)receita$().$(br2)$(bold)3 tipos de glyph:$()$(br)$(li)$(#5DC1E0)★ Methods$() — entry point (azul)$(br)$(li)$(#D670D6)✦ Manifestations$() — efeito principal (roxo)$(br)$(li)$(#FFD700)◆ Distortions$() — modificadores (dourado)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Regras Básicas",
+      "text": "$(bold)Receita válida precisa:$()$(br)$(li)1 Method como primeiro glyph$(br)$(li)Pelo menos 1 Manifestation$(br)$(li)Máximo 8 glyphs total$(br)$(li)Máximo 3 Amplify por feitiço$(br)$(li)Máximo 2 Echo por feitiço$(br2)$(warn)Distortions sempre seguem a Manifestation que modificam.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Methods — Como Olhar (12)",
+      "text": "$(li)$(thing)Direct Gaze$() — onde você olha$(br)$(li)$(thing)Peripheral$() — canto do olho$(br)$(li)$(thing)Memory$() — último lugar memorizado$(br)$(li)$(thing)Silence Watch$() — só funciona escondido$(br)$(li)$(thing)Reflection$() — através de espelho$(br)$(li)$(thing)Touch$() — entity em raio 3b$(br)$(li)$(thing)Self$() — em si mesmo$(br)$(li)$(thing)Laser$() — beam 32b$(br)$(li)$(thing)Burst$() — AOE 6b ao redor$(br)$(li)$(thing)Orbit$() — alvo em cone frontal$(br)$(li)$(thing)Wall$() — linha perpendicular$(br)$(li)$(thing)Chain$() — encadeia em N alvos"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Manifestations Combat (10)",
+      "text": "$(li)$(#FF5522)Fireball$() — bola fogo + queima$(br)$(li)$(#FF3300)Inferno$() — AOE fogo 4b$(br)$(li)$(#BB0000)Harm$() — magic damage 5×$(br)$(li)$(#FF7733)Ignite$() — fogo no alvo$(br)$(li)$(#FFFF66)Lightning$() — relâmpago real$(br)$(li)$(#9d4dd6)Tendril$() — tentáculo cosmic$(br)$(li)$(#3D6010)Decay$() — wither prolongado$(br)$(li)$(#B43232)Fangs$() — 3 Evoker Fangs$(br)$(li)$(#FF501E)Explosion$() — sem grief$(br)$(li)$(#220033)Reality Tear$() — wither AOE"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Manifestations Utility (15)",
+      "text": "$(li)$(#88FF88)Heal$() — cura HP$(br)$(li)$(#55EE55)Healing Rain$() — cura AOE$(br)$(li)$(#88DDFF)Freeze$() — slowness + freeze ticks$(br)$(li)$(#FFFFAA)Launch$() — knockback up$(br)$(li)$(#EEDDFF)Slowfall$() — slow fall pot$(br)$(li)$(#C8C8FF)Levitate$() — levita$(br)$(li)$(#FFB464)Knockback$() — empurra$(br)$(li)$(thing)Place Block$() — coloca dirt/stone$(br)$(li)$(thing)Break Block$() — quebra bloco$(br)$(li)$(thing)Conjure Water$() — water source$(br)$(li)$(thing)Light$() — coloca tocha"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Manifestations Cósmicas (5)",
+      "text": "$(li)$(#442266)Void Pull$() — TP alvo até você$(br)$(li)$(#331144)Dread Stare$() — slow+conf+darkness$(br)$(li)$(#880088)Mind Spike$() — 8 damage psy$(br)$(li)$(#220033)Reality Tear$() — wither AOE$(br)$(li)$(#000022)Singularity$() — black hole 10b$(br2)$(warn)Cosmic spells custam mais sanity mas penetram armadura.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Distortions (Augments)",
+      "text": "$(li)$(thing)Amplify$() — +intensity (max 3)$(br)$(li)$(thing)Linger$() — +duration$(br)$(li)$(thing)Echo$() — repete efeito (max 2)$(br)$(li)$(thing)Secret$() — esconde do alvo$(br)$(li)$(thing)Pierce$() — reach +2$(br)$(li)$(thing)Split$() — multi-cast$(br)$(li)$(thing)AOE$() — raio +3$(br2)Use Distortions em SEQUÊNCIA depois da Manifestation que quer modificar."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Como Conseguir Glyphs",
+      "text": "1. $(bold)Creative$() — todos no menu Liberthia$(br)2. $(bold)/give @s liberthia:glyph_NOME$() — admin$(br)3. $(bold)Loot$() — alguns mobs droppam (futuro)$(br)4. $(bold)Spirit World$() — minerar Sourcestone$(br2)Depois de ter glyphs, use o $(item)Pergaminho$() pra montar receita ou a $(item)Mesa do Escriba$() pra GUI visual."
+    }
+  ]
+}

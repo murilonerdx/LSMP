@@ -1,0 +1,33 @@
+{
+  "id": "factory_aurora_beam",
+  "name": "Feixe Aurora",
+  "school": "ICE",
+  "rarity": "RARE",
+  "mana": 45,
+  "cooldown": 120,
+  "damage": 14,
+  "range": 24,
+  "type": "BEAM",
+  "lore": "Feixe que alterna entre gelo e fogo — congela e queima simultaneamente.",
+  "behavior": {
+    "beam_max_ticks": 30,
+    "beam_range": 24
+  },
+  "vfx": {
+    "color_primary": "#88ddff",
+    "color_secondary": "#ff8866",
+    "impact_scale": 1.4,
+    "screen_shake": 0.6,
+    "impact_light": 13
+  },
+  "effects": [
+    {
+      "type": "FREEZE",
+      "duration": 60
+    },
+    {
+      "type": "IGNITE",
+      "duration": 80
+    }
+  ]
+}

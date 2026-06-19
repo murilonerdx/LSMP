@@ -1,0 +1,33 @@
+{
+  "name": "Spirit World",
+  "icon": "liberthia:soul_sever",
+  "category": "liberthia:dimensions",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "O Outro Lado",
+      "text": "Dimensão paralela acessada via $(item)Soul Sever$(), $(item)Tomo Proibido$() (exile), ou $(item)Ritual Espiritual$().$(br2)$(li)Geografia $(o)impossível$()$(br)$(li)Mobs $(o)pálidos$()$(br)$(li)Você $(warn)não pode digitar chat$() lá$(br)$(li)Items $(good)não são perdidos$() ao morrer$(br)$(li)Sanidade drena $(warn)1/5s$()"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:soul_sever",
+      "text": "Right-click no $(item)Soul Sever$() pra entrar/sair. Item principal de acesso voluntário."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Chat bloqueado",
+      "text": "$(warn)/tell, /msg, /w, /whisper, /r, /me, /say$() todos bloqueados quando você está aqui.$(br2)Mensagem in-game: $(o)\"Sua voz não chega daqui.\"$()$(br2)O chat NÃO é rota de fuga. Encontre o caminho físico."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Saída",
+      "text": "$(li)$(good)Soul Sever$(): right-click pra return normal$(br)$(li)$(item)Livro do Êxodo$(): único método se Tome-cursed$(br)$(li)$(item)Prayer Book$(): quebra Tome Curse$(br)$(li)$(item)Guia Pálida$(): mostra trail pro portal$(br)$(li)Morrer: respawn na overworld com items"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Paranoia",
+      "text": "Em sanity baixa lá:$(br)$(li)Silhuetas pulsando ao redor$(br)$(li)Shadow Stalker se aproxima quando você desvia$(br)$(li)Mobs encarando com olhos vermelhos$(br)$(li)Sons random: passos, sussurros, gritos$(br)$(li)Floating trees random$(br2)Sanidade ≤10 = constante."
+    }
+  ]
+}

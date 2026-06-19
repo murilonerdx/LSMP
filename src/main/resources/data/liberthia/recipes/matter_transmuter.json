@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YMD",
+    "ACA",
+    "DMW"
+  ],
+  "key": {
+    "Y": { "item": "liberthia:yellow_matter_ingot" },
+    "M": { "item": "liberthia:matter_core" },
+    "D": { "item": "liberthia:active_dark_matter" },
+    "A": { "item": "liberthia:dark_matter_catalyst" },
+    "C": { "item": "liberthia:dark_matter_cell" },
+    "W": { "item": "liberthia:clear_matter_block" }
+  },
+  "result": { "item": "liberthia:matter_transmuter" }
+}

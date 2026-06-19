@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:clear_matter_ingot"
+    },
+    "title": {
+      "translate": "advancement.liberthia.first_clear_matter.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.first_clear_matter.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:clear_matter_ingot"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:matter/root"
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "liberthia:block/furnator"
+    },
+    "lit=true": {
+      "model": "liberthia:block/furnator"
+    }
+  }
+}

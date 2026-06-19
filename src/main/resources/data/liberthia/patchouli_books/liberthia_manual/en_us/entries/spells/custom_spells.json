@@ -1,0 +1,28 @@
+{
+  "name": "Custom Spells",
+  "icon": "liberthia:spell_crafting_table",
+  "category": "liberthia:spells",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Crie Seus Próprios",
+      "text": "Use a $(item)Mesa de Feitiços$() pra criar feitiços únicos. Combine:$(br2)• $(thing)Sprite VFX$() (10 opções animadas)$(br)• $(thing)Forma$() (projectile/beam/laser/aoe/self/touch)$(br)• $(thing)Elemento$() (10 tipos)$(br)• $(thing)Poder$() (1-5)$(br2)Custo de mana e dano calculados automaticamente."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Spell Wheel",
+      "text": "Tecla $(thing)X$() abre o $(bold)Spell Wheel$() — menu radial com todos seus custom spells.$(br2)• $(thing)Mouse hover$(): vê stats$(br)• $(thing)Solta X$(): casta hovered$(br)• $(thing)Right-click$(): seleciona como ativo$(br)• $(thing)Q$(): deleta$(br2)Tecla $(thing)V$() quick-casta o selecionado sem abrir wheel."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "10 Sprites VFX",
+      "text": "$(li)Fire Blast (chama)$()$(br)$(li)Ice Lance (lança gelo)$()$(br)$(li)Void Orb (esfera void)$()$(br)$(li)Light Ray (cruz dourada)$()$(br)$(li)Blood Shot (orbe sangue)$()$(br)$(li)Arcane Missile (estrela 5 pontas)$()$(br)$(li)Earth Spike (espinho rocha)$()$(br)$(li)Lightning Bolt (zigzag)$()$(br)$(li)Shadow Dart (dardo preto)$()$(br)$(li)Nature Thorn (vinha)$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "6 Formas",
+      "text": "$(li)$(thing)Projectile$(): voa em linha reta, single hit$()$(br)$(li)$(thing)Beam$(): cone 30°, dmg sustained 3s$()$(br)$(li)$(thing)Laser$(): hit-scan instantâneo, dmg×1.5$()$(br)$(li)$(thing)AOE$(): explode em volta (8b)$()$(br)$(li)$(thing)Self$(): efeito em você$()$(br)$(li)$(thing)Touch$(): single target 4b$()"
+    }
+  ]
+}

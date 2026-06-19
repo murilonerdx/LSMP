@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EAE",
+    "ACA",
+    "ESE"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "A": {
+      "item": "minecraft:amethyst_block"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    },
+    "S": {
+      "item": "liberthia:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "liberthia:mana_condenser",
+    "count": 1
+  }
+}

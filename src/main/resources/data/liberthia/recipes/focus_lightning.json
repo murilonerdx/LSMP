@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Y ",
+    "GPG",
+    " Y "
+  ],
+  "key": {
+    "Y": {
+      "item": "minecraft:yellow_dye"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "liberthia:purified_essence"
+    }
+  },
+  "result": {
+    "item": "liberthia:focus_lightning",
+    "count": 1
+  }
+}

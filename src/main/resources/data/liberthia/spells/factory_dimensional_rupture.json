@@ -1,0 +1,42 @@
+{
+  "id": "factory_dimensional_rupture",
+  "name": "Ruptura Dimensional",
+  "school": "ELDRITCH",
+  "rarity": "EPIC",
+  "mana": 70,
+  "cooldown": 280,
+  "damage": 16,
+  "range": 26,
+  "type": "TARGETED",
+  "lore": "Cria pequenos teleportes aleatórios em volta da vítima.",
+  "behavior": {
+    "radius": 4.0,
+    "aoe_radius": 4.0
+  },
+  "vfx": {
+    "color_primary": "#A020F0",
+    "color_secondary": "#E7CCFF",
+    "trail_density": 18,
+    "trail_size": 1.4,
+    "impact_scale": 1.3,
+    "impact_particles": 100,
+    "screen_shake": 0.6,
+    "impact_light": 11
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "reverse_gravity",
+      "duration": 100,
+      "magnitude": 1.0
+    },
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "nightmare",
+      "duration": 100,
+      "magnitude": 0.0
+    }
+  ],
+  "element": "ELDRITCH",
+  "category": "UTILITY"
+}

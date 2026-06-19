@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EAE",
+    "AXA",
+    "EAE"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_circuit"
+    },
+    "A": {
+      "item": "liberthia:arcane_disruptor"
+    },
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    }
+  },
+  "result": {
+    "item": "liberthia:null_matrix",
+    "count": 1
+  }
+}

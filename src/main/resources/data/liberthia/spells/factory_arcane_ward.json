@@ -1,0 +1,24 @@
+{
+  "id": "factory_arcane_ward",
+  "name": "Proteção Arcana",
+  "school": "ELDRITCH",
+  "rarity": "RARE",
+  "mana": 30,
+  "cooldown": 200,
+  "damage": 0,
+  "range": 0,
+  "type": "SELF",
+  "lore": "Reduz dano mágico em 50% por 20s. Ative antes de batalha contra mages.",
+  "behavior": {},
+  "vfx": {
+    "color_primary": "#9966ff",
+    "impact_scale": 1.1
+  },
+  "effects": [
+    {
+      "type": "RESISTANCE",
+      "duration": 400,
+      "amplifier": 2
+    }
+  ]
+}

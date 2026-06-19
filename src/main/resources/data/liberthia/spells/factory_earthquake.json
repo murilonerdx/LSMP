@@ -1,0 +1,34 @@
+{
+  "id": "factory_earthquake",
+  "name": "Terremoto",
+  "school": "NATURE",
+  "rarity": "RARE",
+  "mana": 50,
+  "cooldown": 180,
+  "damage": 12,
+  "range": 8,
+  "type": "NOVA",
+  "lore": "Onda sísmica do caster. Knockback + lentidão.",
+  "behavior": {
+    "radius": 8.0
+  },
+  "vfx": {
+    "color_primary": "#aa7733",
+    "color_secondary": "#553311",
+    "impact_scale": 2.0,
+    "screen_shake": 1.5,
+    "screen_shake_ticks": 25,
+    "impact_particles": 200
+  },
+  "effects": [
+    {
+      "type": "KNOCKBACK",
+      "magnitude": 1.5
+    },
+    {
+      "type": "SLOWNESS",
+      "duration": 100,
+      "amplifier": 2
+    }
+  ]
+}

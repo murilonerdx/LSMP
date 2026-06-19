@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP",
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "P": {"item": "liberthia:blood_planks"}
+  },
+  "result": {"item": "liberthia:blood_door", "count": 3}
+}

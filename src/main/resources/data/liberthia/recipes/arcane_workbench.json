@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GAG",
+    "STS",
+    "QQQ"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "A": {
+      "item": "liberthia:purified_essence"
+    },
+    "S": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "T": {
+      "item": "liberthia:spell_weaver"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "result": {
+    "item": "liberthia:arcane_workbench",
+    "count": 1
+  }
+}

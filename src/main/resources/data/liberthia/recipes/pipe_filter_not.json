@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RPR",
+    "PIP",
+    "RPR"
+  ],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "P": { "item": "minecraft:paper" },
+    "I": { "item": "minecraft:iron_ingot" }
+  },
+  "result": {
+    "item": "liberthia:pipe_filter_not",
+    "count": 1
+  }
+}

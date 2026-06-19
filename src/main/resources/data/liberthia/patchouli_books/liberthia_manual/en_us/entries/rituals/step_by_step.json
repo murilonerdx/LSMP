@@ -1,0 +1,38 @@
+{
+  "name": "Passo-a-Passo de Invocação",
+  "icon": "liberthia:ritual_circle",
+  "category": "liberthia:rituals",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Como Invocar",
+      "text": "$(thing)6 passos$() pra completar um ritual de invocação:$(br2)1. Crie um $(item)Ritual Circle$()$(br)2. Coloque 4 $(item)Candles$() nas pontas$(br)3. Coloque $(item)Sigilo$() no centro$(br)4. Adicione $(item)Offering$() (varia por entidade)$(br)5. Use $(item)Lighter$() pra acender$(br)6. Aguarde 60 ticks (3s) — invoca!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:ritual_circle",
+      "text": "$(item)Ritual Circle$()$(br2)Craft: 4 chalks + 1 ritual dagger + 4 chiseled stones. Right-click pra ativar uma vez setado tudo."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Offerings por Sigilo",
+      "text": "$(li)Foliot: 4 emeralds$(br)$(li)Djinni: 4 lapis + 1 diamond$(br)$(li)Afrit: 1 wither rose + 4 blaze rods$(br)$(li)Bael: 1 ender pearl + 4 obsidian$(br)$(li)Lucifer: $(warn)1 nether star$()$(br)$(li)Metatron: 1 totem of undying$(br)$(li)Sandalphon: 4 ghast tears + 1 golden apple"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Candles by Tier",
+      "text": "$(li)$(item)Candle White$(): Foliot, Sandalphon$(br)$(li)$(item)Candle Golden$(): Djinni, Metatron$(br)$(li)$(item)Candle Purple$(): Bael, Dimensional$(br)$(li)$(item)Candle Red$(): Afrit, Necro$(br)$(li)$(item)Candle Black$(): $(warn)Lucifer, Banishing$()$(br2)Wrong candle = ritual fails (consume materials!)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Drops dos Invocados",
+      "text": "$(thing)Apenas$() entidades invocadas dropam:$(br)$(li)$(item)Bound Foliot Crystal$()$(br)$(li)$(item)Bound Djinni Crystal$()$(br)$(li)$(item)Bound Afrit Crystal$()$(br)$(li)$(item)Livro do Êxodo$() (raro — só Sandalphon/Metatron)$(br2)Mate, ou faça pacto — depende da entidade."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Custo Total (Lucifer ex.)",
+      "text": "$(li)4× $(item)Chalk Black$()$(br)$(li)1× $(item)Ritual Circle$()$(br)$(li)4× $(item)Candle Black$()$(br)$(li)1× $(item)Sigil Lucifer$()$(br)$(li)1× Nether Star$(br)$(li)1× $(item)Lighter$()$(br)$(li)-25 sanity ao invocar$(br)$(li)Possibilidade de Tome Curse$(br2)$(warn)Vale a pena? Você decide.$()"
+    }
+  ]
+}

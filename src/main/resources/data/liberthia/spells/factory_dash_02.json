@@ -1,0 +1,31 @@
+{
+  "id": "factory_dash_02",
+  "name": "Investida Sangrenta",
+  "school": "BLOOD",
+  "rarity": "RARE",
+  "mana": 40,
+  "cooldown": 80,
+  "damage": 10,
+  "range": 24,
+  "type": "DASH",
+  "lore": "Dash que rouba vida.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#aa6633",
+    "color_secondary": "#ff9966",
+    "trail_density": 15,
+    "trail_size": 1.5,
+    "impact_scale": 1.2,
+    "impact_particles": 40,
+    "screen_shake": 0.4,
+    "impact_light": 10
+  },
+  "effects": [],
+  "element": "BLOOD",
+  "category": "DASH"
+}

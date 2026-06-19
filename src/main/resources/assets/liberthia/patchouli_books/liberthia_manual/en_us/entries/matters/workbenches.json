@@ -1,0 +1,43 @@
+{
+  "name": "Workbenches",
+  "icon": "liberthia:matter_infuser",
+  "category": "liberthia:matters",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Cadeia de Processamento",
+      "text": "Workflow:$(br2)1. $(item)Dark Matter Ore$() → $(item)DM Shard$()$(br)2. $(item)Matter Forge$(): forja shard em ingot$(br)3. $(item)Matter Infuser$(): combina com Clear/Yellow$(br)4. $(item)Matter Purifier$(): produz Clear Ingot$(br)5. $(item)Matter Pill Brewer$(): brew pílulas"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:dark_matter_forge",
+      "text": "$(item)Matter Forge$()$(br2)Basic — shard → ingot. Costs 100 FE/op."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:matter_infuser",
+      "text": "$(item)Matter Infuser$()$(br2)Avançado — combina 3 ingots em 1 stable ingot. Reduz radiation."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:matter_purifier",
+      "text": "$(item)Matter Purifier$()$(br2)Dark + Yellow Catalyst → Clear Matter Ingot. Critical pra progresso."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:matter_pill_brewer",
+      "text": "$(item)Matter Pill Brewer$()$(br2)Alquímico — produz $(item)Clear$()/$(item)Dark$()/$(item)Yellow Pill$(). Costs FE + ingots."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:matter_extractor",
+      "text": "$(item)Matter Extractor$()$(br2)Drena matter do player parado em cima. Output pra tanks via pipes."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:dimensional_chest",
+      "text": "$(item)Dimensional Chest$()$(br2)Frequency-based storage compartilhado. Configura channel via GUI."
+    }
+  ]
+}

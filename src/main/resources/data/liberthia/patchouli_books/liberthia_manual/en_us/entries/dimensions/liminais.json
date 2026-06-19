@@ -1,0 +1,48 @@
+{
+  "name": "As Três Liminais",
+  "icon": "liberthia:drowned_compass",
+  "category": "liberthia:dimensions",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Lugares Errados",
+      "text": "Não são dimensões $(o)onde$() você luta. São lugares $(o)errados$() que alguém esqueceu de fechar.$(br2)$(li)$(cosmic)Upside Sea$()$(br)$(li)$(matter)Folded City$()$(br)$(li)$(spirit)Wooden Place$()$(br2)Não há monstros pra matar. Há $(thing)espaço$() pra atravessar. Atravesse devagar."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:drowned_compass",
+      "text": "$(item)Bússola Afogada$()$(br2)3 charges. Right-click → $(cosmic)Upside Sea$(). Right-click DENTRO → return."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:folded_address",
+      "text": "$(item)Endereço Dobrado$()$(br2)3 charges. Right-click → $(matter)Folded City$(). Right-click DENTRO → return.$(br2)$(o)\"Vire à esquerda. Sempre.\"$()"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:bark_token",
+      "text": "$(item)Sinal de Casca$()$(br2)3 charges. Right-click → $(spirit)Wooden Place$(). Right-click DENTRO → return.$(br2)$(o)\"Ele se mexe quando você não olha.\"$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Upside Sea",
+      "text": "Acima do céu, há outro oceano.$(br2)$(li)Slow Falling permanente$(br)$(li)Camera drifts sozinha$(br)$(li)Levitation random$(br)$(li)Sons de baleia (ghast disguised)$(br)$(li)Partículas de água caem $(thing)pra cima$()$(br)$(li)Cinza branca paira"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Folded City",
+      "text": "Cidade onde $(o)quadras voltam pra si mesmas$().$(br2)$(li)Após 90s + 50b movimento → snap volta$(br)$(li)Pedestres soul-particle ao longe$(br)$(li)Whispers + sky hum constantes$(br)$(li)Camera drifts sutilmente"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Wooden Place",
+      "text": "Floresta $(o)viva$().$(br2)$(li)Caminhantes de Casca: max 3 por player$(br)$(li)Quando você $(thing)OLHA$() = congelados$(br)$(li)Quando você $(thing)DESVIA$() = avanço rápido$(br)$(li)Heartbeat ambiente$(br)$(li)$(warn)Estratégia: $()nunca tire os olhos da multidão"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Death protection",
+      "text": "$(good)Items NÃO são perdidos$() ao morrer em qualquer das 3 liminais.$(br2)Respawn na overworld com tudo. Sistema idêntico ao Spirit World."
+    }
+  ]
+}

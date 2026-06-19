@@ -1,0 +1,6 @@
+{
+  "parent": "liberthia:item/huntress_bow",
+  "textures": {
+    "layer0": "liberthia:item/huntress_bow_pulling_2"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["C C", "C C"],
+  "key": { "C": { "item": "liberthia:purified_clear_matter_ingot" } },
+  "result": { "item": "liberthia:clear_matter_boots" }
+}

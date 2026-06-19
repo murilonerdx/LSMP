@@ -1,0 +1,12 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "minecraft:swamp",
+  "spawners": [
+    {
+      "type": "liberthia:blood_hound",
+      "weight": 8,
+      "minCount": 2,
+      "maxCount": 4
+    }
+  ]
+}

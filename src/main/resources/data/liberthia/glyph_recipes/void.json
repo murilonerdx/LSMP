@@ -1,0 +1,12 @@
+{
+  "display_name": "VAZIO — Feitiço Supremo",
+  "output": { "item": "liberthia:spell_void", "count": 1 },
+  "ingredients": [
+    { "item": "liberthia:void_reagent",     "count": 8 },
+    { "item": "minecraft:amethyst_shard",   "count": 32 },
+    { "item": "liberthia:veil_fragment",    "count": 12 },
+    { "item": "liberthia:phantom_ink",      "count": 8 },
+    { "item": "liberthia:ectoplasm_strand", "count": 8 },
+    { "item": "liberthia:memory_shard",     "count": 6 }
+  ]
+}

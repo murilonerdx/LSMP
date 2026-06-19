@@ -1,0 +1,28 @@
+{
+  "name": "Source Infrastructure (r62)",
+  "icon": "liberthia:source_jar",
+  "category": "liberthia:cosmic",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Source Storage Blocks",
+      "text": "Sistema block-based de Source baseado em AN's SourceJar/Relay patterns.$(br2)$(li)$(thing)Source Jar$() — block storage 10000 Source$(br)$(li)Auto-recarrega players próximos (4 blocos)$(br)$(li)Right-click com Source Gem pra depositar +25$(br)$(li)Right-click sem item pra retirar 25"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:source_jar",
+      "text": "$(item)Source Jar$()$(br2)Capacidade: $(thing)10000 Source$()$(br2)Mecânica: a cada 2s, qualquer player num raio de 4 blocos com Source < max recebe 1 Source automaticamente."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:observation_tome",
+      "text": "$(item)Tomo de Observação$()$(br2)Item central de Observation Casting com $(thing)perk slots$().$(br2)$(li)Tier 1: 1 perk$(br)$(li)Tier 2: 2 perks$(br)$(li)Tier 3: 3 perks$(br2)Right-click pra castar o spell salvo."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "6 Perks Disponíveis",
+      "text": "$(li)$(thing)Regenerar$() — +1 Source/4s por slot$(br)$(li)$(thing)Escudo de Sanidade$() — -25% sanity cost$(br)$(li)$(thing)Economia de Source$() — -20% source cost$(br)$(li)$(thing)Reforço de Dano$() — +15% damage spells$(br)$(li)$(thing)Velocidade Observação$() — Slow Falling + Night Vision$(br)$(li)$(thing)Mestre Glyphs$() — Glowing em mobs hit"
+    }
+  ]
+}

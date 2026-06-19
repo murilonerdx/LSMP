@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:halo_of_abaddon"
+    },
+    "title": {
+      "translate": "advancement.liberthia.all_horror_kills.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.all_horror_kills.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "root": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "liberthia:cosmic/kill_empty_man"
+}

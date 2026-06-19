@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "PLP",
+    "IPI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:ice"
+    },
+    "P": {
+      "item": "minecraft:packed_ice"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "result": {
+    "item": "liberthia:ice_wall",
+    "count": 1
+  }
+}

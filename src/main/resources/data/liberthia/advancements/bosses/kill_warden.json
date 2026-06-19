@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:gold_seal"
+    },
+    "title": {
+      "translate": "advancement.liberthia.kill_warden.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.kill_warden.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "liberthia:blood_warden"
+        }
+      }
+    }
+  },
+  "parent": "liberthia:bosses/root"
+}

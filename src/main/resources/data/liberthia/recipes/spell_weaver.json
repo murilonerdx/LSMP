@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ASA",
+    "TBT",
+    "OOO"
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "S": { "item": "liberthia:source_gem" },
+    "T": { "item": "liberthia:custom_thread" },
+    "B": { "item": "minecraft:book" },
+    "O": { "item": "minecraft:obsidian" }
+  },
+  "result": {
+    "item": "liberthia:spell_weaver",
+    "count": 1
+  }
+}

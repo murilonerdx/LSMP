@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "fill=0":  {"model": "liberthia:block/source_jar_0"},
+    "fill=1":  {"model": "liberthia:block/source_jar_1"},
+    "fill=2":  {"model": "liberthia:block/source_jar_2"},
+    "fill=3":  {"model": "liberthia:block/source_jar_3"},
+    "fill=4":  {"model": "liberthia:block/source_jar_4"},
+    "fill=5":  {"model": "liberthia:block/source_jar_5"},
+    "fill=6":  {"model": "liberthia:block/source_jar_6"},
+    "fill=7":  {"model": "liberthia:block/source_jar_7"},
+    "fill=8":  {"model": "liberthia:block/source_jar_8"},
+    "fill=9":  {"model": "liberthia:block/source_jar_9"},
+    "fill=10": {"model": "liberthia:block/source_jar_10"},
+    "fill=11": {"model": "liberthia:block/source_jar_11"}
+  }
+}

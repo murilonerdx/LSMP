@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:fractured_scripture"
+    },
+    "title": {
+      "translate": "advancement.liberthia.first_horror_item.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.first_horror_item.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "got_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:mirror_mask",
+              "liberthia:fractured_scripture",
+              "liberthia:halo_of_abaddon",
+              "liberthia:veinbound_chestplate"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:cosmic/root"
+}

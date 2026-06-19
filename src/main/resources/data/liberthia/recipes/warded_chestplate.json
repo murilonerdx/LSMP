@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "WMW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "liberthia:warded_core"
+    },
+    "M": {
+      "item": "liberthia:warded_module"
+    }
+  },
+  "result": {
+    "item": "liberthia:warded_chestplate",
+    "count": 1
+  }
+}

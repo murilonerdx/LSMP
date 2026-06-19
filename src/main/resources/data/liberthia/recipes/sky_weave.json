@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FTF",
+    "TLT",
+    "FTF"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "T": {
+      "item": "liberthia:pale_thread"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "result": {
+    "item": "liberthia:sky_weave",
+    "count": 1
+  }
+}

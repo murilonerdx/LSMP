@@ -1,0 +1,18 @@
+{
+  "name": "Tecno-Arcano",
+  "icon": "liberthia:warded_core",
+  "category": "liberthia:antimagic",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Contra a Magia",
+      "text": "O $(l)Tecno-Arcano$() é tecnologia feita pra $(item)conter magos$(). Tudo usa $(matter)matéria escura$(), em $(l)níveis$() (um precisa do anterior):$(br2)$(li)$(item)Núcleo Bastião$() ← fragmento de matéria escura$(br)$(li)$(item)Disruptor Arcano$() ← lingote de matéria escura$(br)$(li)$(item)Matriz Nula$() ← catalisador de matéria escura"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:warded_core",
+      "text": "$(item)Núcleo Bastião$() — o componente-base de toda a linha anti-magia."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "OCO",
+    "IRI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "G": { "item": "minecraft:glass" },
+    "O": { "item": "minecraft:comparator" },
+    "C": { "item": "liberthia:dark_matter_cell" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": { "item": "liberthia:matter_analyzer" }
+}

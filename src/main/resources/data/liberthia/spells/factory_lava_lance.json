@@ -1,0 +1,39 @@
+{
+  "id": "factory_lava_lance",
+  "name": "Lança de Lava",
+  "school": "FIRE",
+  "rarity": "RARE",
+  "category": "DESTRUCTION",
+  "element": "FIRE",
+  "secondary_element": "EARTH",
+  "mana": 40,
+  "cooldown": 80,
+  "damage": 18,
+  "range": 28,
+  "type": "PROJECTILE",
+  "lore": "Lança fundida — perfura blocos. Element combo: LAVA.",
+  "behavior": {
+    "speed": 2.2,
+    "pierce": true,
+    "penetrate_blocks": true,
+    "lifetime_ticks": 80,
+    "ignite_blocks": true,
+    "knockback_strength": 0.8,
+    "aoe_radius": 1.5
+  },
+  "vfx": {
+    "color_primary": "#ff3300",
+    "color_secondary": "#aa1100",
+    "trail_density": 16,
+    "trail_size": 1.8,
+    "impact_scale": 1.6,
+    "screen_shake": 0.9,
+    "impact_light": 15
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 200
+    }
+  ]
+}

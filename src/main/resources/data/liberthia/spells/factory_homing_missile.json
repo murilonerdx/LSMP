@@ -1,0 +1,29 @@
+{
+  "id": "factory_homing_missile",
+  "name": "Míssil Guiado",
+  "school": "ELDRITCH",
+  "rarity": "RARE",
+  "mana": 35,
+  "cooldown": 90,
+  "damage": 14,
+  "range": 32,
+  "type": "HOMING",
+  "lore": "Trava no alvo e persegue até bater. Não há fuga.",
+  "behavior": {
+    "speed": 1.2,
+    "lifetime_ticks": 120,
+    "homing": true,
+    "aoe_radius": 1.5
+  },
+  "vfx": {
+    "color_primary": "#aa00ff",
+    "color_secondary": "#ff66ff",
+    "trail_density": 12,
+    "trail_size": 1.2,
+    "impact_scale": 1.5,
+    "screen_shake": 0.5
+  },
+  "effects": [
+    { "type": "NAUSEA", "duration": 80 }
+  ]
+}

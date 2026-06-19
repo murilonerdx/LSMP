@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "liberthia_blocks",
+  "pattern": [
+    "PPP",
+    "QGQ",
+    "OOO"
+  ],
+  "key": {
+    "P": { "item": "liberthia:purified_essence" },
+    "Q": { "item": "minecraft:quartz_block" },
+    "G": { "item": "minecraft:glass" },
+    "O": { "item": "minecraft:smooth_stone" }
+  },
+  "result": {
+    "item": "liberthia:purification_bench",
+    "count": 1
+  }
+}

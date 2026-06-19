@@ -1,0 +1,38 @@
+{
+  "name": "Tecno-Arcano — Visão Geral",
+  "icon": "liberthia:warded_core",
+  "category": "liberthia:antimagic",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "A Ponte",
+      "text": "O $(l)Tecno-Arcano$() é onde a tecnologia $(thing)FE$() (energia Forge) encontra a magia. Em vez de conjurar, ele $(l)contém$() magos: armadura, escudo, selos e torres movidos a energia que punem ou bloqueiam conjuração.$(br2)Tudo abaixo consome FE da rede tech — sem carga, não funciona."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:warded_chestplate",
+      "text": "$(l)Armadura Bastião$()$(br2)Resiste a dano mágico gastando FE: $(thing)−15% por peça$(), até $(thing)−60%$() no set. Set completo aplica $(item)Antimagia$() em magos que te atacam. Sem carga, vira netherite comum."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:mana_suppressor",
+      "text": "$(l)Selo Supressor de Mana$()$(br2)Enquanto tiver FE, cria um campo de raio $(thing)8$() blocos que $(warn)impede conjuração$(): quem está dentro não gasta mana e o cast falha. Consome FE por tick. Tem GUI de energia."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:arcane_sentinel",
+      "text": "$(l)Selo Sentinela$()$(br2)Detecta conjuradores no alcance e os $(warn)pune$() — defesa passiva pra bases. Consome FE e tem GUI de energia, como os outros selos."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:arcane_turret",
+      "text": "$(l)Torre Arcana$()$(br2)Defesa ativa: com FE, atira um feixe no monstro hostil mais próximo (raio $(thing)14$()), causando dano + Lentidão + $(item)Antimagia$(). Forte contra magos e criaturas cósmicas. Custa FE por disparo."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Componentes & Máquinas",
+      "text": "A linha anti-magia sobe em $(thing)tiers$(): $(item)Núcleo Bastião$() → $(item)Disruptor Arcano$() → $(item)Matriz Nula$(), feitos de matéria escura.$(br2)As $(l)máquinas arcanas$() (Prensa de Metal, Infusor Arcano, Condensador de Mana…) processam intermediários em cadeia, ligando o tech ao arcano. Veja a categoria $(thing)Tech$()."
+    }
+  ]
+}

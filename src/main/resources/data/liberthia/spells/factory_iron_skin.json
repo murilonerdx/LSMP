@@ -1,0 +1,30 @@
+{
+  "id": "factory_iron_skin",
+  "name": "Pele de Ferro",
+  "school": "NATURE",
+  "rarity": "UNCOMMON",
+  "mana": 25,
+  "cooldown": 200,
+  "damage": 0,
+  "range": 0,
+  "type": "SELF",
+  "lore": "Endurece a pele do caster. Resistência III + Absorção por 30s.",
+  "behavior": {},
+  "vfx": {
+    "color_primary": "#88aa44",
+    "impact_scale": 1.0,
+    "screen_shake": 0.1
+  },
+  "effects": [
+    {
+      "type": "RESISTANCE",
+      "duration": 600,
+      "amplifier": 2
+    },
+    {
+      "type": "ABSORPTION",
+      "duration": 600,
+      "amplifier": 1
+    }
+  ]
+}

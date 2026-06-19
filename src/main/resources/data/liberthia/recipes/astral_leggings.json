@@ -1,0 +1,1 @@
+{"type": "minecraft:crafting_shaped", "pattern": ["DCD", "D D", "D D"], "key": {"D": {"item": "minecraft:diamond"}, "C": {"item": "liberthia:constellation_core"}}, "result": {"item": "liberthia:astral_leggings", "count": 1}}

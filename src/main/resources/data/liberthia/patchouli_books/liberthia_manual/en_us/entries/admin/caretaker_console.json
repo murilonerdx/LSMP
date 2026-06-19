@@ -1,0 +1,28 @@
+{
+  "name": "Caretaker Console",
+  "icon": "liberthia:caretaker_console",
+  "category": "liberthia:admin",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:caretaker_console",
+      "text": "$(item)Caretaker Console$()$(br2)GUI admin pra injetar §lmensagens fake§r no chat de um target player. 34 templates + custom messages."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "UI Draggable",
+      "text": "$(li)Janela cosmic (draggable)$(br)$(li)Glifos animados no background$(br)$(li)Title bar pulsante$(br)$(li)Tabs animadas (animated underline)$(br)$(li)Smooth scroll na lista$(br)$(li)Templates categorizados (Join/Death/System/Cmd/Whisper/Obs)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Configuração",
+      "text": "1. Digite nome do $(thing)target$()$(br)2. Set $(thing)Intervalo$() (3s-5min)$(br)3. Set $(thing)Duração$() (1min-permanent)$(br)4. Selecione templates (click toggle)$(br)5. Adicione custom msgs (+)$(br)6. Click $(good)ATIVAR$()$(br2)$(o){TARGET}$() e $(o){RANDOM_NAME}$() são substituídos auto."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Templates Disponíveis",
+      "text": "$(li)Random join/leave fake$(br)$(li)Death messages variadas$(br)$(li)Command fail responses$(br)$(li)Whisper from fake players$(br)$(li)Observation messages (\"OldSteve está te olhando\")$(br2)Mix livre — toque cada uma quantas vezes quiser."
+    }
+  ]
+}

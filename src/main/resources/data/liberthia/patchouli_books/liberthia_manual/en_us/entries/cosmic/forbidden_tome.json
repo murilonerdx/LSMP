@@ -1,0 +1,17 @@
+{
+  "name": "Tomo Proibido",
+  "icon": "liberthia:forbidden_tome",
+  "category": "liberthia:cosmic",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O $(item)Tomo Proibido$() dispara um evento cinematográfico de $(thing)4 minutos$() em 4 phases:$(br2)$(bold)Phase 1 (0-60s)$(): presença sutil$(br)$(bold)Phase 2 (60-120s)$(): corrupção dimensional$(br)$(bold)Phase 3 (120-180s)$(): ruptura da realidade$(br)$(bold)Phase 4 (180-240s)$(): manifestação plena$(br2)Após 4min → $(thing)TP forçado pro Spirit World$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Efeitos Progressivos",
+      "text": "Conforme as phases avançam:$(br2)• Whispers + footsteps atrás$(br)• Mobs/players viram cabeça pra você$(br)• Silhuetas fake na periferia$(br)• Câmera tremendo + mouse girando sozinho$(br)• Tela com glitch + chromatic aberration$(br)• Fake death flash$(br2)Só saí da Spirit World com $(item)Livro do Êxodo$()."
+    }
+  ]
+}

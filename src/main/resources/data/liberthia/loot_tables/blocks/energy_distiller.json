@@ -1,0 +1,1 @@
+{"type": "minecraft:block", "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "liberthia:energy_distiller"}], "conditions": [{"condition": "minecraft:survives_explosion"}]}]}

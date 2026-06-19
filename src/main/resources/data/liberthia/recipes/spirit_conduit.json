@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LQL",
+    "QCQ",
+    "LQL"
+  ],
+  "key": {
+    "L": { "item": "liberthia:soulite_shard" },
+    "Q": { "item": "minecraft:soul_sand" },
+    "C": { "item": "liberthia:source_crystal" }
+  },
+  "result": {
+    "item": "liberthia:spirit_conduit",
+    "count": 1
+  }
+}

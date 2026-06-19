@@ -1,0 +1,48 @@
+{
+  "name": "A Cadeia de Crafting Completa",
+  "icon": "liberthia:assembled_matrix",
+  "category": "liberthia:tech",
+  "sortnum": 31,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Da poeira ao núcleo",
+      "text": "Os materiais de ponta nascem de uma sequência de máquinas. Cada passo precisa de $(item)FE$() e do produto do passo anterior.$(br2)Aqui está a $(l)espinha dorsal$() da cadeia avançada — siga de cima pra baixo."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ramo do Quartzo Quântico",
+      "text": "$(li)$(item)Pulverizadora Quântica$(): Aço Energizado → 2 $(o)Poeira Quântica$()$(br)$(li)$(item)Câmara de Cristalização$(): Poeira Quântica → $(o)Cristal de Fóton$()$(br)$(li)$(item)Enroladora de Bobinas$(): Bobina de Cobre + Cristal de Fóton → $(o)Bobina de Ressonância$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ramo da Matéria Escura",
+      "text": "$(li)$(item)Condensador de Matéria$(): 4 Fragmentos de M. Escura + 2 Poeira Quântica → $(o)Núcleo de Célula de M. Escura$()$(br)$(li)$(item)Nano Montadora$(): Bobina de Ressonância + Núcleo de Célula → $(o)Matriz Montada$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ramo da Energia",
+      "text": "$(li)$(item)Destilador de Energia$(): Bloco de Redstone → 2 $(o)Essência de Energia$()$(br)$(li)$(item)Forja de Fluxo$(): Placa de Aço + Essência → $(o)Lingote de Liga do Vazio$()$(br)$(li)$(item)Compressor de Essência$(): 4 Essências → 2 Aço Energizado (recicla pro topo!)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ramo da Mana",
+      "text": "$(li)$(item)Cristalizadora de Mana$(): Fragmento de Ametista → $(o)Cristal de Mana$()$(br)$(li)$(item)Impressora de Circuito Arcano$(): Cristal de Mana + Poeira de Ouro → $(o)Circuito Energizado$()$(br)$(li)$(item)Gravador de Runas$(): Cristal de Mana + Placa de Aço → $(o)Módulo Bastião$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "O Ápice: Singularidade",
+      "text": "Junte os ramos no topo da cadeia:$(br2)$(li)$(item)Prensa de Singularidade$(): Núcleo de Célula de M. Escura + Matriz Montada → $(l)Matéria Escura Cristalizada$()$(br2)Esse bloco brilhante é o produto mais avançado da linha. $(warn)Toda a fábrica$() existe pra fabricá-lo."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cadeia da Armadura Bastião",
+      "text": "Linha clássica (máquinas da onda 1, essas têm craft de bancada):$(br2)$(li)$(item)Prensa Metálica$(): 2 aço → Placa Endurecida$(br)$(li)$(item)Infusor Arcano$(): placa + fragmento → Placa Bastião$(br)$(li)$(item)Condensador de Mana$(): ametista → Capacitor$(br)$(li)$(item)Fundidora de Cristais$(): capacitor + lingote → Liga Arcana$(br)$(li)$(item)Montadora$(): junta tudo → $(l)Módulo Bastião$()"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:metal_press",
+      "text": "$(item)Prensa Metálica$() — o primeiro elo da cadeia da armadura."
+    }
+  ]
+}

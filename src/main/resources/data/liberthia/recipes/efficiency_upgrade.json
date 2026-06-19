@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DGD",
+    "GCG",
+    "DGD"
+  ],
+  "key": {
+    "D": { "item": "minecraft:diamond" },
+    "G": { "item": "minecraft:gold_ingot" },
+    "C": { "item": "liberthia:dark_matter_cell" }
+  },
+  "result": { "item": "liberthia:efficiency_upgrade" }
+}

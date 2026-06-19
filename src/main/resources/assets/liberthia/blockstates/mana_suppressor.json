@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "liberthia:block/mana_suppressor"
+    },
+    "lit=true": {
+      "model": "liberthia:block/mana_suppressor"
+    }
+  }
+}

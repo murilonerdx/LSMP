@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "axis=x": {"model": "liberthia:block/loom_portal"},
+    "axis=z": {"model": "liberthia:block/loom_portal", "y": 90}
+  }
+}

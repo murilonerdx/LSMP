@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:glass_bottle" },
+    { "item": "liberthia:dark_matter_shard" },
+    { "item": "minecraft:gold_nugget" }
+  ],
+  "result": { "item": "liberthia:matter_ampoule" }
+}

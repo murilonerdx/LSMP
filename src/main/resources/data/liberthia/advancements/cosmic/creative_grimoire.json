@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:creative_grimoire"
+    },
+    "title": {
+      "translate": "advancement.liberthia.creative_grimoire.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.creative_grimoire.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:creative_grimoire"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:cosmic/first_horror_item"
+}

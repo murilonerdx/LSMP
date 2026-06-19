@@ -1,0 +1,28 @@
+{
+  "name": "Motores de Entropia",
+  "icon": "liberthia:entropy_core",
+  "category": "liberthia:cosmic",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "$(cosmic)Núcleo de Entropia$()",
+      "text": "Converte a região em blocos de $(cosmic)outras dimensões$(): a superfície vira infecção e $(l)4 camadas abaixo$() viram rifts (flux → warped → void → rift residue).$(br2)Ele $(l)EXPANDE e acelera$() com o tempo; quem fica perto $(warn)perde sanidade$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(cosmic)Motor de Matéria Escura$()",
+      "text": "Faz o mesmo nos blocos $(l)abaixo$(), trocando por $(matter)matéria escura$() (dark matter, pedra/solo corrompido, esporos — e $(o)raramente$() $(item)Matéria Escura Cristalizada$())."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Reverter tudo",
+      "text": "$(warn)Só para quando o bloco é destruído$() — e aí $(good)REVERTE tudo$() ao original.$(br2)Cada motor mapeia cada troca num JSON em $(o)<mundo>/liberthia/entropy/$(). Se o servidor cair/bugar:$(br)$(li)$(item)/liberthia entropy list$()$(br)$(li)$(item)/liberthia entropy revert <id>$()$(br)$(li)$(item)/liberthia entropy revert all$()"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:entropy_core",
+      "text": "$(item)Núcleo de Entropia$() — super premium (Matriz Nula + catalisador + cristal)."
+    }
+  ]
+}

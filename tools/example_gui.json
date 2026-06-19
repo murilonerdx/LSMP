@@ -1,0 +1,35 @@
+{
+  "name": "ExampleMachine",
+  "snake": "example_machine",
+  "be_class": "ExampleMachineBlockEntity",
+  "block_const": "EXAMPLE_MACHINE",
+  "title_pt": "Máquina de Exemplo",
+  "title_en": "Example Machine",
+  "image_width": 176,
+  "image_height": 166,
+  "data_slots": 8,
+  "theme": {
+    "primary": "0xFF6B2A8C",
+    "background": "0xFF120420",
+    "panel": "0xFF1B0830",
+    "accent": "0xFFAA40E8"
+  },
+  "energy_bar": {
+    "x": 8, "y": 18, "width": 8, "height": 50,
+    "energy_data_hi": 0, "energy_data_lo": 1,
+    "max_data_hi": 2, "max_data_lo": 3
+  },
+  "progress_arrow": {
+    "x": 70, "y": 40, "width": 48, "height": 18,
+    "progress_data": 4, "progress_max_data": 5
+  },
+  "slots": [
+    {"name": "INPUT", "index": 0, "x": 44, "y": 30, "color": "0xFF553090"},
+    {"name": "CATALYST", "index": 1, "x": 44, "y": 52, "color": "0xFFE0C040"},
+    {"name": "OUTPUT", "index": 2, "x": 122, "y": 40, "color": "0xFFAA40E8"}
+  ],
+  "player_inv": { "x": 8, "y": 84 },
+  "hotbar": { "x": 8, "y": 142 },
+  "title_y": 6,
+  "inventory_label_y": 72
+}

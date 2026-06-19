@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P P",
+    " E ",
+    "P P"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "E": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "liberthia:modifier_aoe",
+    "count": 1
+  }
+}

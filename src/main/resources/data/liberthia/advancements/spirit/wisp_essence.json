@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:wisp_essence"
+    },
+    "title": {
+      "translate": "advancement.liberthia.wisp_essence.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.wisp_essence.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:wisp_essence"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:spirit/enter_spirit"
+}

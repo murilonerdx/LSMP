@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "liberthia:steel_ingot"
+    }
+  ],
+  "result": {
+    "item": "liberthia:steel_plate"
+  }
+}

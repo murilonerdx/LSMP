@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FPF",
+    "ECE",
+    "SGS"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    },
+    "S": {
+      "item": "liberthia:steel_ingot"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    }
+  },
+  "result": {
+    "item": "liberthia:flight_beacon",
+    "count": 1
+  }
+}

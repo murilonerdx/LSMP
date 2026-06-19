@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:black_veil"
+    },
+    "title": {
+      "translate": "advancement.liberthia.horror_artifact.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.horror_artifact.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "got_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:black_veil",
+              "liberthia:tendril_crown",
+              "liberthia:silent_bell",
+              "liberthia:open_eye"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:cosmic/first_horror_item"
+}

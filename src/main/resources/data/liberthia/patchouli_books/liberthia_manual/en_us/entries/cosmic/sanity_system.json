@@ -1,0 +1,33 @@
+{
+  "name": "Sistema de Sanidade",
+  "icon": "minecraft:player_head",
+  "category": "liberthia:cosmic",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Sanity 0-100",
+      "text": "Stat per-player. Default: $(good)100$().$(br2)$(li)Spirit World: $(warn)-1/5s$()$(br)$(li)Tomo Proibido carregado: $(warn)-1/min$()$(br)$(li)Castar magia cósmica: $(warn)-2/cast$()$(br)$(li)Sleep em cama: $(good)+25$()$(br)$(li)Milk bucket: $(good)+15$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Efeitos por Threshold",
+      "text": "$(li)≤70: footsteps random$(br)$(li)≤50: vultos/silhuetas$(br)$(li)≤40: Shadow Stalker + red-eye stare$(br)$(li)≤30: whispers + breathing + particles$(br)$(li)≤25: Wood Dimension trigger possível$(br)$(li)≤20: radio + tendril + distortion frequentes$(br)$(li)≤10: scream + audience constantemente"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hallucination Types",
+      "text": "18 tipos de hallucination, cada um com som auto-hooked:$(br)$(li)FAKE_WHISPER$(br)$(li)FAKE_FOOTSTEP$(br)$(li)NAME_WHISPER$(br)$(li)HEARTBEAT_PULSE$(br)$(li)FAKE_ENTITY_PERIPHERAL$(br)$(li)TEMPORAL_GHOST$(br)$(li)DISTORTED_AUDIO$(br)$(li)REVERSE_AUDIO_PULSE$(br)$(li)IMPOSSIBLE_MOON$(br)$(li)SHADOW_MOVEMENT$(br)$(li)REALITY_SHAKE$(br)$(li)SCREEN_GLITCH_BURST$(br)$(li)FAKE_DEATH_FLASH"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Shadow Stalker",
+      "text": "Em sanity ≤ 40 ou Spirit World:$(br2)$(li)Spawn a 35b$(br)$(li)Quando OLHA → congela$(br)$(li)Quando DESVIA → +4b mais perto$(br)$(li)Em <9b → scream + 12 dmg + blindness + slowness 100t$(br2)$(thing)Mantenha ela no campo de visão.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Red Eye Stare",
+      "text": "Em sanity ≤ 30 OU Spirit World:$(br2)$(li)Todos mobs (animais + monstros) próximos ficam $(thing)congelados$() encarando você$(br)$(li)Olhos vermelhos visíveis SOMENTE pra você$(br)$(li)Slowness 200 amp aplicado$(br)$(li)Outros players VEEM os mobs normais"
+    }
+  ]
+}

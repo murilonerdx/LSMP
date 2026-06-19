@@ -1,0 +1,11 @@
+{
+  "type": "liberthia:wooden_place",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "liberthia:wooden_place"
+    },
+    "settings": "minecraft:overworld"
+  }
+}

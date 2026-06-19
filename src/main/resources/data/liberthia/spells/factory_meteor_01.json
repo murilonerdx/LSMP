@@ -1,0 +1,31 @@
+{
+  "id": "factory_meteor_01",
+  "name": "Meteoro Sangrento",
+  "school": "BLOOD",
+  "rarity": "EPIC",
+  "mana": 110,
+  "cooldown": 400,
+  "damage": 30,
+  "range": 24,
+  "type": "AOE_BURST",
+  "lore": "Meteoro de sangue impacta com terremoto.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#ff5500",
+    "color_secondary": "#ffaa00",
+    "trail_density": 20,
+    "trail_size": 2.0,
+    "impact_scale": 2.5,
+    "impact_particles": 120,
+    "screen_shake": 1.0,
+    "impact_light": 15
+  },
+  "effects": [],
+  "element": "BLOOD",
+  "category": "DESTRUCTION"
+}

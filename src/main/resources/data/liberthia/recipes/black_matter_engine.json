@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XDX",
+    "DBD",
+    "XCX"
+  ],
+  "key": {
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    },
+    "B": {
+      "item": "liberthia:crystalized_dark_matter"
+    },
+    "C": {
+      "item": "liberthia:energized_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:black_matter_engine",
+    "count": 1
+  }
+}

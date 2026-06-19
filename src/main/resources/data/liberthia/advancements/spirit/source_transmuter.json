@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:source_transmuter"
+    },
+    "title": {
+      "translate": "advancement.liberthia.source_transmuter.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.source_transmuter.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:source_transmuter"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:spirit/spirit_conduit"
+}

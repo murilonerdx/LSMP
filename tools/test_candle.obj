@@ -1,0 +1,52 @@
+# Cilindro vela teste — 8-sided cylinder height 14, radius 3, centered
+# 16 vertices (8 bottom + 8 top), 24 faces (8 top + 8 bottom + 16 side tris)
+mtllib test_candle.mtl
+o Candle
+v 3.0 0.0 0.0
+v 2.121 0.0 2.121
+v 0.0 0.0 3.0
+v -2.121 0.0 2.121
+v -3.0 0.0 0.0
+v -2.121 0.0 -2.121
+v 0.0 0.0 -3.0
+v 2.121 0.0 -2.121
+v 3.0 14.0 0.0
+v 2.121 14.0 2.121
+v 0.0 14.0 3.0
+v -2.121 14.0 2.121
+v -3.0 14.0 0.0
+v -2.121 14.0 -2.121
+v 0.0 14.0 -3.0
+v 2.121 14.0 -2.121
+usemtl WaxPurple
+# Side faces (quads as 2 tris)
+f 1 2 10
+f 1 10 9
+f 2 3 11
+f 2 11 10
+f 3 4 12
+f 3 12 11
+f 4 5 13
+f 4 13 12
+f 5 6 14
+f 5 14 13
+f 6 7 15
+f 6 15 14
+f 7 8 16
+f 7 16 15
+f 8 1 9
+f 8 9 16
+# Top cap (fan)
+f 9 10 11
+f 9 11 12
+f 9 12 13
+f 9 13 14
+f 9 14 15
+f 9 15 16
+# Bottom cap (fan, reverse winding)
+f 1 8 7
+f 1 7 6
+f 1 6 5
+f 1 5 4
+f 1 4 3
+f 1 3 2

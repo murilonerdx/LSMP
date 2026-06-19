@@ -1,0 +1,29 @@
+{
+  "id": "factory_dragon_breath",
+  "name": "Sopro do Dragão",
+  "school": "FIRE",
+  "rarity": "RARE",
+  "mana": 45,
+  "cooldown": 120,
+  "damage": 12,
+  "range": 8,
+  "type": "CONE",
+  "lore": "Jato de fogo em cone à frente do caster. Inflama tudo no caminho.",
+  "behavior": {
+    "radius": 8.0,
+    "cone_angle": 70.0,
+    "ignite_blocks": true
+  },
+  "vfx": {
+    "color_primary": "#ff7700",
+    "trail_density": 14,
+    "impact_scale": 1.2,
+    "screen_shake": 0.5
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 120
+    }
+  ]
+}

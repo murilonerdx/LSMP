@@ -1,8 +1,0 @@
-All included community assets such as textures, models, sounds, animations,
-visual effects, icons, and configuration files may be reused, modified,
-redistributed, and included in derivative works unless explicitly stated
-otherwise.
-
-Commercial and non-commercial usage is allowed.
-
-Attribution is appreciated but not required.

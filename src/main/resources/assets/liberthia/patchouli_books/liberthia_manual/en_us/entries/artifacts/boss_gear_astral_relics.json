@@ -1,0 +1,33 @@
+{
+  "name": "Relíquias da Constelação",
+  "icon": "liberthia:gravity_staff",
+  "category": "liberthia:artifacts",
+  "sortnum": 21,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Poder do Núcleo",
+      "text": "Além da armadura, o $(item)Núcleo da Constelação$() permite forjar duas relíquias raras: um cajado que dobra a gravidade e um telescópio que rasga o véu entre dimensões.$(br2)Ambos são $(5)épicos$() e brilham por conta própria."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:gravity_staff",
+      "text": "$(item)Cajado Gravitacional$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cajado Gravitacional",
+      "text": "$(l)Clique direito$(): solta uma $(c)onda de repulsão$() — arremessa para longe todas as criaturas num raio de 8 blocos e causa $(c)6 de dano$().$(br2)$(o)Shift + direito$(): inverte e $(2)puxa$() os inimigos para perto de você.$(br2)$(warn)Recarga: 2s. Gasta durabilidade a cada uso."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:dimensional_telescope",
+      "text": "$(item)Telescópio Dimensional$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Telescópio Dimensional",
+      "text": "$(l)Clique direito$(): concede $(9)Visão Noturna$() por 60s e $(9)revela$() (contorno brilhante) toda criatura $(o)cósmica$() num raio de 48 blocos por 15s.$(br2)Mostra quantas foram reveladas.$(br2)$(warn)Recarga: 5s.$(br)$(o)Indispensável para caçar o que se esconde no escuro.$()"
+    }
+  ]
+}

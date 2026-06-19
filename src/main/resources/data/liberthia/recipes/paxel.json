@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PAH",
+    " X ",
+    " U "
+  ],
+  "key": {
+    "P": {
+      "item": "liberthia:energized_pickaxe"
+    },
+    "A": {
+      "item": "liberthia:energized_axe"
+    },
+    "H": {
+      "item": "liberthia:energized_shovel"
+    },
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "U": {
+      "item": "liberthia:copper_coil"
+    }
+  },
+  "result": {
+    "item": "liberthia:paxel",
+    "count": 1
+  }
+}

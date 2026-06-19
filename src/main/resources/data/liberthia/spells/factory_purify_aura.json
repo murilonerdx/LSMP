@@ -1,0 +1,36 @@
+{
+  "id": "factory_purify_aura",
+  "name": "Aura Purificadora",
+  "school": "HOLY",
+  "rarity": "RARE",
+  "mana": 50,
+  "cooldown": 150,
+  "damage": 0,
+  "range": 24,
+  "type": "AURA",
+  "lore": "Remove debuffs negativos de aliados.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#aa66ff",
+    "color_secondary": "#ffffff",
+    "trail_density": 8,
+    "trail_size": 1.2,
+    "impact_scale": 1.0,
+    "impact_particles": 60,
+    "screen_shake": 0.3,
+    "impact_light": 10
+  },
+  "effects": [
+    {
+      "type": "PURIFY",
+      "magnitude": 1
+    }
+  ],
+  "element": "HOLY",
+  "category": "AOE"
+}

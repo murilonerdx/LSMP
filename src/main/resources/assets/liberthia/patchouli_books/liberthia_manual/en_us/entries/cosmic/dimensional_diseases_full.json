@@ -1,0 +1,45 @@
+{
+  "name": "Doenças Dimensionais (Completo)",
+  "icon": "liberthia:dimensional_serum",
+  "category": "liberthia:cosmic",
+  "sortnum": 51,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Contágio",
+      "text": "Exposição prolongada à $(item)entropia$(), à $(5)Radiação Dimensional$() (Corta-Fendas) e a criaturas cósmicas pode te $(warn)contaminar$().$(br2)As doenças são $(o)permanentes$(): NÃO somem com leite, NEM ao morrer. Só o $(item)Soro Dimensional$() cura."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Memória Dimensional",
+      "text": "Partículas $(5)roxas$() te seguem. A cada $(l)~10 min$() sua mente te arrasta para $(o)outra dimensão$() por 10 segundos — e depois te devolve (queda e fogo são protegidos no salto).$(br2)Imprevisível e perigoso longe de casa."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Infecção Dimensional",
+      "text": "Partículas $(2)esverdeadas$() — algo se move sob sua pele. Periodicamente surgem $(o)Vermes Dimensionais$() que te perseguem.$(br2)Ao tocar, aplicam $(warn)Náusea + Fome$(). Mate-os, mas a infecção em si só para com a cura."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "liberthia:dimensional_worm",
+      "name": "Verme Dimensional",
+      "text": "Gerado pela Infecção. Pequeno, rápido e efêmero."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Paranoia Dimensional",
+      "text": "A cada $(l)~30 min$() seus olhos deixam de ser seus: por 5 segundos você $(o)vê pela câmera de outro jogador$().$(br2)Totalmente desorientador no meio de um combate."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "A Cura",
+      "text": "O $(item)Soro Dimensional$() ($(5)raro épico$()) purga $(l)todas$() as três doenças de uma só vez ao ser usado.$(br2)Só consome uma unidade se você realmente estava doente. Carregue alguns sempre que viajar entre mundos."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:dimensional_serum",
+      "title": "Soro Dimensional",
+      "text": "$(good)Cura$() todas as doenças dimensionais."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:dark_matter_pill"
+    },
+    "title": {
+      "translate": "advancement.liberthia.matter_pill.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.matter_pill.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "got_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:dark_matter_pill",
+              "liberthia:clear_matter_pill",
+              "liberthia:yellow_matter_pill"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:matter/matter_extractor"
+}

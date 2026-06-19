@@ -1,0 +1,58 @@
+{
+  "name": "Catálogo de Máquinas Arcanas",
+  "icon": "liberthia:singularity_press",
+  "category": "liberthia:tech",
+  "sortnum": 32,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Onda 1 — Cadeia base",
+      "text": "$(li)$(item)Prensa Metálica$(): aço → Placa Endurecida$(br)$(li)$(item)Infusor Arcano$(): placa + fragmento → Placa Bastião$(br)$(li)$(item)Montadora Tecnológica$(): junta → Módulo Bastião$(br)$(li)$(item)Condensador de Mana$(): ametista → Capacitor de Mana$(br)$(li)$(item)Fundidora de Cristais$(): capacitor + lingote → Liga Arcana$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Pulverização e cristais",
+      "text": "$(li)$(item)Pulverizadora Quântica$(): Aço Energizado → Poeira Quântica$(br)$(li)$(item)Câmara de Cristalização$(): Poeira → Cristal de Fóton$(br)$(li)$(item)Crescedor de Cristais$(): ametista → Cristal de Fóton$(br)$(li)$(item)Polidora de Gemas$(): diamante → 2 Cristais de Fóton$(br)$(li)$(item)Ressoador de Cristais$(): Cristal de Fóton → 2 Cristais de Mana"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bobinas, fios e placas",
+      "text": "$(li)$(item)Enroladora de Bobinas$(): cobre + fóton → Bobina de Ressonância$(br)$(li)$(item)Trefiladora de Fios$(): Poeira de Cobre → Bobina de Cobre$(br)$(li)$(item)Prensa de Placas$(): Lingote de Aço → Placa de Aço$(br)$(li)$(item)Formadora de Lingotes$(): 2 Poeira Quântica → Lingote de Liga do Vazio"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Geração de Essência de Energia",
+      "text": "$(li)$(item)Destilador de Energia$(): Bloco de Redstone → 2 Essência$(br)$(li)$(item)Infusor de Fótons$(): fóton + aço → 3 Essência$(br)$(li)$(item)Reator de Mana$(): Cristal de Mana + redstone → 2 Essência$(br)$(li)$(item)Condensador do End$(): pérola de ender → 3 Essência$(br)$(li)$(item)Extrator de Almas$(): areia de almas → Essência$(br)$(li)$(item)Reator de Blaze$(): vara de blaze → 4 Essência"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mana e circuitos",
+      "text": "$(li)$(item)Cristalizadora de Mana$(): ametista → Cristal de Mana$(br)$(li)$(item)Coletor Arcano$(): aglomerado de ametista → 4 Cristais de Mana$(br)$(li)$(item)Impressora de Circuito Arcano$(): Cristal de Mana + Poeira de Ouro → Circuito Energizado$(br)$(li)$(item)Montadora de Circuitos$(): Poeira de Ouro + redstone → Circuito de Controle$(br)$(li)$(item)Dínamo de Fluxo$(): Bobina de Ressonância + Essência → Circuito Energizado"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ligas e matéria escura",
+      "text": "$(li)$(item)Forja de Fluxo$(): Placa de Aço + Essência → Lingote de Liga do Vazio$(br)$(li)$(item)Fundidora de Liga Escura$(): Liga do Vazio + lingote escuro → Liga Arcana$(br)$(li)$(item)Replicador de Matéria$(): lingote escuro → 2 lingotes$(br)$(li)$(item)Fabricador de Matéria$(): 8 Essência + fragmento → Lingote de M. Escura$(br)$(li)$(item)Divisor de Fragmentos$(): lingote escuro → 9 fragmentos"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Compressão e núcleos",
+      "text": "$(li)$(item)Condensador de Matéria$(): fragmentos + poeira → Núcleo de Célula$(br)$(li)$(item)Compressor de Essência$(): 4 Essências → 2 Aço Energizado$(br)$(li)$(item)Destilador Cósmico$(): M. Escura Cristalizada + Essência → Núcleo de Célula$(br)$(li)$(item)Nano Montadora$(): bobina + núcleo → Matriz Montada$(br)$(li)$(item)Sintetizador Arcano$(): mana + fóton + essência → Matriz Montada"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Runas e ápices",
+      "text": "$(li)$(item)Gravador de Runas$(): mana + placa → Módulo Bastião$(br)$(li)$(item)Inscritor de Runas$(): mana + placa → Placa Bastião$(br)$(li)$(item)Prensa de Singularidade$(): núcleo + matriz → M. Escura Cristalizada$(br)$(li)$(item)Forja de Núcleo de Singularidade$(): 2 núcleos + matriz → M. Escura Cristalizada$(br2)Esses dois são o $(l)topo$() da progressão tech."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:singularity_press",
+      "text": "$(item)Prensa de Singularidade$() — comprime Núcleo de Célula + Matriz Montada em Matéria Escura Cristalizada, o material mais raro da linha."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:mana_reactor",
+      "text": "$(item)Reator de Mana$() — converte Cristais de Mana e redstone em Essência de Energia pra alimentar o resto da fábrica."
+    }
+  ]
+}

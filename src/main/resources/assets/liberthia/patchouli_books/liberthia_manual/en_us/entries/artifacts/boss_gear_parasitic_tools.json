@@ -1,0 +1,38 @@
+{
+  "name": "Ferramentas Vivas",
+  "icon": "liberthia:parasitic_pickaxe",
+  "category": "liberthia:artifacts",
+  "sortnum": 23,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Carne que se Cura",
+      "text": "Do mesmo $(item)Coração da Colmeia$() nascem ferramentas e uma mochila viva. Todas se $(2)auto-regeneram$(): cicatrizam $(b)1 de durabilidade$() a cada 3 segundos enquanto estiverem com você.$(br2)Tier de $(8)matéria escura$() — não precisam de bigorna para durar."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:parasitic_pickaxe",
+      "text": "$(item)Picareta Parasítica$() — minera no tier matéria escura e se regenera."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:parasitic_sword",
+      "text": "$(item)Espada Parasítica$() — +4 de dano e se regenera sozinha."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:parasitic_axe",
+      "text": "$(item)Machado Parasítico$() — +5 de dano e se regenera sozinho."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:living_backpack",
+      "text": "$(item)Mochila Viva$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mochila Viva",
+      "text": "$(l)Clique direito$() para abrir.$(br2)Ela liga você ao seu $(2)Baú de Ender$() de qualquer lugar — o mesmo armazenamento, sempre à mão, sem precisar achar um baú.$(br2)$(o)Carne biológica que guarda o que é seu.$()"
+    }
+  ]
+}

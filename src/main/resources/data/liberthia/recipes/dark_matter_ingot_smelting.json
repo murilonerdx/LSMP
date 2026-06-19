@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "liberthia:dark_matter_shard"
+  },
+  "result": "liberthia:dark_matter_ingot",
+  "experience": 1.0,
+  "cookingtime": 400
+}

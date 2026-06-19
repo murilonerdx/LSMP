@@ -32,6 +32,10 @@ public class CommandEvents {
         br.com.murilo.liberthia.command.FourthWallCommand.register(event.getDispatcher());
         br.com.murilo.liberthia.command.KickAllCommand.register(event.getDispatcher());
         br.com.murilo.liberthia.command.PlayUrlCommand.register(event.getDispatcher());
+        // /liberthia server ... — backup de chunks, desligamento gracioso, restauração
+        br.com.murilo.liberthia.command.ServerOpsCommand.register(event.getDispatcher());
+        // /liberthia fearmoon ... — controla/testa a Lua do Medo
+        br.com.murilo.liberthia.command.FearMoonCommand.register(event.getDispatcher());
     }
 
     /**

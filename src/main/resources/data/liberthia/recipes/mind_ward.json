@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LAL",
+    "AEA",
+    "LAL"
+  ],
+  "key": {
+    "L": { "item": "minecraft:lapis_lazuli" },
+    "A": { "item": "minecraft:amethyst_shard" },
+    "E": { "item": "minecraft:ender_eye" }
+  },
+  "result": {
+    "item": "liberthia:mind_ward",
+    "count": 1
+  }
+}

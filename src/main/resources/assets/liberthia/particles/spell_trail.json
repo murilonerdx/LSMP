@@ -1,0 +1,11 @@
+{
+    "textures": [
+        "liberthia:spell_trail_fire",
+        "liberthia:spell_trail_ice",
+        "liberthia:spell_trail_lightning",
+        "liberthia:spell_trail_blood",
+        "liberthia:spell_trail_eldritch",
+        "liberthia:spell_trail_holy",
+        "liberthia:spell_trail_nature"
+    ]
+}

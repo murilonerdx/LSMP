@@ -1,0 +1,28 @@
+{
+  "name": "Mesa de Feitiços",
+  "icon": "liberthia:spell_crafting_table",
+  "category": "liberthia:spells",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:spell_crafting_table",
+      "text": "$(item)Mesa de Feitiços Portátil$()$(br2)Right-click pra abrir a Spell Crafting GUI. Crie feitiços custom combinando $(thing)Shape$() + $(thing)Element$() + $(thing)Sprite$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Componentes",
+      "text": "$(li)$(thing)Shape$(): PROJECTILE, BEAM, LASER, AOE, SELF, TOUCH$(br2)$(li)$(thing)Element$(): FIRE, ICE, VOID, LIGHT, BLOOD, ARCANE, EARTH, LIGHTNING, SHADOW, NATURE$(br2)$(li)$(thing)Sprite$(): 10 sprites com particles animadas (32 frames cada)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Stats Calculados",
+      "text": "Power 1-5 = damage 4-20, mana 5-25, cooldown 5s-30s, range 8-32b.$(br2)Elementos têm efeitos secundários:$(br)$(li)FIRE: set on fire 8s$(br)$(li)BLOOD: lifesteal 30%$(br)$(li)LIGHT: 2x damage em undead$(br)$(li)LIGHTNING: spawn lightning bolt"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Limite",
+      "text": "$(thing)24 feitiços máximos$() por player (NBT persistido).$(br2)Quando excede, o mais antigo é removido. Use o Spell Wheel pra deletar (Q hover)."
+    }
+  ]
+}

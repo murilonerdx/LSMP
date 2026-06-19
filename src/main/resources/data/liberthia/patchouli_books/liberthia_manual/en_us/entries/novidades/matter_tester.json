@@ -1,0 +1,23 @@
+{
+  "name": "Testador de Matéria",
+  "icon": "liberthia:matter_tester",
+  "category": "liberthia:novidades",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Testador de Matéria",
+      "text": "Máquina de bancada que combina e analisa $(thing)duas amostras$() de matéria. Não consome os itens — é um scanner.$(br2)Coloque matéria nos dois slots e espere o scan (~5s)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Reações",
+      "text": "$(li)Branca + Amarela = $(6)Estrategista$()$(br)$(li)Escura + Amarela = $(4)Instável$() (explosiva)$(br)$(li)Escura + Branca = $(5)Simbiótica$()$(br)$(li)Puras = Selvagem / Cognitiva / Errática$(br2)A GUI mostra reator, painel de resultado (barras DM/WM/YM) e logs dos últimos 16 testes. Primeira vez de cada reação = $(e)✦ NOVA DESCOBERTA$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Computador",
+      "text": "Encoste o Testador num $(item)Computador$() (qualquer lado, com HD + energia). Cada teste manda um $(thing)relatório completo$() pro HD — salvo e exportado em JSON.$(br2)$(o)Ideia da gabisousa02.$()"
+    }
+  ]
+}

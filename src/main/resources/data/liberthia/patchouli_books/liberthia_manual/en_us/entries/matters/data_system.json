@@ -1,0 +1,43 @@
+{
+  "name": "Computador, Impressora & HD",
+  "icon": "liberthia:computador",
+  "category": "liberthia:matters",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Estação de Dados",
+      "text": "O $(thing)Matter Analyzer$() analisa amostras (itens ou §4Seringas de Sangue§r) e mostra DM/WM/YM. Pra $(thing)guardar$() esses relatórios, monte uma estação: coloque um $(l)Computador$() $(bold)encostado$() no Analyzer."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Computador",
+      "text": "No Analyzer, com a amostra no slot, clique $(thing)Salvar PC$() → o relatório vai pro Computador ao lado.$(br2)Clique-direito no Computador pra ver os relatórios (nome, $(c)DNA$(), infecção, matéria).$(br2)$(bold)Login:$() o botão $(thing)Config$() liga uma senha — quem não souber não abre."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:computador",
+      "text": "Receita do Computador."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Impressora",
+      "text": "Coloque uma $(l)Impressora$() encostada no Computador. Abra a Impressora: ela mostra a $(thing)lista de relatórios$() do Computador.$(br2)Ponha $(thing)papel$() no slot, selecione um relatório (ou $(thing)Tudo$()) e clique $(thing)Imprimir$() → sai um $(item)livro escrito$() com os dados."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:printer",
+      "text": "Receita da Impressora."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "HD",
+      "text": "O $(l)HD$() guarda relatórios de forma portátil. No Computador, use $(thing)Gravar HD$() pra copiar os relatórios pro HD, e $(thing)Ler HD$() pra carregá-los de volta (em outro Computador, por exemplo).$(br2)Ótimo pra backup e pra levar pesquisas entre bases."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:hard_drive",
+      "text": "Receita do HD (rende 2)."
+    }
+  ]
+}

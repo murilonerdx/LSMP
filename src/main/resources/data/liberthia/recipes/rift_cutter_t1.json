@@ -1,0 +1,1 @@
+{ "type": "minecraft:crafting_shaped", "pattern": [" D ", "DVD", " S "], "key": { "D": {"item":"liberthia:dark_matter_shard"}, "V": {"item":"liberthia:void_scar"}, "S": {"item":"minecraft:blaze_rod"} }, "result": {"item":"liberthia:rift_cutter_t1","count":1} }

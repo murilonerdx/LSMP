@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "WAW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "liberthia:whisperwood_resin"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result": {
+    "item": "liberthia:spirit_robes_chest",
+    "count": 1
+  }
+}

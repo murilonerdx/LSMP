@@ -1,0 +1,28 @@
+{
+  "name": "Bem-vindo a Liberthia",
+  "icon": "liberthia:liberthia_manual",
+  "category": "liberthia:start",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "O Mundo",
+      "text": "Liberthia tem $(thing)3 sistemas centrais$() interconectados:$(br2)$(li)$(matter)Matter$(): Dark/Clear/Yellow — ciclo de corrupção e purificação$(br2)$(li)$(spirit)Spiritual$(): Spirit World + Loom — dimensões paralelas$(br2)$(li)$(cosmic)Cosmic Horror$(): Sanidade + alucinações + paranoia"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Primeiros Items",
+      "text": "Comece com:$(br2)$(li)$(item)Geiger Counter$(): detecta matter contamination$(br)$(li)$(item)Matter Analyzer$(): vê seu perfil DM/CM/YM$(br)$(li)$(item)Liberthia Manual$(): este livro!$(br2)Depois progrida pros workbenches: $(item)Matter Forge$(), $(item)Matter Infuser$(), $(item)Containment Chamber$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Survivor's Checklist",
+      "text": "$(good)Día 1:$()$(br)$(li)Cuide da sua sanidade — durma em cama$(br)$(li)Evite tocar matter sem proteção$(br)$(li)NÃO segure o $(item)Tomo Proibido$() ainda$(br2)$(good)Día 7:$()$(br)$(li)Encontre $(item)Soul Sever$() pro Spirit World$(br)$(li)Faça $(item)Grimoire$() pra magia$(br)$(li)Procure $(item)Liminal Keys$() (Bússola Afogada, etc)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Comandos úteis",
+      "text": "$(o)/liberthia reset$() — emergency reset$(br)$(o)/liberthia hud sanity show$() — info HUD$(br)$(o)/liberthia sound test whispers$() — testar sons$(br2)Keybinds:$(br)$(li)$(thing)X$() — Spell Wheel$(br)$(li)$(thing)V$() — Quick cast$(br)$(li)$(thing)G$() — Quantum Terminal$(br)$(li)$(thing)T$() — Antenna config"
+    }
+  ]
+}

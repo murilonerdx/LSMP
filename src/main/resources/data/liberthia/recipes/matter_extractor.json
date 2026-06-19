@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OEO",
+    "DND",
+    "ORO"
+  ],
+  "key": {
+    "O": { "item": "minecraft:obsidian" },
+    "E": { "item": "minecraft:ender_eye" },
+    "D": { "item": "liberthia:purified_dark_matter_ingot" },
+    "N": { "item": "liberthia:matter_core" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "item": "liberthia:matter_extractor" }
+}

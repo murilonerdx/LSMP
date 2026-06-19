@@ -1,0 +1,18 @@
+{
+  "name": "Criaturas Novas",
+  "icon": "liberthia:void_manifestation",
+  "category": "liberthia:novidades",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "5 Criaturas (r178)",
+      "text": "Horrores que jogam com a $(thing)luz$() e a $(thing)observação$(). A maioria só age quando você NÃO está olhando — ou quando está no escuro."
+    },
+    {"type": "patchouli:entity", "entity": "liberthia:faceless", "name": "O Sem-Rosto", "text": "Só anda no $(thing)escuro$(). Na luz, ou se você o encara, congela. A luz te protege."},
+    {"type": "patchouli:entity", "entity": "liberthia:ceiling_lurker", "name": "O do Teto", "text": "Pendurado no teto. Despenca quando você passa embaixo. Olhe pra cima."},
+    {"type": "patchouli:entity", "entity": "liberthia:eye_collector", "name": "O Coletor de Olhos", "text": "No escuro te cega (Blindness + Darkness). Na luz cobre o rosto."},
+    {"type": "patchouli:entity", "entity": "liberthia:neighbor", "name": "O Vizinho", "text": "Nunca ataca. Se aproxima quando você não olha; some se chegar perto sem ser visto."},
+    {"type": "patchouli:entity", "entity": "liberthia:void_manifestation", "name": "Manifestação do Vazio", "text": "A sombra de muitos olhos, invocada pelo Olho do Vazio. VFX puro de pavor."}
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "factory_group_strength",
+  "name": "Força em Grupo",
+  "school": "FIRE",
+  "rarity": "RARE",
+  "mana": 40,
+  "cooldown": 120,
+  "damage": 0,
+  "range": 24,
+  "type": "AURA",
+  "lore": "Strength II em aliados.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#aa66ff",
+    "color_secondary": "#ffffff",
+    "trail_density": 8,
+    "trail_size": 1.2,
+    "impact_scale": 1.0,
+    "impact_particles": 60,
+    "screen_shake": 0.3,
+    "impact_light": 10
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "liberthia_blessing",
+      "duration": 400,
+      "magnitude": 1
+    }
+  ],
+  "element": "FIRE",
+  "category": "AOE"
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WIW",
+    "WWW",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "liberthia:warded_core"
+    },
+    "I": {
+      "item": "liberthia:energized_steel"
+    }
+  },
+  "result": {
+    "item": "liberthia:warded_shield",
+    "count": 1
+  }
+}

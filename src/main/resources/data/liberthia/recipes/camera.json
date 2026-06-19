@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "liberthia_tools",
+  "pattern": [
+    "III",
+    "GQR",
+    "III"
+  ],
+  "key": {
+    "I": {"item": "minecraft:iron_ingot"},
+    "G": {"item": "minecraft:glass_pane"},
+    "Q": {"item": "minecraft:ender_eye"},
+    "R": {"item": "minecraft:redstone"}
+  },
+  "result": {
+    "item": "liberthia:camera",
+    "count": 1
+  }
+}

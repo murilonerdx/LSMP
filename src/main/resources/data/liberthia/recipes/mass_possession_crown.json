@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["GNG", "EAE", "EEE"],
+  "key": {
+    "G": { "item": "minecraft:gold_ingot" },
+    "N": { "item": "minecraft:nether_star" },
+    "E": { "item": "minecraft:ender_eye" },
+    "A": { "item": "liberthia:possession_amulet" }
+  },
+  "result": { "item": "liberthia:mass_possession_crown", "count": 1 }
+}

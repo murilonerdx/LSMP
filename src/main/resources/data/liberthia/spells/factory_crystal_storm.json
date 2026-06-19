@@ -1,0 +1,37 @@
+{
+  "id": "factory_crystal_storm",
+  "name": "Tempestade de Cristais",
+  "school": "ELDRITCH",
+  "rarity": "EPIC",
+  "mana": 75,
+  "cooldown": 300,
+  "damage": 12,
+  "range": 25,
+  "type": "AOE_BURST",
+  "lore": "Chuva de shards ametistas devastadora em área.",
+  "behavior": {
+    "radius": 6.0,
+    "aoe_radius": 6.0,
+    "rain_strikes": 20
+  },
+  "vfx": {
+    "color_primary": "#B266FF",
+    "color_secondary": "#4B006E",
+    "trail_density": 22,
+    "trail_size": 1.5,
+    "impact_scale": 1.8,
+    "impact_particles": 140,
+    "screen_shake": 0.8,
+    "impact_light": 11
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "pox_swarm",
+      "duration": 100,
+      "magnitude": 0.0
+    }
+  ],
+  "element": "ELDRITCH",
+  "category": "AOE"
+}

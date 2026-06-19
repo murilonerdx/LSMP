@@ -624,6 +624,12 @@ public final class ModCreativeTabs {
                         out.accept(ModItems.SOURCE_BERRY.get());
                         // ─── r104: Spell Bow ───
                         out.accept(ModItems.SPELL_BOW.get());
+                        // ─── Arco da Caçadora ───
+                        out.accept(ModItems.HUNTRESS_BOW.get());
+                        // ─── Tambor da Lua do Medo ───
+                        out.accept(ModItems.FEAR_MOON_DRUM.get());
+                        // ─── Punhos Celestiais ───
+                        out.accept(ModItems.CELESTIAL_FISTS.get());
                         // ─── r105: Scribe tables ───
                         out.accept(ModItems.INSCRIPTION_TABLE_ITEM.get());
                         out.accept(ModItems.SCROLL_FORGE_ITEM.get());

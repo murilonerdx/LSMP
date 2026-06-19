@@ -1,0 +1,61 @@
+{
+  "name": "Adaga Corta-Fendas (Completo)",
+  "icon": "liberthia:rift_cutter_t3",
+  "category": "liberthia:dimensions",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Corta-Fendas",
+      "text": "Uma adaga que rasga o tecido entre mundos. Salva coordenadas no próprio NBT e abre portais sob demanda.$(br2)$(l)SHIFT+direito$() abre a GUI de coordenadas.$(br)$(l)Direito$() abre um $(2)portal verde$() à frente."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Configurar Alvo",
+      "text": "Com $(l)SHIFT+direito$() abre-se a tela de coordenadas: digite $(item)X$(), $(item)Y$(), $(item)Z$() e a $(item)dimensão$() de destino. Os valores ficam gravados na adaga.$(br2)Sem alvo salvo, o direito não funciona — o tooltip avisa: $(8)Sem alvo$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Abrir o Portal",
+      "text": "$(l)Direito$() (sem agachar) cria um $(2)portal verde$() 2 blocos à frente, virado pra você. Atravesse-o para ser teleportado às coords salvas.$(br2)O portal de IDA também cria um portal de RETORNO no ponto de origem — para voltar."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "liberthia:rift_portal",
+      "name": "Portal de Fenda",
+      "text": "A fenda verde aberta pela adaga. Atravesse para viajar."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "3 Níveis",
+      "text": "$(li)$(item)Corta-Fendas I$() — só $(2)Overworld$().$(br)$(li)$(item)Corta-Fendas II$() — $(2)Overworld + Nether$().$(br)$(li)$(item)Corta-Fendas III$() — $(o)todas$() as dimensões.$(br2)Se o nível não alcança o destino, o portal recusa abrir."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Custo & Radiação",
+      "text": "Cada portal gasta $(l)durabilidade$() e impõe um breve $(l)cooldown$().$(br2)$(warn)Aviso:$() quem estiver perto SEM segurar uma adaga recebe $(5)Radiação Dimensional$() — perde velocidade, vida máxima e sofre tontura. Mantenha leigos longe."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:rift_cutter_t1",
+      "title": "Corta-Fendas I"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:rift_cutter_t2",
+      "title": "Corta-Fendas II"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:rift_forge",
+      "title": "Forja de Fendas",
+      "text": "O bloco-máquina exigido para forjar o $(item)Corta-Fendas III$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:rift_cutter_t3",
+      "title": "Corta-Fendas III",
+      "text": "Não tem receita de bancada. Na $(item)Forja de Fendas$() ($(l)direito$() p/ abrir), preencha os $(l)12 slots$() de entrada e aguarde a forja concluir. É o item dimensional mais caro do jogo."
+    }
+  ]
+}

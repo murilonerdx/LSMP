@@ -1,0 +1,10 @@
+{
+  "_comment": "v0.1.48: TODAS as variantes apontam pro modelo vazio. O fluido visual vem do BER (MatterTankRenderer) que renderiza altura proporcional. Antes os modelos _25/_50/_75/_full desenhavam fluido na textura e CONFLITAVAM com o BER — animação dizia uma coisa, número GUI dizia outra.",
+  "variants": {
+    "level=0": { "model": "liberthia:block/matter_tank_empty" },
+    "level=1": { "model": "liberthia:block/matter_tank_empty" },
+    "level=2": { "model": "liberthia:block/matter_tank_empty" },
+    "level=3": { "model": "liberthia:block/matter_tank_empty" },
+    "level=4": { "model": "liberthia:block/matter_tank_empty" }
+  }
+}

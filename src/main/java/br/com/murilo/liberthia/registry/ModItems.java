@@ -2802,6 +2802,19 @@ public final class ModItems {
             () -> new br.com.murilo.liberthia.magic.weapon.SpellBowItem(
                     new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
 
+    // Arco da Caçadora — Tiro Marcado + Rajada Divina + Tiro Fantasma
+    public static final RegistryObject<Item> HUNTRESS_BOW = ITEMS.register("huntress_bow",
+            () -> new br.com.murilo.liberthia.item.HuntressBowItem(
+                    new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC)));
+
+    // Tambor da Lua do Medo — invoca o evento da Lua do Medo
+    public static final RegistryObject<Item> FEAR_MOON_DRUM = ITEMS.register("fear_moon_drum",
+            () -> new br.com.murilo.liberthia.item.FearMoonDrumItem(new Item.Properties()));
+
+    // Punhos Celestiais — arma de soco (combo/dash/fúria); curio de mãos
+    public static final RegistryObject<Item> CELESTIAL_FISTS = ITEMS.register("celestial_fists",
+            () -> new br.com.murilo.liberthia.item.CelestialFistsItem(new Item.Properties()));
+
     // r108: 3 More Iconic Spells
     public static final RegistryObject<Item> ICE_TOMB_SPELL = ITEMS.register("ice_tomb_spell",
             () -> new br.com.murilo.liberthia.magic.spells.IceTombSpellItem(

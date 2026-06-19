@@ -1,0 +1,39 @@
+{
+  "name": "Adaga Corta-Fendas",
+  "icon": "liberthia:rift_cutter_t3",
+  "category": "liberthia:cosmic",
+  "sortnum": 54,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Corta-Fendas",
+      "text": "Uma adaga que rasga o tecido entre mundos. $(l)SHIFT+direito$() abre a GUI de coordenadas (salvas na adaga). $(l)Direito$() abre um $(2)portal verde$() à frente — atravesse para ir às coords salvas.$(br2)$(warn)Emite Radiação Dimensional$() a quem está perto SEM segurar uma adaga."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "3 Níveis",
+      "text": "$(li)$(item)Corta-Fendas I$() — só Overworld.$(br)$(li)$(item)Corta-Fendas II$() — Overworld + Nether.$(br)$(li)$(item)Corta-Fendas III$() — $(o)todas$() as dimensões (craft mais difícil do jogo)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:rift_cutter_t1",
+      "title": "Corta-Fendas I"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:rift_cutter_t2",
+      "title": "Corta-Fendas II"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:rift_forge",
+      "title": "Forja de Fendas",
+      "text": "O bloco necessário para forjar a Adaga Corta-Fendas III."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Corta-Fendas III",
+      "text": "Na $(item)Forja de Fendas$() (direito p/ abrir), coloque os $(l)12 ingredientes$() nos slots e aguarde a forja: $(o)Corta-Fendas II, blocos de matéria (escura/clara/amarela), Void Scar, Fluxo Dimensional, Resíduo de Fenda, Espaço Distorcido, Estrela do Nether, Cristal do End, Fragmento de Matéria Escura e Selo de Ascensão$()."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DCD",
+    "CFC",
+    "DBD"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "F": {
+      "item": "liberthia:focus_crystal"
+    },
+    "B": {
+      "item": "liberthia:dark_matter_block"
+    }
+  },
+  "result": {
+    "item": "liberthia:stabilizer_beam",
+    "count": 1
+  }
+}

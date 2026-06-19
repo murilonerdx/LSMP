@@ -1,0 +1,53 @@
+{
+  "name": "Cosmic Horror v1 (8 items)",
+  "icon": "liberthia:whispering_veil",
+  "category": "liberthia:artifacts",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Os 8 Originais",
+      "text": "Primeira geração de items cosmic horror. Foco em invasão psicológica."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:whispering_veil",
+      "text": "$(item)Whispering Veil$()$(br2)Passivo. Você ouve $(o)whispers$() — mas eles não são seus. Players próximos também os ouvem."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:eyes_of_abyss",
+      "text": "$(item)Eyes of Abyss$()$(br2)Night vision permanente + glow em mobs cosmic horror."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:cursed_cradle",
+      "text": "$(item)Cursed Cradle$()$(br2)Você não pode dormir. Tentar dormir = nightmare + sanity drop."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:pendulum_of_dread",
+      "text": "$(item)Pendulum of Dread$()$(br2)Quando segurado, slow time perception (slowness leve + nausea cíclica)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:lantern_of_false_memory",
+      "text": "$(item)Lantern of False Memory$()$(br2)Ilumina lugares que $(o)você lembra estarem lá$(), mesmo que não estejam mais."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:tongue_of_old_ones",
+      "text": "$(item)Tongue of Old Ones$()$(br2)Chat: suas mensagens viram glyphs distorcidos pra players com sanity baixa."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:hourglass_of_regression",
+      "text": "$(item)Hourglass of Regression$()$(br2)Right-click. Você $(thing)retroceede 5 segundos$() no tempo (volta pra onde estava, com HP/inv daquela época)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:void_seer_orb",
+      "text": "$(item)Void Seer Orb$()$(br2)Right-click. Vê o que outros players estão fazendo (chat-style summary do que cada um está fazendo no mundo)."
+    }
+  ]
+}

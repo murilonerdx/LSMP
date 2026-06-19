@@ -1,0 +1,29 @@
+{
+  "id": "factory_triple_shot",
+  "name": "Tiro Triplo Gélido",
+  "school": "ICE",
+  "rarity": "UNCOMMON",
+  "mana": 30,
+  "cooldown": 60,
+  "damage": 6,
+  "range": 24,
+  "type": "MULTI_SHOT",
+  "lore": "Três projéteis gelados em leque. Cada um congela o alvo brevemente.",
+  "behavior": {
+    "speed": 1.8,
+    "lifetime_ticks": 60,
+    "projectile_count": 3,
+    "spread_degrees": 25
+  },
+  "vfx": {
+    "color_primary": "#88ddff",
+    "color_secondary": "#ffffff",
+    "trail_density": 6,
+    "trail_size": 1.0,
+    "impact_scale": 0.9
+  },
+  "effects": [
+    { "type": "FREEZE", "duration": 60 },
+    { "type": "SLOWNESS", "duration": 80, "amplifier": 1 }
+  ]
+}

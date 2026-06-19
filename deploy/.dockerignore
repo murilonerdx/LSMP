@@ -1,0 +1,10 @@
+**/node_modules
+**/build
+**/.gradle
+**/dist
+**/.idea
+**/.vscode
+**/*.log
+**/.DS_Store
+**/run/
+**/runs/

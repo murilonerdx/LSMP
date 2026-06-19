@@ -1,0 +1,1 @@
+{ "type": "minecraft:crafting_shaped", "pattern": ["FNF","NRN","FNF"], "key": { "F": {"item":"minecraft:flint_and_steel"}, "N": {"item":"minecraft:nether_star"}, "R": {"item":"liberthia:rift_cutter_t1"} }, "result": {"item":"liberthia:rift_cutter_t2","count":1} }

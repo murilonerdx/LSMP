@@ -1,0 +1,31 @@
+{
+  "id": "factory_volcanic_storm",
+  "name": "Tempestade Vulcânica",
+  "school": "FIRE",
+  "rarity": "EPIC",
+  "mana": 85,
+  "cooldown": 360,
+  "damage": 14,
+  "range": 30,
+  "type": "RAIN",
+  "lore": "Meteoros + raios caem em sequência numa área. Devastação dupla.",
+  "behavior": {
+    "radius": 10.0,
+    "rain_strikes": 15,
+    "rain_duration_ticks": 120,
+    "ignite_blocks": true
+  },
+  "vfx": {
+    "color_primary": "#ff5500",
+    "color_secondary": "#ffff44",
+    "impact_scale": 1.6,
+    "screen_shake": 1.0,
+    "impact_light": 15
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 140
+    }
+  ]
+}

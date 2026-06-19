@@ -1,0 +1,37 @@
+{
+  "id": "factory_great_spell",
+  "name": "Great spell",
+  "school": "FIRE",
+  "rarity": "EPIC",
+  "mana": 17,
+  "cooldown": 10,
+  "damage": 80,
+  "range": 30,
+  "type": "PROJECTILE",
+  "lore": "Um feitiço customizado.",
+  "behavior": {
+    "speed": 1.6,
+    "lifetime_ticks": 80,
+    "pierce": false,
+    "aoe_radius": 2.0
+  },
+  "vfx": {
+    "color_primary": "#ff6633",
+    "color_secondary": "#ffaa00",
+    "trail_density": 35,
+    "trail_size": 2.2,
+    "impact_scale": 2.5,
+    "impact_particles": 250,
+    "screen_shake": 1.2,
+    "impact_light": 15
+  },
+  "effects": [
+    {
+      "type": "KNOCKBACK",
+      "duration": 100,
+      "magnitude": 1.0
+    }
+  ],
+  "element": "FIRE",
+  "category": "CRITICAL"
+}

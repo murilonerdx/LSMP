@@ -1,0 +1,1 @@
+{"type": "minecraft:block", "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "liberthia:mana_crystallizer"}], "conditions": [{"condition": "minecraft:survives_explosion"}]}]}

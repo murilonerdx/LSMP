@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "RIR",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "R": { "item": "minecraft:redstone" },
+    "I": { "item": "minecraft:copper_ingot" }
+  },
+  "result": { "item": "liberthia:energy_cable", "count": 6 }
+}

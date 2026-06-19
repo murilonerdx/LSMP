@@ -1,0 +1,35 @@
+{
+  "id": "factory_berserker_rage",
+  "name": "Fúria do Berserker",
+  "school": "BLOOD",
+  "rarity": "RARE",
+  "mana": 35,
+  "cooldown": 360,
+  "damage": 0,
+  "range": 0,
+  "type": "SELF",
+  "lore": "Sangue ferve. Força III + Absorção II — preço: lentidão menor.",
+  "behavior": {},
+  "vfx": {
+    "color_primary": "#cc0000",
+    "impact_scale": 1.2,
+    "screen_shake": 0.4
+  },
+  "effects": [
+    {
+      "type": "STRENGTH",
+      "duration": 500,
+      "amplifier": 2
+    },
+    {
+      "type": "ABSORPTION",
+      "duration": 500,
+      "amplifier": 1
+    },
+    {
+      "type": "FIRE_RESISTANCE",
+      "duration": 500,
+      "amplifier": 0
+    }
+  ]
+}

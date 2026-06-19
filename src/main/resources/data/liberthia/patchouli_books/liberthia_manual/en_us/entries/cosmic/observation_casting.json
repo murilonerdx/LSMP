@@ -1,0 +1,38 @@
+{
+  "name": "Observation Casting (r60)",
+  "icon": "liberthia:watching_eye",
+  "category": "liberthia:cosmic",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Observation Casting",
+      "text": "Sistema inspirado em Ars Nouveau mas com filosofia oposta:$(br2)$(o)Ars Nouveau:$() glyphs combinam em recipe.$(br2)$(o)Observation:$() glyphs requerem $(thing)condições de percepção$() — o mundo é input."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Arquitetura (real)",
+      "text": "$(li)$(thing)ObservationPart$() — base de tudo, com typeIndex$(br)$(li)$(thing)WatchMethod$() (typeIndex 1) — entry point$(br)$(li)$(thing)Manifestation$() (typeIndex 5) — efeito$(br)$(li)$(thing)Distortion$() (typeIndex 10) — augment$(br)$(li)$(thing)ObservationStats$() — builder pattern$(br)$(li)$(thing)ObservationContext$() — state com attachments map$(br)$(li)$(thing)ObservationResolver$() — pipeline"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Pipeline",
+      "text": "1. Valida recipe$(br)2. Cobra sanity total$(br)3. Executa WatchMethod → HitResult$(br)4. Itera Manifestations:$(br)   a. Coleta Distortions consecutivas$(br)   b. Acumula stats via Builder$(br)   c. Chama manifest()$(br)   d. Pula índices das Distortions$(br)5. Aplica custo final"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Parts foundationais",
+      "text": "$(li)$(thing)Direct Gaze$() (WatchMethod) — observa onde olha (32b raycast)$(br2)$(li)$(thing)Tendril$() (Manifestation) — tentáculos no hit, dmg = intensity$(br2)$(li)$(thing)Amplify$() (Distortion) — ×1.5 intensity, +1 reach"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Test command",
+      "text": "$(o)/liberthia observe test$()$(br2)Casta DirectGaze + Tendril + Amplify no que você olha. Custa 7 sanity (1+4+2).$(br2)$(o)/liberthia observe info$()$(br2)Lista todos parts registrados com tipo + custo."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Próximas revs",
+      "text": "Foundation in place (r60). Próximo:$(br2)$(li)More WatchMethods (Peripheral, Memory, Reflection)$(br)$(li)More Manifestations (Silence, Folding, Mirror, Whisper)$(br)$(li)More Distortions (Linger, Echo, Reveal, Secret)$(br)$(li)Glyph composer GUI (visual mesa)$(br)$(li)Living glyph rendering$(br)$(li)Codec-based serialization pra portable spells$(br)$(li)Item: Observation Tome (carrega spells custom)"
+    }
+  ]
+}

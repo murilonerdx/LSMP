@@ -1,0 +1,33 @@
+{
+  "id": "factory_frost_armor",
+  "name": "Armadura Gélida",
+  "school": "ICE",
+  "rarity": "UNCOMMON",
+  "mana": 30,
+  "cooldown": 280,
+  "damage": 0,
+  "range": 0,
+  "type": "AURA",
+  "lore": "Aura gélida — inimigos próximos ficam lentos enquanto buff dura.",
+  "behavior": {
+    "radius": 4.5,
+    "aura_duration_ticks": 200,
+    "aura_tick_interval": 20
+  },
+  "vfx": {
+    "color_primary": "#aaeeff",
+    "impact_scale": 0.8,
+    "screen_shake": 0.2
+  },
+  "effects": [
+    {
+      "type": "SLOWNESS",
+      "duration": 60,
+      "amplifier": 1
+    },
+    {
+      "type": "FREEZE",
+      "duration": 30
+    }
+  ]
+}

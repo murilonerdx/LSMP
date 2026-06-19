@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "CDC",
+    "SCS"
+  ],
+  "key": {
+    "S": { "item": "liberthia:dark_matter_shard" },
+    "C": { "item": "minecraft:chest" },
+    "D": { "item": "liberthia:dark_matter_block" }
+  },
+  "result": { "item": "liberthia:dark_matter_chest" }
+}

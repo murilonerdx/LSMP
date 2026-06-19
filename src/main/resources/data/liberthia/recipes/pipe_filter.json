@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GPG",
+    "PIP",
+    "GPG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:lime_dye" },
+    "P": { "item": "minecraft:paper" },
+    "I": { "item": "minecraft:iron_ingot" }
+  },
+  "result": {
+    "item": "liberthia:pipe_filter",
+    "count": 1
+  }
+}

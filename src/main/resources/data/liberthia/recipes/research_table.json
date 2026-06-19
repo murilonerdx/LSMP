@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "liberthia_blocks",
+  "pattern": [
+    "BIB",
+    "PPP",
+    "S S"
+  ],
+  "key": {
+    "B": { "item": "minecraft:book" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "P": { "item": "minecraft:oak_planks" },
+    "S": { "item": "minecraft:stick" }
+  },
+  "result": {
+    "item": "liberthia:research_table",
+    "count": 1
+  }
+}

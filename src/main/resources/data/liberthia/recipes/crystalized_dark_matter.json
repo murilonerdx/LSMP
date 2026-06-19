@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DXD",
+    "DDD"
+  ],
+  "key": {
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    },
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    }
+  },
+  "result": {
+    "item": "liberthia:crystalized_dark_matter",
+    "count": 1
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "factory_aetheric_pulse",
+  "name": "Pulso Etéreo",
+  "school": "HOLY",
+  "rarity": "RARE",
+  "category": "AOE",
+  "element": "AIR",
+  "mana": 40,
+  "cooldown": 140,
+  "damage": 0,
+  "range": 8,
+  "type": "NOVA",
+  "lore": "Pulso etéreo — buff defensivo em aliados.",
+  "behavior": {
+    "radius": 8.0,
+    "knockback_strength": 1.0
+  },
+  "vfx": {
+    "color_primary": "#aaccff",
+    "impact_scale": 1.4,
+    "impact_light": 13
+  },
+  "effects": [
+    {
+      "type": "ABSORPTION",
+      "duration": 600,
+      "amplifier": 2
+    },
+    {
+      "type": "RESISTANCE",
+      "duration": 400,
+      "amplifier": 1
+    },
+    {
+      "type": "REGENERATION",
+      "duration": 200,
+      "amplifier": 1
+    }
+  ]
+}

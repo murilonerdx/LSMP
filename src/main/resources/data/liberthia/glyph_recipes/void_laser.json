@@ -1,0 +1,10 @@
+{
+  "display_name": "Vazio Canalizado (Laser)",
+  "output": { "item": "liberthia:spell_void_laser", "count": 1 },
+  "ingredients": [
+    { "item": "liberthia:void_reagent",     "count": 4 },
+    { "item": "minecraft:amethyst_shard",   "count": 16 },
+    { "item": "liberthia:veil_fragment",    "count": 4 },
+    { "item": "liberthia:phantom_ink",      "count": 4 }
+  ]
+}

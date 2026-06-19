@@ -1,0 +1,88 @@
+{
+  "_comment": "r180: Rewards por ranking/pontuação — itens EXCLUSIVOS sem craft que só os top players recebem. Importado no AutoGift por RankingRewardsSeeder (cria se não existir, idempotente por nome). Edite metric/schedule/topN no painel admin. Metrics: VOICE_DURATION_MS, VOICE_CLIPS, CHAT_MESSAGES, LOGIN_COUNT, INVENTORY_ITEMS, DEATHS.",
+  "rules": [
+    {
+      "name": "👑 Campeão Lendário — Top 1 (mensal)",
+      "description": "O #1 do ranking ganha os artefatos MÍTICOS do mod. Itens sem craft, só pra quem está no topo.",
+      "metric": "VOICE_DURATION_MS",
+      "topN": 1,
+      "schedule": "monthly",
+      "scaleByRank": false,
+      "minValue": 0,
+      "rewards": [
+        { "type": "item", "id": "liberthia:eternity_crown", "count": 1 },
+        { "type": "item", "id": "liberthia:wings_of_ascension", "count": 1 },
+        { "type": "item", "id": "liberthia:halo_of_abaddon", "count": 1 },
+        { "type": "item", "id": "liberthia:abyssal_core", "count": 1 },
+        { "type": "broadcast", "value": "§6§l👑 {player} §r§6é o CAMPEÃO LENDÁRIO do mês — recebeu os artefatos míticos!" }
+      ]
+    },
+    {
+      "name": "⭐ Elite — Top 3 (mensal)",
+      "description": "Os 3 melhores recebem artefatos de elite. scaleByRank: o 1º leva mais.",
+      "metric": "CHAT_MESSAGES",
+      "topN": 3,
+      "schedule": "monthly",
+      "scaleByRank": true,
+      "minValue": 0,
+      "rewards": [
+        { "type": "item", "id": "liberthia:ascension_seal", "count": 1 },
+        { "type": "item", "id": "liberthia:divine_smite_rod", "count": 1 },
+        { "type": "item", "id": "liberthia:soul_reaper", "count": 1 },
+        { "type": "item", "id": "liberthia:netherite_seal", "count": 1 },
+        { "type": "broadcast", "value": "§b§l⭐ {player} §r§bentrou na ELITE — artefatos de elite concedidos!" }
+      ]
+    },
+    {
+      "name": "🔮 Veterano — Top 5 (semanal)",
+      "description": "Top 5 da semana ganha relíquias e armas exclusivas.",
+      "metric": "LOGIN_COUNT",
+      "topN": 5,
+      "schedule": "weekly",
+      "scaleByRank": false,
+      "minValue": 0,
+      "rewards": [
+        { "type": "item", "id": "liberthia:chicote_celestial", "count": 1 },
+        { "type": "item", "id": "liberthia:void_eye", "count": 1 },
+        { "type": "item", "id": "liberthia:grimoire_archmage", "count": 1 },
+        { "type": "item", "id": "liberthia:blood_pact_amulet", "count": 1 },
+        { "type": "item", "id": "liberthia:enchanters_gauntlet", "count": 1 },
+        { "type": "broadcast", "value": "§5§l🔮 {player} §r§5é VETERANO da semana!" }
+      ]
+    },
+    {
+      "name": "🗡️ Colecionador — Top 3 (semanal)",
+      "description": "Top 3 por itens no inventário ganha armas e ferramentas raras + tomos do manual.",
+      "metric": "INVENTORY_ITEMS",
+      "topN": 3,
+      "schedule": "weekly",
+      "scaleByRank": false,
+      "minValue": 0,
+      "rewards": [
+        { "type": "item", "id": "liberthia:soul_scream_sword", "count": 1 },
+        { "type": "item", "id": "liberthia:soul_sever", "count": 1 },
+        { "type": "item", "id": "liberthia:rift_opener", "count": 1 },
+        { "type": "item", "id": "liberthia:codex_cosmic", "count": 1 },
+        { "type": "item", "id": "liberthia:codex_matter", "count": 1 },
+        { "type": "item", "id": "liberthia:codex_magic", "count": 1 }
+      ]
+    },
+    {
+      "name": "🎁 Participação — Top 10 (semanal)",
+      "description": "Top 10 ativos ganham amuletos e consumíveis exclusivos + ovos de mobs raros (colecionável).",
+      "metric": "VOICE_CLIPS",
+      "topN": 10,
+      "schedule": "weekly",
+      "scaleByRank": false,
+      "minValue": 0,
+      "rewards": [
+        { "type": "item", "id": "liberthia:angel_tear_amulet", "count": 1 },
+        { "type": "item", "id": "liberthia:soul_mirror", "count": 1 },
+        { "type": "item", "id": "liberthia:lucid_tonic", "count": 4 },
+        { "type": "item", "id": "liberthia:o_observado_spawn_egg", "count": 1 },
+        { "type": "item", "id": "liberthia:matter_sample", "count": 1 },
+        { "type": "broadcast", "value": "§a🎁 {player} §r§aganhou as recompensas de participação!" }
+      ]
+    }
+  ]
+}

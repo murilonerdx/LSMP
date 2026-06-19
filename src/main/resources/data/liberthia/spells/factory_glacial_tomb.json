@@ -1,0 +1,33 @@
+{
+  "id": "factory_glacial_tomb",
+  "name": "Túmulo Glacial",
+  "school": "ICE",
+  "rarity": "RARE",
+  "mana": 40,
+  "cooldown": 140,
+  "damage": 6,
+  "range": 6,
+  "type": "NOVA",
+  "lore": "Congela tudo em volta. Inimigos não conseguem se mover.",
+  "behavior": {
+    "radius": 7.0
+  },
+  "vfx": {
+    "color_primary": "#aaeeff",
+    "color_secondary": "#ffffff",
+    "impact_scale": 1.8,
+    "impact_particles": 150,
+    "impact_light": 14
+  },
+  "effects": [
+    {
+      "type": "FREEZE",
+      "duration": 200
+    },
+    {
+      "type": "SLOWNESS",
+      "duration": 200,
+      "amplifier": 4
+    }
+  ]
+}

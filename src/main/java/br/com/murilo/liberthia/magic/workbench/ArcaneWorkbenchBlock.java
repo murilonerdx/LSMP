@@ -1,0 +1,66 @@
+package br.com.murilo.liberthia.magic.workbench;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
+
+/**
+ * r155 Phase 2: <b>Arcane Workbench</b> — bloco que combina scroll de spell +
+ * modifier glyphs num scroll customizado.
+ */
+public class ArcaneWorkbenchBlock extends Block implements EntityBlock {
+
+    public ArcaneWorkbenchBlock(Properties props) { super(props); }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ArcaneWorkbenchBlockEntity(pos, state);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos,
+                                  Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) return InteractionResult.SUCCESS;
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof ArcaneWorkbenchBlockEntity workbench)) return InteractionResult.PASS;
+
+        if (player instanceof ServerPlayer sp) {
+            net.minecraftforge.network.NetworkHooks.openScreen(sp,
+                    new MenuProvider() {
+                        @Override public Component getDisplayName() {
+                            return Component.literal("Arcane Workbench");
+                        }
+                        @Override
+                        public AbstractContainerMenu createMenu(int id, Inventory inv, Player p) {
+                            return new ArcaneWorkbenchMenu(id, inv, workbench);
+                        }
+                    },
+                    buf -> buf.writeBlockPos(pos));
+        }
+        return InteractionResult.CONSUME;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof ArcaneWorkbenchBlockEntity workbench) {
+                workbench.dropContents(level, pos);
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+}

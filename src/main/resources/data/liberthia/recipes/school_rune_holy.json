@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BPB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:blackstone"
+    },
+    "P": {
+      "item": "minecraft:glowstone_dust"
+    }
+  },
+  "result": {
+    "item": "liberthia:school_rune_holy",
+    "count": 1
+  }
+}

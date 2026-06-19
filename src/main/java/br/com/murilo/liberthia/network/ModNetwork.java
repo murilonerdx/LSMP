@@ -845,6 +845,15 @@ public final class ModNetwork {
                 br.com.murilo.liberthia.cutscene.CutsceneS2CPacket::decode,
                 br.com.murilo.liberthia.cutscene.CutsceneS2CPacket::handle
         );
+
+        // A Lua do Medo — sync S2C (ativa + cor RGB) (APPEND-ONLY: fim da lista)
+        CHANNEL.registerMessage(
+                packetId++,
+                br.com.murilo.liberthia.network.packet.FearMoonSyncS2CPacket.class,
+                br.com.murilo.liberthia.network.packet.FearMoonSyncS2CPacket::encode,
+                br.com.murilo.liberthia.network.packet.FearMoonSyncS2CPacket::decode,
+                br.com.murilo.liberthia.network.packet.FearMoonSyncS2CPacket::handle
+        );
     }
 
     public static void sendToPlayer(ServerPlayer player, Object packet) {

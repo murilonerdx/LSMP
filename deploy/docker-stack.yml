@@ -1,0 +1,211 @@
+# ============================================================================
+# Liberthia Admin — Docker Swarm stack (v84 sem AI/Ollama)
+# ============================================================================
+#
+# Deploy:
+#   docker swarm init        # se ainda não inicializou
+#   docker stack deploy -c deploy/docker-stack.yml liberthia
+#
+# Para rodar local sem swarm (compose simples):
+#   docker compose -f deploy/docker-stack.yml up --build
+#
+# Variáveis de ambiente importantes (set antes do deploy ou em arquivo .env):
+#   LIBERTHIA_PASSWORD   senha do painel (default: liberthia2026)
+#   LIBERTHIA_SECRET     secret JWT (gere com openssl rand -hex 32)
+#   MOD_URL              URL do mod Forge HTTP (default: http://host.docker.internal:25580)
+#   MOD_TOKEN            token X-Liberthia-Token (default: liberthia-dev-token)
+#   POSTGRES_PASSWORD    senha do postgres (default: liberthia_pw)
+#
+# ─── NOVIDADES v84 ─────────────────────────────────────────────────────────
+# • REMOVIDO: serviço `ollama` (LLM local) — consumia ~2GB RAM e travava
+#   o stack quando rodava sem GPU. Toda lógica de IA foi removida do
+#   backend (controllers, OllamaClient, Crown Economy snapshots).
+# • REMOVIDO: variáveis OLLAMA_URL, OLLAMA_MODEL, OLLAMA_TIMEOUT.
+# • FIX 503: nginx agora resolve DNS dinamicamente (ver deploy/nginx.conf).
+#   Não precisa mais forçar update do frontend quando backend reinicia.
+# • REMOVIDO: `order: start-first` do frontend — causava convivência de
+#   2 instâncias do nginx com cache de IP velho durante deploys.
+# ────────────────────────────────────────────────────────────────────────────
+
+version: "3.8"
+
+services:
+  # ----------------------------------------------------------------------------
+  # PostgreSQL — banco de dados de tudo (configs, snapshots, chat, map chunks)
+  # ----------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: liberthia
+      POSTGRES_USER: liberthia
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-liberthia_pw}
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/00-init.sql:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - liberthia_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U liberthia -d liberthia"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 10s
+      placement:
+        constraints:
+          - node.role == manager  # postgres com state preso a um node
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 256M
+
+  # ----------------------------------------------------------------------------
+  # Backend — Spring Boot com engines de fundo (SEM IA)
+  # ----------------------------------------------------------------------------
+  backend:
+    image: liberthia/backend:latest
+    build:
+      context: ..
+      dockerfile: deploy/backend.Dockerfile
+    environment:
+      # DB
+      DB_URL: jdbc:postgresql://postgres:5432/liberthia
+      DB_USER: liberthia
+      DB_PASS: ${POSTGRES_PASSWORD:-liberthia_pw}
+      # Mod
+      MOD_URL: ${MOD_URL:-http://host.docker.internal:25580}
+      MOD_TOKEN: ${MOD_TOKEN:-liberthia-dev-token}
+      # Auth web
+      LIBERTHIA_PASSWORD: ${LIBERTHIA_PASSWORD:-liberthia2026}
+      LIBERTHIA_SECRET: ${LIBERTHIA_SECRET:-}
+      # JVM — heap modesto pra dar espaço pro whisper-cli (subprocess fora da JVM).
+      # Whisper large-v3-turbo come 2-3GB em pico, então o limit total do container
+      # precisa cobrir JVM + whisper + buffers de áudio.
+      JAVA_OPTS: "-Xms256m -Xmx768m"
+    depends_on:
+      - postgres
+    networks:
+      - liberthia_net
+    # Expose só pra debug; em produção fica atrás do nginx
+    ports:
+      - "8090:8090"
+    volumes:
+      # Persiste voice clips e fotos entre redeploys. Sem isso, container redeploy
+      # apaga todos os clipes (escritos no writable layer).
+      - backend_data:/app/data
+    extra_hosts:
+      # Permite acessar o servidor Minecraft rodando no host (Linux)
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8090/api/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    deploy:
+      replicas: 1   # engines são singletons, NÃO escale > 1
+      restart_policy:
+        condition: any
+        delay: 5s
+      # update_config sem start-first: bota o novo PRA CIMA depois de derrubar
+      # o velho. Garante que só 1 IP do backend exista de cada vez na overlay.
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
+        failure_action: rollback
+      # ─── MEMÓRIA: AJUSTADO PRA EVITAR OOM ──────────────────────────────────
+      # ANTES: limits=768M — JVM (1G) + whisper-cli (2-3G) = OOM-killed em pico,
+      # container reiniciava, IP mudava, nginx ficava com IP velho cacheado e
+      # frontend recebia connection refused / 503.
+      # AGORA: limits=4G — cobre JVM (1G), whisper-cli (2-3G) e buffers (~500M).
+      # Reservation=1G garante o mínimo pra subir mesmo em node lotado.
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+
+  # ----------------------------------------------------------------------------
+  # Frontend — React build servido por nginx, proxy /api e /ws
+  # nginx agora resolve `backend` dinamicamente via DNS Docker (10s TTL).
+  # ----------------------------------------------------------------------------
+  frontend:
+    image: liberthia/frontend:latest
+    build:
+      context: ..
+      dockerfile: deploy/frontend.Dockerfile
+    depends_on:
+      - backend
+    networks:
+      - liberthia_net
+    ports:
+      - "5173:8999"   # nginx do frontend ouve em 8999 (NUNCA 80)
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8999/healthz || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    deploy:
+      replicas: 2   # frontend é stateless, pode escalar livremente
+      restart_policy:
+        condition: any
+        delay: 5s
+      # ATENÇÃO: stop-first em vez de start-first.
+      # start-first deixa 2 nginx vivos durante o rollout — e o velho ainda
+      # tem o IP do backend antigo cacheado, causando 503 nos clientes
+      # que caem nele. Stop-first garante que só um nginx atende por vez.
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 32M
+
+  # ----------------------------------------------------------------------------
+  # (Opcional) pgAdmin para inspecionar o banco
+  # Comente este service em produção.
+  # ----------------------------------------------------------------------------
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@liberthia.local
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-liberthia_pw}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - liberthia_net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+
+# ============================================================================
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+  backend_data:
+    driver: local
+
+networks:
+  liberthia_net:
+    driver: overlay   # overlay obrigatório pra swarm; em compose simples, vira bridge
+    attachable: true

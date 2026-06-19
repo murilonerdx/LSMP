@@ -1,0 +1,11 @@
+{
+  "type": "liberthia:folded_city",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "liberthia:folded_city"
+    },
+    "settings": "minecraft:nether"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "liberthia:purified_dark_matter_ingot"},
+    {"item": "minecraft:glass_bottle"},
+    {"item": "minecraft:sugar"}
+  ],
+  "result": {
+    "item": "liberthia:dark_matter_pill",
+    "count": 2
+  }
+}

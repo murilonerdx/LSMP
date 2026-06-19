@@ -1,0 +1,202 @@
+{
+  "source_file": "10_weaponhit_spritesheet.png",
+  "sheet_size": [
+    600,
+    600
+  ],
+  "grid": [
+    6,
+    6
+  ],
+  "cell_size_native": [
+    100,
+    100
+  ],
+  "output_frame_size": [
+    64,
+    64
+  ],
+  "frame_count": 30,
+  "frames": [
+    {
+      "index": 0,
+      "row": 0,
+      "col": 1,
+      "opaque_pixels": 62
+    },
+    {
+      "index": 1,
+      "row": 0,
+      "col": 2,
+      "opaque_pixels": 79
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "col": 3,
+      "opaque_pixels": 98
+    },
+    {
+      "index": 3,
+      "row": 0,
+      "col": 4,
+      "opaque_pixels": 127
+    },
+    {
+      "index": 4,
+      "row": 0,
+      "col": 5,
+      "opaque_pixels": 148
+    },
+    {
+      "index": 5,
+      "row": 1,
+      "col": 0,
+      "opaque_pixels": 179
+    },
+    {
+      "index": 6,
+      "row": 1,
+      "col": 1,
+      "opaque_pixels": 210
+    },
+    {
+      "index": 7,
+      "row": 1,
+      "col": 2,
+      "opaque_pixels": 235
+    },
+    {
+      "index": 8,
+      "row": 1,
+      "col": 3,
+      "opaque_pixels": 264
+    },
+    {
+      "index": 9,
+      "row": 1,
+      "col": 4,
+      "opaque_pixels": 279
+    },
+    {
+      "index": 10,
+      "row": 1,
+      "col": 5,
+      "opaque_pixels": 301
+    },
+    {
+      "index": 11,
+      "row": 2,
+      "col": 0,
+      "opaque_pixels": 313
+    },
+    {
+      "index": 12,
+      "row": 2,
+      "col": 1,
+      "opaque_pixels": 324
+    },
+    {
+      "index": 13,
+      "row": 2,
+      "col": 2,
+      "opaque_pixels": 342
+    },
+    {
+      "index": 14,
+      "row": 2,
+      "col": 3,
+      "opaque_pixels": 339
+    },
+    {
+      "index": 15,
+      "row": 2,
+      "col": 4,
+      "opaque_pixels": 343
+    },
+    {
+      "index": 16,
+      "row": 2,
+      "col": 5,
+      "opaque_pixels": 344
+    },
+    {
+      "index": 17,
+      "row": 3,
+      "col": 0,
+      "opaque_pixels": 349
+    },
+    {
+      "index": 18,
+      "row": 3,
+      "col": 1,
+      "opaque_pixels": 333
+    },
+    {
+      "index": 19,
+      "row": 3,
+      "col": 2,
+      "opaque_pixels": 327
+    },
+    {
+      "index": 20,
+      "row": 3,
+      "col": 3,
+      "opaque_pixels": 316
+    },
+    {
+      "index": 21,
+      "row": 3,
+      "col": 4,
+      "opaque_pixels": 304
+    },
+    {
+      "index": 22,
+      "row": 3,
+      "col": 5,
+      "opaque_pixels": 282
+    },
+    {
+      "index": 23,
+      "row": 4,
+      "col": 0,
+      "opaque_pixels": 254
+    },
+    {
+      "index": 24,
+      "row": 4,
+      "col": 1,
+      "opaque_pixels": 250
+    },
+    {
+      "index": 25,
+      "row": 4,
+      "col": 2,
+      "opaque_pixels": 215
+    },
+    {
+      "index": 26,
+      "row": 4,
+      "col": 3,
+      "opaque_pixels": 190
+    },
+    {
+      "index": 27,
+      "row": 4,
+      "col": 4,
+      "opaque_pixels": 152
+    },
+    {
+      "index": 28,
+      "row": 4,
+      "col": 5,
+      "opaque_pixels": 128
+    },
+    {
+      "index": 29,
+      "row": 5,
+      "col": 0,
+      "opaque_pixels": 71
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "IRI",
+    "ICI"
+  ],
+  "key": {
+    "L": { "item": "minecraft:lever" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "minecraft:copper_ingot" }
+  },
+  "result": {
+    "item": "liberthia:walkie_talkie",
+    "count": 1
+  }
+}

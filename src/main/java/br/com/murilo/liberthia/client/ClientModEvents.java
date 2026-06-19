@@ -87,6 +87,8 @@ public class ClientModEvents {
                 br.com.murilo.liberthia.client.renderer.HemoBoltRenderer::new);
         event.registerEntityRenderer(ModEntities.BLEEDING_ARROW.get(),
                 net.minecraft.client.renderer.entity.TippableArrowRenderer::new);
+        event.registerEntityRenderer(ModEntities.HUNTRESS_ARROW.get(),
+                net.minecraft.client.renderer.entity.TippableArrowRenderer::new);
         event.registerEntityRenderer(ModEntities.ORDER_PALADIN.get(),
                 br.com.murilo.liberthia.client.renderer.OrderPaladinRenderer::new);
         event.registerEntityRenderer(ModEntities.BLOOD_PEARL.get(),
@@ -768,6 +770,22 @@ public class ClientModEvents {
             // r185 — Forja de Fendas
             MenuScreens.register(ModMenuTypes.RIFT_FORGE.get(),
                     br.com.murilo.liberthia.client.screen.RiftForgeScreen::new);
+
+            // Arco da Caçadora: predicates de bow (pull/pulling) iguais ao vanilla,
+            // pra trocar pros frames de tração huntress_bow_pulling_0..2.
+            net.minecraft.client.renderer.item.ItemProperties.register(
+                    br.com.murilo.liberthia.registry.ModItems.HUNTRESS_BOW.get(),
+                    new net.minecraft.resources.ResourceLocation("pull"),
+                    (stack, lvl, entity, seed) -> {
+                        if (entity == null) return 0.0F;
+                        return entity.getUseItem() != stack ? 0.0F
+                                : (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F;
+                    });
+            net.minecraft.client.renderer.item.ItemProperties.register(
+                    br.com.murilo.liberthia.registry.ModItems.HUNTRESS_BOW.get(),
+                    new net.minecraft.resources.ResourceLocation("pulling"),
+                    (stack, lvl, entity, seed) ->
+                            entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 
             // Sample Vial: model override "filled" baseado no NBT (legacy, mantido).
             net.minecraft.client.renderer.item.ItemProperties.register(

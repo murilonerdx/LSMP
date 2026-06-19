@@ -1,0 +1,34 @@
+{
+  "id": "factory_meteor",
+  "name": "Meteoro",
+  "school": "FIRE",
+  "rarity": "EPIC",
+  "mana": 70,
+  "cooldown": 240,
+  "damage": 25,
+  "range": 32,
+  "type": "EXPLOSION",
+  "lore": "Invoca um meteoro flamejante no ponto mirado. Explosão massiva.",
+  "behavior": {
+    "radius": 5.0,
+    "ignite_blocks": true
+  },
+  "vfx": {
+    "color_primary": "#ff4400",
+    "impact_scale": 2.5,
+    "impact_particles": 200,
+    "screen_shake": 1.5,
+    "screen_shake_ticks": 20,
+    "impact_light": 15
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 160
+    },
+    {
+      "type": "KNOCKBACK",
+      "magnitude": 1.2
+    }
+  ]
+}

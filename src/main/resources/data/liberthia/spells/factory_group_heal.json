@@ -1,0 +1,36 @@
+{
+  "id": "factory_group_heal",
+  "name": "Cura em Grupo",
+  "school": "HOLY",
+  "rarity": "RARE",
+  "mana": 50,
+  "cooldown": 100,
+  "damage": 0,
+  "range": 24,
+  "type": "AURA",
+  "lore": "Cura 8HP em todos aliados próximos.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#aa66ff",
+    "color_secondary": "#ffffff",
+    "trail_density": 8,
+    "trail_size": 1.2,
+    "impact_scale": 1.0,
+    "impact_particles": 60,
+    "screen_shake": 0.3,
+    "impact_light": 10
+  },
+  "effects": [
+    {
+      "type": "HEAL",
+      "magnitude": 8
+    }
+  ],
+  "element": "HOLY",
+  "category": "AOE"
+}

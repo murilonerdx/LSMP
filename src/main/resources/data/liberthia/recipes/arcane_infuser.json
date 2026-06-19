@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EWE",
+    "WKW",
+    "ECE"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "W": {
+      "item": "liberthia:warded_core"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "C": {
+      "item": "liberthia:control_circuit"
+    }
+  },
+  "result": {
+    "item": "liberthia:arcane_infuser",
+    "count": 1
+  }
+}

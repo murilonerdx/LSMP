@@ -1,0 +1,42 @@
+{
+  "id": "factory_void_lance",
+  "name": "Lança do Vazio",
+  "school": "ELDRITCH",
+  "rarity": "EPIC",
+  "category": "DESTRUCTION",
+  "element": "NONE",
+  "mana": 60,
+  "cooldown": 100,
+  "damage": 26,
+  "range": 36,
+  "type": "PROJECTILE",
+  "lore": "Penetra blocos. Crítico drenante.",
+  "behavior": {
+    "speed": 2.8,
+    "pierce": true,
+    "penetrate_blocks": true,
+    "lifetime_ticks": 100,
+    "crit_chance": 0.4,
+    "crit_multiplier": 3.0,
+    "knockback_strength": 0.6
+  },
+  "vfx": {
+    "color_primary": "#5a1a8a",
+    "color_secondary": "#dd66ff",
+    "trail_density": 18,
+    "trail_size": 1.4,
+    "impact_scale": 1.8,
+    "screen_shake": 1.0,
+    "impact_light": 11
+  },
+  "effects": [
+    {
+      "type": "WITHER",
+      "duration": 100
+    },
+    {
+      "type": "BLINDNESS",
+      "duration": 80
+    }
+  ]
+}

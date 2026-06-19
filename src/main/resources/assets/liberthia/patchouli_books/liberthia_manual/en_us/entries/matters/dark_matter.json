@@ -1,0 +1,17 @@
+{
+  "name": "Matéria Escura",
+  "icon": "liberthia:dark_matter_bucket",
+  "category": "liberthia:matters",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A $(thing)mais poderosa$() das três. Distorce a realidade ao redor, criando ambientes hostis onde o caos predomina.$(br2)Em pequenas escalas — como em Liberthia — infecta hospedeiros, transformando-os em $(italic)marionetes$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Como obter",
+      "text": "• $(thing)Dark Matter Shard$() dropa minerando (picareta ferro+) — chance 0.5% + 0.005%×(64-Y), cap 3%$(br)• $(item)Dark Matter Ingot$() forjado em Dark Matter Forge$(br)• $(item)Active Dark Matter$() craftado infundindo no Catalyst"
+    }
+  ]
+}

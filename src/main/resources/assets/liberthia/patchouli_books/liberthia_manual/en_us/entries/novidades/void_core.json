@@ -1,0 +1,23 @@
+{
+  "name": "Núcleo do Abismo & Vazio",
+  "icon": "liberthia:abyssal_core",
+  "category": "liberthia:novidades",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Núcleo do Abismo",
+      "text": "Item de lore do $(5)Vazio / Terminus (Kali)$(). Uma esfera de cristal azul com núcleo âmbar selado.$(br2)No inventário/mão: concede $(thing)Proteção do Mar$() (Conduit Power) + partículas do conduíte."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:abyssal_core",
+      "text": "$(item)Núcleo do Abismo$()$(br2)$(o)Um núcleo abissal surgido de um corpo ancestral. Pulsa com energia selada.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cristalização",
+      "text": "Adicione uma $(thing)Ametista$() pra cristalizar:$(br2)$(li)Bancada: Núcleo + Caco de Ametista (shapeless)$(br)$(li)Atalho: segure e clique-direito com ametista no inventário$(br2)Resulta no $(5)Núcleo do Vazio Cristalizado$(): Absorção I + Regeneração I + partículas de portal roxo.$(br2)$(o)A fusão do Abismo com o Vazio. Cristalizado por ametistas carregadas de vozes ecoantes de uma entidade antiga.$()"
+    }
+  ]
+}

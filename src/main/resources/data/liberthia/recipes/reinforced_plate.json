@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PKP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "liberthia:steel_plate"
+    },
+    "K": {
+      "item": "liberthia:dark_matter_shard"
+    }
+  },
+  "result": {
+    "item": "liberthia:reinforced_plate",
+    "count": 4
+  }
+}

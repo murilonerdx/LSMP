@@ -1,0 +1,33 @@
+{
+  "name": "Farol de Voo & Voo Global",
+  "icon": "liberthia:beacon_flight_upgrade",
+  "category": "liberthia:tech",
+  "sortnum": 38,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Voo Regional",
+      "text": "O $(item)Farol de Voo$() concede $(l)VOO$() estilo criativo a qualquer player num raio de 16 blocos, usando só $(item)FE$().$(br2)Enquanto tiver energia e alguém estiver na área, o campo te mantém voando (30 FE/tick). Ao sair do raio ou faltar FE, o voo é revogado. Abra a GUI para ver a energia e ligue à sua rede."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:flight_beacon",
+      "text": "$(item)Farol de Voo$() — pena + pérola do End + aço energizado + circuito + glowstone."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(matter)Núcleo de Voo Global$()",
+      "text": "Coloque o $(item)Núcleo de Voo Global$() no slot de upgrade do Farol (abra a GUI) para transformá-lo.$(br2)Com o núcleo instalado, o farol concede voo a $(l)TODOS os players online$(), em $(l)QUALQUER dimensão$(), sem limite de região — voo no MUNDO INTEIRO."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(warn)Custo do Modo Global$()",
+      "text": "O poder cobra seu preço: o modo global drena $(warn)500 FE/tick$() de forma contínua — muito mais que o regional.$(br2)Prepare uma rede de energia robusta antes de ativá-lo, ou o farol vai apagar. O upgrade é dropado de volta se você quebrar o farol."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:beacon_flight_upgrade",
+      "text": "$(item)Núcleo de Voo Global$() — craft épico: cristal + estrela do nether + selos + beacon + blocos de matéria escura."
+    }
+  ]
+}

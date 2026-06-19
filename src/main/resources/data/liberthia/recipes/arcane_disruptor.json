@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RWR",
+    "WDW",
+    "RWR"
+  ],
+  "key": {
+    "R": {
+      "item": "liberthia:control_circuit"
+    },
+    "W": {
+      "item": "liberthia:warded_core"
+    },
+    "D": {
+      "item": "liberthia:dark_matter_ingot"
+    }
+  },
+  "result": {
+    "item": "liberthia:arcane_disruptor",
+    "count": 1
+  }
+}

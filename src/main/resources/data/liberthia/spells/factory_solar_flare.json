@@ -1,0 +1,37 @@
+{
+  "id": "factory_solar_flare",
+  "name": "Erupção Solar",
+  "school": "HOLY",
+  "rarity": "RARE",
+  "mana": 35,
+  "cooldown": 90,
+  "damage": 10,
+  "range": 10,
+  "type": "CONE",
+  "lore": "Cone de luz divina. Cega + queima + brilha alvos por 15s.",
+  "behavior": {
+    "radius": 10.0,
+    "cone_angle": 80.0
+  },
+  "vfx": {
+    "color_primary": "#ffeeaa",
+    "color_secondary": "#ffffff",
+    "trail_density": 18,
+    "impact_scale": 1.4,
+    "impact_light": 15
+  },
+  "effects": [
+    {
+      "type": "IGNITE",
+      "duration": 100
+    },
+    {
+      "type": "BLINDNESS",
+      "duration": 60
+    },
+    {
+      "type": "GLOWING",
+      "duration": 300
+    }
+  ]
+}

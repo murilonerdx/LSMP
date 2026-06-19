@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LWL",
+    "WrW",
+    "LWL"
+  ],
+  "key": {
+    "L": { "item": "minecraft:leather" },
+    "W": { "item": "minecraft:oak_log" },
+    "r": { "item": "minecraft:wither_rose" }
+  },
+  "result": { "item": "liberthia:fear_moon_drum", "count": 1 }
+}

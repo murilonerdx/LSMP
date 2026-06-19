@@ -1,0 +1,9 @@
+{
+  "_comment": "v0.1.22: REMOVIDO white_matter_pendant + refined_containment_pendant (estavam em DUPLICATA na tag charm + necklace, causando conflito que impedia equip — Curios em 1.20.1 tem comportamento errático com items multi-slot). Esses 2 pendants vivem só em 'necklace' agora.",
+  "replace": false,
+  "values": [
+    "liberthia:containment_glove",
+    "liberthia:refined_containment_glove",
+    "liberthia:pulso"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "liberthia_cures",
+  "pattern": [
+    "GSG",
+    "BPB",
+    "GSG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glow_berries" },
+    "S": { "item": "minecraft:sugar" },
+    "B": { "item": "minecraft:nether_wart" },
+    "P": { "item": "liberthia:clear_matter_pill" }
+  },
+  "result": {
+    "item": "liberthia:daily_pill",
+    "count": 4
+  }
+}

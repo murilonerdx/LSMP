@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GSG",
+    "CWC",
+    "GDG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:gold_ingot" },
+    "S": { "item": "liberthia:dark_matter_shard" },
+    "C": { "item": "liberthia:dark_matter_shard" },
+    "W": { "item": "liberthia:clear_matter_pill" },
+    "D": { "item": "liberthia:yellow_matter_ingot" }
+  },
+  "result": {
+    "item": "liberthia:white_matter_pendant",
+    "count": 1
+  }
+}

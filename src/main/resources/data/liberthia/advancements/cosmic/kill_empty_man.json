@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:empty_man_egg"
+    },
+    "title": {
+      "translate": "advancement.liberthia.kill_empty_man.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.kill_empty_man.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "liberthia:empty_man"
+        }
+      }
+    }
+  },
+  "parent": "liberthia:cosmic/first_horror_item"
+}

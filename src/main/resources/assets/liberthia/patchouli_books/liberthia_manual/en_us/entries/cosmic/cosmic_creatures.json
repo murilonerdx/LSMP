@@ -1,0 +1,23 @@
+{
+  "name": "Criaturas Cósmicas",
+  "icon": "liberthia:colossal_eye_spawn_egg",
+  "category": "liberthia:cosmic",
+  "sortnum": 51,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "14 Horrores",
+      "text": "Criaturas planas tipo $(item)Olho Parasita$() que soltam infecção e corrompem o chão com flux dimensional.$(br2)$(warn)Aparecem só à NOITE / no escuro$() e somente com sua $(l)sanidade abaixo de 40%$() — nunca à luz do dia."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Habilidades",
+      "text": "$(li)$(item)Sanguessuga do Olhar$(): ENCARAR a faz crescer e ficar mais forte$(br)$(li)$(item)Tecelão Cego$(): encarar te cega + invoca brasas de fogo$(br)$(li)$(item)Hospedeiro$(): infecta mobs → eles te atacam$(br)$(li)$(item)Olho Colossal$(): o chefe — lento, enorme, tanque$(br)$(li)$(item)Carrapato do Vazio$(): teleporta pras suas costas"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mais variantes",
+      "text": "$(li)$(item)Larva Gritante$(): grito sônico que empurra$(br)$(li)$(item)Orbe do Pavor$(): pulsos de Escuridão$(br)$(li)$(item)Olho Pútrido$(): Veneno + Wither$(br)$(li)$(item)Mariposa da Penumbra$(), $(item)Ácaro Sussurrante$(), $(item)Rastejante de Bocas$(), $(item)Vigia de Carne$(), $(item)Reflexo$(), $(item)Brasa Parasita$()."
+    }
+  ]
+}

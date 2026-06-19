@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GSG",
+    "DDD",
+    "GSG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glowstone_dust" },
+    "S": { "item": "minecraft:sunflower" },
+    "D": { "item": "liberthia:dark_matter_shard" }
+  },
+  "result": {
+    "item": "liberthia:yellow_matter_ingot",
+    "count": 1
+  }
+}

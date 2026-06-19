@@ -1,0 +1,182 @@
+server:
+  port: 8090
+  # Força UTF-8 em request body + response body. Sem isso, no Windows o
+  # default da JVM (Cp1252) é usado quando o cliente não declara charset
+  # explicitamente — quebra em § (cores Minecraft), acentos, emojis.
+  # Sintoma típico: "JSON parse error: Invalid UTF-8 start byte 0xa7".
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  # Tomcat aceita post size grande pra upload de .ogg/.png
+  tomcat:
+    max-http-form-post-size: 100MB
+    max-swallow-size: 100MB
+
+spring:
+  application:
+    name: liberthia-admin-backend
+  jackson:
+    default-property-inclusion: non_null
+  # Multipart config — sem isso upload > 1MB falha com "Failed to parse multipart"
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+      file-size-threshold: 2KB
+  # Banco de dados PostgreSQL — DEFAULT é o projeto Neon do usuário (cloud).
+  # URL + username são identificadores não-sensíveis; senha tem que vir de env.
+  # Pra rodar localmente em dev: defina DB_URL/DB_USER/DB_PASS apropriados.
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://ep-patient-mode-aqc5e1av-pooler.c-8.us-east-1.aws.neon.tech/neondb?sslmode=require}
+    username: ${DB_USER:neondb_owner}
+    password: ${DB_PASS:}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 30000
+      # initialization-fail-timeout: tempo MÁX que o Hikari fica retentando a
+      # primeira conexão no boot antes de desistir. Default é 1ms (falha na 1ª
+      # tentativa), o que causa o backend a morrer com "FATAL: password
+      # authentication failed" quando o Postgres acabou de subir e ainda não
+      # terminou de aplicar o POSTGRES_PASSWORD no role.
+      # 120000 = 2 min de retry — cobre praticamente qualquer race de startup.
+      initialization-fail-timeout: 120000
+      # validation-timeout: quanto tempo a query "SELECT 1" pode demorar antes
+      # do pool considerar a conexão dead. 5s é confortável.
+      validation-timeout: 5000
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+        # Loga as queries de DDL pra debugar criação de tabela
+        hbm2ddl:
+          show-creation-statements: true
+    show-sql: false
+    open-in-view: false
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: never  # use docker init script ou rode init.sql manualmente
+      continue-on-error: true
+
+# Logs detalhados pra debug. Em produção pode setar back pra INFO.
+logging:
+  level:
+    br.com.murilo.liberthia.admin: INFO
+    # Mostra DDL que o Hibernate gera ao criar tabelas
+    org.hibernate.tool.schema: INFO
+    # Mostra erros de conexão JDBC sem mascarar
+    com.zaxxer.hikari: WARN
+    org.hibernate.SQL: WARN
+
+# Conexão com o mod (servidor Forge)
+#
+# IMPORTANTE — sobre o `token`:
+#   O env var MOD_TOKEN agora é só o valor INICIAL de bootstrap (quando o DB
+#   ainda não tem nada salvo). A fonte de verdade ficou no banco de dados, na
+#   tabela `backend_config` com chave "MOD_TOKEN".
+#
+#   Fluxo:
+#     1. No 1º boot, se não há override no DB → usa o valor daqui (env var).
+#     2. Quando o mod chama POST /api/mod/register com o token dele, o
+#        ModRegistry persiste automaticamente em backend_config — esse virou o
+#        token de verdade e sobrevive a restart do backend.
+#     3. O operador pode editar/colar um novo token a qualquer momento via
+#        painel admin em /mod-config — também persiste no DB.
+#
+#   Resultado: o token do compose pode estar desatualizado/divergente do que o
+#   mod gera em world/serverconfig/liberthia-server.toml e NÃO QUEBRA NADA —
+#   o backend usa o do DB. Não precisa mais editar compose + restart pra
+#   sincronizar tokens.
+mod:
+  url: ${MOD_URL:http://192.168.15.7:25580}
+  # Token de bootstrap — defina via env MOD_TOKEN (a fonte de verdade fica no DB).
+  token: ${MOD_TOKEN:}
+  sse-reconnect-ms: 5000
+
+# CORS — todos os origins permitidos (pra funcionar em qualquer máquina).
+cors:
+  allowed-origins:
+    - "*"
+
+# Senha pra acessar o painel web. Use env var LIBERTHIA_PASSWORD em produção.
+admin:
+  web:
+    # Defina via env LIBERTHIA_PASSWORD (sem default — obrigatório).
+    password: ${LIBERTHIA_PASSWORD:}
+    secret: ${LIBERTHIA_SECRET:}
+
+# Detector de discurso de ódio (HateSpeech) — pipeline regex + Ollama.
+# Roda automaticamente após cada transcrição do Whisper completar.
+# Performance: regex puro (~µs/clip) filtra 95%+ dos clips sem custo de CPU.
+# Só os com gatilho regex são analisados pelo LLM (qwen2.5:1.5b, ~2s/clip).
+hate-speech:
+  # Quando false, desliga o LLM e cria alerta apenas por regex match.
+  # Útil se CPU tá apertado (whisper já consome bastante).
+  use-llm: ${HATE_SPEECH_USE_LLM:true}
+  # Confidence mínima do LLM pra gerar alerta. Abaixo disso, descarta.
+  # 0.5 = aceita "talvez ofensivo". 0.8 = só ofensas certas. Calibrar conforme
+  # taxa de falso positivo no painel.
+  min-confidence: ${HATE_SPEECH_MIN_CONFIDENCE:0.5}
+
+# Voice Archive — captura de voz dos players via Simple Voice Chat
+voice:
+  # Onde os WAVs ficam armazenados. Recomendado: volume persistente em produção.
+  storage-dir: ${VOICE_STORAGE_DIR:data/voice-clips}
+  # Clipes mais velhos que isso são removidos pelo cleanup diário (5h).
+  retention-days: ${VOICE_RETENTION_DAYS:90}
+
+# Whisper transcrição automática — config tunável.
+# Modelo default: large-v3-turbo (~1.5GB RAM, qualidade quase-large-v3, 8× rápido).
+# Pra reduzir uso de RAM (servidor pequeno), trocar pra: small / medium / base.
+# Modelo é baixado no build do Docker (ARG WHISPER_MODEL).
+#
+# ─── DEFAULTS DE CPU AJUSTADOS NA v91 ─────────────────────────────────────
+# Antes da v91, whisper rodava com -t 4 -bo 5 -bs 5 = 200%+ CPU contínuo. Em
+# VPS de 4 cores compartilhados (DB, mod proxy, ffmpeg), isso deixava a JVM
+# sem ciclos e o Traefik retornava 503 no healthcheck → restart loop.
+# Novos defaults: threads=2, beam=3, best=3, nice=15 → ~50% CPU médio.
+# ──────────────────────────────────────────────────────────────────────────
+whisper:
+  enabled: ${WHISPER_ENABLED:true}
+  # Path do .bin no container. Tem que bater com o que foi baixado no Dockerfile.
+  model-path: ${WHISPER_MODEL_PATH:/usr/local/share/ggml-large-v3-turbo.bin}
+  # Idioma — pt | en | es | auto. "auto" detecta mas é menos preciso.
+  language: ${WHISPER_LANGUAGE:pt}
+  # Threads CPU POR WORKER. DEFAULT REDUZIDO de 16→2.
+  # NÃO passar de núcleos físicos disponíveis (HT não ajuda whisper.cpp).
+  threads: ${WHISPER_THREADS:2}
+  # Workers paralelos — quantos clipes transcrevem AO MESMO TEMPO. Cada
+  # worker carrega o modelo (~1.6GB RAM).
+  # Mantém em 1 — se subir, multiplica CPU + RAM.
+  workers: ${WHISPER_WORKERS:1}
+  # Qualidade vs velocidade. Defaults REDUZIDOS de 5/5→3/3 — pt-BR informal
+  # quase não perde qualidade mas economiza ~40% CPU.
+  beam-size: ${WHISPER_BEAM_SIZE:3}
+  best-of: ${WHISPER_BEST_OF:3}
+  # Nice level (0=normal, 19=mais baixo). Default 15 — whisper cede CPU pra
+  # JVM/ffmpeg quando precisam. Sem isso, whisper monopolizava.
+  cpu-priority: ${WHISPER_CPU_PRIORITY:15}
+  # Hard-cap de CPU em % (0 = só nice, sem cap). Ex: 150 = max 1.5 cores.
+  # Precisa do pacote `cpulimit` no container (instalado na v91).
+  cpu-percent: ${WHISPER_CPU_PERCENT:0}
+  # Initial prompt — contexto pra modelo entender gírias, nomes, estilo.
+  # Personalize via env WHISPER_PROMPT pro tom do seu servidor.
+  prompt: ${WHISPER_PROMPT:Conversa informal em português brasileiro entre jogadores no servidor Liberthia. Usam gírias, nomes próprios e palavrões.}
+
+# Economy — config da moeda do servidor (item Crown).
+# Snapshot diário às 6h calcula supply total e armazena pra histórico de
+# inflação. UI em /crown-economy permite ver gráfico e calcular preços.
+economy:
+  # ID do item que representa a moeda. Default: numismatics:crown (mod
+  # Numismatics). Troca via env se mudar de mod.
+  crown-item-id: ${CROWN_ITEM_ID:numismatics:crown}

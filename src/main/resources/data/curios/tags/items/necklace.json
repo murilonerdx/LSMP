@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "liberthia:white_matter_pendant",
+    "liberthia:refined_containment_pendant",
+    "liberthia:dark_matter_pendant",
+    "liberthia:clear_matter_pendant",
+    "liberthia:yellow_matter_pendant",
+    "liberthia:mind_ward",
+    "liberthia:halo_of_light",
+    "liberthia:spirit_compass",
+    "liberthia:angel_tear_amulet",
+    "liberthia:soul_mirror",
+    "liberthia:blood_pact_amulet",
+    "liberthia:ascension_seal",
+    "liberthia:null_seal",
+    "liberthia:astaron_eye_relic",
+    "liberthia:astaron_mind_amulet",
+    "liberthia:astaron_star_pendant",
+    "liberthia:astaron_essence_relic"
+  ]
+}

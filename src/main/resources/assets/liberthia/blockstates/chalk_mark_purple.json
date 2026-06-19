@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "shape=dot": {
+      "model": "liberthia:block/chalk_mark_purple"
+    },
+    "shape=line": {
+      "model": "liberthia:block/chalk_mark_purple"
+    },
+    "shape=circle": {
+      "model": "liberthia:block/chalk_mark_purple"
+    },
+    "shape=sigil": {
+      "model": "liberthia:block/chalk_mark_purple"
+    }
+  }
+}

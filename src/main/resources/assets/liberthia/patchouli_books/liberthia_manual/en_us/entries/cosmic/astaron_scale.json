@@ -1,0 +1,45 @@
+{
+  "name": "Escala de Astaron",
+  "icon": "liberthia:astaron_scale",
+  "category": "liberthia:cosmic",
+  "sortnum": 52,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Escala de Astaron",
+      "text": "Um medidor que lê o estado oculto do mundo: a $(5)Radiação Dimensional$() global e o $(d)número de criaturas cósmicas$() vivas no servidor.$(br2)Basta segurá-la e ver o $(item)tooltip$() — os valores aparecem ali e no HUD."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:astaron_scale",
+      "title": "Como Forjar",
+      "text": "Um medidor de campo: $(item)olho do End$() + $(item)bússola$() pra captar o cósmico, $(item)ametista$() e $(item)redstone$() pro sensor."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Lendo o Medidor",
+      "text": "$(li)$(2)Radiação 0–14$() — $(2)Dormente$().$(br)$(li)$(a)15–39$() — $(a)Estável$().$(br)$(li)$(e)40–69$() — $(e)Elevado$().$(br)$(li)$(6)70–89$() — $(6)Crítico$().$(br)$(li)$(4)90–100$() — $(4)Colapso Iminente$().$(br2)Quanto mais alta a radiação, mais o mundo se torna hostil."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Céu & Caos perto de 100",
+      "text": "Ao se aproximar de $(l)100$(), o $(item)céu muda de cor$() (configurável pelo admin) e o mundo entra em $(warn)caos$(): mais criaturas cósmicas surgem até atingir o alvo de caos definido.$(br2)É o sinal de que algo cósmico está prestes a romper."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Comandos /liberthia astaron",
+      "text": "Para admins (perm. nível 2):$(br)$(li)$(item)radiation set <0-100>$() / $(item)radiation get$()$(br)$(li)$(item)chaos set <0-200>$() — alvo de cósmicos.$(br)$(li)$(item)skycolor <rgb>$() — cor do céu.$(br)$(li)$(item)status$() / $(item)reset$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Status & Reset",
+      "text": "$(item)/liberthia astaron status$() mostra tudo de uma vez: radiação atual, alvo de caos, cósmicos vivos e cor do céu.$(br2)$(item)/liberthia astaron reset$() zera a radiação e o caos — o mundo volta a $(2)Dormente$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:astaron_scale",
+      "title": "Carregue-a",
+      "text": "Item de $(l)stack 1$(). Não faz nada além de medir — mas saber a radiação $(o)antes$() de viajar pode salvar sua vida."
+    }
+  ]
+}

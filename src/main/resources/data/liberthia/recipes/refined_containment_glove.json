@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LSL",
+    "LPL",
+    "L L"
+  ],
+  "key": {
+    "L": { "item": "minecraft:leather" },
+    "S": { "item": "minecraft:string" },
+    "P": { "item": "liberthia:purified_clear_matter_ingot" }
+  },
+  "result": {
+    "item": "liberthia:refined_containment_glove",
+    "count": 1
+  }
+}

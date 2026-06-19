@@ -1,0 +1,38 @@
+{
+  "id": "factory_dim_blind_curse",
+  "name": "Maldição da Cegueira Dimensional",
+  "school": "ELDRITCH",
+  "rarity": "EPIC",
+  "mana": 60,
+  "cooldown": 200,
+  "damage": 6,
+  "range": 24,
+  "type": "TARGETED",
+  "lore": "Inflige cegueira dimensional — vítima vê pelo olho de outro jogador.",
+  "behavior": {
+    "speed": 1.5,
+    "lifetime_ticks": 60,
+    "pierce": false,
+    "aoe_radius": 2
+  },
+  "vfx": {
+    "color_primary": "#6b2dc4",
+    "color_secondary": "#aa00ff",
+    "trail_density": 12,
+    "trail_size": 1.4,
+    "impact_scale": 1.0,
+    "impact_particles": 40,
+    "screen_shake": 0.5,
+    "impact_light": 12
+  },
+  "effects": [
+    {
+      "type": "CUSTOM_EFFECT",
+      "effect": "dimensional_blindness",
+      "duration": 200,
+      "magnitude": 0.0
+    }
+  ],
+  "element": "ELDRITCH",
+  "category": "UTILITY"
+}

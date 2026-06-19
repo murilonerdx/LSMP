@@ -1,0 +1,9 @@
+.gradle/
+build/
+out/
+.idea/
+.vscode/
+*.iml
+liberthia_snapshot_cache/
+**/node_modules/
+*.log

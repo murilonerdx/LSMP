@@ -1,0 +1,23 @@
+{
+  "name": "Selos",
+  "icon": "liberthia:mana_suppressor",
+  "category": "liberthia:antimagic",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Selo Supressor de Mana",
+      "text": "Ligado à rede FE, cria um $(item)campo (raio 8)$() que $(l)IMPEDE conjuração$(): quem entra $(warn)não consegue gastar mana$() — o feitiço falha.$(br2)Ótimo pra proteger bases de magos."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Selo Sentinela",
+      "text": "Detecta quem $(l)conjura$() no raio (12) e $(warn)PUNE$(): dano + Lentidão + Cegueira + Antimagia.$(br2)Ambos consomem FE e abrem GUI de energia no clique direito."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:mana_suppressor",
+      "text": "$(item)Selo Supressor$() — precisa de Disruptor Arcano (T2)."
+    }
+  ]
+}

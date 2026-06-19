@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "liberthia:block/candle_occult_black"
+    },
+    "lit=true": {
+      "model": "liberthia:block/candle_occult_black_lit"
+    }
+  }
+}

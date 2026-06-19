@@ -1,0 +1,6 @@
+{
+  "name": "Sistema de Rituais",
+  "description": "Ritual Circle + chalks + candles + sigils. Invocar entidades, aprender feitiços, banir hostis.",
+  "icon": "liberthia:ritual_circle_item",
+  "sortnum": 2
+}

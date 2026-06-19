@@ -1,0 +1,40 @@
+{
+  "name": "Doenças Dimensionais",
+  "icon": "liberthia:dimensional_serum",
+  "category": "liberthia:cosmic",
+  "sortnum": 53,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Doenças Dimensionais",
+      "text": "Exposição prolongada à $(item)entropia$(), radiação dimensional e criaturas cósmicas pode te $(warn)contaminar$(). As doenças são $(o)permanentes$(): NÃO somem com leite nem ao morrer. Só o $(item)Soro Dimensional$() cura."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Memória Dimensional",
+      "text": "Partículas $(5)roxas$() seguem você. A cada $(l)~10 min$() sua mente te arrasta para $(o)outra dimensão$() por 10 segundos — e te devolve (com queda/fogo protegidos). Imprevisível e perigoso longe de casa."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Infecção Dimensional",
+      "text": "Algo se move sob sua pele. Periodicamente surgem $(cosmic)Vermes Dimensionais$() que te perseguem e, ao tocar, aplicam $(warn)Náusea + Fome$(). Mate-os rápido — mas a infecção continua até a cura."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "liberthia:dimensional_worm",
+      "name": "Verme Dimensional",
+      "text": "Gerado pela Infecção. Pequeno, rápido, efêmero."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Paranoia Dimensional",
+      "text": "A cada $(l)~30 min$() seus olhos deixam de ser seus: você passa a $(o)ver pela visão de outro jogador$() por 5 segundos. Desorientador em combate."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:dimensional_serum",
+      "title": "Soro Dimensional",
+      "text": "A $(good)cura$(). Bebe e purga $(l)todas$() as doenças dimensionais de uma vez. Guarde alguns sempre."
+    }
+  ]
+}

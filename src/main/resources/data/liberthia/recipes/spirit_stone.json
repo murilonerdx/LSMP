@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:deepslate" },
+    { "item": "minecraft:soul_sand" },
+    { "item": "minecraft:lapis_lazuli" }
+  ],
+  "result": { "item": "liberthia:spirit_stone", "count": 4 }
+}

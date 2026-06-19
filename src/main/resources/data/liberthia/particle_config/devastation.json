@@ -1,0 +1,9 @@
+{
+  "name": "Devastation",
+  "trail_density": 35,
+  "trail_size": 2.2,
+  "impact_scale": 2.5,
+  "impact_particles": 250,
+  "screen_shake": 1.2,
+  "impact_light": 15
+}

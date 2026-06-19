@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:glyph_fireball"
+    },
+    "title": {
+      "translate": "advancement.liberthia.first_glyph.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.first_glyph.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "got_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "liberthia:glyph_fireball",
+              "liberthia:glyph_method_self",
+              "liberthia:glyph_effect_harm",
+              "liberthia:glyph_amplify"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "liberthia:magic/first_spell"
+}

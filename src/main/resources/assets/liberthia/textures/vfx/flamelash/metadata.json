@@ -1,0 +1,286 @@
+{
+  "source_file": "6_flamelash_spritesheet.png",
+  "sheet_size": [
+    700,
+    700
+  ],
+  "grid": [
+    7,
+    7
+  ],
+  "cell_size_native": [
+    100,
+    100
+  ],
+  "output_frame_size": [
+    64,
+    64
+  ],
+  "frame_count": 44,
+  "frames": [
+    {
+      "index": 0,
+      "row": 0,
+      "col": 1,
+      "opaque_pixels": 54
+    },
+    {
+      "index": 1,
+      "row": 0,
+      "col": 2,
+      "opaque_pixels": 84
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "col": 3,
+      "opaque_pixels": 126
+    },
+    {
+      "index": 3,
+      "row": 0,
+      "col": 4,
+      "opaque_pixels": 160
+    },
+    {
+      "index": 4,
+      "row": 0,
+      "col": 5,
+      "opaque_pixels": 187
+    },
+    {
+      "index": 5,
+      "row": 0,
+      "col": 6,
+      "opaque_pixels": 212
+    },
+    {
+      "index": 6,
+      "row": 1,
+      "col": 0,
+      "opaque_pixels": 262
+    },
+    {
+      "index": 7,
+      "row": 1,
+      "col": 1,
+      "opaque_pixels": 297
+    },
+    {
+      "index": 8,
+      "row": 1,
+      "col": 2,
+      "opaque_pixels": 317
+    },
+    {
+      "index": 9,
+      "row": 1,
+      "col": 3,
+      "opaque_pixels": 350
+    },
+    {
+      "index": 10,
+      "row": 1,
+      "col": 4,
+      "opaque_pixels": 352
+    },
+    {
+      "index": 11,
+      "row": 1,
+      "col": 5,
+      "opaque_pixels": 367
+    },
+    {
+      "index": 12,
+      "row": 1,
+      "col": 6,
+      "opaque_pixels": 391
+    },
+    {
+      "index": 13,
+      "row": 2,
+      "col": 0,
+      "opaque_pixels": 423
+    },
+    {
+      "index": 14,
+      "row": 2,
+      "col": 1,
+      "opaque_pixels": 454
+    },
+    {
+      "index": 15,
+      "row": 2,
+      "col": 2,
+      "opaque_pixels": 483
+    },
+    {
+      "index": 16,
+      "row": 2,
+      "col": 3,
+      "opaque_pixels": 507
+    },
+    {
+      "index": 17,
+      "row": 2,
+      "col": 4,
+      "opaque_pixels": 513
+    },
+    {
+      "index": 18,
+      "row": 2,
+      "col": 5,
+      "opaque_pixels": 538
+    },
+    {
+      "index": 19,
+      "row": 2,
+      "col": 6,
+      "opaque_pixels": 520
+    },
+    {
+      "index": 20,
+      "row": 3,
+      "col": 0,
+      "opaque_pixels": 522
+    },
+    {
+      "index": 21,
+      "row": 3,
+      "col": 1,
+      "opaque_pixels": 532
+    },
+    {
+      "index": 22,
+      "row": 3,
+      "col": 2,
+      "opaque_pixels": 507
+    },
+    {
+      "index": 23,
+      "row": 3,
+      "col": 3,
+      "opaque_pixels": 473
+    },
+    {
+      "index": 24,
+      "row": 3,
+      "col": 4,
+      "opaque_pixels": 467
+    },
+    {
+      "index": 25,
+      "row": 3,
+      "col": 5,
+      "opaque_pixels": 435
+    },
+    {
+      "index": 26,
+      "row": 3,
+      "col": 6,
+      "opaque_pixels": 388
+    },
+    {
+      "index": 27,
+      "row": 4,
+      "col": 0,
+      "opaque_pixels": 353
+    },
+    {
+      "index": 28,
+      "row": 4,
+      "col": 1,
+      "opaque_pixels": 308
+    },
+    {
+      "index": 29,
+      "row": 4,
+      "col": 2,
+      "opaque_pixels": 254
+    },
+    {
+      "index": 30,
+      "row": 4,
+      "col": 3,
+      "opaque_pixels": 210
+    },
+    {
+      "index": 31,
+      "row": 4,
+      "col": 4,
+      "opaque_pixels": 199
+    },
+    {
+      "index": 32,
+      "row": 4,
+      "col": 5,
+      "opaque_pixels": 168
+    },
+    {
+      "index": 33,
+      "row": 4,
+      "col": 6,
+      "opaque_pixels": 135
+    },
+    {
+      "index": 34,
+      "row": 5,
+      "col": 0,
+      "opaque_pixels": 127
+    },
+    {
+      "index": 35,
+      "row": 5,
+      "col": 1,
+      "opaque_pixels": 113
+    },
+    {
+      "index": 36,
+      "row": 5,
+      "col": 2,
+      "opaque_pixels": 93
+    },
+    {
+      "index": 37,
+      "row": 5,
+      "col": 3,
+      "opaque_pixels": 76
+    },
+    {
+      "index": 38,
+      "row": 5,
+      "col": 4,
+      "opaque_pixels": 72
+    },
+    {
+      "index": 39,
+      "row": 5,
+      "col": 5,
+      "opaque_pixels": 43
+    },
+    {
+      "index": 40,
+      "row": 5,
+      "col": 6,
+      "opaque_pixels": 29
+    },
+    {
+      "index": 41,
+      "row": 6,
+      "col": 0,
+      "opaque_pixels": 19
+    },
+    {
+      "index": 42,
+      "row": 6,
+      "col": 1,
+      "opaque_pixels": 11
+    },
+    {
+      "index": 43,
+      "row": 6,
+      "col": 2,
+      "opaque_pixels": 8
+    }
+  ]
+}

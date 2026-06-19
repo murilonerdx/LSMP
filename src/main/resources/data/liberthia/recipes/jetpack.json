@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E E",
+    "EXE",
+    "U U"
+  ],
+  "key": {
+    "E": {
+      "item": "liberthia:energized_steel"
+    },
+    "X": {
+      "item": "liberthia:dark_matter_catalyst"
+    },
+    "U": {
+      "item": "liberthia:copper_coil"
+    }
+  },
+  "result": {
+    "item": "liberthia:jetpack",
+    "count": 1
+  }
+}

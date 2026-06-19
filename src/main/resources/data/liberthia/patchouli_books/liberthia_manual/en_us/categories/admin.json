@@ -1,0 +1,6 @@
+{
+  "name": "Ferramentas Admin",
+  "description": "Caretaker Console, Reflection Seed, 10 Admin Cosmic Artifacts, e o painel web administrativo.",
+  "icon": "liberthia:caretaker_console",
+  "sortnum": 9
+}

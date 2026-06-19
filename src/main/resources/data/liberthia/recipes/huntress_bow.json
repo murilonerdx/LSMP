@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " gs",
+    "e s",
+    " gs"
+  ],
+  "key": {
+    "g": { "item": "minecraft:gold_ingot" },
+    "s": { "item": "minecraft:string" },
+    "e": { "item": "minecraft:emerald" }
+  },
+  "result": { "item": "liberthia:huntress_bow", "count": 1 }
+}

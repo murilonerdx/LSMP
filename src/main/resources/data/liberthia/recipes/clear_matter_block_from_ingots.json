@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "III",
+    "III"
+  ],
+  "key": {
+    "I": { "item": "liberthia:clear_matter_ingot" }
+  },
+  "result": {
+    "item": "liberthia:clear_matter_block",
+    "count": 1
+  }
+}

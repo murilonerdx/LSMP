@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "liberthia:containment_glove",
+    "liberthia:refined_containment_glove",
+    "liberthia:astaron_void_core"
+  ]
+}

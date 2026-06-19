@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "liberthia:containment_glove",
+    "liberthia:refined_containment_glove",
+    "liberthia:ring_bloodborn",
+    "liberthia:ring_capacity",
+    "liberthia:ring_firewarp",
+    "liberthia:ring_lurker",
+    "liberthia:ring_teleport",
+    "liberthia:ring_mana_flow",
+    "liberthia:ring_lucidity",
+    "liberthia:ring_arcane_power",
+    "liberthia:astaron_mirror_ring"
+  ]
+}

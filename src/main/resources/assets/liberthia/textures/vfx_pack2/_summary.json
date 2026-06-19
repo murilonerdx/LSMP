@@ -1,0 +1,812 @@
+{
+  "part01": {
+    "base_source": "03.png",
+    "frames_per_color": 11,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part10": {
+    "base_source": "484.png",
+    "frames_per_color": 11,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part11": {
+    "base_source": "527.png",
+    "frames_per_color": 11,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part12": {
+    "base_source": "569.png",
+    "frames_per_color": 13,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part13": {
+    "base_source": "633.png",
+    "frames_per_color": 12,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part14": {
+    "base_source": "655.png",
+    "frames_per_color": 15,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part15": {
+    "base_source": "712.png",
+    "frames_per_color": 21,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part02": {
+    "base_source": "71.png",
+    "frames_per_color": 9,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part03": {
+    "base_source": "135.png",
+    "frames_per_color": 12,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part04": {
+    "base_source": "197.png",
+    "frames_per_color": 14,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part05": {
+    "base_source": "232.png",
+    "frames_per_color": 9,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part06": {
+    "base_source": "296.png",
+    "frames_per_color": 9,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part07": {
+    "base_source": "326.png",
+    "frames_per_color": 7,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part08": {
+    "base_source": "388.png",
+    "frames_per_color": 8,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  },
+  "part09": {
+    "base_source": "436.png",
+    "frames_per_color": 8,
+    "colors": [
+      {
+        "idx": 0,
+        "name": "red"
+      },
+      {
+        "idx": 1,
+        "name": "orange"
+      },
+      {
+        "idx": 2,
+        "name": "yellow"
+      },
+      {
+        "idx": 3,
+        "name": "green"
+      },
+      {
+        "idx": 4,
+        "name": "cyan"
+      },
+      {
+        "idx": 5,
+        "name": "blue"
+      },
+      {
+        "idx": 6,
+        "name": "purple"
+      },
+      {
+        "idx": 7,
+        "name": "magenta"
+      },
+      {
+        "idx": 8,
+        "name": "white"
+      },
+      {
+        "idx": 9,
+        "name": "brown"
+      },
+      {
+        "idx": 10,
+        "name": "pink"
+      },
+      {
+        "idx": 11,
+        "name": "teal"
+      }
+    ]
+  }
+}

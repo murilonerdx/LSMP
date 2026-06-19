@@ -1,0 +1,33 @@
+{
+  "name": "Máquinas Arcanas — Visão Geral",
+  "icon": "liberthia:nano_assembler",
+  "category": "liberthia:tech",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "O que são",
+      "text": "As $(l)Máquinas Arcanas$() são cerca de $(o)39 blocos$() que processam materiais movidos a $(item)Forge Energy (FE)$(). Diferente de craft de bancada, elas transformam um item em outro automaticamente — e a saída de uma vira a entrada da próxima.$(br2)Todas usam a $(l)mesma GUI genérica$(), então aprender uma é aprender todas."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Como operar",
+      "text": "$(item)Clique direito$() na máquina pra abrir a GUI:$(br2)$(li)$(item)Barra de FE$() — passe o mouse pra ver a energia exata$(br)$(li)$(item)Slot(s) de entrada$() — onde vai o material$(br)$(li)$(item)Slot(s) de saída$() — o produto pronto$(br)$(li)$(item)Barra de progresso$() — avança enquanto há FE e receita válida"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Alimentando de FE",
+      "text": "Sem energia, nada acontece. Ligue as máquinas à $(l)rede de FE$():$(br2)$(li)$(item)Geradores$() (Solar, Térmico, Furnator, Magmator) produzem$(br)$(li)$(item)Células de Energia$() armazenam$(br)$(li)Por $(o)adjacência$() ou cabos a corrente flui pra máquina$(br2)Um $(warn)Reator de Matéria Escura$() pode sustentar uma linha inteira."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cadeia multi-etapa",
+      "text": "A graça do sistema é encadear: o produto da $(item)Pulverizadora Quântica$() alimenta a $(item)Câmara de Cristalização$(), que alimenta a $(item)Enroladora de Bobinas$(), e por aí vai.$(br2)Construa sua $(l)linha de montagem$() colocando as máquinas em sequência e deixe a rede de FE rodando.$(br2)Veja a entrada $(o)Cadeia Completa$() pra os passos exatos."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:nano_assembler",
+      "text": "$(item)Nano Montadora$() — exemplo de máquina avançada: junta Bobina de Ressonância + Núcleo de Célula em uma Matriz Montada."
+    }
+  ]
+}

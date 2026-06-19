@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "liberthia:dark_matter_shard"
+    },
+    "title": {
+      "translate": "advancement.liberthia.root.title"
+    },
+    "description": {
+      "translate": "advancement.liberthia.root.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "liberthia:textures/gui/advancements/bg_matter.png"
+  },
+  "criteria": {
+    "root": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

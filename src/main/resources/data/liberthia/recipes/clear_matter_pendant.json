@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "APA",
+    "PNP",
+    "AEA"
+  ],
+  "key": {
+    "P": { "item": "liberthia:purified_clear_matter_ingot" },
+    "N": { "item": "minecraft:netherite_ingot" },
+    "A": { "item": "minecraft:amethyst_block" },
+    "E": { "item": "minecraft:ender_eye" }
+  },
+  "result": {
+    "item": "liberthia:clear_matter_pendant",
+    "count": 1
+  }
+}

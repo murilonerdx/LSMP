@@ -1,0 +1,34 @@
+{
+  "name": "Buraco Negro de Esporos",
+  "icon": "liberthia:spore_bloom",
+  "category": "liberthia:cosmic",
+  "sortnum": 37,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "$(cosmic)O Nascimento$()",
+      "text": "Conforme o $(item)Motor de Matéria Escura$() trabalha, ele semeia $(item)Florações de Esporos$() no ar. Quando MUITOS esporos (15+) se acumulam perto do motor, eles colapsam num $(cosmic)Buraco Negro de Matéria Escura$() vivo.$(br2)Um som de $(warn)Warden emergindo$() anuncia a sua chegada acima do motor."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "liberthia:dark_matter_black_hole",
+      "name": "$(cosmic)Buraco Negro$()",
+      "text": "Uma esfera de partículas pulsante que segue o player mais próximo."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(warn)Comportamento$()",
+      "text": "Ele alterna em fases:$(br2)$(li)$(warn)Sucção$() (5s): puxa todos os players num raio de 20 blocos$(br)$(li)$(warn)Repulsão$() (2s): explode todos para longe$(br)$(li)$(warn)Dormência$() (20s): some — sua janela para agir$(br2)Enquanto ativo, ele $(l)PERSEGUE$() você, ataca com partículas pretas (Cegueira + Fome) e infecta o chão."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(warn)Contato = Morte$()",
+      "text": "Se ele te alcançar, EXPLODE no contato: $(warn)100% de matéria escura$() (infecção máxima), Cegueira longa e dano pesado em todos por perto.$(br2)Mantenha distância e use os 20s de dormência para correr. Ele reaparece sobre o motor depois disso."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "$(good)Como Parar$()",
+      "text": "A única forma de matá-lo de vez é $(l)DESTRUIR O MOTOR$() que o gerou.$(br2)$(good)Quebrar o motor mata o buraco negro vinculado$() e reverte toda a infecção. Se o motor sumir enquanto ele está dormente, ele morre sozinho. Não tente lutar com a esfera — corte a fonte."
+    }
+  ]
+}

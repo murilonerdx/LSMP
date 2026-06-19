@@ -1,0 +1,9 @@
+{
+  "display_name": "Apocalipse Solar",
+  "output": { "item": "liberthia:spell_solar_apocalypse", "count": 1 },
+  "ingredients": [
+    { "item": "liberthia:wisp_essence",    "count": 8 },
+    { "item": "liberthia:astral_dust",     "count": 6 },
+    { "item": "liberthia:veil_fragment",   "count": 2 }
+  ]
+}

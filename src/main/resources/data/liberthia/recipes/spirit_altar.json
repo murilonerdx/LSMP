@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["SES", "OBO", "OOO"],
+  "key": {
+    "S": { "item": "liberthia:spirit_stone" },
+    "E": { "item": "minecraft:ender_eye" },
+    "O": { "item": "minecraft:obsidian" },
+    "B": { "item": "minecraft:soul_lantern" }
+  },
+  "result": { "item": "liberthia:spirit_altar", "count": 1 }
+}

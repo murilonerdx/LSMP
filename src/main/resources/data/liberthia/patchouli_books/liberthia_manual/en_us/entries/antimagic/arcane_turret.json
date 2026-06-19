@@ -1,0 +1,18 @@
+{
+  "name": "Torre Arcana",
+  "icon": "liberthia:arcane_turret",
+  "category": "liberthia:antimagic",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Defesa Tecnológica",
+      "text": "A $(item)Torre Arcana$() atira um feixe nos $(l)monstros hostis$() num raio de 14 blocos — dano + Lentidão + $(item)Antimagia$() (forte contra cósmicos/magos).$(br2)Consome FE por disparo. Ligue à rede."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "liberthia:arcane_turret",
+      "text": "Núcleo Bastião + dispenser + circuitos + aço energizado."
+    }
+  ]
+}

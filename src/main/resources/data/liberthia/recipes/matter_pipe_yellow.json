@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GYG",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "Y": { "item": "liberthia:yellow_matter_ingot" }
+  },
+  "result": { "item": "liberthia:matter_pipe_yellow", "count": 8 }
+}

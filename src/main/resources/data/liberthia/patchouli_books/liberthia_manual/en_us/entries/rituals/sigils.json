@@ -1,0 +1,63 @@
+{
+  "name": "Sigilos (10)",
+  "icon": "liberthia:sigil_metatron",
+  "category": "liberthia:rituals",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "10 Sigilos",
+      "text": "Itens centrais do sistema de rituais. Cada sigilo invoca uma entidade diferente.$(br2)3 Tiers: Foliot (low), Djinni (mid), Afrit/+ (high)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_foliot",
+      "text": "$(item)Sigil Foliot$()$(br2)Invoca Foliot — entidade menor. Útil pra slow/weakness em alvos."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_djinni",
+      "text": "$(item)Sigil Djinni$()$(br2)Djinni mid-tier. Buff de stats no caster."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_afrit",
+      "text": "$(item)Sigil Afrit$()$(br2)Fogo/destrutivo. Spawn afrit que ataca inimigos."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_bael",
+      "text": "$(item)Sigil Bael$()$(br2)Invocação de Bael — invisibility + movement speed."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_lucifer",
+      "text": "$(item)Sigil Lucifer$()$(br2)§lEND-GAME§r. Cosmic damage massivo. -25 sanity."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_metatron",
+      "text": "$(item)Sigil Metatron$()$(br2)Protection — DamageResistance V + FireRes + Absorption."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_sandalphon",
+      "text": "$(item)Sigil Sandalphon$()$(br2)Healing supremo. Remove ALL debuffs + restaura sanidade."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_necro",
+      "text": "$(item)Sigil Necro$()$(br2)Necromancia — raise undead servants."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_banishing",
+      "text": "$(item)Sigil Banishing$()$(br2)LBRP — banish todos hostis num raio (TP 40b away)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "liberthia:sigil_dimensional",
+      "text": "$(item)Sigil Dimensional$()$(br2)Abre portal pro Spirit World ou Loom (depende do ritual circle config)."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "liberthia:block/blood_slab"
+    },
+    "type=top": {
+      "model": "liberthia:block/blood_slab_top"
+    },
+    "type=double": {
+      "model": "liberthia:block/blood_planks"
+    }
+  }
+}

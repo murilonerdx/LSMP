@@ -1,0 +1,31 @@
+{
+  "id": "factory_amethyst_shards",
+  "name": "Estilhaços de Ametista",
+  "school": "ELDRITCH",
+  "rarity": "UNCOMMON",
+  "mana": 30,
+  "cooldown": 60,
+  "damage": 8,
+  "range": 22,
+  "type": "PROJECTILE",
+  "lore": "Múltiplos shards triangulares deixam trilhas roxas.",
+  "behavior": {
+    "speed": 1.9,
+    "lifetime_ticks": 50,
+    "pierce": false,
+    "aoe_radius": 1.0
+  },
+  "vfx": {
+    "color_primary": "#B266FF",
+    "color_secondary": "#7A3DFF",
+    "trail_density": 12,
+    "trail_size": 1.0,
+    "impact_scale": 0.9,
+    "impact_particles": 50,
+    "screen_shake": 0.2,
+    "impact_light": 9
+  },
+  "effects": [],
+  "element": "ELDRITCH",
+  "category": "PROJECTILE"
+}

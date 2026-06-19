@@ -1,0 +1,13 @@
+{
+  "variants": {
+
+    "facing=north,waterlogged=false": { "model": "liberthia:item/host_plush" },
+    "facing=south,waterlogged=false": { "model": "liberthia:item/host_plush", "y": 180 },
+    "facing=west,waterlogged=false":  { "model": "liberthia:item/host_plush", "y": 270 },
+    "facing=east,waterlogged=false":  { "model": "liberthia:item/host_plush", "y": 90 },
+    "facing=north,waterlogged=true":  { "model": "liberthia:item/host_plush" },
+    "facing=south,waterlogged=true":  { "model": "liberthia:item/host_plush", "y": 180 },
+    "facing=west,waterlogged=true":   { "model": "liberthia:item/host_plush", "y": 270 },
+    "facing=east,waterlogged=true":   { "model": "liberthia:item/host_plush", "y": 90 }
+  }
+}
