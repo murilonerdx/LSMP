@@ -76,20 +76,19 @@ public class BookRedKirikoItem extends Item {
             ResourceKey<Level> key = serverLevel.dimension();
             String dimensionId = key.location().toString();
 
+            // CRÍTICO: NÃO chamar findSafeTeleportPosition aqui. Ele escaneia
+            // milhares de blocos (getBlockState) e, em TODAS as dimensões, força
+            // geração SÍNCRONA de chunks na thread principal → o servidor congela
+            // por segundos ao abrir o livro → todos os players caem por timeout.
+            // A posição segura é calculada no MOMENTO do teleporte, só pra a
+            // dimensão escolhida (KirikoBookTeleportPacket.teleportToDimension).
             OpenKirikoBookScreenPacket.TeleportPos defaultPos = defaultPositionForDimension(dimensionId);
-
-            OpenKirikoBookScreenPacket.TeleportPos safePos = findSafeTeleportPosition(
-                    serverLevel,
-                    defaultPos.x(),
-                    defaultPos.y(),
-                    defaultPos.z()
-            );
 
             dimensions.add(new OpenKirikoBookScreenPacket.DimensionEntry(
                     dimensionId,
-                    safePos.x(),
-                    safePos.y(),
-                    safePos.z()
+                    defaultPos.x(),
+                    defaultPos.y(),
+                    defaultPos.z()
             ));
         }
 
